@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mTabHost = (FragmentTabHost) findViewById(R.id.tabHost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtab);
         for (int i = 0; i < tabsItem.length; i++) {
-            View inflate = null;
-            inflate = getLayoutInflater().inflate(R.layout.tabs_item, null);
+            View inflate = getLayoutInflater().inflate(R.layout.tabs_item, null);
             TextView tabs_text = (TextView) inflate.findViewById(R.id.tabs_text);
             ImageView tabs_img = (ImageView) inflate.findViewById(R.id.tabs_img);
             tabs_text.setText(tabsItem[i]);
