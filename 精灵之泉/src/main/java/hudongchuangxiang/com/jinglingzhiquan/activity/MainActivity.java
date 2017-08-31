@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ShengQianFragment;
+import hudongchuangxiang.com.jinglingzhiquan.fragment.ShouKuanFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Class[] fragment = new Class[]{
             ShengQianFragment.class,
             ShengQianFragment.class,
-            ShengQianFragment.class,
+            ShouKuanFragment.class,
             ShengQianFragment.class,
             ShengQianFragment.class
     };
@@ -61,5 +62,6 @@ public class MainActivity extends AppCompatActivity {
             tabs_img.setImageResource(imgRes[i]);
             mTabHost.addTab(mTabHost.newTabSpec(tabsItem[i]).setIndicator(inflate), fragment[i], null);
         }
+        mTabHost.setCurrentTab(2);
     }
 }

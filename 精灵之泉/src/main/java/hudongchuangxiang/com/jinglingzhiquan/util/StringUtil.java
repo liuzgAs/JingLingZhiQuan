@@ -101,32 +101,15 @@ public class StringUtil {
     public static String extractLocation(final String city, final String district){
         return district.contains("县") ? district.substring(0, district.length() - 1) : city.substring(0, city.length() - 1);
     }
-//    public static boolean checkPersonID(Context context, String personID){
-//        final boolean[] flag = {false};
-//        try {
-//            String yanzhengdizhi = "http://apis.juhe.cn/idcard/index?key=86c3cf00ca77641e108196c609ca3c08&cardno=" + personID;
-//            HTTPUtils.get(context, yanzhengdizhi, new VolleyListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError volleyError) {
-//                }
-//
-//                @Override
-//                public void onResponse(String s) {
-//                    UsedPersonID usedPersonID = GsonUtils.parseJSON(s, UsedPersonID.class);
-//                    int error_code = usedPersonID.getError_code();
-//                    if (0 == error_code) {
-//                        //成功
-//                        flag[0] = true;
-//                    } else{
-//                        flag[0] = false;
-//
-//                    }
-//                }
-//            });
-//
-//        } catch (Exception e) {
-//            flag[0] = false;
-//        }
-//        return flag[0];
-//    }
+
+    //金额验证
+    public static boolean isAmount(String str){
+        Pattern pattern=Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 判断小数点后2位的数字的正则表达式
+        Matcher match=pattern.matcher(str);
+        if(match.matches()==false){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
