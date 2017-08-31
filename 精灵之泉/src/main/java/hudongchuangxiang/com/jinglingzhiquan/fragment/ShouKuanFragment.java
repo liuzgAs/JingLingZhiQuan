@@ -51,7 +51,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (mInflate == null) {
-            mInflate = inflater.inflate(R.layout.fragment_shoukuan, container, false);
+            mInflate = inflater.inflate(R.layout.fragment_shou_kuan, container, false);
             init();
         }
         //缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。

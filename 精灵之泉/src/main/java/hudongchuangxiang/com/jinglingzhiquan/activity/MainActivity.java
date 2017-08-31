@@ -14,13 +14,14 @@ import android.widget.TextView;
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ShengQianFragment;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ShouKuanFragment;
+import hudongchuangxiang.com.jinglingzhiquan.fragment.ZhuanQianFragment;
 
 
 public class MainActivity extends AppCompatActivity {
     private String[] tabsItem = new String[5];
     private Class[] fragment = new Class[]{
             ShengQianFragment.class,
-            ShengQianFragment.class,
+            ZhuanQianFragment.class,
             ShouKuanFragment.class,
             ShengQianFragment.class,
             ShengQianFragment.class
