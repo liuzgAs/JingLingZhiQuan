@@ -14,6 +14,7 @@ import android.widget.TextView;
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ShengQianFragment;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ShouKuanFragment;
+import hudongchuangxiang.com.jinglingzhiquan.fragment.WoDeFragment;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ZhuanQianFragment;
 
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             ZhuanQianFragment.class,
             ShouKuanFragment.class,
             ShengQianFragment.class,
-            ShengQianFragment.class
+            WoDeFragment.class
     };
     private int[] imgRes = new int[]{
             R.drawable.selector_shengqian_item,

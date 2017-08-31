@@ -12,8 +12,6 @@
     <dimen name="bigLitterText">14dp</dimen>
     <dimen name="menuSize">40dp</dimen>
     <dimen name="normalItemHeight">40dp</dimen>
-    <dimen name="marginleft_right10dp">10dp</dimen>
-    <dimen name="marginleft_right15dp">15dp</dimen>
     <dimen name="marginTop">5dp</dimen>
     <dimen name="titleHeight">45dp</dimen>
     <dimen name="bannerHeight">180dp</dimen>
