@@ -13,6 +13,7 @@ import android.widget.Toast;
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.ShangChengDDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.customview.HeadZoomScrollView;
 import hudongchuangxiang.com.jinglingzhiquan.util.DpUtils;
@@ -133,7 +134,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "我的资料", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.viewDingDan:
-                Toast.makeText(getActivity(), "商城订单", Toast.LENGTH_SHORT).show();
+                dingDan();
                 break;
             case R.id.viewZhangDan1:
                 Toast.makeText(getActivity(), "我的账单", Toast.LENGTH_SHORT).show();
@@ -145,9 +146,15 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "我的资料", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.viewDingDan1:
-                Toast.makeText(getActivity(), "商城订单", Toast.LENGTH_SHORT).show();
+                dingDan();
                 break;
         }
+    }
+
+    private void dingDan() {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), ShangChengDDActivity.class);
+        startActivity(intent);
     }
 
     class MyScrollListener implements HeadZoomScrollView.OnScrollListener {

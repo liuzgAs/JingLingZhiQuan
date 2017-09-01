@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.BangZhuZXActivity" />
-        <activity android:name=".activity.GongGaoActivity"></activity>
+        <activity android:name=".activity.GongGaoActivity" />
+        <activity android:name=".activity.ShangChengDDActivity"></activity>
     </application>
 
 </manifest>
