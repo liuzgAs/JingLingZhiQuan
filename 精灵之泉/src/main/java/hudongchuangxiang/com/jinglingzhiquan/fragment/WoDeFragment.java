@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.customview.HeadZoomScrollView;
 import hudongchuangxiang.com.jinglingzhiquan.util.DpUtils;
@@ -28,6 +30,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     private View viewZoom;
     private HeadZoomScrollView zoomScrollView;
     private View viewTips;
+    private ImageView imageGongGao;
 
     public WoDeFragment() {
         // Required empty public constructor
@@ -67,6 +70,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         relaTitleStatue = mInflate.findViewById(R.id.relaTitleStatue);
         viewZoom = mInflate.findViewById(R.id.viewZoom);
         viewTips = mInflate.findViewById(R.id.viewTips);
+        imageGongGao = (ImageView) mInflate.findViewById(R.id.imageGongGao);
     }
 
     @Override
@@ -94,6 +98,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewWoDeDianPu).setOnClickListener(this);
         mInflate.findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
+        imageGongGao.setOnClickListener(this);
     }
 
     @Override
@@ -105,6 +110,10 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.imageGongGao:
+                intent.setClass(getActivity(), GongGaoActivity.class);
+                startActivity(intent);
+                break;
             case R.id.viewBangZhuZX:
                 intent.setClass(getActivity(), BangZhuZXActivity.class);
                 startActivity(intent);

@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BangZhuZXActivity"></activity>
+        <activity android:name=".activity.BangZhuZXActivity" />
+        <activity android:name=".activity.GongGaoActivity"></activity>
     </application>
 
 </manifest>
