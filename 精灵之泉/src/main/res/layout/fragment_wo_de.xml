@@ -489,6 +489,7 @@
                         android:id="@+id/textView26" />
 
                     <RelativeLayout
+                        android:id="@+id/viewBangZhuZX"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"

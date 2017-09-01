@@ -1,6 +1,7 @@
 package hudongchuangxiang.com.jinglingzhiquan.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
+import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.customview.HeadZoomScrollView;
 import hudongchuangxiang.com.jinglingzhiquan.util.DpUtils;
-import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 
 /**
@@ -91,6 +92,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewZiLiao1).setOnClickListener(this);
         mInflate.findViewById(R.id.viewDingDan1).setOnClickListener(this);
         mInflate.findViewById(R.id.viewWoDeDianPu).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
     }
 
@@ -101,10 +103,13 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewBangZhuZX:
+                intent.setClass(getActivity(), BangZhuZXActivity.class);
+                startActivity(intent);
+                break;
             case R.id.viewWoDeDianPu:
-                LogUtil.LogShitou("WoDeFragment--onClick", "大图高度" + viewZoom.getHeight());
-                LogUtil.LogShitou("WoDeFragment--onClick", "标题高度" + relaTitleStatue.getHeight());
                 break;
             case R.id.viewHuiYuan:
                 Toast.makeText(getActivity(), "会员详情", Toast.LENGTH_SHORT).show();

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q:"
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/light_black"
+            android:id="@+id/textView407"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="无法连接服务器？发不出消息？请求被禁止？"
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/light_black"
+            android:id="@+id/textView408"
+            android:layout_alignTop="@+id/textView407"
+            android:layout_toRightOf="@+id/textView407"
+            android:layout_toEndOf="@+id/textView407" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A:"
+            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView409"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请先检查手机网络是否有问题，请先检查手机网络是否有问题，请先检查手机网络是否有问题，请先检查手机网络是否有问题，请先检查手机网络是否有问题，"
+            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView410"
+            android:layout_alignTop="@+id/textView409"
+            android:layout_toRightOf="@+id/textView409"
+            android:layout_toEndOf="@+id/textView409" />
+    </RelativeLayout>
+</LinearLayout>
