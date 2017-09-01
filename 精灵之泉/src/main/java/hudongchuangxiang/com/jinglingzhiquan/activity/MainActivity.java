@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
+import hudongchuangxiang.com.jinglingzhiquan.fragment.RenZhengFragment;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ShengQianFragment;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ShouKuanFragment;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.WoDeFragment;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ZhuanQianFragment;
+import hudongchuangxiang.com.jinglingzhiquan.util.BackHandlerHelper;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             ShengQianFragment.class,
             ZhuanQianFragment.class,
             ShouKuanFragment.class,
-            ShengQianFragment.class,
+            RenZhengFragment.class,
             WoDeFragment.class
     };
     private int[] imgRes = new int[]{
@@ -65,5 +67,12 @@ public class MainActivity extends AppCompatActivity {
             mTabHost.addTab(mTabHost.newTabSpec(tabsItem[i]).setIndicator(inflate), fragment[i], null);
         }
         mTabHost.setCurrentTab(2);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!BackHandlerHelper.handleBackPress(this)) {
+            super.onBackPressed();
+        }
     }
 }

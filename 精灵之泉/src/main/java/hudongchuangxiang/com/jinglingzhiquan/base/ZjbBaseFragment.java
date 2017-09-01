@@ -12,13 +12,15 @@ import android.view.View;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
+import hudongchuangxiang.com.jinglingzhiquan.interfacepage.FragmentBackHandler;
 import hudongchuangxiang.com.jinglingzhiquan.model.UserInfoBean;
 import hudongchuangxiang.com.jinglingzhiquan.util.ACache;
+import hudongchuangxiang.com.jinglingzhiquan.util.BackHandlerHelper;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class ZjbBaseFragment extends Fragment {
+public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHandler {
     public boolean isLogin = false;
     public int changeControl = 2016;
     private AlertDialog mAlertDialog;
@@ -109,6 +111,9 @@ public abstract class ZjbBaseFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
     }
-
+    @Override
+    public boolean onBackPressed() {
+        return BackHandlerHelper.handleBackPress(this);
+    }
 
 }
