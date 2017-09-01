@@ -111,6 +111,18 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 return item;
             }
         });
+        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+            @Override
+            public View onCreateView(ViewGroup parent) {
+                View header_zahun_qian = LayoutInflater.from(getActivity()).inflate(R.layout.header_zahun_qian, null);
+                return header_zahun_qian;
+            }
+
+            @Override
+            public void onBindView(View headerView) {
+
+            }
+        });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
