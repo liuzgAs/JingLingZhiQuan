@@ -14,6 +14,7 @@ import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.ShangChengDDActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.ShangHuXXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.customview.HeadZoomScrollView;
 import hudongchuangxiang.com.jinglingzhiquan.util.DpUtils;
@@ -128,7 +129,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "我的账单", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.viewShangHu:
-                Toast.makeText(getActivity(), "我的商户", Toast.LENGTH_SHORT).show();
+                shangHu();
                 break;
             case R.id.viewZiLiao:
                 Toast.makeText(getActivity(), "我的资料", Toast.LENGTH_SHORT).show();
@@ -140,7 +141,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "我的账单", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.viewShangHu1:
-                Toast.makeText(getActivity(), "我的商户", Toast.LENGTH_SHORT).show();
+                shangHu();
                 break;
             case R.id.viewZiLiao1:
                 Toast.makeText(getActivity(), "我的资料", Toast.LENGTH_SHORT).show();
@@ -149,6 +150,12 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 dingDan();
                 break;
         }
+    }
+
+    private void shangHu() {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), ShangHuXXActivity.class);
+        startActivity(intent);
     }
 
     private void dingDan() {
