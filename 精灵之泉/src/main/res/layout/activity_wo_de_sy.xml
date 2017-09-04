@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@mipmap/wodeshouyi"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSYActivity">
+    <include layout="@layout/view_bar"/>
+
+    <RelativeLayout
+        android:id="@+id/viewYongJinTX"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@mipmap/item_wodeshouyi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp">
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推广佣金"
+            android:textColor="@color/light_black"
+            android:id="@+id/textView79"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:src="@mipmap/right"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView47"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:textSize="24dp"
+            android:textColor="@color/textYellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥588.00"
+            android:id="@+id/textView80"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imageView47"
+            android:layout_toStartOf="@+id/imageView47" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/litterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可提现金额"
+            android:id="@+id/textView81"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/textView80"
+            android:layout_alignEnd="@+id/textView80" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/viewFanXianTX"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@mipmap/item_wodeshouyi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+
+        <ImageView
+            android:src="@mipmap/right"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView48"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="购物返现"
+            android:textColor="@color/light_black"
+            android:id="@+id/textView82"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:textSize="24dp"
+            android:textColor="@color/textYellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥588.00"
+            android:id="@+id/textView83"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imageView48"
+            android:layout_toStartOf="@+id/imageView48" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/litterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可提现金额"
+            android:id="@+id/textView84"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/textView83"
+            android:layout_alignEnd="@+id/textView83" />
+    </RelativeLayout>
+</LinearLayout>

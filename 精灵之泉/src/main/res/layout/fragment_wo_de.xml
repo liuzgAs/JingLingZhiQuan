@@ -397,7 +397,7 @@
                         android:id="@+id/textView24" />
 
                     <RelativeLayout
-                        android:id="@+id/viewShouYiMX"
+                        android:id="@+id/viewWoDeSY"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"

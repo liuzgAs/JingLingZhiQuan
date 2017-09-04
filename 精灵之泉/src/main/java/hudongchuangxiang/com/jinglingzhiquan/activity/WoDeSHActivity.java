@@ -15,7 +15,7 @@ import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseNotLeftActivity;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ZhiJieTJYHFragment;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 
-public class WoDeSHActivity extends ZjbBaseNotLeftActivity {
+public class WoDeSHActivity extends ZjbBaseNotLeftActivity implements View.OnClickListener {
 
     private View viewBar;
     private TabLayout tablayout;
@@ -59,12 +59,21 @@ public class WoDeSHActivity extends ZjbBaseNotLeftActivity {
 
     @Override
     protected void setListeners() {
-
+        findViewById(R.id.imageBack).setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imageBack:
+                finish();
+                break;
+        }
     }
 
     class MyViewPagerAdapter extends FragmentPagerAdapter {
