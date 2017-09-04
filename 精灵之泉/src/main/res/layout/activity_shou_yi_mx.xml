@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.ShouYiMXActivity">
+
+    <include layout="@layout/view_bar" />
+
+    <LinearLayout
+        android:id="@+id/viewTabBg"
+        android:background="@mipmap/mingxitab1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <RelativeLayout
+            android:id="@+id/viewShouYi1"
+            android:paddingBottom="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:src="@mipmap/shouyi_shouyi"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView41"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:textSize="@dimen/litterText"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的收益"
+                android:layout_marginTop="8dp"
+                android:id="@+id/textView53"
+                android:layout_below="@+id/imageView41"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginBottom="6dp"
+            android:textSize="20dp"
+            android:layout_gravity="bottom"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="·"
+            android:id="@+id/textView57" />
+
+        <RelativeLayout
+            android:id="@+id/viewShouYi2"
+            android:paddingBottom="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:src="@mipmap/shouyi_fennun"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView42"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:textSize="@dimen/litterText"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的分润"
+                android:layout_marginTop="8dp"
+                android:id="@+id/textView54"
+                android:layout_below="@+id/imageView42"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginBottom="6dp"
+            android:textSize="20dp"
+            android:layout_gravity="bottom"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="·"
+            android:id="@+id/textView58" />
+
+        <RelativeLayout
+            android:id="@+id/viewShouYi3"
+            android:paddingBottom="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:src="@mipmap/shouyi_yongjin"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView43"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:textSize="@dimen/litterText"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的佣金"
+                android:layout_marginTop="8dp"
+                android:id="@+id/textView55"
+                android:layout_below="@+id/imageView43"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginBottom="6dp"
+            android:textSize="20dp"
+            android:layout_gravity="bottom"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="·"
+            android:id="@+id/textView59" />
+
+        <RelativeLayout
+            android:id="@+id/viewShouYi4"
+            android:paddingBottom="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:src="@mipmap/shouyi_fanyong"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView44"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:textSize="@dimen/litterText"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="购物返佣"
+                android:layout_marginTop="8dp"
+                android:id="@+id/textView56"
+                android:layout_below="@+id/imageView44"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

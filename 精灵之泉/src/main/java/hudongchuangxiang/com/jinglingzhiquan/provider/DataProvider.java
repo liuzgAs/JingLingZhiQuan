@@ -24,4 +24,22 @@ public class DataProvider {
         return arr;
     }
 
+    public static List<Boolean> getShouYi(int page) {
+        ArrayList<Boolean> arr = new ArrayList<>();
+        if (page == 4) return arr;
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        arr.add(false);
+        return arr;
+    }
+
 }
