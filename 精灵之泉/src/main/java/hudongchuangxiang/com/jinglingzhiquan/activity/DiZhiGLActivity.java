@@ -1,5 +1,6 @@
 package hudongchuangxiang.com.jinglingzhiquan.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -166,9 +167,11 @@ public class DiZhiGLActivity extends ZjbBaseActivity implements SwipeRefreshLayo
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.textXinZengDZ:
-
+                intent.setClass(this,XinZengDZActivity.class);
+                startActivity(intent);
                 break;
             case R.id.imageBack:
                 finish();
