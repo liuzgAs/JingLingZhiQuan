@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.DiZhiGLActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/view_bar" />
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/textXinZengDZ"
+        android:layout_below="@+id/include"
+        app:layout_empty="@layout/view_empty"
+        app:layout_progress="@layout/view_progress"
+        app:scrollbarStyle="insideOverlay" />
+
+    <TextView
+        android:id="@+id/textXinZengDZ"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="+新增地址"
+        android:textColor="@color/basic_color"
+        android:textSize="@dimen/bigText" />
+</RelativeLayout>

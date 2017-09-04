@@ -30,7 +30,8 @@
         <activity android:name=".activity.TuiGuangYJActivity" />
         <activity android:name=".activity.LiJiTXActivity" />
         <activity android:name=".activity.WoDeZDActivity" />
-        <activity android:name=".activity.WoDeZLActivity"></activity>
+        <activity android:name=".activity.WoDeZLActivity" />
+        <activity android:name=".activity.DiZhiGLActivity"></activity>
     </application>
 
 </manifest>

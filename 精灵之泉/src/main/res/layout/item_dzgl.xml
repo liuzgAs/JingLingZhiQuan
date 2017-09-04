@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/textView165"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:text="肖萧潇"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:id="@+id/textView166"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView165"
+            android:layout_toEndOf="@+id/textView165"
+            android:layout_toRightOf="@+id/textView165"
+            android:text="18370061888"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:textColor="@color/light_black"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/textView167"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView165"
+            android:text="福建省 厦门市 思明区 观音山互动创想有限公司"
+            android:textSize="@dimen/normal_textsize" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:paddingRight="5dp"
+            android:paddingLeft="10dp"
+            android:src="@mipmap/weixuanzhong"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView35"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:textSize="@dimen/litterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置默认地址"
+            android:id="@+id/textView168"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView35"
+            android:layout_toEndOf="@+id/imageView35" />
+
+        <Button
+            android:layout_marginRight="10dp"
+            android:textSize="@dimen/litterText"
+            android:background="@drawable/shape_gray1dp"
+            android:layout_width="65dp"
+            android:layout_height="28dp"
+            android:text="删除"
+            android:id="@+id/button7"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_marginRight="8dp"
+            android:textSize="@dimen/litterText"
+            android:background="@drawable/shape_gray1dp"
+            android:layout_width="65dp"
+            android:layout_height="28dp"
+            android:text="编辑"
+            android:id="@+id/buttonBianJi"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/button7"
+            android:layout_toStartOf="@+id/button7" />
+    </RelativeLayout>
+</LinearLayout>
