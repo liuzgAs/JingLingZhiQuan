@@ -50,152 +50,148 @@
         android:src="@mipmap/denglu_touxiang" />
 
     <RelativeLayout
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp">
 
         <EditText
-            android:paddingLeft="2dp"
             android:id="@+id/editText8"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textView39"
+            android:layout_toStartOf="@+id/textView39"
             android:background="@null"
             android:hint="请输入手机号"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_toLeftOf="@+id/textView39"
-            android:layout_toStartOf="@+id/textView39" />
+            android:paddingLeft="2dp"
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:gravity="center_vertical"
             android:id="@+id/textView39"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:gravity="center_vertical"
             android:text="验证码登录"
             android:textColor="@color/basic_color"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
     <TextView
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/basic_color"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_gravity="center_horizontal" />
-
-    <RelativeLayout
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:background="@color/basic_color" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_gravity="center_horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp">
 
         <EditText
-            android:paddingLeft="2dp"
             android:id="@+id/editText9"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textView40"
+            android:layout_toStartOf="@+id/textView40"
             android:background="@null"
             android:hint="密码"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_toLeftOf="@+id/textView40"
-            android:layout_toStartOf="@+id/textView40" />
+            android:paddingLeft="2dp"
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:gravity="center_vertical"
             android:id="@+id/textView40"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:gravity="center_vertical"
             android:text="忘记密码"
             android:textColor="@color/basic_color"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
     <TextView
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/basic_color"
+        android:id="@+id/textView41"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/textView41" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/basic_color" />
 
     <RelativeLayout
-        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp">
 
         <ImageView
-            android:padding="10dp"
-            android:src="@mipmap/duigou"
+            android:id="@+id/imageView39"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:id="@+id/imageView39"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@mipmap/duigou" />
 
         <TextView
-            android:textSize="@dimen/litterText"
+            android:id="@+id/textView42"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="同意《精灵之泉》用户协议"
-            android:id="@+id/textView42"
             android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imageView39"
             android:layout_toRightOf="@+id/imageView39"
-            android:layout_toEndOf="@+id/imageView39" />
+            android:text="同意《精灵之泉》用户协议"
+            android:textSize="@dimen/litterText" />
     </RelativeLayout>
 
     <Button
-        android:layout_marginTop="20dp"
+        android:id="@+id/buttonLogin"
+        style="@style/MyButton"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        style="@style/MyButton"
-        android:text="登录"
-        android:id="@+id/buttonLogin"
-      />
+        android:layout_marginTop="20dp"
+        android:text="登录" />
 
     <Button
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="35dp"
+        android:id="@+id/button3"
+        style="@style/MyButtonStroke"
         android:layout_marginLeft="35dp"
-        android:background="@drawable/shape_basic1dp_20dp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/normalItemHeight"
-        android:textColor="@color/basic_color"
-        android:text="新注册用户"
-        android:id="@+id/button3" />
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="20dp"
+        android:text="新注册用户" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_marginBottom="15dp"
-            android:textSize="@dimen/moreLitterText"
+            android:id="@+id/textView43"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="客服热线：400-188-2030"
-            android:id="@+id/textView43"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:text="客服热线：400-188-2030"
+            android:textSize="@dimen/moreLitterText" />
     </RelativeLayout>
 
 </LinearLayout>

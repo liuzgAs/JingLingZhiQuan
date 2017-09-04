@@ -27,7 +27,8 @@
         <activity android:name=".activity.ShouYiMXActivity" />
         <activity android:name=".activity.WoDeSHActivity" />
         <activity android:name=".activity.WoDeSYActivity" />
-        <activity android:name=".activity.TuiGuangYJActivity"></activity>
+        <activity android:name=".activity.TuiGuangYJActivity" />
+        <activity android:name=".activity.LiJiTXActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package hudongchuangxiang.com.jinglingzhiquan.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,14 @@ import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseActivity;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 
-public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListener {
+public class LiJiTXActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private View viewBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wo_de_sy);
+        setContentView(R.layout.activity_li_ji_tx);
         init();
     }
 
@@ -38,7 +37,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("我的收益");
+        ((TextView)findViewById(R.id.textViewTitle)).setText("提现");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
@@ -47,8 +46,6 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
-        findViewById(R.id.viewYongJinTX).setOnClickListener(this);
-        findViewById(R.id.viewFanXianTX).setOnClickListener(this);
     }
 
     @Override
@@ -58,16 +55,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent();
-        switch (v.getId()) {
-            case R.id.viewYongJinTX:
-                intent.setClass(this, TuiGuangYJActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.viewFanXianTX:
-                intent.setClass(this, TuiGuangYJActivity.class);
-                startActivity(intent);
-                break;
+        switch (v.getId()){
             case R.id.imageBack:
                 finish();
                 break;
