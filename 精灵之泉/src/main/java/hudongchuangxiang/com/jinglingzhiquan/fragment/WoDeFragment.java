@@ -14,9 +14,10 @@ import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.ShangChengDDActivity;
-import hudongchuangxiang.com.jinglingzhiquan.activity.ShangHuXXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSHActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSYActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeZDActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeZLActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.customview.HeadZoomScrollView;
 import hudongchuangxiang.com.jinglingzhiquan.util.DpUtils;
@@ -133,30 +134,36 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "会员详情", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.viewZhangDan:
-                Toast.makeText(getActivity(), "我的账单", Toast.LENGTH_SHORT).show();
+                zhangDan();
                 break;
             case R.id.viewShangHu:
                 woDeSH();
                 break;
             case R.id.viewZiLiao:
-                shangHu();
+                ziLiao();
                 break;
             case R.id.viewDingDan:
                 dingDan();
                 break;
             case R.id.viewZhangDan1:
-                Toast.makeText(getActivity(), "我的账单", Toast.LENGTH_SHORT).show();
+                zhangDan();
                 break;
             case R.id.viewShangHu1:
                 woDeSH();
                 break;
             case R.id.viewZiLiao1:
-                shangHu();
+                ziLiao();
                 break;
             case R.id.viewDingDan1:
                 dingDan();
                 break;
         }
+    }
+
+    private void zhangDan() {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), WoDeZDActivity.class);
+        startActivity(intent);
     }
 
     private void woDeSH() {
@@ -165,9 +172,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         startActivity(intent);
     }
 
-    private void shangHu() {
+    private void ziLiao() {
         Intent intent = new Intent();
-        intent.setClass(getActivity(), ShangHuXXActivity.class);
+        intent.setClass(getActivity(), WoDeZLActivity.class);
         startActivity(intent);
     }
 
