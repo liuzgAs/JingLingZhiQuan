@@ -34,7 +34,8 @@
         <activity android:name=".activity.DiZhiGLActivity" />
         <activity android:name=".activity.XinZengDZActivity" />
         <activity android:name=".activity.ZhuCeActivity" />
-        <activity android:name=".activity.WangJiMMActivity"></activity>
+        <activity android:name=".activity.WangJiMMActivity" />
+        <activity android:name=".activity.DingDanXQActivity"></activity>
     </application>
 
 </manifest>

@@ -376,7 +376,7 @@
             android:textSize="@dimen/normal_textsize"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:text="删除订单"
+            android:text="评好货"
             android:id="@+id/textView120"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/button14"

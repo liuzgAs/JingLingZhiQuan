@@ -1,6 +1,7 @@
 package hudongchuangxiang.com.jinglingzhiquan.fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
+import hudongchuangxiang.com.jinglingzhiquan.activity.DingDanXQActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.provider.DataProvider;
 import hudongchuangxiang.com.jinglingzhiquan.util.DpUtils;
@@ -149,6 +151,9 @@ public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayo
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), DingDanXQActivity.class);
+                startActivity(intent);
             }
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
