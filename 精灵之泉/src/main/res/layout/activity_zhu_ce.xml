@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.DengLuActivity">
+    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.ZhuCeActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -49,40 +49,23 @@
         android:layout_marginTop="10dp"
         android:src="@mipmap/denglu_touxiang" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/normalItemHeight"
-        android:layout_gravity="center_horizontal"
+    <EditText
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:id="@+id/editText8"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/textView39"
+        android:layout_toStartOf="@+id/textView39"
+        android:background="@null"
+        android:hint="请输入手机号"
+        android:paddingLeft="2dp"
+        android:textSize="@dimen/normal_textsize" />
 
-        <EditText
-            android:id="@+id/editText8"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textView39"
-            android:layout_toStartOf="@+id/textView39"
-            android:background="@null"
-            android:hint="请输入手机号"
-            android:paddingLeft="2dp"
-            android:textSize="@dimen/normal_textsize" />
-
-        <TextView
-            android:id="@+id/textView39"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:text="验证码登录"
-            android:textColor="@color/basic_color"
-            android:textSize="@dimen/normal_textsize" />
-    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -110,19 +93,19 @@
             android:layout_toLeftOf="@+id/textView40"
             android:layout_toStartOf="@+id/textView40"
             android:background="@null"
-            android:hint="密码"
+            android:hint="请输入验证码"
             android:paddingLeft="2dp"
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textWangJiMM"
+            android:id="@+id/textView40"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:text="忘记密码"
+            android:text="获取验证码"
             android:textColor="@color/basic_color"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
@@ -136,32 +119,83 @@
         android:layout_marginRight="20dp"
         android:background="@color/basic_color" />
 
-    <RelativeLayout
+    <EditText
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/editText11"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/normalItemHeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/textView39"
+        android:layout_toStartOf="@+id/textView39"
+        android:background="@null"
+        android:hint="请设置密码（字母+数字6位以上）"
+        android:paddingLeft="2dp"
+        android:textSize="@dimen/normal_textsize" />
+
+    <TextView
+        android:id="@+id/textView108"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/basic_color" />
 
-        <ImageView
-            android:id="@+id/imageView39"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:src="@mipmap/duigou" />
+    <EditText
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/editText12"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/textView39"
+        android:layout_toStartOf="@+id/textView39"
+        android:background="@null"
+        android:hint="确认密码"
+        android:paddingLeft="2dp"
+        android:textSize="@dimen/normal_textsize" />
 
-        <TextView
-            android:id="@+id/textView42"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/imageView39"
-            android:layout_toRightOf="@+id/imageView39"
-            android:text="同意《精灵之泉》用户协议"
-            android:textSize="@dimen/litterText" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/textView109"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/basic_color" />
+
+    <EditText
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/editText13"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/textView39"
+        android:layout_toStartOf="@+id/textView39"
+        android:background="@null"
+        android:hint="请输入推荐人手机号码（选填）"
+        android:paddingLeft="2dp"
+        android:textSize="@dimen/normal_textsize" />
+
+    <TextView
+        android:id="@+id/textView110"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/basic_color" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -169,15 +203,7 @@
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:layout_marginTop="20dp"
-        android:text="登录" />
-
-    <Button
-        android:id="@+id/buttonZhuCe"
-        style="@style/MyButtonStroke"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="20dp"
-        android:text="新注册用户" />
+        android:text="注册" />
 
     <RelativeLayout
         android:layout_width="match_parent"

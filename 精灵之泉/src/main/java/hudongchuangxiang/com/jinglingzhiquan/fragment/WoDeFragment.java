@@ -94,15 +94,16 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewHuiYuan).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZhangDan).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShangHu).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewZiLiao).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewShouYi).setOnClickListener(this);
         mInflate.findViewById(R.id.viewDingDan).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZhangDan1).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShangHu1).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewZiLiao1).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewShouYi1).setOnClickListener(this);
         mInflate.findViewById(R.id.viewDingDan1).setOnClickListener(this);
         mInflate.findViewById(R.id.viewWoDeDianPu).setOnClickListener(this);
         mInflate.findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewWoDeSY).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewWoDeZL).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewZhanNeiGG).setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
         imageGongGao.setOnClickListener(this);
     }
@@ -116,13 +117,14 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
-            case R.id.viewWoDeSY:
-                intent.setClass(getActivity(), WoDeSYActivity.class);
-                startActivity(intent);
+            case R.id.viewWoDeZL:
+                ziLiao();
+                break;
+            case R.id.viewZhanNeiGG:
+                gongGao();
                 break;
             case R.id.imageGongGao:
-                intent.setClass(getActivity(), GongGaoActivity.class);
-                startActivity(intent);
+                gongGao();
                 break;
             case R.id.viewBangZhuZX:
                 intent.setClass(getActivity(), BangZhuZXActivity.class);
@@ -139,8 +141,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             case R.id.viewShangHu:
                 woDeSH();
                 break;
-            case R.id.viewZiLiao:
-                ziLiao();
+            case R.id.viewShouYi:
+                shouYi();
                 break;
             case R.id.viewDingDan:
                 dingDan();
@@ -151,13 +153,25 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             case R.id.viewShangHu1:
                 woDeSH();
                 break;
-            case R.id.viewZiLiao1:
-                ziLiao();
+            case R.id.viewShouYi1:
+                shouYi();
                 break;
             case R.id.viewDingDan1:
                 dingDan();
                 break;
         }
+    }
+
+    private void shouYi() {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), WoDeSYActivity.class);
+        startActivity(intent);
+    }
+
+    private void gongGao() {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), GongGaoActivity.class);
+        startActivity(intent);
     }
 
     private void zhangDan() {

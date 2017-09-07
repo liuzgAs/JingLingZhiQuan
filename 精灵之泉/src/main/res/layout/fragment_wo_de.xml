@@ -116,7 +116,7 @@
                             android:layout_height="match_parent"/>
                         <View
                             android:layout_weight="1"
-                            android:id="@+id/viewZiLiao"
+                            android:id="@+id/viewShouYi"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                         <View
@@ -146,7 +146,7 @@
                     android:layout_height="match_parent"/>
                 <View
                     android:layout_weight="1"
-                    android:id="@+id/viewZiLiao1"
+                    android:id="@+id/viewShouYi1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
                 <View
@@ -302,7 +302,7 @@
                                     android:layout_below="@+id/imageView10"
                                     android:layout_centerHorizontal="true"
                                     android:layout_marginTop="10dp"
-                                    android:text="我的资料"
+                                    android:text="我的收益"
                                     android:textSize="@dimen/litterText" />
                             </RelativeLayout>
 
@@ -397,7 +397,7 @@
                         android:id="@+id/textView24" />
 
                     <RelativeLayout
-                        android:id="@+id/viewWoDeSY"
+                        android:id="@+id/viewWoDeZL"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
@@ -411,7 +411,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/mine_menu02" />
+                            android:src="@mipmap/mine_menu10" />
 
                         <TextView
                             android:id="@+id/textView18"
@@ -421,7 +421,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_toEndOf="@+id/imageView14"
                             android:layout_toRightOf="@+id/imageView14"
-                            android:text="我的收益"
+                            android:text="我的资料"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/normal_textsize" />
 
@@ -444,6 +444,101 @@
                         android:id="@+id/textView25" />
 
                     <RelativeLayout
+                        android:id="@+id/relativeLayout"
+                        android:background="@drawable/layout_selector_white_system_gray"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight" >
+
+                        <ImageView
+                            android:id="@+id/imageView62"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/mine_menu08" />
+
+                        <TextView
+                            android:id="@+id/textView114"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toEndOf="@+id/imageView62"
+                            android:layout_toRightOf="@+id/imageView62"
+                            android:text="我的费率"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/normal_textsize" />
+
+                        <ImageView
+                            android:src="@mipmap/right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView63"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:background="@color/line_gray"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_width"
+                        android:id="@+id/textView115" />
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout2"
+                        android:background="@drawable/layout_selector_white_system_gray"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight" >
+
+                        <ImageView
+                            android:id="@+id/imageView64"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/mine_menu09" />
+
+                        <TextView
+                            android:id="@+id/textView116"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toEndOf="@+id/imageView64"
+                            android:layout_toRightOf="@+id/imageView64"
+                            android:text="办理信用卡"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/normal_textsize" />
+
+                        <ImageView
+                            android:src="@mipmap/right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView65"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:background="@color/line_gray"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_width"
+                        android:id="@+id/textView117" />
+
+                    <RelativeLayout
+                        android:id="@+id/viewZhanNeiGG"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"

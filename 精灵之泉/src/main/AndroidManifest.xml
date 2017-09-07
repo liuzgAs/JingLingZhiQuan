@@ -32,7 +32,9 @@
         <activity android:name=".activity.WoDeZDActivity" />
         <activity android:name=".activity.WoDeZLActivity" />
         <activity android:name=".activity.DiZhiGLActivity" />
-        <activity android:name=".activity.XinZengDZActivity"></activity>
+        <activity android:name=".activity.XinZengDZActivity" />
+        <activity android:name=".activity.ZhuCeActivity" />
+        <activity android:name=".activity.WangJiMMActivity"></activity>
     </application>
 
 </manifest>
