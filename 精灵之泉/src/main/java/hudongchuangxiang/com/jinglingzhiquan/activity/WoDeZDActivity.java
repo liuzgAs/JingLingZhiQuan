@@ -47,7 +47,7 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("商城订单");
+        ((TextView) findViewById(R.id.textViewTitle)).setText("我的账单");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
