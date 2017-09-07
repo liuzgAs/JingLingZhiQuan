@@ -31,15 +31,15 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:text="等待付款"
+            android:text="已完成"
             android:textColor="@color/basic_color"
             android:textSize="@dimen/normal_textsize" />
 
         <ImageView
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/weixuanzhong"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:src="@mipmap/wo_de_dd_mai"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:id="@+id/imageView27"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
@@ -110,7 +110,7 @@
         <TextView
             android:layout_marginBottom="8dp"
             android:textSize="@dimen/MoreBigText"
-            android:textColor="@color/basic_color"
+            android:textColor="@color/light_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¥450"
@@ -119,15 +119,20 @@
             android:layout_toRightOf="@+id/imageView130"
             android:layout_toEndOf="@+id/imageView130" />
 
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/basic_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赚¥20"
+            android:textSize="@dimen/bigText"
+            android:id="@+id/textView118"
+            android:layout_alignBottom="@+id/textView46"
+            android:layout_toRightOf="@+id/textView46"
+            android:layout_toEndOf="@+id/textView46" />
+
     </RelativeLayout>
 
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/line_gray"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_width"
-         />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -192,7 +197,7 @@
         <TextView
             android:layout_marginBottom="8dp"
             android:textSize="@dimen/MoreBigText"
-            android:textColor="@color/basic_color"
+            android:textColor="@color/light_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¥450"
@@ -200,6 +205,18 @@
             android:layout_alignBottom="@+id/imageView40"
             android:layout_toRightOf="@+id/imageView40"
             android:layout_toEndOf="@+id/imageView40" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/basic_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赚¥20"
+            android:textSize="@dimen/bigText"
+            android:id="@+id/textView119"
+            android:layout_alignBottom="@+id/textView50"
+            android:layout_toRightOf="@+id/textView50"
+            android:layout_toEndOf="@+id/textView50" />
     </RelativeLayout>
 
     <TextView
@@ -209,6 +226,72 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:id="@+id/textView51" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="合计："
+                android:id="@+id/textView123" />
+            <TextView
+                android:textColor="@color/light_black"
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥156.02"
+                android:id="@+id/textView122" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="赚："
+                android:id="@+id/textView124" />
+
+            <TextView
+                android:textColor="@color/light_black"
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥40"
+                android:id="@+id/textView125" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:id="@+id/textView121" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -220,7 +303,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="￥78.00"
-            android:textColor="@color/basic_color"
+            android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/textView52"
@@ -230,8 +313,7 @@
             android:id="@+id/textView308"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="共计2件商品 合计："
-            android:textColor="@color/light_black"
+            android:text="应付："
             android:textSize="@dimen/normal_textsize"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/textZongJia"
@@ -256,7 +338,7 @@
         android:layout_gravity="center_horizontal">
 
         <Button
-            android:background="@drawable/btn_jianbian"
+            android:background="@drawable/btn_jianbian_basic"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:id="@+id/buttonPingJia"
@@ -271,17 +353,33 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
+            android:textColor="@color/white"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:gravity="center"
-            android:background="@null"
+            android:background="@drawable/btn_jianbian_gray"
             android:id="@+id/button14"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginRight="20dp"
-            android:text="取消订单"
+            android:layout_height="35dp"
+            android:layout_marginRight="10dp"
+            android:text="查看物流"
             android:textSize="@dimen/normal_textsize"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/buttonPingJia"
             android:layout_toStartOf="@+id/buttonPingJia"
-            android:layout_marginEnd="20dp" />
+            android:layout_marginEnd="10dp" />
+
+        <TextView
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="删除订单"
+            android:id="@+id/textView120"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/button14"
+            android:layout_toStartOf="@+id/button14" />
     </RelativeLayout>
 </LinearLayout>

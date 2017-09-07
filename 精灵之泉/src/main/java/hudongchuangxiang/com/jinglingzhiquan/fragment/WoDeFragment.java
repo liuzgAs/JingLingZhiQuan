@@ -13,7 +13,7 @@ import android.widget.Toast;
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
-import hudongchuangxiang.com.jinglingzhiquan.activity.ShangChengDDActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeDDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSHActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSYActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeZDActivity;
@@ -194,7 +194,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
 
     private void dingDan() {
         Intent intent = new Intent();
-        intent.setClass(getActivity(), ShangChengDDActivity.class);
+        intent.setClass(getActivity(), WoDeDDActivity.class);
         startActivity(intent);
     }
 

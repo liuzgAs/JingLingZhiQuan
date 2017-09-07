@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".activity.BangZhuZXActivity" />
         <activity android:name=".activity.GongGaoActivity" />
-        <activity android:name=".activity.ShangChengDDActivity" />
+        <activity android:name=".activity.WoDeDDActivity" />
         <activity android:name=".activity.ShangHuXXActivity" />
         <activity android:name=".activity.ShouYiMXActivity" />
         <activity android:name=".activity.WoDeSHActivity" />

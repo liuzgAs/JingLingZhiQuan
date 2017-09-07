@@ -15,7 +15,7 @@ import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseActivity;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.DingDanFragment;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 
-public class ShangChengDDActivity extends ZjbBaseActivity implements View.OnClickListener{
+public class WoDeDDActivity extends ZjbBaseActivity implements View.OnClickListener{
     private TabLayout tablayout;
     private ViewPager viewPager;
     private View viewBar;
@@ -45,17 +45,19 @@ public class ShangChengDDActivity extends ZjbBaseActivity implements View.OnClic
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("商城订单");
+        ((TextView) findViewById(R.id.textViewTitle)).setText("我的订单");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
         viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
         tablayout.setupWithViewPager(viewPager);
-        tablayout.getTabAt(0).setText("全部");
+        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tablayout.getTabAt(0).setText("全部订单");
         tablayout.getTabAt(1).setText("待付款");
         tablayout.getTabAt(2).setText("待发货");
         tablayout.getTabAt(3).setText("待收货");
-        tablayout.getTabAt(4).setText("退/货款");
+        tablayout.getTabAt(4).setText("退换货");
+        tablayout.getTabAt(5).setText("已完成");
     }
 
     @Override
@@ -90,7 +92,7 @@ public class ShangChengDDActivity extends ZjbBaseActivity implements View.OnClic
 
         @Override
         public int getCount() {
-            return 5;
+            return 6;
         }
     }
 }
