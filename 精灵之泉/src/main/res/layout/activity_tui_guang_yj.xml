@@ -12,54 +12,94 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardCornerRadius="3dp">
-
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageView49"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/tuiguangyongjinimg" />
+            android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:layout_toEndOf="@+id/imageView49"
-                android:layout_toRightOf="@+id/imageView49">
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
 
                 <TextView
-                    android:id="@+id/textView85"
+                    android:textSize="@dimen/normal_textsize"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/basic_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:text="¥214"
+                    android:id="@+id/textView82"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:text="可提现金额"
-                    android:textSize="@dimen/normal_textsize" />
+                    android:layout_alignParentEnd="true" />
 
                 <TextView
-                    android:id="@+id/textView86"
+                    android:textSize="@dimen/normal_textsize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/textView85"
-                    android:layout_alignRight="@+id/textView85"
-                    android:layout_below="@+id/textView85"
-                    android:text="586"
-                    android:textColor="@color/light_black"
-                    android:textSize="50dp" />
+                    android:text="待收返佣："
+                    android:id="@+id/textView83"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/textView82"
+                    android:layout_toStartOf="@+id/textView82" />
             </RelativeLayout>
-        </RelativeLayout>
+
+            <TextView
+                android:background="@mipmap/fengexian_huise"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/textView81" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <ImageView
+                    android:id="@+id/imageView49"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@mipmap/tuiguangyongjinimg" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_toEndOf="@+id/imageView49"
+                    android:layout_toRightOf="@+id/imageView49">
+
+                    <TextView
+                        android:id="@+id/textView85"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:text="可提现金额"
+                        android:textSize="@dimen/normal_textsize" />
+
+                    <TextView
+                        android:id="@+id/textView86"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/textView85"
+                        android:layout_alignRight="@+id/textView85"
+                        android:layout_below="@+id/textView85"
+                        android:text="586"
+                        android:textColor="@color/light_black"
+                        android:textSize="50dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
     </android.support.v7.widget.CardView>
 
     <Button
@@ -68,7 +108,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="立即提现" />
 
     <Button
@@ -76,7 +116,7 @@
         style="@style/MyButtonStroke"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:text="收益明细" />
 
     <TextView
