@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseNotLeftActivity;
+import hudongchuangxiang.com.jinglingzhiquan.fragment.JianJieTJYHFragment;
 import hudongchuangxiang.com.jinglingzhiquan.fragment.ZhiJieTJYHFragment;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 
@@ -47,7 +48,7 @@ public class WoDeSHActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
     @Override
     protected void initViews() {
-        ((TextView)findViewById(R.id.textViewTitle)).setText("我的商户");
+        ((TextView) findViewById(R.id.textViewTitle)).setText("我的商户");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
@@ -69,7 +70,7 @@ public class WoDeSHActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imageBack:
                 finish();
                 break;
@@ -84,7 +85,14 @@ public class WoDeSHActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
         @Override
         public Fragment getItem(int position) {
-            return new ZhiJieTJYHFragment();
+            switch (position) {
+                case 0:
+                    return new ZhiJieTJYHFragment();
+                case 1:
+                    return new JianJieTJYHFragment();
+                default:
+                    return new ZhiJieTJYHFragment();
+            }
         }
 
         @Override

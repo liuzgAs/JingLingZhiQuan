@@ -1,0 +1,176 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="hudongchuangxiang.com.jinglingzhiquan.fragment.ZhiJieTJYHFragment">
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/jianjie_lv"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView451"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:textColor="@color/light_black"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="直属VIP旗下商户"
+                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textView761"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView451"
+                android:layout_toEndOf="@+id/imageView451" />
+
+            <ImageView
+                android:src="@mipmap/right"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView461"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人数：0"
+                android:id="@+id/textView771"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageView461"
+                android:layout_toStartOf="@+id/imageView461" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/yin_pai_xiao_fei"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView452"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:textColor="@color/light_black"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="直属银牌旗下商户"
+                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textView762"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView452"
+                android:layout_toEndOf="@+id/imageView452" />
+
+            <ImageView
+                android:src="@mipmap/right"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView462"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人数：0"
+                android:id="@+id/textView772"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageView462"
+                android:layout_toStartOf="@+id/imageView462" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/qixiajingling"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4521"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:textColor="@color/light_black"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="直属银牌旗下VIP"
+                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textView7621"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView4521"
+                android:layout_toEndOf="@+id/imageView4521" />
+
+            <ImageView
+                android:src="@mipmap/right"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4621"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人数：0"
+                android:id="@+id/textView7721"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageView4621"
+                android:layout_toStartOf="@+id/imageView4621" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
