@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.FeiLvActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeDDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSHActivity;
@@ -104,6 +105,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
         mInflate.findViewById(R.id.viewWoDeZL).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZhanNeiGG).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewFeiLv).setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
         imageGongGao.setOnClickListener(this);
     }
@@ -117,6 +119,10 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewFeiLv:
+                intent.setClass(getActivity(), FeiLvActivity.class);
+                startActivity(intent);
+                break;
             case R.id.viewWoDeZL:
                 ziLiao();
                 break;
