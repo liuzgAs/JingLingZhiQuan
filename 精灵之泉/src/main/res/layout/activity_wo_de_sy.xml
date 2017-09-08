@@ -1,121 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@mipmap/wodeshouyi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSYActivity">
-    <include layout="@layout/view_bar"/>
 
-    <RelativeLayout
-        android:id="@+id/viewYongJinTX"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@mipmap/item_wodeshouyi"
+    <include layout="@layout/view_bar" />
+
+    <hudongchuangxiang.com.jinglingzhiquan.customview.ResizableImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="105dp">
+        android:src="@mipmap/wo_de_shou_yi_top" />
 
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:textSize="18dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="推广佣金"
-            android:textColor="@color/light_black"
-            android:id="@+id/textView79"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <ImageView
-            android:src="@mipmap/right"
-            android:layout_marginRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView47"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <TextView
-            android:layout_marginRight="10dp"
-            android:textSize="24dp"
-            android:textColor="@color/textYellow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥588.00"
-            android:id="@+id/textView80"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/imageView47"
-            android:layout_toStartOf="@+id/imageView47" />
-
-        <TextView
-            android:layout_marginTop="20dp"
-            android:textSize="@dimen/litterText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="可提现金额"
-            android:id="@+id/textView81"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/textView80"
-            android:layout_alignEnd="@+id/textView80" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/viewFanXianTX"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@mipmap/item_wodeshouyi"
+    <android.support.v7.widget.CardView
+        android:id="@+id/viewFenRun"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
-        <ImageView
-            android:src="@mipmap/right"
-            android:layout_marginRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView48"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:textSize="18dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="购物返现"
-            android:textColor="@color/light_black"
-            android:id="@+id/textView82"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@color/textBlue" />
 
-        <TextView
-            android:layout_marginRight="10dp"
-            android:textSize="24dp"
-            android:textColor="@color/textYellow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥588.00"
-            android:id="@+id/textView83"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/imageView48"
-            android:layout_toStartOf="@+id/imageView48" />
+            <TextView
+                android:id="@+id/textView80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="我的分润"
+                android:textColor="@color/light_black"
+                android:textSize="20dp" />
 
-        <TextView
-            android:layout_marginTop="20dp"
-            android:textSize="@dimen/litterText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="可提现金额"
-            android:id="@+id/textView84"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/textView83"
-            android:layout_alignEnd="@+id/textView83" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imageView47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/right_big" />
+
+            <TextView
+                android:id="@+id/textFenRun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/imageView47"
+                android:layout_toStartOf="@+id/imageView47"
+                android:text="¥51513.00"
+                android:textColor="@color/textBlue"
+                android:textScaleX="1.1"
+                android:textSize="30dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/viewYongJin"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView791"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@color/basic_color" />
+
+            <TextView
+                android:id="@+id/textView801"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="推广佣金"
+                android:textColor="@color/light_black"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/imageView471"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/right_big" />
+
+            <TextView
+                android:id="@+id/textYongJin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/imageView471"
+                android:layout_toStartOf="@+id/imageView471"
+                android:text="¥588.00"
+                android:textColor="@color/basic_color"
+                android:textScaleX="1.1"
+                android:textSize="30dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/viewFanYong"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView792"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@color/textYellow" />
+
+            <TextView
+                android:id="@+id/textView802"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="平台返佣"
+                android:textColor="@color/light_black"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/imageView472"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/right_big" />
+
+            <TextView
+                android:id="@+id/textFanYong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/imageView472"
+                android:layout_toStartOf="@+id/imageView472"
+                android:text="¥588.00"
+                android:textColor="@color/textYellow"
+                android:textScaleX="1.1"
+                android:textSize="30dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -24,4 +24,5 @@
     <color name="mineScroeGray">#90ef7a</color>
     <color name="tranblack">#66000000</color>
     <color name="textYellow">#ff6e0b</color>
+    <color name="textBlue">#4f9cdd</color>
 </resources>
