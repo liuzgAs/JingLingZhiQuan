@@ -10,7 +10,6 @@ import android.widget.ScrollView;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
-import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 
 /**
@@ -23,6 +22,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private View mRelaTitleStatue;
     private View viewTianXinXi;
     private ScrollView scrollView;
+    private View viewShiMingRZ;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -60,6 +60,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         mRelaTitleStatue = mInflate.findViewById(R.id.relaTitleStatue);
         viewTianXinXi = mInflate.findViewById(R.id.viewTianXinXi);
         scrollView = (ScrollView) mInflate.findViewById(R.id.scrollView);
+        viewShiMingRZ = mInflate.findViewById(R.id.viewShiMingRZ);
     }
 
     @Override
@@ -84,6 +85,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonNext:
+                viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
                 viewTianXinXi.setVisibility(View.GONE);
                 scrollView.setVisibility(View.VISIBLE);
                 break;
@@ -92,10 +94,10 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 
     @Override
     public boolean onBackPressed() {
-        LogUtil.LogShitou("RenZhengFragment--onBackPressed", "11111");
         if (scrollView.getVisibility() == View.VISIBLE) {
             viewTianXinXi.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
+            viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop1);
             return true;
         }else {
             return super.onBackPressed();
