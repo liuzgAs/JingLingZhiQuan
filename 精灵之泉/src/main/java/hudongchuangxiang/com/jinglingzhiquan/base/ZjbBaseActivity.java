@@ -14,7 +14,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
-import hudongchuangxiang.com.jinglingzhiquan.model.UserInfoBean;
+import hudongchuangxiang.com.jinglingzhiquan.model.UserInfo;
 import hudongchuangxiang.com.jinglingzhiquan.util.ACache;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
@@ -24,7 +24,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
     private SwipeBackLayout mSwipeBackLayout;
     public int changeControl = 2016;
     private AlertDialog mAlertDialog;
-    public UserInfoBean mMyUserInfo;
+    public UserInfo userInfo;
     public boolean isLogin = false;
     private AlertDialog reLoginDialog;
     public String tokenTime;
@@ -49,7 +49,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
     public void init() {
         changeControl = Constant.changeControl - 1;
         ACache aCache = ACache.get(this, Constant.ACACHE.App);
-        mMyUserInfo = (UserInfoBean) aCache.getAsObject(Constant.ACACHE.USER_INFO);
+        userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
         initSP();
         initIntent();
@@ -103,7 +103,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
     }
 
     private void initLogin() {
-        if (mMyUserInfo != null) {
+        if (userInfo != null) {
             isLogin = true;
         } else {
             isLogin = false;

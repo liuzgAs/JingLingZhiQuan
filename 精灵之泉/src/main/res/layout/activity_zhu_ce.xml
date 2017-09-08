@@ -49,18 +49,18 @@
         android:layout_marginTop="10dp"
         android:src="@mipmap/denglu_touxiang" />
 
-    <EditText
+    <hudongchuangxiang.com.jinglingzhiquan.customview.EditTextWithDel
+        android:inputType="number"
+        android:maxLength="11"
+        android:singleLine="true"
+        android:textColorHint="@color/lightMore_black"
+        android:textCursorDrawable="@drawable/mycursor"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
-        android:id="@+id/editText8"
+        android:id="@+id/edit01"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/textView39"
-        android:layout_toStartOf="@+id/textView39"
         android:background="@null"
         android:hint="请输入手机号"
         android:paddingLeft="2dp"
@@ -68,6 +68,7 @@
 
 
     <TextView
+        android:id="@+id/line01"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
@@ -83,22 +84,28 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp">
 
-        <EditText
-            android:id="@+id/editText9"
+        <hudongchuangxiang.com.jinglingzhiquan.customview.EditTextWithDel
+            android:paddingRight="10dp"
+            android:inputType="number"
+            android:maxLength="6"
+            android:singleLine="true"
+            android:textColorHint="@color/lightMore_black"
+            android:textCursorDrawable="@drawable/mycursor"
+            android:id="@+id/edit02"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textView40"
-            android:layout_toStartOf="@+id/textView40"
+            android:layout_toLeftOf="@+id/textSms"
+            android:layout_toStartOf="@+id/textSms"
             android:background="@null"
             android:hint="请输入验证码"
             android:paddingLeft="2dp"
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView40"
+            android:id="@+id/textSms"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -111,7 +118,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/line02"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
@@ -119,25 +126,25 @@
         android:layout_marginRight="20dp"
         android:background="@color/basic_color" />
 
-    <EditText
+    <hudongchuangxiang.com.jinglingzhiquan.customview.EditTextWithDel
+        android:inputType="textPassword"
+        android:maxLength="17"
+        android:singleLine="true"
+        android:textColorHint="@color/lightMore_black"
+        android:textCursorDrawable="@drawable/mycursor"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:id="@+id/editText11"
+        android:id="@+id/edit03"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/textView39"
-        android:layout_toStartOf="@+id/textView39"
         android:background="@null"
         android:hint="请设置密码（字母+数字6位以上）"
         android:paddingLeft="2dp"
         android:textSize="@dimen/normal_textsize" />
 
     <TextView
-        android:id="@+id/textView108"
+        android:id="@+id/line03"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
@@ -145,25 +152,25 @@
         android:layout_marginRight="20dp"
         android:background="@color/basic_color" />
 
-    <EditText
+    <hudongchuangxiang.com.jinglingzhiquan.customview.EditTextWithDel
+        android:inputType="textPassword"
+        android:maxLength="17"
+        android:singleLine="true"
+        android:textColorHint="@color/lightMore_black"
+        android:textCursorDrawable="@drawable/mycursor"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:id="@+id/editText12"
+        android:id="@+id/edit04"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/textView39"
-        android:layout_toStartOf="@+id/textView39"
         android:background="@null"
         android:hint="确认密码"
         android:paddingLeft="2dp"
         android:textSize="@dimen/normal_textsize" />
 
     <TextView
-        android:id="@+id/textView109"
+        android:id="@+id/line04"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
@@ -171,25 +178,25 @@
         android:layout_marginRight="20dp"
         android:background="@color/basic_color" />
 
-    <EditText
+    <hudongchuangxiang.com.jinglingzhiquan.customview.EditTextWithDel
+        android:inputType="number"
+        android:maxLength="11"
+        android:singleLine="true"
+        android:textColorHint="@color/lightMore_black"
+        android:textCursorDrawable="@drawable/mycursor"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:id="@+id/editText13"
+        android:id="@+id/edit05"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/textView39"
-        android:layout_toStartOf="@+id/textView39"
         android:background="@null"
         android:hint="请输入推荐人手机号码（选填）"
         android:paddingLeft="2dp"
         android:textSize="@dimen/normal_textsize" />
 
     <TextView
-        android:id="@+id/textView110"
+        android:id="@+id/line05"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
@@ -198,7 +205,7 @@
         android:background="@color/basic_color" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonZuCe"
         style="@style/MyButton"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"

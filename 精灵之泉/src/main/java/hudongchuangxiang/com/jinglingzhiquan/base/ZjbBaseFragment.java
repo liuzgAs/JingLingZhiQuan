@@ -13,7 +13,7 @@ import android.view.View;
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
 import hudongchuangxiang.com.jinglingzhiquan.interfacepage.FragmentBackHandler;
-import hudongchuangxiang.com.jinglingzhiquan.model.UserInfoBean;
+import hudongchuangxiang.com.jinglingzhiquan.model.UserInfo;
 import hudongchuangxiang.com.jinglingzhiquan.util.ACache;
 import hudongchuangxiang.com.jinglingzhiquan.util.BackHandlerHelper;
 
@@ -24,7 +24,7 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
     public boolean isLogin = false;
     public int changeControl = 2016;
     private AlertDialog mAlertDialog;
-    public UserInfoBean mMyUserInfo;
+    public UserInfo userInfo;
     public String tokenTime;
 
     @Override
@@ -38,7 +38,7 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
         //添加当前界面到容器中
         changeControl = Constant.changeControl - 1;
         ACache aCache = ACache.get(getActivity(), Constant.ACACHE.App);
-        mMyUserInfo = (UserInfoBean) aCache.getAsObject(Constant.ACACHE.USER_INFO);
+        userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
         initSP();
         initIntent();
@@ -60,7 +60,7 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
     protected abstract void initData();
 
     private void initLogin() {
-        if (mMyUserInfo != null) {
+        if (userInfo != null) {
             isLogin = true;
         } else {
             isLogin = false;

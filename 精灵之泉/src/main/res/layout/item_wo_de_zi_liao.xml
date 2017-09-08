@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         android:background="@color/white">
 
         <TextView
@@ -79,29 +79,29 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView99"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="追梦赤子心"
-            android:layout_marginRight="10dp"
-            android:id="@+id/textView99"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/imageView53"
-            android:layout_toStartOf="@+id/imageView53" />
+            android:layout_toStartOf="@+id/imageView53"
+            android:text="追梦赤子心"
+            android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/textView100"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/line_gray"
-        android:id="@+id/textView100" />
+        android:background="@color/line_gray" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white" >
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/imageView54"
@@ -128,18 +128,18 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/textView103"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/line_gray"
-        android:id="@+id/textView103" />
+        android:background="@color/line_gray" />
 
     <RelativeLayout
         android:id="@+id/viewDiZhiGL"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@drawable/layout_selector_white_system_gray" >
+        android:background="@drawable/layout_selector_white_system_gray">
 
         <ImageView
             android:id="@+id/imageView55"
@@ -165,10 +165,10 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white" >
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/imageView56"
@@ -193,22 +193,22 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView105"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="158****5320"
-            android:layout_marginRight="10dp"
-            android:id="@+id/textView105"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/imageView56"
-            android:layout_toStartOf="@+id/imageView56" />
+            android:layout_toStartOf="@+id/imageView56"
+            android:text="158****5320"
+            android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white" >
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/imageView57"
@@ -232,5 +232,13 @@
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/buttonExit"
+        style="@style/MyButton"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:text="退出登录" />
 
 </LinearLayout>

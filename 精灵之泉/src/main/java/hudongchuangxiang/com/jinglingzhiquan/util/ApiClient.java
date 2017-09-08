@@ -14,12 +14,14 @@ import okhttp3.Response;
  */
 public class ApiClient {
 
-    public interface CallBack{
+    public interface CallBack {
         void onSuccess(String s);
+
         void onError(Response response);
     }
 
-    public static void post(Context context, OkObject okObject, final CallBack callBack){
+    public static void post(Context context, OkObject okObject, final CallBack callBack) {
+        LogUtil.LogShitou("ApiClient--发送", "" + okObject.getJson());
         OkGo.post(okObject.getUrl())//
                 .tag(context)//
                 .upJson(okObject.getJson())//
@@ -32,7 +34,7 @@ public class ApiClient {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                       callBack.onError(response);
+                        callBack.onError(response);
                     }
                 });
     }

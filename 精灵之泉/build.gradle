@@ -8,8 +8,8 @@ android {
         applicationId "hudongchuangxiang.com.jinglingzhiquan"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 17090801
+        versionName "0.0.1"
     }
     buildTypes {
         release {

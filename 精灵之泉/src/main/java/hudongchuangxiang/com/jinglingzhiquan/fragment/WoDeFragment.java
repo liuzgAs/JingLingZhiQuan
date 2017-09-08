@@ -37,6 +37,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     private HeadZoomScrollView zoomScrollView;
     private View viewTips;
     private ImageView imageGongGao;
+    private ImageView imageTouXiang;
 
     public WoDeFragment() {
         // Required empty public constructor
@@ -77,6 +78,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         viewZoom = mInflate.findViewById(R.id.viewZoom);
         viewTips = mInflate.findViewById(R.id.viewTips);
         imageGongGao = (ImageView) mInflate.findViewById(R.id.imageGongGao);
+        imageTouXiang = (ImageView) mInflate.findViewById(R.id.imageTouXiang);
     }
 
     @Override
@@ -106,8 +108,10 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewWoDeZL).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZhanNeiGG).setOnClickListener(this);
         mInflate.findViewById(R.id.viewFeiLv).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewName).setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
         imageGongGao.setOnClickListener(this);
+        imageTouXiang.setOnClickListener(this);
     }
 
     @Override
@@ -124,6 +128,12 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 startActivity(intent);
                 break;
             case R.id.viewWoDeZL:
+                ziLiao();
+                break;
+            case R.id.viewName:
+                ziLiao();
+                break;
+            case R.id.imageTouXiang:
                 ziLiao();
                 break;
             case R.id.viewZhanNeiGG:

@@ -1,16 +1,23 @@
 package hudongchuangxiang.com.jinglingzhiquan.constant;
 
 
+import hudongchuangxiang.com.jinglingzhiquan.util.AppUtil;
+
 /**
  * Created by zjb on 2016/6/12.
  */
 public class Constant {
-    public static String HOST = "http://rapapi.org/mockjsdata/24989/";
+    public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
+
     public static int changeControl = 2017;//判断数据是否有改变
 
     public static class Url {
         //登录
-        public static final String USER_LOGIN = "login/login";
+        public static final String LOGIN_INDEX = "&g=App&m=Login&a=index";
+        //注册验证码
+        public static final String LOGIN_REGSMS = "&g=App&m=Login&a=regSms";
+        //注册
+        public static final String LOGIN_REGISTER = "&g=App&m=Login&a=register";
     }
 
     public static class PERMISSION {
@@ -35,6 +42,7 @@ public class Constant {
 
     public static class INTENT_KEY {
         public static final String TITLE = "title";
+        public static final String PHONE = "phone";
     }
 
     public static class REQUEST_RESULT_CODE {
@@ -42,7 +50,7 @@ public class Constant {
     }
 
     public static class ACACHE {
-        public static final String App = "maYi";
+        public static final String App = "app";
         public static final String USER_INFO = "userInfo";
         public static final String TOKENTIME = "tokentime";
     }

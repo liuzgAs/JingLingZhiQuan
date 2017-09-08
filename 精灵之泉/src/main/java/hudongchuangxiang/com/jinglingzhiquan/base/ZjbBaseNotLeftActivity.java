@@ -15,7 +15,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
-import hudongchuangxiang.com.jinglingzhiquan.model.UserInfoBean;
+import hudongchuangxiang.com.jinglingzhiquan.model.UserInfo;
 import hudongchuangxiang.com.jinglingzhiquan.util.ACache;
 
 
@@ -23,7 +23,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
 
     public int changeControl = 2016;
     private AlertDialog mAlertDialog;
-    public UserInfoBean mMyUserInfo;
+    public UserInfo userInfo;
     public boolean isLogin = false;
     public String tokenTime;
 
@@ -43,7 +43,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
 
     public void init() {
         ACache aCache = ACache.get(this, Constant.ACACHE.App);
-        mMyUserInfo = (UserInfoBean) aCache.getAsObject(Constant.ACACHE.USER_INFO);
+        userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
         changeControl = Constant.changeControl-1;
         initSP();
@@ -98,7 +98,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
     }
 
     private void initLogin() {
-        if (mMyUserInfo != null) {
+        if (userInfo != null) {
             isLogin = true;
         } else {
             isLogin = false;

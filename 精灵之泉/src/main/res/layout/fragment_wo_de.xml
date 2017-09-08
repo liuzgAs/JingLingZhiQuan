@@ -40,7 +40,7 @@
                 </RelativeLayout>
 
                 <hudongchuangxiang.com.jinglingzhiquan.customview.CircleImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/imageTouXiang"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_below="@+id/relaTitleStatue01"
@@ -51,9 +51,10 @@
                     app:civ_border_width="2dp" />
 
                 <RelativeLayout
+                    android:id="@+id/viewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageView6"
+                    android:layout_below="@+id/imageTouXiang"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp">
 
