@@ -2,6 +2,7 @@ package hudongchuangxiang.com.jinglingzhiquan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
 import hudongchuangxiang.com.jinglingzhiquan.util.AppUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
+import hudongchuangxiang.com.jinglingzhiquan.util.StringUtil;
 import okhttp3.Response;
 
 public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnClickListener {
@@ -148,22 +150,22 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
                 finish();
                 break;
             case R.id.buttonLogin:
-                intent.setClass(DengLuActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-//                if (!StringUtil.isMobileNO(editPhone.getText().toString().trim())) {
-//                    Toast.makeText(DengLuActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(editPsw.getText().toString().trim())) {
-//                    Toast.makeText(DengLuActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (!isCheck) {
-//                    Toast.makeText(DengLuActivity.this, "阅读并同意《精灵之泉协议》", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                login();
+//                intent.setClass(DengLuActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+                if (!StringUtil.isMobileNO(editPhone.getText().toString().trim())) {
+                    Toast.makeText(DengLuActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(editPsw.getText().toString().trim())) {
+                    Toast.makeText(DengLuActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!isCheck) {
+                    Toast.makeText(DengLuActivity.this, "阅读并同意《精灵之泉协议》", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                login();
                 break;
         }
     }

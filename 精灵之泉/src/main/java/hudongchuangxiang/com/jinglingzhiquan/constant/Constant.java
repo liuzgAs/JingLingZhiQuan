@@ -18,6 +18,10 @@ public class Constant {
         public static final String LOGIN_REGSMS = "&g=App&m=Login&a=regSms";
         //注册
         public static final String LOGIN_REGISTER = "&g=App&m=Login&a=register";
+        //忘记密码验证码
+        public static final String LOGIN_FORGETSMS = "&g=App&m=Login&a=forgetSms";
+        //忘记密码
+        public static final String LOGIN_FORGET = "&g=App&m=Login&a=forget";
     }
 
     public static class PERMISSION {

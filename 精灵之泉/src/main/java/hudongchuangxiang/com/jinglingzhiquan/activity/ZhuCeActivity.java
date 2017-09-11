@@ -72,10 +72,6 @@ public class ZhuCeActivity extends ZjbBaseActivity implements View.OnClickListen
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.buttonZuCe).setOnClickListener(this);
         textSms.setOnClickListener(this);
-    }
-
-    @Override
-    protected void initData() {
         for (int i = 0; i < editView.length; i++) {
             final int finalI = i;
             editView[i].setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -90,6 +86,11 @@ public class ZhuCeActivity extends ZjbBaseActivity implements View.OnClickListen
                 }
             });
         }
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override

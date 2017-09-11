@@ -25,7 +25,10 @@
             android:src="@mipmap/yonghu" />
 
         <EditText
-            android:id="@+id/editText14"
+            android:inputType="number"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:id="@+id/edit01"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -60,7 +63,10 @@
             android:src="@mipmap/duanxin" />
 
         <EditText
-            android:id="@+id/editText15"
+            android:inputType="number"
+            android:maxLength="6"
+            android:singleLine="true"
+            android:id="@+id/edit02"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -72,7 +78,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView113"
+            android:id="@+id/textSms"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -109,7 +115,10 @@
             android:src="@mipmap/mima" />
 
         <EditText
-            android:id="@+id/editText16"
+            android:inputType="textPassword"
+            android:maxLength="17"
+            android:singleLine="true"
+            android:id="@+id/edit03"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -145,7 +154,10 @@
             android:src="@mipmap/mima" />
 
         <EditText
-            android:id="@+id/editText17"
+            android:inputType="textPassword"
+            android:maxLength="17"
+            android:singleLine="true"
+            android:id="@+id/edit04"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -158,7 +170,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonTiJiao"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="30dp"
