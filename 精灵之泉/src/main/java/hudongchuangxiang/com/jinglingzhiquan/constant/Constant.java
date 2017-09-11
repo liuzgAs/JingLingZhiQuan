@@ -57,6 +57,7 @@ public class Constant {
         public static final String App = "app";
         public static final String USER_INFO = "userInfo";
         public static final String TOKENTIME = "tokentime";
+        public static final String FRIST = "frist";
     }
 
     public static class BROADCASTCODE {

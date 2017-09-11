@@ -9,11 +9,68 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:theme="@style/AppThemeNoTranslucent"
             android:name=".activity.MainActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@style/AppThemeNoTranslucent" />
         <activity
             android:name=".activity.DengLuActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.BangZhuZXActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.GongGaoActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeDDActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ShangHuXXActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ShouYiMXActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeSHActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeSYActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.TuiGuangYJActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.LiJiTXActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeZDActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeZLActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.DiZhiGLActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.XinZengDZActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ZhuCeActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WangJiMMActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.DingDanXQActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.FeiLvActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.XuanZeTDActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.HuanYingActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,24 +78,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BangZhuZXActivity" />
-        <activity android:name=".activity.GongGaoActivity" />
-        <activity android:name=".activity.WoDeDDActivity" />
-        <activity android:name=".activity.ShangHuXXActivity" />
-        <activity android:name=".activity.ShouYiMXActivity" />
-        <activity android:name=".activity.WoDeSHActivity" />
-        <activity android:name=".activity.WoDeSYActivity" />
-        <activity android:name=".activity.TuiGuangYJActivity" />
-        <activity android:name=".activity.LiJiTXActivity" />
-        <activity android:name=".activity.WoDeZDActivity" />
-        <activity android:name=".activity.WoDeZLActivity" />
-        <activity android:name=".activity.DiZhiGLActivity" />
-        <activity android:name=".activity.XinZengDZActivity" />
-        <activity android:name=".activity.ZhuCeActivity" />
-        <activity android:name=".activity.WangJiMMActivity" />
-        <activity android:name=".activity.DingDanXQActivity" />
-        <activity android:name=".activity.FeiLvActivity" />
-        <activity android:name=".activity.XuanZeTDActivity"></activity>
+        <activity
+            android:name=".activity.YinDaoActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

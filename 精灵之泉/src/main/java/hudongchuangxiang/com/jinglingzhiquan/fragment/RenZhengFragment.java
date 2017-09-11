@@ -75,10 +75,40 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     protected void setListeners() {
         mInflate.findViewById(R.id.buttonNext).setOnClickListener(this);
     }
+    
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+//    private OkObject getOkObject() {
+//        String url = Constant.HOST +Constant.Url.;
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("uid",userInfo.getUid()+"");
+//        params.put("tokenTime",tokenTime);
+//        return new OkObject(params, url);
+//    }
 
     @Override
     protected void initData() {
-
+//        showLoadingDialog();
+//        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+//            @Override
+//            public void onSuccess(String s) {
+//                cancelLoadingDialog();
+//                LogUtil.LogShitou("RenZhengFragment--onSuccess", "");
+//                try {
+//                } catch (Exception e) {
+//                    Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onError(Response response) {
+//                cancelLoadingDialog();
+//                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
