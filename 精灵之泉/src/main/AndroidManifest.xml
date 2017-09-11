@@ -9,6 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:theme="@style/AppThemeNoTranslucent"
             android:name=".activity.MainActivity"
             android:launchMode="singleTop" />
         <activity
@@ -36,7 +37,8 @@
         <activity android:name=".activity.ZhuCeActivity" />
         <activity android:name=".activity.WangJiMMActivity" />
         <activity android:name=".activity.DingDanXQActivity" />
-        <activity android:name=".activity.FeiLvActivity"></activity>
+        <activity android:name=".activity.FeiLvActivity" />
+        <activity android:name=".activity.XuanZeTDActivity"></activity>
     </application>
 
 </manifest>

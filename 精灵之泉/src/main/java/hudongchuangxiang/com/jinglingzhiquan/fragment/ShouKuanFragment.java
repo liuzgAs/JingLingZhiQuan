@@ -1,6 +1,7 @@
 package hudongchuangxiang.com.jinglingzhiquan.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
+import hudongchuangxiang.com.jinglingzhiquan.activity.XuanZeTDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.StringUtil;
@@ -112,7 +114,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
         }
         mInflate.findViewById(R.id.textKeyDian).setOnClickListener(this);
         mInflate.findViewById(R.id.textKeyDelete).setOnClickListener(this);
-        mInflate.findViewById(R.id.buttonSure).setOnClickListener(this);
+        mInflate.findViewById(R.id.buttonShouKuan).setOnClickListener(this);
         mInflate.findViewById(R.id.textKeyDelete).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -160,7 +162,10 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
             case R.id.viewWeiXin:
                 viewTabBg.setBackgroundResource(R.mipmap.youbian);
                 break;
-            case R.id.buttonSure:
+            case R.id.buttonShouKuan:
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), XuanZeTDActivity.class);
+                startActivity(intent);
                 break;
         }
     }

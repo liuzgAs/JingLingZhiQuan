@@ -23,4 +23,5 @@
     <dimen name="grid">4dp</dimen>
     <dimen name="mineImg">15dp</dimen>
     <dimen name="mineImgConner">15dp</dimen>
+    <dimen name="diver">10dp</dimen>
 </resources>

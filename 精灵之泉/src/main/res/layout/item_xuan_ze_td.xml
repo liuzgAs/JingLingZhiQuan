@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@drawable/layout_selector_white_system_gray"
+   >
+
+    <ImageView
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/right_big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView6"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/imageView6"
+        android:layout_toStartOf="@+id/imageView6">
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/fei_lv_yinlian"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView39"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <RelativeLayout
+                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView39"
+                android:layout_toEndOf="@+id/imageView39">
+
+                <TextView
+                    android:textColor="@color/light_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="银联APPD+0"
+                    android:textSize="@dimen/MoreBigText"
+                    android:id="@+id/textView113"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单笔2万，8:00-22:00秒到"
+                    android:textSize="@dimen/normal_textsize"
+                    android:id="@+id/textView138"
+                    android:layout_below="@+id/textView113"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/basic_color"
+            android:layout_marginLeft="75dp"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="费率：0.55%    结算：2.00元/笔"
+            android:id="@+id/textView139" />
+    </LinearLayout>
+</RelativeLayout>

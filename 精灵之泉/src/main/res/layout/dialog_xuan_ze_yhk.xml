@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="bottom"
+    android:background="@color/tranblack"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/viewCancle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择银行卡"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/MoreBigText"
+            android:id="@+id/textView141"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:padding="18dp"
+            android:src="@mipmap/cancle"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView72"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <ListView
+        android:divider="@null"
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:background="@color/line_gray"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+     />
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:src="@mipmap/xin_zeng_yhk"
+            android:layout_marginLeft="10dp"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView70"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:textSize="@dimen/bigText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新增银行卡"
+            android:textColor="@color/light_black"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/textView140"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView70"
+            android:layout_toEndOf="@+id/imageView70" />
+
+        <ImageView
+            android:src="@mipmap/right_big"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView71"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</LinearLayout>
