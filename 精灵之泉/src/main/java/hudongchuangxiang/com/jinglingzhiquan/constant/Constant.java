@@ -22,6 +22,10 @@ public class Constant {
         public static final String LOGIN_FORGETSMS = "&g=App&m=Login&a=forgetSms";
         //忘记密码
         public static final String LOGIN_FORGET = "&g=App&m=Login&a=forget";
+        //会员身份认证请求
+        public static final String USER_CARDBEFORE = "&g=App&m=User&a=cardBefore";
+        //实名认证时验证码
+        public static final String LOGIN_BINDSMS = "&g=App&m=Login&a=bindSms";
     }
 
     public static class PERMISSION {
@@ -51,6 +55,11 @@ public class Constant {
 
     public static class REQUEST_RESULT_CODE {
         public static final int CHOOSE_CITY = 2017;
+        public static final int IMG01 = 2018;
+        public static final int IMG02 = 2019;
+        public static final int IMG03 = 2020;
+        public static final int IMG04 = 2021;
+        public static final int IMG05 = 2022;
     }
 
     public static class ACACHE {

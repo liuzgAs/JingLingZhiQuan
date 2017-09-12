@@ -70,7 +70,7 @@
                 android:src="@mipmap/tishi" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textTip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -100,13 +100,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/viewTianXinXi"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"
             android:layout_gravity="center_horizontal"
@@ -157,7 +158,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/editName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -188,7 +189,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/editCard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -200,43 +201,13 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/viewKaiHuYH"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/textView35"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="储蓄卡"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
-
-            <EditText
-                android:id="@+id/editText4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/textView35"
-                android:layout_toRightOf="@+id/textView35"
-                android:background="@null"
-                android:hint="请输入本人提现储蓄卡卡号"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="1dp"
-            android:background="@color/white">
+            android:background="@drawable/layout_selector_white_system_gray">
 
             <TextView
                 android:id="@+id/textView36"
@@ -251,7 +222,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <TextView
-                android:id="@+id/editText5"
+                android:id="@+id/textBankName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -280,6 +251,37 @@
             android:background="@color/white">
 
             <TextView
+                android:id="@+id/textView35"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="储蓄卡"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/normal_textsize" />
+
+            <EditText
+                android:id="@+id/editBankCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/textView35"
+                android:layout_toRightOf="@+id/textView35"
+                android:background="@null"
+                android:hint="请输入本人提现储蓄卡卡号"
+                android:textSize="@dimen/normal_textsize" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="1dp"
+            android:background="@color/white">
+
+            <TextView
                 android:id="@+id/textView37"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
@@ -292,7 +294,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/editPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -323,20 +325,20 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/editCode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/textView38"
-                android:layout_toLeftOf="@+id/button"
+                android:layout_toLeftOf="@+id/buttonSms"
                 android:layout_toRightOf="@+id/textView38"
-                android:layout_toStartOf="@+id/button"
+                android:layout_toStartOf="@+id/buttonSms"
                 android:background="@null"
                 android:hint="请输入验证码"
                 android:textSize="@dimen/normal_textsize" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonSms"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -360,7 +362,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollView" >
@@ -401,7 +403,7 @@
                         android:src="@mipmap/shenfenzhengmian"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView37"
+                        android:id="@+id/image01"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
 
@@ -438,7 +440,7 @@
                         android:src="@mipmap/shenfenbeimain"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView32"
+                        android:id="@+id/image02"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
             </LinearLayout>
@@ -474,7 +476,7 @@
                         android:src="@mipmap/xingyongkademo"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView68"
+                        android:id="@+id/image03"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
             </LinearLayout>
@@ -510,7 +512,7 @@
                         android:src="@mipmap/yinhangkazhengmian"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView34"
+                        android:id="@+id/image04"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
             </LinearLayout>
@@ -546,10 +548,19 @@
                         android:src="@mipmap/shouchibanshen"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView36"
+                        android:id="@+id/image05"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
             </LinearLayout>
+
+            <Button
+                android:layout_marginBottom="40dp"
+                style="@style/MyButton"
+                android:id="@+id/buttonTiJiao"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:text="提交" />
 
         </LinearLayout>
     </ScrollView>
