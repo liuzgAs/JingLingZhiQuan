@@ -6,15 +6,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.XuanZeTDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
+import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.StringUtil;
 
@@ -41,7 +44,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
             R.id.textKey08,
             R.id.textKey09,
     };
-    private String amount ="";
+    private String amount = "";
 
     public ShouKuanFragment() {
         // Required empty public constructor
@@ -105,8 +108,8 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
             mInflate.findViewById(textKeyId[i]).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (amount.length()<9){
-                        amount =amount+ finalI;
+                    if (amount.length() < 9) {
+                        amount = amount + finalI;
                         checkAmount();
                     }
                 }
@@ -118,7 +121,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
         mInflate.findViewById(R.id.textKeyDelete).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                amount="";
+                amount = "";
                 setAmount();
                 return false;
             }
@@ -126,10 +129,10 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
     }
 
     private void checkAmount() {
-        if (StringUtil.isAmount(amount)){
+        if (StringUtil.isAmount(amount)) {
             setAmount();
-        }else {
-            amount = amount.substring(0,amount.length()-1);
+        } else {
+            amount = amount.substring(0, amount.length() - 1);
         }
     }
 
@@ -142,14 +145,14 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.textKeyDelete:
-                if (amount.length()>0){
-                    amount = amount.substring(0,amount.length()-1);
+                if (amount.length() > 0) {
+                    amount = amount.substring(0, amount.length() - 1);
                     setAmount();
                 }
                 break;
             case R.id.textKeyDian:
-                if (amount.length()<9&&StringUtil.isAmount(amount)){
-                    amount =amount+ ".";
+                if (amount.length() < 9 && StringUtil.isAmount(amount)) {
+                    amount = amount + ".";
                     checkAmount();
                 }
                 break;
@@ -163,7 +166,17 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 viewTabBg.setBackgroundResource(R.mipmap.youbian);
                 break;
             case R.id.buttonShouKuan:
+                if (amount.length()==0){
+                    Toast.makeText(getContext(), "请输入金额", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (amount.length() > 1) {
+                    if (TextUtils.equals(".", amount.substring(amount.length() - 1))) {
+                        amount = amount.substring(0, amount.length() - 1);
+                    }
+                }
                 Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.amount,amount);
                 intent.setClass(getActivity(), XuanZeTDActivity.class);
                 startActivity(intent);
                 break;
@@ -171,7 +184,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
     }
 
     private void setAmount() {
-        SpannableString span = new SpannableString("¥"+amount);
+        SpannableString span = new SpannableString("¥" + amount);
         span.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textAmount.setText(span);
     }

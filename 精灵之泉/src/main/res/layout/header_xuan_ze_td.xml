@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥6666.00"
-                android:id="@+id/textView109"
+                android:id="@+id/textAmount"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/textView108"
                 android:layout_toEndOf="@+id/textView108" />

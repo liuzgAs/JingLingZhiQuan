@@ -34,6 +34,8 @@ public class Constant {
         public static final String USER_CARDADD = "&g=App&m=User&a=cardAdd";
         //选择支付通道
         public static final String BANK_PAYMENT = "&g=App&m=Bank&a=payment";
+        //选择银行卡
+        public static final String BANK_CARDLIST = "&g=App&m=Bank&a=cardList";
     }
 
     public static class PERMISSION {
@@ -59,6 +61,7 @@ public class Constant {
     public static class INTENT_KEY {
         public static final String TITLE = "title";
         public static final String PHONE = "phone";
+        public static final String amount = "amount";
     }
 
     public static class REQUEST_RESULT_CODE {

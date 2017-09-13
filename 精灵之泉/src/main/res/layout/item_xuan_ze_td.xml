@@ -35,7 +35,7 @@
                 android:src="@mipmap/fei_lv_yinlian"
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView39"
+                android:id="@+id/imageImg"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -45,8 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/imageView39"
-                android:layout_toEndOf="@+id/imageView39">
+                android:layout_toRightOf="@+id/imageImg"
+                android:layout_toEndOf="@+id/imageImg">
 
                 <TextView
                     android:textColor="@color/light_black"
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:text="银联APPD+0"
                     android:textSize="@dimen/MoreBigText"
-                    android:id="@+id/textView113"
+                    android:id="@+id/textName"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
@@ -65,8 +65,8 @@
                     android:layout_height="wrap_content"
                     android:text="单笔2万，8:00-22:00秒到"
                     android:textSize="@dimen/normal_textsize"
-                    android:id="@+id/textView138"
-                    android:layout_below="@+id/textView113"
+                    android:id="@+id/textDes"
+                    android:layout_below="@+id/textName"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
             </RelativeLayout>
@@ -80,6 +80,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="费率：0.55%    结算：2.00元/笔"
-            android:id="@+id/textView139" />
+            android:id="@+id/textRateFee" />
     </LinearLayout>
 </RelativeLayout>
