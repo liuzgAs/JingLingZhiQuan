@@ -26,6 +26,12 @@ public class Constant {
         public static final String USER_CARDBEFORE = "&g=App&m=User&a=cardBefore";
         //实名认证时验证码
         public static final String LOGIN_BINDSMS = "&g=App&m=Login&a=bindSms";
+        //实名认证下一步
+        public static final String LOGIN_BINDNEXT = "&g=App&m=Login&a=bindNext";
+        //图片单个上传
+        public static final String RESPOND_APPIMGADD = "&g=App&m=Respond&a=appImgAdd";
+        //会员身份认证提交
+        public static final String USER_CARDADD = "&g=App&m=User&a=cardAdd";
     }
 
     public static class PERMISSION {

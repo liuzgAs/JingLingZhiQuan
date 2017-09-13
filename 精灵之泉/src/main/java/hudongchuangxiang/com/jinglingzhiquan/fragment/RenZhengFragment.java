@@ -1,12 +1,15 @@
 package hudongchuangxiang.com.jinglingzhiquan.fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,22 +25,32 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
+import hudongchuangxiang.com.jinglingzhiquan.base.MyDialog;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
 import hudongchuangxiang.com.jinglingzhiquan.model.OkObject;
+import hudongchuangxiang.com.jinglingzhiquan.model.RespondAppimgadd;
 import hudongchuangxiang.com.jinglingzhiquan.model.SimpleInfo;
 import hudongchuangxiang.com.jinglingzhiquan.model.UserCardbefore;
 import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
+import hudongchuangxiang.com.jinglingzhiquan.util.CheckIdCard;
 import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
+import hudongchuangxiang.com.jinglingzhiquan.util.ImgToBase64;
 import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.PicassoImageLoader;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.StringUtil;
+import okhttp3.Call;
 import okhttp3.Response;
 
 /**
@@ -71,11 +84,8 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private ImageView image04;
     private ImageView image05;
     private ImagePicker mImagePicker;
-    private String path1;
-    private String path2;
-    private String path3;
-    private String path4;
-    private String path5;
+    private String[] path = new String[5];
+    private Button buttonTiJiao;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -129,6 +139,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         image03 = (ImageView) mInflate.findViewById(R.id.image03);
         image04 = (ImageView) mInflate.findViewById(R.id.image04);
         image05 = (ImageView) mInflate.findViewById(R.id.image05);
+        buttonTiJiao = (Button) mInflate.findViewById(R.id.buttonTiJiao);
     }
 
     @Override
@@ -154,6 +165,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         image03.setOnClickListener(this);
         image04.setOnClickListener(this);
         image05.setOnClickListener(this);
+        buttonTiJiao.setOnClickListener(this);
     }
 
     /**
@@ -219,6 +231,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             image03.setEnabled(true);
                             image04.setEnabled(true);
                             image05.setEnabled(true);
+                            buttonTiJiao.setEnabled(true);
                         } else {
                             editName.setEnabled(false);
                             editCard.setEnabled(false);
@@ -232,6 +245,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             image03.setEnabled(false);
                             image04.setEnabled(false);
                             image05.setEnabled(false);
+                            buttonTiJiao.setEnabled(false);
                         }
                     } else {
                         Toast.makeText(getActivity(), userCardbefore.getInfo(), Toast.LENGTH_SHORT).show();
@@ -256,41 +270,41 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
             switch (requestCode) {
                 case Constant.REQUEST_RESULT_CODE.IMG01:
                     ArrayList<ImageItem> images01 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path1 = images01.get(0).path;
+                    path[0] = images01.get(0).path;
                     Glide.with(RenZhengFragment.this)
-                            .load(path1)
+                            .load(path[0])
                             .placeholder(R.mipmap.ic_empty)
                             .into(image01);
                     break;
                 case Constant.REQUEST_RESULT_CODE.IMG02:
                     ArrayList<ImageItem> images02 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path2 = images02.get(0).path;
+                    path[1] = images02.get(0).path;
                     Glide.with(RenZhengFragment.this)
-                            .load(path2)
+                            .load(path[1])
                             .placeholder(R.mipmap.ic_empty)
                             .into(image02);
                     break;
                 case Constant.REQUEST_RESULT_CODE.IMG03:
                     ArrayList<ImageItem> images03 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path3 = images03.get(0).path;
+                    path[2] = images03.get(0).path;
                     Glide.with(RenZhengFragment.this)
-                            .load(path3)
+                            .load(path[2])
                             .placeholder(R.mipmap.ic_empty)
                             .into(image03);
                     break;
                 case Constant.REQUEST_RESULT_CODE.IMG04:
                     ArrayList<ImageItem> images04 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path4 = images04.get(0).path;
+                    path[3] = images04.get(0).path;
                     Glide.with(RenZhengFragment.this)
-                            .load(path4)
+                            .load(path[3])
                             .placeholder(R.mipmap.ic_empty)
                             .into(image04);
                     break;
                 case Constant.REQUEST_RESULT_CODE.IMG05:
                     ArrayList<ImageItem> images05 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path5 = images05.get(0).path;
+                    path[4] = images05.get(0).path;
                     Glide.with(RenZhengFragment.this)
-                            .load(path5)
+                            .load(path[4])
                             .placeholder(R.mipmap.ic_empty)
                             .into(image05);
                     break;
@@ -301,6 +315,30 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.buttonTiJiao:
+                if (TextUtils.isEmpty(path[0]) && TextUtils.isEmpty(userCardbefore.getData().getImg())) {
+                    Toast.makeText(getActivity(), "请选择身份证正面照", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(path[1]) && TextUtils.isEmpty(userCardbefore.getData().getImg2())) {
+                    Toast.makeText(getActivity(), "请选择身份证背面照", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(path[2]) && TextUtils.isEmpty(userCardbefore.getData().getImg3())) {
+                    Toast.makeText(getActivity(), "请选择本人任一信用卡正面照", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(path[3]) && TextUtils.isEmpty(userCardbefore.getData().getImg4())) {
+                    Toast.makeText(getActivity(), "请选择银行卡正面照", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(path[4]) && TextUtils.isEmpty(userCardbefore.getData().getImg5())) {
+                    Toast.makeText(getActivity(), "请选择手持银行卡和身份证半身照", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                shangChuanPic();
+//                tiJiao();
+                break;
             case R.id.image01:
                 chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG01);
                 break;
@@ -339,8 +377,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     Toast.makeText(getActivity(), "请输入真实姓名", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(editCard.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入本人身份证号码", Toast.LENGTH_SHORT).show();
+                CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
+                if (!checkIdCard.validate()) {
+                    Toast.makeText(getActivity(), "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(userCardbefore.getData().getBankName()) || userCardbefore.getData().getBank() <= 0) {
@@ -359,15 +398,201 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     Toast.makeText(getActivity(), "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                userCardbefore.getData().setName(editName.getText().toString().trim());
-                userCardbefore.getData().setCard(editCard.getText().toString().trim());
-                userCardbefore.getData().setBankCard(editBankCard.getText().toString().trim());
-                userCardbefore.getData().setPhone(editPhone.getText().toString().trim());
-                viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
-                viewTianXinXi.setVisibility(View.GONE);
-                scrollView.setVisibility(View.VISIBLE);
+                next();
                 break;
         }
+    }
+
+    private void shangChuanPic() {
+        final boolean[] isBreak = {false};
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("上传图片");
+        progressDialog.setMessage("已上传0/5");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMax(5);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("是否取消上传")
+                            .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    isBreak[0] = true;
+                                    progressDialog.dismiss();
+                                }
+                            }).setNegativeButton("否", null)
+                            .create()
+                            .show();
+                }
+                return false;
+            }
+        });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final int[] count = {0};
+                final List<Integer> imgList = new ArrayList<>();
+                for (int i = 0; i < path.length; i++) {
+                    if (isBreak[0]) {
+                        break;
+                    }
+                    if (!TextUtils.isEmpty(path[i])) {
+                        HashMap<String, String> params = new HashMap<>();
+                        params.put("uid", userInfo.getUid());
+                        params.put("tokenTime", tokenTime);
+                        params.put("code", "Album");
+                        params.put("img", ImgToBase64.toBase64(path[i]));
+                        params.put("brand", "android");
+                        JSONObject jsonObject = new JSONObject(params);
+                        OkGo.post(Constant.HOST + Constant.Url.RESPOND_APPIMGADD)//
+                                .tag(this)//
+                                .upJson(jsonObject.toString())//
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onSuccess(String s, Call call, Response response) {
+                                        Log.e("ShangChuanPicActivity", "ShangChuanPicActivity--onSuccess--单个图片上传" + s);
+                                        try {
+                                            RespondAppimgadd respondAppimgadd = GsonUtils.parseJSON(s, RespondAppimgadd.class);
+                                            if (respondAppimgadd.getStatus() == 1) {
+                                                count[0]++;
+                                                progressDialog.setProgress(count[0]);
+                                                progressDialog.setMessage("已上传" + count[0] + "/5");
+                                                imgList.add(respondAppimgadd.getImgId());
+                                                if (count[0] == 5) {
+                                                    progressDialog.dismiss();
+                                                    userCardbefore.getData().setImgId(imgList.get(0));
+                                                    userCardbefore.getData().setImgId2(imgList.get(1));
+                                                    userCardbefore.getData().setImgId3(imgList.get(2));
+                                                    userCardbefore.getData().setImgId4(imgList.get(3));
+                                                    userCardbefore.getData().setImgId4(imgList.get(4));
+                                                    tiJiao();
+                                                }
+                                            } else if (respondAppimgadd.getStatus() == 3) {
+                                                MyDialog.showReLoginDialog(getActivity());
+                                            } else {
+                                                Toast.makeText(getActivity(), respondAppimgadd.getInfo(), Toast.LENGTH_SHORT).show();
+                                                isBreak[0] = false;
+                                            }
+                                        } catch (Exception e) {
+                                            Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Call call, Response response, Exception e) {
+                                        super.onError(call, response, e);
+                                        Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject3() {
+        String url = Constant.HOST + Constant.Url.USER_CARDADD;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid",userInfo.getUid()+"");
+        params.put("tokenTime",tokenTime);
+        params.put("card",userCardbefore.getData().getCard());
+        params.put("phone",userCardbefore.getData().getPhone());
+        params.put("name",userCardbefore.getData().getName());
+        params.put("bankCard",userCardbefore.getData().getBankCard());
+        params.put("bank",userCardbefore.getData().getBank()+"");
+        params.put("imgId",userCardbefore.getData().getImgId()+"");
+        params.put("imgId2",userCardbefore.getData().getImgId2()+"");
+        params.put("imgId3",userCardbefore.getData().getImgId3()+"");
+        params.put("imgId4",userCardbefore.getData().getImgId4()+"");
+        params.put("imgId5",userCardbefore.getData().getImgId5()+"");
+        return new OkObject(params, url);
+    }
+
+    private void tiJiao() {
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getOkObject3(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("RenZhengFragment--onSuccess", "");
+                try {
+                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                    Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                    if (simpleInfo.getStatus()==1){
+                        viewTianXinXi.setVisibility(View.VISIBLE);
+                        scrollView.setVisibility(View.GONE);
+                        viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop1);
+                        //// TODO: 2017/9/12 0012 弹窗
+                        initData();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject2() {
+        String url = Constant.HOST + Constant.Url.LOGIN_BINDNEXT;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid() + "");
+        params.put("tokenTime", tokenTime);
+        params.put("code", editCode.getText().toString().trim());
+        return new OkObject(params, url);
+    }
+
+    private void next() {
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getOkObject2(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("RenZhengFragment--实名认证下一步", "" + s);
+                try {
+                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                    if (simpleInfo.getStatus() == 1) {
+                        userCardbefore.getData().setName(editName.getText().toString().trim());
+                        userCardbefore.getData().setCard(editCard.getText().toString().trim());
+                        userCardbefore.getData().setBankCard(editBankCard.getText().toString().trim());
+                        userCardbefore.getData().setPhone(editPhone.getText().toString().trim());
+                        viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
+                        viewTianXinXi.setVisibility(View.GONE);
+                        scrollView.setVisibility(View.VISIBLE);
+                    } else {
+                        Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void chooseTuPian(int requestCode) {
@@ -405,6 +630,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                         buttonSms.setText("重新发送");
                         return;
                     } else {
+
                     }
                     buttonSms.postDelayed(mR, 1000);
                 }
@@ -441,7 +667,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("RenZhengFragment--获取短信", "");
+                LogUtil.LogShitou("RenZhengFragment--获取短信", ""+s);
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
