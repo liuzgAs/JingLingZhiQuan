@@ -32,6 +32,8 @@ public class Constant {
         public static final String RESPOND_APPIMGADD = "&g=App&m=Respond&a=appImgAdd";
         //会员身份认证提交
         public static final String USER_CARDADD = "&g=App&m=User&a=cardAdd";
+        //选择支付通道
+        public static final String BANK_PAYMENT = "&g=App&m=Bank&a=payment";
     }
 
     public static class PERMISSION {

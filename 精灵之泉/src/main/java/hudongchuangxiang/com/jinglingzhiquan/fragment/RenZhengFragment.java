@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,10 +24,6 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +45,6 @@ import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.PicassoImageLoader;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.StringUtil;
-import okhttp3.Call;
 import okhttp3.Response;
 
 /**
@@ -231,7 +225,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             image03.setEnabled(true);
                             image04.setEnabled(true);
                             image05.setEnabled(true);
-                            buttonTiJiao.setEnabled(true);
                         } else {
                             editName.setEnabled(false);
                             editCard.setEnabled(false);
@@ -245,7 +238,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             image03.setEnabled(false);
                             image04.setEnabled(false);
                             image05.setEnabled(false);
-                            buttonTiJiao.setEnabled(false);
                         }
                     } else {
                         Toast.makeText(getActivity(), userCardbefore.getInfo(), Toast.LENGTH_SHORT).show();
@@ -316,6 +308,10 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonTiJiao:
+                if (userCardbefore.getSubmitStatus() != 1) {
+                    Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (TextUtils.isEmpty(path[0]) && TextUtils.isEmpty(userCardbefore.getData().getImg())) {
                     Toast.makeText(getActivity(), "请选择身份证正面照", Toast.LENGTH_SHORT).show();
                     return;
@@ -373,6 +369,10 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 sendSMS();
                 break;
             case R.id.buttonNext:
+                if (userCardbefore.getSubmitStatus() != 1) {
+                    Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (TextUtils.isEmpty(editName.getText().toString().trim())) {
                     Toast.makeText(getActivity(), "请输入真实姓名", Toast.LENGTH_SHORT).show();
                     return;
@@ -442,55 +442,60 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                         break;
                     }
                     if (!TextUtils.isEmpty(path[i])) {
-                        HashMap<String, String> params = new HashMap<>();
-                        params.put("uid", userInfo.getUid());
-                        params.put("tokenTime", tokenTime);
-                        params.put("code", "Album");
-                        params.put("img", ImgToBase64.toBase64(path[i]));
-                        params.put("brand", "android");
-                        JSONObject jsonObject = new JSONObject(params);
-                        OkGo.post(Constant.HOST + Constant.Url.RESPOND_APPIMGADD)//
-                                .tag(this)//
-                                .upJson(jsonObject.toString())//
-                                .execute(new StringCallback() {
-                                    @Override
-                                    public void onSuccess(String s, Call call, Response response) {
-                                        Log.e("ShangChuanPicActivity", "ShangChuanPicActivity--onSuccess--单个图片上传" + s);
-                                        try {
-                                            RespondAppimgadd respondAppimgadd = GsonUtils.parseJSON(s, RespondAppimgadd.class);
-                                            if (respondAppimgadd.getStatus() == 1) {
-                                                count[0]++;
-                                                progressDialog.setProgress(count[0]);
-                                                progressDialog.setMessage("已上传" + count[0] + "/5");
-                                                imgList.add(respondAppimgadd.getImgId());
-                                                if (count[0] == 5) {
-                                                    progressDialog.dismiss();
-                                                    userCardbefore.getData().setImgId(imgList.get(0));
-                                                    userCardbefore.getData().setImgId2(imgList.get(1));
-                                                    userCardbefore.getData().setImgId3(imgList.get(2));
-                                                    userCardbefore.getData().setImgId4(imgList.get(3));
-                                                    userCardbefore.getData().setImgId4(imgList.get(4));
-                                                    tiJiao();
-                                                }
-                                            } else if (respondAppimgadd.getStatus() == 3) {
-                                                MyDialog.showReLoginDialog(getActivity());
-                                            } else {
-                                                Toast.makeText(getActivity(), respondAppimgadd.getInfo(), Toast.LENGTH_SHORT).show();
-                                                isBreak[0] = false;
-                                            }
-                                        } catch (Exception e) {
-                                            Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                        ApiClient.post(getActivity(), getOkObject4(i), new ApiClient.CallBack() {
+                            @Override
+                            public void onSuccess(String s) {
+                                LogUtil.LogShitou("RenZhengFragment--单个图片上传返回", ""+s);
+                                try {
+                                    RespondAppimgadd respondAppimgadd = GsonUtils.parseJSON(s, RespondAppimgadd.class);
+                                    if (respondAppimgadd.getStatus() == 1) {
+                                        count[0]++;
+                                        progressDialog.setProgress(count[0]);
+                                        progressDialog.setMessage("已上传" + count[0] + "/5");
+                                        imgList.add(respondAppimgadd.getImgId());
+                                        if (count[0] == 5) {
+                                            progressDialog.dismiss();
+                                            userCardbefore.getData().setImgId(imgList.get(0));
+                                            userCardbefore.getData().setImgId2(imgList.get(1));
+                                            userCardbefore.getData().setImgId3(imgList.get(2));
+                                            userCardbefore.getData().setImgId4(imgList.get(3));
+                                            userCardbefore.getData().setImgId5(imgList.get(4));
+                                            tiJiao();
                                         }
+                                    } else if (respondAppimgadd.getStatus() == 3) {
+                                        MyDialog.showReLoginDialog(getActivity());
+                                    } else {
+                                        Toast.makeText(getActivity(), respondAppimgadd.getInfo(), Toast.LENGTH_SHORT).show();
+                                        isBreak[0] = false;
                                     }
+                                } catch (Exception e) {
+                                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
-                                    @Override
-                                    public void onError(Call call, Response response, Exception e) {
-                                        super.onError(call, response, e);
-                                        Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                            @Override
+                            public void onError(Response response) {
+                                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
+            }
+
+            /**
+             * des： 网络请求参数
+             * author： ZhangJieBo
+             * date： 2017/8/28 0028 上午 9:55
+             */
+            private OkObject getOkObject4(int i) {
+                String url = Constant.HOST + Constant.Url.RESPOND_APPIMGADD;
+                HashMap<String, String> params = new HashMap<>();
+                params.put("uid", userInfo.getUid());
+                params.put("tokenTime", tokenTime);
+                params.put("code", "card");
+                params.put("img", ImgToBase64.toBase64(path[i]));
+                params.put("brand", "android");
+                return new OkObject(params, url);
             }
         }).start();
     }
@@ -558,6 +563,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid() + "");
         params.put("tokenTime", tokenTime);
+        params.put("userName", mPhone_sms);
         params.put("code", editCode.getText().toString().trim());
         return new OkObject(params, url);
     }
@@ -651,7 +657,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private OkObject getOkObject1() {
         String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
         HashMap<String, String> params = new HashMap<>();
-        params.put("userName", editPhone.getText().toString().trim() + "");
+        params.put("userName", mPhone_sms);
         return new OkObject(params, url);
     }
 
