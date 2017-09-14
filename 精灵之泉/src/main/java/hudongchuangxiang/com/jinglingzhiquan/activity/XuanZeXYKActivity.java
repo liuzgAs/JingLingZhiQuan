@@ -2,17 +2,28 @@ package hudongchuangxiang.com.jinglingzhiquan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.jzxiang.pickerview.TimePickerDialog;
+import com.jzxiang.pickerview.data.Type;
+import com.jzxiang.pickerview.listener.OnDateSetListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +33,7 @@ import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseActivity;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
 import hudongchuangxiang.com.jinglingzhiquan.model.BankCardlist;
 import hudongchuangxiang.com.jinglingzhiquan.model.OkObject;
+import hudongchuangxiang.com.jinglingzhiquan.model.SimpleInfo;
 import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
 import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
@@ -29,11 +41,13 @@ import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 import hudongchuangxiang.com.jinglingzhiquan.viewholder.XuanZeXYKViewHolder;
 import okhttp3.Response;
 
-public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickListener {
+public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
     private View viewBar;
     private RecyclerArrayAdapter<BankCardlist.DataBean> adapter;
     private EasyRecyclerView recyclerView;
     private String amount;
+    private AlertDialog zhiFuDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,10 +102,10 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
-                        intent.setClass(XuanZeXYKActivity.this,XinZengYHKActivity.class);
-                        intent.putExtra(Constant.INTENT_KEY.TITLE,"新增信用卡");
-                        intent.putExtra(Constant.INTENT_KEY.type,2);
-                        startActivityForResult(intent,Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);
+                        intent.setClass(XuanZeXYKActivity.this, XuanZeXYKActivity.class);
+                        intent.putExtra(Constant.INTENT_KEY.TITLE, "新增信用卡");
+                        intent.putExtra(Constant.INTENT_KEY.type, 2);
+                        startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);
                     }
                 });
                 return view;
@@ -102,11 +116,166 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
 
             }
         });
+        recyclerView.setRefreshListener(this);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            private TextView buttonSms;
+            private Runnable mR;
+            private int[] mI;
+            private String youXiaoQi;
 
             @Override
             public void onItemClick(int position) {
+                final BankCardlist.DataBean dataBean = adapter.getItem(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(XuanZeXYKActivity.this, R.style.mydialog);
+                View view = LayoutInflater.from(XuanZeXYKActivity.this).inflate(R.layout.dialog_zhi_fu, null);
+                final TextView textYouXiaoQi = (TextView) view.findViewById(R.id.textYouXiaoQi);
+                TextView textPhone = (TextView) view.findViewById(R.id.textPhone);
+                TextView textCard = (TextView) view.findViewById(R.id.textCard);
+                Button buttonZhiFu = (Button) view.findViewById(R.id.buttonZhiFu);
+                final EditText editCode = (EditText) view.findViewById(R.id.editCode);
+                final EditText textCVV2 = (EditText) view.findViewById(R.id.textCVV2);
+                buttonZhiFu.setText("支付"+amount+"元");
+                textCard.setText("请输入"+dataBean.getBankName()+"信用卡（"+dataBean.getBankCard()+"）信息");
+                final String phone = dataBean.getPhone();
+                textPhone.setText("请输入"+ phone.substring(0,3)+"****"+ phone.substring(phone.length()-4)+"收到的短信验证码");
+                view.findViewById(R.id.viewCancle).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        zhiFuDialog.dismiss();
+                    }
+                });
+                view.findViewById(R.id.imageCancle).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        zhiFuDialog.dismiss();
+                    }
+                });
+                view.findViewById(R.id.viewYouXiaoQi).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TimePickerDialog timePickerDialog = new TimePickerDialog.Builder()
+                                .setType(Type.YEAR_MONTH)
+                                .setTitleStringId("有效期")
+                                .setMinMillseconds(System.currentTimeMillis())
+                                .setMaxMillseconds(System.currentTimeMillis() + 1000l * 60l * 60l * 24l * 365l * 50l)
+                                .setThemeColor(getResources().getColor(R.color.basic_color))
+                                .setCallBack(new OnDateSetListener() {
 
+                                    @Override
+                                    public void onDateSet(TimePickerDialog timePickerView, long millseconds) {
+                                        SimpleDateFormat sf = new SimpleDateFormat("有效期：MM/yyyy");
+                                        SimpleDateFormat sf1 = new SimpleDateFormat("yyMM");
+                                        Date d = new Date(millseconds);
+                                        String format = sf.format(d);
+                                        youXiaoQi = sf1.format(d);
+                                        LogUtil.LogShitou("XuanZeXYKActivity--onDateSet", ""+ youXiaoQi);
+                                        textYouXiaoQi.setText(format);
+                                    }
+                                })
+                                .build();
+                        timePickerDialog.show(getSupportFragmentManager(), "year_month");
+                    }
+                });
+                buttonSms = (TextView) view.findViewById(R.id.buttonSms);
+                buttonSms.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sendSMS(phone);
+                    }
+                });
+                buttonZhiFu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (TextUtils.isEmpty(editCode.getText().toString().trim())){
+                            Toast.makeText(XuanZeXYKActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (TextUtils.isEmpty(youXiaoQi)){
+                            Toast.makeText(XuanZeXYKActivity.this, "请选择有效期", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (TextUtils.isEmpty(textCVV2.getText().toString().trim())){
+                            Toast.makeText(XuanZeXYKActivity.this, "请输入CVV2银行卡背面的3位数", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                    }
+                });
+                zhiFuDialog = builder.setView(view)
+                        .create();
+                zhiFuDialog.show();
+            }
+
+            /**
+             * des： 短信发送按钮状态
+             * author： ZhangJieBo
+             * date： 2017/8/22 0022 上午 10:26
+             */
+            private void sendSMS(String phone) {
+                buttonSms.removeCallbacks(mR);
+                buttonSms.setEnabled(false);
+                mI = new int[]{60};
+
+                mR = new Runnable() {
+                    @Override
+                    public void run() {
+                        buttonSms.setText((mI[0]--) + "秒后重发");
+                        if (mI[0] == 0) {
+                            buttonSms.setEnabled(true);
+                            buttonSms.setText("重新发送");
+                            return;
+                        } else {
+
+                        }
+                        buttonSms.postDelayed(mR, 1000);
+                    }
+                };
+                buttonSms.postDelayed(mR, 0);
+                getSms(phone);
+            }
+
+            /**
+             * des： 网络请求参数
+             * author： ZhangJieBo
+             * date： 2017/8/28 0028 上午 9:55
+             */
+            private OkObject getOkObject1(String phone) {
+                String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
+                HashMap<String, String> params = new HashMap<>();
+                params.put("userName", phone);
+                return new OkObject(params, url);
+            }
+
+
+            /**
+             * des： 获取短信
+             * author： ZhangJieBo
+             * date： 2017/9/11 0011 下午 4:32
+             */
+            private void getSms(String phone) {
+                showLoadingDialog();
+                ApiClient.post(XuanZeXYKActivity.this, getOkObject1(phone), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        cancelLoadingDialog();
+                        LogUtil.LogShitou("RenZhengFragment--获取短信", "" + s);
+                        try {
+                            SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                            Toast.makeText(XuanZeXYKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                            if (simpleInfo.getStatus() == 1) {
+
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(XuanZeXYKActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        cancelLoadingDialog();
+                        Toast.makeText(XuanZeXYKActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -135,6 +304,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
         return new OkObject(params, url);
     }
 
+    @Override
     public void onRefresh() {
         ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
             @Override
@@ -180,14 +350,14 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==Constant.REQUEST_RESULT_CODE.XIN_YONG_KA&&resultCode==Constant.REQUEST_RESULT_CODE.XIN_YONG_KA){
+        if (requestCode == Constant.REQUEST_RESULT_CODE.XIN_YONG_KA && resultCode == Constant.REQUEST_RESULT_CODE.XIN_YONG_KA) {
             onRefresh();
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imageBack:
                 finish();
                 break;

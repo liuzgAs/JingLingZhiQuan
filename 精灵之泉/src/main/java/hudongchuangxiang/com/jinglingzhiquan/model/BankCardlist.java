@@ -56,6 +56,15 @@ public class BankCardlist {
         private String name;
         private String type;
         private String img;
+        private String phone;
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
 
         public String getBankName() {
             return bankName;
