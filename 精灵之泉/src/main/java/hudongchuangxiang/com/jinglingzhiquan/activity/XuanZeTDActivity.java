@@ -47,6 +47,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
     private AlertDialog XuanZeYHKDialog;
     private String amount;
     private List<BankCardlist.DataBean> bankCardlistData;
+    private String tongDaoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,13 +192,14 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             }
 
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(final int position) {
                 showLoadingDialog();
                 ApiClient.post(XuanZeTDActivity.this, getOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         cancelLoadingDialog();
                         LogUtil.LogShitou("XuanZeTDActivity--选择银行卡", s + "");
+                        tongDaoId = adapter.getItem(position).getId();
                         try {
                             BankCardlist bankCardlist = GsonUtils.parseJSON(s, BankCardlist.class);
                             if (bankCardlist.getStatus() == 1) {
@@ -250,8 +252,11 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(XuanZeTDActivity.this,XuanZeXYKActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id,bankCardlistData.get(position).getId());
+                intent.putExtra(Constant.INTENT_KEY.tongDaoId,tongDaoId);
                 intent.putExtra(Constant.INTENT_KEY.amount,amount);
                 startActivity(intent);
+                finish();
                 XuanZeYHKDialog.dismiss();
             }
         });

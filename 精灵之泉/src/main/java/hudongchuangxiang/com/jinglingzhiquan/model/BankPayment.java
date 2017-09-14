@@ -55,6 +55,15 @@ public class BankPayment {
         private String minAmount;
         private String name;
         private String rate;
+        private String id;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public String getDes() {
             return des;

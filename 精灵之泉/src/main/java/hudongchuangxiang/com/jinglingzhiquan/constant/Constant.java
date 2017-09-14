@@ -41,6 +41,8 @@ public class Constant {
         public static final String BANK_CARDADDBEFORE = "&g=App&m=Bank&a=cardAddbefore";
         //银行卡添加提交
         public static final String BANK_CARDADD = "&g=App&m=Bank&a=cardAdd";
+        //代收代付提交
+        public static final String ORDER_NEWORDER = "&g=App&m=Order&a=neworder";
     }
 
     public static class PERMISSION {
@@ -68,6 +70,8 @@ public class Constant {
         public static final String PHONE = "phone";
         public static final String amount = "amount";
         public static final String type = "type";
+        public static final String id = "id";
+        public static final String tongDaoId = "tongDaoId";
     }
 
     public static class REQUEST_RESULT_CODE {
