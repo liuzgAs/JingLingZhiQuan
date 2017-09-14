@@ -1,6 +1,7 @@
 package hudongchuangxiang.com.jinglingzhiquan.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -43,6 +44,8 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
     private Runnable mR;
     private int[] mI;
     private String mPhone_sms;
+    private String title;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,9 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        title = intent.getStringExtra(Constant.INTENT_KEY.TITLE);
+        type = intent.getIntExtra(Constant.INTENT_KEY.type, 0);
     }
 
     @Override
@@ -75,7 +80,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("新增银行卡");
+        ((TextView) findViewById(R.id.textViewTitle)).setText(title);
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
@@ -83,6 +88,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     protected void setListeners() {
+        findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.XuanZeYH).setOnClickListener(this);
         findViewById(R.id.buttonTiJiao).setOnClickListener(this);
         buttonSms.setOnClickListener(this);
@@ -96,7 +102,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.BANK_CARDADDBEFORE;
         HashMap<String, String> params = new HashMap<>();
-        params.put("type","1");//储蓄卡1  信用卡2
+        params.put("type", type + "");//储蓄卡1  信用卡2
         return new OkObject(params, url);
     }
 
@@ -107,18 +113,18 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("XinZengYHKActivity--银行卡添加前请求",s+ "");
+                LogUtil.LogShitou("XinZengYHKActivity--银行卡添加前请求", s + "");
                 try {
                     BankCardaddbefore bankCardaddbefore = GsonUtils.parseJSON(s, BankCardaddbefore.class);
-                    if (bankCardaddbefore.getStatus()==1){
+                    if (bankCardaddbefore.getStatus() == 1) {
                         bankCardaddbeforeData = bankCardaddbefore.getData();
-                    }else if (bankCardaddbefore.getStatus()==2){
+                    } else if (bankCardaddbefore.getStatus() == 2) {
                         MyDialog.showReLoginDialog(XinZengYHKActivity.this);
-                    }else {
+                    } else {
                         Toast.makeText(XinZengYHKActivity.this, bankCardaddbefore.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(XinZengYHKActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengYHKActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -132,7 +138,10 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
+            case R.id.imageBack:
+                finish();
+                break;
             case R.id.buttonSms:
                 sendSMS();
                 break;
@@ -241,7 +250,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("RenZhengFragment--获取短信", ""+s);
+                LogUtil.LogShitou("RenZhengFragment--获取短信", "" + s);
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     Toast.makeText(XinZengYHKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
@@ -269,14 +278,14 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
     private OkObject getOkObject2() {
         String url = Constant.HOST + Constant.Url.BANK_CARDADD;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
-        params.put("tokenTime",tokenTime);
-        params.put("name",editName.getText().toString().trim());
-        params.put("card",editCard.getText().toString().trim());
-        params.put("phone",editPhone.getText().toString().trim());
-        params.put("bankCard",editBankCard.getText().toString().trim());
-        params.put("bank",id+"");
-        params.put("code",editCode.getText().toString().trim());
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("name", editName.getText().toString().trim());
+        params.put("card", editCard.getText().toString().trim());
+        params.put("phone", editPhone.getText().toString().trim());
+        params.put("bankCard", editBankCard.getText().toString().trim());
+        params.put("bank", id + "");
+        params.put("code", editCode.getText().toString().trim());
         return new OkObject(params, url);
     }
 
@@ -289,15 +298,20 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                 LogUtil.LogShitou("XinZengYHKActivity--onSuccess", "");
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                    if (simpleInfo.getStatus()==1){
-                        finish();
-                    }else if (simpleInfo.getStatus()==2){
+                    if (simpleInfo.getStatus() == 1) {
+                        if (type == 2) {
+                            setResult(Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);
+                            finish();
+                        }else {
+                            finish();
+                        }
+                    } else if (simpleInfo.getStatus() == 2) {
                         MyDialog.showReLoginDialog(XinZengYHKActivity.this);
-                    }else {
+                    } else {
                     }
                     Toast.makeText(XinZengYHKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
-                    Toast.makeText(XinZengYHKActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengYHKActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 

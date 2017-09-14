@@ -67,6 +67,7 @@ public class Constant {
         public static final String TITLE = "title";
         public static final String PHONE = "phone";
         public static final String amount = "amount";
+        public static final String type = "type";
     }
 
     public static class REQUEST_RESULT_CODE {
@@ -76,6 +77,7 @@ public class Constant {
         public static final int IMG03 = 2020;
         public static final int IMG04 = 2021;
         public static final int IMG05 = 2022;
+        public static final int XIN_YONG_KA = 2023;
     }
 
     public static class ACACHE {

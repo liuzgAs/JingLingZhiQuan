@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -45,7 +46,6 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
     private EasyRecyclerView recyclerView;
     private AlertDialog XuanZeYHKDialog;
     private String amount;
-    private int page = 1;
     private List<BankCardlist.DataBean> bankCardlistData;
 
     @Override
@@ -106,13 +106,11 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
-        page = 1;
         ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("选择支付通道", s);
                 try {
-                    page++;
                     BankPayment bankPayment = GsonUtils.parseJSON(s, BankPayment.class);
                     if (bankPayment.getStatus() == 1) {
                         adapter.clear();
@@ -188,7 +186,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                 HashMap<String, String> params = new HashMap<>();
                 params.put("uid", userInfo.getUid());
                 params.put("tokenTime", tokenTime);
-                params.put("type", "1");
+                params.put("type", "1");//储蓄卡1  信用卡2
                 return new OkObject(params, url);
             }
 
@@ -247,6 +245,16 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             listView.setLayoutParams(layoutParams);
         }
         listView.setAdapter(new MyAdapter());
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(XuanZeTDActivity.this,XuanZeXYKActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.amount,amount);
+                startActivity(intent);
+                XuanZeYHKDialog.dismiss();
+            }
+        });
         XuanZeYHKDialog = builder.setView(view)
                 .create();
         XuanZeYHKDialog.show();
@@ -255,6 +263,8 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(XuanZeTDActivity.this, XinZengYHKActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE,"选择银行卡");
+                intent.putExtra(Constant.INTENT_KEY.type,1);
                 startActivity(intent);
                 XuanZeYHKDialog.dismiss();
             }

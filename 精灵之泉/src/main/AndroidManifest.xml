@@ -81,7 +81,8 @@
         <activity
             android:name=".activity.YinDaoActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.XinZengYHKActivity"></activity>
+        <activity android:name=".activity.XinZengYHKActivity" />
+        <activity android:name=".activity.XuanZeXYKActivity"></activity>
     </application>
 
 </manifest>
