@@ -14,7 +14,7 @@
             android:theme="@style/AppThemeNoTranslucent" />
         <activity
             android:name=".activity.DengLuActivity"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.BangZhuZXActivity"
             android:launchMode="singleTop" />
@@ -81,6 +81,7 @@
         <activity
             android:name=".activity.YinDaoActivity"
             android:launchMode="singleTop" />
+        <activity android:name=".activity.XinZengYHKActivity"></activity>
     </application>
 
 </manifest>

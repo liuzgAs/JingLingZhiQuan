@@ -266,6 +266,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
+                android:maxLength="19"
                 android:inputType="number"
                 android:id="@+id/editBankCard"
                 android:layout_width="match_parent"
@@ -331,6 +332,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
+                android:maxLength="6"
                 android:inputType="number"
                 android:id="@+id/editCode"
                 android:layout_width="match_parent"

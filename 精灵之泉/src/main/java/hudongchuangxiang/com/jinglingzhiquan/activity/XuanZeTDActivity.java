@@ -186,7 +186,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             private OkObject getOkObject() {
                 String url = Constant.HOST + Constant.Url.BANK_CARDLIST;
                 HashMap<String, String> params = new HashMap<>();
-                params.put("uid", "1");
+                params.put("uid", userInfo.getUid());
                 params.put("tokenTime",tokenTime);
                 params.put("type","1");
                 return new OkObject(params, url);
@@ -243,6 +243,15 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
         XuanZeYHKDialog = builder.setView(view)
                 .create();
         XuanZeYHKDialog.show();
+        view.findViewById(R.id.viewXinZengYHK).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(XuanZeTDActivity.this,XinZengYHKActivity.class);
+                startActivity(intent);
+                XuanZeYHKDialog.dismiss();
+            }
+        });
     }
 
     @Override
