@@ -7,7 +7,8 @@ import hudongchuangxiang.com.jinglingzhiquan.util.AppUtil;
  * Created by zjb on 2016/6/12.
  */
 public class Constant {
-    public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
+//    public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
+    public static String HOST = "http://api.jlzquan.com/index.php?key=" + AppUtil.getMD5Time();
 
     public static int changeControl = 2017;//判断数据是否有改变
 
@@ -36,6 +37,10 @@ public class Constant {
         public static final String BANK_PAYMENT = "&g=App&m=Bank&a=payment";
         //选择银行卡
         public static final String BANK_CARDLIST = "&g=App&m=Bank&a=cardList";
+        //银行卡添加前请求
+        public static final String BANK_CARDADDBEFORE = "&g=App&m=Bank&a=cardAddbefore";
+        //银行卡添加提交
+        public static final String BANK_CARDADD = "&g=App&m=Bank&a=cardAdd";
     }
 
     public static class PERMISSION {

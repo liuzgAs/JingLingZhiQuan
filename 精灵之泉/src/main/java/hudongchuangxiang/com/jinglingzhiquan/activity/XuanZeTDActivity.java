@@ -99,14 +99,14 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.BANK_PAYMENT;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid()+"");
-        params.put("tokenTime",tokenTime);
+        params.put("uid", userInfo.getUid() + "");
+        params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
 
     @Override
     public void onRefresh() {
-        page =1;
+        page = 1;
         ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
@@ -118,7 +118,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                         adapter.clear();
                         List<BankPayment.DataBean> dataBeanList = bankPayment.getData();
                         adapter.addAll(dataBeanList);
-                    } else if (bankPayment.getStatus()== 2) {
+                    } else if (bankPayment.getStatus() == 2) {
                         MyDialog.showReLoginDialog(XuanZeTDActivity.this);
                     } else {
                         showError(bankPayment.getInfo());
@@ -187,10 +187,11 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                 String url = Constant.HOST + Constant.Url.BANK_CARDLIST;
                 HashMap<String, String> params = new HashMap<>();
                 params.put("uid", userInfo.getUid());
-                params.put("tokenTime",tokenTime);
-                params.put("type","1");
+                params.put("tokenTime", tokenTime);
+                params.put("type", "1");
                 return new OkObject(params, url);
             }
+
             @Override
             public void onItemClick(int position) {
                 showLoadingDialog();
@@ -198,19 +199,19 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                     @Override
                     public void onSuccess(String s) {
                         cancelLoadingDialog();
-                        LogUtil.LogShitou("XuanZeTDActivity--选择银行卡",s+ "");
+                        LogUtil.LogShitou("XuanZeTDActivity--选择银行卡", s + "");
                         try {
                             BankCardlist bankCardlist = GsonUtils.parseJSON(s, BankCardlist.class);
-                            if (bankCardlist.getStatus()==1){
+                            if (bankCardlist.getStatus() == 1) {
                                 bankCardlistData = bankCardlist.getData();
                                 xuanZeYHK();
-                            }else if (bankCardlist.getStatus()==2){
+                            } else if (bankCardlist.getStatus() == 2) {
                                 MyDialog.showReLoginDialog(XuanZeTDActivity.this);
-                            }else {
+                            } else {
                                 Toast.makeText(XuanZeTDActivity.this, bankCardlist.getInfo(), Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
-                            Toast.makeText(XuanZeTDActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(XuanZeTDActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -233,8 +234,14 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                 XuanZeYHKDialog.dismiss();
             }
         });
+        view.findViewById(R.id.imageCancle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                XuanZeYHKDialog.dismiss();
+            }
+        });
         ListView listView = (ListView) view.findViewById(R.id.listView);
-        if (bankCardlistData.size()<=3){
+        if (bankCardlistData.size() <= 3) {
             ViewGroup.LayoutParams layoutParams = listView.getLayoutParams();
             layoutParams.height = (int) DpUtils.convertDpToPixel(70 * bankCardlistData.size(), XuanZeTDActivity.this);
             listView.setLayoutParams(layoutParams);
@@ -247,7 +254,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(XuanZeTDActivity.this,XinZengYHKActivity.class);
+                intent.setClass(XuanZeTDActivity.this, XinZengYHKActivity.class);
                 startActivity(intent);
                 XuanZeYHKDialog.dismiss();
             }
@@ -298,7 +305,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.textBankNameBankCard.setText(bankCardlistData.get(position).getBankName()+"("+bankCardlistData.get(position).getBankCard()+")");
+            holder.textBankNameBankCard.setText(bankCardlistData.get(position).getBankName() + "(" + bankCardlistData.get(position).getBankCard() + ")");
             holder.textBank.setText(bankCardlistData.get(position).getBank());
             Glide.with(XuanZeTDActivity.this)
                     .load(bankCardlistData.get(position).getImg())

@@ -28,7 +28,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -91,10 +91,11 @@
         android:background="@color/line_gray" />
 
     <RelativeLayout
+        android:id="@+id/XuanZeYH"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white">
+        android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
             android:id="@+id/textView109"
@@ -120,7 +121,7 @@
 
         <TextView
             android:layout_marginRight="5dp"
-            android:id="@+id/textView148"
+            android:id="@+id/textBankName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="选择银行"
@@ -241,7 +242,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView145"
+            android:id="@+id/buttonSms"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -262,9 +263,9 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/textView144"
-            android:layout_toLeftOf="@+id/textView145"
+            android:layout_toLeftOf="@+id/buttonSms"
             android:layout_toRightOf="@+id/textView144"
-            android:layout_toStartOf="@+id/textView145"
+            android:layout_toStartOf="@+id/buttonSms"
             android:background="@null"
             android:inputType="number"
             android:maxLength="6"
@@ -273,7 +274,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonTiJiao"
         style="@style/MyButton"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"

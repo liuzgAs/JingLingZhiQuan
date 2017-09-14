@@ -30,7 +30,7 @@
             android:src="@mipmap/cancle"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:id="@+id/imageView72"
+            android:id="@+id/imageCancle"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
