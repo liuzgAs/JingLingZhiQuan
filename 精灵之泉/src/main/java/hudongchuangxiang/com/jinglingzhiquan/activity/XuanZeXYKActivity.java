@@ -266,12 +266,13 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                                         Intent intent = new Intent();
                                         intent.setClass(XuanZeXYKActivity.this,WoDeZDActivity.class);
                                         startActivity(intent);
+                                        zhiFuDialog.dismiss();
                                         finish();
                                     }else if (simpleInfo.getStatus()==2){
                                         MyDialog.showReLoginDialog(XuanZeXYKActivity.this);
                                     }else {
-                                        Toast.makeText(XuanZeXYKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                                     }
+                                    Toast.makeText(XuanZeXYKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                                 } catch (Exception e) {
                                     Toast.makeText(XuanZeXYKActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
                                 }
