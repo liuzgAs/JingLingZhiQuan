@@ -45,6 +45,10 @@ public class Constant {
         public static final String ORDER_NEWORDER = "&g=App&m=Order&a=neworder";
         //赚钱
         public static final String INDEX_MAKEMONEY = "&g=App&m=Index&a=makeMoney";
+        //会员平台返佣
+        public static final String USER_INCOME3 = "&g=App&m=User&a=income3";
+        //会员收益
+        public static final String USER_INCOME = "&g=App&m=User&a=income";
     }
 
     public static class PERMISSION {

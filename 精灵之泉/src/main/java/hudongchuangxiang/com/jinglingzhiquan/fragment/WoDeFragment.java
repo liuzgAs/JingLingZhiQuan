@@ -228,9 +228,14 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             }
             if (scrollY >= 0 && scrollY <= heightYingHua1) {
                 float baiFenBi = (float) scrollY / heightYingHua1;
+                if (1 - baiFenBi<0.8){
+                    imageGongGao.setEnabled(false);
+                }else {
+                    imageGongGao.setEnabled(true);
+                }
                 viewTips.setAlpha(1 - baiFenBi);
                 viewTips.setVisibility(View.VISIBLE);
-            } else if (scrollY > heightYingHua) {
+            } else if (scrollY > heightYingHua1) {
                 viewTips.setAlpha(0);
                 viewTips.setVisibility(View.GONE);
             }
