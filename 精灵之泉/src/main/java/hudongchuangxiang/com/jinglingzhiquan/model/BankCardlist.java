@@ -57,6 +57,24 @@ public class BankCardlist {
         private String type;
         private String img;
         private String phone;
+        private double maxAmount;
+        private double limitAmount;
+
+        public double getMaxAmount() {
+            return maxAmount;
+        }
+
+        public void setMaxAmount(double maxAmount) {
+            this.maxAmount = maxAmount;
+        }
+
+        public double getLimitAmount() {
+            return limitAmount;
+        }
+
+        public void setLimitAmount(double limitAmount) {
+            this.limitAmount = limitAmount;
+        }
 
         public String getPhone() {
             return phone;

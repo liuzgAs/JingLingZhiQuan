@@ -52,10 +52,19 @@ public class BankPayment {
 
         private String des;
         private String fee;
-        private String minAmount;
+        private double minAmount;
+        private double maxAmount;
         private String name;
         private String rate;
         private String id;
+
+        public double getMaxAmount() {
+            return maxAmount;
+        }
+
+        public void setMaxAmount(double maxAmount) {
+            this.maxAmount = maxAmount;
+        }
 
         public String getId() {
             return id;
@@ -81,11 +90,11 @@ public class BankPayment {
             this.fee = fee;
         }
 
-        public String getMinAmount() {
+        public double getMinAmount() {
             return minAmount;
         }
 
-        public void setMinAmount(String minAmount) {
+        public void setMinAmount(double minAmount) {
             this.minAmount = minAmount;
         }
 

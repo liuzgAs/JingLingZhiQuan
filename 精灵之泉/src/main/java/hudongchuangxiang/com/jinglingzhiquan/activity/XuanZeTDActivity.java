@@ -193,6 +193,14 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
 
             @Override
             public void onItemClick(final int position) {
+                if (Double.parseDouble(amount) < adapter.getItem(position).getMinAmount()) {
+                    MyDialog.showTipDialog(XuanZeTDActivity.this, "单次最少金额" + adapter.getItem(position).getMaxAmount());
+                    return;
+                }
+                if (Double.parseDouble(amount) > adapter.getItem(position).getMaxAmount()) {
+                    MyDialog.showTipDialog(XuanZeTDActivity.this, "单次最大金额" + adapter.getItem(position).getMaxAmount());
+                    return;
+                }
                 showLoadingDialog();
                 ApiClient.post(XuanZeTDActivity.this, getOkObject(), new ApiClient.CallBack() {
                     @Override
@@ -251,10 +259,10 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
-                intent.setClass(XuanZeTDActivity.this,XuanZeXYKActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.id,bankCardlistData.get(position).getId());
-                intent.putExtra(Constant.INTENT_KEY.tongDaoId,tongDaoId);
-                intent.putExtra(Constant.INTENT_KEY.amount,amount);
+                intent.setClass(XuanZeTDActivity.this, XuanZeXYKActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id, bankCardlistData.get(position).getId());
+                intent.putExtra(Constant.INTENT_KEY.tongDaoId, tongDaoId);
+                intent.putExtra(Constant.INTENT_KEY.amount, amount);
                 startActivity(intent);
                 finish();
                 XuanZeYHKDialog.dismiss();
@@ -268,8 +276,8 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(XuanZeTDActivity.this, XinZengYHKActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.TITLE,"选择银行卡");
-                intent.putExtra(Constant.INTENT_KEY.type,1);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "选择银行卡");
+                intent.putExtra(Constant.INTENT_KEY.type, 1);
                 startActivity(intent);
                 XuanZeYHKDialog.dismiss();
             }

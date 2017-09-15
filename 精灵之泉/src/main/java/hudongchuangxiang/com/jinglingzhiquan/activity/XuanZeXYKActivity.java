@@ -130,6 +130,10 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
 
             @Override
             public void onItemClick(int position) {
+                if (Double.parseDouble(amount)<adapter.getItem(position).getLimitAmount()){
+                    MyDialog.showTipDialog(XuanZeXYKActivity.this,"单卡限额"+adapter.getItem(position).getMaxAmount()+"\n本次限额"+adapter.getItem(position).getLimitAmount());
+                    return;
+                }
                 final BankCardlist.DataBean dataBean = adapter.getItem(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(XuanZeXYKActivity.this, R.style.mydialog);
                 View view = LayoutInflater.from(XuanZeXYKActivity.this).inflate(R.layout.dialog_zhi_fu, null);
