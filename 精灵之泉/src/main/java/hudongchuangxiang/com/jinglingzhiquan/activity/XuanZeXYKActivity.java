@@ -191,6 +191,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                         sendSMS(phone);
                     }
                 });
+                sendSMS(phone);
                 buttonZhiFu.setOnClickListener(new View.OnClickListener() {
 
                     private StringBuffer nameTiJiao;

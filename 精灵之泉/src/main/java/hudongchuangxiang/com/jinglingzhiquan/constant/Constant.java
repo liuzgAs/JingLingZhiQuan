@@ -43,6 +43,8 @@ public class Constant {
         public static final String BANK_CARDADD = "&g=App&m=Bank&a=cardAdd";
         //代收代付提交
         public static final String ORDER_NEWORDER = "&g=App&m=Order&a=neworder";
+        //赚钱
+        public static final String INDEX_MAKEMONEY = "&g=App&m=Index&a=makeMoney";
     }
 
     public static class PERMISSION {

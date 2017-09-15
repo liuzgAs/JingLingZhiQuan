@@ -63,13 +63,13 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     protected void initData() {
-        SpannableString span = new SpannableString("¥" + "51513.00");
+        SpannableString span = new SpannableString("¥" + "0.00");
         span.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textFenRun.setText(span);
-        SpannableString span1 = new SpannableString("¥" + "588.00");
+        SpannableString span1 = new SpannableString("¥" + "0.00");
         span.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textYongJin.setText(span1);
-        SpannableString span2 = new SpannableString("¥" + "588.00");
+        SpannableString span2 = new SpannableString("¥" + "0.00");
         span.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textFanYong.setText(span2);
     }

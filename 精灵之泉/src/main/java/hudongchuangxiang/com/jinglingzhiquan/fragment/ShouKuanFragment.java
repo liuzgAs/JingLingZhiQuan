@@ -18,6 +18,7 @@ import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.XuanZeTDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
+import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.StringUtil;
 
@@ -110,6 +111,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 public void onClick(View v) {
                     if (amount.length() < 9) {
                         amount = amount + finalI;
+                        LogUtil.LogShitou("ShouKuanFragment--onClick", "");
                         checkAmount();
                     }
                 }
