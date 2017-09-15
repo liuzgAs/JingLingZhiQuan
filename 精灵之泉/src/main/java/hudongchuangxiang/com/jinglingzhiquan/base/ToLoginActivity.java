@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Process;
 
 import hudongchuangxiang.com.jinglingzhiquan.activity.DengLuActivity;
+import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
+import hudongchuangxiang.com.jinglingzhiquan.util.ACache;
 
 
 /**
@@ -18,6 +20,8 @@ public class ToLoginActivity {
      * date： 2017/7/6 0006 下午 2:14
      */
     public static void toLoginActivity(Context context) {
+        ACache aCache = ACache.get(context, Constant.ACACHE.App);
+        aCache.clear();
         Intent intent = new Intent(context, DengLuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);

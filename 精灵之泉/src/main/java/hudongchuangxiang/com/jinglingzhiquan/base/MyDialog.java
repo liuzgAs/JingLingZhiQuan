@@ -6,9 +6,6 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 
-import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
-import hudongchuangxiang.com.jinglingzhiquan.util.ACache;
-
 
 /**
  * Created by Administrator on 2017/8/27.
@@ -22,8 +19,6 @@ public class MyDialog {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ACache aCache = ACache.get(context, Constant.ACACHE.App);
-                        aCache.clear();
                         ToLoginActivity.toLoginActivity(context);
                     }
                 })
@@ -33,8 +28,6 @@ public class MyDialog {
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
 
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-                    ACache aCache = ACache.get(context, Constant.ACACHE.App);
-                    aCache.clear();
                     reLoginDialog.dismiss();
                     ToLoginActivity.toLoginActivity(context);
                 }
