@@ -130,7 +130,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
 
             @Override
             public void onItemClick(int position) {
-                if (Double.parseDouble(amount)<adapter.getItem(position).getLimitAmount()){
+                if (Double.parseDouble(amount)>adapter.getItem(position).getLimitAmount()){
                     MyDialog.showTipDialog(XuanZeXYKActivity.this,"单卡限额"+adapter.getItem(position).getMaxAmount()+"\n本次限额"+adapter.getItem(position).getLimitAmount());
                     return;
                 }
