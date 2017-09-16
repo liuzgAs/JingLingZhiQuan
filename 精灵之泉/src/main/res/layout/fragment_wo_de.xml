@@ -446,7 +446,7 @@
                         android:id="@+id/textView25" />
 
                     <RelativeLayout
-                        android:id="@+id/viewFeiLv"
+                        android:id="@+id/viewGuanLiYHK"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
@@ -460,7 +460,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/mine_menu08" />
+                            android:src="@mipmap/mine_menu11" />
 
                         <TextView
                             android:id="@+id/textView114"
@@ -470,7 +470,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_toEndOf="@+id/imageView62"
                             android:layout_toRightOf="@+id/imageView62"
-                            android:text="我的费率"
+                            android:text="管理银行卡"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/normal_textsize" />
 
@@ -491,6 +491,53 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:id="@+id/textView115" />
+
+                    <RelativeLayout
+                        android:id="@+id/viewFeiLv"
+                        android:background="@drawable/layout_selector_white_system_gray"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight" >
+
+                        <ImageView
+                            android:id="@+id/imageView74"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/mine_menu08" />
+
+                        <TextView
+                            android:id="@+id/textView106"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toEndOf="@+id/imageView74"
+                            android:layout_toRightOf="@+id/imageView74"
+                            android:text="我的费率"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/normal_textsize" />
+
+                        <ImageView
+                            android:src="@mipmap/right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView75"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:background="@color/line_gray"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_width"
+                        android:id="@+id/textView151" />
 
                     <RelativeLayout
                         android:id="@+id/relativeLayout2"
@@ -679,51 +726,6 @@
                         android:layout_height="@dimen/line_width"
                         android:id="@+id/textView28" />
 
-                    <RelativeLayout
-                        android:background="@drawable/layout_selector_white_system_gray"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
-
-                        <ImageView
-                            android:id="@+id/imageView22"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/mine_menu06" />
-
-                        <TextView
-                            android:id="@+id/textView22"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="5dp"
-                            android:layout_toEndOf="@+id/imageView22"
-                            android:layout_toRightOf="@+id/imageView22"
-                            android:text="关于我们"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/normal_textsize" />
-
-                        <ImageView
-                            android:src="@mipmap/right"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/imageView23"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView29" />
 
                     <RelativeLayout
                         android:background="@drawable/layout_selector_white_system_gray"

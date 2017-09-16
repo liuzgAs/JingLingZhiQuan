@@ -14,6 +14,7 @@ import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.FeiLvActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.GuanLiYHKActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.SheZhiActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeDDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSHActivity;
@@ -96,6 +97,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     @Override
     protected void setListeners() {
         mInflate.findViewById(R.id.viewHuiYuan).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewGuanLiYHK).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZhangDan).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShangHu).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShouYi).setOnClickListener(this);
@@ -124,6 +126,10 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewGuanLiYHK:
+                intent.setClass(getActivity(), GuanLiYHKActivity.class);
+                startActivity(intent);
+                break;
             case R.id.viewFeiLv:
                 intent.setClass(getActivity(), FeiLvActivity.class);
                 startActivity(intent);
