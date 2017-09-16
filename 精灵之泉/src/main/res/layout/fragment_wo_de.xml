@@ -12,9 +12,9 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:clipChildren="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipChildren="false"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -59,7 +59,7 @@
                     android:layout_marginTop="10dp">
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/textNickName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -70,14 +70,13 @@
                         android:textSize="@dimen/bigLitterText" />
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="3dp"
-                        android:layout_toEndOf="@+id/textView9"
-                        android:layout_toRightOf="@+id/textView9"
+                        android:layout_toEndOf="@+id/textNickName"
+                        android:layout_toRightOf="@+id/textNickName"
                         android:background="@drawable/shape_white1px_2dp"
                         android:paddingBottom="1dp"
                         android:paddingLeft="3dp"
@@ -85,85 +84,141 @@
                         android:paddingTop="1dp"
                         android:text="LV2"
                         android:textColor="@color/white"
-                        android:textSize="8dp" />
+                        android:textSize="8dp"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical"
+                    android:id="@+id/viewHuiYuan01"
                     android:layout_width="match_parent"
                     android:layout_height="85dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true">
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <View
                         android:id="@+id/viewHuiYuan"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"/>
+                        android:layout_height="50dp" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
                         <View
-                            android:layout_weight="1"
                             android:id="@+id/viewZhangDan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
                         <View
-                            android:layout_weight="1"
                             android:id="@+id/viewShangHu"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
                         <View
-                            android:layout_weight="1"
                             android:id="@+id/viewShouYi"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
                         <View
-                            android:layout_weight="1"
                             android:id="@+id/viewDingDan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
                     </LinearLayout>
                 </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/viewFeiHuiYuan01"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"/>
             </RelativeLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/viewHuiYuan02"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:orientation="horizontal"
+                android:visibility="gone">
+
                 <View
-                    android:layout_weight="1"
                     android:id="@+id/viewZhangDan1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
                 <View
-                    android:layout_weight="1"
                     android:id="@+id/viewShangHu1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
                 <View
-                    android:layout_weight="1"
                     android:id="@+id/viewShouYi1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
                 <View
-                    android:layout_weight="1"
                     android:id="@+id/viewDingDan1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="bottom"
-                android:clipChildren="false"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/viewFeiHuiYuan02"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="100dp">
+                <View
+                    android:id="@+id/viewZhangDan2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <View
+                    android:id="@+id/viewShangHu2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <View
+                    android:id="@+id/viewShouYi2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <View
+                    android:id="@+id/viewDingDan2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewHuiYuan03"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipChildren="false"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -184,7 +239,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="2.5">
+                            >
 
                             <ImageView
                                 android:id="@+id/imageView7"
@@ -227,112 +282,78 @@
                             android:layout_marginRight="10dp"
                             android:background="@mipmap/fengexian" />
 
-                        <LinearLayout
+                        <include layout="@layout/view_wode" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewFeiHuiYuan03"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipChildren="false"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:cardCornerRadius="3dp">
+
+                    <LinearLayout
+                        android:background="@color/background"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:gravity="center"
+                            android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
+                            >
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center">
+                            <TextView
+                                android:layout_marginLeft="30dp"
+                                android:layout_marginRight="30dp"
+                                android:textSize="@dimen/litterText"
+                                android:gravity="center_horizontal"
+                                android:layout_centerHorizontal="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="您还不是VIP推广商！加入VIP享受更低的收款费率+高额的推广佣金+商城购物返佣"
+                                android:id="@+id/textView9" />
 
-                                <ImageView
-                                    android:id="@+id/imageView8"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:src="@mipmap/mine01" />
+                            <Button
+                                android:layout_marginTop="5dp"
+                                android:paddingLeft="25dp"
+                                android:paddingRight="25dp"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/litterText"
+                                android:background="@drawable/shape_basic_20dp"
+                                android:layout_below="@+id/textView9"
+                                android:layout_centerHorizontal="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="23dp"
+                                android:text="立即了解"
+                                android:id="@+id/textView22" />
+                        </RelativeLayout>
 
-                                <TextView
-                                    android:id="@+id/textView13"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/imageView8"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="10dp"
-                                    android:text="我的账单"
-                                    android:textSize="@dimen/litterText" />
-                            </RelativeLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@mipmap/fengexian" />
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:id="@+id/imageView9"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:src="@mipmap/mine02" />
-
-                                <TextView
-                                    android:id="@+id/textView14"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/imageView9"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="10dp"
-                                    android:text="我的商户"
-                                    android:textSize="@dimen/litterText" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:id="@+id/imageView10"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:src="@mipmap/mine03" />
-
-                                <TextView
-                                    android:id="@+id/textView15"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/imageView10"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="10dp"
-                                    android:text="我的收益"
-                                    android:textSize="@dimen/litterText" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:id="@+id/imageView11"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:src="@mipmap/mine04" />
-
-                                <TextView
-                                    android:id="@+id/textView16"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/imageView11"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="10dp"
-                                    android:text="商城订单"
-                                    android:textSize="@dimen/litterText" />
-                            </RelativeLayout>
-                        </LinearLayout>
+                        <include layout="@layout/view_wode" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
@@ -352,12 +373,12 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:background="@drawable/layout_selector_white_system_gray"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
                         android:id="@+id/viewWoDeDianPu"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight">
+                        android:layout_height="@dimen/normalItemHeight"
+                        android:background="@drawable/layout_selector_white_system_gray"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView12"
@@ -381,30 +402,30 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView13"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                     <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textView24"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView24" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
                     <RelativeLayout
                         android:id="@+id/viewWoDeZL"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView14"
@@ -428,30 +449,30 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView15"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView15"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                     <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textView25"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView25" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
                     <RelativeLayout
                         android:id="@+id/viewGuanLiYHK"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView62"
@@ -475,30 +496,30 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView63"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView63"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                     <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textView115"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView115" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
                     <RelativeLayout
                         android:id="@+id/viewFeiLv"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView74"
@@ -522,30 +543,30 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView75"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView75"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                     <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textView151"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView151" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
                     <RelativeLayout
                         android:id="@+id/relativeLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView64"
@@ -569,30 +590,30 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView65"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView65"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                     <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textView117"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView117" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
                     <RelativeLayout
                         android:id="@+id/viewZhanNeiGG"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView16"
@@ -616,30 +637,30 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView17"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                     <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textView26"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView26" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
                     <RelativeLayout
                         android:id="@+id/viewBangZhuZX"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView18"
@@ -663,29 +684,29 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView19"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView19"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                     <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textView27"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView27" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
                     <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView20"
@@ -709,30 +730,30 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView21"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                     <TextView
-                        android:background="@color/line_gray"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:id="@+id/textView28"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
-                        android:id="@+id/textView28" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
 
                     <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/normalItemHeight" >
+                        android:paddingRight="10dp">
 
                         <ImageView
                             android:id="@+id/imageView24"
@@ -756,13 +777,13 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:src="@mipmap/right"
+                            android:id="@+id/imageView25"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView25"
-                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -771,10 +792,10 @@
     </hudongchuangxiang.com.jinglingzhiquan.customview.HeadZoomScrollView>
 
     <RelativeLayout
-        android:background="@mipmap/mine_title"
         android:id="@+id/relaTitleStatue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@mipmap/mine_title"
         android:visibility="visible">
 
         <RelativeLayout
@@ -815,34 +836,33 @@
         android:id="@+id/viewTips"
         android:layout_width="match_parent"
         android:layout_height="@dimen/titleHeight"
-        android:layout_below="@+id/relaTitleStatue"
-        >
+        android:layout_below="@+id/relaTitleStatue">
 
         <TextView
-            android:paddingTop="5dp"
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_mine_title_right"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textColor="@color/white"
-            android:background="@drawable/shape_mine_title_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:text="推荐人：李大海"
-            android:textSize="@dimen/litterText"
-            android:id="@+id/textView32"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/litterText" />
 
         <ImageView
-            android:src="@mipmap/shezhi"
+            android:id="@+id/imageSheZhi"
             android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageSheZhi"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:src="@mipmap/shezhi" />
     </RelativeLayout>
 </RelativeLayout>

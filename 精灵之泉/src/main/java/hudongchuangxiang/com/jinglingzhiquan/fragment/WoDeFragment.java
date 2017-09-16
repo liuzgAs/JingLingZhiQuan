@@ -8,7 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import java.util.HashMap;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
@@ -21,10 +26,18 @@ import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSHActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSYActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeZDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeZLActivity;
+import hudongchuangxiang.com.jinglingzhiquan.base.MyDialog;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
+import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
 import hudongchuangxiang.com.jinglingzhiquan.customview.HeadZoomScrollView;
+import hudongchuangxiang.com.jinglingzhiquan.model.OkObject;
+import hudongchuangxiang.com.jinglingzhiquan.model.UserIndex;
+import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
 import hudongchuangxiang.com.jinglingzhiquan.util.DpUtils;
+import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
+import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +53,13 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     private View viewTips;
     private ImageView imageSheZhi;
     private ImageView imageTouXiang;
+    private TextView textNickName;
+    private View viewHuiYuan01;
+    private View viewHuiYuan02;
+    private View viewHuiYuan03;
+    private View viewFeiHuiYuan01;
+    private View viewFeiHuiYuan02;
+    private View viewFeiHuiYuan03;
 
     public WoDeFragment() {
         // Required empty public constructor
@@ -81,6 +101,13 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         viewTips = mInflate.findViewById(R.id.viewTips);
         imageSheZhi = (ImageView) mInflate.findViewById(R.id.imageSheZhi);
         imageTouXiang = (ImageView) mInflate.findViewById(R.id.imageTouXiang);
+        textNickName = (TextView) mInflate.findViewById(R.id.textNickName);
+        viewHuiYuan01 = mInflate.findViewById(R.id.viewHuiYuan01);
+        viewHuiYuan02 = mInflate.findViewById(R.id.viewHuiYuan02);
+        viewHuiYuan03 = mInflate.findViewById(R.id.viewHuiYuan03);
+        viewFeiHuiYuan01 = mInflate.findViewById(R.id.viewFeiHuiYuan01);
+        viewFeiHuiYuan02 = mInflate.findViewById(R.id.viewFeiHuiYuan02);
+        viewFeiHuiYuan03 = mInflate.findViewById(R.id.viewFeiHuiYuan03);
     }
 
     @Override
@@ -106,6 +133,10 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewShangHu1).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShouYi1).setOnClickListener(this);
         mInflate.findViewById(R.id.viewDingDan1).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewZhangDan2).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewShangHu2).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewShouYi2).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewDingDan2).setOnClickListener(this);
         mInflate.findViewById(R.id.viewWoDeDianPu).setOnClickListener(this);
         mInflate.findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
         mInflate.findViewById(R.id.viewWoDeZL).setOnClickListener(this);
@@ -117,9 +148,71 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         imageTouXiang.setOnClickListener(this);
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.USER_INDEX;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        return new OkObject(params, url);
+    }
+
     @Override
     protected void initData() {
+        Glide.with(getActivity())
+                .load(userInfo.getHeadImg())
+                .placeholder(R.mipmap.ic_empty)
+                .into(imageTouXiang);
+        textNickName.setText(userInfo.getNickName());
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("WoDeFragment--我的", s + "");
+                try {
+                    UserIndex userIndex = GsonUtils.parseJSON(s, UserIndex.class);
+                    if (userIndex.getStatus() == 1) {
+                        Glide.with(getActivity())
+                                .load(userIndex.getHeadImg())
+                                .placeholder(R.mipmap.ic_empty)
+                                .into(imageTouXiang);
+                        textNickName.setText(userIndex.getNickName());
+                        if (userIndex.getGrade() == 0) {
+                            viewHuiYuan01.setVisibility(View.GONE);
+                            viewHuiYuan02.setVisibility(View.GONE);
+                            viewHuiYuan03.setVisibility(View.GONE);
+                            viewFeiHuiYuan01.setVisibility(View.VISIBLE);
+                            viewFeiHuiYuan02.setVisibility(View.VISIBLE);
+                            viewFeiHuiYuan03.setVisibility(View.VISIBLE);
+                        } else {
+                            viewHuiYuan01.setVisibility(View.VISIBLE);
+                            viewHuiYuan02.setVisibility(View.VISIBLE);
+                            viewHuiYuan03.setVisibility(View.VISIBLE);
+                            viewFeiHuiYuan01.setVisibility(View.GONE);
+                            viewFeiHuiYuan02.setVisibility(View.GONE);
+                            viewFeiHuiYuan03.setVisibility(View.GONE);
+                        }
+                    } else if (userIndex.getStatus() == 2) {
+                        MyDialog.showReLoginDialog(getActivity());
+                    } else {
+                        Toast.makeText(getActivity(), userIndex.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -183,6 +276,18 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             case R.id.viewDingDan1:
                 dingDan();
                 break;
+            case R.id.viewZhangDan2:
+                zhangDan();
+                break;
+            case R.id.viewShangHu2:
+                woDeSH();
+                break;
+            case R.id.viewShouYi2:
+                shouYi();
+                break;
+            case R.id.viewDingDan2:
+                dingDan();
+                break;
         }
     }
 
@@ -236,9 +341,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             }
             if (scrollY >= 0 && scrollY <= heightYingHua1) {
                 float baiFenBi = (float) scrollY / heightYingHua1;
-                if (1 - baiFenBi<0.8){
+                if (1 - baiFenBi < 0.8) {
                     imageSheZhi.setEnabled(false);
-                }else {
+                } else {
                     imageSheZhi.setEnabled(true);
                 }
                 viewTips.setAlpha(1 - baiFenBi);

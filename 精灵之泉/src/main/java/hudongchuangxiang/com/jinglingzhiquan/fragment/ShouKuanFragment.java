@@ -163,32 +163,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
 
     @Override
     protected void initData() {
-        showLoadingDialog();
-        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
-            @Override
-            public void onSuccess(String s) {
-                cancelLoadingDialog();
-                LogUtil.LogShitou("ShouKuanFragment--收款前请求", "" + s);
-                try {
-                    orderReceiptbefore = GsonUtils.parseJSON(s, OrderReceiptbefore.class);
-                    if (orderReceiptbefore.getStatus() == 1) {
 
-                    } else if (orderReceiptbefore.getStatus() == 2) {
-                        MyDialog.showReLoginDialog(getActivity());
-                    } else {
-                        Toast.makeText(getActivity(), orderReceiptbefore.getInfo(), Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onError(Response response) {
-                cancelLoadingDialog();
-                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -219,46 +194,71 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 viewTabBg.setBackgroundResource(R.mipmap.youbian);
                 break;
             case R.id.buttonShouKuan:
-                switch (type) {
-                    case 1:
-                        if (orderReceiptbefore.getRealStatus() == 0) {
-                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getRealTips());
-                            return;
-                        } else {
-                            break;
+                showLoadingDialog();
+                ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        cancelLoadingDialog();
+                        LogUtil.LogShitou("ShouKuanFragment--收款前请求", "" + s);
+                        try {
+                            orderReceiptbefore = GsonUtils.parseJSON(s, OrderReceiptbefore.class);
+                            if (orderReceiptbefore.getStatus() == 1) {
+                                switch (type) {
+                                    case 1:
+                                        if (orderReceiptbefore.getRealStatus() == 0) {
+                                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getRealTips());
+                                            return;
+                                        } else {
+                                            break;
+                                        }
+                                    case 2:
+                                        if (orderReceiptbefore.getAlipayStatus() == 0) {
+                                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getAlipayTips());
+                                            return;
+                                        } else {
+                                            break;
+                                        }
+                                    case 3:
+                                        if (orderReceiptbefore.getWechatStatus() == 0) {
+                                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getWechatTips());
+                                            return;
+                                        } else {
+                                            break;
+                                        }
+                                }
+                                if (amount.length() == 0) {
+                                    Toast.makeText(getContext(), "请输入金额", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                if (amount.length() > 1) {
+                                    if (TextUtils.equals(".", amount.substring(amount.length() - 1))) {
+                                        amount = amount.substring(0, amount.length() - 1);
+                                    }
+                                }
+                                if (Double.parseDouble(amount)>1000000){
+                                    Toast.makeText(getActivity(), "最大金额不能超过100万", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                Intent intent = new Intent();
+                                intent.putExtra(Constant.INTENT_KEY.amount, amount);
+                                intent.setClass(getActivity(), XuanZeTDActivity.class);
+                                startActivity(intent);
+                            } else if (orderReceiptbefore.getStatus() == 2) {
+                                MyDialog.showReLoginDialog(getActivity());
+                            } else {
+                                Toast.makeText(getActivity(), orderReceiptbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                         }
-                    case 2:
-                        if (orderReceiptbefore.getAlipayStatus() == 0) {
-                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getAlipayTips());
-                            return;
-                        } else {
-                            break;
-                        }
-                    case 3:
-                        if (orderReceiptbefore.getWechatStatus() == 0) {
-                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getWechatTips());
-                            return;
-                        } else {
-                            break;
-                        }
-                }
-                if (amount.length() == 0) {
-                    Toast.makeText(getContext(), "请输入金额", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (amount.length() > 1) {
-                    if (TextUtils.equals(".", amount.substring(amount.length() - 1))) {
-                        amount = amount.substring(0, amount.length() - 1);
                     }
-                }
-                if (Double.parseDouble(amount)>1000000){
-                    Toast.makeText(getActivity(), "最大金额不能超过100万", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent intent = new Intent();
-                intent.putExtra(Constant.INTENT_KEY.amount, amount);
-                intent.setClass(getActivity(), XuanZeTDActivity.class);
-                startActivity(intent);
+
+                    @Override
+                    public void onError(Response response) {
+                        cancelLoadingDialog();
+                        Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
     }

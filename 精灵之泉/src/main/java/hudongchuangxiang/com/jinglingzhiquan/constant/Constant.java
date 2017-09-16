@@ -59,6 +59,8 @@ public class Constant {
         public static final String USER_MONEYLOG = "&g=App&m=User&a=moneyLog";
         //银行卡删除
         public static final String BANK_CARDDEL = "&g=App&m=Bank&a=cardDel";
+        //我的
+        public static final String USER_INDEX = "&g=App&m=User&a=index";
     }
 
     public static class PERMISSION {
