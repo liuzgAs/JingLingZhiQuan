@@ -4,7 +4,6 @@ package hudongchuangxiang.com.jinglingzhiquan.fragment;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,7 +41,6 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
     private View mInflate;
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<UserMoneylog.DataBean> adapter;
-    private Handler handler = new Handler();
     private int page = 1;
     private int type = 1;
     private String s_time;
