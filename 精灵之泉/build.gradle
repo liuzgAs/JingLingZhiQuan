@@ -8,8 +8,8 @@ android {
         applicationId "hudongchuangxiang.com.jinglingzhiquan"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 17091503
-        versionName "0.0.3"
+        versionCode 17091602
+        versionName "0.0.5"
     }
     buildTypes {
         release {
@@ -38,4 +38,5 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'com.lzy.widget:imagepicker:0.5.3'
     compile 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
+    compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
 }

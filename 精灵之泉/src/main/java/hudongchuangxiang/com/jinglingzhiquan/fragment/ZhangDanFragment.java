@@ -18,8 +18,6 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -35,7 +33,6 @@ import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
 import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.viewholder.ZhangDanViewHolder;
-import okhttp3.Call;
 import okhttp3.Response;
 
 /**
@@ -125,7 +122,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
             @Override
             public View onCreateView(ViewGroup parent) {
                 View header_zahun_qian = LayoutInflater.from(getActivity()).inflate(R.layout.header_zhang_dan, null);
-                final TextView textStartTime =  (TextView) header_zahun_qian.findViewById(R.id.textStartTime);
+                final TextView textStartTime = (TextView) header_zahun_qian.findViewById(R.id.textStartTime);
                 final TextView textEndTime = (TextView) header_zahun_qian.findViewById(R.id.textEndTime);
                 header_zahun_qian.findViewById(R.id.viewStartTime).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -134,8 +131,9 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                s_time =year + "-" + (month+1) + "-" + dayOfMonth;
-                                textStartTime.setText(year + "-" + (month+1) + "-" + dayOfMonth);
+                                s_time = year + "-" + (month + 1) + "-" + dayOfMonth;
+                                textStartTime.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                                onRefresh();
                             }
                         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
@@ -149,8 +147,9 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                e_time =year + "-" + (month+1) + "-" + dayOfMonth;
-                                textEndTime.setText(year + "-" + (month+1) + "-" + dayOfMonth);
+                                e_time = year + "-" + (month + 1) + "-" + dayOfMonth;
+                                textEndTime.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                                onRefresh();
                             }
                         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
@@ -168,35 +167,31 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-         OkObject okObject = getOkObject();
-         OkGo.post(okObject.getUrl())//
-                 .tag(this)//
-                 .upJson(okObject.getJson())//
-                 .execute(new StringCallback() {
-                     @Override
-                     public void onSuccess(String s, Call call, Response response) {
-                         try {
-                             page++;
-                             UserMoneylog userMoneylog = GsonUtils.parseJSON(s, UserMoneylog.class);
-                             int status = userMoneylog.getStatus();
-                             if (status == 1) {
-                                 List<UserMoneylog.DataBean> userMoneylogData = userMoneylog.getData();
-                                 adapter.addAll(userMoneylogData);
-                             } else if (status == 3) {
-                                 MyDialog.showReLoginDialog(getActivity());
-                             } else {
-                                 adapter.pauseMore();
-                             }
-                         } catch (Exception e) {
-                             adapter.pauseMore();
-                         }
-                     }
-                     @Override
-                     public void onError(Call call, Response response, Exception e) {
-                         super.onError(call, response, e);
-                         adapter.pauseMore();
-                     }
-                 });
+                ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        try {
+                            page++;
+                            UserMoneylog userMoneylog = GsonUtils.parseJSON(s, UserMoneylog.class);
+                            int status = userMoneylog.getStatus();
+                            if (status == 1) {
+                                List<UserMoneylog.DataBean> userMoneylogData = userMoneylog.getData();
+                                adapter.addAll(userMoneylogData);
+                            } else if (status == 3) {
+                                MyDialog.showReLoginDialog(getActivity());
+                            } else {
+                                adapter.pauseMore();
+                            }
+                        } catch (Exception e) {
+                            adapter.pauseMore();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        adapter.pauseMore();
+                    }
+                });
             }
 
             @Override
@@ -244,9 +239,9 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
         params.put("type", type + "");
-        params.put("s_time",s_time);
-        params.put("e_time",e_time);
-        params.put("page",page+"");
+        params.put("s_time", s_time);
+        params.put("e_time", e_time);
+        params.put("p", page + "");
         return new OkObject(params, url);
     }
 

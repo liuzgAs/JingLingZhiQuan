@@ -251,6 +251,10 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                         amount = amount.substring(0, amount.length() - 1);
                     }
                 }
+                if (Double.parseDouble(amount)>1000000){
+                    Toast.makeText(getActivity(), "最大金额不能超过100万", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.amount, amount);
                 intent.setClass(getActivity(), XuanZeTDActivity.class);

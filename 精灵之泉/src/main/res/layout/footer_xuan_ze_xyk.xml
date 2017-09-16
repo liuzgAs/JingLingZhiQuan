@@ -9,7 +9,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:text="+新增行用卡"
+        android:text="+新增信用卡"
         android:textColor="@color/basic_color"
         android:id="@+id/textXinZengXYK"
         android:layout_gravity="center_horizontal" />

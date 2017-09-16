@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -64,7 +65,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="用户昵称"
+            android:text="昵称"
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
 
@@ -79,6 +80,7 @@
             android:src="@mipmap/right" />
 
         <TextView
+            tools:text="追梦赤子心"
             android:id="@+id/textView99"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,7 +88,6 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/imageView53"
             android:layout_toStartOf="@+id/imageView53"
-            android:text="追梦赤子心"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
@@ -101,7 +102,142 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white">
+        android:background="@color/white" >
+
+        <ImageView
+            android:id="@+id/imageView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/right" />
+
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="生日"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:hint="未填写"
+            android:id="@+id/textView61"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imageView36"
+            android:layout_toStartOf="@+id/imageView36"
+            android:textSize="@dimen/normal_textsize"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView103"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:background="@color/white" >
+
+        <ImageView
+            android:id="@+id/imageView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/right" />
+
+        <TextView
+            android:id="@+id/textView62"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="性别"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:hint="未填写"
+            android:id="@+id/textView63"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imageView37"
+            android:layout_toStartOf="@+id/imageView37"
+            android:textSize="@dimen/normal_textsize" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView65"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:background="@color/white" >
+
+        <ImageView
+            android:id="@+id/imageView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/right" />
+
+        <TextView
+            android:id="@+id/textView67"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="地区"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:hint="未填写"
+            android:id="@+id/textView69"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imageView39"
+            android:layout_toStartOf="@+id/imageView39"
+            android:textSize="@dimen/normal_textsize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:background="@color/white" >
 
         <ImageView
             android:id="@+id/imageView54"
@@ -114,21 +250,31 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView101"
+            android:id="@+id/textView71"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="基本设置"
+            android:text="手机"
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
 
+        <TextView
+            android:hint="180****7896"
+            android:id="@+id/textView73"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imageView54"
+            android:layout_toStartOf="@+id/imageView54"
+            android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView103"
+        android:id="@+id/textView75"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -136,10 +282,9 @@
         android:background="@color/line_gray" />
 
     <RelativeLayout
-        android:id="@+id/viewDiZhiGL"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@drawable/layout_selector_white_system_gray">
+        android:background="@color/white" >
 
         <ImageView
             android:id="@+id/imageView55"
@@ -152,23 +297,42 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView104"
+            android:id="@+id/textView82"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="地址管理"
+            android:text="微信名片"
             android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:hint="上传微信二维码"
+            android:id="@+id/textView86"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imageView55"
+            android:layout_toStartOf="@+id/imageView55"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/textView101"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray" />
+
     <RelativeLayout
+        android:id="@+id/viewDiZhiGL"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
+        android:background="@color/white" >
 
         <ImageView
             android:id="@+id/imageView56"
@@ -188,48 +352,19 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="手机"
+            android:text="地址管理"
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView105"
+            android:hint="新建/修改"
+            android:id="@+id/textView104"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/imageView56"
             android:layout_toStartOf="@+id/imageView56"
-            android:text="158****5320"
-            android:textSize="@dimen/normal_textsize" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/normalItemHeight"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-
-        <ImageView
-            android:id="@+id/imageView57"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/right" />
-
-        <TextView
-            android:id="@+id/textView106"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:text="密码设置"
-            android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 

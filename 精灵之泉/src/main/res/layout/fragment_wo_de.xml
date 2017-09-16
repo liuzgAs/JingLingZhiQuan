@@ -70,6 +70,7 @@
                         android:textSize="@dimen/bigLitterText" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -832,12 +833,12 @@
             android:layout_alignParentEnd="true" />
 
         <ImageView
-            android:src="@mipmap/tips"
+            android:src="@mipmap/shezhi"
             android:layout_width="40dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_height="match_parent"
-            android:id="@+id/imageGongGao"
+            android:id="@+id/imageSheZhi"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

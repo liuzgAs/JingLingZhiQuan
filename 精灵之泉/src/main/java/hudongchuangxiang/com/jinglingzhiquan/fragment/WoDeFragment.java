@@ -14,6 +14,7 @@ import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.FeiLvActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.SheZhiActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeDDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSHActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSYActivity;
@@ -36,7 +37,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     private View viewZoom;
     private HeadZoomScrollView zoomScrollView;
     private View viewTips;
-    private ImageView imageGongGao;
+    private ImageView imageSheZhi;
     private ImageView imageTouXiang;
 
     public WoDeFragment() {
@@ -77,7 +78,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         relaTitleStatue = mInflate.findViewById(R.id.relaTitleStatue);
         viewZoom = mInflate.findViewById(R.id.viewZoom);
         viewTips = mInflate.findViewById(R.id.viewTips);
-        imageGongGao = (ImageView) mInflate.findViewById(R.id.imageGongGao);
+        imageSheZhi = (ImageView) mInflate.findViewById(R.id.imageSheZhi);
         imageTouXiang = (ImageView) mInflate.findViewById(R.id.imageTouXiang);
     }
 
@@ -110,7 +111,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewFeiLv).setOnClickListener(this);
         mInflate.findViewById(R.id.viewName).setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
-        imageGongGao.setOnClickListener(this);
+        imageSheZhi.setOnClickListener(this);
         imageTouXiang.setOnClickListener(this);
     }
 
@@ -139,8 +140,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             case R.id.viewZhanNeiGG:
                 gongGao();
                 break;
-            case R.id.imageGongGao:
-                gongGao();
+            case R.id.imageSheZhi:
+                intent.setClass(getActivity(), SheZhiActivity.class);
+                startActivity(intent);
                 break;
             case R.id.viewBangZhuZX:
                 intent.setClass(getActivity(), BangZhuZXActivity.class);
@@ -229,9 +231,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             if (scrollY >= 0 && scrollY <= heightYingHua1) {
                 float baiFenBi = (float) scrollY / heightYingHua1;
                 if (1 - baiFenBi<0.8){
-                    imageGongGao.setEnabled(false);
+                    imageSheZhi.setEnabled(false);
                 }else {
-                    imageGongGao.setEnabled(true);
+                    imageSheZhi.setEnabled(true);
                 }
                 viewTips.setAlpha(1 - baiFenBi);
                 viewTips.setVisibility(View.VISIBLE);

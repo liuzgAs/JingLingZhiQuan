@@ -194,7 +194,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             @Override
             public void onItemClick(final int position) {
                 if (Double.parseDouble(amount) < adapter.getItem(position).getMinAmount()) {
-                    MyDialog.showTipDialog(XuanZeTDActivity.this, "单次最少金额" + adapter.getItem(position).getMaxAmount());
+                    MyDialog.showTipDialog(XuanZeTDActivity.this, "单次最少金额" + adapter.getItem(position).getMinAmount());
                     return;
                 }
                 if (Double.parseDouble(amount) > adapter.getItem(position).getMaxAmount()) {
@@ -276,7 +276,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(XuanZeTDActivity.this, XinZengYHKActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.TITLE, "选择银行卡");
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "新增银行卡");
                 intent.putExtra(Constant.INTENT_KEY.type, 1);
                 startActivity(intent);
                 XuanZeYHKDialog.dismiss();
