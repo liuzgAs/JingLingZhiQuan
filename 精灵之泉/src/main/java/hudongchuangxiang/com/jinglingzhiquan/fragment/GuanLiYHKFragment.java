@@ -1,8 +1,10 @@
 package hudongchuangxiang.com.jinglingzhiquan.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -147,15 +149,22 @@ public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLa
             }
         });
         recyclerView.setRefreshListener(this);
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+       adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
+           @Override
+           public boolean onItemLongClick(int position) {
+               AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).setTitle("提示")
+                       .setMessage("确定要删除吗？")
+                       .setNegativeButton("取消", null)
+                       .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
 
-            @Override
-            public void onItemClick(int position) {
-
-
-            }
-
-        });
+                           }
+                       }).create();
+               alertDialog.show();
+               return false;
+           }
+       });
     }
 
     @Override

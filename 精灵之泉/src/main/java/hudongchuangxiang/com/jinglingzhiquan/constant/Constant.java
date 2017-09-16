@@ -57,6 +57,8 @@ public class Constant {
         public static final String ORDER_RECEIPTBEFORE = "&g=App&m=Order&a=receiptBefore";
         //会员我的账单
         public static final String USER_MONEYLOG = "&g=App&m=User&a=moneyLog";
+        //银行卡删除
+        public static final String BANK_CARDDEL = "&g=App&m=Bank&a=cardDel";
     }
 
     public static class PERMISSION {

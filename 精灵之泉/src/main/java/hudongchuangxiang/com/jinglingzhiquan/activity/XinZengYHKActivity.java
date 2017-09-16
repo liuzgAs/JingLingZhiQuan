@@ -299,12 +299,8 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     if (simpleInfo.getStatus() == 1) {
-                        if (type == 2) {
-                            setResult(Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);
-                            finish();
-                        }else {
-                            finish();
-                        }
+                        setResult(Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);
+                        finish();
                     } else if (simpleInfo.getStatus() == 2) {
                         MyDialog.showReLoginDialog(XinZengYHKActivity.this);
                     } else {
