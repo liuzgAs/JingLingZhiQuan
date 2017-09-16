@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -26,6 +27,7 @@ import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
 import hudongchuangxiang.com.jinglingzhiquan.model.BankCardlist;
 import hudongchuangxiang.com.jinglingzhiquan.model.OkObject;
+import hudongchuangxiang.com.jinglingzhiquan.model.SimpleInfo;
 import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
 import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
@@ -150,15 +152,53 @@ public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLa
         });
         recyclerView.setRefreshListener(this);
        adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
+           /**
+            * des： 网络请求参数
+            * author： ZhangJieBo
+            * date： 2017/8/28 0028 上午 9:55
+            */
+           private OkObject getOkObject1(String id) {
+               String url = Constant.HOST + Constant.Url.BANK_CARDDEL;
+               HashMap<String, String> params = new HashMap<>();
+               params.put("uid",userInfo.getUid());
+               params.put("tokenTime",tokenTime);
+               params.put("id",id);
+               return new OkObject(params, url);
+           }
            @Override
-           public boolean onItemLongClick(int position) {
+           public boolean onItemLongClick(final int position) {
                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).setTitle("提示")
                        .setMessage("确定要删除吗？")
                        .setNegativeButton("取消", null)
                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
-
+                               showLoadingDialog();
+                               ApiClient.post(getActivity(), getOkObject1(adapter.getItem(position).getId()), new ApiClient.CallBack() {
+                                   @Override
+                                   public void onSuccess(String s) {
+                                       cancelLoadingDialog();
+                                       LogUtil.LogShitou("GuanLiYHKFragment--删除银行卡", ""+s);
+                                       try {
+                                           SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                                           if (simpleInfo.getStatus()==1){
+                                               onRefresh();
+                                           }else if (simpleInfo.getStatus()==2){
+                                               MyDialog.showReLoginDialog(getActivity());
+                                           }else {
+                                           }
+                                           Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                                       } catch (Exception e) {
+                                           Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+                                       }
+                                   }
+                               
+                                   @Override
+                                   public void onError(Response response) {
+                                       cancelLoadingDialog();
+                                       Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                                   }
+                               });
                            }
                        }).create();
                alertDialog.show();
