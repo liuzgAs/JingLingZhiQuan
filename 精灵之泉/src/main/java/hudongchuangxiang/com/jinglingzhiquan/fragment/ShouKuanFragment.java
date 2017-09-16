@@ -14,13 +14,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import hudongchuangxiang.com.jinglingzhiquan.R;
 import hudongchuangxiang.com.jinglingzhiquan.activity.XuanZeTDActivity;
+import hudongchuangxiang.com.jinglingzhiquan.base.MyDialog;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
 import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
+import hudongchuangxiang.com.jinglingzhiquan.model.OkObject;
+import hudongchuangxiang.com.jinglingzhiquan.model.OrderReceiptbefore;
+import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
+import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 import hudongchuangxiang.com.jinglingzhiquan.util.StringUtil;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +54,8 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
             R.id.textKey09,
     };
     private String amount = "";
+    private OrderReceiptbefore orderReceiptbefore;
+    private int type = 1;
 
     public ShouKuanFragment() {
         // Required empty public constructor
@@ -138,9 +148,47 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
         }
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.ORDER_RECEIPTBEFORE;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        return new OkObject(params, url);
+    }
+
     @Override
     protected void initData() {
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("ShouKuanFragment--收款前请求", "" + s);
+                try {
+                    orderReceiptbefore = GsonUtils.parseJSON(s, OrderReceiptbefore.class);
+                    if (orderReceiptbefore.getStatus() == 1) {
 
+                    } else if (orderReceiptbefore.getStatus() == 2) {
+                        MyDialog.showReLoginDialog(getActivity());
+                    } else {
+                        Toast.makeText(getActivity(), orderReceiptbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -159,16 +207,42 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 }
                 break;
             case R.id.viewYinLian:
+                type = 1;
                 viewTabBg.setBackgroundResource(R.mipmap.zuobian);
                 break;
             case R.id.viewZhiFuBao:
+                type = 2;
                 viewTabBg.setBackgroundResource(R.mipmap.zhongjian);
                 break;
             case R.id.viewWeiXin:
+                type = 3;
                 viewTabBg.setBackgroundResource(R.mipmap.youbian);
                 break;
             case R.id.buttonShouKuan:
-                if (amount.length()==0){
+                switch (type) {
+                    case 1:
+                        if (orderReceiptbefore.getRealStatus() == 0) {
+                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getRealTips());
+                            return;
+                        } else {
+                            break;
+                        }
+                    case 2:
+                        if (orderReceiptbefore.getAlipayStatus() == 0) {
+                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getAlipayTips());
+                            return;
+                        } else {
+                            break;
+                        }
+                    case 3:
+                        if (orderReceiptbefore.getWechatStatus() == 0) {
+                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getWechatTips());
+                            return;
+                        } else {
+                            break;
+                        }
+                }
+                if (amount.length() == 0) {
                     Toast.makeText(getContext(), "请输入金额", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -178,7 +252,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                     }
                 }
                 Intent intent = new Intent();
-                intent.putExtra(Constant.INTENT_KEY.amount,amount);
+                intent.putExtra(Constant.INTENT_KEY.amount, amount);
                 intent.setClass(getActivity(), XuanZeTDActivity.class);
                 startActivity(intent);
                 break;

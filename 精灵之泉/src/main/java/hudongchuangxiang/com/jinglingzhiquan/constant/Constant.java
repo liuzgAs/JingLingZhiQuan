@@ -49,6 +49,8 @@ public class Constant {
         public static final String USER_INCOME3 = "&g=App&m=User&a=income3";
         //会员收益
         public static final String USER_INCOME = "&g=App&m=User&a=income";
+        //收款前请求
+        public static final String ORDER_RECEIPTBEFORE = "&g=App&m=Order&a=receiptBefore";
     }
 
     public static class PERMISSION {
