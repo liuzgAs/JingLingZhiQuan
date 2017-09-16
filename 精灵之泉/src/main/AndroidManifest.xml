@@ -37,25 +37,58 @@
     <uses-permission android:name="android.permission.REORDER_TASKS" />
 
     <application
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--阿里云推送测试-->
-        <meta-data
-            android:name="com.alibaba.app.appkey"
-            android:value="24626107" /> <!-- 请填写你自己的- appKey -->
-        <meta-data
-            android:name="com.alibaba.app.appsecret"
-            android:value="cd6c163e9bb11d72f2afa500761e1b42" /> <!-- 请填写你自己的appSecret -->
-        <!--阿里云推送正式-->
         <!--<meta-data-->
             <!--android:name="com.alibaba.app.appkey"-->
-            <!--android:value="24624935" /> &lt;!&ndash; 请填写你自己的- appKey &ndash;&gt;-->
+            <!--android:value="24626107" /> &lt;!&ndash; 请填写你自己的- appKey &ndash;&gt;-->
         <!--<meta-data-->
             <!--android:name="com.alibaba.app.appsecret"-->
-            <!--android:value="f20b18c7ed7913bbf45c6ffda95c6d1a" /> &lt;!&ndash; 请填写你自己的appSecret &ndash;&gt;-->
+            <!--android:value="cd6c163e9bb11d72f2afa500761e1b42" /> &lt;!&ndash; 请填写你自己的appSecret &ndash;&gt;-->
+        <!--阿里云推送正式-->
+        <meta-data
+            android:name="com.alibaba.app.appkey"
+            android:value="24624935" /> <!-- 请填写你自己的- appKey -->
+        <meta-data
+            android:name="com.alibaba.app.appsecret"
+            android:value="f20b18c7ed7913bbf45c6ffda95c6d1a" /> <!-- 请填写你自己的appSecret -->
+
+        <!--消息接收监听器-->
+        <receiver android:name=".reciver.MyReciver">
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.COMMAND" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.taobao.taobao.intent.action.COMMAND" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
 
         <!-- 通道保持服务 -->
         <service android:name="com.alibaba.sdk.android.push.ChannelService"
