@@ -139,8 +139,8 @@
                     android:id="@+id/viewFeiHuiYuan01"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
@@ -252,7 +252,7 @@
                                 android:src="@mipmap/riqi" />
 
                             <TextView
-                                android:id="@+id/textView11"
+                                android:id="@+id/textVipTime"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
@@ -263,7 +263,7 @@
                                 android:textSize="@dimen/litterText" />
 
                             <TextView
-                                android:id="@+id/textView12"
+                                android:id="@+id/textGradeName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -839,7 +839,7 @@
         android:layout_below="@+id/relaTitleStatue">
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/texttXName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

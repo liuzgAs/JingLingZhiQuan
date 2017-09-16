@@ -4,6 +4,7 @@ package hudongchuangxiang.com.jinglingzhiquan.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.FeiLvActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GongGaoActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.GuanLiYHKActivity;
+import hudongchuangxiang.com.jinglingzhiquan.activity.MainActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.SheZhiActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeDDActivity;
 import hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSHActivity;
@@ -60,6 +62,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     private View viewFeiHuiYuan01;
     private View viewFeiHuiYuan02;
     private View viewFeiHuiYuan03;
+    private TextView texttXName;
+    private TextView textGradeName;
+    private TextView textVipTime;
 
     public WoDeFragment() {
         // Required empty public constructor
@@ -108,6 +113,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         viewFeiHuiYuan01 = mInflate.findViewById(R.id.viewFeiHuiYuan01);
         viewFeiHuiYuan02 = mInflate.findViewById(R.id.viewFeiHuiYuan02);
         viewFeiHuiYuan03 = mInflate.findViewById(R.id.viewFeiHuiYuan03);
+        texttXName = (TextView) mInflate.findViewById(R.id.texttXName);
+        textGradeName = (TextView) mInflate.findViewById(R.id.textGradeName);
+        textVipTime = (TextView) mInflate.findViewById(R.id.textVipTime);
     }
 
     @Override
@@ -143,6 +151,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewZhanNeiGG).setOnClickListener(this);
         mInflate.findViewById(R.id.viewFeiLv).setOnClickListener(this);
         mInflate.findViewById(R.id.viewName).setOnClickListener(this);
+        viewFeiHuiYuan01.setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
         imageSheZhi.setOnClickListener(this);
         imageTouXiang.setOnClickListener(this);
@@ -197,6 +206,14 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                             viewFeiHuiYuan02.setVisibility(View.GONE);
                             viewFeiHuiYuan03.setVisibility(View.GONE);
                         }
+                        if (TextUtils.isEmpty(userIndex.getTxName())){
+                            texttXName.setVisibility(View.GONE);
+                        }else {
+                            texttXName.setText(userIndex.getTxName());
+                            texttXName.setVisibility(View.VISIBLE);
+                        }
+                        textGradeName.setText(userIndex.getGradeName());
+                        textVipTime.setText(userIndex.getVipTime());
                     } else if (userIndex.getStatus() == 2) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
@@ -219,6 +236,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewFeiHuiYuan01:
+                ((MainActivity)getActivity()).mTabHost.setCurrentTab(1);
+                break;
             case R.id.viewGuanLiYHK:
                 intent.setClass(getActivity(), GuanLiYHKActivity.class);
                 startActivity(intent);
@@ -250,7 +270,6 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             case R.id.viewWoDeDianPu:
                 break;
             case R.id.viewHuiYuan:
-                Toast.makeText(getActivity(), "会员详情", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.viewZhangDan:
                 zhangDan();

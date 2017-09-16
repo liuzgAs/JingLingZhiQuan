@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.selector_renzheng_item,
             R.drawable.selector_mine_item
     };
-    private FragmentTabHost mTabHost;
+    public FragmentTabHost mTabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

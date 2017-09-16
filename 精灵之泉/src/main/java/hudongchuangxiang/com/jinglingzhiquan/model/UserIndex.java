@@ -21,6 +21,15 @@ public class UserIndex {
     private String nickName;
     private int status;
     private String vipTime;
+    private String txName;
+
+    public String getTxName() {
+        return txName;
+    }
+
+    public void setTxName(String txName) {
+        this.txName = txName;
+    }
 
     public int getGrade() {
         return grade;
