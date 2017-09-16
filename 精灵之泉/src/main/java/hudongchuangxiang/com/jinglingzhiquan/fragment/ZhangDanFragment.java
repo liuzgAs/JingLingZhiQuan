@@ -1,27 +1,42 @@
 package hudongchuangxiang.com.jinglingzhiquan.fragment;
 
 
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 import hudongchuangxiang.com.jinglingzhiquan.R;
+import hudongchuangxiang.com.jinglingzhiquan.base.MyDialog;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseFragment;
-import hudongchuangxiang.com.jinglingzhiquan.provider.DataProvider;
-import hudongchuangxiang.com.jinglingzhiquan.util.DpUtils;
+import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
+import hudongchuangxiang.com.jinglingzhiquan.model.OkObject;
+import hudongchuangxiang.com.jinglingzhiquan.model.UserMoneylog;
+import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
+import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
+import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.viewholder.ZhangDanViewHolder;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,12 +44,19 @@ import hudongchuangxiang.com.jinglingzhiquan.viewholder.ZhangDanViewHolder;
 public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<Boolean> adapter;
+    private RecyclerArrayAdapter<UserMoneylog.DataBean> adapter;
     private Handler handler = new Handler();
     private int page = 1;
+    private int type = 1;
+    private String s_time;
+    private String e_time;
 
     public ZhangDanFragment() {
         // Required empty public constructor
+    }
+
+    public ZhangDanFragment(int type) {
+        this.type = type;
     }
 
 
@@ -92,7 +114,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Boolean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<UserMoneylog.DataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_shouyi_mx;
@@ -103,20 +125,39 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
             @Override
             public View onCreateView(ViewGroup parent) {
                 View header_zahun_qian = LayoutInflater.from(getActivity()).inflate(R.layout.header_zhang_dan, null);
+                final TextView textStartTime =  (TextView) header_zahun_qian.findViewById(R.id.textStartTime);
+                final TextView textEndTime = (TextView) header_zahun_qian.findViewById(R.id.textEndTime);
+                header_zahun_qian.findViewById(R.id.viewStartTime).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar c = Calendar.getInstance();
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                s_time =year + "-" + (month+1) + "-" + dayOfMonth;
+                                textStartTime.setText(year + "-" + (month+1) + "-" + dayOfMonth);
+                            }
+                        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        datePickerDialog.show();
+                    }
+                });
+                header_zahun_qian.findViewById(R.id.viewEndTime).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar c = Calendar.getInstance();
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                e_time =year + "-" + (month+1) + "-" + dayOfMonth;
+                                textEndTime.setText(year + "-" + (month+1) + "-" + dayOfMonth);
+                            }
+                        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        datePickerDialog.show();
+                    }
+                });
                 return header_zahun_qian;
-            }
-
-            @Override
-            public void onBindView(View headerView) {
-
-            }
-        });
-        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
-            @Override
-            public View onCreateView(ViewGroup parent) {
-                View view = new View(getContext());
-                view.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DpUtils.convertDpToPixel(15, getActivity())));
-                return view;
             }
 
             @Override
@@ -127,13 +168,35 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.addAll(DataProvider.getShouYi(page));
-                        page++;
-                    }
-                }, 500);
+         OkObject okObject = getOkObject();
+         OkGo.post(okObject.getUrl())//
+                 .tag(this)//
+                 .upJson(okObject.getJson())//
+                 .execute(new StringCallback() {
+                     @Override
+                     public void onSuccess(String s, Call call, Response response) {
+                         try {
+                             page++;
+                             UserMoneylog userMoneylog = GsonUtils.parseJSON(s, UserMoneylog.class);
+                             int status = userMoneylog.getStatus();
+                             if (status == 1) {
+                                 List<UserMoneylog.DataBean> userMoneylogData = userMoneylog.getData();
+                                 adapter.addAll(userMoneylogData);
+                             } else if (status == 3) {
+                                 MyDialog.showReLoginDialog(getActivity());
+                             } else {
+                                 adapter.pauseMore();
+                             }
+                         } catch (Exception e) {
+                             adapter.pauseMore();
+                         }
+                     }
+                     @Override
+                     public void onError(Call call, Response response, Exception e) {
+                         super.onError(call, response, e);
+                         adapter.pauseMore();
+                     }
+                 });
             }
 
             @Override
@@ -170,16 +233,65 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
         });
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.USER_MONEYLOG;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("type", type + "");
+        params.put("s_time",s_time);
+        params.put("e_time",e_time);
+        params.put("page",page+"");
+        return new OkObject(params, url);
+    }
+
     @Override
     public void onRefresh() {
         page = 1;
-        handler.postDelayed(new Runnable() {
+        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override
-            public void run() {
-                adapter.clear();
-                adapter.addAll(DataProvider.getShouYi(page));
-                page++;
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("我的账单", s);
+                try {
+                    page++;
+                    UserMoneylog userMoneylog = GsonUtils.parseJSON(s, UserMoneylog.class);
+                    if (userMoneylog.getStatus() == 1) {
+                        List<UserMoneylog.DataBean> userMoneylogData = userMoneylog.getData();
+                        adapter.clear();
+                        adapter.addAll(userMoneylogData);
+                    } else if (userMoneylog.getStatus() == 2) {
+                        MyDialog.showReLoginDialog(getActivity());
+                    } else {
+                        showError(userMoneylog.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
             }
-        }, 0);
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
     }
 }

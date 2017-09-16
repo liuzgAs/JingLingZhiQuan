@@ -21,6 +21,7 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
+                android:id="@+id/viewDaiShowFY"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
@@ -30,8 +31,8 @@
                     android:textColor="@color/basic_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¥214"
-                    android:id="@+id/textView82"
+                    android:text="¥0.0"
+                    android:id="@+id/textDaiShouFY"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
@@ -43,8 +44,8 @@
                     android:text="待收返佣："
                     android:id="@+id/textView83"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/textView82"
-                    android:layout_toStartOf="@+id/textView82" />
+                    android:layout_toLeftOf="@+id/textDaiShouFY"
+                    android:layout_toStartOf="@+id/textDaiShouFY" />
             </RelativeLayout>
 
             <TextView
@@ -86,13 +87,13 @@
                         android:textSize="@dimen/normal_textsize" />
 
                     <TextView
-                        android:id="@+id/textView86"
+                        android:id="@+id/textJinE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@+id/textView85"
                         android:layout_alignRight="@+id/textView85"
                         android:layout_below="@+id/textView85"
-                        android:text="586"
+                        android:text="0.0"
                         android:textColor="@color/light_black"
                         android:textSize="50dp" />
                 </RelativeLayout>
@@ -101,6 +102,14 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/normal_textsize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="累计平台返佣¥0.0"
+        android:id="@+id/textLeiJi" />
 
     <Button
         android:id="@+id/buttonLiJiTX"

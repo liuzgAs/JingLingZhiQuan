@@ -56,6 +56,7 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         tablayout.getTabAt(0).setText("收款");
         tablayout.getTabAt(1).setText("结算");
         tablayout.getTabAt(2).setText("分润");
+        tablayout.getTabAt(3).setText("推广");
     }
 
     @Override
@@ -85,12 +86,12 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
         @Override
         public Fragment getItem(int position) {
-            return new ZhangDanFragment();
+            return new ZhangDanFragment(position+1);
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
     }
 }

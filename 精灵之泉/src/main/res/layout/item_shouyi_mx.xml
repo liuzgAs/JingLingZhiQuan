@@ -6,7 +6,6 @@
     >
 
     <LinearLayout
-        android:animateLayoutChanges="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="16dp"
@@ -23,7 +22,7 @@
             android:layout_weight="1.5">
 
             <TextView
-                android:id="@+id/textView60"
+                android:id="@+id/textTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -35,7 +34,7 @@
                 android:textSize="@dimen/litterText" />
 
             <TextView
-                android:id="@+id/textView61"
+                android:id="@+id/textDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -60,7 +59,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/textView62"
+                android:id="@+id/textText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -71,7 +70,7 @@
                 android:textSize="@dimen/litterText" />
 
             <TextView
-                android:id="@+id/textView63"
+                android:id="@+id/textMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -108,7 +107,7 @@
                 android:textSize="@dimen/litterText" />
 
             <TextView
-                android:id="@+id/textView65"
+                android:id="@+id/textBlance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -145,7 +144,7 @@
                 android:textSize="@dimen/litterText" />
 
             <TextView
-                android:id="@+id/textView67"
+                android:id="@+id/textToMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -190,7 +189,7 @@
                     android:textSize="@dimen/litterText" />
 
                 <TextView
-                    android:id="@+id/textView69"
+                    android:id="@+id/textPaymen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -226,7 +225,7 @@
                     android:textSize="@dimen/litterText" />
 
                 <TextView
-                    android:id="@+id/textView71"
+                    android:id="@+id/textFee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -262,7 +261,7 @@
                     android:textSize="@dimen/litterText" />
 
                 <TextView
-                    android:id="@+id/textView73"
+                    android:id="@+id/textRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -298,7 +297,7 @@
                     android:textSize="@dimen/litterText" />
 
                 <TextView
-                    android:id="@+id/textView75"
+                    android:id="@+id/textOrderSn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

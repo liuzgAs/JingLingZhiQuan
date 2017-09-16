@@ -3,12 +3,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include
+        android:layout_marginBottom="15dp"
         android:layout_marginTop="10dp"
         layout="@layout/view_kaishi_jieshu_sj"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
     <RelativeLayout
+        android:visibility="gone"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
         android:layout_marginTop="1dp"

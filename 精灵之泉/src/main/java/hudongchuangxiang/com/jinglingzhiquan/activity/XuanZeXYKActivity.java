@@ -107,7 +107,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
-                        intent.setClass(XuanZeXYKActivity.this, XuanZeXYKActivity.class);
+                        intent.setClass(XuanZeXYKActivity.this, XinZengYHKActivity.class);
                         intent.putExtra(Constant.INTENT_KEY.TITLE, "新增信用卡");
                         intent.putExtra(Constant.INTENT_KEY.type, 2);
                         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);

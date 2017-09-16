@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <RelativeLayout
+        android:id="@+id/viewStartTime"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white">
+        android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
             android:id="@+id/textView334"
@@ -30,21 +33,24 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView335"
+            android:gravity="right"
+            android:hint="请选择开始时间"
+            tools:text="2017-6-30 星期三"
+            android:id="@+id/textStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/imageView140"
             android:layout_toStartOf="@+id/imageView140"
-            android:text="2017-6-30 星期二"
             android:textSize="@dimen/litterText" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/viewEndTime"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
         android:layout_marginTop="1dp"
-        android:background="@color/white">
+        android:background="@drawable/layout_selector_white_system_gray">
 
         <ImageView
             android:id="@+id/imageView141"
@@ -69,14 +75,16 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView337"
+            android:gravity="right"
+            android:hint="请选择结束时间"
+            tools:text="2017-6-30 星期三"
+            android:id="@+id/textEndTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/imageView141"
             android:layout_toStartOf="@+id/imageView141"
-            android:text="2017-6-30 星期三"
             android:textSize="@dimen/litterText" />
     </RelativeLayout>
 </LinearLayout>
