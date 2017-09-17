@@ -309,7 +309,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:text="上传微信二维码"
+            android:hint="上传微信二维码"
             android:id="@+id/textWx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

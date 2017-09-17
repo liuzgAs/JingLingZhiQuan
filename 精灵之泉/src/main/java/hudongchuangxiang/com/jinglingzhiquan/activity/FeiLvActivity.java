@@ -2,9 +2,9 @@ package hudongchuangxiang.com.jinglingzhiquan.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,18 +14,27 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
+import java.util.HashMap;
+import java.util.List;
+
 import hudongchuangxiang.com.jinglingzhiquan.R;
+import hudongchuangxiang.com.jinglingzhiquan.base.MyDialog;
 import hudongchuangxiang.com.jinglingzhiquan.base.ZjbBaseActivity;
-import hudongchuangxiang.com.jinglingzhiquan.provider.DataProvider;
+import hudongchuangxiang.com.jinglingzhiquan.constant.Constant;
+import hudongchuangxiang.com.jinglingzhiquan.model.OkObject;
+import hudongchuangxiang.com.jinglingzhiquan.model.UserRate;
+import hudongchuangxiang.com.jinglingzhiquan.util.ApiClient;
+import hudongchuangxiang.com.jinglingzhiquan.util.GsonUtils;
+import hudongchuangxiang.com.jinglingzhiquan.util.LogUtil;
 import hudongchuangxiang.com.jinglingzhiquan.util.ScreenUtils;
 import hudongchuangxiang.com.jinglingzhiquan.viewholder.FeiLvViewHolder;
+import okhttp3.Response;
 
 public class FeiLvActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
-    private RecyclerArrayAdapter<Integer> adapter;
-    private Handler handler = new Handler();
-    private int page = 1;
+    private RecyclerArrayAdapter<UserRate.DataBean> adapter;
     private EasyRecyclerView recyclerView;
     private View viewBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,17 +77,60 @@ public class FeiLvActivity extends ZjbBaseActivity implements View.OnClickListen
         onRefresh();
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.USER_RATE;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        return new OkObject(params, url);
+    }
+
     @Override
     public void onRefresh() {
-        page = 1;
-        handler.postDelayed(new Runnable() {
+        ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
             @Override
-            public void run() {
-                adapter.clear();
-                adapter.addAll(DataProvider.getPersonList(page));
-                page ++;
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("我的费率", s);
+                try {
+                    UserRate userRate = GsonUtils.parseJSON(s, UserRate.class);
+                    if (userRate.getStatus() == 1) {
+                        List<UserRate.DataBean> userRateData = userRate.getData();
+                        adapter.clear();
+                        adapter.addAll(userRateData);
+                    } else if (userRate.getStatus() == 2) {
+                        MyDialog.showReLoginDialog(FeiLvActivity.this);
+                    } else {
+                        showError(userRate.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
             }
-        }, 500);
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(FeiLvActivity.this).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
     }
 
     private void initRecycler() {
@@ -87,61 +139,13 @@ public class FeiLvActivity extends ZjbBaseActivity implements View.OnClickListen
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColor(getResources().getColor(R.color.basic_color));
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(FeiLvActivity.this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<UserRate.DataBean>(FeiLvActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_fei_lv;
                 return new FeiLvViewHolder(parent, layout);
             }
 
-            @Override
-            public int getViewType(int position) {
-                Integer item = getItem(position);
-                return item;
-            }
-        });
-        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
-            @Override
-            public void onMoreShow() {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.addAll(DataProvider.getPersonList(page));
-                        page++;
-                    }
-                }, 500);
-            }
-
-            @Override
-            public void onMoreClick() {
-
-            }
-        });
-        adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
-            @Override
-            public void onNoMoreShow() {
-
-            }
-
-            @Override
-            public void onNoMoreClick() {
-            }
-        });
-        adapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
-            @Override
-            public void onErrorShow() {
-                adapter.resumeMore();
-            }
-
-            @Override
-            public void onErrorClick() {
-                adapter.resumeMore();
-            }
-        });
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-            }
         });
         recyclerView.setRefreshListener(this);
     }
