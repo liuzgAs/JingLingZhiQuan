@@ -14,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
@@ -26,6 +24,9 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+
+import java.util.HashMap;
+
 import okhttp3.Response;
 
 /**
@@ -131,7 +132,7 @@ public class ShengQianFragment extends ZjbBaseFragment {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("ZhuanQianFragment--onSuccess", "");
+                LogUtil.LogShitou("ZhuanQianFragment--省钱", ""+s);
                 try {
                     Index_Makemoney index_makemoney = GsonUtils.parseJSON(s, Index_Makemoney.class);
                     if (index_makemoney.getStatus()==1){

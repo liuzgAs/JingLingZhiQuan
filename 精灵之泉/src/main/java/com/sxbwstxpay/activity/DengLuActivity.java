@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
@@ -122,7 +123,7 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", editPhone.getText().toString().trim());
         params.put("userPwd", AppUtil.getMD5(AppUtil.getMD5(editPsw.getText().toString().trim()) + "ad"));
-        params.put("deviceId", "");
+        params.put("deviceId", PushServiceFactory.getCloudPushService().getDeviceId());
         params.put("deviceToken", "");
         params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
