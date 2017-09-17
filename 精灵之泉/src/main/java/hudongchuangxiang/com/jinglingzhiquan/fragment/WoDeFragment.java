@@ -127,6 +127,12 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mRelaTitleStatue01.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
         relaTitleStatue.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
         zoomScrollView.setZoomView(viewZoom);
+        texttXName.setVisibility(View.GONE);
+        Glide.with(getActivity())
+                .load(userInfo.getHeadImg())
+                .placeholder(R.mipmap.ic_empty)
+                .into(imageTouXiang);
+        textNickName.setText(userInfo.getNickName());
     }
 
     @Override
@@ -172,11 +178,6 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
 
     @Override
     protected void initData() {
-        Glide.with(getActivity())
-                .load(userInfo.getHeadImg())
-                .placeholder(R.mipmap.ic_empty)
-                .into(imageTouXiang);
-        textNickName.setText(userInfo.getNickName());
         showLoadingDialog();
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override

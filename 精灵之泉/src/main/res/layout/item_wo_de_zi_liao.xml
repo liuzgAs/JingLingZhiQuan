@@ -35,7 +35,7 @@
             android:src="@mipmap/right" />
 
         <ImageView
-            android:id="@+id/imageView52"
+            android:id="@+id/imageHeadImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -81,7 +81,7 @@
 
         <TextView
             tools:text="追梦赤子心"
-            android:id="@+id/textView99"
+            android:id="@+id/textNickName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -128,7 +128,7 @@
 
         <TextView
             android:hint="未填写"
-            android:id="@+id/textView61"
+            android:id="@+id/textBirthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -176,7 +176,7 @@
 
         <TextView
             android:hint="未填写"
-            android:id="@+id/textView63"
+            android:id="@+id/textSex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -223,7 +223,7 @@
 
         <TextView
             android:hint="未填写"
-            android:id="@+id/textView69"
+            android:id="@+id/textArea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -263,7 +263,7 @@
 
         <TextView
             android:hint="180****7896"
-            android:id="@+id/textView73"
+            android:id="@+id/textMobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -309,8 +309,8 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:hint="上传微信二维码"
-            android:id="@+id/textView86"
+            android:text="上传微信二维码"
+            android:id="@+id/textWx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -318,6 +318,16 @@
             android:layout_toLeftOf="@+id/imageView55"
             android:layout_toStartOf="@+id/imageView55"
             android:textSize="@dimen/normal_textsize" />
+
+        <ImageView
+            android:id="@+id/imageWx"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imageView55"
+            android:layout_toStartOf="@+id/imageView55"
+            android:src="@mipmap/denglu_touxiang" />
     </RelativeLayout>
 
     <TextView

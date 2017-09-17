@@ -61,6 +61,8 @@ public class Constant {
         public static final String BANK_CARDDEL = "&g=App&m=Bank&a=cardDel";
         //我的
         public static final String USER_INDEX = "&g=App&m=User&a=index";
+        //我的资料
+        public static final String USER_PROFILE = "&g=App&m=User&a=profile";
     }
 
     public static class PERMISSION {
