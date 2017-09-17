@@ -11,7 +11,10 @@ public class Constant {
     public static String HOST = "http://api.jlzquan.com/index.php?key=" + AppUtil.getMD5Time();
 
     public static int changeControl = 2017;//判断数据是否有改变
-
+    public static String WXAPPID = "wxfef0031f5d8f3ed0";//微信appid
+    public static String WXSCRENT = "02d7e0ca570f95630b552bd055fdd14a";//微信scrent
+    public static String QQ_ID = "1106239952";//qq
+    public static String QQ_KEY = "HcA9s2rpKkLO2M5w";//qq
     public static class Url {
         //关于我们
         public static final String INFO_ABOUT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=about";
@@ -150,6 +153,11 @@ public class Constant {
 
     public static class BROADCASTCODE {
         public static final String NearFilter01 = "NearFilter01";
+        public static final String PAY_RECEIVER = "pay_receiver";
+        public static final String WX_LOGIN = "wxLogin";
+        public static final String WX_SHARE = "wxShare";
+        public static final String WX_LOGIN_FAIL = "wxLoginFail";
+        public static final String WX_SHARE_FAIL = "wxShareFail";
     }
 
 }

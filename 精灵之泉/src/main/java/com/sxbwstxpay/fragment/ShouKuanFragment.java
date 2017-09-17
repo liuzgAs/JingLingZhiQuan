@@ -11,10 +11,9 @@ import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.HashMap;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.XuanZeTDActivity;
@@ -28,6 +27,9 @@ import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.util.StringUtil;
+
+import java.util.HashMap;
+
 import okhttp3.Response;
 
 /**
@@ -56,6 +58,8 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
     private String amount = "";
     private OrderReceiptbefore orderReceiptbefore;
     private int type = 1;
+    private View viewShouKuan;
+    private ImageView imageBuShouKuan;
 
     public ShouKuanFragment() {
         // Required empty public constructor
@@ -96,6 +100,8 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
         tabView[1] = mInflate.findViewById(R.id.viewZhiFuBao);
         tabView[2] = mInflate.findViewById(R.id.viewWeiXin);
         viewTabBg = mInflate.findViewById(R.id.viewTabBg);
+        viewShouKuan = mInflate.findViewById(R.id.viewShouKuan);
+        imageBuShouKuan = (ImageView) mInflate.findViewById(R.id.imageBuShouKuan);
     }
 
     @Override
@@ -183,14 +189,20 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 break;
             case R.id.viewYinLian:
                 type = 1;
+                imageBuShouKuan.setVisibility(View.GONE);
+                viewShouKuan.setVisibility(View.VISIBLE);
                 viewTabBg.setBackgroundResource(R.mipmap.zuobian);
                 break;
             case R.id.viewZhiFuBao:
                 type = 2;
+                imageBuShouKuan.setVisibility(View.VISIBLE);
+                viewShouKuan.setVisibility(View.GONE);
                 viewTabBg.setBackgroundResource(R.mipmap.zhongjian);
                 break;
             case R.id.viewWeiXin:
                 type = 3;
+                imageBuShouKuan.setVisibility(View.VISIBLE);
+                viewShouKuan.setVisibility(View.GONE);
                 viewTabBg.setBackgroundResource(R.mipmap.youbian);
                 break;
             case R.id.buttonShouKuan:
