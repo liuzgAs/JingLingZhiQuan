@@ -18,8 +18,8 @@ import com.sxbwstxpay.activity.BangZhuZXActivity;
 import com.sxbwstxpay.activity.FeiLvActivity;
 import com.sxbwstxpay.activity.GongGaoActivity;
 import com.sxbwstxpay.activity.GuanLiYHKActivity;
-import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
+import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.WoDeDDActivity;
 import com.sxbwstxpay.activity.WoDeSHActivity;
@@ -261,7 +261,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 startActivity(intent);
                 break;
             case R.id.viewFeiHuiYuan01:
-                ((MainActivity) getActivity()).mTabHost.setCurrentTab(1);
+                intent.setClass(getContext(), TuiGuangActivity.class);
+                startActivity(intent);
                 break;
             case R.id.viewGuanLiYHK:
                 intent.setClass(getActivity(), GuanLiYHKActivity.class);

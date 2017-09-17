@@ -9,11 +9,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
@@ -59,6 +63,10 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
             }
         }
     };
+    private WebSettings mSettings;
+    private ProgressBar pb1;
+    private WebView mWebView;
+    private TextView textViewTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,15 +91,36 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
         viewBar = findViewById(R.id.viewBar);
         textText1 = (TextView) findViewById(R.id.textText1);
         textText2 = (TextView) findViewById(R.id.textText2);
+        mWebView = (WebView) findViewById(R.id.webView);
+        pb1 = (ProgressBar) findViewById(R.id.progressBar2);
+        textViewTitle = (TextView) findViewById(R.id.textViewTitle);
+
     }
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("成为VIP精灵推广商");
+        textViewTitle.setText("成为VIP精灵推广商");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
         textText2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG); // 设置中划线并加清晰
+        mWebView.setWebViewClient(new WebViewClient());//覆盖第三方浏览器
+        mSettings = mWebView.getSettings();
+        mSettings.setJavaScriptEnabled(true);
+        mSettings.setUseWideViewPort(true);
+        mSettings.setLoadWithOverviewMode(true);
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                pb1.setProgress(newProgress);
+                if (newProgress == 100) {
+                    pb1.setVisibility(View.GONE);
+                } else {
+                    pb1.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override
@@ -123,10 +152,8 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 try {
                     OrderVipbefore orderVipbefore = GsonUtils.parseJSON(s, OrderVipbefore.class);
                     if (orderVipbefore.getStatus() == 1) {
-                        Glide.with(TuiGuangActivity.this)
-                                .load(orderVipbefore.getImg())
-                                .placeholder(R.mipmap.ic_empty)
-                                .into(imageImg);
+                        mWebView.loadUrl(orderVipbefore.getUrl());
+                        textViewTitle.setText(orderVipbefore.getUrlTitle());
                         textText1.setText(orderVipbefore.getText1());
                         textText2.setText(orderVipbefore.getText2());
                     } else if (orderVipbefore.getStatus() == 2) {

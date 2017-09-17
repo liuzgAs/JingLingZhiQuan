@@ -12,18 +12,27 @@ public class OrderVipbefore {
      * info : 返回成功！
      */
 
-    private String img;
+    private String url;
+    private String urlTitle;
     private String text1;
     private String text2;
     private int status;
     private String info;
 
-    public String getImg() {
-        return img;
+    public String getUrl() {
+        return url;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrlTitle() {
+        return urlTitle;
+    }
+
+    public void setUrlTitle(String urlTitle) {
+        this.urlTitle = urlTitle;
     }
 
     public String getText1() {

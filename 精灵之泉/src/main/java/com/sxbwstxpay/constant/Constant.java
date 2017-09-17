@@ -28,6 +28,8 @@ public class Constant {
         public static final String INFO_POLICY2 = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=policy2";
         //办理信用卡
         public static final String INFO_CREDIT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=credit";
+        //了解VIP推广商
+        public static final String WEB_VIP = "http://api.jlzquan.com/index.php?g=App&m=Web&a=vip";
         //登录
         public static final String LOGIN_INDEX = "&g=App&m=Login&a=index";
         //注册验证码
