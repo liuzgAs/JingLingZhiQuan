@@ -69,6 +69,8 @@ public class Constant {
         public static final String USER_MYTEAM = "&g=App&m=User&a=myTeam";
         //我的商户列表
         public static final String USER_TEAM = "&g=App&m=User&a=team";
+        //站内公告与帮助
+        public static final String NEWS_INDEX = "&g=App&m=News&a=index";
     }
 
     public static class PERMISSION {

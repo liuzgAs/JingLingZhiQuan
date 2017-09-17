@@ -17,7 +17,7 @@
             android:text="Q:"
             android:textSize="@dimen/normal_textsize"
             android:textColor="@color/light_black"
-            android:id="@+id/textView407"
+            android:id="@+id/textTitle1"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -30,10 +30,10 @@
             android:text="无法连接服务器？发不出消息？请求被禁止？"
             android:textSize="@dimen/normal_textsize"
             android:textColor="@color/light_black"
-            android:id="@+id/textView408"
-            android:layout_alignTop="@+id/textView407"
-            android:layout_toRightOf="@+id/textView407"
-            android:layout_toEndOf="@+id/textView407" />
+            android:id="@+id/textTitle"
+            android:layout_alignTop="@+id/textTitle1"
+            android:layout_toRightOf="@+id/textTitle1"
+            android:layout_toEndOf="@+id/textTitle1" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="请先检查手机网络是否有问题，请先检查手机网络是否有问题，请先检查手机网络是否有问题，请先检查手机网络是否有问题，请先检查手机网络是否有问题，"
             android:textSize="@dimen/normal_textsize"
-            android:id="@+id/textView410"
+            android:id="@+id/textIntro"
             android:layout_alignTop="@+id/textView409"
             android:layout_toRightOf="@+id/textView409"
             android:layout_toEndOf="@+id/textView409" />
