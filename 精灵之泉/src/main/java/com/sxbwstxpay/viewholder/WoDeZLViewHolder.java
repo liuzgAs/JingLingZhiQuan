@@ -15,6 +15,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.DiZhiGLActivity;
+import com.sxbwstxpay.activity.EditActivity;
 import com.sxbwstxpay.activity.WeiXinMPMaActivity;
 import com.sxbwstxpay.activity.WoDeZLActivity;
 import com.sxbwstxpay.base.ToLoginActivity;
@@ -88,6 +89,46 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
                     intent.putExtra(Constant.INTENT_KEY.img, data.getWx());
                     getContext().startActivity(intent);
                 }
+            }
+        });
+        $(R.id.viewNickName).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), EditActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type, 1);
+                intent.putExtra(Constant.INTENT_KEY.value,data.getNickName());
+                ((WoDeZLActivity)getContext()).startActivityForResult(intent);
+            }
+        });
+        $(R.id.viewShengRi).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), EditActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type, 2);
+                intent.putExtra(Constant.INTENT_KEY.value,data.getBirthday());
+                ((WoDeZLActivity)getContext()).startActivityForResult(intent);
+            }
+        });
+        $(R.id.viewSex).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), EditActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type, 3);
+                intent.putExtra(Constant.INTENT_KEY.value,data.getSex());
+                ((WoDeZLActivity)getContext()).startActivityForResult(intent);
+            }
+        });
+        $(R.id.viewDiQu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), EditActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type, 4);
+                intent.putExtra(Constant.INTENT_KEY.value,data.getArea());
+                ((WoDeZLActivity)getContext()).startActivityForResult(intent);
             }
         });
     }

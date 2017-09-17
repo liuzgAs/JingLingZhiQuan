@@ -56,7 +56,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white">
+        android:id="@+id/viewNickName"
+        android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
             android:id="@+id/textView98"
@@ -103,7 +104,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white" >
+        android:id="@+id/viewShengRi"
+        android:background="@drawable/layout_selector_white_system_gray" >
 
         <ImageView
             android:id="@+id/imageView36"
@@ -128,6 +130,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
+            android:gravity="right"
             android:hint="未填写"
             android:id="@+id/textBirthday"
             android:layout_width="wrap_content"
@@ -151,7 +154,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white" >
+        android:id="@+id/viewSex"
+        android:background="@drawable/layout_selector_white_system_gray" >
 
         <ImageView
             android:id="@+id/imageView37"
@@ -176,6 +180,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
+            android:gravity="right"
             android:hint="未填写"
             android:id="@+id/textSex"
             android:layout_width="wrap_content"
@@ -198,7 +203,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white" >
+        android:id="@+id/viewDiQu"
+        android:background="@drawable/layout_selector_white_system_gray" >
 
         <ImageView
             android:id="@+id/imageView39"
@@ -223,6 +229,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
+            android:gravity="right"
             android:hint="未填写"
             android:id="@+id/textArea"
             android:layout_width="wrap_content"

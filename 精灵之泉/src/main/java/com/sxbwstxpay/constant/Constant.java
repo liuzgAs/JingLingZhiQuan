@@ -13,6 +13,18 @@ public class Constant {
     public static int changeControl = 2017;//判断数据是否有改变
 
     public static class Url {
+        //关于我们
+        public static final String INFO_ABOUT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=about";
+        //联系客服
+        public static final String INFO_CONTACT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=contact";
+        //资质证书
+        public static final String INFO_CA = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=ca";
+        //注册协议
+        public static final String INFO_POLICY = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=policy";
+        //精灵之泉推广商服务协议
+        public static final String INFO_POLICY2 = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=policy2";
+        //办理信用卡
+        public static final String INFO_CREDIT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=credit";
         //登录
         public static final String LOGIN_INDEX = "&g=App&m=Login&a=index";
         //注册验证码
@@ -77,6 +89,8 @@ public class Constant {
         public static final String USER_PWDSAVE = "&g=App&m=User&a=pwdSave";
         //启动广告页
         public static final String INDEX_STARTAD = "&g=App&m=Index&a=startAd";
+        //我的资料保存
+        public static final String USER_PROFILESAVE = "&g=App&m=User&a=profileSave";
     }
 
     public static class PERMISSION {
@@ -107,6 +121,7 @@ public class Constant {
         public static final String id = "id";
         public static final String tongDaoId = "tongDaoId";
         public static final String img = "img";
+        public static final String value = "value";
     }
 
     public static class REQUEST_RESULT_CODE {
@@ -119,6 +134,7 @@ public class Constant {
         public static final int XIN_YONG_KA = 2023;
         public static final int IMAGE_HEAD = 2024;
         public static final int IMAGE_WX = 2025;
+        public static final int BaoCun= 2026;
     }
 
     public static class ACACHE {

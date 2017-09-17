@@ -3,7 +3,6 @@ package com.sxbwstxpay.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,10 +14,8 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseFragment;
-import com.sxbwstxpay.provider.DataProvider;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.ZhuanQianViewHolder;
 
@@ -27,12 +24,10 @@ import com.sxbwstxpay.viewholder.ZhuanQianViewHolder;
  */
 public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-        private EasyRecyclerView recyclerView;
+    private EasyRecyclerView recyclerView;
     private View mInflate;
     private View mRelaTitleStatue;
-        private RecyclerArrayAdapter<Integer> adapter;
-    private Handler handler = new Handler();
-    private int page = 1;
+    private RecyclerArrayAdapter<Integer> adapter;
 
     public ZhuanQianFragment() {
         // Required empty public constructor
@@ -123,63 +118,13 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
             }
         });
-        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
-            @Override
-            public void onMoreShow() {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.addAll(DataProvider.getPersonList(page));
-                        page++;
-                    }
-                }, 500);
-            }
-
-            @Override
-            public void onMoreClick() {
-
-            }
-        });
-        adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
-            @Override
-            public void onNoMoreShow() {
-
-            }
-
-            @Override
-            public void onNoMoreClick() {
-            }
-        });
-        adapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
-            @Override
-            public void onErrorShow() {
-                adapter.resumeMore();
-            }
-
-            @Override
-            public void onErrorClick() {
-                adapter.resumeMore();
-            }
-        });
-        recyclerView.setRefreshListener(this);
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-            }
-        });
     }
 
     @Override
     public void onRefresh() {
-        page = 1;
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter.clear();
-                adapter.addAll(DataProvider.getPersonList(page));
-                page++;
-            }
-        }, 0);
+        adapter.clear();
+        adapter.add(1);
+        adapter.notifyDataSetChanged();
     }
 
 

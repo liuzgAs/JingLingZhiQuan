@@ -85,11 +85,9 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        showLoadingDialog();
         ApiClient.post(HuanYingActivity.this, getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
-                cancelLoadingDialog();
                 LogUtil.LogShitou("HuanYingActivity--onSuccess", "");
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);

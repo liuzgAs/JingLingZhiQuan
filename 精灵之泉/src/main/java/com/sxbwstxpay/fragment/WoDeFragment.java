@@ -13,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
-import java.util.HashMap;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.BangZhuZXActivity;
 import com.sxbwstxpay.activity.FeiLvActivity;
@@ -39,6 +36,9 @@ import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+
+import java.util.HashMap;
+
 import okhttp3.Response;
 
 /**
@@ -189,6 +189,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                     if (userIndex.getStatus() == 1) {
                         Glide.with(getActivity())
                                 .load(userIndex.getHeadImg())
+                                .dontAnimate()
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageTouXiang);
                         textNickName.setText(userIndex.getNickName());
