@@ -20,6 +20,7 @@ import com.sxbwstxpay.activity.GongGaoActivity;
 import com.sxbwstxpay.activity.GuanLiYHKActivity;
 import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
+import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.WoDeDDActivity;
 import com.sxbwstxpay.activity.WoDeSHActivity;
 import com.sxbwstxpay.activity.WoDeSYActivity;
@@ -157,6 +158,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewZhanNeiGG).setOnClickListener(this);
         mInflate.findViewById(R.id.viewFeiLv).setOnClickListener(this);
         mInflate.findViewById(R.id.viewName).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewLianXiKF).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewZiZhiZS).setOnClickListener(this);
+        mInflate.findViewById(R.id.relatBanLiXYK).setOnClickListener(this);
         viewFeiHuiYuan01.setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
         imageSheZhi.setOnClickListener(this);
@@ -208,9 +212,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                             viewFeiHuiYuan02.setVisibility(View.GONE);
                             viewFeiHuiYuan03.setVisibility(View.GONE);
                         }
-                        if (TextUtils.isEmpty(userIndex.getTxName())){
+                        if (TextUtils.isEmpty(userIndex.getTxName())) {
                             texttXName.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             texttXName.setText(userIndex.getTxName());
                             texttXName.setVisibility(View.VISIBLE);
                         }
@@ -238,8 +242,26 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.relatBanLiXYK:
+                intent.setClass(getActivity(), WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "办理信用卡");
+                intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_CREDIT);
+                startActivity(intent);
+                break;
+            case R.id.viewLianXiKF:
+                intent.setClass(getActivity(), WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "联系客服");
+                intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_CONTACT);
+                startActivity(intent);
+                break;
+            case R.id.viewZiZhiZS:
+                intent.setClass(getActivity(), WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "资质证书");
+                intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_CA);
+                startActivity(intent);
+                break;
             case R.id.viewFeiHuiYuan01:
-                ((MainActivity)getActivity()).mTabHost.setCurrentTab(1);
+                ((MainActivity) getActivity()).mTabHost.setCurrentTab(1);
                 break;
             case R.id.viewGuanLiYHK:
                 intent.setClass(getActivity(), GuanLiYHKActivity.class);

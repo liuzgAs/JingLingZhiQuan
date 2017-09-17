@@ -1,7 +1,12 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,10 +20,15 @@ import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.OrderVipbefore;
+import com.sxbwstxpay.model.OrderVippay;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.tencent.mm.opensdk.constants.Build;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
 
@@ -31,6 +41,24 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private View viewBar;
     private TextView textText1;
     private TextView textText2;
+    final IWXAPI api = WXAPIFactory.createWXAPI(this, null);
+    private BroadcastReceiver recevier = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (TextUtils.equals(action, Constant.BROADCASTCODE.PAY_RECEIVER)) {
+                cancelLoadingDialog();
+                int error = intent.getIntExtra("error", -1);
+                if (error == 0) {
+                    MyDialog.dialogFinish(TuiGuangActivity.this, "支付成功");
+                } else if (error == -1) {
+                    MyDialog.showTipDialog(TuiGuangActivity.this, "支付失败");
+                } else if (error == -2) {
+                    MyDialog.showTipDialog(TuiGuangActivity.this, "支付取消");
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +97,8 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
+        findViewById(R.id.textJiaRu).setOnClickListener(this);
+        findViewById(R.id.textXieYI).setOnClickListener(this);
     }
 
     /**
@@ -117,12 +147,103 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
         });
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject1() {
+        String url = Constant.HOST + Constant.Url.ORDER_VIPPAY;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid",userInfo.getUid());
+        params.put("tokenTime",tokenTime);
+        return new OkObject(params, url);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.textXieYI:
+                Intent intent = new Intent();
+                intent.setClass(this, WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "精灵之泉推广商服务协议");
+                intent.putExtra(Constant.INTENT_KEY.URL,Constant.HOST+ Constant.Url.INFO_POLICY2);
+                startActivity(intent);
+                break;
+            case R.id.textJiaRu:
+                showLoadingDialog();
+                ApiClient.post(TuiGuangActivity.this, getOkObject1(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        cancelLoadingDialog();
+                        LogUtil.LogShitou("TuiGuangActivity--VIP推广商支付",s+ "");
+                        try {
+                            OrderVippay orderVippay = GsonUtils.parseJSON(s, OrderVippay.class);
+                            if (orderVippay.getStatus()==1){
+                                wechatPay(orderVippay);
+                            }else if (orderVippay.getStatus()==2){
+                                MyDialog.showReLoginDialog(TuiGuangActivity.this);
+                            }else {
+                                Toast.makeText(TuiGuangActivity.this, orderVippay.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(TuiGuangActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        cancelLoadingDialog();
+                        Toast.makeText(TuiGuangActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
             case R.id.imageBack:
                 finish();
                 break;
         }
+    }
+
+    /**
+     * 检查微信版本是否支付支付或是否安装可支付的微信版本
+     */
+    private boolean checkIsSupportedWeachatPay() {
+        boolean isPaySupported = api.getWXAppSupportAPI() >= Build.PAY_SUPPORTED_SDK_INT;
+        return isPaySupported;
+    }
+
+    /**
+     * 微信支付
+     */
+    private void wechatPay(OrderVippay orderPay) {
+        if (!checkIsSupportedWeachatPay()) {
+            Toast.makeText(this, "您暂未安装微信或您的微信版本暂不支持支付功能\n请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
+        } else {
+            OrderVippay.PayBean.ConfigBean config = orderPay.getPay().getConfig();
+            api.registerApp(config.getAppid());
+            PayReq mPayReq = new PayReq();
+            mPayReq.appId = config.getAppid();
+            mPayReq.partnerId = config.getPartnerid();
+            mPayReq.prepayId = config.getPrepayid();
+            mPayReq.packageValue = config.getPackagevalue();
+            mPayReq.nonceStr = config.getNoncestr();
+            mPayReq.timeStamp = config.getTimestamp() + "";
+            mPayReq.sign = config.getSign().toUpperCase();
+            api.sendReq(mPayReq);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.PAY_RECEIVER);
+        registerReceiver(recevier, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(recevier);
     }
 }

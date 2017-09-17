@@ -8,7 +8,7 @@ android {
         applicationId "com.sxbwstxpay"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 17091702
+        versionCode 17091703
         versionName "0.0.7"
     }
     buildTypes {
@@ -39,5 +39,5 @@ dependencies {
     compile 'com.lzy.widget:imagepicker:0.5.3'
     compile 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
     compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
-    compile files('libs/libammsdk.jar')
+    compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
 }

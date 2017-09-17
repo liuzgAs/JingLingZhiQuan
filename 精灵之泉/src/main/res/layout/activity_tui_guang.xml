@@ -31,14 +31,14 @@
             android:layout_alignParentLeft="true" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textXieYI"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_toEndOf="@+id/checkBox2"
             android:gravity="center_vertical"
-            android:text="《容易付推广商服务协议》"
+            android:text="《精灵之泉推广商服务协议》"
             android:textColor="@color/light_black"
             android:textSize="@dimen/moreLitterText"
             android:layout_toRightOf="@+id/checkBox2" />
@@ -82,7 +82,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/textJiaRu"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="#f53b70"

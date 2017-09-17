@@ -51,6 +51,7 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.viewZhangHuAQ).setOnClickListener(this);
         findViewById(R.id.viewBanBen).setOnClickListener(this);
+        findViewById(R.id.viewGuanYu).setOnClickListener(this);
     }
 
     @Override
@@ -60,13 +61,19 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewGuanYu:
+                intent.setClass(this, WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "关于我们");
+                intent.putExtra(Constant.INTENT_KEY.URL,Constant.HOST+ Constant.Url.INFO_ABOUT);
+                startActivity(intent);
+                break;
             case R.id.viewBanBen:
                 //检查更新
                 UpgradeUtils.checkUpgrade(SheZhiActivity.this, Constant.HOST + Constant.Url.INDEX_VERSION);
                 break;
             case R.id.viewZhangHuAQ:
-                Intent intent = new Intent();
                 intent.setClass(this, ZhangHuAQActivity.class);
                 startActivity(intent);
                 break;

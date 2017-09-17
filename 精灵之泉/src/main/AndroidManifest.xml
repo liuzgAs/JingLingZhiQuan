@@ -247,6 +247,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- QQ登录界面 -->
+        <activity
+            android:name=".activity.WebActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

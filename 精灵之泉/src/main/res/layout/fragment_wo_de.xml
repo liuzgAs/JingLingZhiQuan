@@ -563,7 +563,7 @@
                         android:background="@color/line_gray" />
 
                     <RelativeLayout
-                        android:id="@+id/relativeLayout2"
+                        android:id="@+id/relatBanLiXYK"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
@@ -704,6 +704,7 @@
                         android:background="@color/line_gray" />
 
                     <RelativeLayout
+                        android:id="@+id/viewLianXiKF"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"
@@ -751,6 +752,7 @@
 
 
                     <RelativeLayout
+                        android:id="@+id/viewZiZhiZS"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/normalItemHeight"
                         android:background="@drawable/layout_selector_white_system_gray"

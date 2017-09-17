@@ -98,6 +98,8 @@ public class Constant {
         public static final String ORDER_VIPBEFORE = "&g=App&m=Order&a=vipBefore";
         //我的推广二维码
         public static final String SHARE_INDEX = "g=App&m=Share&a=index";
+        //VIP推广商支付
+        public static final String ORDER_VIPPAY = "&g=App&m=Order&a=vipPay";
     }
 
     public static class PERMISSION {
@@ -129,6 +131,7 @@ public class Constant {
         public static final String tongDaoId = "tongDaoId";
         public static final String img = "img";
         public static final String value = "value";
+        public static final String URL = "URL";
     }
 
     public static class REQUEST_RESULT_CODE {

@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
@@ -22,6 +20,9 @@ import com.sxbwstxpay.util.AppUtil;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.StringUtil;
+
+import java.util.HashMap;
+
 import okhttp3.Response;
 
 public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnClickListener {
@@ -81,6 +82,7 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.buttonZhuCe).setOnClickListener(this);
         findViewById(R.id.buttonLogin).setOnClickListener(this);
+        findViewById(R.id.textXieYi).setOnClickListener(this);
         textWangJiMM.setOnClickListener(this);
         imageXieYi.setOnClickListener(this);
         editPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -130,6 +132,12 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.textXieYi:
+                intent.setClass(this, WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "注册协议");
+                intent.putExtra(Constant.INTENT_KEY.URL,Constant.HOST+ Constant.Url.INFO_POLICY);
+                startActivity(intent);
+                break;
             case R.id.imageXieYi:
                 isCheck = !isCheck;
                 if (isCheck) {
