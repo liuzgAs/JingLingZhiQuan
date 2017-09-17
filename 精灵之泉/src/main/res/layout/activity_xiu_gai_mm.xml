@@ -3,9 +3,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background"
+    android:orientation="vertical"
     tools:context=".activity.XiuGaiMMActivity">
+
     <include layout="@layout/view_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/imageView77"
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/mima" />
+
+        <EditText
+            android:id="@+id/editUserPwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imageView77"
+            android:layout_toRightOf="@+id/imageView77"
+            android:background="@null"
+            android:hint="输入旧密码"
+            android:inputType="textPassword"
+            android:maxLength="17"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textSize="@dimen/normal_textsize" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/imageView52"
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/mima" />
+
+        <EditText
+            android:id="@+id/editNewuserPwd01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imageView52"
+            android:layout_toRightOf="@+id/imageView52"
+            android:background="@null"
+            android:hint="设置新密码"
+            android:inputType="textPassword"
+            android:maxLength="17"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textSize="@dimen/normal_textsize" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/imageView76"
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/mima" />
+
+        <EditText
+            android:id="@+id/editNewuserPwd02"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imageView76"
+            android:layout_toRightOf="@+id/imageView76"
+            android:background="@null"
+            android:hint="确认新密码"
+            android:inputType="textPassword"
+            android:maxLength="17"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textSize="@dimen/normal_textsize" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/buttonTiJiao"
+        style="@style/MyButton"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:text="提交" />
 
 </LinearLayout>

@@ -1,17 +1,37 @@
 package com.sxbwstxpay.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.base.MyDialog;
+import com.sxbwstxpay.base.ToLoginActivity;
 import com.sxbwstxpay.base.ZjbBaseActivity;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.SimpleInfo;
+import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.AppUtil;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.util.StringUtil;
+
+import java.util.HashMap;
+
+import okhttp3.Response;
 
 public class XiuGaiMMActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private View viewBar;
+    private EditText editUserPwd;
+    private EditText editNewuserPwd01;
+    private EditText editNewuserPwd02;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +53,9 @@ public class XiuGaiMMActivity extends ZjbBaseActivity implements View.OnClickLis
     @Override
     protected void findID() {
         viewBar = findViewById(R.id.viewBar);
+        editUserPwd = (EditText) findViewById(R.id.editUserPwd);
+        editNewuserPwd01 = (EditText) findViewById(R.id.editNewuserPwd01);
+        editNewuserPwd02 = (EditText) findViewById(R.id.editNewuserPwd02);
     }
 
     @Override
@@ -46,6 +69,7 @@ public class XiuGaiMMActivity extends ZjbBaseActivity implements View.OnClickLis
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
+        findViewById(R.id.buttonTiJiao).setOnClickListener(this);
     }
 
     @Override
@@ -53,11 +77,76 @@ public class XiuGaiMMActivity extends ZjbBaseActivity implements View.OnClickLis
 
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.USER_PWDSAVE;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("userPwd", AppUtil.getMD5(AppUtil.getMD5(editUserPwd.getText().toString().trim()) + "ad"));
+        params.put("newuserPwd", AppUtil.getMD5(AppUtil.getMD5(editNewuserPwd01.getText().toString().trim()) + "ad"));
+        return new OkObject(params, url);
+    }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imageBack:
                 finish();
+                break;
+            case R.id.buttonTiJiao:
+                if (TextUtils.isEmpty(editUserPwd.getText().toString().trim())) {
+                    Toast.makeText(XiuGaiMMActivity.this, "请输入旧密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(editNewuserPwd01.getText().toString().trim())) {
+                    Toast.makeText(XiuGaiMMActivity.this, "请输入新密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(editNewuserPwd02.getText().toString().trim())) {
+                    Toast.makeText(XiuGaiMMActivity.this, "请再次输入新密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!TextUtils.equals(editNewuserPwd01.getText().toString().trim(), editNewuserPwd02.getText().toString().trim())) {
+                    Toast.makeText(XiuGaiMMActivity.this, "两次密码不一致", Toast.LENGTH_SHORT).show();
+                    editNewuserPwd01.setText("");
+                    editNewuserPwd02.setText("");
+                    return;
+                }
+                if (!StringUtil.isPassword(editNewuserPwd01.getText().toString().trim())) {
+                    Toast.makeText(XiuGaiMMActivity.this, "密码太简单", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                showLoadingDialog();
+                ApiClient.post(XiuGaiMMActivity.this, getOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        cancelLoadingDialog();
+                        LogUtil.LogShitou("XiuGaiMMActivity--修改密码", s + "");
+                        try {
+                            SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                            if (simpleInfo.getStatus() == 1) {
+                                ToLoginActivity.toLoginActivity(XiuGaiMMActivity.this);
+                            } else if (simpleInfo.getStatus() == 2) {
+                                MyDialog.showReLoginDialog(XiuGaiMMActivity.this);
+                            } else {
+                            }
+                            Toast.makeText(XiuGaiMMActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Toast.makeText(XiuGaiMMActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        cancelLoadingDialog();
+                        Toast.makeText(XiuGaiMMActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
     }

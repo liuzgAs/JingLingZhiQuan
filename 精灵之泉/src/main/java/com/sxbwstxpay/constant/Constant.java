@@ -73,6 +73,8 @@ public class Constant {
         public static final String NEWS_INDEX = "&g=App&m=News&a=index";
         //版本判断
         public static final String INDEX_VERSION = "&g=App&m=Index&a=version";
+        //修改密码
+        public static final String USER_PWDSAVE = "&g=App&m=User&a=pwdSave";
     }
 
     public static class PERMISSION {
