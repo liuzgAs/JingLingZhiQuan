@@ -1,6 +1,7 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.List;
-
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ShangHuLBActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -21,12 +20,16 @@ import com.sxbwstxpay.model.UserMyteam;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+
+import java.util.HashMap;
+import java.util.List;
+
 import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class JianJieTJYHFragment extends ZjbBaseFragment {
+public class JianJieTJYHFragment extends ZjbBaseFragment implements View.OnClickListener {
 
 
     private View mInflate;
@@ -79,8 +82,11 @@ public class JianJieTJYHFragment extends ZjbBaseFragment {
 
     @Override
     protected void setListeners() {
-
+        mInflate.findViewById(R.id.viewWoDeSH01).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewWoDeSH02).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewWoDeSH03).setOnClickListener(this);
     }
+
     /**
      * des： 网络请求参数
      * author： ZhangJieBo
@@ -89,8 +95,8 @@ public class JianJieTJYHFragment extends ZjbBaseFragment {
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.USER_MYTEAM;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
-        params.put("tokenTime",tokenTime);
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
 
@@ -101,21 +107,21 @@ public class JianJieTJYHFragment extends ZjbBaseFragment {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("WoDeSHActivity--我的商户", s+"");
+                LogUtil.LogShitou("WoDeSHActivity--我的商户", s + "");
                 try {
                     UserMyteam userMyteam = GsonUtils.parseJSON(s, UserMyteam.class);
-                    if (userMyteam.getStatus()==1){
+                    if (userMyteam.getStatus() == 1) {
                         List<Integer> data2 = userMyteam.getData2();
-                        text01.setText("人数："+data2.get(0));
-                        text02.setText("人数："+data2.get(1));
-                        text03.setText("人数："+data2.get(2));
-                    }else if (userMyteam.getStatus()==2){
+                        text01.setText("人数：" + data2.get(0));
+                        text02.setText("人数：" + data2.get(1));
+                        text03.setText("人数：" + data2.get(2));
+                    } else if (userMyteam.getStatus() == 2) {
                         MyDialog.showReLoginDialog(getActivity());
-                    }else {
+                    } else {
                         Toast.makeText(getActivity(), userMyteam.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -125,5 +131,27 @@ public class JianJieTJYHFragment extends ZjbBaseFragment {
                 Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.viewWoDeSH01:
+                intent.setClass(getActivity(), ShangHuLBActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type, 20);
+                startActivity(intent);
+                break;
+            case R.id.viewWoDeSH02:
+                intent.setClass(getActivity(), ShangHuLBActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type, 21);
+                startActivity(intent);
+                break;
+            case R.id.viewWoDeSH03:
+                intent.setClass(getActivity(), ShangHuLBActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type, 22);
+                startActivity(intent);
+                break;
+        }
     }
 }

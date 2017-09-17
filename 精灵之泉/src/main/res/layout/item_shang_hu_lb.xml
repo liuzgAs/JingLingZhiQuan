@@ -14,18 +14,32 @@
             android:src="@mipmap/denglu_touxiang"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/imageView22"
+            android:id="@+id/imageHeadImg"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/bigText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="名称"
-            android:id="@+id/textView11"
+            android:id="@+id/textNickName"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imageView22"
-            android:layout_toEndOf="@+id/imageView22" />
+            android:layout_toRightOf="@+id/imageHeadImg"
+            android:layout_toEndOf="@+id/imageHeadImg" />
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:textSize="@dimen/litterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-9-17"
+            android:id="@+id/textRegTime"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </LinearLayout>
