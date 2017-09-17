@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.TuiGuangActivity">
+    <include layout="@layout/view_bar" />
+    <ImageView
+        android:id="@+id/imageImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <CheckBox
+            android:checked="true"
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="我一阅读并同意"
+            android:textSize="@dimen/moreLitterText"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/checkBox2"
+            android:gravity="center_vertical"
+            android:text="《容易付推广商服务协议》"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/moreLitterText"
+            android:layout_toRightOf="@+id/checkBox2" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#f6e75d">
+
+            <TextView
+                android:id="@+id/textText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="限期优惠00.00元"
+                android:textColor="#3b1688"
+                android:textSize="16dp"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="1dp"
+                android:id="@+id/textText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textText1"
+                android:layout_toEndOf="@+id/textText1"
+                android:text="原价00.00"
+                android:textColor="#3b1688"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_toRightOf="@+id/textText1" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="#f53b70"
+            android:gravity="center"
+            android:text="立即加入"
+            android:textColor="#f5e35d" />
+    </LinearLayout>
+
+</LinearLayout>

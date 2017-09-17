@@ -21,10 +21,6 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
-
-import java.util.HashMap;
-import java.util.List;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
@@ -38,6 +34,10 @@ import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.XuanZeTDViewHolder;
+
+import java.util.HashMap;
+import java.util.List;
+
 import okhttp3.Response;
 
 public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
@@ -276,7 +276,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(XuanZeTDActivity.this, XinZengYHKActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.TITLE, "新增银行卡");
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "新增收款储蓄卡");
                 intent.putExtra(Constant.INTENT_KEY.type, 1);
                 startActivity(intent);
                 XuanZeYHKDialog.dismiss();

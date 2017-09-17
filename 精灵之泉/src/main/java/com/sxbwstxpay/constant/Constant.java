@@ -91,6 +91,10 @@ public class Constant {
         public static final String INDEX_STARTAD = "&g=App&m=Index&a=startAd";
         //我的资料保存
         public static final String USER_PROFILESAVE = "&g=App&m=User&a=profileSave";
+        //VIP推广商请求
+        public static final String ORDER_VIPBEFORE = "&g=App&m=Order&a=vipBefore";
+        //我的推广二维码
+        public static final String SHARE_INDEX = "g=App&m=Share&a=index";
     }
 
     public static class PERMISSION {
