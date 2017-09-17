@@ -71,6 +71,8 @@ public class Constant {
         public static final String USER_TEAM = "&g=App&m=User&a=team";
         //站内公告与帮助
         public static final String NEWS_INDEX = "&g=App&m=News&a=index";
+        //版本判断
+        public static final String INDEX_VERSION = "&g=App&m=Index&a=version";
     }
 
     public static class PERMISSION {

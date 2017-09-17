@@ -12,12 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.fragment.RenZhengFragment;
 import com.sxbwstxpay.fragment.ShengQianFragment;
 import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
 import com.sxbwstxpay.util.BackHandlerHelper;
+import com.sxbwstxpay.util.UpgradeUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -49,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         }
         //禁止横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        //检查更新
+        UpgradeUtils.checkUpgrade(MainActivity.this, Constant.HOST + Constant.Url.INDEX_VERSION);
         tabsItem[0] = "省钱";
         tabsItem[1] = "赚钱";
         tabsItem[2] = "收款";

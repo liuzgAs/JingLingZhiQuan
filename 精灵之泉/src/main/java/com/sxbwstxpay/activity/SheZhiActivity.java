@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.util.UpgradeUtils;
 
 public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListener {
 
@@ -48,6 +50,7 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.viewZhangHuAQ).setOnClickListener(this);
+        findViewById(R.id.viewBanBen).setOnClickListener(this);
     }
 
     @Override
@@ -58,9 +61,13 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.viewBanBen:
+                //检查更新
+                UpgradeUtils.checkUpgrade(SheZhiActivity.this, Constant.HOST + Constant.Url.INDEX_VERSION);
+                break;
             case R.id.viewZhangHuAQ:
-                Intent intent= new Intent();
-                intent.setClass(this,ZhangHuAQActivity.class);
+                Intent intent = new Intent();
+                intent.setClass(this, ZhangHuAQActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageBack:

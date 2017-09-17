@@ -29,6 +29,9 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sxbwstxpay.R;
+import com.sxbwstxpay.model.OkObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,8 +42,6 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.HashMap;
 
-import com.sxbwstxpay.R;
-import com.sxbwstxpay.model.OkObject;
 import okhttp3.Response;
 
 
@@ -163,6 +164,8 @@ public class UpgradeUtils extends Activity {
             DisplayMetrics d = mContext.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
             lp.width = (int) (d.widthPixels * 0.8); // 高度设置为屏幕的0.6
             dialogWindow.setAttributes(lp);
+        }else {
+            Toast.makeText(mContext, "已是最新版本", Toast.LENGTH_SHORT).show();
         }
     }
 
