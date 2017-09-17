@@ -257,7 +257,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                         List<UserMoneylog.DataBean> userMoneylogData = userMoneylog.getData();
                         adapter.clear();
                         adapter.addAll(userMoneylogData);
-                    } else if (userMoneylog.getStatus() == 2) {
+                    } else if (userMoneylog.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         showError(userMoneylog.getInfo());

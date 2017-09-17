@@ -108,7 +108,7 @@ public class BangZhuZXActivity extends ZjbBaseActivity implements View.OnClickLi
                         List<NewsIndex.DataBean> newsIndexData = newsIndex.getData();
                         adapter.clear();
                         adapter.addAll(newsIndexData);
-                    } else if (newsIndex.getStatus() == 2) {
+                    } else if (newsIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(BangZhuZXActivity.this);
                     } else {
                         showError(newsIndex.getInfo());

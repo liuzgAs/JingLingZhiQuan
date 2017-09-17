@@ -145,7 +145,7 @@ public class WoDeZLActivity extends ZjbBaseActivity implements View.OnClickListe
                         adapter.clear();
                         adapter.add(userProfile);
                         adapter.notifyDataSetChanged();
-                    } else if (userProfile.getStatus() == 2) {
+                    } else if (userProfile.getStatus() == 3) {
                         MyDialog.showReLoginDialog(WoDeZLActivity.this);
                     } else {
                         showError(userProfile.getInfo());
@@ -202,7 +202,7 @@ public class WoDeZLActivity extends ZjbBaseActivity implements View.OnClickListe
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     if (simpleInfo.getStatus() == 1) {
 
-                    } else if (simpleInfo.getStatus() == 2) {
+                    } else if (simpleInfo.getStatus() == 3) {
                         MyDialog.showReLoginDialog(WoDeZLActivity.this);
                     } else {
                         Toast.makeText(WoDeZLActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();

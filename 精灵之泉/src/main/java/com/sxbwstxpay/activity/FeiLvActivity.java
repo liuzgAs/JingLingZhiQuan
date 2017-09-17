@@ -102,7 +102,7 @@ public class FeiLvActivity extends ZjbBaseActivity implements View.OnClickListen
                         List<UserRate.DataBean> userRateData = userRate.getData();
                         adapter.clear();
                         adapter.addAll(userRateData);
-                    } else if (userRate.getStatus() == 2) {
+                    } else if (userRate.getStatus() == 3) {
                         MyDialog.showReLoginDialog(FeiLvActivity.this);
                     } else {
                         showError(userRate.getInfo());

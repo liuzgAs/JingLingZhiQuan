@@ -115,7 +115,7 @@ public class JianJieTJYHFragment extends ZjbBaseFragment implements View.OnClick
                         text01.setText("人数：" + data2.get(0));
                         text02.setText("人数：" + data2.get(1));
                         text03.setText("人数：" + data2.get(2));
-                    } else if (userMyteam.getStatus() == 2) {
+                    } else if (userMyteam.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         Toast.makeText(getActivity(), userMyteam.getInfo(), Toast.LENGTH_SHORT).show();

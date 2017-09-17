@@ -117,7 +117,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                         adapter.clear();
                         List<BankPayment.DataBean> dataBeanList = bankPayment.getData();
                         adapter.addAll(dataBeanList);
-                    } else if (bankPayment.getStatus() == 2) {
+                    } else if (bankPayment.getStatus() == 3) {
                         MyDialog.showReLoginDialog(XuanZeTDActivity.this);
                     } else {
                         showError(bankPayment.getInfo());
@@ -213,7 +213,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                             if (bankCardlist.getStatus() == 1) {
                                 bankCardlistData = bankCardlist.getData();
                                 xuanZeYHK();
-                            } else if (bankCardlist.getStatus() == 2) {
+                            } else if (bankCardlist.getStatus() == 3) {
                                 MyDialog.showReLoginDialog(XuanZeTDActivity.this);
                             } else {
                                 Toast.makeText(XuanZeTDActivity.this, bankCardlist.getInfo(), Toast.LENGTH_SHORT).show();

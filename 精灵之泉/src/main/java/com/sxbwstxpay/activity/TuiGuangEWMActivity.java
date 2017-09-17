@@ -148,7 +148,7 @@ public class TuiGuangEWMActivity extends ZjbBaseActivity implements View.OnClick
                                 bitmap = netPicToBmp(shareIndex.getShare_icon());
                             }
                         }).start();
-                    } else if (shareIndex.getStatus() == 2) {
+                    } else if (shareIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(TuiGuangEWMActivity.this);
                     } else {
                         Toast.makeText(TuiGuangEWMActivity.this, shareIndex.getInfo(), Toast.LENGTH_SHORT).show();

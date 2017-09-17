@@ -156,7 +156,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                         textViewTitle.setText(orderVipbefore.getUrlTitle());
                         textText1.setText(orderVipbefore.getText1());
                         textText2.setText(orderVipbefore.getText2());
-                    } else if (orderVipbefore.getStatus() == 2) {
+                    } else if (orderVipbefore.getStatus() == 3) {
                         MyDialog.showReLoginDialog(TuiGuangActivity.this);
                     } else {
                         Toast.makeText(TuiGuangActivity.this, orderVipbefore.getInfo(), Toast.LENGTH_SHORT).show();

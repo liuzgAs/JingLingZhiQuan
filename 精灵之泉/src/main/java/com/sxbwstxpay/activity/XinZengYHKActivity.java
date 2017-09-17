@@ -118,7 +118,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                     BankCardaddbefore bankCardaddbefore = GsonUtils.parseJSON(s, BankCardaddbefore.class);
                     if (bankCardaddbefore.getStatus() == 1) {
                         bankCardaddbeforeData = bankCardaddbefore.getData();
-                    } else if (bankCardaddbefore.getStatus() == 2) {
+                    } else if (bankCardaddbefore.getStatus() == 3) {
                         MyDialog.showReLoginDialog(XinZengYHKActivity.this);
                     } else {
                         Toast.makeText(XinZengYHKActivity.this, bankCardaddbefore.getInfo(), Toast.LENGTH_SHORT).show();
@@ -301,7 +301,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                     if (simpleInfo.getStatus() == 1) {
                         setResult(Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);
                         finish();
-                    } else if (simpleInfo.getStatus() == 2) {
+                    } else if (simpleInfo.getStatus() == 3) {
                         MyDialog.showReLoginDialog(XinZengYHKActivity.this);
                     } else {
                     }

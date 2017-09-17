@@ -220,7 +220,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                         }
                         textGradeName.setText(userIndex.getGradeName());
                         textVipTime.setText(userIndex.getVipTime());
-                    } else if (userIndex.getStatus() == 2) {
+                    } else if (userIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         Toast.makeText(getActivity(), userIndex.getInfo(), Toast.LENGTH_SHORT).show();

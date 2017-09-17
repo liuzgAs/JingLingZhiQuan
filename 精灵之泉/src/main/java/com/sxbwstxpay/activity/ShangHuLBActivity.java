@@ -190,7 +190,7 @@ public class ShangHuLBActivity extends ZjbBaseActivity implements SwipeRefreshLa
                         List<UserTeam.DataBean> userTeamData = userTeam.getData();
                         adapter.clear();
                         adapter.addAll(userTeamData);
-                    } else if (userTeam.getStatus() == 2) {
+                    } else if (userTeam.getStatus() == 3) {
                         MyDialog.showReLoginDialog(ShangHuLBActivity.this);
                     } else {
                         showError(userTeam.getInfo());

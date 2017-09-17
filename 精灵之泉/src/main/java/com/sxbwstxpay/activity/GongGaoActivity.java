@@ -178,7 +178,7 @@ public class GongGaoActivity extends ZjbBaseActivity implements SwipeRefreshLayo
                         List<NewsIndex.DataBean> newsIndexData = newsIndex.getData();
                         adapter.clear();
                         adapter.addAll(newsIndexData);
-                    } else if (newsIndex.getStatus() == 2) {
+                    } else if (newsIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(GongGaoActivity.this);
                     } else {
                         showError(newsIndex.getInfo());

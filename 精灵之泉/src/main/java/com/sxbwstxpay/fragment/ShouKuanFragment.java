@@ -255,7 +255,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                                 intent.putExtra(Constant.INTENT_KEY.amount, amount);
                                 intent.setClass(getActivity(), XuanZeTDActivity.class);
                                 startActivity(intent);
-                            } else if (orderReceiptbefore.getStatus() == 2) {
+                            } else if (orderReceiptbefore.getStatus() == 3) {
                                 MyDialog.showReLoginDialog(getActivity());
                             } else {
                                 Toast.makeText(getActivity(), orderReceiptbefore.getInfo(), Toast.LENGTH_SHORT).show();

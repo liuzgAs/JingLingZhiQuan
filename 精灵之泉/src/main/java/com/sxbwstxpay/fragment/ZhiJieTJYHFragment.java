@@ -119,7 +119,7 @@ public class ZhiJieTJYHFragment extends ZjbBaseFragment implements View.OnClickL
                         text02.setText("人数：" + data1.get(1));
                         text03.setText("人数：" + data1.get(2));
                         text04.setText("人数：" + data1.get(3));
-                    } else if (userMyteam.getStatus() == 2) {
+                    } else if (userMyteam.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         Toast.makeText(getActivity(), userMyteam.getInfo(), Toast.LENGTH_SHORT).show();

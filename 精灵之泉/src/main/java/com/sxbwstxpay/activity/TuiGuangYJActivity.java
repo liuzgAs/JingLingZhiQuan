@@ -133,7 +133,7 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
                                 textDaiShouFY.setText("¥"+userIncomeMx.getAmount2());
                                 break;
                         }
-                    } else if (userIncomeMx.getStatus() == 2) {
+                    } else if (userIncomeMx.getStatus() == 3) {
                         MyDialog.showReLoginDialog(TuiGuangYJActivity.this);
                     } else {
                         Toast.makeText(TuiGuangYJActivity.this, userIncomeMx.getInfo(), Toast.LENGTH_SHORT).show();

@@ -406,7 +406,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                         adapter.clear();
                         List<BankCardlist.DataBean> bankCardlistData = bankCardlist.getData();
                         adapter.addAll(bankCardlistData);
-                    } else if (bankCardlist.getStatus() == 2) {
+                    } else if (bankCardlist.getStatus() == 3) {
                         MyDialog.showReLoginDialog(XuanZeXYKActivity.this);
                     } else {
                         showError(bankCardlist.getInfo());

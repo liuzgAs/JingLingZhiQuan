@@ -131,7 +131,7 @@ public class XiuGaiMMActivity extends ZjbBaseActivity implements View.OnClickLis
                             SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                             if (simpleInfo.getStatus() == 1) {
                                 ToLoginActivity.toLoginActivity(XiuGaiMMActivity.this);
-                            } else if (simpleInfo.getStatus() == 2) {
+                            } else if (simpleInfo.getStatus() == 3) {
                                 MyDialog.showReLoginDialog(XiuGaiMMActivity.this);
                             } else {
                             }

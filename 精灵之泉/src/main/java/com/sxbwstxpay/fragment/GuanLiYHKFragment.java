@@ -241,7 +241,7 @@ public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         adapter.clear();
                         List<BankCardlist.DataBean> bankCardlistData = bankCardlist.getData();
                         adapter.addAll(bankCardlistData);
-                    } else if (bankCardlist.getStatus() == 2) {
+                    } else if (bankCardlist.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         showError(bankCardlist.getInfo());
