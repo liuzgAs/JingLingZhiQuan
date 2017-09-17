@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="人数：0"
-                android:id="@+id/textView771"
+                android:id="@+id/text01"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/imageView461"
                 android:layout_toStartOf="@+id/imageView461" />
@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="人数：0"
-                android:id="@+id/textView772"
+                android:id="@+id/text02"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/imageView462"
                 android:layout_toStartOf="@+id/imageView462" />
@@ -166,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="人数：0"
-                android:id="@+id/textView7721"
+                android:id="@+id/text03"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/imageView4621"
                 android:layout_toStartOf="@+id/imageView4621" />

@@ -65,6 +65,8 @@ public class Constant {
         public static final String USER_PROFILE = "&g=App&m=User&a=profile";
         //我的费率
         public static final String USER_RATE = "&g=App&m=User&a=rate";
+        //我的商户
+        public static final String USER_MYTEAM = "&g=App&m=User&a=myTeam";
     }
 
     public static class PERMISSION {
