@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/welcome01"
-    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.HuanYingActivity">
+    tools:context=".activity.HuanYingActivity">
 
 </RelativeLayout>

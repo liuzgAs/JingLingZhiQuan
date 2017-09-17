@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.WoDeSYActivity">
+    tools:context=".activity.WoDeSYActivity">
 
     <include layout="@layout/view_bar" />
 
-    <hudongchuangxiang.com.jinglingzhiquan.customview.ResizableImageView
+    <com.sxbwstxpay.customview.ResizableImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@mipmap/wo_de_shou_yi_top" />

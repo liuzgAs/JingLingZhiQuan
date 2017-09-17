@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context="hudongchuangxiang.com.jinglingzhiquan.fragment.ShengQianFragment">
+    tools:context=".fragment.ShengQianFragment">
 
     <RelativeLayout
         android:id="@+id/relaTitleStatue"

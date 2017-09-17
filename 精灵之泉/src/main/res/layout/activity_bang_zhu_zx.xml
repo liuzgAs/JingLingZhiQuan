@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.BangZhuZXActivity">
+    tools:context=".activity.BangZhuZXActivity">
     <include layout="@layout/view_bar" />
 
     <com.jude.easyrecyclerview.EasyRecyclerView

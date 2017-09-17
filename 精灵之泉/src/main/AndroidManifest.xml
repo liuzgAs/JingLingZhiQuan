@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hudongchuangxiang.com.jinglingzhiquan">
+    package="com.sxbwstxpay">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -205,7 +205,8 @@
         <activity android:name=".activity.XinZengYHKActivity" />
         <activity android:name=".activity.XuanZeXYKActivity" />
         <activity android:name=".activity.SheZhiActivity" />
-        <activity android:name=".activity.GuanLiYHKActivity"></activity>
+        <activity android:name=".activity.GuanLiYHKActivity" />
+        <activity android:name=".activity.ShangHuLBActivity"></activity>
     </application>
 
 </manifest>

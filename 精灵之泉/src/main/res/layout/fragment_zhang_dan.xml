@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="hudongchuangxiang.com.jinglingzhiquan.fragment.ZhangDanFragment">
+    tools:context=".fragment.ZhangDanFragment">
 
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recyclerView"

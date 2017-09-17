@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context="hudongchuangxiang.com.jinglingzhiquan.activity.DengLuActivity">
+    tools:context=".activity.DengLuActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -57,7 +57,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp">
 
-        <hudongchuangxiang.com.jinglingzhiquan.customview.EditTextWithDel
+        <com.sxbwstxpay.customview.EditTextWithDel
             android:inputType="number"
             android:maxLength="11"
             android:singleLine="true"
@@ -107,7 +107,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp">
 
-        <hudongchuangxiang.com.jinglingzhiquan.customview.EditTextWithDel
+        <com.sxbwstxpay.customview.EditTextWithDel
             android:paddingRight="10dp"
             android:inputType="textPassword"
             android:maxLength="17"
