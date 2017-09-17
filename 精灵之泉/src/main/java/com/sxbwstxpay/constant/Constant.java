@@ -75,6 +75,8 @@ public class Constant {
         public static final String INDEX_VERSION = "&g=App&m=Index&a=version";
         //修改密码
         public static final String USER_PWDSAVE = "&g=App&m=User&a=pwdSave";
+        //启动广告页
+        public static final String INDEX_STARTAD = "&g=App&m=Index&a=startAd";
     }
 
     public static class PERMISSION {
