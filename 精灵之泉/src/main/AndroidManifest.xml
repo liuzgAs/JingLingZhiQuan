@@ -208,7 +208,8 @@
         <activity android:name=".activity.GuanLiYHKActivity" />
         <activity android:name=".activity.ShangHuLBActivity" />
         <activity android:name=".activity.ZhangHuAQActivity" />
-        <activity android:name=".activity.XiuGaiMMActivity"></activity>
+        <activity android:name=".activity.XiuGaiMMActivity" />
+        <activity android:name=".activity.WeiXinMPMaActivity"></activity>
     </application>
 
 </manifest>

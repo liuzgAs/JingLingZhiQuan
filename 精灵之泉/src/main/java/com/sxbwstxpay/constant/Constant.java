@@ -106,6 +106,7 @@ public class Constant {
         public static final String type = "type";
         public static final String id = "id";
         public static final String tongDaoId = "tongDaoId";
+        public static final String img = "img";
     }
 
     public static class REQUEST_RESULT_CODE {
@@ -116,6 +117,8 @@ public class Constant {
         public static final int IMG04 = 2021;
         public static final int IMG05 = 2022;
         public static final int XIN_YONG_KA = 2023;
+        public static final int IMAGE_HEAD = 2024;
+        public static final int IMAGE_WX = 2025;
     }
 
     public static class ACACHE {

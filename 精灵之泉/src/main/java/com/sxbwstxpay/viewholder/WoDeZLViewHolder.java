@@ -15,7 +15,10 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.DiZhiGLActivity;
+import com.sxbwstxpay.activity.WeiXinMPMaActivity;
+import com.sxbwstxpay.activity.WoDeZLActivity;
 import com.sxbwstxpay.base.ToLoginActivity;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.UserProfile;
 
 /**
@@ -31,6 +34,7 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
     private final TextView textArea;
     private final TextView textMobile;
     private final TextView textWx;
+    private UserProfile data;
 
     public WoDeZLViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -67,19 +71,39 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
                         .show();
             }
         });
+        $(R.id.viewTouXiang).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((WoDeZLActivity) getContext()).chooseHead();
+            }
+        });
+        $(R.id.viewWX).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(data.getWx())) {
+                    ((WoDeZLActivity) getContext()).chooseWX();
+                } else {
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), WeiXinMPMaActivity.class);
+                    intent.putExtra(Constant.INTENT_KEY.img, data.getWx());
+                    getContext().startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
     public void setData(UserProfile data) {
         super.setData(data);
+        this.data = data;
         Glide.with(getContext())
                 .load(data.getHeadImg())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageHeadImg);
-        if (TextUtils.isEmpty(data.getWx())){
+        if (TextUtils.isEmpty(data.getWx())) {
             textWx.setVisibility(View.VISIBLE);
             imageWx.setVisibility(View.GONE);
-        }else {
+        } else {
             imageWx.setVisibility(View.VISIBLE);
             textWx.setVisibility(View.GONE);
             Glide.with(getContext())

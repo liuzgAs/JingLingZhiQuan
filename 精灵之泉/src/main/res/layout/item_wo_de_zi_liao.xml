@@ -6,11 +6,12 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/viewTouXiang"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="@color/white">
+        android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
             android:id="@+id/textView97"
@@ -282,9 +283,10 @@
         android:background="@color/line_gray" />
 
     <RelativeLayout
+        android:id="@+id/viewWX"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white" >
+        android:background="@drawable/layout_selector_white_system_gray" >
 
         <ImageView
             android:id="@+id/imageView55"
