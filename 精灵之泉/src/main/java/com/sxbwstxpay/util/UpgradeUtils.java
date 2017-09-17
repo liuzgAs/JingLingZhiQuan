@@ -57,6 +57,7 @@ public class UpgradeUtils extends Activity {
 
     private static OkObject getOkObject(String url) {
         HashMap<String, String> params = new HashMap<>();
+        params.put("type","android");
         return new OkObject(params, url);
     }
 
