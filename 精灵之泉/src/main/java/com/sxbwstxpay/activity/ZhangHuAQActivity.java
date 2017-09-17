@@ -10,14 +10,14 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.util.ScreenUtils;
 
-public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListener {
+public class ZhangHuAQActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private View viewBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_she_zhi);
+        setContentView(R.layout.activity_zhang_hu_aq);
         init();
     }
 
@@ -38,7 +38,7 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("设置");
+        ((TextView) findViewById(R.id.textViewTitle)).setText("账户安全");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
@@ -47,7 +47,7 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
-        findViewById(R.id.viewZhangHuAQ).setOnClickListener(this);
+        findViewById(R.id.viewXiuGaiMM).setOnClickListener(this);
     }
 
     @Override
@@ -57,10 +57,10 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.viewZhangHuAQ:
-                Intent intent= new Intent();
-                intent.setClass(this,ZhangHuAQActivity.class);
+        Intent intent = new Intent();
+        switch (v.getId()){
+            case R.id.viewXiuGaiMM:
+                intent.setClass(this,XiuGaiMMActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageBack:

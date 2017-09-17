@@ -206,7 +206,9 @@
         <activity android:name=".activity.XuanZeXYKActivity" />
         <activity android:name=".activity.SheZhiActivity" />
         <activity android:name=".activity.GuanLiYHKActivity" />
-        <activity android:name=".activity.ShangHuLBActivity"></activity>
+        <activity android:name=".activity.ShangHuLBActivity" />
+        <activity android:name=".activity.ZhangHuAQActivity" />
+        <activity android:name=".activity.XiuGaiMMActivity"></activity>
     </application>
 
 </manifest>

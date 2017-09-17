@@ -9,9 +9,10 @@
     <include layout="@layout/view_bar" />
 
     <RelativeLayout
+        android:id="@+id/viewZhangHuAQ"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white" >
+        android:background="@drawable/layout_selector_white_system_gray" >
 
         <ImageView
             android:id="@+id/imageView57"
