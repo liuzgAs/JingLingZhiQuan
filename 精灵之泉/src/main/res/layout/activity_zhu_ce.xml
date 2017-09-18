@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".activity.ZhuCeActivity">
+    tools:context="com.jlzquan.www.activity.ZhuCeActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -49,7 +49,7 @@
         android:layout_marginTop="10dp"
         android:src="@mipmap/denglu_touxiang" />
 
-    <com.sxbwstxpay.customview.EditTextWithDel
+    <com.jlzquan.www.customview.EditTextWithDel
         android:inputType="number"
         android:maxLength="11"
         android:singleLine="true"
@@ -84,7 +84,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp">
 
-        <com.sxbwstxpay.customview.EditTextWithDel
+        <com.jlzquan.www.customview.EditTextWithDel
             android:paddingRight="10dp"
             android:inputType="number"
             android:maxLength="6"
@@ -126,7 +126,7 @@
         android:layout_marginRight="20dp"
         android:background="@color/basic_color" />
 
-    <com.sxbwstxpay.customview.EditTextWithDel
+    <com.jlzquan.www.customview.EditTextWithDel
         android:inputType="textPassword"
         android:maxLength="17"
         android:singleLine="true"
@@ -152,7 +152,7 @@
         android:layout_marginRight="20dp"
         android:background="@color/basic_color" />
 
-    <com.sxbwstxpay.customview.EditTextWithDel
+    <com.jlzquan.www.customview.EditTextWithDel
         android:inputType="textPassword"
         android:maxLength="17"
         android:singleLine="true"
@@ -178,7 +178,7 @@
         android:layout_marginRight="20dp"
         android:background="@color/basic_color" />
 
-    <com.sxbwstxpay.customview.EditTextWithDel
+    <com.jlzquan.www.customview.EditTextWithDel
         android:inputType="number"
         android:maxLength="11"
         android:singleLine="true"

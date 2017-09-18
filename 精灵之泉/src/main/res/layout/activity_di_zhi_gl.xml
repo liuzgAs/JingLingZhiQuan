@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".activity.DiZhiGLActivity">
+    tools:context="com.jlzquan.www.activity.DiZhiGLActivity">
 
     <include
         android:id="@+id/include"

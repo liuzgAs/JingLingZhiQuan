@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
-    tools:context=".activity.ShangHuLBActivity">
+    tools:context="com.jlzquan.www.activity.ShangHuLBActivity">
 
     <include layout="@layout/view_bar" />
 

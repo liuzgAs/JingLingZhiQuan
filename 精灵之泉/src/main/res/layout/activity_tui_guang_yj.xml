@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".activity.TuiGuangYJActivity">
+    tools:context="com.jlzquan.www.activity.TuiGuangYJActivity">
 
     <include layout="@layout/view_bar" />
 
