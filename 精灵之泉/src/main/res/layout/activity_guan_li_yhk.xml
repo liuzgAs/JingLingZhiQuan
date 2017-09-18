@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
-    tools:context="com.jlzquan.www.activity.GuanLiYHKActivity">
+    tools:context="com.sxbwstxpay.activity.GuanLiYHKActivity">
     <include layout="@layout/view_bar" />
     <android.support.design.widget.TabLayout
         android:background="@color/white"

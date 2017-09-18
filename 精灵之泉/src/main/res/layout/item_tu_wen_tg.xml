@@ -23,7 +23,7 @@
         android:text="真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮真皮"
         android:textSize="@dimen/normal_textsize" />
 
-    <com.jlzquan.www.customview.GridView4ScrollView
+    <com.sxbwstxpay.customview.GridView4ScrollView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

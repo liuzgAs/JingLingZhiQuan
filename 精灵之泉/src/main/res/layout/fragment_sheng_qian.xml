@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context="com.jlzquan.www.fragment.ShengQianFragment">
+    tools:context="com.sxbwstxpay.fragment.ShengQianFragment">
 
     <RelativeLayout
         android:id="@+id/relaTitleStatue"

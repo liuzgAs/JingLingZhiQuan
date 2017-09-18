@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context="com.jlzquan.www.activity.XinZengYHKActivity">
+    tools:context="com.sxbwstxpay.activity.XinZengYHKActivity">
 
     <include layout="@layout/view_bar" />
 
