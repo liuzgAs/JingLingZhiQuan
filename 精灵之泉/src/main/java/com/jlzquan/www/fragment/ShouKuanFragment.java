@@ -28,7 +28,9 @@ import com.jlzquan.www.util.LogUtil;
 import com.jlzquan.www.util.ScreenUtils;
 import com.jlzquan.www.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Response;
 
@@ -206,6 +208,46 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 viewTabBg.setBackgroundResource(R.mipmap.youbian);
                 break;
             case R.id.buttonShouKuan:
+                if (amount.contains(".")) {
+                    if (amount.length() >= 4) {
+                        String amountSub;
+                        LogUtil.LogShitou("ShouKuanFragment--onClick1", ""+amount.substring(amount.length()-1));
+                        LogUtil.LogShitou("ShouKuanFragment--onClick2", ""+amount.substring(amount.length()-2));
+                        if (TextUtils.equals(amount.substring(amount.length()-2),"00")){
+                            amountSub = amount.substring(amount.length() - 6,amount.length() - 1);
+                        }else if (TextUtils.equals(amount.substring(amount.length()-1),"0")){
+                            amountSub = amount.substring(amount.length() - 5,amount.length() - 2);
+                        }else {
+                            amountSub = amount.substring(amount.length() - 4);
+                        }
+                        LogUtil.LogShitou("ShouKuanFragment--amountsubstring", "" + amountSub);
+                        String[] split = amountSub.split("");
+                        List<String> list = new ArrayList<>();
+                        for (int i = 0; i < split.length; i++) {
+                            if (!TextUtils.equals(".",split[i])){
+                                list.add(split[i]);
+                            }
+                        }
+                        if (Integer.parseInt(list.get(1)) == Integer.parseInt(list.get(2))
+                                && Integer.parseInt(list.get(1)) == Integer.parseInt(list.get(3))
+                                && Integer.parseInt(list.get(2)) == Integer.parseInt(list.get(3))) {
+                            Toast.makeText(getActivity(), "后三位数不能相同", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                } else {
+                    if (amount.length() >= 3) {
+                        String amountSub = amount.substring(amount.length() - 3);
+                        LogUtil.LogShitou("ShouKuanFragment--amountsubstring", "" + amountSub);
+                        String[] split = amountSub.split("");
+                        if (Integer.parseInt(split[1]) == Integer.parseInt(split[2])
+                                && Integer.parseInt(split[1]) == Integer.parseInt(split[3])
+                                && Integer.parseInt(split[2]) == Integer.parseInt(split[3])) {
+                            Toast.makeText(getActivity(), "后三位数不能相同", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                }
                 showLoadingDialog();
                 ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                     @Override
@@ -218,21 +260,21 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                                 switch (type) {
                                     case 1:
                                         if (orderReceiptbefore.getRealStatus() == 0) {
-                                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getRealTips());
+                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getRealTips());
                                             return;
                                         } else {
                                             break;
                                         }
                                     case 2:
                                         if (orderReceiptbefore.getAlipayStatus() == 0) {
-                                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getAlipayTips());
+                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getAlipayTips());
                                             return;
                                         } else {
                                             break;
                                         }
                                     case 3:
                                         if (orderReceiptbefore.getWechatStatus() == 0) {
-                                            MyDialog.showTipDialog(getActivity(),orderReceiptbefore.getWechatTips());
+                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getWechatTips());
                                             return;
                                         } else {
                                             break;
@@ -247,7 +289,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                                         amount = amount.substring(0, amount.length() - 1);
                                     }
                                 }
-                                if (Double.parseDouble(amount)>1000000){
+                                if (Double.parseDouble(amount) > 1000000) {
                                     Toast.makeText(getActivity(), "最大金额不能超过100万", Toast.LENGTH_SHORT).show();
                                     return;
                                 }

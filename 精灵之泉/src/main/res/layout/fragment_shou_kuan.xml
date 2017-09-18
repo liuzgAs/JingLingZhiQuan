@@ -1,9 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:orientation="vertical"
     tools:context="com.jlzquan.www.fragment.ShengQianFragment">
 
     <RelativeLayout
@@ -47,100 +46,11 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/viewTabBg"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@mipmap/zuobian"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp">
-
-        <RelativeLayout
-            android:id="@+id/viewYinLian"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@mipmap/yinlian" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView"
-                android:layout_centerHorizontal="true"
-                android:text="银联支付"
-                android:textColor="@color/white"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/viewZhiFuBao"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@mipmap/zhifubao" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView2"
-                android:layout_centerHorizontal="true"
-                android:text="支付宝支付"
-                android:textColor="@color/white"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/viewWeiXin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@mipmap/weixin" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView3"
-                android:layout_centerHorizontal="true"
-                android:text="微信支付"
-                android:textColor="@color/white"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/viewShouKuan"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewTabBg">
 
         <TextView
             android:id="@+id/textView4"
@@ -343,11 +253,106 @@
     </LinearLayout>
 
     <ImageView
+        android:layout_below="@+id/viewTabBg"
+        android:layout_marginTop="-10dp"
+        android:visibility="gone"
         android:src="@mipmap/bunengzhifu"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imageBuShouKuan" />
+        android:id="@+id/imageBuShouKuan"
+         />
+
+    <LinearLayout
+        android:layout_below="@+id/relaTitleStatue"
+        android:id="@+id/viewTabBg"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@mipmap/zuobian"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <RelativeLayout
+            android:id="@+id/viewYinLian"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/yinlian" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                android:text="银联支付"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_textsize" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/viewZhiFuBao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/zhifubao" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView2"
+                android:layout_centerHorizontal="true"
+                android:text="支付宝支付"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_textsize" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/viewWeiXin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/weixin" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView3"
+                android:layout_centerHorizontal="true"
+                android:text="微信支付"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_textsize" />
+        </RelativeLayout>
+    </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
