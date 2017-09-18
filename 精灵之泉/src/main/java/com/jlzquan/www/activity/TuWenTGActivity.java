@@ -1,5 +1,6 @@
 package com.jlzquan.www.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.jlzquan.www.viewholder.TuWenTGViewHolder;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +69,9 @@ public class TuWenTGActivity extends ZjbBaseActivity implements SwipeRefreshLayo
 
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.diver), 0, 0);
+        itemDecoration.setDrawLastItem(false);
+        recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<ShareShareDay.ListDataBean>(TuWenTGActivity.this) {
             @Override
