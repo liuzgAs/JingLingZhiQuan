@@ -1,5 +1,7 @@
 package com.sxbwstxpay.viewholder;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
@@ -12,10 +14,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jlzquan.www.R;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.customview.GridView4ScrollView;
 import com.sxbwstxpay.model.ShareShareDay;
 import com.sxbwstxpay.util.SDFileHelper;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -46,6 +48,14 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
                     helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getShare_images().get(i));
                 }
                 Toast.makeText(getContext(), "已保存到本地相册", Toast.LENGTH_SHORT).show();
+            }
+        });
+        textShare_contents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager cmb = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                cmb.setText(textShare_contents.getText().toString().trim()); //将内容放入粘贴管理器,在别的地方长按选择"粘贴"即可
+                Toast.makeText(getContext(), "复制文本成功", Toast.LENGTH_SHORT).show();
             }
         });
     }
