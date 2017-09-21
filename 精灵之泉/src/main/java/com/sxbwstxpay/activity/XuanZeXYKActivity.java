@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jlzquan.www.R;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -21,13 +22,6 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import com.jlzquan.www.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
@@ -40,6 +34,12 @@ import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.XuanZeXYKViewHolder;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
 import okhttp3.Response;
 
 public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -333,6 +333,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                 String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
                 HashMap<String, String> params = new HashMap<>();
                 params.put("userName", phone);
+                params.put("type", "3");
                 return new OkObject(params, url);
             }
 

@@ -1,10 +1,15 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,6 +23,7 @@ import com.sxbwstxpay.fragment.ShengQianFragment;
 import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
+import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.util.BackHandlerHelper;
 import com.sxbwstxpay.util.UpgradeUtils;
 
@@ -39,6 +45,19 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.selector_mine_item
     };
     public FragmentTabHost mTabHost;
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (TextUtils.equals(action, Constant.BROADCASTCODE.EXTRAMAP)) {
+                ExtraMap extraMap = (ExtraMap) intent.getSerializableExtra(Constant.INTENT_KEY.EXTRAMAP);
+                try {
+                    action(extraMap);
+                } catch (Exception e) {
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             // Translucent status bar
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+        Constant.MainActivityAlive = 1;
         //禁止横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //检查更新
@@ -77,5 +97,51 @@ public class MainActivity extends AppCompatActivity {
         if (!BackHandlerHelper.handleBackPress(this)) {
             super.onBackPressed();
         }
+    }
+
+    private void action(ExtraMap extramap) {
+        if (extramap != null) {
+            Intent intent = new Intent();
+            switch (extramap.getCode()) {
+                case "app_pay":
+                    mTabHost.setCurrentTab(2);
+                    break;
+                case "app_user":
+                    mTabHost.setCurrentTab(4);
+                    break;
+                case "app_account":
+                    intent.setClass(this, WoDeZDActivity.class);
+                    startActivity(intent);
+                    break;
+                case "app_vip":
+                    intent.setClass(this, TuiGuangActivity.class);
+                    startActivity(intent);
+                    break;
+                case "web":
+                    if (!TextUtils.isEmpty(extramap.getUrl())) {
+                        Intent intent1 = new Intent();
+                        intent1.setClass(MainActivity.this, WebActivity.class);
+                        intent1.putExtra(Constant.INTENT_KEY.TITLE, extramap.getTitle());
+                        intent1.putExtra(Constant.INTENT_KEY.URL, extramap.getUrl()+"&uid="+extramap.getUid());
+                        startActivity(intent1);
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.EXTRAMAP);
+        registerReceiver(receiver, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Constant.MainActivityAlive = 0;
+        unregisterReceiver(receiver);
     }
 }

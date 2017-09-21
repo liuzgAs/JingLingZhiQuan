@@ -18,6 +18,7 @@ public class WeiXinMPMaActivity extends ZjbBaseActivity {
     private ImageView imageEWM;
     private View viewBar;
     private String img;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class WeiXinMPMaActivity extends ZjbBaseActivity {
     @Override
     protected void initIntent() {
         Intent intent = getIntent();
+        title = intent.getStringExtra(Constant.INTENT_KEY.TITLE);
         img = intent.getStringExtra(Constant.INTENT_KEY.img);
     }
 
@@ -45,10 +47,13 @@ public class WeiXinMPMaActivity extends ZjbBaseActivity {
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("我的微信名片");
+        ((TextView) findViewById(R.id.textViewTitle)).setText(title);
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
+        ViewGroup.LayoutParams layoutParams1 = imageEWM.getLayoutParams();
+        layoutParams1.width = (int) (ScreenUtils.getScreenWidth(this)*0.6f);
+        layoutParams1.height = (int) (ScreenUtils.getScreenWidth(this)*0.6f);
         Glide.with(WeiXinMPMaActivity.this)
                 .load(img)
                 .placeholder(R.mipmap.ic_empty)

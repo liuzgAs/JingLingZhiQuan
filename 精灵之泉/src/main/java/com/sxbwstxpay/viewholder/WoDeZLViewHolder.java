@@ -87,6 +87,7 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
                     Intent intent = new Intent();
                     intent.setClass(getContext(), WeiXinMPMaActivity.class);
                     intent.putExtra(Constant.INTENT_KEY.img, data.getWx());
+                    intent.putExtra(Constant.INTENT_KEY.TITLE,"我的微信名片");
                     getContext().startActivity(intent);
                 }
             }

@@ -20,16 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.jlzquan.www.R;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import com.jlzquan.www.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -45,6 +40,11 @@ import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.PicassoImageLoader;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import okhttp3.Response;
 
 /**
@@ -658,6 +658,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", mPhone_sms);
+        params.put("type", "0");
         return new OkObject(params, url);
     }
 

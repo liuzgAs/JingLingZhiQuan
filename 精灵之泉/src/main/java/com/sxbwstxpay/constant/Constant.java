@@ -9,10 +9,9 @@ import com.sxbwstxpay.util.AppUtil;
 public class Constant {
     //    public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
     public static String HOST = "http://api.jlzquan.com/index.php?key=" + AppUtil.getMD5Time();
-
+    public static int MainActivityAlive = 0;
     public static int changeControl = 2017;//判断数据是否有改变
     public static String WXAPPID = "wxfef0031f5d8f3ed0";//微信appid
-//    public static String WXAPPID = "wxc8de00b44284664f";//微信appid
     public static String WXSCRENT = "02d7e0ca570f95630b552bd055fdd14a";//微信scrent
     public static String QQ_ID = "1106239952";//qq
     public static String QQ_KEY = "HcA9s2rpKkLO2M5w";//qq
@@ -31,6 +30,12 @@ public class Constant {
         public static final String INFO_CREDIT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=credit";
         //了解VIP推广商
         public static final String WEB_VIP = "http://api.jlzquan.com/index.php?g=App&m=Web&a=vip";
+        //用户使用协议
+        public static final String INFO_POLICY3 = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=policy3";
+        //功能介绍
+        public static final String INFO_FEATURES = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=Features";
+        //投诉
+        public static final String INFO_COMPLAINT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=complaint";
         //登录
         public static final String LOGIN_INDEX = "&g=App&m=Login&a=index";
         //注册验证码
@@ -61,8 +66,6 @@ public class Constant {
         public static final String BANK_CARDADD = "&g=App&m=Bank&a=cardAdd";
         //代收代付提交
         public static final String ORDER_NEWORDER = "&g=App&m=Order&a=neworder";
-        //赚钱
-        public static final String INDEX_MAKEMONEY = "&g=App&m=Index&a=makeMoney";
         //会员我的分润
         public static final String USER_INCOME1 = "&g=App&m=User&a=income1";
         //会员推广佣金
@@ -105,6 +108,14 @@ public class Constant {
         public static final String ORDER_VIPPAY = "&g=App&m=Order&a=vipPay";
         //图文推广
         public static final String SHARE_SHARE_DAY = "&g=App&m=Share&a=share_day";
+        //微信待收
+        public static final String ORDER_WXPAY = "&g=App&m=Order&a=wxPay";
+        //支付宝代收
+        public static final String ORDER_ALIPAY = "&g=App&m=Order&a=aliPay";
+        //省钱
+        public static final String INDEX_MONEY = "&g=App&m=Index&a=money";
+        //赚钱
+        public static final String INDEX_MAKEMONEY = "&g=App&m=Index&a=makeMoney";
     }
 
     public static class PERMISSION {
@@ -137,6 +148,7 @@ public class Constant {
         public static final String img = "img";
         public static final String value = "value";
         public static final String URL = "URL";
+        public static final String EXTRAMAP = "ExtraMap";
     }
 
     public static class REQUEST_RESULT_CODE {
@@ -166,6 +178,7 @@ public class Constant {
         public static final String WX_SHARE = "wxShare";
         public static final String WX_LOGIN_FAIL = "wxLoginFail";
         public static final String WX_SHARE_FAIL = "wxShareFail";
+        public static final String EXTRAMAP = "extramap";
     }
 
 }

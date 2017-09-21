@@ -1,19 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewLinear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:orientation="vertical"
     tools:context="com.sxbwstxpay.fragment.ShengQianFragment">
+
+    <com.sxbwstxpay.customview.ResizableImageView
+        android:src="@mipmap/zhuan_qian_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewImg" />
 
     <RelativeLayout
         android:id="@+id/relaTitleStatue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/bar_bg"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -40,12 +44,7 @@
         android:layout_height="match_parent"
         app:layout_empty="@layout/view_empty"
         app:layout_progress="@layout/view_progress"
-        app:scrollbarStyle="insideOverlay" />
+        app:scrollbarStyle="insideOverlay"
+        android:layout_below="@+id/viewImg" />
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="2dp" />
-
-</LinearLayout>
+</RelativeLayout>

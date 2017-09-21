@@ -12,7 +12,6 @@ import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.util.DataCleanManager;
 import com.sxbwstxpay.util.ScreenUtils;
-import com.sxbwstxpay.util.UpgradeUtils;
 import com.sxbwstxpay.util.VersionUtils;
 
 public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListener {
@@ -52,7 +51,7 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
         textHuanCun.setText(getSize());
-        textBanben.setText("V"+VersionUtils.getCurrVersionName(this));
+        textBanben.setText("v"+VersionUtils.getCurrVersionName(this));
     }
 
     @Override
@@ -85,8 +84,8 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.viewBanBen:
-                //检查更新
-                UpgradeUtils.checkUpgrade(SheZhiActivity.this, Constant.HOST + Constant.Url.INDEX_VERSION);
+                intent.setClass(this,DangQianBBActivity.class);
+                startActivity(intent);
                 break;
             case R.id.viewZhangHuAQ:
                 intent.setClass(this, ZhangHuAQActivity.class);

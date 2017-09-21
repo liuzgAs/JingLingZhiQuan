@@ -120,7 +120,7 @@ public class ShengQianFragment extends ZjbBaseFragment {
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObject() {
-        String url = Constant.HOST + Constant.Url.INDEX_MAKEMONEY;
+        String url = Constant.HOST + Constant.Url.INDEX_MONEY;
         HashMap<String, String> params = new HashMap<>();
         return new OkObject(params, url);
     }

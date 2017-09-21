@@ -16,12 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jlzquan.www.R;
+import com.sxbwstxpay.activity.WeiXinMPMaActivity;
 import com.sxbwstxpay.activity.XuanZeTDActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.OrderReceiptbefore;
+import com.sxbwstxpay.model.OrderWxPay;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
@@ -191,20 +193,20 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 break;
             case R.id.viewYinLian:
                 type = 1;
-                imageBuShouKuan.setVisibility(View.GONE);
-                viewShouKuan.setVisibility(View.VISIBLE);
+//                imageBuShouKuan.setVisibility(View.GONE);
+//                viewShouKuan.setVisibility(View.VISIBLE);
                 viewTabBg.setBackgroundResource(R.mipmap.zuobian);
                 break;
             case R.id.viewZhiFuBao:
                 type = 2;
-                imageBuShouKuan.setVisibility(View.VISIBLE);
-                viewShouKuan.setVisibility(View.GONE);
+//                imageBuShouKuan.setVisibility(View.VISIBLE);
+//                viewShouKuan.setVisibility(View.GONE);
                 viewTabBg.setBackgroundResource(R.mipmap.zhongjian);
                 break;
             case R.id.viewWeiXin:
                 type = 3;
-                imageBuShouKuan.setVisibility(View.VISIBLE);
-                viewShouKuan.setVisibility(View.GONE);
+//                imageBuShouKuan.setVisibility(View.VISIBLE);
+//                viewShouKuan.setVisibility(View.GONE);
                 viewTabBg.setBackgroundResource(R.mipmap.youbian);
                 break;
             case R.id.buttonShouKuan:
@@ -257,29 +259,6 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                         try {
                             orderReceiptbefore = GsonUtils.parseJSON(s, OrderReceiptbefore.class);
                             if (orderReceiptbefore.getStatus() == 1) {
-                                switch (type) {
-                                    case 1:
-                                        if (orderReceiptbefore.getRealStatus() == 0) {
-                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getRealTips());
-                                            return;
-                                        } else {
-                                            break;
-                                        }
-                                    case 2:
-                                        if (orderReceiptbefore.getAlipayStatus() == 0) {
-                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getAlipayTips());
-                                            return;
-                                        } else {
-                                            break;
-                                        }
-                                    case 3:
-                                        if (orderReceiptbefore.getWechatStatus() == 0) {
-                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getWechatTips());
-                                            return;
-                                        } else {
-                                            break;
-                                        }
-                                }
                                 if (amount.length() == 0) {
                                     Toast.makeText(getContext(), "请输入金额", Toast.LENGTH_SHORT).show();
                                     return;
@@ -293,10 +272,35 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                                     Toast.makeText(getActivity(), "最大金额不能超过100万", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                                Intent intent = new Intent();
-                                intent.putExtra(Constant.INTENT_KEY.amount, amount);
-                                intent.setClass(getActivity(), XuanZeTDActivity.class);
-                                startActivity(intent);
+                                switch (type) {
+                                    case 1:
+                                        if (orderReceiptbefore.getRealStatus() == 0) {
+                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getRealTips());
+                                            return;
+                                        } else {
+                                            Intent intent = new Intent();
+                                            intent.putExtra(Constant.INTENT_KEY.amount, amount);
+                                            intent.setClass(getActivity(), XuanZeTDActivity.class);
+                                            startActivity(intent);
+                                            break;
+                                        }
+                                    case 2:
+                                        if (orderReceiptbefore.getAlipayStatus() == 0) {
+                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getAlipayTips());
+                                            return;
+                                        } else {
+                                            toZhiFuBaoSK();
+                                            break;
+                                        }
+                                    case 3:
+                                        if (orderReceiptbefore.getWechatStatus() == 0) {
+                                            MyDialog.showTipDialog(getActivity(), orderReceiptbefore.getWechatTips());
+                                            return;
+                                        } else {
+                                            toWXShouKuan();
+                                            break;
+                                        }
+                                }
                             } else if (orderReceiptbefore.getStatus() == 3) {
                                 MyDialog.showReLoginDialog(getActivity());
                             } else {
@@ -305,6 +309,99 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                         } catch (Exception e) {
                             Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                         }
+                    }
+
+                    /**
+                     * des： 网络请求参数
+                     * author： ZhangJieBo
+                     * date： 2017/8/28 0028 上午 9:55
+                     */
+                    private OkObject getOkObjectZFB() {
+                        String url = Constant.HOST + Constant.Url.ORDER_ALIPAY;
+                        HashMap<String, String> params = new HashMap<>();
+                        params.put("uid",userInfo.getUid());
+                        params.put("tokenTime",tokenTime);
+                        return new OkObject(params, url);
+                    }
+
+                    private void toZhiFuBaoSK() {
+                        showLoadingDialog();
+                        ApiClient.post(getActivity(), getOkObjectZFB(), new ApiClient.CallBack() {
+                            @Override
+                            public void onSuccess(String s) {
+                                cancelLoadingDialog();
+                                LogUtil.LogShitou("ShouKuanFragment--支付宝代收", s+"");
+                                try {
+                                    OrderWxPay orderWxPay = GsonUtils.parseJSON(s, OrderWxPay.class);
+                                    if (orderWxPay.getStatus()==1){
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), WeiXinMPMaActivity.class);
+                                        intent.putExtra(Constant.INTENT_KEY.TITLE,"支付宝代收");
+                                        intent.putExtra(Constant.INTENT_KEY.img, orderWxPay.getImg());
+                                        startActivity(intent);
+                                    }else if (orderWxPay.getStatus()==2){
+                                        MyDialog.showReLoginDialog(getActivity());
+                                    }else {
+                                        Toast.makeText(getActivity(), orderWxPay.getInfo(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        
+                            @Override
+                            public void onError(Response response) {
+                                cancelLoadingDialog();
+                                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    /**
+                     * des： 网络请求参数
+                     * author： ZhangJieBo
+                     * date： 2017/8/28 0028 上午 9:55
+                     */
+                    private OkObject getOkObjectWX() {
+                        String url = Constant.HOST + Constant.Url.ORDER_WXPAY;
+                        HashMap<String, String> params = new HashMap<>();
+                        params.put("uid",userInfo.getUid());
+                        params.put("tokenTime",tokenTime);
+                        params.put("orderAmount",amount);
+                        return new OkObject(params, url);
+                    }
+
+                    private void toWXShouKuan() {
+                        showLoadingDialog();
+                        ApiClient.post(getActivity(), getOkObjectWX(), new ApiClient.CallBack() {
+                            @Override
+                            public void onSuccess(String s) {
+                                cancelLoadingDialog();
+                                LogUtil.LogShitou("ShouKuanFragment--微信代收", "");
+                                try {
+                                    OrderWxPay orderWxPay = GsonUtils.parseJSON(s, OrderWxPay.class);
+                                    if (orderWxPay.getStatus()==1){
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), WeiXinMPMaActivity.class);
+                                        intent.putExtra(Constant.INTENT_KEY.TITLE,"微信代收");
+                                        intent.putExtra(Constant.INTENT_KEY.img, orderWxPay.getImg());
+                                        startActivity(intent);
+                                    }else if (orderWxPay.getStatus()==2){
+                                        MyDialog.showReLoginDialog(getActivity());
+                                    }else {
+                                        Toast.makeText(getActivity(), orderWxPay.getInfo(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Response response) {
+                                cancelLoadingDialog();
+                                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                     @Override

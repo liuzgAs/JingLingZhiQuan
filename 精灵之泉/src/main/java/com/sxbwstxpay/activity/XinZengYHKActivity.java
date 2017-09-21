@@ -11,9 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.List;
-
 import com.jlzquan.www.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
@@ -27,6 +24,10 @@ import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.util.StringUtil;
+
+import java.util.HashMap;
+import java.util.List;
+
 import okhttp3.Response;
 
 public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickListener {
@@ -235,6 +236,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
         String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", mPhone_sms);
+        params.put("type", type+"");
         return new OkObject(params, url);
     }
 
