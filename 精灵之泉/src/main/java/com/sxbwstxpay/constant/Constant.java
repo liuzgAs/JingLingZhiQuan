@@ -116,6 +116,8 @@ public class Constant {
         public static final String INDEX_MONEY = "&g=App&m=Index&a=money";
         //赚钱
         public static final String INDEX_MAKEMONEY = "&g=App&m=Index&a=makeMoney";
+        //注销
+        public static final String LOGIN_LOGOUT = "&g=App&m=Login&a=logOut";
     }
 
     public static class PERMISSION {

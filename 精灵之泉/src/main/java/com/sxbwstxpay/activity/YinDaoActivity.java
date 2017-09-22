@@ -19,6 +19,7 @@ public class YinDaoActivity extends FragmentActivity {
     private ViewPager mMyPager;
     private PageIndicatorView mPageIndicatorView;
     private int[] imgs = new int[]{
+            R.mipmap.welcome01,
             R.mipmap.welcome02,
             R.mipmap.welcome03,
             R.mipmap.welcome04,

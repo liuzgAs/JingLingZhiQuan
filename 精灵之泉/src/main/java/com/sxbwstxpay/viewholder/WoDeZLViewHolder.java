@@ -9,18 +9,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-
 import com.jlzquan.www.R;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.activity.DiZhiGLActivity;
 import com.sxbwstxpay.activity.EditActivity;
 import com.sxbwstxpay.activity.WeiXinMPMaActivity;
 import com.sxbwstxpay.activity.WoDeZLActivity;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ToLoginActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.model.UserProfile;
+import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
+
+import java.util.HashMap;
+
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -63,9 +73,48 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
                         .setMessage("确定要退出吗？")
                         .setNegativeButton("取消", null)
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            /**
+                             * des： 网络请求参数
+                             * author： ZhangJieBo
+                             * date： 2017/8/28 0028 上午 9:55
+                             */
+                            private OkObject getOkObject() {
+                                String url = Constant.HOST + Constant.Url.LOGIN_LOGOUT;
+                                HashMap<String, String> params = new HashMap<>();
+                                params.put("uid",((WoDeZLActivity)getContext()).userInfo.getUid());
+                                params.put("tokenTime",((WoDeZLActivity)getContext()).tokenTime);
+                                return new OkObject(params, url);
+                            }
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ToLoginActivity.toLoginActivity(getContext());
+                                ((WoDeZLActivity)getContext()).showLoadingDialog();
+                                ApiClient.post(getContext(), getOkObject(), new ApiClient.CallBack() {
+                                    @Override
+                                    public void onSuccess(String s) {
+                                        ((WoDeZLActivity)getContext()).cancelLoadingDialog();
+                                        LogUtil.LogShitou("WoDeZLViewHolder--注销", s+"");
+                                        try {
+                                            ToLoginActivity.toLoginActivity(getContext());
+                                            SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                                            if (simpleInfo.getStatus()==1){
+                                            }else if (simpleInfo.getStatus()==2){
+                                                MyDialog.showReLoginDialog(getContext());
+                                            }else {
+                                                Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        } catch (Exception e) {
+                                            ToLoginActivity.toLoginActivity(getContext());
+                                            Toast.makeText(getContext(),"数据出错", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Response response) {
+                                        ((WoDeZLActivity)getContext()).cancelLoadingDialog();
+                                        ToLoginActivity.toLoginActivity(getContext());
+                                        Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         })
                         .create()
