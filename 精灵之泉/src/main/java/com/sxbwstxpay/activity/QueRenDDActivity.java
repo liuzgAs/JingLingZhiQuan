@@ -47,7 +47,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("产品详情");
+        ((TextView) findViewById(R.id.textViewTitle)).setText("确认订单");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
@@ -57,6 +57,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
+        findViewById(R.id.buttonTiJiao).setOnClickListener(this);
     }
 
     @Override
@@ -119,7 +120,12 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.buttonTiJiao:
+                intent.setClass(this,ZhiFuActivity.class);
+                startActivity(intent);
+                break;
             case R.id.imageBack:
                 finish();
                 break;

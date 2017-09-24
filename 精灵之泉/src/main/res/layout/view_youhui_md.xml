@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/viewJinE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/marginTop"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingTop="50dp">
+
+        <TextView
+            android:id="@+id/textView394"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:text="¥"
+            android:textColor="@color/light_black"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text="658"
+            android:id="@+id/textJinE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView394"
+            android:layout_toRightOf="@+id/textView394"
+            android:textColor="@color/light_black"
+            android:textSize="50dp"
+             />
+    </RelativeLayout>
+
+    <TextView
+        android:text="本单可赚40元"
+        android:id="@+id/textDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/normal_textsize" />
+
+    <TextView
+        android:id="@+id/textView397"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:text="支付方式"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/litterText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/background" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/imageView147"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitStart"
+                    android:src="@mipmap/zhifu_zhifubao" />
+
+                <TextView
+                    android:id="@+id/textView401"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/imageView147"
+                    android:layout_toRightOf="@+id/imageView147"
+                    android:text="支付宝"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView398"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_width"
+                android:layout_marginLeft="10dp"
+                android:background="@color/background" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/imageView148"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitStart"
+                    android:src="@mipmap/zhifu_weixin" />
+
+                <TextView
+                    android:id="@+id/textView402"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/imageView148"
+                    android:layout_toRightOf="@+id/imageView148"
+                    android:text="微信支付"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/buttonZhiFu"
+            style="@style/MyButton"
+            android:layout_gravity="center_horizontal"
+            android:text="确认支付" />
+    </LinearLayout>
+
+</LinearLayout>

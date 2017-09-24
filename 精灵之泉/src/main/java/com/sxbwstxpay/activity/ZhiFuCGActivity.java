@@ -2,16 +2,11 @@ package com.sxbwstxpay.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jlzquan.www.R;
@@ -22,22 +17,21 @@ import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.provider.DataProvider;
 import com.sxbwstxpay.util.DpUtils;
-import com.sxbwstxpay.util.RecycleViewDistancaUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.ChanPinXQViewHolder;
 
-public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+
     private View viewBar;
     private EasyRecyclerView recyclerView;
+    private TextView textViewTitle;
     private RecyclerArrayAdapter<Integer> adapter;
     private int page = 1;
-    private TextView textViewTitle;
-    private int viewBarHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chan_pin_xq);
+        setContentView(R.layout.activity_zhi_fu_cg);
         init();
     }
 
@@ -53,26 +47,22 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
 
     @Override
     protected void findID() {
-        viewBar = findViewById(R.id.viewBar);
+        viewBar = findViewById(R.id.include2);
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
     }
 
     @Override
     protected void initViews() {
-        textViewTitle.setText("产品详情");
+        textViewTitle.setText("支付成功");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
-        viewBarHeight = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
-        layoutParams.height = viewBarHeight;
+        layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
-        viewBar.getBackground().mutate().setAlpha(0);
-        textViewTitle.setAlpha(0);
         initRecycle();
     }
 
     @Override
     protected void setListeners() {
-        findViewById(R.id.viewGouWuChe).setOnClickListener(this);
         findViewById(R.id.imageBack).setOnClickListener(this);
     }
 
@@ -103,27 +93,10 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
-            private ListView listView;
-            private TabLayout tablayout;
-
             @Override
             public View onCreateView(ViewGroup parent) {
-                View header_xhan_pin_xq = LayoutInflater.from(ChanPinXQActivity.this).inflate(R.layout.header_xhan_pin_xq, null);
-                tablayout = (TabLayout) header_xhan_pin_xq.findViewById(R.id.tablayout);
-                for (int i = 0; i < 2; i++) {
-                    View item_tablayout = LayoutInflater.from(ChanPinXQActivity.this).inflate(R.layout.item_tablayout, null);
-                    TextView textTitle = (TextView) item_tablayout.findViewById(R.id.textTitle);
-                    if (i == 1) {
-                        textTitle.setText("宝贝详情");
-                        tablayout.addTab(tablayout.newTab().setCustomView(item_tablayout));
-                    } else {
-                        textTitle.setText("规格参数");
-                        tablayout.addTab(tablayout.newTab().setCustomView(item_tablayout));
-                    }
-                }
-                listView = (ListView) header_xhan_pin_xq.findViewById(R.id.listView);
-                listView.setAdapter(new MyAdapter());
-                return header_xhan_pin_xq;
+                View header_zhi_fu_cg = LayoutInflater.from(ZhiFuCGActivity.this).inflate(R.layout.header_zhi_fu_cg, null);
+                return header_zhi_fu_cg;
             }
 
             @Override
@@ -131,41 +104,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
 
             }
 
-            class MyAdapter extends BaseAdapter {
-                class ViewHolder {
-                    public ImageView imageImg;
-                }
-
-                @Override
-                public int getCount() {
-                    return 1;
-                }
-
-                @Override
-                public Object getItem(int position) {
-                    return null;
-                }
-
-                @Override
-                public long getItemId(int position) {
-                    return 0;
-                }
-
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    ViewHolder holder;
-                    if (convertView == null) {
-                        holder = new ViewHolder();
-                        convertView = LayoutInflater.from(ChanPinXQActivity.this).inflate(R.layout.item_img, null);
-                        holder.imageImg = (ImageView) convertView.findViewById(R.id.imageImg);
-                        convertView.setTag(holder);
-                    } else {
-                        holder = (ViewHolder) convertView.getTag();
-                    }
-                    holder.imageImg.setImageResource(R.mipmap.imgxiangqing);
-                    return convertView;
-                }
-            }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
@@ -205,22 +143,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             @Override
             public void onItemClick(int position) {
 
-            }
-        });
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int scrollY = RecycleViewDistancaUtil.getDistance(recyclerView, 0);
-                float guangGaoHeight = getResources().getDimension(R.dimen.chanPinXQBanner);
-                if (scrollY <= guangGaoHeight - viewBarHeight && scrollY >= 0) {
-                    int i = (int) ((double) scrollY / (double) (guangGaoHeight - viewBar.getHeight()) * 255);
-                    viewBar.getBackground().mutate().setAlpha(i);
-                    textViewTitle.setAlpha((float) i / 255f);
-                } else {
-                    viewBar.getBackground().mutate().setAlpha(255);
-                    textViewTitle.setAlpha(1);
-                }
             }
         });
     }
