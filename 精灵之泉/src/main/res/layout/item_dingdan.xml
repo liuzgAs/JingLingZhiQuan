@@ -14,14 +14,14 @@
             android:id="@+id/textView218"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/imageView27"
+            android:layout_toRightOf="@+id/imageView27"
             android:text="订单号：JKLJ222314534645"
             android:textColor="@color/light_black"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_marginStart="5dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imageView27"
-            android:layout_toEndOf="@+id/imageView27" />
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
             android:id="@+id/textView219"
@@ -36,262 +36,94 @@
             android:textSize="@dimen/normal_textsize" />
 
         <ImageView
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/wo_de_dd_mai"
+            android:id="@+id/imageView27"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:id="@+id/imageView27"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_gravity="center_horizontal"
-        >
-
-        <ImageView
-            android:id="@+id/imageView130"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/dingdandemo" />
-
-        <TextView
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:id="@+id/textView304"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView130"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_toEndOf="@+id/imageView130"
-            android:layout_toRightOf="@+id/imageView130"
-            android:text="青陌印尼花奇楠木佛珠印尼花"
-            android:textColor="@color/light_black"
-            android:textSize="@dimen/MoreBigText" />
-
-        <RelativeLayout
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView304"
-            android:layout_toRightOf="@+id/imageView130"
-            android:layout_toEndOf="@+id/imageView130">
-
-            <TextView
-                android:textSize="@dimen/normal_textsize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="颜色：白色 尺寸：M"
-                android:id="@+id/textView44"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="×2"
-                android:layout_marginRight="10dp"
-                android:id="@+id/textView45"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_marginBottom="8dp"
-            android:textSize="@dimen/MoreBigText"
-            android:textColor="@color/light_black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥450"
-            android:id="@+id/textView46"
-            android:layout_alignBottom="@+id/imageView130"
-            android:layout_toRightOf="@+id/imageView130"
-            android:layout_toEndOf="@+id/imageView130" />
-
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/basic_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="赚¥20"
-            android:textSize="@dimen/bigText"
-            android:id="@+id/textView118"
-            android:layout_alignBottom="@+id/textView46"
-            android:layout_toRightOf="@+id/textView46"
-            android:layout_toEndOf="@+id/textView46" />
-
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/wo_de_dd_mai" />
     </RelativeLayout>
 
+    <include layout="@layout/view_dingdan" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_gravity="center_horizontal" >
-
-        <ImageView
-            android:id="@+id/imageView40"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/dingdandemo" />
-
-        <RelativeLayout
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView47"
-            android:layout_toRightOf="@+id/imageView40"
-            android:layout_toEndOf="@+id/imageView40" >
-
-            <TextView
-                android:textSize="@dimen/normal_textsize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="颜色：白色 尺寸：M"
-                android:id="@+id/textView48"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="×2"
-                android:layout_marginRight="10dp"
-                android:id="@+id/textView49"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
-
-        <TextView
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:id="@+id/textView47"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView40"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_toEndOf="@+id/imageView40"
-            android:layout_toRightOf="@+id/imageView40"
-            android:text="青陌印尼花奇楠木佛珠印尼花"
-            android:textColor="@color/light_black"
-            android:textSize="@dimen/MoreBigText" />
-
-        <TextView
-            android:layout_marginBottom="8dp"
-            android:textSize="@dimen/MoreBigText"
-            android:textColor="@color/light_black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥450"
-            android:id="@+id/textView50"
-            android:layout_alignBottom="@+id/imageView40"
-            android:layout_toRightOf="@+id/imageView40"
-            android:layout_toEndOf="@+id/imageView40" />
-
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/basic_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="赚¥20"
-            android:textSize="@dimen/bigText"
-            android:id="@+id/textView119"
-            android:layout_alignBottom="@+id/textView50"
-            android:layout_toRightOf="@+id/textView50"
-            android:layout_toEndOf="@+id/textView50" />
-    </RelativeLayout>
+    <include layout="@layout/view_dingdan" />
 
     <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/line_gray"
+        android:id="@+id/textView51"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
-        android:id="@+id/textView51" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="right"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:paddingTop="10dp">
 
 
             <TextView
-                android:layout_marginRight="10dp"
-                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textView123"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:text="合计："
-                android:id="@+id/textView123" />
+                android:textSize="@dimen/normal_textsize" />
+
             <TextView
-                android:textColor="@color/light_black"
-                android:layout_marginRight="10dp"
-                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textView122"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:text="¥156.02"
-                android:id="@+id/textView122" />
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/normal_textsize" />
         </LinearLayout>
 
         <LinearLayout
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="right"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
 
             <TextView
-                android:layout_marginRight="10dp"
-                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textView124"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:text="赚："
-                android:id="@+id/textView124" />
+                android:textSize="@dimen/normal_textsize" />
 
             <TextView
-                android:textColor="@color/light_black"
-                android:layout_marginRight="10dp"
-                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textView125"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:text="¥40"
-                android:id="@+id/textView125" />
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/normal_textsize" />
         </LinearLayout>
 
     </LinearLayout>
 
     <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/line_gray"
+        android:id="@+id/textView121"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
-        android:id="@+id/textView121" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -302,33 +134,33 @@
             android:id="@+id/textZongJia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥78.00"
-            android:textColor="@color/light_black"
-            android:textSize="@dimen/normal_textsize"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/textView52"
-            android:layout_toStartOf="@+id/textView52" />
+            android:layout_toStartOf="@+id/textView52"
+            android:text="￥78.00"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
             android:id="@+id/textView308"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="应付："
-            android:textSize="@dimen/normal_textsize"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/textZongJia"
-            android:layout_toStartOf="@+id/textZongJia" />
+            android:layout_toStartOf="@+id/textZongJia"
+            android:text="应付："
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:layout_marginRight="10dp"
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView52"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="（含运费10元）"
-            android:id="@+id/textView52"
-            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:text="（含运费10元）"
+            android:textSize="@dimen/normal_textsize" />
 
     </RelativeLayout>
 
@@ -338,9 +170,6 @@
         android:layout_gravity="center_horizontal">
 
         <Button
-            android:background="@drawable/btn_jianbian270_basic_30dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
             android:id="@+id/buttonPingJia"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
@@ -348,38 +177,41 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:background="@drawable/btn_jianbian270_basic_30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:text="确认付款"
             android:textColor="@color/white"
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:textColor="@color/white"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:gravity="center"
-            android:background="@drawable/btn_jianbian270_gray_30dp"
             android:id="@+id/button14"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginRight="10dp"
-            android:text="查看物流"
-            android:textSize="@dimen/normal_textsize"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/buttonPingJia"
             android:layout_toStartOf="@+id/buttonPingJia"
-            android:layout_marginEnd="10dp" />
+            android:background="@drawable/btn_jianbian270_gray_30dp"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="查看物流"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView120"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:text="评好货"
-            android:id="@+id/textView120"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/button14"
-            android:layout_toStartOf="@+id/button14" />
+            android:layout_toStartOf="@+id/button14"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="评好货"
+            android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 </LinearLayout>

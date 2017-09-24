@@ -265,7 +265,9 @@
             android:theme="@style/Theme.Transparent" />
         <activity android:name="com.sxbwstxpay.activity.DangQianBBActivity" />
         <activity android:name="com.sxbwstxpay.activity.ChanPinXQActivity" />
-        <activity android:name="com.sxbwstxpay.activity.GouWuCActivity"></activity>
+        <activity android:name="com.sxbwstxpay.activity.GouWuCActivity" />
+        <activity android:name="com.sxbwstxpay.activity.QueRenDDActivity" />
+        <activity android:name="com.sxbwstxpay.activity.XuanZeSHDZActivity"></activity>
     </application>
 
 </manifest>
