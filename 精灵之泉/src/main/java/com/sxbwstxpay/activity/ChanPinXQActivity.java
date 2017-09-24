@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -25,7 +26,7 @@ import com.sxbwstxpay.util.RecycleViewDistancaUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.ChanPinXQViewHolder;
 
-public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private View viewBar;
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<Integer> adapter;
@@ -71,7 +72,8 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
 
     @Override
     protected void setListeners() {
-
+        findViewById(R.id.viewGouWuChe).setOnClickListener(this);
+        findViewById(R.id.imageBack).setOnClickListener(this);
     }
 
     @Override
@@ -114,7 +116,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     if (i == 1) {
                         textTitle.setText("宝贝详情");
                         tablayout.addTab(tablayout.newTab().setCustomView(item_tablayout));
-                    }else {
+                    } else {
                         textTitle.setText("规格参数");
                         tablayout.addTab(tablayout.newTab().setCustomView(item_tablayout));
                     }
@@ -133,18 +135,22 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 class ViewHolder {
                     public ImageView imageImg;
                 }
+
                 @Override
                 public int getCount() {
                     return 1;
                 }
+
                 @Override
                 public Object getItem(int position) {
                     return null;
                 }
+
                 @Override
                 public long getItemId(int position) {
                     return 0;
                 }
+
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
                     ViewHolder holder;
@@ -224,5 +230,19 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         page++;
         adapter.clear();
         adapter.addAll(DataProvider.getPersonList(page));
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.imageBack:
+                finish();
+                break;
+            case R.id.viewGouWuChe:
+                intent.setClass(this, GouWuCActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

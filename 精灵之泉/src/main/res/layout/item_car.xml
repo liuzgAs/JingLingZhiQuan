@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/layout_selector_white_system_gray">
+
+    <ImageView
+        android:id="@+id/imageXuanZhong"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="5dp"
+        android:src="@mipmap/weixuanzhong" />
+
+    <ImageView
+        android:id="@+id/imageImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/imageXuanZhong"
+        android:layout_toRightOf="@+id/imageXuanZhong"
+        android:scaleType="fitXY"
+        android:src="@mipmap/you" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageImg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/imageImg"
+        android:layout_toRightOf="@+id/imageImg"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="一品轩皇家有机食用调和油"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/text111111"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="规格：买一送三"
+        android:textSize="@dimen/normal_textsize"
+        android:layout_below="@+id/textName"
+        android:layout_alignLeft="@+id/textName"
+        android:layout_alignStart="@+id/textName" />
+
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¥78.00"
+        android:textColor="@color/light_black"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/bigText"
+        android:layout_below="@+id/text111111"
+        android:layout_alignLeft="@+id/text111111"
+        android:layout_alignStart="@+id/text111111" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageImg"
+        android:layout_alignLeft="@+id/textName"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/textName">
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@color/line_gray"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="@dimen/bigLitterText" />
+
+        <TextView
+            android:id="@+id/textNum"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/textView24"
+            android:layout_toRightOf="@+id/textView24"
+            android:background="@color/line_gray"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="2"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/textNum"
+            android:layout_toRightOf="@+id/textNum"
+            android:background="@color/line_gray"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="@dimen/bigLitterText" />
+
+        <ImageView
+            android:id="@+id/imageDelete"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:src="@mipmap/delete" />
+    </RelativeLayout>
+
+</RelativeLayout>

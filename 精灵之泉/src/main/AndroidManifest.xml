@@ -264,7 +264,8 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.Transparent" />
         <activity android:name="com.sxbwstxpay.activity.DangQianBBActivity" />
-        <activity android:name="com.sxbwstxpay.activity.ChanPinXQActivity"></activity>
+        <activity android:name="com.sxbwstxpay.activity.ChanPinXQActivity" />
+        <activity android:name="com.sxbwstxpay.activity.GouWuCActivity"></activity>
     </application>
 
 </manifest>
