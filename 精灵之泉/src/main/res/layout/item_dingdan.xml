@@ -338,7 +338,7 @@
         android:layout_gravity="center_horizontal">
 
         <Button
-            android:background="@drawable/btn_jianbian_basic"
+            android:background="@drawable/btn_jianbian270_basic_30dp"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:id="@+id/buttonPingJia"
@@ -357,7 +357,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:gravity="center"
-            android:background="@drawable/btn_jianbian_gray"
+            android:background="@drawable/btn_jianbian270_gray_30dp"
             android:id="@+id/button14"
             android:layout_width="wrap_content"
             android:layout_height="35dp"

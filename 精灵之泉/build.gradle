@@ -23,6 +23,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile files('libs/gson-2.2.4.jar')
+    compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
@@ -39,5 +40,5 @@ dependencies {
     compile 'com.lzy.widget:imagepicker:0.5.3'
     compile 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
     compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
-    compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
+    compile 'com.bigkoo:convenientbanner:2.0.5'
 }

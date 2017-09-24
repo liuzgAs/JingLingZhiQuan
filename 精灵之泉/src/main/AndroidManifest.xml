@@ -263,7 +263,8 @@
             android:name="com.sxbwstxpay.activity.ReciverActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Transparent" />
-        <activity android:name="com.sxbwstxpay.activity.DangQianBBActivity"></activity>
+        <activity android:name="com.sxbwstxpay.activity.DangQianBBActivity" />
+        <activity android:name="com.sxbwstxpay.activity.ChanPinXQActivity"></activity>
     </application>
 
 </manifest>

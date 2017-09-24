@@ -17,6 +17,7 @@
     <color name="gray">#8c8c8c</color>
     <color name="gray_deep">#5c5c5c</color>
     <color name="tranwhite">#66ffffff</color>
+    <color name="tranwhite1">#ccffffff</color>
     <color name="tran">#00ffffff</color>
     <color name="alpha_gray">#CC646464</color>
     <color name="content_bg">#F3F3F3</color>
