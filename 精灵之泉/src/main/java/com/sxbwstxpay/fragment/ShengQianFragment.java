@@ -1,6 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,12 +16,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ChengShiXZActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.IndexCitylist;
 import com.sxbwstxpay.model.Index_Makemoney;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
@@ -32,13 +39,26 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShengQianFragment extends ZjbBaseFragment {
+public class ShengQianFragment extends ZjbBaseFragment implements View.OnClickListener {
     private WebSettings mSettings;
     private ProgressBar pb1;
     private LinearLayout viewLinear;
     private WebView webView;
     private View mInflate;
     private View mRelaTitleStatue;
+    private TextView textCity;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.CITY_CHOOSE:
+                    IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
+                    textCity.setText(cityBean.getName());
+                    break;
+            }
+        }
+    };
 
     public ShengQianFragment() {
         // Required empty public constructor
@@ -79,6 +99,7 @@ public class ShengQianFragment extends ZjbBaseFragment {
 //        mWebView = (WebView) mInflate.findViewById(R.id.webView);
         pb1 = (ProgressBar) mInflate.findViewById(R.id.progressBar2);
         viewLinear = (LinearLayout) mInflate.findViewById(R.id.viewLinear);
+        textCity = (TextView) mInflate.findViewById(R.id.textCity);
     }
 
     @Override
@@ -111,7 +132,7 @@ public class ShengQianFragment extends ZjbBaseFragment {
 
     @Override
     protected void setListeners() {
-
+        textCity.setOnClickListener(this);
     }
 
     /**
@@ -132,18 +153,18 @@ public class ShengQianFragment extends ZjbBaseFragment {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("ZhuanQianFragment--省钱", ""+s);
+                LogUtil.LogShitou("ZhuanQianFragment--省钱", "" + s);
                 try {
                     Index_Makemoney index_makemoney = GsonUtils.parseJSON(s, Index_Makemoney.class);
-                    if (index_makemoney.getStatus()==1){
+                    if (index_makemoney.getStatus() == 1) {
                         webView.loadUrl(index_makemoney.getUrl());
-                    }else if (index_makemoney.getStatus()==2){
+                    } else if (index_makemoney.getStatus() == 2) {
                         MyDialog.showReLoginDialog(getActivity());
-                    }else {
+                    } else {
                         Toast.makeText(getActivity(), index_makemoney.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -163,5 +184,30 @@ public class ShengQianFragment extends ZjbBaseFragment {
         } else {
             return super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.textCity:
+                intent.setClass(getActivity(), ChengShiXZActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
+        getActivity().registerReceiver(reciver, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(reciver);
     }
 }

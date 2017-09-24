@@ -1,6 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,19 +14,38 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ChengShiXZActivity;
 import com.sxbwstxpay.base.ZjbBaseFragment;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.IndexCitylist;
+import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ScreenUtils;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShengQianCZFragment extends ZjbBaseFragment {
+public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClickListener {
     private View mInflate;
     private View mRelaTitleStatue;
     private TabLayout tablayout;
     private ViewPager viewPager;
+    private TextView textCity;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.CITY_CHOOSE:
+                    IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
+                    textCity.setText(cityBean.getName());
+                    break;
+            }
+        }
+    };
+    private String mCity;
 
     public ShengQianCZFragment() {
         // Required empty public constructor
@@ -48,7 +71,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment {
 
     @Override
     protected void initSP() {
-
+        final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+        String cityAcache = aCache.getAsString(Constant.ACACHE.CITY);
+        if (cityAcache != null) {
+            mCity = cityAcache;
+        }
     }
 
     @Override
@@ -61,6 +88,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment {
         mRelaTitleStatue = mInflate.findViewById(R.id.relaTitleStatue);
         tablayout = (TabLayout) mInflate.findViewById(R.id.tablayout);
         viewPager = (ViewPager) mInflate.findViewById(R.id.viewPager);
+        textCity = (TextView) mInflate.findViewById(R.id.textCity);
     }
 
     @Override
@@ -77,11 +105,12 @@ public class ShengQianCZFragment extends ZjbBaseFragment {
         tablayout.getTabAt(3).setText("日用家居");
         tablayout.getTabAt(4).setText("母婴儿童");
         tablayout.getTabAt(5).setText("本地生活");
+        textCity.setText(mCity);
     }
 
     @Override
     protected void setListeners() {
-
+        textCity.setOnClickListener(this);
     }
 
 
@@ -108,6 +137,31 @@ public class ShengQianCZFragment extends ZjbBaseFragment {
         public int getCount() {
             return 6;
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.textCity:
+                intent.setClass(getActivity(), ChengShiXZActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
+        getActivity().registerReceiver(reciver, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(reciver);
     }
 
 }

@@ -118,6 +118,10 @@ public class Constant {
         public static final String INDEX_MAKEMONEY = "&g=App&m=Index&a=makeMoney";
         //注销
         public static final String LOGIN_LOGOUT = "&g=App&m=Login&a=logOut";
+        //限时购
+        public static final String INDEX_GOODS = "&g=App&m=Index&a=goods";
+        //城市选择
+        public static final String INDEX_CITYLIST = "&g=App&m=Index&a=cityList";
     }
 
     public static class PERMISSION {
@@ -151,10 +155,10 @@ public class Constant {
         public static final String value = "value";
         public static final String URL = "URL";
         public static final String EXTRAMAP = "ExtraMap";
+        public static final String CITY = "city";
     }
 
     public static class REQUEST_RESULT_CODE {
-        public static final int CHOOSE_CITY = 2017;
         public static final int IMG01 = 2018;
         public static final int IMG02 = 2019;
         public static final int IMG03 = 2020;
@@ -186,6 +190,7 @@ public class Constant {
         public static final String WX_LOGIN_FAIL = "wxLoginFail";
         public static final String WX_SHARE_FAIL = "wxShareFail";
         public static final String EXTRAMAP = "extramap";
+        public static final String CITY_CHOOSE = "cityChoose";
     }
 
 }

@@ -126,7 +126,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity {
                 }
                 ACache aCache = ACache.get(HuanYingActivity.this, Constant.ACACHE.LOCATION);
                 aCache.put(Constant.ACACHE.CITY, indexStartad.getCityName());
-                aCache.put(Constant.ACACHE.CITY_ID, indexStartad.getCityId());
+                aCache.put(Constant.ACACHE.CITY_ID, indexStartad.getCityId()+"");
             }
 
             @Override
