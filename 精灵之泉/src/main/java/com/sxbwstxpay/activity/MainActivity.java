@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.jlzquan.www.R;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.fragment.RenZhengFragment;
-import com.sxbwstxpay.fragment.ShengQianFragment;
+import com.sxbwstxpay.fragment.ShengQianCZFragment;
 import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
@@ -31,7 +31,8 @@ import com.sxbwstxpay.util.UpgradeUtils;
 public class MainActivity extends AppCompatActivity {
     private String[] tabsItem = new String[5];
     private Class[] fragment = new Class[]{
-            ShengQianFragment.class,
+            ShengQianCZFragment.class,
+//            ShengQianFragment.class,
             ZhuanQianFragment.class,
             ShouKuanFragment.class,
             RenZhengFragment.class,
