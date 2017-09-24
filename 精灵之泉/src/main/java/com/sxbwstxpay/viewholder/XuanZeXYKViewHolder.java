@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.BankCardlist;
 
 /**

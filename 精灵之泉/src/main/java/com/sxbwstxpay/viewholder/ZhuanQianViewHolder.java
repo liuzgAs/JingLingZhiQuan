@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.activity.TuWenTGActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;

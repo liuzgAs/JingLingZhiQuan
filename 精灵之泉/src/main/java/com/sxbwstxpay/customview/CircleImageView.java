@@ -36,7 +36,7 @@ import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 
 /**
  * des： 圆形imageview

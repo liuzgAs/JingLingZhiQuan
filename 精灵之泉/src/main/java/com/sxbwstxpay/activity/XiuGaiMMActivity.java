@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ToLoginActivity;
 import com.sxbwstxpay.base.ZjbBaseActivity;

@@ -49,8 +49,12 @@ public class DataCleanManager {
                 LogUtil.LogShitou("DataCleanManager--deleteDir", "" + children[i]);
                 if (TextUtils.equals(children[i], Constant.ACACHE.App) ||
                         TextUtils.equals(children[i], Constant.ACACHE.USER_INFO) ||
-                        TextUtils.equals(children[i], Constant.ACACHE.USER_INFO) ||
-                        TextUtils.equals(children[i], Constant.ACACHE.FRIST)
+                        TextUtils.equals(children[i], Constant.ACACHE.TOKENTIME) ||
+                        TextUtils.equals(children[i], Constant.ACACHE.LOCATION)||
+                        TextUtils.equals(children[i], Constant.ACACHE.LAT)||
+                        TextUtils.equals(children[i], Constant.ACACHE.LNG)||
+                        TextUtils.equals(children[i], Constant.ACACHE.CITY)||
+                        TextUtils.equals(children[i], Constant.ACACHE.CITY_ID)
                         ) {
 
                 } else {

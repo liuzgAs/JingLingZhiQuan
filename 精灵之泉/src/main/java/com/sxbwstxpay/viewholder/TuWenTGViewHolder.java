@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.customview.GridView4ScrollView;
 import com.sxbwstxpay.model.ShareShareDay;

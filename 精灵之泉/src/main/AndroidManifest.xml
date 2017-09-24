@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jlzquan.www">
+    package="com.sxbwstxpay">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -36,6 +36,20 @@
     <!-- 允许task重排序 -->
     <uses-permission android:name="android.permission.REORDER_TASKS" />
 
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于写入缓存数据到扩展存储卡 -->
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <application
         android:name="com.sxbwstxpay.application.MyApplication"
         android:allowBackup="true"
@@ -68,6 +82,16 @@
             android:name="com.alibaba.app.appsecret"
             android:value="f20b18c7ed7913bbf45c6ffda95c6d1a" />
         <!-- 请填写你自己的appSecret -->
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1cd7ea3ce46ead8939a680cb6b5f79f0" />
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59c78d3dcae7e7216a001917" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="hudongchuangxiang" />
 
 
         <!-- 消息接收监听器 -->

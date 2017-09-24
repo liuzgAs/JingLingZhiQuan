@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.util.ScreenUtils;
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.BangZhuZXActivity;
 import com.sxbwstxpay.activity.FeiLvActivity;
 import com.sxbwstxpay.activity.GongGaoActivity;

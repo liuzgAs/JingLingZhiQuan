@@ -22,7 +22,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;

@@ -11,7 +11,7 @@ import android.support.v4.view.ViewPager;
 import com.rd.PageIndicatorView;
 import com.rd.animation.AnimationType;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.fragment.GuideFragment;
 
 public class YinDaoActivity extends FragmentActivity {

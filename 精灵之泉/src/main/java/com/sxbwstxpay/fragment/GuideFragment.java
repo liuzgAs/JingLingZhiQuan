@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.DengLuActivity;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;

@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 
 /**
  * Created by Administrator on 2017/3/28 0028.

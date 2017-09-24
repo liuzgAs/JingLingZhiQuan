@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;

@@ -9,7 +9,7 @@ import com.lzy.imagepicker.loader.ImageLoader;
 
 import java.io.File;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 
 
 public class PicassoImageLoader implements ImageLoader {

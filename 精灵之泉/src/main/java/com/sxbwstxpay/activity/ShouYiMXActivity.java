@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.adapter.ShouYiFragmentAdapter;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.util.ScreenUtils;

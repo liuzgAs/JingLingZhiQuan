@@ -12,7 +12,7 @@ import android.view.WindowManager;
 
 import com.umeng.analytics.MobclickAgent;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;

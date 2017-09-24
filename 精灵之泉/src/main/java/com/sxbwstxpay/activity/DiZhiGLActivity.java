@@ -16,7 +16,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.provider.DataProvider;
 import com.sxbwstxpay.util.DpUtils;

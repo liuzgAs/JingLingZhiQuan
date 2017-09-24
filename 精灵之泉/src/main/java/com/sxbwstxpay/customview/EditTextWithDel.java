@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 
 
 public class EditTextWithDel extends EditText {

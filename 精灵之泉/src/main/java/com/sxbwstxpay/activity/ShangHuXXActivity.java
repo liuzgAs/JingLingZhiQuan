@@ -11,7 +11,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.ShangHuXXViewHolder;

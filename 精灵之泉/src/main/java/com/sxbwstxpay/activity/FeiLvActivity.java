@@ -17,7 +17,7 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import java.util.HashMap;
 import java.util.List;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;

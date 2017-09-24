@@ -31,8 +31,8 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jlzquan.www.BuildConfig;
-import com.jlzquan.www.R;
+import com.sxbwstxpay.BuildConfig;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.OkObject;
 
 import java.io.File;

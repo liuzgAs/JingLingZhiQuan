@@ -171,6 +171,11 @@ public class Constant {
         public static final String USER_INFO = "userInfo";
         public static final String TOKENTIME = "tokentime";
         public static final String FRIST = "frist";
+        public static final String LOCATION = "location";
+        public static final String LAT = "lat";
+        public static final String LNG = "lng";
+        public static final String CITY = "city";
+        public static final String CITY_ID = "cityId";
     }
 
     public static class BROADCASTCODE {

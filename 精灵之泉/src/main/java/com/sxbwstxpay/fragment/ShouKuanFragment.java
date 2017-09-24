@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.WeiXinMPMaActivity;
 import com.sxbwstxpay.activity.XuanZeTDActivity;
 import com.sxbwstxpay.base.MyDialog;

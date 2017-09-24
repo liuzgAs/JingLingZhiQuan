@@ -10,7 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.jlzquan.www.R;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.interfacepage.FragmentBackHandler;
 import com.sxbwstxpay.model.UserInfo;
