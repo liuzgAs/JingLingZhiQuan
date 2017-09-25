@@ -67,21 +67,21 @@
             android:layout_alignParentEnd="true" />
 
         <ImageView
-            android:layout_marginRight="15dp"
+            android:paddingRight="15dp"
             android:src="@mipmap/tupian"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
             android:id="@+id/imageView88"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/buttonShangJia"
             android:layout_toStartOf="@+id/buttonShangJia" />
 
         <ImageView
-            android:layout_marginRight="15dp"
+            android:paddingRight="15dp"
             android:src="@mipmap/fenxiang"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView89"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageShare"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imageView88"
             android:layout_toStartOf="@+id/imageView88" />

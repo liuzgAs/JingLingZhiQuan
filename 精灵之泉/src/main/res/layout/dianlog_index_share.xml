@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="@color/white"
+            android:textSize="20dp"
+            android:textColor="@color/basic_color"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="赚7.49"
+            />
+
+        <TextView
+            android:paddingBottom="10dp"
+            android:lineSpacingExtra="5dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="只要你的好友通过你的链接购买此商品，你就能赚到至少7.49元利润哦~"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/litterText"
+            android:id="@+id/textView224" />
+
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <RelativeLayout
+                android:gravity="center"
+                android:id="@+id/viewWeiXin"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:src="@mipmap/weixinshare"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/imageView89" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/litterText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="微信"
+                    android:id="@+id/textView225"
+                    android:layout_below="@+id/imageView89"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center"
+                android:id="@+id/viewPengYouQuan"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:src="@mipmap/pengyouquan"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/imageView124" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/litterText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="朋友圈"
+                    android:id="@+id/textView226"
+                    android:layout_below="@+id/imageView124"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center"
+                android:id="@+id/viewErWeiMa"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:src="@mipmap/erweima"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/imageView125" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/litterText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="二维码"
+                    android:id="@+id/textView227"
+                    android:layout_below="@+id/imageView125"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:src="@mipmap/quxiao"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imageCancle"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

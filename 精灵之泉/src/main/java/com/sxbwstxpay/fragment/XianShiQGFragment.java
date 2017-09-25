@@ -309,4 +309,5 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             }
         });
     }
+
 }

@@ -1,6 +1,7 @@
 package com.sxbwstxpay.viewholder;
 
 import android.support.annotation.LayoutRes;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.model.IndexGoods;
 
 /**
@@ -22,6 +24,7 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexGoods.DataBean> {
     private final TextView textPrice;
     private final TextView textGoods_money;
     private final Button buttonShangJia;
+    private IndexGoods.DataBean data;
 
     public XianShiQGViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -31,11 +34,18 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexGoods.DataBean> {
         textPrice = $(R.id.textPrice);
         textGoods_money = $(R.id.textGoods_money);
         buttonShangJia = $(R.id.buttonShangJia);
+        $(R.id.imageShare).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getContext()).share(data.getShare());
+            }
+        });
     }
 
     @Override
     public void setData(IndexGoods.DataBean data) {
         super.setData(data);
+        this.data=data;
         Glide.with(getContext())
                 .load(data.getRecom_img())
                 .placeholder(R.mipmap.ic_empty)
