@@ -80,67 +80,6 @@ public class TuWenTGActivity extends ZjbBaseActivity implements SwipeRefreshLayo
                 return new TuWenTGViewHolder(parent, layout);
             }
         });
-//        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
-//            @Override
-//            public void onMoreShow() {
-//                ApiClient.post(TuWenTGActivity.this, getOkObject(), new ApiClient.CallBack() {
-//                    @Override
-//                    public void onSuccess(String s) {
-//                        try {
-//                            page++;
-//                            NewsIndex newsIndex = GsonUtils.parseJSON(s, NewsIndex.class);
-//                            int status = newsIndex.getStatus();
-//                            if (status == 1) {
-//                                List<NewsIndex.DataBean> newsIndexData = newsIndex.getData();
-//                                adapter.addAll(newsIndexData);
-//                            } else if (status == 3) {
-//                                MyDialog.showReLoginDialog(TuWenTGActivity.this);
-//                            } else {
-//                                adapter.pauseMore();
-//                            }
-//                        } catch (Exception e) {
-//                            adapter.pauseMore();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Response response) {
-//                        adapter.pauseMore();
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onMoreClick() {
-//
-//            }
-//        });
-//        adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
-//            @Override
-//            public void onNoMoreShow() {
-//
-//            }
-//
-//            @Override
-//            public void onNoMoreClick() {
-//            }
-//        });
-//        adapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
-//            @Override
-//            public void onErrorShow() {
-//                adapter.resumeMore();
-//            }
-//
-//            @Override
-//            public void onErrorClick() {
-//                adapter.resumeMore();
-//            }
-//        });
-//        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//            }
-//        });
         recyclerView.setRefreshListener(this);
     }
 

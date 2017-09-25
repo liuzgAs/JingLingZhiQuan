@@ -26,6 +26,7 @@ import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.IndexGoods;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ACache;
@@ -48,7 +49,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<IndexGoods.DataBean> adapter;
+    private RecyclerArrayAdapter<IndexDataBean> adapter;
     private int page = 1;
     private String mCity;
     private String lat;
@@ -111,7 +112,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexGoods.DataBean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qg;
@@ -179,7 +180,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                             IndexGoods indexGoods = GsonUtils.parseJSON(s, IndexGoods.class);
                             int status = indexGoods.getStatus();
                             if (status == 1) {
-                                List<IndexGoods.DataBean> indexGoodsData = indexGoods.getData();
+                                List<IndexDataBean> indexGoodsData = indexGoods.getData();
                                 adapter.addAll(indexGoodsData);
                             } else if (status == 3) {
                                 MyDialog.showReLoginDialog(getActivity());
@@ -276,7 +277,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         indexGoodsBanner = indexGoods.getBanner();
                         indexGoodsTimes = indexGoods.getTimes();
                         indexGoodsImg = indexGoods.getImg();
-                        List<IndexGoods.DataBean> indexGoodsData = indexGoods.getData();
+                        List<IndexDataBean> indexGoodsData = indexGoods.getData();
                         adapter.clear();
                         adapter.addAll(indexGoodsData);
                     } else if (indexGoods.getStatus() == 2) {

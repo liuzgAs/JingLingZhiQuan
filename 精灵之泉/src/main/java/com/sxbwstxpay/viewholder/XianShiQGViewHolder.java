@@ -11,12 +11,12 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.MainActivity;
-import com.sxbwstxpay.model.IndexGoods;
+import com.sxbwstxpay.model.IndexDataBean;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
  */
-public class XianShiQGViewHolder extends BaseViewHolder<IndexGoods.DataBean> {
+public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
 
     private final ImageView imageRecom_img;
     private final TextView textStock_num;
@@ -24,7 +24,7 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexGoods.DataBean> {
     private final TextView textPrice;
     private final TextView textGoods_money;
     private final Button buttonShangJia;
-    private IndexGoods.DataBean data;
+    private IndexDataBean data;
 
     public XianShiQGViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -43,7 +43,7 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexGoods.DataBean> {
     }
 
     @Override
-    public void setData(IndexGoods.DataBean data) {
+    public void setData(IndexDataBean data) {
         super.setData(data);
         this.data=data;
         Glide.with(getContext())

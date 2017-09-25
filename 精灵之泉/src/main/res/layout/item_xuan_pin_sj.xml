@@ -90,20 +90,20 @@
 
         <ImageView
             android:id="@+id/imageView99"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
+            android:paddingRight="15dp"
             android:layout_toLeftOf="@+id/buttonAct"
             android:layout_toStartOf="@+id/buttonAct"
             android:src="@mipmap/tupian" />
 
         <ImageView
-            android:id="@+id/imageView100"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageShare"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
+            android:paddingRight="15dp"
             android:layout_toLeftOf="@+id/imageView99"
             android:layout_toStartOf="@+id/imageView99"
             android:src="@mipmap/fenxiang" />

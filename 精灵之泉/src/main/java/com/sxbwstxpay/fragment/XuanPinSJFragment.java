@@ -20,6 +20,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.GoodsIndex;
+import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
@@ -40,7 +41,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<GoodsIndex.DataBean> adapter;
+    private RecyclerArrayAdapter<IndexDataBean> adapter;
     private int page = 1;
     private int id = 0;
 
@@ -93,7 +94,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<GoodsIndex.DataBean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xuan_pin_sj;
@@ -112,7 +113,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                           GoodsIndex goodsIndex = GsonUtils.parseJSON(s, GoodsIndex.class);
                           int status = goodsIndex.getStatus();
                           if (status == 1) {
-                              List<GoodsIndex.DataBean> goodsIndexData = goodsIndex.getData();
+                              List<IndexDataBean> goodsIndexData = goodsIndex.getData();
                               adapter.addAll(goodsIndexData);
                           } else if (status == 3) {
                               MyDialog.showReLoginDialog(getActivity());
@@ -199,7 +200,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     page++;
                     GoodsIndex goodsIndex = GsonUtils.parseJSON(s, GoodsIndex.class);
                     if (goodsIndex.getStatus() == 1) {
-                        List<GoodsIndex.DataBean> goodsIndexData = goodsIndex.getData();
+                        List<IndexDataBean> goodsIndexData = goodsIndex.getData();
                         adapter.clear();
                         adapter.addAll(goodsIndexData);
                     } else if (goodsIndex.getStatus() == 2) {

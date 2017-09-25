@@ -23,7 +23,7 @@ public class IndexGoods {
     private int status;
     private List<BannerBean> banner;
     private List<CateBean> cate;
-    private List<DataBean> data;
+    private List<IndexDataBean> data;
     private List<TimesBean> times;
 
     public String getImg() {
@@ -74,11 +74,11 @@ public class IndexGoods {
         this.cate = cate;
     }
 
-    public List<DataBean> getData() {
+    public List<IndexDataBean> getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(List<IndexDataBean> data) {
         this.data = data;
     }
 
@@ -215,188 +215,6 @@ public class IndexGoods {
 
         public void setName(String name) {
             this.name = name;
-        }
-    }
-
-    public static class DataBean {
-        /**
-         * act : 0
-         * goods_money : 10.00
-         * id : 1
-         * img : http://api.jlzquan.com
-         * price : 100.00
-         * recom_img : http://api.jlzquan.com/Uploads/goods/59c75e4306bf8.jpg
-         * share : {"des1":"只要你的好友通过你的分享购买此商品，你就能赚到至少","des2":"元利润哦~","desMoney":"10.00","shareDes":"有人@你　你有一个分享尚未点击","shareImg":"http://api.jlzquan.com","shareTitle":"测试商品","shareUrl":"http://api.jlzquan.com/index.php?g=App&m=Web&a=vip","title":"赚10.00"}
-         * stock_num : 8481
-         * title : 测试商品
-         */
-
-        private int act;
-        private String goods_money;
-        private String id;
-        private String img;
-        private String price;
-        private String recom_img;
-        private ShareBean share;
-        private String stock_num;
-        private String title;
-
-        public int getAct() {
-            return act;
-        }
-
-        public void setAct(int act) {
-            this.act = act;
-        }
-
-        public String getGoods_money() {
-            return goods_money;
-        }
-
-        public void setGoods_money(String goods_money) {
-            this.goods_money = goods_money;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getImg() {
-            return img;
-        }
-
-        public void setImg(String img) {
-            this.img = img;
-        }
-
-        public String getPrice() {
-            return price;
-        }
-
-        public void setPrice(String price) {
-            this.price = price;
-        }
-
-        public String getRecom_img() {
-            return recom_img;
-        }
-
-        public void setRecom_img(String recom_img) {
-            this.recom_img = recom_img;
-        }
-
-        public ShareBean getShare() {
-            return share;
-        }
-
-        public void setShare(ShareBean share) {
-            this.share = share;
-        }
-
-        public String getStock_num() {
-            return stock_num;
-        }
-
-        public void setStock_num(String stock_num) {
-            this.stock_num = stock_num;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public static class ShareBean {
-            /**
-             * des1 : 只要你的好友通过你的分享购买此商品，你就能赚到至少
-             * des2 : 元利润哦~
-             * desMoney : 10.00
-             * shareDes : 有人@你　你有一个分享尚未点击
-             * shareImg : http://api.jlzquan.com
-             * shareTitle : 测试商品
-             * shareUrl : http://api.jlzquan.com/index.php?g=App&m=Web&a=vip
-             * title : 赚10.00
-             */
-
-            private String des1;
-            private String des2;
-            private String desMoney;
-            private String shareDes;
-            private String shareImg;
-            private String shareTitle;
-            private String shareUrl;
-            private String title;
-
-            public String getDes1() {
-                return des1;
-            }
-
-            public void setDes1(String des1) {
-                this.des1 = des1;
-            }
-
-            public String getDes2() {
-                return des2;
-            }
-
-            public void setDes2(String des2) {
-                this.des2 = des2;
-            }
-
-            public String getDesMoney() {
-                return desMoney;
-            }
-
-            public void setDesMoney(String desMoney) {
-                this.desMoney = desMoney;
-            }
-
-            public String getShareDes() {
-                return shareDes;
-            }
-
-            public void setShareDes(String shareDes) {
-                this.shareDes = shareDes;
-            }
-
-            public String getShareImg() {
-                return shareImg;
-            }
-
-            public void setShareImg(String shareImg) {
-                this.shareImg = shareImg;
-            }
-
-            public String getShareTitle() {
-                return shareTitle;
-            }
-
-            public void setShareTitle(String shareTitle) {
-                this.shareTitle = shareTitle;
-            }
-
-            public String getShareUrl() {
-                return shareUrl;
-            }
-
-            public void setShareUrl(String shareUrl) {
-                this.shareUrl = shareUrl;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
         }
     }
 

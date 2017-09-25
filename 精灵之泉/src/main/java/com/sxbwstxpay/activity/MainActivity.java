@@ -37,7 +37,7 @@ import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
 import com.sxbwstxpay.model.ExtraMap;
-import com.sxbwstxpay.model.IndexGoods;
+import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.BackHandlerHelper;
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
      * author： ZhangJieBo
      * date： 2017/9/25 0025 上午 11:54
      */
-    public void share(final IndexGoods.DataBean.ShareBean share) {
+    public void share(final IndexDataBean.ShareBean share) {
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void wxShare(final int flag, final IndexGoods.DataBean.ShareBean share) {
+    private void wxShare(final int flag, final IndexDataBean.ShareBean share) {
         api.registerApp(Constant.WXAPPID);
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = share.getShareUrl();
