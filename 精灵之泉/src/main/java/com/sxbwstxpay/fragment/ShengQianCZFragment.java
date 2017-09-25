@@ -183,7 +183,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             if (position == 0) {
                 return new XianShiQGFragment();
             } else {
-                return new XuanPinSJFragment();
+                return new XuanPinSJFragment(indexCateCate.get(position).getId());
             }
         }
 

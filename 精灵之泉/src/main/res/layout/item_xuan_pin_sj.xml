@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView98"
+        android:id="@+id/imageImg"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_alignParentLeft="true"
@@ -19,27 +19,27 @@
         android:src="@mipmap/chengzi" />
 
     <TextView
-        android:id="@+id/textView148"
+        android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView98"
+        android:layout_alignTop="@+id/imageImg"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/imageView98"
-        android:layout_toRightOf="@+id/imageView98"
+        android:layout_toEndOf="@+id/imageImg"
+        android:layout_toRightOf="@+id/imageImg"
         android:ellipsize="end"
         android:lines="2"
         android:text="骆驼女鞋2017秋季新款 英伦风百搭系带学院风内增高厚底高跟单鞋"
         android:textSize="@dimen/normal_textsize" />
 
     <TextView
-        android:id="@+id/textView154"
+        android:id="@+id/textPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/imageView98"
-        android:layout_toRightOf="@+id/imageView98"
+        android:layout_toEndOf="@+id/imageImg"
+        android:layout_toRightOf="@+id/imageImg"
         android:text="¥2999"
         android:textColor="@color/light_black"
         android:textSize="@dimen/bigText" />
@@ -50,12 +50,12 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="2dp"
-        android:layout_toEndOf="@+id/textView154"
-        android:layout_toRightOf="@+id/textView154"
+        android:layout_toEndOf="@+id/textPrice"
+        android:layout_toRightOf="@+id/textPrice"
         android:text="/" />
 
     <TextView
-        android:id="@+id/textView158"
+        android:id="@+id/textGoods_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -69,14 +69,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_alignBottom="@+id/imageView98"
-        android:layout_alignLeft="@+id/textView154"
+        android:layout_alignBottom="@+id/imageImg"
+        android:layout_alignLeft="@+id/textTitle"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignStart="@+id/textView154">
+        android:layout_alignStart="@+id/textTitle">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonAct"
             android:layout_width="50dp"
             android:layout_height="20dp"
             android:layout_alignParentEnd="true"
@@ -94,8 +94,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/button3"
-            android:layout_toStartOf="@+id/button3"
+            android:layout_toLeftOf="@+id/buttonAct"
+            android:layout_toStartOf="@+id/buttonAct"
             android:src="@mipmap/tupian" />
 
         <ImageView
@@ -109,7 +109,7 @@
             android:src="@mipmap/fenxiang" />
 
         <TextView
-            android:id="@+id/textView159"
+            android:id="@+id/textStock_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

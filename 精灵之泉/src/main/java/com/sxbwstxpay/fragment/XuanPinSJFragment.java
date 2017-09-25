@@ -9,16 +9,28 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.sxbwstxpay.R;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
-import com.sxbwstxpay.provider.DataProvider;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.GoodsIndex;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.viewholder.XuanPinSJViewHolder;
+
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,11 +40,16 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<Integer> adapter;
+    private RecyclerArrayAdapter<GoodsIndex.DataBean> adapter;
     private int page = 1;
+    private int id = 0;
 
     public XuanPinSJFragment() {
         // Required empty public constructor
+    }
+
+    public XuanPinSJFragment(int id) {
+        this.id = id;
     }
 
 
@@ -71,12 +88,12 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     protected void initViews() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) DpUtils.convertDpToPixel(1f,getActivity()), 0, 0);
+        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) DpUtils.convertDpToPixel(1f, getActivity()), 0, 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<GoodsIndex.DataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xuan_pin_sj;
@@ -86,8 +103,32 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-                page++;
-                adapter.addAll(DataProvider.getPersonList(page));
+              ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+                  @Override
+                  public void onSuccess(String s) {
+                      LogUtil.LogShitou("XuanPinSJFragment--选品上架更多", s+"");
+                      try {
+                          page++;
+                          GoodsIndex goodsIndex = GsonUtils.parseJSON(s, GoodsIndex.class);
+                          int status = goodsIndex.getStatus();
+                          if (status == 1) {
+                              List<GoodsIndex.DataBean> goodsIndexData = goodsIndex.getData();
+                              adapter.addAll(goodsIndexData);
+                          } else if (status == 3) {
+                              MyDialog.showReLoginDialog(getActivity());
+                          } else {
+                              adapter.pauseMore();
+                          }
+                      } catch (Exception e) {
+                          adapter.pauseMore();
+                      }
+                  }
+
+                  @Override
+                  public void onError(Response response) {
+                      adapter.pauseMore();
+                  }
+              });
             }
 
             @Override
@@ -134,11 +175,61 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         onRefresh();
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.GOODS_INDEX;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", id+"");
+        params.put("p", page+"");
+        return new OkObject(params, url);
+    }
 
     @Override
     public void onRefresh() {
         page = 1;
-        adapter.clear();
-        adapter.addAll(DataProvider.getPersonList(page));
+        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("选品上架", s);
+                try {
+                    page++;
+                    GoodsIndex goodsIndex = GsonUtils.parseJSON(s, GoodsIndex.class);
+                    if (goodsIndex.getStatus() == 1) {
+                        List<GoodsIndex.DataBean> goodsIndexData = goodsIndex.getData();
+                        adapter.clear();
+                        adapter.addAll(goodsIndexData);
+                    } else if (goodsIndex.getStatus() == 2) {
+                        MyDialog.showReLoginDialog(getActivity());
+                    } else {
+                        showError(goodsIndex.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
     }
 }

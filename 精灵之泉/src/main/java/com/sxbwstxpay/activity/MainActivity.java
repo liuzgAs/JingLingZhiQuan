@@ -13,7 +13,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -212,6 +215,12 @@ public class MainActivity extends AppCompatActivity {
 //                    public void run() {
         LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
         View dialog_shengji = inflater.inflate(R.layout.dianlog_index_share, null);
+        TextView textDes1 = (TextView) dialog_shengji.findViewById(R.id.textDes1);
+        TextView textDes2 = (TextView) dialog_shengji.findViewById(R.id.textDes2);
+        textDes1.setText(share.getTitle());
+        SpannableString span = new SpannableString(share.getDes1()+share.getDesMoney()+share.getDes2());
+        span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.basic_color)), share.getDes1().length(),share.getDes1().length()+share.getDesMoney().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textDes2.setText(span);
         final AlertDialog alertDialog1 = new AlertDialog.Builder(MainActivity.this, R.style.dialog)
                 .setView(dialog_shengji)
                 .create();
