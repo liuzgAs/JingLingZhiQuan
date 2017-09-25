@@ -76,23 +76,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (TextUtils.equals(action, Constant.BROADCASTCODE.EXTRAMAP)) {
-                ExtraMap extraMap = (ExtraMap) intent.getSerializableExtra(Constant.INTENT_KEY.EXTRAMAP);
-                try {
-                    action(extraMap);
-                } catch (Exception e) {
-                }
-            }
-        }
-    };
-    public UserInfo userInfo;
-    private IWXAPI api = WXAPIFactory.createWXAPI(MainActivity.this, Constant.WXAPPID, true);
-    private Tencent mTencent;
-    private Bitmap bitmap;
-    private BroadcastReceiver reciver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
             switch (action) {
                 case Constant.BROADCASTCODE.WX_SHARE:
                     MyDialog.showTipDialog(MainActivity.this, "分享成功");
@@ -100,9 +83,20 @@ public class MainActivity extends AppCompatActivity {
                 case Constant.BROADCASTCODE.WX_SHARE_FAIL:
                     MyDialog.showTipDialog(MainActivity.this, "取消分享");
                     break;
+                case Constant.BROADCASTCODE.EXTRAMAP:
+                    ExtraMap extraMap = (ExtraMap) intent.getSerializableExtra(Constant.INTENT_KEY.EXTRAMAP);
+                    try {
+                        action(extraMap);
+                    } catch (Exception e) {
+                    }
+                    break;
             }
         }
     };
+    public UserInfo userInfo;
+    private IWXAPI api = WXAPIFactory.createWXAPI(MainActivity.this, Constant.WXAPPID, true);
+    private Tencent mTencent;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.EXTRAMAP);
+        filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
+        filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
         registerReceiver(receiver, filter);
     }
 
@@ -214,47 +210,47 @@ public class MainActivity extends AppCompatActivity {
 //                runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {
-                        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                        View dialog_shengji = inflater.inflate(R.layout.dianlog_index_share, null);
-                        final AlertDialog alertDialog1 = new AlertDialog.Builder(MainActivity.this, R.style.dialog)
-                                .setView(dialog_shengji)
-                                .create();
-                        alertDialog1.show();
-                        dialog_shengji.findViewById(R.id.imageCancle).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                alertDialog1.dismiss();
-                            }
-                        });
-                        dialog_shengji.findViewById(R.id.viewWeiXin).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (!checkIsSupportedWeachatPay()) {
-                                    Toast.makeText(MainActivity.this, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                wxShare(0, share);
-                                alertDialog1.dismiss();
-                            }
-                        });
-                        dialog_shengji.findViewById(R.id.viewPengYouQuan).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (!checkIsSupportedWeachatPay()) {
-                                    Toast.makeText(MainActivity.this, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                wxShare(1, share);
-                                alertDialog1.dismiss();
-                            }
-                        });
-                        dialog_shengji.findViewById(R.id.viewErWeiMa).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Toast.makeText(MainActivity.this, "此功能暂未开放", Toast.LENGTH_SHORT).show();
-                                alertDialog1.dismiss();
-                            }
-                        });
+        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+        View dialog_shengji = inflater.inflate(R.layout.dianlog_index_share, null);
+        final AlertDialog alertDialog1 = new AlertDialog.Builder(MainActivity.this, R.style.dialog)
+                .setView(dialog_shengji)
+                .create();
+        alertDialog1.show();
+        dialog_shengji.findViewById(R.id.imageCancle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog1.dismiss();
+            }
+        });
+        dialog_shengji.findViewById(R.id.viewWeiXin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!checkIsSupportedWeachatPay()) {
+                    Toast.makeText(MainActivity.this, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                wxShare(0, share);
+                alertDialog1.dismiss();
+            }
+        });
+        dialog_shengji.findViewById(R.id.viewPengYouQuan).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!checkIsSupportedWeachatPay()) {
+                    Toast.makeText(MainActivity.this, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                wxShare(1, share);
+                alertDialog1.dismiss();
+            }
+        });
+        dialog_shengji.findViewById(R.id.viewErWeiMa).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "此功能暂未开放", Toast.LENGTH_SHORT).show();
+                alertDialog1.dismiss();
+            }
+        });
 //                        dialog_shengji.findViewById(R.id.relaShouCang).setOnClickListener(new View.OnClickListener() {
 //                            @Override
 //                            public void onClick(View view) {
@@ -295,13 +291,13 @@ public class MainActivity extends AppCompatActivity {
 //                                alertDialog1.dismiss();
 //                            }
 //                        });
-                        Window dialogWindow = alertDialog1.getWindow();
-                        dialogWindow.setGravity(Gravity.BOTTOM);
-                        dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
-                        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-                        DisplayMetrics d = MainActivity.this.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
-                        lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
-                        dialogWindow.setAttributes(lp);
+        Window dialogWindow = alertDialog1.getWindow();
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        DisplayMetrics d = MainActivity.this.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
+        lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
+        dialogWindow.setAttributes(lp);
 //                    }
 //                });
 //            }
@@ -405,4 +401,5 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
+
 }
