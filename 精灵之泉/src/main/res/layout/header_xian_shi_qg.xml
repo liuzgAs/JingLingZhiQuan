@@ -30,6 +30,6 @@
         android:src="@mipmap/banner_middle"
         android:layout_width="match_parent"
         android:layout_height="165dp"
-        android:id="@+id/imageView92" />
+        android:id="@+id/imageMiddle" />
 
 </LinearLayout>

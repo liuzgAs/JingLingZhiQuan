@@ -374,7 +374,6 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:visibility="gone"
                         android:id="@+id/viewWoDeDianPu"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/normalItemHeight"
@@ -414,7 +413,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/textView24"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"

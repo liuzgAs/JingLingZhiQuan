@@ -122,6 +122,8 @@ public class Constant {
         public static final String INDEX_GOODS = "&g=App&m=Index&a=goods";
         //城市选择
         public static final String INDEX_CITYLIST = "&g=App&m=Index&a=cityList";
+        //限时购分类
+        public static final String INDEX_CATE = "&g=App&m=Index&a=cate";
     }
 
     public static class PERMISSION {

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView86"
+            android:id="@+id/imageRecom_img"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_gravity="center_horizontal"
@@ -18,7 +18,7 @@
             android:src="@mipmap/item_shangcheng_img" />
 
         <TextView
-            android:id="@+id/textView61"
+            android:id="@+id/textStock_num"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentEnd="true"
@@ -43,7 +43,7 @@
         android:lines="2"
         android:textSize="@dimen/normal_textsize"
         android:textColor="@color/light_black"
-        android:id="@+id/textView73"
+        android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -61,7 +61,7 @@
             android:layout_marginRight="10dp"
             android:layout_height="20dp"
             android:text="+"
-            android:id="@+id/button"
+            android:id="@+id/buttonShangJia"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
@@ -73,8 +73,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView88"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/button"
-            android:layout_toStartOf="@+id/button" />
+            android:layout_toLeftOf="@+id/buttonShangJia"
+            android:layout_toStartOf="@+id/buttonShangJia" />
 
         <ImageView
             android:layout_marginRight="15dp"
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¥2999"
-            android:id="@+id/textView86"
+            android:id="@+id/textPrice"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -105,8 +105,8 @@
             android:text="/"
             android:id="@+id/textView99"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView86"
-            android:layout_toEndOf="@+id/textView86" />
+            android:layout_toRightOf="@+id/textPrice"
+            android:layout_toEndOf="@+id/textPrice" />
 
         <TextView
             android:layout_marginLeft="2dp"
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="赚150"
-            android:id="@+id/textView129"
+            android:id="@+id/textGoods_money"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView99"
             android:layout_toEndOf="@+id/textView99" />

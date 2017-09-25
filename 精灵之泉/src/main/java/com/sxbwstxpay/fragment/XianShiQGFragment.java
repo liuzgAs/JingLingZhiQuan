@@ -11,10 +11,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -24,9 +26,8 @@ import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.IndexGoods;
 import com.sxbwstxpay.model.OkObject;
-import com.sxbwstxpay.model.SimpleInfo;
-import com.sxbwstxpay.provider.DataProvider;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
@@ -34,7 +35,6 @@ import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.viewholder.LocalImageHolderView;
 import com.sxbwstxpay.viewholder.XianShiQGViewHolder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,13 +48,16 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<Integer> adapter;
+    private RecyclerArrayAdapter<IndexGoods.DataBean> adapter;
     private int page = 1;
     private String mCity;
     private String lat;
     private String lng;
     private String cityId;
     private int id;
+    private List<IndexGoods.BannerBean> indexGoodsBanner;
+    private List<IndexGoods.TimesBean> indexGoodsTimes;
+    private String indexGoodsImg;
 
     public XianShiQGFragment() {
         // Required empty public constructor
@@ -108,7 +111,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexGoods.DataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qg;
@@ -117,8 +120,8 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
+            private ImageView imageMiddle;
             private TabLayout tablayoutHeader;
-            private List<String> imgBanner;
             private ConvenientBanner banner;
 
             @Override
@@ -127,42 +130,72 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
-                imgBanner = new ArrayList<>();
-                imgBanner.add("11111111");
-                imgBanner.add("22222222");
-                imgBanner.add("33333333");
-                imgBanner.add("44444444");
-                imgBanner.add("55555555");
                 tablayoutHeader = (TabLayout) header_xian_shi_qg.findViewById(R.id.tablayoutHeader);
-                tablayoutHeader.removeAllTabs();
-                tablayoutHeader.setTabMode(TabLayout.MODE_SCROLLABLE);
-                for (int i = 0; i < 12; i++) {
-                    View item_qiang_gou_sj = LayoutInflater.from(getActivity()).inflate(R.layout.item_qiang_gou_sj, null);
-                    if (i == 2) {
-                        tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), true);
-                    } else {
-                        tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), false);
-                    }
-                }
+                imageMiddle = (ImageView) header_xian_shi_qg.findViewById(R.id.imageMiddle);
                 return header_xian_shi_qg;
             }
 
             @Override
             public void onBindView(View headerView) {
-                banner.setPages(new CBViewHolderCreator() {
-                    @Override
-                    public Object createHolder() {
-                        return new LocalImageHolderView();
+                if (indexGoodsBanner!=null){
+                    banner.setPages(new CBViewHolderCreator() {
+                        @Override
+                        public Object createHolder() {
+                            return new LocalImageHolderView();
+                        }
+                    }, indexGoodsBanner);
+                    banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
+                }
+                if (indexGoodsTimes!=null){
+                    tablayoutHeader.removeAllTabs();
+                    tablayoutHeader.setTabMode(TabLayout.MODE_SCROLLABLE);
+                    for (int i = 0; i < indexGoodsTimes.size(); i++) {
+                        View item_qiang_gou_sj = LayoutInflater.from(getActivity()).inflate(R.layout.item_qiang_gou_sj, null);
+                        TextView textQiangGouTitle = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouTitle);
+                        TextView textQiangGouDes = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouDes);
+                        textQiangGouTitle.setText(indexGoodsTimes.get(i).getTimes());
+                        textQiangGouDes.setText(indexGoodsTimes.get(i).getDes());
+                        if (indexGoodsTimes.get(i).getAct() == 1) {
+                            tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), true);
+                        } else {
+                            tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), false);
+                        }
                     }
-                }, imgBanner);
-                banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
+                }
+                Glide.with(getActivity())
+                        .load(indexGoodsImg)
+                        .placeholder(R.mipmap.ic_empty)
+                        .into(imageMiddle);
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-                page++;
-                adapter.addAll(DataProvider.getPersonList(page));
+                ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        try {
+                            page++;
+                            IndexGoods indexGoods = GsonUtils.parseJSON(s, IndexGoods.class);
+                            int status = indexGoods.getStatus();
+                            if (status == 1) {
+                                List<IndexGoods.DataBean> indexGoodsData = indexGoods.getData();
+                                adapter.addAll(indexGoodsData);
+                            } else if (status == 3) {
+                                MyDialog.showReLoginDialog(getActivity());
+                            } else {
+                                adapter.pauseMore();
+                            }
+                        } catch (Exception e) {
+                            adapter.pauseMore();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        adapter.pauseMore();
+                    }
+                });
             }
 
             @Override
@@ -238,12 +271,18 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 LogUtil.LogShitou("限时购", s);
                 try {
                     page++;
-                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                    if (simpleInfo.getStatus() == 1) {
-                    } else if (simpleInfo.getStatus() == 2) {
+                    IndexGoods indexGoods = GsonUtils.parseJSON(s, IndexGoods.class);
+                    if (indexGoods.getStatus() == 1) {
+                        indexGoodsBanner = indexGoods.getBanner();
+                        indexGoodsTimes = indexGoods.getTimes();
+                        indexGoodsImg = indexGoods.getImg();
+                        List<IndexGoods.DataBean> indexGoodsData = indexGoods.getData();
+                        adapter.clear();
+                        adapter.addAll(indexGoodsData);
+                    } else if (indexGoods.getStatus() == 2) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
-                        showError(simpleInfo.getInfo());
+                        showError(indexGoods.getInfo());
                     }
                 } catch (Exception e) {
                     showError("数据出错");

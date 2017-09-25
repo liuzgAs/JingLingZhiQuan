@@ -109,7 +109,7 @@
         android:layout_height="@dimen/normalItemHeight"
         android:background="@color/white"
         app:tabIndicatorColor="@color/basic_color"
-        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@color/basic_color"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
         app:tabTextColor="@color/light_black" />

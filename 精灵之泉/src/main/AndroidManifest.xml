@@ -293,7 +293,8 @@
         <activity android:name=".activity.XuanZeSHDZActivity" />
         <activity android:name=".activity.ZhiFuActivity" />
         <activity android:name=".activity.ZhiFuCGActivity" />
-        <activity android:name=".activity.ChengShiXZActivity"></activity>
+        <activity android:name=".activity.ChengShiXZActivity" />
+        <activity android:name=".activity.WoDeDPActivity"></activity>
     </application>
 
 </manifest>

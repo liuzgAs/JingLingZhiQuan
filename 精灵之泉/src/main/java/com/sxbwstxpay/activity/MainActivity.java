@@ -24,6 +24,8 @@ import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
 import com.sxbwstxpay.model.ExtraMap;
+import com.sxbwstxpay.model.UserInfo;
+import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.BackHandlerHelper;
 import com.sxbwstxpay.util.UpgradeUtils;
 
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    public UserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //检查更新
         UpgradeUtils.checkUpgrade(MainActivity.this, Constant.HOST + Constant.Url.INDEX_VERSION);
+        ACache aCache = ACache.get(this, Constant.ACACHE.App);
+        userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
         tabsItem[0] = "省钱";
         tabsItem[1] = "赚钱";
         tabsItem[2] = "收款";
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             tabs_img.setImageResource(imgRes[i]);
             mTabHost.addTab(mTabHost.newTabSpec(tabsItem[i]).setIndicator(inflate), fragment[i], null);
         }
-        mTabHost.setCurrentTab(2);
+        mTabHost.setCurrentTab(1);
     }
 
     @Override
