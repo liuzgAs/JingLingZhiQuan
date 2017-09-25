@@ -126,6 +126,8 @@ public class Constant {
         public static final String INDEX_CATE = "&g=App&m=Index&a=cate";
         //选品上架
         public static final String GOODS_INDEX = "&g=App&m=Goods&a=index";
+        //商品上架
+        public static final String INDEX_UPGOODS = "&g=App&m=Index&a=upGoods";
     }
 
     public static class PERMISSION {
@@ -160,6 +162,7 @@ public class Constant {
         public static final String URL = "URL";
         public static final String EXTRAMAP = "ExtraMap";
         public static final String CITY = "city";
+        public static final String position = "position";
     }
 
     public static class REQUEST_RESULT_CODE {
@@ -195,6 +198,8 @@ public class Constant {
         public static final String WX_SHARE_FAIL = "wxShareFail";
         public static final String EXTRAMAP = "extramap";
         public static final String CITY_CHOOSE = "cityChoose";
+        public static final String ShangJia01 = "ShangJia01";
+        public static final String ShangJia02 = "ShangJia02";
     }
 
 }

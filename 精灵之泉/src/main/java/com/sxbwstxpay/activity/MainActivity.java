@@ -2,6 +2,7 @@ package com.sxbwstxpay.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
@@ -20,6 +21,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -61,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     private String[] tabsItem = new String[5];
     private Class[] fragment = new Class[]{
             ShengQianCZFragment.class,
-//            ShengQianFragment.class,
             ZhuanQianFragment.class,
             ShouKuanFragment.class,
             RenZhengFragment.class,
@@ -100,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
     private IWXAPI api = WXAPIFactory.createWXAPI(MainActivity.this, Constant.WXAPPID, true);
     private Tencent mTencent;
     private Bitmap bitmap;
+    private AlertDialog mAlertDialog;
+    public String tokenTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         UpgradeUtils.checkUpgrade(MainActivity.this, Constant.HOST + Constant.Url.INDEX_VERSION);
         ACache aCache = ACache.get(this, Constant.ACACHE.App);
         userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
+        tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
         tabsItem[0] = "省钱";
         tabsItem[1] = "赚钱";
         tabsItem[2] = "收款";
@@ -218,8 +222,8 @@ public class MainActivity extends AppCompatActivity {
         TextView textDes1 = (TextView) dialog_shengji.findViewById(R.id.textDes1);
         TextView textDes2 = (TextView) dialog_shengji.findViewById(R.id.textDes2);
         textDes1.setText(share.getTitle());
-        SpannableString span = new SpannableString(share.getDes1()+share.getDesMoney()+share.getDes2());
-        span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.basic_color)), share.getDes1().length(),share.getDes1().length()+share.getDesMoney().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString span = new SpannableString(share.getDes1() + share.getDesMoney() + share.getDes2());
+        span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.basic_color)), share.getDes1().length(), share.getDes1().length() + share.getDesMoney().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textDes2.setText(span);
         final AlertDialog alertDialog1 = new AlertDialog.Builder(MainActivity.this, R.style.dialog)
                 .setView(dialog_shengji)
@@ -408,6 +412,37 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             // Log exception
             return null;
+        }
+    }
+
+    public void showLoadingDialog() {
+        if (mAlertDialog == null) {
+            View dialog_progress = getLayoutInflater().inflate(R.layout.view_progress, null);
+            mAlertDialog = new AlertDialog.Builder(this, R.style.dialog)
+                    .setView(dialog_progress)
+                    .setCancelable(false)
+                    .create();
+            mAlertDialog.show();
+            mAlertDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+                        cancelLoadingDialog();
+                        finish();
+                    }
+                    return false;
+                }
+            });
+        } else {
+            mAlertDialog.show();
+        }
+    }
+
+    public void cancelLoadingDialog() {
+        if (mAlertDialog != null && mAlertDialog.isShowing()) {
+            mAlertDialog.dismiss();
+            mAlertDialog = null;
         }
     }
 

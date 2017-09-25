@@ -1,25 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.sxbwstxpay.fragment.XianShiQGFragment">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_progress="@layout/view_progress"
-        app:scrollbarStyle="insideOverlay" />
     <RelativeLayout
-        android:id="@+id/viewShangJiaTip"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_marginBottom="46dp">
 
         <RelativeLayout
             android:id="@+id/view"
@@ -90,4 +79,4 @@
             android:src="@mipmap/shangjia_toast" />
 
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

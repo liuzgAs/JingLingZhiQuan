@@ -40,13 +40,12 @@
         android:paddingRight="10dp"
         android:paddingTop="8dp"
         android:ellipsize="end"
-        android:lines="2"
+        android:maxLines="2"
         android:textSize="@dimen/normal_textsize"
         android:textColor="@color/light_black"
         android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:text="伊利 金典 有机纯牛奶 250ml*12 天赐有机 WWF 低脂优蛋白 领券满99减5元" />
 
     <RelativeLayout

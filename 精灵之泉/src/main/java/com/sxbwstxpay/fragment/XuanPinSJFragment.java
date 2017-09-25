@@ -1,6 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +13,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -30,6 +36,8 @@ import com.sxbwstxpay.viewholder.XuanPinSJViewHolder;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Response;
 
@@ -44,6 +52,62 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private RecyclerArrayAdapter<IndexDataBean> adapter;
     private int page = 1;
     private int id = 0;
+    private View viewShangJiaTip;
+    private Timer timer;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.ShangJia02:
+                    String value = intent.getStringExtra(Constant.INTENT_KEY.value);
+                    textNum.setText(value);
+                    if (viewShangJiaTip.getVisibility()==View.VISIBLE){
+                        timer.cancel();
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        hideView();
+                                    }
+                                });
+                            }
+                        }, 2000, 1000);
+                    }else {
+                        Animation animation01 = AnimationUtils.loadAnimation(getActivity(),R.anim.push_up_in);
+                        viewShangJiaTip.startAnimation(animation01);
+                        viewShangJiaTip.setVisibility(View.VISIBLE);
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        hideView();
+                                    }
+                                });
+                            }
+                        }, 2000, 1000);
+                    }
+                    break;
+            }
+        }
+    };
+    private TextView textNum;
+    public void hideView(){
+        Animation animation02 = AnimationUtils.loadAnimation(getActivity(),R.anim.push_down_out);
+        viewShangJiaTip.startAnimation(animation02);
+        viewShangJiaTip.setVisibility(View.GONE);
+        if (timer!=null){
+            timer.cancel();
+        }
+        timer =null;
+    }
 
     public XuanPinSJFragment() {
         // Required empty public constructor
@@ -83,10 +147,13 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     @Override
     protected void findID() {
         recyclerView = (EasyRecyclerView) mInflate.findViewById(R.id.recyclerView);
+        viewShangJiaTip = mInflate.findViewById(R.id.viewShangJiaTip);
+        textNum = (TextView) mInflate.findViewById(R.id.textNum);
     }
 
     @Override
     protected void initViews() {
+        viewShangJiaTip.setVisibility(View.GONE);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) DpUtils.convertDpToPixel(1f, getActivity()), 0, 0);
@@ -232,5 +299,19 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 recyclerView.showError();
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.ShangJia02);
+        getActivity().registerReceiver(reciver,filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(reciver);
     }
 }
