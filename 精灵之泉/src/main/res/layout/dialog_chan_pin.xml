@@ -1,111 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:gravity="bottom"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
 
         <ImageView
-            android:src="@mipmap/chengzi"
-            android:layout_marginLeft="10dp"
+            android:id="@+id/imageView100"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/imageView100"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/chengzi" />
 
         <TextView
-            android:layout_marginTop="5dp"
-            android:lineSpacingExtra="4dp"
-            android:maxLines="2"
+            android:id="@+id/textView230"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView100"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:ellipsize="end"
-            android:layout_width="wrap_content"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_height="wrap_content"
-            android:text="奢润光彩美肌 全新香奈儿奢华精粹底妆全新香奈儿奢华精粹底妆"
-            android:id="@+id/textView230"
-            android:layout_alignTop="@+id/imageView100"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/imageView100"
             android:layout_toRightOf="@+id/imageView100"
-            android:layout_toEndOf="@+id/imageView100" />
+            android:ellipsize="end"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="2"
+            android:text="奢润光彩美肌 全新香奈儿奢华精粹底妆全新香奈儿奢华精粹底妆"
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/light_black"
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView231"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¥255"
-            android:id="@+id/textView231"
             android:layout_alignBottom="@+id/imageView100"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/imageView100"
             android:layout_toRightOf="@+id/imageView100"
-            android:layout_toEndOf="@+id/imageView100" />
+            android:text="¥255"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
     <TextView
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
-        android:background="@color/line_gray"/>
+        android:layout_marginBottom="10dp"
+        android:background="@color/line_gray" />
 
     <RelativeLayout
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp">
 
         <TextView
+            android:id="@+id/textView229"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="规格"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/textView229"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="规格"
+            android:textSize="@dimen/normal_textsize" />
 
         <com.sxbwstxpay.customview.FlowTagLayout
-            android:layout_marginRight="10dp"
             android:id="@+id/flowTagLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView229"
-            android:layout_toEndOf="@+id/textView229" />
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/textView229"
+            android:layout_toRightOf="@+id/textView229" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginBottom="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageImg"
         android:layout_alignLeft="@+id/textName"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignStart="@+id/textName" >
+        android:layout_alignStart="@+id/textName"
+        android:layout_marginBottom="30dp">
 
         <TextView
             android:id="@+id/textDelete"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/textView228"
+            android:layout_toRightOf="@+id/textView228"
             android:background="@color/line_gray"
             android:gravity="center"
             android:text="-"
-            android:textSize="@dimen/bigLitterText"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView228"
-            android:layout_toEndOf="@+id/textView228" />
+            android:textSize="@dimen/bigLitterText" />
 
         <TextView
             android:id="@+id/textNum"
@@ -137,16 +137,16 @@
             android:textSize="@dimen/bigLitterText" />
 
         <TextView
+            android:id="@+id/textView228"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="数量"
-            android:textSize="@dimen/normal_textsize"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/textView228"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:text="数量"
+            android:textSize="@dimen/normal_textsize" />
 
     </RelativeLayout>
 
@@ -155,32 +155,46 @@
         android:layout_height="@dimen/line_width"
         android:background="@color/line_gray" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <TextView
+        android:id="@+id/textDaoJiShi"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_weight="1"
+        android:background="@drawable/btn_jianbian180_basic_0dp"
+        android:gravity="center"
+        android:text="倒计时：00:01:02"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
+
+
+    <LinearLayout
+        android:id="@+id/viewKeGouMai"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <TextView
-            android:background="@color/white"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="16dp"
+            android:id="@+id/textAddCar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
             android:text="加入购物车"
             android:textColor="@color/light_black"
-            android:id="@+id/textAddCar" />
+            android:textSize="16dp" />
 
         <TextView
-            android:background="@drawable/btn_jianbian180_yellow_0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="16dp"
+            android:id="@+id/textQuick"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_jianbian180_yellow_0dp"
+            android:gravity="center"
             android:text="立即购买"
             android:textColor="@color/white"
-            android:id="@+id/textQuick" />
+            android:textSize="16dp" />
     </LinearLayout>
 </LinearLayout>

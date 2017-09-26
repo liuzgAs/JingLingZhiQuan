@@ -138,6 +138,8 @@ public class Constant {
         public static final String CART_UPDATECART = "&g=App&m=Cart&a=updateCart";
         //购物车删除
         public static final String CART_DELCART = "&g=App&m=Cart&a=delCart";
+        //确认订单请求
+        public static final String CART_ORDER = "&g=App&m=Cart&a=order";
     }
 
     public static class PERMISSION {

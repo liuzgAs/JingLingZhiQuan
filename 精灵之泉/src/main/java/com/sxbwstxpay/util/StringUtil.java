@@ -26,14 +26,16 @@ public class StringUtil {
 
     /**
      * 密码必须大于6位，且由字母及数字组合
+     *
      * @param password
      * @return
      */
-    public static boolean isPassword(String password){
+    public static boolean isPassword(String password) {
         String pass = "^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9]{6,}$";
         if (TextUtils.isEmpty(password)) return false;
         else return password.matches(pass);
     }
+
     /**
      * 验证邮箱
      *
@@ -52,6 +54,7 @@ public class StringUtil {
         }
         return flag;
     }
+
     /**
      * 验证合法字符
      *
@@ -69,15 +72,17 @@ public class StringUtil {
         }
         return flag;
     }
-    public static boolean isCarID(String carId){
+
+    public static boolean isCarID(String carId) {
         String telRegex = "[\\u4e00-\\u9fa5|WJ]{1}[A-Z0-9]{6}";
         if (TextUtils.isEmpty(carId)) return false;
         else return carId.matches(telRegex);
     }
+
     /**
      * 验证姓名
      */
-    public static boolean checkChineseName(String name){
+    public static boolean checkChineseName(String name) {
         boolean flag = false;
         try {
             Pattern p = Pattern.compile("[\u4e00-\u9fa5]*");
@@ -94,22 +99,37 @@ public class StringUtil {
 
     /**
      * 提取出城市或者县
+     *
      * @param city
      * @param district
      * @return
      */
-    public static String extractLocation(final String city, final String district){
+    public static String extractLocation(final String city, final String district) {
         return district.contains("县") ? district.substring(0, district.length() - 1) : city.substring(0, city.length() - 1);
     }
 
     //金额验证
-    public static boolean isAmount(String str){
-        Pattern pattern=Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 判断小数点后2位的数字的正则表达式
-        Matcher match=pattern.matcher(str);
-        if(match.matches()==false){
+    public static boolean isAmount(String str) {
+        Pattern pattern = Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 判断小数点后2位的数字的正则表达式
+        Matcher match = pattern.matcher(str);
+        if (match.matches() == false) {
             return false;
-        }else{
+        } else {
             return true;
         }
+    }
+
+    /**
+     * des： 秒数转换时分秒
+     * author： ZhangJieBo
+     * date： 2017/9/26 0026 下午 8:08
+     */
+    public static String TimeFormat(int progress) {
+        int hour = progress / 3600;
+        int min = progress % 3600 / 60;
+        int sec = progress % 60;
+        //设置整数的输出格式：  %02d  d代表int  2代码位数    0代表位数不够时前面补0
+        String time = String.format("%02d", hour) + ":" +String.format("%02d", min) + ":" + String.format("%02d", sec);
+        return time;
     }
 }

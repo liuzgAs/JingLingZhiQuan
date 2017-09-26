@@ -127,6 +127,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
                 break;
             case R.id.buttonJieSuan:
                 intent.setClass(this, QueRenDDActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.value,new CartIndex(adapter.getAllData()));
                 startActivity(intent);
                 break;
             case R.id.imageBack:
@@ -154,7 +155,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("购物车", s);
-//                try {
+                try {
                     CartIndex cartIndex = GsonUtils.parseJSON(s, CartIndex.class);
                     if (cartIndex.getStatus() == 1) {
                         List<CartIndex.CartBean> cartIndexCart = cartIndex.getCart();
@@ -169,9 +170,9 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
                     } else {
                         showError(cartIndex.getInfo());
                     }
-//                } catch (Exception e) {
-//                    showError("数据出错");
-//                }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
             }
 
             @Override

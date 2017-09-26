@@ -55,6 +55,7 @@ import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.RecycleViewDistancaUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.util.StringUtil;
 import com.sxbwstxpay.viewholder.ChanPinXQViewHolder;
 import com.sxbwstxpay.viewholder.LocalImageChanPinHolderView;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -73,6 +74,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Response;
 
@@ -105,6 +108,10 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             }
         }
     };
+    private Timer timer;
+    private TextView textDaoJiShi;
+    private int countdown;
+    private View viewKeGouMai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,7 +161,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
 
     @Override
     protected void initData() {
-        LogUtil.LogShitou("ChanPinXQActivity--initData", ""+userInfo.getUid());
+        LogUtil.LogShitou("ChanPinXQActivity--initData", "" + userInfo.getUid());
         onRefresh();
     }
 
@@ -179,7 +186,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(2));
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
-
+            private TextView textCountdown;
             private TextView textStock_num;
             private TextView textSale_add;
             private TextView textNum;
@@ -253,6 +260,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                         mai();
                     }
                 });
+                textCountdown = (TextView) header_xhan_pin_xq.findViewById(R.id.textCountdown);
                 return header_xhan_pin_xq;
             }
 
@@ -280,6 +288,39 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     textNum.setText("浏览" + goodsInfoAd.getNum() + "次");
                     textSale_add.setText(goodsInfoAd.getSale_add() + "人在售");
                     textStock_num.setText("剩余" + goodsInfoAd.getStock_num() + "库存");
+                    countdown = goodsInfoAd.getCountdown();
+                    LogUtil.LogShitou("ChanPinXQActivity--countdown", "" + countdown);
+                    if (timer!=null){
+                        timer.cancel();
+                    }
+                    timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LogUtil.LogShitou("ChanPinXQActivity--run", "" + countdown);
+                                    if (countdown >= 1) {
+                                        countdown--;
+                                        textCountdown.setText(StringUtil.TimeFormat(countdown));
+                                        if (textDaoJiShi!=null&&viewKeGouMai!=null){
+                                            textDaoJiShi.setText("倒计时 "+StringUtil.TimeFormat(countdown));
+                                            if (countdown>0){
+                                                textDaoJiShi.setVisibility(View.VISIBLE);
+                                                viewKeGouMai.setVisibility(View.GONE);
+                                            }else {
+                                                textDaoJiShi.setVisibility(View.GONE);
+                                                viewKeGouMai.setVisibility(View.VISIBLE);
+                                            }
+                                        }
+                                    }else {
+                                        timer.cancel();
+                                    }
+                                }
+                            });
+                        }
+                    }, 0, 1000);
                 }
             }
 
@@ -354,19 +395,28 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         });
     }
 
-    
+
     /**
      * des： 加入购物车弹窗
      * author： ZhangJieBo
      * date： 2017/9/26 0026 下午 4:04
      */
-    
+
     private void mai() {
         for (int i = 0; i < goodsInfoAdDes.size(); i++) {
             goodsInfoAdDes.get(i).setSelect(false);
         }
         LayoutInflater inflater = LayoutInflater.from(ChanPinXQActivity.this);
         View dialog_chan_pin = inflater.inflate(R.layout.dialog_chan_pin, null);
+        textDaoJiShi = (TextView) dialog_chan_pin.findViewById(R.id.textDaoJiShi);
+        viewKeGouMai = dialog_chan_pin.findViewById(R.id.viewKeGouMai);
+        if (countdown>0){
+            textDaoJiShi.setVisibility(View.VISIBLE);
+            viewKeGouMai.setVisibility(View.GONE);
+        }else {
+            textDaoJiShi.setVisibility(View.GONE);
+            viewKeGouMai.setVisibility(View.VISIBLE);
+        }
         final TextView textNum = (TextView) dialog_chan_pin.findViewById(R.id.textNum);
         textNum.setText(num + "");
         dialog_chan_pin.findViewById(R.id.textAddCar).setOnClickListener(new View.OnClickListener() {
@@ -583,7 +633,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 break;
         }
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -603,6 +653,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(receiver);
+        if (timer!=null){
+            timer.cancel();
+        }
     }
 
     /**

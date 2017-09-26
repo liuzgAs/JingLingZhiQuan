@@ -29,7 +29,7 @@
             android:src="@mipmap/xianshiqianggou" />
 
         <TextView
-            android:id="@+id/textView173"
+            android:id="@+id/textCountdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -47,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/textView173"
-            android:layout_toStartOf="@+id/textView173"
+            android:layout_toLeftOf="@+id/textCountdown"
+            android:layout_toStartOf="@+id/textCountdown"
             android:text="距离结束仅剩"
             android:textColor="@color/white"
             android:textSize="@dimen/litterText" />

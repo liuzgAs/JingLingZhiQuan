@@ -8,19 +8,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.sxbwstxpay.R;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.CartIndex;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.SimpleInfo;
+import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.QueRenDDViewHolder;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Response;
 
 public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private View viewBar;
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<Integer> adapter;
+    private CartIndex cartIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +51,8 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        cartIndex = (CartIndex) intent.getSerializableExtra(Constant.INTENT_KEY.value);
     }
 
     @Override
@@ -74,7 +90,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_queren_dd;
+                int layout = R.layout.view_dingdan;
                 return new QueRenDDViewHolder(parent, layout);
             }
 
@@ -110,12 +126,76 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
             }
         });
+        adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
+            @Override
+            public View onCreateView(ViewGroup parent) {
+                View item_queren_dd = LayoutInflater.from(QueRenDDActivity.this).inflate(R.layout.item_queren_dd, null);
+                return item_queren_dd;
+            }
+
+            @Override
+            public void onBindView(View headerView) {
+
+            }
+        });
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        List<String> cart = new ArrayList<>();
+        for (int i = 0; i < cartIndex.getCart().size(); i++) {
+            if (cartIndex.getCart().get(i).ischeck()){
+                cart.add(cartIndex.getCart().get(i).getId());
+            }
+        }
+        String url = Constant.HOST + Constant.Url.CART_ORDER;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid",userInfo.getUid());
+        params.put("tokenTime",tokenTime);
+        params.put("cart",GsonUtils.parseObject(cart));
+        return new OkObject(params, url);
     }
 
     public void onRefresh() {
-        adapter.clear();
-        adapter.add(1);
-        adapter.notifyDataSetChanged();
+        ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("", s);
+                try {
+                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                    if (simpleInfo.getStatus() == 1) {
+                    } else if (simpleInfo.getStatus()== 2) {
+                        MyDialog.showReLoginDialog(QueRenDDActivity.this);
+                    } else {
+                        showError(simpleInfo.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(QueRenDDActivity.this).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
     }
 
     @Override

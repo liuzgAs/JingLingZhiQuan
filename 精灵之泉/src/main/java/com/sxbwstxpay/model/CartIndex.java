@@ -1,11 +1,16 @@
 package com.sxbwstxpay.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by zhangjiebo on 2017/9/26 0026.
  */
-public class CartIndex {
+public class CartIndex implements Serializable{
+    public CartIndex(List<CartBean> cart) {
+        this.cart = cart;
+    }
+
     /**
      * cart : [{"id":"249","uid":"2","goods_id":"1","num":"","spe_name":"规格：a456","spe_id":"4","goods_price":"100.00","goods_img":"http://api.jlzquan.com/Uploads/goods/59c8b4abe6837.png","goods_title":"测试商品"},{"id":"252","uid":"2","goods_id":"1","num":"6","spe_name":"规格：a123","spe_id":"3","goods_price":"100.00","goods_img":"http://api.jlzquan.com/Uploads/goods/59c8b4abe6837.png","goods_title":"测试商品"}]
      * sum : 600
@@ -50,7 +55,7 @@ public class CartIndex {
         this.cart = cart;
     }
 
-    public static class CartBean {
+    public static class CartBean implements Serializable{
         /**
          * id : 249
          * uid : 2
