@@ -211,4 +211,14 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
     public void setSum(String sum){
         textSum.setText("¥"+sum);
     }
+
+
+    /**
+     * des： 删除item
+     * author： ZhangJieBo
+     * date： 2017/9/26 0026 下午 7:41
+     */
+    public void remove(int position){
+        adapter.remove(position);
+    }
 }

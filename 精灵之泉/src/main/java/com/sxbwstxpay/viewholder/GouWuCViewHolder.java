@@ -1,6 +1,8 @@
 package com.sxbwstxpay.viewholder;
 
+import android.content.DialogInterface;
 import android.support.annotation.LayoutRes;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -80,9 +82,13 @@ public class GouWuCViewHolder extends BaseViewHolder<CartIndex.CartBean> {
                 }
             }
         });
+        imageDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete();
+            }
+        });
     }
-
-
 
     @Override
     public void setData(CartIndex.CartBean data) {
@@ -101,6 +107,66 @@ public class GouWuCViewHolder extends BaseViewHolder<CartIndex.CartBean> {
         textSpe_name.setText(data.getSpe_name());
         textGoods_price.setText("¥" + data.getGoods_price());
         textNum.setText(data.getNum()+"");
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject1() {
+        String url = Constant.HOST + Constant.Url.CART_DELCART;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid",((GouWuCActivity) getContext()).userInfo.getUid());
+        params.put("tokenTime",((GouWuCActivity) getContext()).tokenTime);
+        params.put("cartId",data.getId());
+        return new OkObject(params, url);
+    }
+
+    /**
+     * des： 购物车删除
+     * author： ZhangJieBo
+     * date： 2017/9/26 0026 下午 7:38
+     */
+    private void delete() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("提示")
+                .setMessage("确定删除该商品吗？")
+                .setNegativeButton("否",null)
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((GouWuCActivity) getContext()).showLoadingDialog();
+                        ApiClient.post(getContext(), getOkObject1(), new ApiClient.CallBack() {
+                            @Override
+                            public void onSuccess(String s) {
+                                ((GouWuCActivity) getContext()).cancelLoadingDialog();
+                                LogUtil.LogShitou("GouWuCViewHolder--删除购物车", s+"");
+                                try {
+                                    CartUpdatecart cartUpdatecart = GsonUtils.parseJSON(s, CartUpdatecart.class);
+                                    if (cartUpdatecart.getStatus()==1){
+                                        ((GouWuCActivity) getContext()).remove(getDataPosition());
+                                        ((GouWuCActivity) getContext()).setSum(cartUpdatecart.getSum());
+                                    }else if (cartUpdatecart.getStatus()==2){
+                                        MyDialog.showReLoginDialog(getContext());
+                                    }else {
+                                        Toast.makeText(getContext(), cartUpdatecart.getInfo(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(getContext(),"数据出错", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Response response) {
+                                ((GouWuCActivity) getContext()).cancelLoadingDialog();
+                                Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                })
+                .create()
+                .show();
     }
 
     /**
