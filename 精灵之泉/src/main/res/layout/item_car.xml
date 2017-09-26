@@ -16,7 +16,7 @@
         android:src="@mipmap/weixuanzhong" />
 
     <ImageView
-        android:id="@+id/imageImg"
+        android:id="@+id/imageGoods_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerVertical="true"
@@ -27,14 +27,14 @@
         android:src="@mipmap/you" />
 
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/textGoods_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageImg"
+        android:layout_alignTop="@+id/imageGoods_img"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:layout_toEndOf="@+id/imageImg"
-        android:layout_toRightOf="@+id/imageImg"
+        android:layout_toEndOf="@+id/imageGoods_img"
+        android:layout_toRightOf="@+id/imageGoods_img"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="一品轩皇家有机食用调和油"
@@ -43,39 +43,39 @@
 
     <TextView
         android:layout_marginTop="5dp"
-        android:id="@+id/text111111"
+        android:id="@+id/textSpe_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="规格：买一送三"
         android:textSize="@dimen/normal_textsize"
-        android:layout_below="@+id/textName"
-        android:layout_alignLeft="@+id/textName"
-        android:layout_alignStart="@+id/textName" />
+        android:layout_below="@+id/textGoods_title"
+        android:layout_alignLeft="@+id/textGoods_title"
+        android:layout_alignStart="@+id/textGoods_title" />
 
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/textGoods_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¥78.00"
         android:textColor="@color/light_black"
         android:layout_marginTop="5dp"
         android:textSize="@dimen/bigText"
-        android:layout_below="@+id/text111111"
-        android:layout_alignLeft="@+id/text111111"
-        android:layout_alignStart="@+id/text111111" />
+        android:layout_below="@+id/textSpe_name"
+        android:layout_alignLeft="@+id/textSpe_name"
+        android:layout_alignStart="@+id/textSpe_name" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageImg"
+        android:layout_alignBottom="@+id/imageGoods_img"
         android:layout_alignLeft="@+id/textName"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignStart="@+id/textName">
+        android:layout_alignStart="@+id/textGoods_title">
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/textDelete"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
@@ -92,8 +92,8 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
-            android:layout_toEndOf="@+id/textView24"
-            android:layout_toRightOf="@+id/textView24"
+            android:layout_toEndOf="@+id/textDelete"
+            android:layout_toRightOf="@+id/textDelete"
             android:background="@color/line_gray"
             android:gravity="center"
             android:paddingLeft="30dp"
@@ -103,7 +103,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/textAdd"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"

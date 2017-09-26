@@ -132,6 +132,10 @@ public class Constant {
         public static final String GOODS_INFO = "&g=App&m=Goods&a=info";
         //购物车新增
         public static final String CART_ADDCART = "&g=App&m=Cart&a=addCart";
+        //购物车
+        public static final String CART_INDEX = "&g=App&m=Cart&a=index";
+        //购物车更新
+        public static final String CART_UPDATECART = "&g=App&m=Cart&a=updateCart";
     }
 
     public static class PERMISSION {
