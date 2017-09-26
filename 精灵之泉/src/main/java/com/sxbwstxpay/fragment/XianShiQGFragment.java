@@ -297,6 +297,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id,adapter.getItem(position).getId());
                 intent.setClass(getActivity(), ChanPinXQActivity.class);
                 startActivity(intent);
             }

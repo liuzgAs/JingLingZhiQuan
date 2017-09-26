@@ -7,28 +7,28 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageView101"
-        android:layout_width="wrap_content"
+        android:id="@+id/imageImg"
+        android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/kouhong" />
 
     <TextView
-        android:id="@+id/textView160"
+        android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView101"
+        android:layout_below="@+id/imageImg"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="一只口红"
         android:textSize="@dimen/litterText" />
 
     <TextView
-        android:id="@+id/textView161"
+        android:id="@+id/textPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView160"
+        android:layout_below="@+id/textTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:text="¥75.00"

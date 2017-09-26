@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/relativeLayout2"
-        app:layout_empty="@layout/view_empty"
         app:layout_progress="@layout/view_progress"
         app:scrollbarStyle="insideOverlay" />
 
@@ -61,7 +60,7 @@
             <TextView
                 android:background="@drawable/btn_jianbian180_yellow_0dp"
                 android:layout_weight="1"
-                android:id="@+id/textView163"
+                android:id="@+id/textMai1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -72,7 +71,7 @@
             <TextView
                 android:background="@drawable/btn_jianbian180_basic_0dp"
                 android:layout_weight="1"
-                android:id="@+id/textView164"
+                android:id="@+id/textMai2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

@@ -22,6 +22,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -229,6 +230,10 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id,adapter.getItem(position).getId());
+                intent.setClass(getActivity(), ChanPinXQActivity.class);
+                startActivity(intent);
             }
         });
     }

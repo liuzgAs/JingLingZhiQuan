@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView102"
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/chanPinXQBanner"
-        android:layout_gravity="center_horizontal"
         android:background="@color/white"
-        android:src="@mipmap/chanpinxq" />
+        app:canLoop="true" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,269 +55,295 @@
     </RelativeLayout>
 
     <TextView
-        android:background="@color/white"
-        android:id="@+id/textView178"
-        android:layout_width="wrap_content"
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
         android:padding="10dp"
         android:text="奢润光采美肌 全新香奈儿奢华精粹底妆全新香奈儿奢华精粹底妆"
         android:textColor="@color/light_black"
         android:textSize="@dimen/MoreBigText" />
 
     <RelativeLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white">
 
         <TextView
+            android:id="@+id/textPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¥2999"
-            android:textSize="18dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/light_black"
-            android:id="@+id/textView179"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="¥2999"
+            android:textColor="@color/light_black"
+            android:textSize="18dp" />
 
         <TextView
+            android:id="@+id/textView180"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="/"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:id="@+id/textView180"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView179"
-            android:layout_toEndOf="@+id/textView179" />
+            android:layout_toEndOf="@+id/textPrice"
+            android:layout_toRightOf="@+id/textPrice"
+            android:text="/" />
 
         <TextView
-            android:textColor="@color/basic_color"
+            android:id="@+id/textGoods_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="赚150"
-            android:textSize="@dimen/normal_textsize"
-            android:id="@+id/textView181"
             android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/textView180"
             android:layout_toRightOf="@+id/textView180"
-            android:layout_toEndOf="@+id/textView180" />
+            android:text="赚150"
+            android:textColor="@color/basic_color"
+            android:textSize="@dimen/normal_textsize" />
 
     </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/white"/>
+        android:background="@color/white" />
 
     <LinearLayout
-        android:background="@color/white"
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="35dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <ImageView
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/duigougreen"
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/imageView105"
-                android:layout_centerVertical="true"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/duigougreen" />
 
             <TextView
+                android:id="@+id/textNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="浏览23412次"
-                android:textSize="@dimen/litterText"
-                android:layout_marginLeft="5dp"
-                android:id="@+id/textView182"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/imageView105"
                 android:layout_toRightOf="@+id/imageView105"
-                android:layout_toEndOf="@+id/imageView105" />
+                android:text="浏览23412次"
+                android:textSize="@dimen/litterText" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <ImageView
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/duigougreen"
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/imageView106"
-                android:layout_centerVertical="true"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/duigougreen" />
 
             <TextView
+                android:id="@+id/textSale_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="19862人在售"
-                android:textSize="@dimen/litterText"
-                android:layout_marginLeft="5dp"
-                android:id="@+id/textView194"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/imageView106"
                 android:layout_toRightOf="@+id/imageView106"
-                android:layout_toEndOf="@+id/imageView106" />
+                android:text="19862人在售"
+                android:textSize="@dimen/litterText" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <ImageView
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/duigougreen"
+                android:id="@+id/imageView107"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView107"
-                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/duigougreen" />
 
             <TextView
+                android:id="@+id/textStock_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="剩余500库存"
-                android:textSize="@dimen/litterText"
-                android:layout_marginLeft="5dp"
-                android:id="@+id/textView195"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/imageView107"
                 android:layout_toRightOf="@+id/imageView107"
-                android:layout_toEndOf="@+id/imageView107" />
+                android:text="剩余500库存"
+                android:textSize="@dimen/litterText" />
         </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:background="@drawable/layout_selector_white_system_gray"
+        android:id="@+id/viewGuiGe"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView196"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="规格选择"
-            android:id="@+id/textView196"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="规格选择"
+            android:textSize="@dimen/normal_textsize" />
 
         <ImageView
-            android:src="@mipmap/right_big"
-            android:layout_marginRight="10dp"
+            android:id="@+id/imageView108"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView108"
-            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/right_big" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:background="@drawable/layout_selector_white_system_gray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_gravity="center_horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/layout_selector_white_system_gray"
+        android:visibility="gone">
 
         <TextView
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView197"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="查看素材"
-            android:id="@+id/textView197"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="查看素材"
+            android:textSize="@dimen/normal_textsize" />
 
         <ImageView
-            android:src="@mipmap/right_big"
-            android:layout_marginRight="10dp"
+            android:id="@+id/imageView109"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView109"
-            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/right_big" />
 
         <TextView
-            android:layout_marginRight="10dp"
-            android:textSize="@dimen/litterText"
+            android:id="@+id/textView198"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="18组"
-            android:id="@+id/textView198"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/imageView109"
-            android:layout_toStartOf="@+id/imageView109" />
+            android:layout_toStartOf="@+id/imageView109"
+            android:text="18组"
+            android:textSize="@dimen/litterText" />
     </RelativeLayout>
+
     <android.support.design.widget.TabLayout
-        android:layout_marginTop="10dp"
-        app:tabMode="fixed"
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         app:tabIndicatorColor="@color/basic_color"
         app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="@color/basic_color"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
         app:tabTextColor="@color/light_black" />
-    <com.sxbwstxpay.customview.ListView4ScrollView
-        android:id="@+id/listView"
+
+    <LinearLayout
+        android:id="@+id/viewXiangQing"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:textSize="@dimen/normal_textsize"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="宝贝"
+            android:id="@+id/textIntro" />
+
+        <com.sxbwstxpay.customview.ListView4ScrollView
+            android:id="@+id/listView01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <com.sxbwstxpay.customview.ListView4ScrollView
+        android:id="@+id/listView02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight">
 
         <TextView
-            android:textColor="@color/light_black"
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textView199"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:text="商品推荐"
-            android:id="@+id/textView199"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="40dp"
-            android:background="@color/basic_color"
-            android:layout_height="1dp"
             android:id="@+id/textView200"
+            android:layout_width="40dp"
+            android:layout_height="1dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/textView199"
             android:layout_toRightOf="@+id/textView199"
-            android:layout_toEndOf="@+id/textView199" />
+            android:background="@color/basic_color" />
 
         <TextView
-            android:layout_marginRight="10dp"
-            android:layout_width="40dp"
-            android:background="@color/basic_color"
-            android:layout_height="1dp"
             android:id="@+id/textView201"
+            android:layout_width="40dp"
+            android:layout_height="1dp"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/textView199"
-            android:layout_toStartOf="@+id/textView199" />
+            android:layout_toStartOf="@+id/textView199"
+            android:background="@color/basic_color" />
     </RelativeLayout>
 </LinearLayout>

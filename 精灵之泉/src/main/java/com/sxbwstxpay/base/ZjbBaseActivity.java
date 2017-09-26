@@ -10,12 +10,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.umeng.analytics.MobclickAgent;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
+import com.sxbwstxpay.util.LogUtil;
+import com.umeng.analytics.MobclickAgent;
+
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 
@@ -50,6 +51,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
         changeControl = Constant.changeControl - 1;
         ACache aCache = ACache.get(this, Constant.ACACHE.App);
         userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
+        LogUtil.LogShitou("ZjbBaseActivity--init", ""+userInfo.getUid());
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
         initSP();
         initIntent();

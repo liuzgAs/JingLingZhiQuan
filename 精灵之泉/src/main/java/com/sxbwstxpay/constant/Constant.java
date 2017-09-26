@@ -128,6 +128,10 @@ public class Constant {
         public static final String GOODS_INDEX = "&g=App&m=Goods&a=index";
         //商品上架
         public static final String INDEX_UPGOODS = "&g=App&m=Index&a=upGoods";
+        //产品详情
+        public static final String GOODS_INFO = "&g=App&m=Goods&a=info";
+        //购物车新增
+        public static final String CART_ADDCART = "&g=App&m=Cart&a=addCart";
     }
 
     public static class PERMISSION {

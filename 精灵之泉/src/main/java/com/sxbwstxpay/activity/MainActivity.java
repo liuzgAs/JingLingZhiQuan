@@ -39,7 +39,7 @@ import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
 import com.sxbwstxpay.model.ExtraMap;
-import com.sxbwstxpay.model.IndexDataBean;
+import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.BackHandlerHelper;
@@ -180,8 +180,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.EXTRAMAP);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
@@ -209,14 +209,7 @@ public class MainActivity extends AppCompatActivity {
      * author： ZhangJieBo
      * date： 2017/9/25 0025 上午 11:54
      */
-    public void share(final IndexDataBean.ShareBean share) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-////                bitmap = netPicToBmp(share.getShareImg());
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
+    public void share(final ShareBean share) {
         LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
         View dialog_shengji = inflater.inflate(R.layout.dianlog_index_share, null);
         TextView textDes1 = (TextView) dialog_shengji.findViewById(R.id.textDes1);
@@ -264,46 +257,6 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog1.dismiss();
             }
         });
-//                        dialog_shengji.findViewById(R.id.relaShouCang).setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                wxShare(2, share);
-//                                alertDialog1.dismiss();
-//                                alertDialog1.dismiss();
-//                            }
-//                        });
-//                        dialog_shengji.findViewById(R.id.relatQQ).setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                final Bundle params = new Bundle();
-//                                params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-//                                params.putString(QQShare.SHARE_TO_QQ_TITLE, share.getTitle());
-//                                params.putString(QQShare.SHARE_TO_QQ_SUMMARY, share.getShareDes());
-//                                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, share.getShareUrl());
-//                                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, share.getShareImg());
-//                                params.putString(QQShare.SHARE_TO_QQ_APP_NAME, getResources().getString(R.string.app_name));
-////                        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, );
-//                                mTencent.shareToQQ(MainActivity.this, params,new BaseUiListener());
-//                                alertDialog1.dismiss();
-//                            }
-//                        });
-//                        dialog_shengji.findViewById(R.id.relaQzone).setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                final Bundle params = new Bundle();
-//                                params.putString(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_KEY_TYPE);
-//                                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, share.getTitle());
-//                                params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, share.getShareDes());
-//                                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, share.getShareUrl());
-//                                params.putString(QzoneShare.SHARE_TO_QQ_IMAGE_URL, share.getShareImg());
-//                                params.putString(QzoneShare.SHARE_TO_QQ_APP_NAME, getResources().getString(R.string.app_name));
-//                                ArrayList<String> value = new ArrayList<String>();
-//                                value.add(share.getShareImg());
-//                                params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, value);
-//                                mTencent.shareToQzone(MainActivity.this, params, new BaseUiListener());
-//                                alertDialog1.dismiss();
-//                            }
-//                        });
         Window dialogWindow = alertDialog1.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
         dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
@@ -311,10 +264,6 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics d = MainActivity.this.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
         lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
         dialogWindow.setAttributes(lp);
-//                    }
-//                });
-//            }
-//        }).start();
     }
 
     /**
@@ -339,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void wxShare(final int flag, final IndexDataBean.ShareBean share) {
+    private void wxShare(final int flag, final ShareBean share) {
         api.registerApp(Constant.WXAPPID);
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = share.getShareUrl();
