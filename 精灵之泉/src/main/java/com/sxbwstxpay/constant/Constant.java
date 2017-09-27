@@ -142,6 +142,12 @@ public class Constant {
         public static final String CART_ORDER = "&g=App&m=Cart&a=order";
         //地址保存
         public static final String USER_SAVEADDRESS = "&g=App&m=User&a=saveAddress";
+        //地址列表
+        public static final String USER_ADDRESS = "&g=App&m=User&a=address";
+        //地址设为默认
+        public static final String USER_ADDRESSDEFAULT = "&g=App&m=User&a=addressDefault";
+        //删除地址
+        public static final String USER_DELADDRESS = "&g=App&m=User&a=delAddress";
     }
 
     public static class PERMISSION {

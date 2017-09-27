@@ -21,6 +21,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ProvinceBean;
 import com.sxbwstxpay.model.SimpleInfo;
+import com.sxbwstxpay.model.UserAddress;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GetJsonDataUtil;
 import com.sxbwstxpay.util.GsonUtils;
@@ -46,7 +47,7 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
     private EditText editConsignee;
     private EditText editPhone;
     private EditText editAddress;
-    private String id;
+    private UserAddress.DataBean value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
     @Override
     protected void initIntent() {
         Intent intent = getIntent();
-        id = intent.getStringExtra(Constant.INTENT_KEY.id);
+        value = (UserAddress.DataBean)intent.getSerializableExtra(Constant.INTENT_KEY.value);
     }
 
     @Override
@@ -87,6 +88,13 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
+        if (value!=null){
+            textArea.setText(value.getArea());
+            editConsignee.setText(value.getConsignee());
+            editConsignee.setSelection(value.getConsignee().length());
+            editPhone.setText(value.getPhone());
+            editAddress.setText(value.getAddress());
+        }
     }
 
     @Override
@@ -144,7 +152,7 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
                     Toast.makeText(XinZengDZActivity.this, "请输入联系人姓名", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (StringUtil.isMobileNO(editPhone.getText().toString().trim())) {
+                if (!StringUtil.isMobileNO(editPhone.getText().toString().trim())) {
                     Toast.makeText(XinZengDZActivity.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -174,8 +182,8 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
-        if (!TextUtils.isEmpty(id)) {
-            params.put("id", id);
+        if (value!=null) {
+            params.put("id", value.getId());
         }
         params.put("consignee", editConsignee.getText().toString().trim());
         params.put("phone", editPhone.getText().toString().trim());
@@ -202,7 +210,11 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
                         Intent intent = new Intent();
                         intent.setAction(Constant.BROADCASTCODE.address);
                         sendBroadcast(intent);
-                        MyDialog.dialogFinish(XinZengDZActivity.this,"新增地址成功！");
+                        if (value!=null){
+                            MyDialog.dialogFinish(XinZengDZActivity.this,"修改地址成功！");
+                        }else {
+                            MyDialog.dialogFinish(XinZengDZActivity.this,"新增地址成功！");
+                        }
                     } else if (simpleInfo.getStatus() == 2) {
                         MyDialog.showReLoginDialog(XinZengDZActivity.this);
                     } else {

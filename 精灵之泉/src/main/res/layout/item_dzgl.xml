@@ -11,7 +11,7 @@
         android:layout_gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/textView165"
+            android:id="@+id/textConsignee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -23,24 +23,25 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView166"
+            android:id="@+id/textPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textView165"
-            android:layout_toEndOf="@+id/textView165"
-            android:layout_toRightOf="@+id/textView165"
+            android:layout_alignTop="@+id/textConsignee"
+            android:layout_toEndOf="@+id/textConsignee"
+            android:layout_toRightOf="@+id/textConsignee"
             android:text="18370061888"
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
+            android:layout_marginRight="10dp"
             android:textColor="@color/light_black"
             android:layout_marginLeft="10dp"
-            android:id="@+id/textView167"
+            android:id="@+id/textAreaAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView165"
-            android:text="福建省 厦门市 思明区 观音山互动创想有限公司"
+            android:layout_below="@+id/textConsignee"
+            android:text="福建省 厦门市 思明区 观音山互动创想有限公司福建省 厦门市 思明区 观音山互动创想有限公司"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
@@ -56,27 +57,6 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal">
 
-        <ImageView
-            android:paddingRight="5dp"
-            android:paddingLeft="10dp"
-            android:src="@mipmap/weixuanzhong"
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView35"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:textSize="@dimen/litterText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="设置默认地址"
-            android:id="@+id/textView168"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imageView35"
-            android:layout_toEndOf="@+id/imageView35" />
-
         <Button
             android:layout_marginRight="10dp"
             android:textSize="@dimen/litterText"
@@ -84,7 +64,7 @@
             android:layout_width="65dp"
             android:layout_height="28dp"
             android:text="删除"
-            android:id="@+id/button7"
+            android:id="@+id/buttonDelete"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
@@ -98,7 +78,37 @@
             android:text="编辑"
             android:id="@+id/buttonBianJi"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/button7"
-            android:layout_toStartOf="@+id/button7" />
+            android:layout_toLeftOf="@+id/buttonDelete"
+            android:layout_toStartOf="@+id/buttonDelete" />
+
+        <RelativeLayout
+            android:id="@+id/viewDefa"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:textSize="@dimen/litterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设置默认地址"
+                android:id="@+id/textView168"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageDefa"
+                android:layout_toEndOf="@+id/imageDefa" />
+
+            <ImageView
+                android:paddingRight="5dp"
+                android:paddingLeft="10dp"
+                android:src="@mipmap/weixuanzhong"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageDefa"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

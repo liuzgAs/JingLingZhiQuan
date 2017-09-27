@@ -79,7 +79,7 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
 
     public void showLoadingDialog() {
         if (mAlertDialog == null) {
-            View dialog_progress = getLayoutInflater(getArguments()).inflate(R.layout.view_progress, null);
+            View dialog_progress = getLayoutInflater(getArguments()).inflate(R.layout.view_progress01, null);
             mAlertDialog = new AlertDialog.Builder(getActivity(), R.style.dialog)
                     .setView(dialog_progress)
                     .setCancelable(false)

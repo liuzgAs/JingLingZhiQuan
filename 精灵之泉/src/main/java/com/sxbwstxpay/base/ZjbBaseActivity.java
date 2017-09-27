@@ -114,7 +114,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
 
     public void showLoadingDialog() {
         if (mAlertDialog == null) {
-            View dialog_progress = getLayoutInflater().inflate(R.layout.view_progress, null);
+            View dialog_progress = getLayoutInflater().inflate(R.layout.view_progress01, null);
             mAlertDialog = new AlertDialog.Builder(this, R.style.dialog)
                     .setView(dialog_progress)
                     .setCancelable(false)

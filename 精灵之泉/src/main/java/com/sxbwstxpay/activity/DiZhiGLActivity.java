@@ -1,12 +1,15 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,20 +18,39 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
-
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
-import com.sxbwstxpay.provider.DataProvider;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.UserAddress;
+import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.DiZhiGLViewHolder;
 
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Response;
+
 public class DiZhiGLActivity extends ZjbBaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<Integer> adapter;
-    private Handler handler = new Handler();
-    private int page = 1;
+    public RecyclerArrayAdapter<UserAddress.DataBean> adapter;
     private View include;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.address:
+                    onRefresh();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,18 +90,13 @@ public class DiZhiGLActivity extends ZjbBaseActivity implements SwipeRefreshLayo
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(DiZhiGLActivity.this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<UserAddress.DataBean>(DiZhiGLActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_dzgl;
                 return new DiZhiGLViewHolder(parent, layout);
             }
 
-            @Override
-            public int getViewType(int position) {
-                Integer item = getItem(position);
-                return item;
-            }
         });
 
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
@@ -93,49 +110,6 @@ public class DiZhiGLActivity extends ZjbBaseActivity implements SwipeRefreshLayo
             @Override
             public void onBindView(View headerView) {
 
-            }
-        });
-        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
-            @Override
-            public void onMoreShow() {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.addAll(DataProvider.getPersonList(page));
-                        page++;
-                    }
-                }, 500);
-            }
-
-            @Override
-            public void onMoreClick() {
-
-            }
-        });
-        adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
-            @Override
-            public void onNoMoreShow() {
-
-            }
-
-            @Override
-            public void onNoMoreClick() {
-            }
-        });
-        adapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
-            @Override
-            public void onErrorShow() {
-                adapter.resumeMore();
-            }
-
-            @Override
-            public void onErrorClick() {
-                adapter.resumeMore();
-            }
-        });
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
             }
         });
         recyclerView.setRefreshListener(this);
@@ -152,17 +126,60 @@ public class DiZhiGLActivity extends ZjbBaseActivity implements SwipeRefreshLayo
         onRefresh();
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.USER_ADDRESS;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid",userInfo.getUid());
+        params.put("tokenTime",tokenTime);
+        return new OkObject(params, url);
+    }
+
     @Override
     public void onRefresh() {
-        page = 1;
-        handler.postDelayed(new Runnable() {
+        ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
             @Override
-            public void run() {
-                adapter.clear();
-                adapter.addAll(DataProvider.getPersonList(page));
-                page++;
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("地址列表", s);
+                try {
+                    UserAddress userAddress = GsonUtils.parseJSON(s, UserAddress.class);
+                    if (userAddress.getStatus() == 1) {
+                        List<UserAddress.DataBean> userAddressData = userAddress.getData();
+                        adapter.clear();
+                        adapter.addAll(userAddressData);
+                    } else if (userAddress.getStatus()== 2) {
+                        MyDialog.showReLoginDialog(DiZhiGLActivity.this);
+                    } else {
+                        showError(userAddress.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
             }
-        }, 500);
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(DiZhiGLActivity.this).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        recyclerView.showProgress();
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
     }
 
     @Override
@@ -177,5 +194,19 @@ public class DiZhiGLActivity extends ZjbBaseActivity implements SwipeRefreshLayo
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.address);
+        registerReceiver(reciver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }
