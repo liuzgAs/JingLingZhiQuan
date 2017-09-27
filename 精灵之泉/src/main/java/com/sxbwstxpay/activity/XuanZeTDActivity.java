@@ -139,6 +139,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                 view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        recyclerView.showProgress();
                         initData();
                     }
                 });

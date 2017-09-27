@@ -13,6 +13,7 @@ import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.model.ProvinceBean;
 import com.sxbwstxpay.util.GetJsonDataUtil;
 import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 
 import java.lang.reflect.Type;
@@ -26,6 +27,7 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
     private List<ProvinceBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    private List<ProvinceBean> jsonBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,37 +81,36 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.viewChooseDiQu:
-                OptionsPickerView pvOptions = new  OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
+                /**
+                 * 注意 ：如果是三级联动的数据(省市区等)，请参照 JsonDataActivity 类里面的写法。
+                 */
+
+                OptionsPickerView pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
                     @Override
-                    public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
-                        //返回的分别是三个级别的选中位置
-                        String tx = options1Items.get(options1).getName()
-                                + options2Items.get(options1).get(option2)
-                                + options3Items.get(options1).get(option2).get(options3);
-                        textArea.setText(tx);
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        textArea.setText(options1Items.get(options1).getPickerViewText()+options2Items.get(options2)+options3Items.get(options2).get(options3));
                     }
                 })
-                        .setSubmitText("确定")//确定按钮文字
-                        .setCancelText("取消")//取消按钮文字
-                        .setTitleText("城市选择")//标题
-                        .setSubCalSize(18)//确定和取消文字大小
-                        .setTitleSize(20)//标题文字大小
-                        .setTitleColor(Color.BLACK)//标题文字颜色
-                        .setSubmitColor(Color.BLUE)//确定按钮文字颜色
-                        .setCancelColor(Color.BLUE)//取消按钮文字颜色
-                        .setTitleBgColor(0xFF333333)//标题背景颜色 Night mode
-                        .setBgColor(0xFF000000)//滚轮背景颜色 Night mode
-                        .setContentTextSize(18)//滚轮文字大小
-                        .setLinkage(false)//设置是否联动，默认true
-                        .setLabels("省", "市", "区")//设置选择的三级单位
+                        .setTitleText("城市选择")
+                        .setContentTextSize(20)//设置滚轮文字大小
+                        .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+                        .setSelectOptions(0, 0, 0)//默认选中项
+                        .setBgColor(getResources().getColor(R.color.background))
+                        .setTitleBgColor(getResources().getColor(R.color.white))
+                        .setTitleColor(getResources().getColor(R.color.light_black))
+                        .setCancelColor(getResources().getColor(R.color.text_gray))
+                        .setSubmitColor(getResources().getColor(R.color.basic_color))
+                        .setTextColorCenter(getResources().getColor(R.color.basic_color))
                         .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                        .setCyclic(false, false, false)//循环与否
-                        .setSelectOptions(1, 1, 1)  //设置默认选中项
-                        .setOutSideCancelable(false)//点击外部dismiss default true
-                        .isDialog(true)//是否显示为对话框样式
+                        .setLabels("省", "市", "区")
+                        .setBackgroundId(0x66000000) //设置外部遮罩颜色
                         .build();
 
-                pvOptions.setPicker(options1Items, options2Items, options3Items);//添加数据源
+                //pvOptions.setSelectOptions(1,1);
+        /*pvOptions.setPicker(options1Items);//一级选择器*/
+//                pvOptions.setPicker(options1Items, options2Items);//二级选择器
+                pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+                pvOptions.show();
                 break;
             case R.id.buttonBaoCun:
 
@@ -127,10 +128,10 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
          * 关键逻辑在于循环体
          *
          * */
-        String JsonData = new GetJsonDataUtil().getJson(this,"province.json");//获取assets目录下的json文件数据
+        String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
         Type type = new TypeToken<ArrayList<ProvinceBean>>() {
         }.getType();
-        List<ProvinceBean> provinceBeanList = GsonUtils.parseJSONArray(JsonData, type);
+        jsonBean = GsonUtils.parseJSONArray(JsonData, type);
 
         /**
          * 添加省份数据
@@ -138,25 +139,25 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
          * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
          * PickerView会通过getPickerViewText方法获取字符串显示出来。
          */
-        options1Items = provinceBeanList;
-        for (int i=0;i<provinceBeanList.size();i++){//遍历省份
+        options1Items = jsonBean;
+        for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
             ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
             ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
 
-            for (int c=0; c<provinceBeanList.get(i).getCity().size(); c++){//遍历该省份的所有城市
-                String CityName = provinceBeanList.get(i).getCity().get(c).getName();
+            for (int c = 0; c < jsonBean.get(i).getCity().size(); c++) {//遍历该省份的所有城市
+                String CityName = jsonBean.get(i).getCity().get(c).getName();
                 CityList.add(CityName);//添加城市
 
                 ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
 
                 //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
-                if (provinceBeanList.get(i).getCity().get(c).getArea() == null
-                        ||provinceBeanList.get(i).getCity().get(c).getArea().size()==0) {
+                if (jsonBean.get(i).getCity().get(c).getArea() == null
+                        || jsonBean.get(i).getCity().get(c).getArea().size() == 0) {
                     City_AreaList.add("");
-                }else {
+                } else {
 
-                    for (int d=0; d < provinceBeanList.get(i).getCity().get(c).getArea().size(); d++) {//该城市对应地区所有数据
-                        String AreaName = provinceBeanList.get(i).getCity().get(c).getArea().get(d);
+                    for (int d = 0; d < jsonBean.get(i).getCity().get(c).getArea().size(); d++) {//该城市对应地区所有数据
+                        String AreaName = jsonBean.get(i).getCity().get(c).getArea().get(d);
 
                         City_AreaList.add(AreaName);//添加该城市所有地区数据
                     }
@@ -174,6 +175,9 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
              */
             options3Items.add(Province_AreaList);
         }
+        LogUtil.LogShitou("XinZengDZActivity--options1Items", "" + options1Items.size());
+        LogUtil.LogShitou("XinZengDZActivity--options2Items", "" + options2Items.size());
+        LogUtil.LogShitou("XinZengDZActivity--options3Items", "" + options3Items.size());
     }
 
 }

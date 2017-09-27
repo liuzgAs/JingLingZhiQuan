@@ -429,6 +429,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                 view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        recyclerView.showProgress();
                         initData();
                     }
                 });

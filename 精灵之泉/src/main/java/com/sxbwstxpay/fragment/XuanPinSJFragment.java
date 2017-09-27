@@ -297,6 +297,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        recyclerView.showProgress();
                         initData();
                     }
                 });

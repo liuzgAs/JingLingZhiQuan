@@ -140,6 +140,7 @@ public class TuWenTGActivity extends ZjbBaseActivity implements SwipeRefreshLayo
                 view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        recyclerView.showProgress();
                         initData();
                     }
                 });

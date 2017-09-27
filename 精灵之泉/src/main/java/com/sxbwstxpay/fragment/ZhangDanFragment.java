@@ -17,11 +17,6 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
-
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
@@ -32,6 +27,11 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.viewholder.ZhangDanViewHolder;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+
 import okhttp3.Response;
 
 /**
@@ -279,6 +279,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                 view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        recyclerView.showProgress();
                         initData();
                     }
                 });
