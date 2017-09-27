@@ -284,6 +284,9 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                 try {
                     CartNeworder cartNeworder = GsonUtils.parseJSON(s, CartNeworder.class);
                     if (cartNeworder.getStatus()==1){
+                        Intent intent1 = new Intent();
+                        intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+                        sendBroadcast(intent1);
                         Intent intent = new Intent();
                         intent.setClass(QueRenDDActivity.this,ZhiFuActivity.class);
                         intent.putExtra(Constant.INTENT_KEY.id,cartNeworder.getOid());

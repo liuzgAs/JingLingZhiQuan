@@ -1,8 +1,10 @@
 package com.sxbwstxpay.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,7 +124,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
                 header_zhi_fu_cg.findViewById(R.id.textFanHuiSC).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       finish();
+                        finish();
                     }
                 });
                 return header_zhi_fu_cg;
@@ -131,11 +133,11 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
             @Override
             public void onBindView(View headerView) {
                 textStatusText.setText(statusText);
-                if (isVip==1){
+                if (isVip == 1) {
                     textVipText.setText(vipText);
                     textVipText.setVisibility(View.VISIBLE);
                     textLiJiLiaoJie.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     textVipText.setVisibility(View.GONE);
                     textLiJiLiaoJie.setVisibility(View.GONE);
                 }
@@ -159,9 +161,9 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.ORDER_PAYS;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
-        params.put("tokenTime",tokenTime);
-        params.put("oid",oid);
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("oid", oid);
         return new OkObject(params, url);
     }
 
@@ -217,12 +219,39 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.imageBack:
-                finish();
+                new AlertDialog.Builder(this)
+                        .setTitle("提示")
+                        .setMessage("订单未支付，确定要退出吗？\n（可在我的订单页面查看）")
+                        .setNegativeButton("否", null)
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                        .create()
+                        .show();
                 break;
             case R.id.viewGouWuChe:
                 intent.setClass(this, GouWuCActivity.class);
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("提示")
+                .setMessage("订单未支付，确定要退出吗？\n（可在我的订单页面查看）")
+                .setNegativeButton("否", null)
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .create()
+                .show();
     }
 }
