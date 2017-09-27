@@ -223,7 +223,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                                             List<IndexDataBean> indexGoodsData = indexGoods.getData();
                                             adapter.removeAll();
                                             adapter.addAll(indexGoodsData);
-                                        } else if (indexGoods.getStatus() == 2) {
+                                        } else if (indexGoods.getStatus() == 3) {
                                             MyDialog.showReLoginDialog(getActivity());
                                         } else {
                                             showError(indexGoods.getInfo());
@@ -420,7 +420,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         List<IndexDataBean> indexGoodsData = indexGoods.getData();
                         adapter.clear();
                         adapter.addAll(indexGoodsData);
-                    } else if (indexGoods.getStatus() == 2) {
+                    } else if (indexGoods.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         showError(indexGoods.getInfo());

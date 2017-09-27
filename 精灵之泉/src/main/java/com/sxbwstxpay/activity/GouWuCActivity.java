@@ -169,7 +169,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
                         adapter.clear();
                         adapter.addAll(cartIndexCart);
                         viewQuJieSuan.setVisibility(View.VISIBLE);
-                    } else if (cartIndex.getStatus() == 2) {
+                    } else if (cartIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(GouWuCActivity.this);
                     } else {
                         showError(cartIndex.getInfo());

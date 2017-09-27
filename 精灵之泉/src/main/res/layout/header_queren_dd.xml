@@ -27,7 +27,7 @@
                 android:layout_alignParentTop="true">
 
                 <TextView
-                    android:id="@+id/textView345"
+                    android:id="@+id/textConsignee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -39,21 +39,21 @@
                     android:textSize="@dimen/normal_textsize" />
 
                 <TextView
-                    android:id="@+id/textView346"
+                    android:id="@+id/textPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="50dp"
                     android:layout_marginStart="50dp"
-                    android:layout_toEndOf="@+id/textView345"
-                    android:layout_toRightOf="@+id/textView345"
+                    android:layout_toEndOf="@+id/textConsignee"
+                    android:layout_toRightOf="@+id/textConsignee"
                     android:text="18370061888"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/normal_textsize" />
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/textView347"
+                android:id="@+id/textAreaAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"

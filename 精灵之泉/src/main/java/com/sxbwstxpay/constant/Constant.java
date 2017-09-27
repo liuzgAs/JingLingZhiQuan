@@ -148,6 +148,10 @@ public class Constant {
         public static final String USER_ADDRESSDEFAULT = "&g=App&m=User&a=addressDefault";
         //删除地址
         public static final String USER_DELADDRESS = "&g=App&m=User&a=delAddress";
+        //确认订单提交
+        public static final String CART_NEWORDER = "&g=App&m=Cart&a=newOrder";
+        //支付界面
+        public static final String ORDER_PAY = "&g=App&m=Order&a=pay";
     }
 
     public static class PERMISSION {
@@ -195,6 +199,7 @@ public class Constant {
         public static final int IMAGE_HEAD = 2024;
         public static final int IMAGE_WX = 2025;
         public static final int BaoCun= 2026;
+        public static final int address= 2027;
     }
 
     public static class ACACHE {

@@ -132,7 +132,7 @@
             android:paddingRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/editText19"
+            android:id="@+id/editPayMsg"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView358"
             android:layout_toEndOf="@+id/textView358" />

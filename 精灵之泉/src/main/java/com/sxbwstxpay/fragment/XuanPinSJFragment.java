@@ -275,7 +275,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         List<IndexDataBean> goodsIndexData = goodsIndex.getData();
                         adapter.clear();
                         adapter.addAll(goodsIndexData);
-                    } else if (goodsIndex.getStatus() == 2) {
+                    } else if (goodsIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         showError(goodsIndex.getInfo());

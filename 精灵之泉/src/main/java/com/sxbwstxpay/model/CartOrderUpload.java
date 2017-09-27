@@ -10,6 +10,14 @@ public class CartOrderUpload {
     private String uid;
     private String tokenTime;
 
+    public List<String> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<String> cart) {
+        this.cart = cart;
+    }
+
     public CartOrderUpload(List<String> cart, String uid, String tokenTime) {
         this.cart = cart;
         this.uid = uid;

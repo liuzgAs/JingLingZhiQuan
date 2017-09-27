@@ -215,7 +215,7 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
                         }else {
                             MyDialog.dialogFinish(XinZengDZActivity.this,"新增地址成功！");
                         }
-                    } else if (simpleInfo.getStatus() == 2) {
+                    } else if (simpleInfo.getStatus() == 3) {
                         MyDialog.showReLoginDialog(XinZengDZActivity.this);
                     } else {
                         Toast.makeText(XinZengDZActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();

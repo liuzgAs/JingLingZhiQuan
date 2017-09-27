@@ -1,25 +1,37 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.sxbwstxpay.R;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.OrderPay;
+import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.ZhiFuViewHolder;
 
+import java.util.HashMap;
+
+import okhttp3.Response;
+
 public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListener {
     private RecyclerArrayAdapter<Integer> adapter;
-    private Handler handler = new Handler();
     private EasyRecyclerView recyclerView;
     private View viewBar;
+    private int oid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +47,8 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        oid = intent.getIntExtra(Constant.INTENT_KEY.id, 0);
     }
 
     @Override
@@ -81,15 +94,58 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
         });
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.ORDER_PAY;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        return new OkObject(params, url);
+    }
+
     public void onRefresh() {
-        handler.postDelayed(new Runnable() {
+        ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
             @Override
-            public void run() {
-                adapter.clear();
-                adapter.add(0);
-                adapter.notifyDataSetChanged();
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("支付界面", s);
+                try {
+                    OrderPay orderPay = GsonUtils.parseJSON(s, OrderPay.class);
+                    if (orderPay.getStatus() == 1) {
+
+                    } else if (orderPay.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(ZhiFuActivity.this);
+                    } else {
+                        showError(orderPay.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
             }
-        }, 500);
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(ZhiFuActivity.this).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        recyclerView.showProgress();
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
     }
 
     @Override

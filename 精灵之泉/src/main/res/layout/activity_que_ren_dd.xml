@@ -19,6 +19,7 @@
         app:scrollbarStyle="insideOverlay" />
 
     <LinearLayout
+        android:id="@+id/viewTiJiao"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -50,7 +51,7 @@
                 android:textSize="@dimen/bigText" />
 
             <TextView
-                android:id="@+id/textView362"
+                android:id="@+id/textYunFei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -58,19 +59,19 @@
                 android:layout_toLeftOf="@+id/buttonTiJiao"
                 android:layout_toStartOf="@+id/buttonTiJiao"
                 android:text="(含运费10元)"
-                android:textSize="@dimen/litterText" />
+                android:textSize="@dimen/bigText" />
 
             <TextView
                 android:textColor="@color/light_black"
-                android:id="@+id/textView363"
+                android:id="@+id/textSum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/textView362"
-                android:layout_toStartOf="@+id/textView362"
+                android:layout_toLeftOf="@+id/textYunFei"
+                android:layout_toStartOf="@+id/textYunFei"
                 android:text="¥156.02"
                 android:layout_marginRight="5dp"
-                android:textSize="@dimen/normal_textsize" />
+                android:textSize="@dimen/bigText" />
 
             <TextView
                 android:id="@+id/textView364"
@@ -78,10 +79,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/textView363"
-                android:layout_toStartOf="@+id/textView363"
+                android:layout_toLeftOf="@+id/textSum"
+                android:layout_toStartOf="@+id/textSum"
                 android:text="应付:"
-                android:textSize="@dimen/litterText" />
+                android:textSize="@dimen/bigText" />
 
         </RelativeLayout>
     </LinearLayout>

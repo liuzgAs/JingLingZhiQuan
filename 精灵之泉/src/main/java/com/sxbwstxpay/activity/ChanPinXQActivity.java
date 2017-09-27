@@ -552,7 +552,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                             intent.setClass(ChanPinXQActivity.this, GouWuCActivity.class);
                             startActivity(intent);
                         }
-                    } else if (cartAddcart.getStatus() == 2) {
+                    } else if (cartAddcart.getStatus() == 3) {
                         MyDialog.showReLoginDialog(ChanPinXQActivity.this);
                     } else {
                         Toast.makeText(ChanPinXQActivity.this, cartAddcart.getInfo(), Toast.LENGTH_SHORT).show();
@@ -601,7 +601,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                         List<GoodsInfo.RecommBean> goodsInfoRecomm = goodsInfo.getRecomm();
                         adapter.clear();
                         adapter.addAll(goodsInfoRecomm);
-                    } else if (goodsInfo.getStatus() == 2) {
+                    } else if (goodsInfo.getStatus() == 3) {
                         MyDialog.showReLoginDialog(ChanPinXQActivity.this);
                     } else {
                         showError(goodsInfo.getInfo());

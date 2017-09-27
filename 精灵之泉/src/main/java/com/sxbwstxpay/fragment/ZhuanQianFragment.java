@@ -152,7 +152,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         adapter.clear();
                         adapter.add(indexMakemoney);
                         adapter.notifyDataSetChanged();
-                    } else if (indexMakemoney.getStatus()== 2) {
+                    } else if (indexMakemoney.getStatus()== 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         showError(indexMakemoney.getInfo());

@@ -151,7 +151,7 @@ public class DiZhiGLActivity extends ZjbBaseActivity implements SwipeRefreshLayo
                         List<UserAddress.DataBean> userAddressData = userAddress.getData();
                         adapter.clear();
                         adapter.addAll(userAddressData);
-                    } else if (userAddress.getStatus()== 2) {
+                    } else if (userAddress.getStatus()== 3) {
                         MyDialog.showReLoginDialog(DiZhiGLActivity.this);
                     } else {
                         showError(userAddress.getInfo());
