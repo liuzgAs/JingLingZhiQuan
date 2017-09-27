@@ -1,24 +1,39 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.google.gson.reflect.TypeToken;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ProvinceBean;
+import com.sxbwstxpay.model.SimpleInfo;
+import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GetJsonDataUtil;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.util.StringUtil;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Response;
 
 public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickListener {
 
@@ -28,6 +43,10 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private List<ProvinceBean> jsonBean;
+    private EditText editConsignee;
+    private EditText editPhone;
+    private EditText editAddress;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +68,17 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        id = intent.getStringExtra(Constant.INTENT_KEY.id);
     }
 
     @Override
     protected void findID() {
         viewBar = findViewById(R.id.viewBar);
         textArea = (TextView) findViewById(R.id.textArea);
+        editConsignee = (EditText) findViewById(R.id.editConsignee);
+        editPhone = (EditText) findViewById(R.id.editPhone);
+        editAddress = (EditText) findViewById(R.id.editAddress);
     }
 
     @Override
@@ -81,6 +104,11 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.viewChooseDiQu:
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(),
+                            0);
+                }
                 /**
                  * 注意 ：如果是三级联动的数据(省市区等)，请参照 JsonDataActivity 类里面的写法。
                  */
@@ -88,7 +116,7 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
                 OptionsPickerView pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
                     @Override
                     public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                        textArea.setText(options1Items.get(options1).getPickerViewText()+options2Items.get(options2)+options3Items.get(options2).get(options3));
+                        textArea.setText(options1Items.get(options1).getPickerViewText() + "-" + options2Items.get(options1).get(options2) + "-" + options3Items.get(options1).get(options2).get(options3));
                     }
                 })
                         .setTitleText("城市选择")
@@ -102,7 +130,6 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
                         .setSubmitColor(getResources().getColor(R.color.basic_color))
                         .setTextColorCenter(getResources().getColor(R.color.basic_color))
                         .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                        .setLabels("省", "市", "区")
                         .setBackgroundId(0x66000000) //设置外部遮罩颜色
                         .build();
 
@@ -113,12 +140,85 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
                 pvOptions.show();
                 break;
             case R.id.buttonBaoCun:
-
+                if (TextUtils.isEmpty(editConsignee.getText().toString().trim())) {
+                    Toast.makeText(XinZengDZActivity.this, "请输入联系人姓名", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (StringUtil.isMobileNO(editPhone.getText().toString().trim())) {
+                    Toast.makeText(XinZengDZActivity.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(textArea.getText().toString().trim())) {
+                    Toast.makeText(XinZengDZActivity.this, "请选择地区", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(editAddress.getText().toString().trim())) {
+                    Toast.makeText(XinZengDZActivity.this, "请输入街道地址", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                save();
                 break;
             case R.id.imageBack:
                 finish();
                 break;
         }
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.USER_SAVEADDRESS;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        if (!TextUtils.isEmpty(id)) {
+            params.put("id", id);
+        }
+        params.put("consignee", editConsignee.getText().toString().trim());
+        params.put("phone", editPhone.getText().toString().trim());
+        params.put("address", editAddress.getText().toString().trim());
+        params.put("area", textArea.getText().toString().trim());
+        return new OkObject(params, url);
+    }
+
+    /**
+     * des： 新增地址提交
+     * author： ZhangJieBo
+     * date： 2017/9/27 0027 下午 2:07
+     */
+    private void save() {
+        showLoadingDialog();
+        ApiClient.post(XinZengDZActivity.this, getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("XinZengDZActivity--地址保存", s + "");
+                try {
+                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                    if (simpleInfo.getStatus() == 1) {
+                        Intent intent = new Intent();
+                        intent.setAction(Constant.BROADCASTCODE.address);
+                        sendBroadcast(intent);
+                        MyDialog.dialogFinish(XinZengDZActivity.this,"新增地址成功！");
+                    } else if (simpleInfo.getStatus() == 2) {
+                        MyDialog.showReLoginDialog(XinZengDZActivity.this);
+                    } else {
+                        Toast.makeText(XinZengDZActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(XinZengDZActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(XinZengDZActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initJsonData() {//解析数据
