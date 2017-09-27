@@ -1,6 +1,9 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -47,6 +50,17 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     private EditText editPayMsg;
     private TextView textSum;
     private TextView textYunFei;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.zhiFuGuanBi:
+                    finish();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -290,5 +304,19 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                 Toast.makeText(QueRenDDActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        registerReceiver(reciver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }

@@ -9,10 +9,10 @@ public class OrderPay {
 
     /**
      * aliPayUrl : http://api.jlzquan.com/App/Respond/alipay.html
-     * data : {"des":"ABDS201709142154062","goods_money":"本单可赚12元","itemId":"0","orderAmount":"0.01","orderSn":"ABDS201709142154062","title":"ABDS201709142154062","type":"1","uid":"1"}
+     * data : {"des":"AO201709271735421","goods_money":"本单可赚12元","itemId":"0","orderAmount":"0.01","orderSn":"AO201709271735421","title":"AO201709271735421","type":"20","uid":"2"}
      * info : 返回成功！
-     * pay : {"class_name":"WxApp","config":{"appid":"wxfef0031f5d8f3ed0","ios":{"appid":"wxfef0031f5d8f3ed0","noncestr":"4p8ysnfjtbu65y56yjiqqyokd0ymhq1t","package":"Sign=Wxpay","partnerid":"1484853072","sign":"ec02fe1b21e2b8163db554d01531b594","timestamp":1506501834},"key":"f20b18c7ed7913bbf45c6ffda95c6d1a","noncestr":"4p8ysnfjtbu65y56yjiqqyokd0ymhq1t","notify_url":"http://api.jlzquan.com/App/Respond/wechat.html","package":"prepay_id=","packagevalue":"prepay_id=","partnerid":"1484853072","secret":"02d7e0ca570f95630b552bd055fdd14a","sign":"d79dd911732dd3da9feec56faf4946bf","subject":"ABDS201709142154062","timestamp":1506501834,"total_fee":0.01,"total_fee_format":0.01},"pay_info":"ABDS201709142154062","pay_money":0.01,"payment_name":"微信支付"}
-     * payAli : alipay_sdk=alipay-sdk-php-20161101&app_id=2017070407644871&biz_content=%7B%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22subject%22%3A+%22App%E6%94%AF%E4%BB%98%E6%B5%8B%E8%AF%95%22%2C%22out_trade_no%22%3A+%22ABDS201709142154062%22%2C%22timeout_express%22%3A+%2230m%22%2C%22total_amount%22%3A+%220.01%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2Fapi.jlzquan.com%2FApp%2FRespond%2Falipay.html&sign_type=RSA2&timestamp=2017-09-27+16%3A43%3A55&version=1.0&sign=M2kdIjLsv5Cagv0ROwkVWP1Du2IGT%2Fu34X3Y3BPNcYy3MmuDC8Pet%2BwENIHsMgrTNMWt91sXRtmsXRc0MxA8mjzT7uf2MzYEvlbhP1lSc5bE%2B1hPTV57dGc77KjCiPBLJEwvfHVhfEZ%2BceE9I7K6%2BzR%2FtyafShr9NnqNRfIyFkiUSUfKqHBDsGiIO7fnMRkNcG35jpmM1FpzGdbIC5ryphRF%2B8unFJHwH%2Bbyv6jGzDyL1ROmRjxUTeK7fNI5QdHHcHtTFM35Mkbm8C3fZqZ7Y2d%2F4pLkRGNIZyPXiNQfdqZF3Gb%2FPPytdJM7iKpTb3CcZh4JeFXdu6gNputGotC1HA%3D%3D
+     * pay : {"class_name":"WxApp","config":{"appid":"wxfef0031f5d8f3ed0","ios":{"appid":"wxfef0031f5d8f3ed0","noncestr":"tmxzrm4fb4gblzv6sziy3aex5w8575eh","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx20170927173543ad433261610077612957","sign":"2e668e62b6186162198e65a423d69a92","timestamp":1506504943},"key":"f20b18c7ed7913bbf45c6ffda95c6d1a","noncestr":"tmxzrm4fb4gblzv6sziy3aex5w8575eh","notify_url":"http://api.jlzquan.com/App/Respond/wechat.html","package":"prepay_id=wx20170927173543ad433261610077612957","packagevalue":"prepay_id=wx20170927173543ad433261610077612957","partnerid":"1484853072","prepayid":"wx20170927173543ad433261610077612957","secret":"02d7e0ca570f95630b552bd055fdd14a","sign":"e7f58f3cccc576d89b6ebaf852e426a0","subject":"AO201709271735421","timestamp":1506504943,"total_fee":0.01,"total_fee_format":0.01},"pay_info":"AO201709271735421","pay_money":0.01,"payment_name":"微信支付"}
+     * payAli : alipay_sdk=alipay-sdk-php-20161101&app_id=2017070407644871&biz_content=%7B%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22subject%22%3A+%22App%E6%94%AF%E4%BB%98%E6%B5%8B%E8%AF%95%22%2C%22out_trade_no%22%3A+%22AO201709271735421%22%2C%22timeout_express%22%3A+%2230m%22%2C%22total_amount%22%3A+%220.01%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2Fapi.jlzquan.com%2FApp%2FRespond%2Falipay.html&sign_type=RSA2&timestamp=2017-09-27+17%3A35%3A43&version=1.0&sign=IcvBLkEjIo8Z6uXv%2FZjQ%2Fa9QC1FafAMBwhW1HoZLay09SEwbLl2NPv9phjPdQ8GBKh155lRLNL%2B3aepcvGsfY3cYPWPXBufgvPRaQ08ODztIXLM6SyuIXAtezCh6WoJTv%2B9xqM0kqQATuIy%2FH7Cndlejuu2DWMAJW1KU9zHWaAhzzVi0LFKZvwySgaQ7t43jBrHV1rFXQ9aU7Hng%2FSbc%2BtL8Kao13qR1f2F724pKGC60O8KWWjJvYQQRlDsWYrT%2FkEH9ufLJmDRDER0943Hdh6LoK11auzBkC132nqleyVv3kNu%2FPLmFIyVznRD6Kl8AdS1TE8loYLaNRKdDRRJLBQ%3D%3D
      * status : 1
      * wechatUrl : http://api.jlzquan.com/App/Respond/wechat.html
      */
@@ -83,14 +83,14 @@ public class OrderPay {
 
     public static class DataBean {
         /**
-         * des : ABDS201709142154062
+         * des : AO201709271735421
          * goods_money : 本单可赚12元
          * itemId : 0
          * orderAmount : 0.01
-         * orderSn : ABDS201709142154062
-         * title : ABDS201709142154062
-         * type : 1
-         * uid : 1
+         * orderSn : AO201709271735421
+         * title : AO201709271735421
+         * type : 20
+         * uid : 2
          */
 
         private String des;
@@ -170,8 +170,8 @@ public class OrderPay {
     public static class PayBean {
         /**
          * class_name : WxApp
-         * config : {"appid":"wxfef0031f5d8f3ed0","ios":{"appid":"wxfef0031f5d8f3ed0","noncestr":"4p8ysnfjtbu65y56yjiqqyokd0ymhq1t","package":"Sign=Wxpay","partnerid":"1484853072","sign":"ec02fe1b21e2b8163db554d01531b594","timestamp":1506501834},"key":"f20b18c7ed7913bbf45c6ffda95c6d1a","noncestr":"4p8ysnfjtbu65y56yjiqqyokd0ymhq1t","notify_url":"http://api.jlzquan.com/App/Respond/wechat.html","package":"prepay_id=","packagevalue":"prepay_id=","partnerid":"1484853072","secret":"02d7e0ca570f95630b552bd055fdd14a","sign":"d79dd911732dd3da9feec56faf4946bf","subject":"ABDS201709142154062","timestamp":1506501834,"total_fee":0.01,"total_fee_format":0.01}
-         * pay_info : ABDS201709142154062
+         * config : {"appid":"wxfef0031f5d8f3ed0","ios":{"appid":"wxfef0031f5d8f3ed0","noncestr":"tmxzrm4fb4gblzv6sziy3aex5w8575eh","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx20170927173543ad433261610077612957","sign":"2e668e62b6186162198e65a423d69a92","timestamp":1506504943},"key":"f20b18c7ed7913bbf45c6ffda95c6d1a","noncestr":"tmxzrm4fb4gblzv6sziy3aex5w8575eh","notify_url":"http://api.jlzquan.com/App/Respond/wechat.html","package":"prepay_id=wx20170927173543ad433261610077612957","packagevalue":"prepay_id=wx20170927173543ad433261610077612957","partnerid":"1484853072","prepayid":"wx20170927173543ad433261610077612957","secret":"02d7e0ca570f95630b552bd055fdd14a","sign":"e7f58f3cccc576d89b6ebaf852e426a0","subject":"AO201709271735421","timestamp":1506504943,"total_fee":0.01,"total_fee_format":0.01}
+         * pay_info : AO201709271735421
          * pay_money : 0.01
          * payment_name : 微信支付
          */
@@ -225,17 +225,18 @@ public class OrderPay {
         public static class ConfigBean {
             /**
              * appid : wxfef0031f5d8f3ed0
-             * ios : {"appid":"wxfef0031f5d8f3ed0","noncestr":"4p8ysnfjtbu65y56yjiqqyokd0ymhq1t","package":"Sign=Wxpay","partnerid":"1484853072","sign":"ec02fe1b21e2b8163db554d01531b594","timestamp":1506501834}
+             * ios : {"appid":"wxfef0031f5d8f3ed0","noncestr":"tmxzrm4fb4gblzv6sziy3aex5w8575eh","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx20170927173543ad433261610077612957","sign":"2e668e62b6186162198e65a423d69a92","timestamp":1506504943}
              * key : f20b18c7ed7913bbf45c6ffda95c6d1a
-             * noncestr : 4p8ysnfjtbu65y56yjiqqyokd0ymhq1t
+             * noncestr : tmxzrm4fb4gblzv6sziy3aex5w8575eh
              * notify_url : http://api.jlzquan.com/App/Respond/wechat.html
-             * package : prepay_id=
-             * packagevalue : prepay_id=
+             * package : prepay_id=wx20170927173543ad433261610077612957
+             * packagevalue : prepay_id=wx20170927173543ad433261610077612957
              * partnerid : 1484853072
+             * prepayid : wx20170927173543ad433261610077612957
              * secret : 02d7e0ca570f95630b552bd055fdd14a
-             * sign : d79dd911732dd3da9feec56faf4946bf
-             * subject : ABDS201709142154062
-             * timestamp : 1506501834
+             * sign : e7f58f3cccc576d89b6ebaf852e426a0
+             * subject : AO201709271735421
+             * timestamp : 1506504943
              * total_fee : 0.01
              * total_fee_format : 0.01
              */
@@ -249,6 +250,7 @@ public class OrderPay {
             private String packageX;
             private String packagevalue;
             private String partnerid;
+            private String prepayid;
             private String secret;
             private String sign;
             private String subject;
@@ -320,6 +322,14 @@ public class OrderPay {
                 this.partnerid = partnerid;
             }
 
+            public String getPrepayid() {
+                return prepayid;
+            }
+
+            public void setPrepayid(String prepayid) {
+                this.prepayid = prepayid;
+            }
+
             public String getSecret() {
                 return secret;
             }
@@ -371,11 +381,12 @@ public class OrderPay {
             public static class IosBean {
                 /**
                  * appid : wxfef0031f5d8f3ed0
-                 * noncestr : 4p8ysnfjtbu65y56yjiqqyokd0ymhq1t
+                 * noncestr : tmxzrm4fb4gblzv6sziy3aex5w8575eh
                  * package : Sign=Wxpay
                  * partnerid : 1484853072
-                 * sign : ec02fe1b21e2b8163db554d01531b594
-                 * timestamp : 1506501834
+                 * prepayid : wx20170927173543ad433261610077612957
+                 * sign : 2e668e62b6186162198e65a423d69a92
+                 * timestamp : 1506504943
                  */
 
                 private String appid;
@@ -383,6 +394,7 @@ public class OrderPay {
                 @SerializedName("package")
                 private String packageX;
                 private String partnerid;
+                private String prepayid;
                 private String sign;
                 private int timestamp;
 
@@ -416,6 +428,14 @@ public class OrderPay {
 
                 public void setPartnerid(String partnerid) {
                     this.partnerid = partnerid;
+                }
+
+                public String getPrepayid() {
+                    return prepayid;
+                }
+
+                public void setPrepayid(String prepayid) {
+                    this.prepayid = prepayid;
                 }
 
                 public String getSign() {

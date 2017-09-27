@@ -11,14 +11,14 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/relativeLayout2"
+        android:layout_above="@+id/viewMaiMaiMai"
         app:layout_progress="@layout/view_progress"
         app:scrollbarStyle="insideOverlay" />
 
     <include layout="@layout/view_bar" />
 
     <LinearLayout
-        android:id="@+id/relativeLayout2"
+        android:id="@+id/viewMaiMaiMai"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"

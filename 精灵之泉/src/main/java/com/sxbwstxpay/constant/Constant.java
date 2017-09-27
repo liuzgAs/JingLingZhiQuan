@@ -152,6 +152,8 @@ public class Constant {
         public static final String CART_NEWORDER = "&g=App&m=Cart&a=newOrder";
         //支付界面
         public static final String ORDER_PAY = "&g=App&m=Order&a=pay";
+        //支付成功
+        public static final String ORDER_PAYS = "&g=App&m=Order&a=pays";
     }
 
     public static class PERMISSION {
@@ -226,6 +228,7 @@ public class Constant {
         public static final String ShangJia01 = "ShangJia01";
         public static final String ShangJia02 = "ShangJia02";
         public static final String address = "address";
+        public static final String zhiFuGuanBi = "zhiFuGuanBi";
     }
 
 }

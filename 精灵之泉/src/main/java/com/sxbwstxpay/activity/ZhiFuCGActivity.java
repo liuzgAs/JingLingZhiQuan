@@ -9,24 +9,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
+import com.sxbwstxpay.R;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
-import com.sxbwstxpay.provider.DataProvider;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.OrderPays;
+import com.sxbwstxpay.model.RecommBean;
+import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.ChanPinXQViewHolder;
+
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Response;
 
 public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private View viewBar;
     private EasyRecyclerView recyclerView;
     private TextView textViewTitle;
-    private RecyclerArrayAdapter<Integer> adapter;
-    private int page = 1;
+    private RecyclerArrayAdapter<RecommBean> adapter;
+    private String oid;
+    private String statusText;
+    private String vipText;
+    private int isVip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +57,8 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        oid = intent.getStringExtra(Constant.INTENT_KEY.id);
     }
 
     @Override
@@ -80,7 +96,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
         recyclerView.getSwipeToRefresh().setProgressViewOffset(true, 30, 220);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<RecommBean>(this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_chan_pin_xq;
@@ -93,50 +109,38 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
+            private TextView textLiJiLiaoJie;
+            private TextView textVipText;
+            private TextView textStatusText;
+
             @Override
             public View onCreateView(ViewGroup parent) {
                 View header_zhi_fu_cg = LayoutInflater.from(ZhiFuCGActivity.this).inflate(R.layout.header_zhi_fu_cg, null);
+                textStatusText = (TextView) header_zhi_fu_cg.findViewById(R.id.textStatusText);
+                textVipText = (TextView) header_zhi_fu_cg.findViewById(R.id.textVipText);
+                textLiJiLiaoJie = (TextView) header_zhi_fu_cg.findViewById(R.id.textLiJiLiaoJie);
+                header_zhi_fu_cg.findViewById(R.id.textFanHuiSC).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       finish();
+                    }
+                });
                 return header_zhi_fu_cg;
             }
 
             @Override
             public void onBindView(View headerView) {
-
+                textStatusText.setText(statusText);
+                if (isVip==1){
+                    textVipText.setText(vipText);
+                    textVipText.setVisibility(View.VISIBLE);
+                    textLiJiLiaoJie.setVisibility(View.VISIBLE);
+                }else {
+                    textVipText.setVisibility(View.GONE);
+                    textLiJiLiaoJie.setVisibility(View.GONE);
+                }
             }
 
-        });
-        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
-            @Override
-            public void onMoreShow() {
-                page++;
-                adapter.addAll(DataProvider.getPersonList(page));
-            }
-
-            @Override
-            public void onMoreClick() {
-
-            }
-        });
-        adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
-            @Override
-            public void onNoMoreShow() {
-
-            }
-
-            @Override
-            public void onNoMoreClick() {
-            }
-        });
-        adapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
-            @Override
-            public void onErrorShow() {
-                adapter.resumeMore();
-            }
-
-            @Override
-            public void onErrorClick() {
-                adapter.resumeMore();
-            }
         });
         recyclerView.setRefreshListener(this);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
@@ -147,11 +151,65 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         });
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.ORDER_PAYS;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid",userInfo.getUid());
+        params.put("tokenTime",tokenTime);
+        params.put("oid",oid);
+        return new OkObject(params, url);
+    }
+
     @Override
     public void onRefresh() {
-        page++;
-        adapter.clear();
-        adapter.addAll(DataProvider.getPersonList(page));
+        ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("支付成功", s);
+                try {
+                    OrderPays orderPays = GsonUtils.parseJSON(s, OrderPays.class);
+                    if (orderPays.getStatus() == 1) {
+                        statusText = orderPays.getStatusText();
+                        vipText = orderPays.getVipText();
+                        isVip = orderPays.getIsVip();
+                        List<RecommBean> recomm = orderPays.getRecomm();
+                        adapter.clear();
+                        adapter.addAll(recomm);
+                    } else if (orderPays.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(ZhiFuCGActivity.this);
+                    } else {
+                        showError(orderPays.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(ZhiFuCGActivity.this).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        recyclerView.showProgress();
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
     }
 
     @Override

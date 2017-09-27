@@ -1,6 +1,9 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -28,10 +31,47 @@ import java.util.HashMap;
 import okhttp3.Response;
 
 public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListener {
-    private RecyclerArrayAdapter<Integer> adapter;
+    private RecyclerArrayAdapter<OrderPay> adapter;
     private EasyRecyclerView recyclerView;
     private View viewBar;
     private int oid;
+    private BroadcastReceiver recevier = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.PAY_RECEIVER:
+                    cancelLoadingDialog();
+                    int error = intent.getIntExtra("error", -1);
+                    if (error == 0) {
+                        paySuccess();
+                    } else if (error == -1) {
+                        MyDialog.showTipDialog(ZhiFuActivity.this, "支付失败");
+                    } else if (error == -2) {
+                        MyDialog.showTipDialog(ZhiFuActivity.this, "支付失败");
+                    }
+                    break;
+                case Constant.BROADCASTCODE.zhiFuGuanBi:
+                    finish();
+                    break;
+            }
+        }
+    };
+
+    /**
+     * des： 支付成功提示
+     * author： ZhangJieBo
+     * date： 2017/7/6 0006 下午 2:34
+     */
+    private void paySuccess() {
+        Intent intent1 = new Intent();
+        intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        sendBroadcast(intent1);
+        Intent intent = new Intent();
+        intent.putExtra(Constant.INTENT_KEY.id, oid);
+        intent.setClass(this, ZhiFuCGActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +119,11 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
     private void initRecycle() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(ZhiFuActivity.this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<OrderPay>(ZhiFuActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.view_youhui_md;
                 return new ZhiFuViewHolder(parent, layout);
-            }
-
-            @Override
-            public int getViewType(int position) {
-                Integer item = getItem(position);
-                return item;
             }
         });
     }
@@ -104,6 +138,7 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
+        params.put("oid", oid + "");
         return new OkObject(params, url);
     }
 
@@ -115,7 +150,9 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
                 try {
                     OrderPay orderPay = GsonUtils.parseJSON(s, OrderPay.class);
                     if (orderPay.getStatus() == 1) {
-
+                        adapter.clear();
+                        adapter.add(orderPay);
+                        adapter.notifyDataSetChanged();
                     } else if (orderPay.getStatus() == 3) {
                         MyDialog.showReLoginDialog(ZhiFuActivity.this);
                     } else {
@@ -155,5 +192,21 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
                 finish();
                 break;
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.PAY_RECEIVER);
+        filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        registerReceiver(recevier, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(recevier);
     }
 }

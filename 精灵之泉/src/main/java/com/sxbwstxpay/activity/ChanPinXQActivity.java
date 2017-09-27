@@ -48,6 +48,7 @@ import com.sxbwstxpay.customview.OnTagSelectListener;
 import com.sxbwstxpay.model.CartAddcart;
 import com.sxbwstxpay.model.GoodsInfo;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.RecommBean;
 import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
@@ -82,7 +83,7 @@ import okhttp3.Response;
 public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private View viewBar;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<GoodsInfo.RecommBean> adapter;
+    private RecyclerArrayAdapter<RecommBean> adapter;
     private TextView textViewTitle;
     private int viewBarHeight;
     private String id;
@@ -105,6 +106,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 case Constant.BROADCASTCODE.WX_SHARE_FAIL:
                     MyDialog.showTipDialog(ChanPinXQActivity.this, "取消分享");
                     break;
+                case Constant.BROADCASTCODE.zhiFuGuanBi:
+                    finish();
+                    break;
             }
         }
     };
@@ -112,6 +116,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
     private TextView textDaoJiShi;
     private int countdown;
     private View viewKeGouMai;
+    private View viewMaiMaiMai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +142,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         viewBar = findViewById(R.id.viewBar);
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
+        viewMaiMaiMai = findViewById(R.id.viewMaiMaiMai);
     }
 
     @Override
@@ -148,6 +154,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         viewBar.setLayoutParams(layoutParams);
         viewBar.getBackground().mutate().setAlpha(0);
         textViewTitle.setAlpha(0);
+        viewMaiMaiMai.setVisibility(View.GONE);
         initRecycle();
     }
 
@@ -174,7 +181,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
         recyclerView.getSwipeToRefresh().setProgressViewOffset(true, 30, 220);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<GoodsInfo.RecommBean>(this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<RecommBean>(this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_chan_pin_xq;
@@ -290,7 +297,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     textStock_num.setText("剩余" + goodsInfoAd.getStock_num() + "库存");
                     countdown = goodsInfoAd.getCountdown();
                     LogUtil.LogShitou("ChanPinXQActivity--countdown", "" + countdown);
-                    if (timer!=null){
+                    if (timer != null) {
                         timer.cancel();
                     }
                     timer = new Timer();
@@ -303,17 +310,17 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                                     if (countdown >= 1) {
                                         countdown--;
                                         textCountdown.setText(StringUtil.TimeFormat(countdown));
-                                        if (textDaoJiShi!=null&&viewKeGouMai!=null){
-                                            textDaoJiShi.setText("倒计时 "+StringUtil.TimeFormat(countdown));
-                                            if (countdown>0){
+                                        if (textDaoJiShi != null && viewKeGouMai != null) {
+                                            textDaoJiShi.setText("倒计时 " + StringUtil.TimeFormat(countdown));
+                                            if (countdown > 0) {
                                                 textDaoJiShi.setVisibility(View.VISIBLE);
                                                 viewKeGouMai.setVisibility(View.GONE);
-                                            }else {
+                                            } else {
                                                 textDaoJiShi.setVisibility(View.GONE);
                                                 viewKeGouMai.setVisibility(View.VISIBLE);
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         textCountdown.setText("00:00:00");
                                         timer.cancel();
                                     }
@@ -415,18 +422,18 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         TextView textPriceDialog = (TextView) dialog_chan_pin.findViewById(R.id.textPriceDialog);
         TextView textZhuan = (TextView) dialog_chan_pin.findViewById(R.id.textZhuan);
         textTitleDialog.setText(goodsInfoAd.getTitle());
-        textPriceDialog.setText("¥"+goodsInfoAd.getPrice());
-        textZhuan.setText("赚"+goodsInfoAd.getGoods_money());
+        textPriceDialog.setText("¥" + goodsInfoAd.getPrice());
+        textZhuan.setText("赚" + goodsInfoAd.getGoods_money());
         Glide.with(ChanPinXQActivity.this)
                 .load(goodsInfoAd.getImg())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
 
         View viewGuiGe = dialog_chan_pin.findViewById(R.id.viewGuiGe);
-        if (countdown>0){
+        if (countdown > 0) {
             textDaoJiShi.setVisibility(View.VISIBLE);
             viewKeGouMai.setVisibility(View.GONE);
-        }else {
+        } else {
             textDaoJiShi.setVisibility(View.GONE);
             viewKeGouMai.setVisibility(View.VISIBLE);
         }
@@ -464,7 +471,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 }
             }
         });
-        if (goodsInfoAdDes.size()>0){
+        if (goodsInfoAdDes.size() > 0) {
             viewGuiGe.setVisibility(View.VISIBLE);
             FlowTagLayout flowTagLayout = (FlowTagLayout) dialog_chan_pin.findViewById(R.id.flowTagLayout);
             flowTagLayout.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
@@ -483,7 +490,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     }
                 }
             });
-        }else {
+        } else {
             viewGuiGe.setVisibility(View.GONE);
         }
         alertDialog1 = new AlertDialog.Builder(ChanPinXQActivity.this, R.style.dialog)
@@ -598,9 +605,10 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                         for (int i = 0; i < goodsInfoAdDes.size(); i++) {
                             goodsInfoAdDes.get(i).setSelect(false);
                         }
-                        List<GoodsInfo.RecommBean> goodsInfoRecomm = goodsInfo.getRecomm();
+                        List<RecommBean> goodsInfoRecomm = goodsInfo.getRecomm();
                         adapter.clear();
                         adapter.addAll(goodsInfoRecomm);
+                        viewMaiMaiMai.setVisibility(View.VISIBLE);
                     } else if (goodsInfo.getStatus() == 3) {
                         MyDialog.showReLoginDialog(ChanPinXQActivity.this);
                     } else {
@@ -665,6 +673,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
+        filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
         registerReceiver(receiver, filter);
     }
 
@@ -672,7 +681,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(receiver);
-        if (timer!=null){
+        if (timer != null) {
             timer.cancel();
         }
     }
@@ -836,4 +845,5 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             return null;
         }
     }
+
 }

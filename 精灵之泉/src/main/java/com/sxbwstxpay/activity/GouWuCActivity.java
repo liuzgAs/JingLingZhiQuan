@@ -1,6 +1,9 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -27,6 +31,7 @@ import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.GouWuCViewHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,6 +45,17 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
     private boolean isQuanXuna = true;
     private TextView textSum;
     private View viewQuJieSuan;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.zhiFuGuanBi:
+                    finish();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +132,11 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.viewQuanXuan:
-                if (isQuanXuna){
+                if (isQuanXuna) {
                     for (int i = 0; i < adapter.getAllData().size(); i++) {
                         adapter.getAllData().get(i).setIscheck(false);
                     }
-                }else {
+                } else {
                     for (int i = 0; i < adapter.getAllData().size(); i++) {
                         adapter.getAllData().get(i).setIscheck(true);
                     }
@@ -129,8 +145,24 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
                 quanXuan();
                 break;
             case R.id.buttonJieSuan:
+                List<CartIndex.CartBean> allData = adapter.getAllData();
+                if (allData.size() > 0) {
+                    List<String> cart = new ArrayList<>();
+                    for (int i = 0; i < allData.size(); i++) {
+                        if (allData.get(i).ischeck()) {
+                            cart.add(allData.get(i).getId());
+                        }
+                    }
+                    if (cart.size() == 0) {
+                        Toast.makeText(GouWuCActivity.this, "请选择要结算的商品", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } else {
+                    Toast.makeText(GouWuCActivity.this, "购物车为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 intent.setClass(this, QueRenDDActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.value,new CartIndex(adapter.getAllData()));
+                intent.putExtra(Constant.INTENT_KEY.value, new CartIndex(adapter.getAllData()));
                 startActivity(intent);
                 break;
             case R.id.imageBack:
@@ -161,11 +193,19 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
                 try {
                     CartIndex cartIndex = GsonUtils.parseJSON(s, CartIndex.class);
                     if (cartIndex.getStatus() == 1) {
-                        List<CartIndex.CartBean> cartIndexCart = cartIndex.getCart();
+                        List<CartIndex.CartBean> cartIndexCart = new ArrayList<>();
+                        if (cartIndex.getCart() == null) {
+                        } else {
+                            cartIndexCart = cartIndex.getCart();
+                        }
                         for (int i = 0; i < cartIndexCart.size(); i++) {
                             cartIndexCart.get(i).setIscheck(true);
                         }
-                        textSum.setText("¥"+cartIndex.getSum());
+                        if (cartIndex.getSum() == null) {
+                            textSum.setText("¥0.00");
+                        } else {
+                            textSum.setText("¥" + cartIndex.getSum());
+                        }
                         adapter.clear();
                         adapter.addAll(cartIndexCart);
                         viewQuJieSuan.setVisibility(View.VISIBLE);
@@ -214,8 +254,8 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
         imageQuanXuan.setImageResource(R.mipmap.xuanzhong);
     }
 
-    public void setSum(String sum){
-        textSum.setText("¥"+sum);
+    public void setSum(String sum) {
+        textSum.setText("¥" + sum);
     }
 
 
@@ -224,7 +264,21 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
      * author： ZhangJieBo
      * date： 2017/9/26 0026 下午 7:41
      */
-    public void remove(int position){
+    public void remove(int position) {
         adapter.remove(position);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        registerReceiver(reciver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }

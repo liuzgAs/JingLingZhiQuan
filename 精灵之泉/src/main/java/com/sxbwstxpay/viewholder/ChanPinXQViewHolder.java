@@ -13,7 +13,7 @@ import com.sxbwstxpay.model.GoodsInfo;
 /**
  * Created by Administrator on 2017/3/28 0028.
  */
-public class ChanPinXQViewHolder extends BaseViewHolder<GoodsInfo.RecommBean> {
+public class ChanPinXQViewHolder extends BaseViewHolder<RecommBean> {
 
     private final ImageView imageImg;
     private final TextView textTitle;
@@ -27,7 +27,7 @@ public class ChanPinXQViewHolder extends BaseViewHolder<GoodsInfo.RecommBean> {
     }
 
     @Override
-    public void setData(GoodsInfo.RecommBean data) {
+    public void setData(RecommBean data) {
         super.setData(data);
         Glide.with(getContext())
                 .load(data.getImg())

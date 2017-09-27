@@ -147,18 +147,19 @@
         </LinearLayout>
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="50dp"
             android:layout_height="match_parent">
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/radioZhiFuBao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:checked="true" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/radioWeiXin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
