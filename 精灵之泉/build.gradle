@@ -42,4 +42,5 @@ dependencies {
     compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile files('libs/AMap2DMap_4.2.0_AMapSearch_5.1.0_AMapLocation_3.4.0_20170517.jar')
+    compile 'com.contrarywind:Android-PickerView:3.2.6'
 }

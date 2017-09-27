@@ -20,7 +20,7 @@
         app:scrollbarStyle="insideOverlay" />
 
     <TextView
-        android:id="@+id/textView205"
+        android:id="@+id/textXinZengSHDZ"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
         android:background="@drawable/btn_jianbian180_basic_0dp"

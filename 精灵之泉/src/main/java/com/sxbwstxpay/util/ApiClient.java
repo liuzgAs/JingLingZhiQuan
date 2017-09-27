@@ -6,6 +6,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
 import com.sxbwstxpay.model.OkObject;
+
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -25,6 +26,25 @@ public class ApiClient {
         OkGo.post(okObject.getUrl())//
                 .tag(context)//
                 .upJson(okObject.getJson())//
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        callBack.onSuccess(s);
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        callBack.onError(response);
+                    }
+                });
+    }
+
+    public static void postJson(Context context,String url,String json, final CallBack callBack) {
+        LogUtil.LogShitou("ApiClient--发送", "" + json);
+        OkGo.post(url)//
+                .tag(context)//
+                .upJson(json)//
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {

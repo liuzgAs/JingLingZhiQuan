@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,6 +61,7 @@ public class XuanZeSHDZActivity extends ZjbBaseActivity implements View.OnClickL
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
+        findViewById(R.id.textXinZengSHDZ).setOnClickListener(this);
     }
 
     @Override
@@ -109,6 +111,11 @@ public class XuanZeSHDZActivity extends ZjbBaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.textXinZengSHDZ:
+                Intent intent = new Intent();
+                intent.setClass(this,XinZengDZActivity.class);
+                startActivity(intent);
+                break;
             case R.id.imageBack:
                 finish();
                 break;

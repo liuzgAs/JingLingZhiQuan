@@ -16,8 +16,8 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.CartIndex;
-import com.sxbwstxpay.model.OkObject;
-import com.sxbwstxpay.model.SimpleInfo;
+import com.sxbwstxpay.model.CartOrder;
+import com.sxbwstxpay.model.CartOrderUpload;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
@@ -25,7 +25,6 @@ import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.QueRenDDViewHolder;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Response;
@@ -34,8 +33,9 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
     private View viewBar;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<Integer> adapter;
+    private RecyclerArrayAdapter<CartOrder.CartBean> adapter;
     private CartIndex cartIndex;
+    private List<?> cartOrderAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,18 +87,13 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
         recyclerView.getSwipeToRefresh().setProgressViewOffset(true, 30, 220);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<CartOrder.CartBean>(this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.view_dingdan;
                 return new QueRenDDViewHolder(parent, layout);
             }
 
-            @Override
-            public int getViewType(int position) {
-                Integer item = getItem(position);
-                return item;
-            }
         });
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
@@ -107,10 +102,15 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
             }
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+
+            private TextView textAdd;
+            private View viewXuanZeSHDZ;
             @Override
             public View onCreateView(ViewGroup parent) {
-                View view = LayoutInflater.from(QueRenDDActivity.this).inflate(R.layout.header_queren_dd, null);
-                view.findViewById(R.id.viewXuanZeSHDZ).setOnClickListener(new View.OnClickListener() {
+                View header_queren_dd = LayoutInflater.from(QueRenDDActivity.this).inflate(R.layout.header_queren_dd, null);
+                viewXuanZeSHDZ = header_queren_dd.findViewById(R.id.viewXuanZeSHDZ);
+                textAdd = (TextView) header_queren_dd.findViewById(R.id.textAdd);
+                viewXuanZeSHDZ.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
@@ -118,15 +118,22 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         startActivity(intent);
                     }
                 });
-                return view;
+                return header_queren_dd;
             }
 
             @Override
             public void onBindView(View headerView) {
-
+                if (cartOrderAd!=null){
+                    viewXuanZeSHDZ.setVisibility(View.VISIBLE);
+                    textAdd.setVisibility(View.GONE);
+                }else {
+                    viewXuanZeSHDZ.setVisibility(View.GONE);
+                    textAdd.setVisibility(View.VISIBLE);
+                }
             }
         });
         adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
+
             @Override
             public View onCreateView(ViewGroup parent) {
                 View item_queren_dd = LayoutInflater.from(QueRenDDActivity.this).inflate(R.layout.item_queren_dd, null);
@@ -140,38 +147,30 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         });
     }
 
-    /**
-     * des： 网络请求参数
-     * author： ZhangJieBo
-     * date： 2017/8/28 0028 上午 9:55
-     */
-    private OkObject getOkObject() {
+    public void onRefresh() {
         List<String> cart = new ArrayList<>();
         for (int i = 0; i < cartIndex.getCart().size(); i++) {
             if (cartIndex.getCart().get(i).ischeck()){
                 cart.add(cartIndex.getCart().get(i).getId());
             }
         }
+        CartOrderUpload cartOrderUpload = new CartOrderUpload(cart,userInfo.getUid(),tokenTime);
         String url = Constant.HOST + Constant.Url.CART_ORDER;
-        HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
-        params.put("tokenTime",tokenTime);
-        params.put("cart",GsonUtils.parseObject(cart));
-        return new OkObject(params, url);
-    }
-
-    public void onRefresh() {
-        ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
+        ApiClient.postJson(this, url,GsonUtils.parseObject(cartOrderUpload), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
-                LogUtil.LogShitou("", s);
+                LogUtil.LogShitou("确认订单请求", s);
                 try {
-                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                    if (simpleInfo.getStatus() == 1) {
-                    } else if (simpleInfo.getStatus()== 2) {
+                    CartOrder cartOrder = GsonUtils.parseJSON(s, CartOrder.class);
+                    if (cartOrder.getStatus() == 1) {
+                        cartOrderAd = cartOrder.getAd();
+                        List<CartOrder.CartBean> cartOrderCart = cartOrder.getCart();
+                        adapter.clear();
+                        adapter.addAll(cartOrderCart);
+                    } else if (cartOrder.getStatus()== 2) {
                         MyDialog.showReLoginDialog(QueRenDDActivity.this);
                     } else {
-                        showError(simpleInfo.getInfo());
+                        showError(cartOrder.getInfo());
                     }
                 } catch (Exception e) {
                     showError("数据出错");

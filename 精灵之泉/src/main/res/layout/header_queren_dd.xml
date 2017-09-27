@@ -78,6 +78,15 @@
     </RelativeLayout>
 
     <TextView
+        android:background="@drawable/layout_selector_white_system_gray"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="添加收货地址"
+        android:textSize="@dimen/bigText"
+        android:gravity="center"
+        android:id="@+id/textAdd" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/marginTop"
         android:background="@color/background"

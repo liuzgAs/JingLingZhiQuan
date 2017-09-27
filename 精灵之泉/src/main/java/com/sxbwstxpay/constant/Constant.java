@@ -140,6 +140,8 @@ public class Constant {
         public static final String CART_DELCART = "&g=App&m=Cart&a=delCart";
         //确认订单请求
         public static final String CART_ORDER = "&g=App&m=Cart&a=order";
+        //地址保存
+        public static final String USER_SAVEADDRESS = "&g=App&m=User&a=saveAddress";
     }
 
     public static class PERMISSION {

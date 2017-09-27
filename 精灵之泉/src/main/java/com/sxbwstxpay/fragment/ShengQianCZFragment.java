@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChengShiXZActivity;
-import com.sxbwstxpay.activity.WoDeVIPActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -200,8 +199,8 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.viewVip:
-                intent.setClass(getActivity(), WoDeVIPActivity.class);
-                startActivity(intent);
+//                intent.setClass(getActivity(), WoDeVIPActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.textCity:
                 intent.setClass(getActivity(), ChengShiXZActivity.class);

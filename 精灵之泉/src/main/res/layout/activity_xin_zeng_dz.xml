@@ -32,7 +32,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editConsignee"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -69,7 +69,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/editPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -90,6 +90,7 @@
             android:background="@color/background" />
 
         <RelativeLayout
+            android:id="@+id/viewChooseDiQu"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"
             android:layout_gravity="center_horizontal">
@@ -108,7 +109,7 @@
 
             <TextView
                 android:hint="地区信息"
-                android:id="@+id/editText3"
+                android:id="@+id/textArea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -119,6 +120,7 @@
                 android:textSize="@dimen/normal_edittextsize" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/imageView87"
                 android:layout_width="15dp"
                 android:layout_height="wrap_content"
@@ -155,7 +157,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText10"
+                android:id="@+id/editAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
@@ -179,6 +181,7 @@
             android:background="@color/background" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"
             android:layout_gravity="center_horizontal">
@@ -211,7 +214,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/buttonBaoCun"
         style="@style/MyButton"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"

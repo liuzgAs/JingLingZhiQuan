@@ -62,7 +62,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private String lat;
     private String lng;
     private String cityId;
-    private int id;
+    private String id;
     private List<IndexGoods.BannerBean> indexGoodsBanner;
     private List<IndexGoods.TimesBean> indexGoodsTimes;
     private String indexGoodsImg;
@@ -73,11 +73,11 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.ShangJia01:
                     String value = intent.getStringExtra(Constant.INTENT_KEY.value);
                     textNum.setText(value);
-                    if (viewShangJiaTip.getVisibility()==View.VISIBLE){
+                    if (viewShangJiaTip.getVisibility() == View.VISIBLE) {
                         timer.cancel();
                         timer = new Timer();
                         timer.schedule(new TimerTask() {
@@ -91,8 +91,8 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                                 });
                             }
                         }, 2000, 1000);
-                    }else {
-                        Animation animation01 = AnimationUtils.loadAnimation(getActivity(),R.anim.push_up_in);
+                    } else {
+                        Animation animation01 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_up_in);
                         viewShangJiaTip.startAnimation(animation01);
                         viewShangJiaTip.setVisibility(View.VISIBLE);
                         timer = new Timer();
@@ -114,14 +114,14 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     };
     private TextView textNum;
 
-    public void hideView(){
-        Animation animation02 = AnimationUtils.loadAnimation(getActivity(),R.anim.push_down_out);
+    public void hideView() {
+        Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
         viewShangJiaTip.startAnimation(animation02);
         viewShangJiaTip.setVisibility(View.GONE);
-        if (timer!=null){
+        if (timer != null) {
             timer.cancel();
         }
-        timer =null;
+        timer = null;
     }
 
     public XianShiQGFragment() {
@@ -191,6 +191,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             private ImageView imageMiddle;
             private TabLayout tablayoutHeader;
             private ConvenientBanner banner;
+            private boolean isSelect = false;
 
             @Override
             public View onCreateView(ViewGroup parent) {
@@ -199,13 +200,80 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
                 tablayoutHeader = (TabLayout) header_xian_shi_qg.findViewById(R.id.tablayoutHeader);
+                tablayoutHeader.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        if (isSelect) {
+                            for (int i = 0; i < indexGoodsTimes.size(); i++) {
+                                indexGoodsTimes.get(i).setAct(0);
+                            }
+                            indexGoodsTimes.get(tab.getPosition()).setAct(1);
+                            page = 1;
+                            id = indexGoodsTimes.get(tab.getPosition()).getId();
+                            showLoadingDialog();
+                            ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+                                @Override
+                                public void onSuccess(String s) {
+                                    cancelLoadingDialog();
+                                    LogUtil.LogShitou("限时购时段", s);
+                                    try {
+                                        page++;
+                                        IndexGoods indexGoods = GsonUtils.parseJSON(s, IndexGoods.class);
+                                        if (indexGoods.getStatus() == 1) {
+                                            List<IndexDataBean> indexGoodsData = indexGoods.getData();
+                                            adapter.removeAll();
+                                            adapter.addAll(indexGoodsData);
+                                        } else if (indexGoods.getStatus() == 2) {
+                                            MyDialog.showReLoginDialog(getActivity());
+                                        } else {
+                                            showError(indexGoods.getInfo());
+                                        }
+                                    } catch (Exception e) {
+                                        showError("数据出错");
+                                    }
+                                }
+
+                                @Override
+                                public void onError(Response response) {
+                                    cancelLoadingDialog();
+                                    showError("网络出错");
+                                }
+
+                                public void showError(String msg) {
+                                    View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                                    TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                                    textMsg.setText(msg);
+                                    view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            initData();
+                                        }
+                                    });
+                                    recyclerView.setErrorView(view_loaderror);
+                                    recyclerView.showError();
+                                }
+                            });
+                        }
+
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
                 imageMiddle = (ImageView) header_xian_shi_qg.findViewById(R.id.imageMiddle);
                 return header_xian_shi_qg;
             }
 
             @Override
             public void onBindView(View headerView) {
-                if (indexGoodsBanner!=null){
+                if (indexGoodsBanner != null) {
                     banner.setPages(new CBViewHolderCreator() {
                         @Override
                         public Object createHolder() {
@@ -214,7 +282,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     }, indexGoodsBanner);
                     banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
                 }
-                if (indexGoodsTimes!=null){
+                if (indexGoodsTimes != null) {
                     tablayoutHeader.removeAllTabs();
                     tablayoutHeader.setTabMode(TabLayout.MODE_SCROLLABLE);
                     for (int i = 0; i < indexGoodsTimes.size(); i++) {
@@ -223,11 +291,13 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         TextView textQiangGouDes = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouDes);
                         textQiangGouTitle.setText(indexGoodsTimes.get(i).getTimes());
                         textQiangGouDes.setText(indexGoodsTimes.get(i).getDes());
+                        isSelect = false;
                         if (indexGoodsTimes.get(i).getAct() == 1) {
                             tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), true);
                         } else {
                             tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), false);
                         }
+                        isSelect = true;
                     }
                 }
                 Glide.with(getActivity())
@@ -297,7 +367,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent();
-                intent.putExtra(Constant.INTENT_KEY.id,adapter.getItem(position).getId());
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
                 intent.setClass(getActivity(), ChanPinXQActivity.class);
                 startActivity(intent);
             }
@@ -324,15 +394,16 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
-        params.put("p", page+"");
+        params.put("p", page + "");
         params.put("lat", lat);
         params.put("lng", lng);
-        params.put("id", id+"");
+        params.put("id", id);
         return new OkObject(params, url);
     }
 
     @Override
     public void onRefresh() {
+        id = "0";
         page = 1;
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override
@@ -384,7 +455,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.ShangJia01);
-        getActivity().registerReceiver(reciver,filter);
+        getActivity().registerReceiver(reciver, filter);
     }
 
     @Override
@@ -395,7 +466,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imageCancle:
                 hideView();
                 break;

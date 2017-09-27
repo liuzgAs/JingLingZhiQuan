@@ -6,11 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.TuWenTGActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.TuiGuangEWMActivity;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.model.IndexMakemoney;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
     private final TextView textDes2;
     private final TextView textDes3;
     private final TextView textDes4;
+    private IndexMakemoney data;
 
     public ZhuanQianViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -42,23 +44,34 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
         $(R.id.view02).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (data.getGrade()>0){
+                }else {
+                    MyDialog.showTipDialog(getContext(),"请先成为VIP推广商");
+                }
             }
         });
         $(R.id.view03).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getContext(), TuiGuangEWMActivity.class);
-                getContext().startActivity(intent);
+                if (data.getGrade()>0){
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), TuiGuangEWMActivity.class);
+                    getContext().startActivity(intent);
+                }else {
+                    MyDialog.showTipDialog(getContext(),"请先成为VIP推广商");
+                }
             }
         });
         $(R.id.view04).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getContext(), TuWenTGActivity.class);
-                getContext().startActivity(intent);
+                if (data.getGrade()>0){
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), TuWenTGActivity.class);
+                    getContext().startActivity(intent);
+                }else {
+                    MyDialog.showTipDialog(getContext(),"请先成为VIP推广商");
+                }
             }
         });
         textTitle1 = $(R.id.textTitle1);
@@ -74,6 +87,7 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
     @Override
     public void setData(IndexMakemoney data) {
         super.setData(data);
+        this.data = data;
         List<IndexMakemoney.ListBean> listBeanList = data.getList();
         textTitle1.setText(listBeanList.get(0).getTitle());
         textTitle2.setText(listBeanList.get(1).getTitle());

@@ -7,7 +7,7 @@
     android:background="@color/white">
 
     <ImageView
-        android:id="@+id/imageView130"
+        android:id="@+id/imageGoods_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentLeft="true"
@@ -18,14 +18,14 @@
         android:src="@mipmap/dingdandemo" />
 
     <TextView
-        android:id="@+id/textView304"
+        android:id="@+id/textGoods_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView130"
+        android:layout_alignTop="@+id/imageGoods_img"
         android:layout_marginRight="10dp"
         android:layout_marginTop="8dp"
-        android:layout_toEndOf="@+id/imageView130"
-        android:layout_toRightOf="@+id/imageView130"
+        android:layout_toEndOf="@+id/imageGoods_img"
+        android:layout_toRightOf="@+id/imageGoods_img"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="青陌印尼花奇楠木佛珠印尼花"
@@ -35,23 +35,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView304"
+        android:layout_below="@+id/textGoods_title"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/imageView130"
-        android:layout_toRightOf="@+id/imageView130">
+        android:layout_toEndOf="@+id/imageGoods_img"
+        android:layout_toRightOf="@+id/imageGoods_img">
 
         <TextView
-            android:id="@+id/textView44"
+            android:id="@+id/textSpe_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:text="颜色：白色 尺寸：M"
+            android:text="颜色：白色  尺寸：M"
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView45"
+            android:id="@+id/textNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -62,25 +62,25 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView46"
+        android:id="@+id/textGoods_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView130"
+        android:layout_alignBottom="@+id/imageGoods_img"
         android:layout_marginBottom="8dp"
-        android:layout_toEndOf="@+id/imageView130"
-        android:layout_toRightOf="@+id/imageView130"
+        android:layout_toEndOf="@+id/imageGoods_img"
+        android:layout_toRightOf="@+id/imageGoods_img"
         android:text="¥450"
         android:textColor="@color/light_black"
         android:textSize="@dimen/MoreBigText" />
 
     <TextView
-        android:id="@+id/textView118"
+        android:id="@+id/textGoods_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView46"
+        android:layout_alignBottom="@+id/textGoods_price"
         android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/textView46"
-        android:layout_toRightOf="@+id/textView46"
+        android:layout_toEndOf="@+id/textGoods_price"
+        android:layout_toRightOf="@+id/textGoods_price"
         android:text="赚¥20"
         android:textColor="@color/basic_color"
         android:textSize="@dimen/bigText" />

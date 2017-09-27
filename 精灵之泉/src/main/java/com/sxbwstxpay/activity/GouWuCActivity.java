@@ -39,6 +39,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
     private ImageView imageQuanXuan;
     private boolean isQuanXuna = true;
     private TextView textSum;
+    private View viewQuJieSuan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
         viewBar = findViewById(R.id.viewBar);
         imageQuanXuan = (ImageView) findViewById(R.id.imageQuanXuan);
         textSum = (TextView) findViewById(R.id.textSum);
+        viewQuJieSuan = findViewById(R.id.viewQuJieSuan);
     }
 
     @Override
@@ -73,6 +75,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
         viewBar.setLayoutParams(layoutParams);
         initRecycler();
         imageQuanXuan.setImageResource(R.mipmap.xuanzhong);
+        viewQuJieSuan.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -165,6 +168,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
                         textSum.setText("¥"+cartIndex.getSum());
                         adapter.clear();
                         adapter.addAll(cartIndexCart);
+                        viewQuJieSuan.setVisibility(View.VISIBLE);
                     } else if (cartIndex.getStatus() == 2) {
                         MyDialog.showReLoginDialog(GouWuCActivity.this);
                     } else {

@@ -17,8 +17,17 @@ public class IndexMakemoney {
     private String img;
     private String url;
     private int status;
+    private int grade;
     private String info;
     private List<ListBean> list;
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
 
     public String getImg() {
         return img;

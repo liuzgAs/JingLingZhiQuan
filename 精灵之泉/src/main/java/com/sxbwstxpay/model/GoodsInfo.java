@@ -77,11 +77,20 @@ public class GoodsInfo {
         private int stock_num;
         private int sale_add;
         private String intro;
+        private String img;
         private ShareBean share;
         private List<String> banner;
         private List<DesBean> des;
         private List<ImgsBean> imgs;
         private List<ImgsBean> imgs2;
+
+        public String getImg() {
+            return img;
+        }
+
+        public void setImg(String img) {
+            this.img = img;
+        }
 
         public String getTitle() {
             return title;

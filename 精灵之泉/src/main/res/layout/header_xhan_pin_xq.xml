@@ -37,7 +37,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:letterSpacing="0.1"
-            android:text="15:42:15"
+            android:text="00:00:00"
             android:textColor="@color/white"
             android:textSize="@dimen/litterText" />
 

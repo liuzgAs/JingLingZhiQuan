@@ -300,7 +300,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    LogUtil.LogShitou("ChanPinXQActivity--run", "" + countdown);
                                     if (countdown >= 1) {
                                         countdown--;
                                         textCountdown.setText(StringUtil.TimeFormat(countdown));
@@ -315,6 +314,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                                             }
                                         }
                                     }else {
+                                        textCountdown.setText("00:00:00");
                                         timer.cancel();
                                     }
                                 }
@@ -410,6 +410,19 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         View dialog_chan_pin = inflater.inflate(R.layout.dialog_chan_pin, null);
         textDaoJiShi = (TextView) dialog_chan_pin.findViewById(R.id.textDaoJiShi);
         viewKeGouMai = dialog_chan_pin.findViewById(R.id.viewKeGouMai);
+        ImageView imageImg = (ImageView) dialog_chan_pin.findViewById(R.id.imageImg);
+        TextView textTitleDialog = (TextView) dialog_chan_pin.findViewById(R.id.textTitleDialog);
+        TextView textPriceDialog = (TextView) dialog_chan_pin.findViewById(R.id.textPriceDialog);
+        TextView textZhuan = (TextView) dialog_chan_pin.findViewById(R.id.textZhuan);
+        textTitleDialog.setText(goodsInfoAd.getTitle());
+        textPriceDialog.setText("¥"+goodsInfoAd.getPrice());
+        textZhuan.setText("赚"+goodsInfoAd.getGoods_money());
+        Glide.with(ChanPinXQActivity.this)
+                .load(goodsInfoAd.getImg())
+                .placeholder(R.mipmap.ic_empty)
+                .into(imageImg);
+
+        View viewGuiGe = dialog_chan_pin.findViewById(R.id.viewGuiGe);
         if (countdown>0){
             textDaoJiShi.setVisibility(View.VISIBLE);
             viewKeGouMai.setVisibility(View.GONE);
@@ -451,23 +464,28 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 }
             }
         });
-        FlowTagLayout flowTagLayout = (FlowTagLayout) dialog_chan_pin.findViewById(R.id.flowTagLayout);
-        flowTagLayout.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
-        tagAdapter = new TagAdapter(ChanPinXQActivity.this);
-        flowTagLayout.setAdapter(tagAdapter);
-        tagAdapter.clearAndAddAll(goodsInfoAdDes);
-        flowTagLayout.setOnTagSelectListener(new OnTagSelectListener() {
-            @Override
-            public void onItemSelect(FlowTagLayout parent, List<Integer> selectedList) {
-                for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-                    goodsInfoAdDes.get(i).setSelect(false);
+        if (goodsInfoAdDes.size()>0){
+            viewGuiGe.setVisibility(View.VISIBLE);
+            FlowTagLayout flowTagLayout = (FlowTagLayout) dialog_chan_pin.findViewById(R.id.flowTagLayout);
+            flowTagLayout.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+            tagAdapter = new TagAdapter(ChanPinXQActivity.this);
+            flowTagLayout.setAdapter(tagAdapter);
+            tagAdapter.clearAndAddAll(goodsInfoAdDes);
+            flowTagLayout.setOnTagSelectListener(new OnTagSelectListener() {
+                @Override
+                public void onItemSelect(FlowTagLayout parent, List<Integer> selectedList) {
+                    for (int i = 0; i < goodsInfoAdDes.size(); i++) {
+                        goodsInfoAdDes.get(i).setSelect(false);
+                    }
+                    for (int i = 0; i < selectedList.size(); i++) {
+                        LogUtil.LogShitou("DaiYingYaoFragment--onItemSelect", "" + selectedList.get(i));
+                        goodsInfoAdDes.get(selectedList.get(i)).setSelect(true);
+                    }
                 }
-                for (int i = 0; i < selectedList.size(); i++) {
-                    LogUtil.LogShitou("DaiYingYaoFragment--onItemSelect", "" + selectedList.get(i));
-                    goodsInfoAdDes.get(selectedList.get(i)).setSelect(true);
-                }
-            }
-        });
+            });
+        }else {
+            viewGuiGe.setVisibility(View.GONE);
+        }
         alertDialog1 = new AlertDialog.Builder(ChanPinXQActivity.this, R.style.dialog)
                 .setView(dialog_chan_pin)
                 .create();
