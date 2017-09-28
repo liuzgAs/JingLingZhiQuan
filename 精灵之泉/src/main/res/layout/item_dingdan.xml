@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -11,7 +12,7 @@
         android:layout_gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/textView218"
+            android:id="@+id/textOrderSn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -24,7 +25,7 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView219"
+            android:id="@+id/textStatus_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -45,11 +46,11 @@
             android:layout_marginLeft="10dp"
             android:src="@mipmap/wo_de_dd_mai" />
     </RelativeLayout>
-
-    <include layout="@layout/view_dingdan" />
-
-    <include layout="@layout/view_dingdan" />
-
+    <com.sxbwstxpay.customview.ListView4ScrollView
+        android:id="@+id/listView"
+        android:divider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/textView51"
         android:layout_width="match_parent"
@@ -80,7 +81,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <TextView
-                android:id="@+id/textView122"
+                android:id="@+id/textSum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -106,7 +107,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <TextView
-                android:id="@+id/textView125"
+                android:id="@+id/textGoods_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -131,12 +132,12 @@
         android:layout_gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/textZongJia"
+            android:id="@+id/textOrderAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textView52"
-            android:layout_toStartOf="@+id/textView52"
+            android:layout_toLeftOf="@+id/textSumDes"
+            android:layout_toStartOf="@+id/textSumDes"
             android:text="￥78.00"
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
@@ -146,13 +147,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textZongJia"
-            android:layout_toStartOf="@+id/textZongJia"
+            android:layout_toLeftOf="@+id/textOrderAmount"
+            android:layout_toStartOf="@+id/textOrderAmount"
             android:text="应付："
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView52"
+            android:id="@+id/textSumDes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -165,12 +166,13 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/viewBtn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal">
 
         <Button
-            android:id="@+id/buttonPingJia"
+            android:id="@+id/buttonSure"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_alignParentEnd="true"
@@ -185,33 +187,16 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/button14"
+            android:id="@+id/textBtn"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/buttonPingJia"
-            android:layout_toStartOf="@+id/buttonPingJia"
-            android:background="@drawable/btn_jianbian270_gray_30dp"
-            android:gravity="center"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="查看物流"
-            android:textColor="@color/white"
-            android:textSize="@dimen/normal_textsize" />
-
-        <TextView
-            android:id="@+id/textView120"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/button14"
-            android:layout_toStartOf="@+id/button14"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="评好货"
-            android:textSize="@dimen/normal_textsize" />
+            android:textSize="@dimen/normal_textsize"
+            android:layout_toLeftOf="@+id/buttonSure"
+            android:layout_toStartOf="@+id/buttonSure" />
     </RelativeLayout>
 </LinearLayout>

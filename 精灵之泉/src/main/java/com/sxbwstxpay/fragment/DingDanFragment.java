@@ -12,18 +12,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.DingDanXQActivity;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
-import com.sxbwstxpay.provider.DataProvider;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.UserOrder;
+import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.viewholder.DingDanViewHolder;
+
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,12 +44,18 @@ public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayo
 
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<Integer> adapter;
+    private RecyclerArrayAdapter<UserOrder.ListBean> adapter;
     private Handler handler = new Handler();
     private int page = 1;
+    private String state;
 
     public DingDanFragment() {
         // Required empty public constructor
+    }
+
+    public DingDanFragment(String state) {
+        // Required empty public constructor
+        this.state = state;
     }
 
 
@@ -91,34 +108,47 @@ public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayo
     private void initRecycle() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) DpUtils.convertDpToPixel(10,getActivity()), 0, 0);
+        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) DpUtils.convertDpToPixel(10, getActivity()), 0, 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<UserOrder.ListBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_dingdan;
                 return new DingDanViewHolder(parent, layout);
             }
 
-            @Override
-            public int getViewType(int position) {
-                Integer item = getItem(position);
-                return item;
-            }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-                handler.postDelayed(new Runnable() {
+                ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                     @Override
-                    public void run() {
-                        adapter.addAll(DataProvider.getPersonList(page));
-                        page++;
+                    public void onSuccess(String s) {
+                        try {
+                            page++;
+                            UserOrder userOrder = GsonUtils.parseJSON(s, UserOrder.class);
+                            int status = userOrder.getStatus();
+                            if (status == 1) {
+                                List<UserOrder.ListBean> userOrderList = userOrder.getList();
+                                adapter.addAll(userOrderList);
+                            } else if (status == 3) {
+                                MyDialog.showReLoginDialog(getActivity());
+                            } else {
+                                adapter.pauseMore();
+                            }
+                        } catch (Exception e) {
+                            adapter.pauseMore();
+                        }
                     }
-                }, 500);
+
+                    @Override
+                    public void onError(Response response) {
+                        adapter.pauseMore();
+                    }
+                });
             }
 
             @Override
@@ -160,7 +190,7 @@ public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayo
             @Override
             public View onCreateView(ViewGroup parent) {
                 View view = new View(getContext());
-                view.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DpUtils.convertDpToPixel(10,getActivity())));
+                view.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DpUtils.convertDpToPixel(10, getActivity())));
                 return view;
             }
 
@@ -171,16 +201,64 @@ public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayo
         });
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.USER_ORDER;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("p", page + "");
+        params.put("state", state);
+        return new OkObject(params, url);
+    }
+
     @Override
     public void onRefresh() {
         page = 1;
-        handler.postDelayed(new Runnable() {
+        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override
-            public void run() {
-                adapter.clear();
-                adapter.addAll(DataProvider.getPersonList(page));
-                page++;
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("我的订单", s);
+                try {
+                    page++;
+                    UserOrder userOrder = GsonUtils.parseJSON(s, UserOrder.class);
+                    if (userOrder.getStatus() == 1) {
+                        List<UserOrder.ListBean> userOrderList = userOrder.getList();
+                        adapter.clear();
+                        adapter.addAll(userOrderList);
+                    } else if (userOrder.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(getActivity());
+                    } else {
+                        showError(userOrder.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
             }
-        }, 0);
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        recyclerView.showProgress();
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
     }
 }

@@ -9,16 +9,30 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.base.ZjbBaseActivity;
+import com.sxbwstxpay.base.MyDialog;
+import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.fragment.DingDanFragment;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.UserOrder;
+import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 
-public class WoDeDDActivity extends ZjbBaseActivity implements View.OnClickListener{
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Response;
+
+public class WoDeDDActivity extends ZjbBaseNotLeftActivity implements View.OnClickListener{
     private TabLayout tablayout;
     private ViewPager viewPager;
     private View viewBar;
+    private List<UserOrder.TypeBean> userOrderType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +63,6 @@ public class WoDeDDActivity extends ZjbBaseActivity implements View.OnClickListe
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
-        viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
-        tablayout.setupWithViewPager(viewPager);
-        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tablayout.getTabAt(0).setText("全部订单");
-        tablayout.getTabAt(1).setText("待付款");
-        tablayout.getTabAt(2).setText("待发货");
-        tablayout.getTabAt(3).setText("待收货");
-        tablayout.getTabAt(4).setText("退换货");
-        tablayout.getTabAt(5).setText("已完成");
     }
 
     @Override
@@ -65,9 +70,54 @@ public class WoDeDDActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.imageBack).setOnClickListener(this);
     }
 
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.USER_ORDER;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid",userInfo.getUid());
+        params.put("tokenTime",tokenTime);
+        params.put("p","1");
+        return new OkObject(params, url);
+    }
+
     @Override
     protected void initData() {
+        showLoadingDialog();
+        ApiClient.post(WoDeDDActivity.this, getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("WoDeDDActivity--我的订单", s+"");
+                try {
+                    UserOrder userOrder = GsonUtils.parseJSON(s, UserOrder.class);
+                    if (userOrder.getStatus()==1){
+                        userOrderType = userOrder.getType();
+                        viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
+                        tablayout.setupWithViewPager(viewPager);
+                        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+                        for (int i = 0; i < userOrderType.size(); i++) {
+                            tablayout.getTabAt(i).setText(userOrderType.get(i).getN());
+                        }
+                    }else if (userOrder.getStatus()==3){
+                        MyDialog.showReLoginDialog(WoDeDDActivity.this);
+                    }else {
+                        Toast.makeText(WoDeDDActivity.this, userOrder.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(WoDeDDActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(WoDeDDActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -87,12 +137,12 @@ public class WoDeDDActivity extends ZjbBaseActivity implements View.OnClickListe
 
         @Override
         public Fragment getItem(int position) {
-            return new DingDanFragment();
+            return new DingDanFragment(userOrderType.get(position).getV());
         }
 
         @Override
         public int getCount() {
-            return 6;
+            return userOrderType.size();
         }
     }
 }

@@ -7,7 +7,7 @@ import com.sxbwstxpay.util.AppUtil;
  * Created by zjb on 2016/6/12.
  */
 public class Constant {
-    //    public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
+//        public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
     public static String HOST = "http://api.jlzquan.com/index.php?key=" + AppUtil.getMD5Time();
     public static int MainActivityAlive = 0;
     public static int changeControl = 2017;//判断数据是否有改变
@@ -154,6 +154,8 @@ public class Constant {
         public static final String ORDER_PAY = "&g=App&m=Order&a=pay";
         //支付成功
         public static final String ORDER_PAYS = "&g=App&m=Order&a=pays";
+        //商城订单
+        public static final String USER_ORDER = "&g=App&m=User&a=order";
     }
 
     public static class PERMISSION {
