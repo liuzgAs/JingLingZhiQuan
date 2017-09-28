@@ -10,15 +10,15 @@ import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.BannerBean;
 import com.sxbwstxpay.model.ExtraMap;
-import com.sxbwstxpay.model.IndexGoods;
 
 /**
  * des： banner image
  * author： ZhangJieBo
  * date： 2017/7/7 0007 上午 9:46
  */
-public class LocalImageHolderView implements Holder<IndexGoods.BannerBean> {
+public class LocalImageHolderView implements Holder<BannerBean> {
     private ImageView imageView;
     @Override
     public View createView(Context context) {
@@ -28,7 +28,7 @@ public class LocalImageHolderView implements Holder<IndexGoods.BannerBean> {
     }
 
     @Override
-    public void UpdateUI(final Context context, int position, final IndexGoods.BannerBean data) {
+    public void UpdateUI(final Context context, int position, final BannerBean data) {
         Glide.with(context)
                 .load(data.getImg())
                 .placeholder(R.mipmap.ic_empty)

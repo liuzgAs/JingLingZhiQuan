@@ -14,6 +14,16 @@ public class IndexCate {
 
     private int status;
     private String info;
+    private String vipNum;
+
+    public String getVipNum() {
+        return vipNum;
+    }
+
+    public void setVipNum(String vipNum) {
+        this.vipNum = vipNum;
+    }
+
     private List<CateBean> cate;
 
     public int getStatus() {

@@ -59,6 +59,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     };
     private String mCity;
     private List<IndexCate.CateBean> indexCateCate;
+    private TextView textVipNum;
 
     public ShengQianCZFragment() {
         // Required empty public constructor
@@ -102,6 +103,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         tablayout = (TabLayout) mInflate.findViewById(R.id.tablayout);
         viewPager = (ViewPager) mInflate.findViewById(R.id.viewPager);
         textCity = (TextView) mInflate.findViewById(R.id.textCity);
+        textVipNum = (TextView) mInflate.findViewById(R.id.textVipNum);
     }
 
     @Override
@@ -145,6 +147,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                        viewPager.setAdapter(new MyViewPagerAdapter(getChildFragmentManager()));
                        tablayout.setupWithViewPager(viewPager);
                        tablayout.removeAllTabs();
+                       textVipNum.setText(indexCate.getVipNum());
                        for (int i = 0; i < indexCateCate.size(); i++) {
                            View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_tablayout, null);
                            TextView textTitle = (TextView) view.findViewById(R.id.textTitle);

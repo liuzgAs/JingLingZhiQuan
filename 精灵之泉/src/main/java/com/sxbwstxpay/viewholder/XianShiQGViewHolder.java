@@ -56,34 +56,34 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
         buttonShangJia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getContext()).showLoadingDialog();
+                ((MainActivity) getContext()).showLoadingDialog();
                 ApiClient.post(getContext(), getOkObject1(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
-                        ((MainActivity)getContext()).cancelLoadingDialog();
-                        LogUtil.LogShitou("XianShiQGViewHolder--商品上架", s+"");
+                        ((MainActivity) getContext()).cancelLoadingDialog();
+                        LogUtil.LogShitou("XianShiQGViewHolder--商品上架", s + "");
                         try {
                             IndexUpgoods indexUpgoods = GsonUtils.parseJSON(s, IndexUpgoods.class);
-                            if (indexUpgoods.getStatus()==1){
+                            if (indexUpgoods.getStatus() == 1) {
                                 buttonShangJia.setText("√");
                                 data.setAct(1);
                                 Intent intent = new Intent();
-                                intent.putExtra(Constant.INTENT_KEY.value,indexUpgoods.getG_num());
+                                intent.putExtra(Constant.INTENT_KEY.value, indexUpgoods.getG_num());
                                 intent.setAction(Constant.BROADCASTCODE.ShangJia01);
                                 getContext().sendBroadcast(intent);
-                            }else if (indexUpgoods.getStatus()==2){
+                            } else if (indexUpgoods.getStatus() == 2) {
                                 MyDialog.showReLoginDialog(getContext());
-                            }else {
+                            } else {
                                 Toast.makeText(getContext(), indexUpgoods.getInfo(), Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
-                            Toast.makeText(getContext(),"数据出错", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "数据出错", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onError(Response response) {
-                        ((MainActivity)getContext()).cancelLoadingDialog();
+                        ((MainActivity) getContext()).cancelLoadingDialog();
                         Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -100,9 +100,9 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
     private OkObject getOkObject1() {
         String url = Constant.HOST + Constant.Url.INDEX_UPGOODS;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",((MainActivity)getContext()).userInfo.getUid());
-        params.put("tokenTime",((MainActivity)getContext()).tokenTime);
-        params.put("id",data.getId());
+        params.put("uid", ((MainActivity) getContext()).userInfo.getUid());
+        params.put("tokenTime", ((MainActivity) getContext()).tokenTime);
+        params.put("id", data.getId());
         return new OkObject(params, url);
     }
 
@@ -120,8 +120,10 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
         textGoods_money.setText("赚" + data.getGoods_money());
         if (data.getAct() == 1) {
             buttonShangJia.setText("√");
+        } else if (data.getAct()==2) {
+            buttonShangJia.setText("－");
         } else {
-            buttonShangJia.setText("+");
+            buttonShangJia.setText("＋");
         }
     }
 

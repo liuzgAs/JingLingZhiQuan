@@ -31,6 +31,7 @@ import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.BannerBean;
 import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.IndexGoods;
 import com.sxbwstxpay.model.OkObject;
@@ -63,7 +64,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private String lng;
     private String cityId;
     private String id;
-    private List<IndexGoods.BannerBean> indexGoodsBanner;
+    private List<BannerBean> indexGoodsBanner;
     private List<IndexGoods.TimesBean> indexGoodsTimes;
     private String indexGoodsImg;
     private View viewShangJiaTip;

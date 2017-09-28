@@ -88,10 +88,11 @@
                 android:layout_alignParentEnd="true">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/textVipNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="@dimen/bigText"
                     android:layout_centerVertical="true"

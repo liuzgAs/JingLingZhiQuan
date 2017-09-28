@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/guanLiDianPuTop">
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:src="@mipmap/katongmeinv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView86"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <RelativeLayout
+            android:background="@color/tranblack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.sxbwstxpay.customview.CircleImageView
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/head"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/imageStoreLogo"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="龙凤图兔宝宝"
+                android:textColor="@color/white"
+                android:textSize="@dimen/bigText"
+                android:id="@+id/textStoreNmae"
+                android:layout_alignTop="@+id/imageStoreLogo"
+                android:layout_toRightOf="@+id/imageStoreLogo"
+                android:layout_toEndOf="@+id/imageStoreLogo" />
+
+            <TextView
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="李成的店"
+                android:textColor="@color/gray_white"
+                android:textSize="@dimen/litterText"
+                android:id="@+id/textStoreDes"
+                android:layout_alignBottom="@+id/imageStoreLogo"
+                android:layout_toRightOf="@+id/imageStoreLogo"
+                android:layout_toEndOf="@+id/imageStoreLogo" />
+
+            <RelativeLayout
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:src="@mipmap/fenxiang_dianpu"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/imageView100"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:textSize="@dimen/normal_textsize"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="店铺分享"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/textView120"
+                    android:layout_below="@+id/imageView100"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/banner"
+        app:canLoop="true"
+        android:layout_width="match_parent"
+        android:layout_height="175dp" />
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight">
+
+        <TextView
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/light_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="精品推荐"
+            android:id="@+id/textView46"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+          android:background="@color/background"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView46"
+            android:layout_toEndOf="@+id/textView46" />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/background"
+            android:id="@+id/textView52"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textView46"
+            android:layout_toStartOf="@+id/textView46" />
+    </RelativeLayout>
+
+</LinearLayout>

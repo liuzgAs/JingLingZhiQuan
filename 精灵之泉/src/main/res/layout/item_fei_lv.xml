@@ -15,7 +15,7 @@
         android:layout_weight="5">
 
         <ImageView
-            android:id="@+id/imageView69"
+            android:id="@+id/imageImg"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -29,8 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toEndOf="@+id/imageView69"
-            android:layout_toRightOf="@+id/imageView69">
+            android:layout_toEndOf="@+id/imageImg"
+            android:layout_toRightOf="@+id/imageImg">
 
             <TextView
                 android:id="@+id/textName"

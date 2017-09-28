@@ -54,7 +54,7 @@ public class UserRate {
 
         private String id;
         private String name;
-        private String type;
+        private int type;
         private String des;
         private String rate;
         private String fee;
@@ -86,11 +86,11 @@ public class UserRate {
             this.name = name;
         }
 
-        public String getType() {
+        public int getType() {
             return type;
         }
 
-        public void setType(String type) {
+        public void setType(int type) {
             this.type = type;
         }
 

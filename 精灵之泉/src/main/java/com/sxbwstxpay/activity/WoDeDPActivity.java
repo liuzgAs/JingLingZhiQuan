@@ -1,6 +1,8 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +23,7 @@ import java.util.List;
 
 import okhttp3.Response;
 
-public class WoDeDPActivity extends ZjbBaseActivity {
+public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private TextView textNum01;
     private TextView textNum02;
@@ -64,7 +66,7 @@ public class WoDeDPActivity extends ZjbBaseActivity {
 
     @Override
     protected void setListeners() {
-
+findViewById(R.id.buttonGuanLi).setOnClickListener(this);
     }
 
     /**
@@ -118,5 +120,16 @@ public class WoDeDPActivity extends ZjbBaseActivity {
                 Toast.makeText(WoDeDPActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.buttonGuanLi:
+                Intent intent = new Intent();
+                intent.setClass(this,GuanLiWDDPActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

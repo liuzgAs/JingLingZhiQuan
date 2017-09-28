@@ -229,17 +229,39 @@
         <activity
             android:name=".activity.YinDaoActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.XinZengYHKActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.XuanZeXYKActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.SheZhiActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.GuanLiYHKActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.ShangHuLBActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.ZhangHuAQActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.XiuGaiMMActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.WeiXinMPMaActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.EditActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.TuiGuangActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.TuiGuangEWMActivity" android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.XinZengYHKActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.XuanZeXYKActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.SheZhiActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.GuanLiYHKActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ShangHuLBActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ZhangHuAQActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.XiuGaiMMActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WeiXinMPMaActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.EditActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.TuiGuangActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.TuiGuangEWMActivity"
+            android:launchMode="singleTop" />
         <!-- wechat callback -->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
@@ -277,38 +299,56 @@
         <activity
             android:name=".activity.WebActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.TuWenTGActivity" android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.TuWenTGActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.ReciverActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Transparent" />
-        <activity android:name=".activity.DangQianBBActivity" android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.DangQianBBActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".activity.ChanPinXQActivity" />
-        <activity android:name=".activity.GouWuCActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.QueRenDDActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.XuanZeSHDZActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.ZhiFuActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.ZhiFuCGActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.ChengShiXZActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.WoDeDPActivity" android:launchMode="singleTop"/>
-        <activity android:name=".activity.WoDeVIPActivity"
-            android:launchMode="singleTop"/>
-        <!--支付宝h5-->
+        <activity
+            android:name=".activity.GouWuCActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.QueRenDDActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.XuanZeSHDZActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ZhiFuActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ZhiFuCGActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ChengShiXZActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeDPActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeVIPActivity"
+            android:launchMode="singleTop" />
+        <!-- 支付宝h5 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
-        <!--支付宝h5-->
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+        <!-- 支付宝h5 -->
+        <activity android:name=".activity.GuanLiWDDPActivity"></activity>
     </application>
 
 </manifest>

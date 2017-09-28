@@ -2,10 +2,10 @@ package com.sxbwstxpay.viewholder;
 
 import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.UserRate;
 
@@ -21,16 +21,18 @@ public class FeiLvViewHolder extends BaseViewHolder<UserRate.DataBean> {
     private final TextView textFee;
     private final TextView textMaxDay;
     private final TextView textMaxAmount;
+    private final ImageView imageImg;
 
     public FeiLvViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
         textName = $(R.id.textName);
         textDes = $(R.id.textDes);
         textNameDes = $(R.id.textNameDes);
-        textRate = $(R.id.textNameDes);
-        textFee = $(R.id.textNameDes);
+        textRate = $(R.id.textRate);
+        textFee = $(R.id.textFee);
         textMaxDay = $(R.id.textMaxDay);
         textMaxAmount = $(R.id.textMaxAmount);
+        imageImg = $(R.id.imageImg);
     }
 
     @Override
@@ -43,6 +45,17 @@ public class FeiLvViewHolder extends BaseViewHolder<UserRate.DataBean> {
         textFee.setText(data.getFee());
         textMaxDay.setText(data.getMaxDay());
         textMaxAmount.setText(data.getMaxAmount());
+        switch (data.getType()) {
+            case 0:
+                imageImg.setImageResource(R.mipmap.fei_lv_yinlian);
+                break;
+            case 1:
+                imageImg.setImageResource(R.mipmap.zhifu_zhifubao);
+                break;
+            case 2:
+                imageImg.setImageResource(R.mipmap.zhifu_weixin);
+                break;
+        }
     }
-    
+
 }

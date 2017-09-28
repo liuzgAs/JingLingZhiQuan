@@ -25,4 +25,5 @@
     <dimen name="mineImgConner">15dp</dimen>
     <dimen name="diver">10dp</dimen>
     <dimen name="chanPinXQBanner">200dp</dimen>
+    <dimen name="guanLiDianPuTop">190dp</dimen>
 </resources>
