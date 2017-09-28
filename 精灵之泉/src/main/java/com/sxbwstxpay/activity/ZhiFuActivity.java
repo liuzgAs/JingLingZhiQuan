@@ -63,7 +63,7 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
      * author： ZhangJieBo
      * date： 2017/7/6 0006 下午 2:34
      */
-    private void paySuccess() {
+    public void paySuccess() {
         Intent intent1 = new Intent();
         intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
         sendBroadcast(intent1);

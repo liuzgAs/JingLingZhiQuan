@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.model.GoodsInfo;
+import com.sxbwstxpay.model.RecommBean;
 
 /**
  * Created by Administrator on 2017/3/28 0028.

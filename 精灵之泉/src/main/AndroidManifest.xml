@@ -3,10 +3,6 @@
     package="com.sxbwstxpay">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- 阿里移动推送相关权限 -->
     <!-- Android 6.0版本可去除，用于选举信息（通道复用）的同步 -->
@@ -233,17 +229,17 @@
         <activity
             android:name=".activity.YinDaoActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.XinZengYHKActivity" />
-        <activity android:name=".activity.XuanZeXYKActivity" />
-        <activity android:name=".activity.SheZhiActivity" />
-        <activity android:name=".activity.GuanLiYHKActivity" />
-        <activity android:name=".activity.ShangHuLBActivity" />
-        <activity android:name=".activity.ZhangHuAQActivity" />
-        <activity android:name=".activity.XiuGaiMMActivity" />
-        <activity android:name=".activity.WeiXinMPMaActivity" />
-        <activity android:name=".activity.EditActivity" />
-        <activity android:name=".activity.TuiGuangActivity" />
-        <activity android:name=".activity.TuiGuangEWMActivity" />
+        <activity android:name=".activity.XinZengYHKActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.XuanZeXYKActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.SheZhiActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.GuanLiYHKActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.ShangHuLBActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.ZhangHuAQActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.XiuGaiMMActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.WeiXinMPMaActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.EditActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.TuiGuangActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.TuiGuangEWMActivity" android:launchMode="singleTop"/>
         <!-- wechat callback -->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
@@ -281,21 +277,38 @@
         <activity
             android:name=".activity.WebActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.TuWenTGActivity" />
+        <activity android:name=".activity.TuWenTGActivity" android:launchMode="singleTop"/>
         <activity
             android:name=".activity.ReciverActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Transparent" />
-        <activity android:name=".activity.DangQianBBActivity" />
+        <activity android:name=".activity.DangQianBBActivity" android:launchMode="singleTop"/>
         <activity android:name=".activity.ChanPinXQActivity" />
-        <activity android:name=".activity.GouWuCActivity" />
-        <activity android:name=".activity.QueRenDDActivity" />
-        <activity android:name=".activity.XuanZeSHDZActivity" />
-        <activity android:name=".activity.ZhiFuActivity" />
-        <activity android:name=".activity.ZhiFuCGActivity" />
-        <activity android:name=".activity.ChengShiXZActivity" />
-        <activity android:name=".activity.WoDeDPActivity" />
-        <activity android:name=".activity.WoDeVIPActivity"></activity>
+        <activity android:name=".activity.GouWuCActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.QueRenDDActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.XuanZeSHDZActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.ZhiFuActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.ZhiFuCGActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.ChengShiXZActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.WoDeDPActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.WoDeVIPActivity"
+            android:launchMode="singleTop"/>
+        <!--支付宝h5-->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <!--支付宝h5-->
     </application>
 
 </manifest>

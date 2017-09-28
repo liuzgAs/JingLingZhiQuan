@@ -534,15 +534,17 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
      * date： 2017/9/26 0026 下午 2:20
      */
     private void addCar(final boolean quick) {
-        boolean hasId = false;
-        for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-            if (goodsInfoAdDes.get(i).isSelect()) {
-                hasId = true;
+        if (goodsInfoAdDes.size()>0){
+            boolean hasId = false;
+            for (int i = 0; i < goodsInfoAdDes.size(); i++) {
+                if (goodsInfoAdDes.get(i).isSelect()) {
+                    hasId = true;
+                }
             }
-        }
-        if (!hasId) {
-            Toast.makeText(ChanPinXQActivity.this, "请选择规格", Toast.LENGTH_SHORT).show();
-            return;
+            if (!hasId) {
+                Toast.makeText(ChanPinXQActivity.this, "请选择规格", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         showLoadingDialog();
         ApiClient.post(ChanPinXQActivity.this, getOkObjectAddCar(), new ApiClient.CallBack() {

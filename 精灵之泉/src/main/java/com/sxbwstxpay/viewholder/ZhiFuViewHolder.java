@@ -7,13 +7,20 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ZhiFuActivity;
+import com.sxbwstxpay.base.MyDialog;
+import com.sxbwstxpay.model.AliPayBean;
 import com.sxbwstxpay.model.OrderPay;
+import com.sxbwstxpay.util.GsonUtils;
 import com.tencent.mm.opensdk.constants.Build;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -33,9 +40,47 @@ public class ZhiFuViewHolder extends BaseViewHolder<OrderPay> {
         $(R.id.buttonZhiFu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (payMode){
+                switch (payMode) {
                     case 1:
-                        Toast.makeText(getContext(), "支付宝暂未集成", Toast.LENGTH_SHORT).show();
+                        Runnable payRunnable = new Runnable() {
+
+                            @Override
+                            public void run() {
+                                PayTask alipay = new PayTask((ZhiFuActivity) getContext());
+                                Map<String, String> stringMap = alipay.payV2(data.getPayAli(), true);
+                                stringMap.get("result");
+                                AliPayBean aliPayBean = GsonUtils.parseJSON(stringMap.get("result"), AliPayBean.class);
+                                switch (aliPayBean.getAlipay_trade_app_pay_response().getCode()) {
+                                    case 10000:
+                                        ((ZhiFuActivity) getContext()).paySuccess();
+                                        break;
+                                    case 8000:
+                                        ((ZhiFuActivity) getContext()).paySuccess();
+                                        break;
+                                    case 4000:
+                                        MyDialog.showTipDialog(getContext(), "订单支付失败");
+                                        break;
+                                    case 5000:
+                                        MyDialog.showTipDialog(getContext(), "重复请求");
+                                        break;
+                                    case 6001:
+                                        MyDialog.showTipDialog(getContext(), "取消支付");
+                                        break;
+                                    case 6002:
+                                        MyDialog.showTipDialog(getContext(), "网络连接错误");
+                                        break;
+                                    case 6004:
+                                        MyDialog.showTipDialog(getContext(), "支付结果未知");
+                                        break;
+                                    default:
+                                        MyDialog.showTipDialog(getContext(), "支付失败");
+                                        break;
+                                }
+                            }
+                        };
+                        // 必须异步调用
+                        Thread payThread = new Thread(payRunnable);
+                        payThread.start();
                         break;
                     case 2:
                         wechatPay();

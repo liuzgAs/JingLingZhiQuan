@@ -8,7 +8,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.amap.api.location.AMapLocation;
@@ -132,7 +131,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity {
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                Toast.makeText(HuanYingActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                MyDialog.dialogFinish(HuanYingActivity.this,"请求失败");
             }
         });
     }
