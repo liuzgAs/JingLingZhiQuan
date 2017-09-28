@@ -141,10 +141,20 @@ public class MainActivity extends AppCompatActivity {
         mTabHost.setCurrentTab(1);
     }
 
+    /**
+     * 双击退出应用
+     */
+    private long currentTime = 0;
     @Override
     public void onBackPressed() {
         if (!BackHandlerHelper.handleBackPress(this)) {
-            super.onBackPressed();
+            if (System.currentTimeMillis() - currentTime > 1000) {
+                Toast toast = Toast.makeText(this,"双击退出应用", Toast.LENGTH_SHORT);
+                toast.show();
+                currentTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
         }
     }
 
