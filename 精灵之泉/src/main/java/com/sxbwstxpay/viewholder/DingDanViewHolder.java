@@ -1,6 +1,9 @@
 package com.sxbwstxpay.viewholder;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +12,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.WoDeDDActivity;
+import com.sxbwstxpay.base.MyDialog;
+import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.model.UserOrder;
+import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
+
+import java.util.HashMap;
+
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -45,6 +61,102 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         buttonSure = $(R.id.buttonSure);
         listView = $(R.id.listView);
         viewBtn = $(R.id.viewBtn);
+        buttonSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (data.getIs_pay() == 1) {
+                    buttonSure.setText("去付款");
+                }
+                if (data.getIs_confirm() == 1) {
+                    dingDanCaoZuo("confirm");
+                }
+            }
+        });
+        textBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (data.getIs_cancle() == 1) {
+                    dingDanCaoZuo("cancle");
+                }
+                if (data.getIs_del() == 1) {
+                    dingDanCaoZuo("del");
+                }
+            }
+        });
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject(String type) {
+        String url = Constant.HOST + Constant.Url.USER_ORDERDONE;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", ((WoDeDDActivity) getContext()).userInfo.getUid());
+        params.put("tokenTime", ((WoDeDDActivity) getContext()).tokenTime);
+        params.put("id", data.getId());
+        params.put("type", type);
+        return new OkObject(params, url);
+    }
+
+    /**
+     * des： 订单操作
+     * author： ZhangJieBo
+     * date： 2017/9/28 0028 上午 11:11
+     */
+    private void dingDanCaoZuo(final String type) {
+        String message = "";
+        switch (type) {
+            case "confirm":
+                message = "是否确认订单？";
+                break;
+            case "cancle":
+                message = "确认取消订单吗？";
+                break;
+            case "del":
+                message = "确认删除订单吗？";
+                break;
+        }
+        new AlertDialog.Builder(getContext())
+                .setTitle("提示")
+                .setMessage(message)
+                .setNegativeButton("取消",null)
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((WoDeDDActivity) getContext()).showLoadingDialog();
+                        ApiClient.post(getContext(), getOkObject(type), new ApiClient.CallBack() {
+                            @Override
+                            public void onSuccess(String s) {
+                                ((WoDeDDActivity) getContext()).cancelLoadingDialog();
+                                LogUtil.LogShitou("DingDanViewHolder--订单操作",s+ "");
+                                try {
+                                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                                    if (simpleInfo.getStatus() == 1) {
+                                        Intent intent = new Intent();
+                                        intent.setAction(Constant.BROADCASTCODE.ShuaXinDingDan);
+                                        getContext().sendBroadcast(intent);
+                                    } else if (simpleInfo.getStatus() == 3) {
+                                        MyDialog.showReLoginDialog(getContext());
+                                    } else {
+                                        Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(getContext(), "数据出错", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Response response) {
+                                ((WoDeDDActivity) getContext()).cancelLoadingDialog();
+                                Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                })
+                .create()
+                .show();
     }
 
     @Override
@@ -61,7 +173,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
             textBtn.setText("取消订单");
         }
         if (data.getIs_pay() == 1) {
-            buttonSure.setText("确认付款");
+            buttonSure.setText("去付款");
         }
         if (data.getIs_confirm() == 1) {
             buttonSure.setText("确认收货");
@@ -69,13 +181,13 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         if (data.getIs_del() == 1) {
             textBtn.setText("删除订单");
         }
-        if (data.getIs_del() == 0 && data.getIs_del() == 0) {
+        if (data.getIs_del() == 0 && data.getIs_cancle() == 0) {
             textBtn.setVisibility(View.GONE);
         }
         if (data.getIs_confirm() == 0 && data.getIs_pay() == 0) {
             buttonSure.setVisibility(View.GONE);
         }
-        if (data.getIs_confirm() == 0 && data.getIs_pay() == 0 && data.getIs_del() == 0 && data.getIs_del() == 0) {
+        if (data.getIs_confirm() == 0 && data.getIs_pay() == 0 && data.getIs_del() == 0 && data.getIs_cancle() == 0) {
             viewBtn.setVisibility(View.GONE);
         }
         listView.setAdapter(new MyAdapter());

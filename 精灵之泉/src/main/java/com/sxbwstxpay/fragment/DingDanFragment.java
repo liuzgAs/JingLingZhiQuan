@@ -1,10 +1,12 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,9 +47,19 @@ public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayo
     private View mInflate;
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<UserOrder.ListBean> adapter;
-    private Handler handler = new Handler();
     private int page = 1;
     private String state;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.ShuaXinDingDan:
+                    onRefresh();
+                    break;
+            }
+        }
+    };
 
     public DingDanFragment() {
         // Required empty public constructor
@@ -260,5 +272,19 @@ public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayo
                 recyclerView.showError();
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.ShuaXinDingDan);
+        getActivity().registerReceiver(reciver,filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(reciver);
     }
 }
