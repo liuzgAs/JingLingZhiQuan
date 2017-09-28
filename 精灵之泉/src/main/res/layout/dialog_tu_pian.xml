@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/bigText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:text="查看"
+            android:gravity="center"
+            android:id="@+id/textChaKan" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_gray" />
+
+        <TextView
+            android:textColor="@color/basic_color"
+            android:textSize="@dimen/bigText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:text="重新上传"
+            android:gravity="center"
+            android:id="@+id/textShangChuan" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_gray"
+            android:id="@+id/textView93" />
+
+        <TextView
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/bigText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:text="取消"
+            android:gravity="center"
+            android:id="@+id/textQuXiao"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+</LinearLayout>
