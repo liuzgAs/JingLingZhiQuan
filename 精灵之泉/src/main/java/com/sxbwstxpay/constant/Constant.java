@@ -162,6 +162,8 @@ public class Constant {
         public static final String STORE_MYSTORE = "&g=App&m=Store&a=myStore";
         //管理我的店铺
         public static final String STORE_GOODS = "&g=App&m=Store&a=goods";
+        //商品下架
+        public static final String INDEX_DOWNGOODS = "&g=App&m=Index&a=downGoods";
     }
 
     public static class PERMISSION {
