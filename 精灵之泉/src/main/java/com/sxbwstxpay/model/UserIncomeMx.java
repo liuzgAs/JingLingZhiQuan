@@ -1,9 +1,11 @@
 package com.sxbwstxpay.model;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangjiebo on 2017/9/16 0016.
  */
-public class UserIncomeMx {
+public class UserIncomeMx implements Serializable{
     /**
      * amount : 0
      * amount1 : 0
@@ -15,6 +17,24 @@ public class UserIncomeMx {
     private double amount1;
     private double amount2;
     private double status;
+    private String des;
+    private double min;
+
+    public double getMin() {
+        return min;
+    }
+
+    public void setMin(double min) {
+        this.min = min;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
+    }
 
     public double getAmount2() {
         return amount2;

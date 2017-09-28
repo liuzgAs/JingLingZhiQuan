@@ -1,6 +1,9 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -9,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.HashMap;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
@@ -22,6 +23,9 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+
+import java.util.HashMap;
+
 import okhttp3.Response;
 
 public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListener {
@@ -30,6 +34,17 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
     private TextView textFenRun;
     private TextView textYongJin;
     private TextView textFanYong;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.ShuaXinYongJin:
+                    initData();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,5 +170,18 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        registerReceiver(reciver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }

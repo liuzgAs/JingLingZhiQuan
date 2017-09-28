@@ -1,13 +1,14 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.HashMap;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
@@ -19,6 +20,9 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+
+import java.util.HashMap;
+
 import okhttp3.Response;
 
 public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickListener {
@@ -29,6 +33,18 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
     private TextView textLeiJi;
     private TextView textDaiShouFY;
     private TextView textJinE;
+    private UserIncomeMx userIncomeMx;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.ShuaXinYongJin:
+                    initData();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +134,7 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
                 cancelLoadingDialog();
                 LogUtil.LogShitou("TuiGuangYJActivity--收益", "" + s);
                 try {
-                    UserIncomeMx userIncomeMx = GsonUtils.parseJSON(s, UserIncomeMx.class);
+                    userIncomeMx = GsonUtils.parseJSON(s, UserIncomeMx.class);
                     if (userIncomeMx.getStatus() == 1) {
                         textJinE.setText(userIncomeMx.getAmount()+"");
                         switch (id) {
@@ -126,11 +142,11 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
                                 textLeiJi.setText("累计我的分润¥" + userIncomeMx.getAmount1());
                                 break;
                             case 2:
-                                textLeiJi.setText("累计我的分润¥" + userIncomeMx.getAmount1());
+                                textLeiJi.setText("累计推广佣金¥" + userIncomeMx.getAmount1());
                                 break;
                             case 3:
-                                textLeiJi.setText("累计我的分润¥" + userIncomeMx.getAmount1());
-                                textDaiShouFY.setText("¥"+userIncomeMx.getAmount2());
+                                textLeiJi.setText("累计平台返佣¥" + userIncomeMx.getAmount1());
+                                textDaiShouFY.setText("¥"+ userIncomeMx.getAmount2());
                                 break;
                         }
                     } else if (userIncomeMx.getStatus() == 3) {
@@ -156,6 +172,8 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.buttonLiJiTX:
+                intent.putExtra(Constant.INTENT_KEY.id,id);
+                intent.putExtra(Constant.INTENT_KEY.value,userIncomeMx);
                 intent.setClass(this, LiJiTXActivity.class);
                 startActivity(intent);
                 break;
@@ -167,5 +185,18 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        registerReceiver(reciver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }

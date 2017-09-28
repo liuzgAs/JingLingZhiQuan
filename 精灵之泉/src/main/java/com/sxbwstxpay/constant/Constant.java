@@ -164,6 +164,8 @@ public class Constant {
         public static final String STORE_GOODS = "&g=App&m=Store&a=goods";
         //商品下架
         public static final String INDEX_DOWNGOODS = "&g=App&m=Index&a=downGoods";
+        //会员佣金提现
+        public static final String USER_WITHDRAW = "&g=App&m=User&a=withdraw";
     }
 
     public static class PERMISSION {
@@ -240,6 +242,7 @@ public class Constant {
         public static final String address = "address";
         public static final String zhiFuGuanBi = "zhiFuGuanBi";
         public static final String ShuaXinDingDan = "ShuaXinDingDan";
+        public static final String ShuaXinYongJin = "ShuaXinYongJin";
     }
 
 }
