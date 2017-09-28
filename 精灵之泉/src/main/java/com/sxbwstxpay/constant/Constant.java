@@ -158,6 +158,8 @@ public class Constant {
         public static final String USER_ORDER = "&g=App&m=User&a=order";
         //订单操作
         public static final String USER_ORDERDONE = "&g=App&m=User&a=orderDone";
+        //我的店铺
+        public static final String STORE_MYSTORE = "&g=App&m=Store&a=myStore";
     }
 
     public static class PERMISSION {
