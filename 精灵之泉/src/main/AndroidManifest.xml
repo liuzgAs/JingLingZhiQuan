@@ -340,15 +340,16 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- 支付宝h5 -->
-        <activity android:name=".activity.GuanLiWDDPActivity"></activity>
+        <activity android:name=".activity.GuanLiWDDPActivity" />
+        <activity android:name=".activity.SouSuoActivity"></activity>
     </application>
 
 </manifest>

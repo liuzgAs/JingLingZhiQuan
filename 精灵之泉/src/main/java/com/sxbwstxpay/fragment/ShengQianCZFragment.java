@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChengShiXZActivity;
+import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -119,6 +120,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     protected void setListeners() {
         textCity.setOnClickListener(this);
         mInflate.findViewById(R.id.viewVip).setOnClickListener(this);
+        mInflate.findViewById(R.id.textSouSuo).setOnClickListener(this);
     }
 
     /**
@@ -134,46 +136,46 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
 
     @Override
     protected void initData() {
-       showLoadingDialog();
-       ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
-           @Override
-           public void onSuccess(String s) {
-               cancelLoadingDialog();
-               LogUtil.LogShitou("ShengQianCZFragment--限时购分类", s+"");
-               try {
-                   IndexCate indexCate = GsonUtils.parseJSON(s, IndexCate.class);
-                   if (indexCate.getStatus()==1){
-                       indexCateCate = indexCate.getCate();
-                       viewPager.setAdapter(new MyViewPagerAdapter(getChildFragmentManager()));
-                       tablayout.setupWithViewPager(viewPager);
-                       tablayout.removeAllTabs();
-                       textVipNum.setText(indexCate.getVipNum());
-                       for (int i = 0; i < indexCateCate.size(); i++) {
-                           View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_tablayout, null);
-                           TextView textTitle = (TextView) view.findViewById(R.id.textTitle);
-                           textTitle.setText(indexCateCate.get(i).getName());
-                           if (i==0){
-                               tablayout.addTab(tablayout.newTab().setCustomView(view),true);
-                           }else {
-                               tablayout.addTab(tablayout.newTab().setCustomView(view),false);
-                           }
-                       }
-                   }else if (indexCate.getStatus()==2){
-                       MyDialog.showReLoginDialog(getActivity());
-                   }else {
-                       Toast.makeText(getActivity(), indexCate.getInfo(), Toast.LENGTH_SHORT).show();
-                   }
-               } catch (Exception e) {
-                   Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
-               }
-           }
-       
-           @Override
-           public void onError(Response response) {
-               cancelLoadingDialog();
-               Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
-           }
-       });
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("ShengQianCZFragment--限时购分类", s + "");
+                try {
+                    IndexCate indexCate = GsonUtils.parseJSON(s, IndexCate.class);
+                    if (indexCate.getStatus() == 1) {
+                        indexCateCate = indexCate.getCate();
+                        viewPager.setAdapter(new MyViewPagerAdapter(getChildFragmentManager()));
+                        tablayout.setupWithViewPager(viewPager);
+                        tablayout.removeAllTabs();
+                        textVipNum.setText(indexCate.getVipNum());
+                        for (int i = 0; i < indexCateCate.size(); i++) {
+                            View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_tablayout, null);
+                            TextView textTitle = (TextView) view.findViewById(R.id.textTitle);
+                            textTitle.setText(indexCateCate.get(i).getName());
+                            if (i == 0) {
+                                tablayout.addTab(tablayout.newTab().setCustomView(view), true);
+                            } else {
+                                tablayout.addTab(tablayout.newTab().setCustomView(view), false);
+                            }
+                        }
+                    } else if (indexCate.getStatus() == 2) {
+                        MyDialog.showReLoginDialog(getActivity());
+                    } else {
+                        Toast.makeText(getActivity(), indexCate.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     class MyViewPagerAdapter extends FragmentPagerAdapter {
@@ -201,6 +203,10 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.textSouSuo:
+                intent.setClass(getActivity(), SouSuoActivity.class);
+                startActivity(intent);
+                break;
             case R.id.viewVip:
 //                intent.setClass(getActivity(), WoDeVIPActivity.class);
 //                startActivity(intent);

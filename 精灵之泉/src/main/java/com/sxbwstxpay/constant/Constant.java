@@ -7,7 +7,7 @@ import com.sxbwstxpay.util.AppUtil;
  * Created by zjb on 2016/6/12.
  */
 public class Constant {
-//        public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
+    //        public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
     public static String HOST = "http://api.jlzquan.com/index.php?key=" + AppUtil.getMD5Time();
     public static int MainActivityAlive = 0;
     public static int changeControl = 2017;//判断数据是否有改变
@@ -15,6 +15,7 @@ public class Constant {
     public static String WXSCRENT = "02d7e0ca570f95630b552bd055fdd14a";//微信scrent
     public static String QQ_ID = "1106239952";//qq
     public static String QQ_KEY = "HcA9s2rpKkLO2M5w";//qq
+
     public static class Url {
         //关于我们
         public static final String INFO_ABOUT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=about";
@@ -171,7 +172,9 @@ public class Constant {
         //我的店铺信息保存
         public static final String STORE_STORESAVE = "&g=App&m=Store&a=storeSave";
         //图文二维码
-        public static final String GOODS_EWM= "&g=App&m=Goods&a=ewm";
+        public static final String GOODS_EWM = "&g=App&m=Goods&a=ewm";
+        //首页搜索
+        public static final String INDEX_SEARCH = "&g=App&m=Index&a=search";
     }
 
     public static class PERMISSION {
@@ -218,9 +221,9 @@ public class Constant {
         public static final int XIN_YONG_KA = 2023;
         public static final int IMAGE_HEAD = 2024;
         public static final int IMAGE_WX = 2025;
-        public static final int BaoCun= 2026;
-        public static final int address= 2027;
-        public static final int IMAGE_DIANZHAO= 2028;
+        public static final int BaoCun = 2026;
+        public static final int address = 2027;
+        public static final int IMAGE_DIANZHAO = 2028;
     }
 
     public static class ACACHE {

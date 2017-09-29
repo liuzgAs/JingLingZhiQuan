@@ -54,7 +54,7 @@
                 android:layout_toLeftOf="@+id/viewVip">
 
                 <TextView
-                    android:id="@+id/editText5"
+                    android:id="@+id/textSouSuo"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_centerHorizontal="true"
