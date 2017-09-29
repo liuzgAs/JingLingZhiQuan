@@ -249,6 +249,7 @@ public class Constant {
         public static final String ShuaXinDingDan = "ShuaXinDingDan";
         public static final String ShuaXinYongJin = "ShuaXinYongJin";
         public static final String ShuaXinWoDeDP = "ShuaXinWoDeDP";
+        public static final String FenXiangZCLJ = "FenXiangZCLJ";
     }
 
 }

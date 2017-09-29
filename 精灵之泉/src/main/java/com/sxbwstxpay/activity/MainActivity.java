@@ -82,10 +82,14 @@ public class MainActivity extends AppCompatActivity {
             String action = intent.getAction();
             switch (action) {
                 case Constant.BROADCASTCODE.WX_SHARE:
-                    MyDialog.showTipDialog(MainActivity.this, "分享成功");
+                    if (isShow){
+                        MyDialog.showTipDialog(MainActivity.this, "分享成功");
+                    }
                     break;
                 case Constant.BROADCASTCODE.WX_SHARE_FAIL:
-                    MyDialog.showTipDialog(MainActivity.this, "取消分享");
+                    if (isShow){
+                        MyDialog.showTipDialog(MainActivity.this, "取消分享");
+                    }
                     break;
                 case Constant.BROADCASTCODE.EXTRAMAP:
                     ExtraMap extraMap = (ExtraMap) intent.getSerializableExtra(Constant.INTENT_KEY.EXTRAMAP);
@@ -103,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private AlertDialog mAlertDialog;
     public String tokenTime;
+    private boolean isShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,11 +197,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        isShow=true;
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.EXTRAMAP);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
         registerReceiver(receiver, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isShow=false;
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.sxbwstxpay.activity.TuWenTGActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.TuiGuangEWMActivity;
 import com.sxbwstxpay.base.MyDialog;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.IndexMakemoney;
 
 import java.util.List;
@@ -45,6 +46,9 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
             @Override
             public void onClick(View v) {
                 if (data.getGrade()>0){
+                    Intent intent = new Intent();
+                    intent.setAction(Constant.BROADCASTCODE.FenXiangZCLJ);
+                    getContext().sendBroadcast(intent);
                 }else {
                     MyDialog.showTipDialog(getContext(),"请先成为VIP推广商");
                 }
