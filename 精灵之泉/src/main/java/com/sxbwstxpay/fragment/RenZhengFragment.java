@@ -176,7 +176,8 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     }
 
     @Override
-    protected void initData() {
+    public void onResume() {
+        super.onResume();
         showLoadingDialog();
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override
@@ -253,6 +254,11 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override
@@ -538,7 +544,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                         scrollView.setVisibility(View.GONE);
                         viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop1);
                         //// TODO: 2017/9/12 0012 弹窗
-                        initData();
+                       onResume();
                     }
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();

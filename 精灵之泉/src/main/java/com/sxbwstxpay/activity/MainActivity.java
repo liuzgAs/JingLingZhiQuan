@@ -43,6 +43,8 @@ import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.BackHandlerHelper;
+import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.FileUtil;
 import com.sxbwstxpay.util.UpgradeUtils;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
@@ -82,12 +84,12 @@ public class MainActivity extends AppCompatActivity {
             String action = intent.getAction();
             switch (action) {
                 case Constant.BROADCASTCODE.WX_SHARE:
-                    if (isShow){
+                    if (isShow) {
                         MyDialog.showTipDialog(MainActivity.this, "分享成功");
                     }
                     break;
                 case Constant.BROADCASTCODE.WX_SHARE_FAIL:
-                    if (isShow){
+                    if (isShow) {
                         MyDialog.showTipDialog(MainActivity.this, "取消分享");
                     }
                     break;
@@ -150,11 +152,12 @@ public class MainActivity extends AppCompatActivity {
      * 双击退出应用
      */
     private long currentTime = 0;
+
     @Override
     public void onBackPressed() {
         if (!BackHandlerHelper.handleBackPress(this)) {
             if (System.currentTimeMillis() - currentTime > 1000) {
-                Toast toast = Toast.makeText(this,"双击退出应用", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "双击退出应用", Toast.LENGTH_SHORT);
                 toast.show();
                 currentTime = System.currentTimeMillis();
             } else {
@@ -197,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        isShow=true;
+        isShow = true;
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.EXTRAMAP);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
@@ -208,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        isShow=false;
+        isShow = false;
     }
 
     @Override
@@ -275,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
         dialog_shengji.findViewById(R.id.viewErWeiMa).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "此功能暂未开放", Toast.LENGTH_SHORT).show();
+                erWeiMa(share);
                 alertDialog1.dismiss();
             }
         });
@@ -285,6 +288,55 @@ public class MainActivity extends AppCompatActivity {
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         DisplayMetrics d = MainActivity.this.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
         lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
+        dialogWindow.setAttributes(lp);
+    }
+
+    private void erWeiMa(ShareBean share) {
+        View dialog_fen_xiang_erm = LayoutInflater.from(this).inflate(R.layout.dialog_fen_xiang_erm, null);
+        final View viewJieTu = dialog_fen_xiang_erm.findViewById(R.id.viewJieTu);
+        final AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.dialog)
+                .setView(dialog_fen_xiang_erm)
+                .create();
+        dialog_fen_xiang_erm.findViewById(R.id.textBaoCun).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                viewJieTu.setDrawingCacheEnabled(true);
+                viewJieTu.buildDrawingCache();  //启用DrawingCache并创建位图
+                final Bitmap bitmap = Bitmap.createBitmap(viewJieTu.getDrawingCache()); //创建一个DrawingCache的拷贝，因为DrawingCache得到的位图在禁用后会被回收
+                View dialog_img_show = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_img_show, null);
+                ImageView imageView = (ImageView) dialog_img_show.findViewById(R.id.imageView);
+                imageView.setImageBitmap(bitmap);
+                Toast toast = new Toast(MainActivity.this);
+                toast.setView(dialog_img_show);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            FileUtil.saveMyBitmap(MainActivity.this, "分享二维码" + System.currentTimeMillis(), bitmap);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(MainActivity.this, "图片保存在\"/sdcard/精灵之泉/\"目录下", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        });
+        alertDialog.show();
+        Window dialogWindow = alertDialog.getWindow();
+        dialogWindow.setGravity(Gravity.CENTER);
+        dialogWindow.setWindowAnimations(R.style.AnimFromTopToButtom);
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        DisplayMetrics d = getResources().getDisplayMetrics(); // 获取屏幕宽、高用
+        lp.width = (int) (d.widthPixels - DpUtils.convertDpToPixel(20, this)); // 高度设置为屏幕的0.6
         dialogWindow.setAttributes(lp);
     }
 

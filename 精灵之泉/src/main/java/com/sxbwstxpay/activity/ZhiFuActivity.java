@@ -2,9 +2,11 @@ package com.sxbwstxpay.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -189,7 +191,18 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageBack:
-                finish();
+                new AlertDialog.Builder(this)
+                        .setTitle("提示")
+                        .setMessage("订单未支付，确定要退出吗？\n（可在我的订单页面查看）")
+                        .setNegativeButton("否", null)
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                        .create()
+                        .show();
                 break;
         }
     }
@@ -208,5 +221,21 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(recevier);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("提示")
+                .setMessage("订单未支付，确定要退出吗？\n（可在我的订单页面查看）")
+                .setNegativeButton("否", null)
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .create()
+                .show();
     }
 }

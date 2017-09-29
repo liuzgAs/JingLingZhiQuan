@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.fragment.ZhangDanFragment;
 import com.sxbwstxpay.util.ScreenUtils;
 
@@ -20,6 +22,7 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
     private TabLayout tablayout;
     private ViewPager viewPager;
     private View viewBar;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,8 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        id = intent.getIntExtra(Constant.INTENT_KEY.id, 0);
     }
 
     @Override
@@ -57,6 +61,20 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         tablayout.getTabAt(1).setText("结算");
         tablayout.getTabAt(2).setText("分润");
         tablayout.getTabAt(3).setText("推广");
+        switch (id) {
+            case 0:
+
+                break;
+            case 1:
+                viewPager.setCurrentItem(2);
+                break;
+            case 2:
+                viewPager.setCurrentItem(3);
+                break;
+            case 3:
+                viewPager.setCurrentItem(1);
+                break;
+        }
     }
 
     @Override
@@ -86,7 +104,7 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
         @Override
         public Fragment getItem(int position) {
-            return new ZhangDanFragment(position+1);
+            return new ZhangDanFragment(position + 1);
         }
 
         @Override

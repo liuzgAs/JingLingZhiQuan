@@ -178,7 +178,8 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.buttonShouYiMX:
-                intent.setClass(this, ShouYiMXActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id,id);
+                intent.setClass(this, WoDeZDActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageBack:

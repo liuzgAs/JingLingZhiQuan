@@ -1,10 +1,8 @@
 package com.sxbwstxpay.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +38,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
     private EasyRecyclerView recyclerView;
     private TextView textViewTitle;
     private RecyclerArrayAdapter<RecommBean> adapter;
-    private String oid;
+    private int oid;
     private String statusText;
     private String vipText;
     private int isVip;
@@ -60,7 +58,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
     @Override
     protected void initIntent() {
         Intent intent = getIntent();
-        oid = intent.getStringExtra(Constant.INTENT_KEY.id);
+        oid = intent.getIntExtra(Constant.INTENT_KEY.id,0);
     }
 
     @Override
@@ -163,7 +161,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
-        params.put("oid", oid);
+        params.put("oid", oid+"");
         return new OkObject(params, url);
     }
 
@@ -219,18 +217,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.imageBack:
-                new AlertDialog.Builder(this)
-                        .setTitle("提示")
-                        .setMessage("订单未支付，确定要退出吗？\n（可在我的订单页面查看）")
-                        .setNegativeButton("否", null)
-                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .create()
-                        .show();
+                finish();
                 break;
             case R.id.viewGouWuChe:
                 intent.setClass(this, GouWuCActivity.class);
@@ -239,19 +226,4 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("提示")
-                .setMessage("订单未支付，确定要退出吗？\n（可在我的订单页面查看）")
-                .setNegativeButton("否", null)
-                .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .create()
-                .show();
-    }
 }

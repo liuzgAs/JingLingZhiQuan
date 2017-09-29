@@ -46,35 +46,37 @@ public class ZhiFuViewHolder extends BaseViewHolder<OrderPay> {
 
                             @Override
                             public void run() {
-                                PayTask alipay = new PayTask((ZhiFuActivity) getContext());
-                                Map<String, String> stringMap = alipay.payV2(data.getPayAli(), true);
-                                stringMap.get("result");
-                                AliPayBean aliPayBean = GsonUtils.parseJSON(stringMap.get("result"), AliPayBean.class);
-                                switch (aliPayBean.getAlipay_trade_app_pay_response().getCode()) {
-                                    case 10000:
-                                        ((ZhiFuActivity) getContext()).paySuccess();
-                                        break;
-                                    case 8000:
-                                        ((ZhiFuActivity) getContext()).paySuccess();
-                                        break;
-                                    case 4000:
-                                        MyDialog.showTipDialog(getContext(), "订单支付失败");
-                                        break;
-                                    case 5000:
-                                        MyDialog.showTipDialog(getContext(), "重复请求");
-                                        break;
-                                    case 6001:
-                                        MyDialog.showTipDialog(getContext(), "取消支付");
-                                        break;
-                                    case 6002:
-                                        MyDialog.showTipDialog(getContext(), "网络连接错误");
-                                        break;
-                                    case 6004:
-                                        MyDialog.showTipDialog(getContext(), "支付结果未知");
-                                        break;
-                                    default:
-                                        MyDialog.showTipDialog(getContext(), "支付失败");
-                                        break;
+                                try {
+                                    PayTask alipay = new PayTask((ZhiFuActivity) getContext());
+                                    Map<String, String> stringMap = alipay.payV2(data.getPayAli(), true);
+                                    AliPayBean aliPayBean = GsonUtils.parseJSON(stringMap.get("result"), AliPayBean.class);
+                                    switch (aliPayBean.getAlipay_trade_app_pay_response().getCode()) {
+                                        case 10000:
+                                            ((ZhiFuActivity) getContext()).paySuccess();
+                                            break;
+                                        case 8000:
+                                            ((ZhiFuActivity) getContext()).paySuccess();
+                                            break;
+                                        case 4000:
+                                            MyDialog.showTipDialog(getContext(), "订单支付失败");
+                                            break;
+                                        case 5000:
+                                            MyDialog.showTipDialog(getContext(), "重复请求");
+                                            break;
+                                        case 6001:
+                                            MyDialog.showTipDialog(getContext(), "取消支付");
+                                            break;
+                                        case 6002:
+                                            MyDialog.showTipDialog(getContext(), "网络连接错误");
+                                            break;
+                                        case 6004:
+                                            MyDialog.showTipDialog(getContext(), "支付结果未知");
+                                            break;
+                                        default:
+                                            MyDialog.showTipDialog(getContext(), "支付失败");
+                                            break;
+                                    }
+                                } catch (Exception e) {
                                 }
                             }
                         };
