@@ -170,6 +170,8 @@ public class Constant {
         public static final String STORE_STOREINFO = "&g=App&m=Store&a=storeInfo";
         //我的店铺信息保存
         public static final String STORE_STORESAVE = "&g=App&m=Store&a=storeSave";
+        //图文二维码
+        public static final String GOODS_EWM= "&g=App&m=Goods&a=ewm";
     }
 
     public static class PERMISSION {

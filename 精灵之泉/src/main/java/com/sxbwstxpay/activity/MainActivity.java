@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void share(final String id, final String type, final ShareBean share){
-        MyDialog.share(MainActivity.this,api,id,type,share);
+        MyDialog.share(MainActivity.this,"MainActivity",api,id,type,share);
     }
 
     public void showLoadingDialog() {
