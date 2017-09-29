@@ -33,6 +33,8 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
     private RadioButton radioNan;
     private RadioButton radioNv;
     private TextView textViewRight;
+    private EditText editDianPuMC;
+    private EditText editDianPuJJ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,8 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
         editDiQu = (EditText) findViewById(R.id.editDiQu);
         radioNan = (RadioButton) findViewById(R.id.radioNan);
         radioNv = (RadioButton) findViewById(R.id.radioNv);
+        editDianPuMC = (EditText) findViewById(R.id.editDianPuMC);
+        editDianPuJJ = (EditText) findViewById(R.id.editDianPuJJ);
     }
 
     @Override
@@ -79,6 +83,8 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
                 viewShengRi.setVisibility(View.GONE);
                 viewSex.setVisibility(View.GONE);
                 editDiQu.setVisibility(View.GONE);
+                editDianPuMC.setVisibility(View.GONE);
+                editDianPuJJ.setVisibility(View.GONE);
                 break;
             case 2:
                 textViewTitle.setText("修改生日");
@@ -87,6 +93,8 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
                 viewShengRi.setVisibility(View.VISIBLE);
                 viewSex.setVisibility(View.GONE);
                 editDiQu.setVisibility(View.GONE);
+                editDianPuMC.setVisibility(View.GONE);
+                editDianPuJJ.setVisibility(View.GONE);
                 break;
             case 3:
                 textViewTitle.setText("修改性别");
@@ -99,6 +107,8 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
                 viewShengRi.setVisibility(View.GONE);
                 viewSex.setVisibility(View.VISIBLE);
                 editDiQu.setVisibility(View.GONE);
+                editDianPuMC.setVisibility(View.GONE);
+                editDianPuJJ.setVisibility(View.GONE);
                 break;
             case 4:
                 textViewTitle.setText("修改地区");
@@ -107,6 +117,28 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
                 viewShengRi.setVisibility(View.GONE);
                 viewSex.setVisibility(View.GONE);
                 editDiQu.setVisibility(View.VISIBLE);
+                editDianPuMC.setVisibility(View.GONE);
+                editDianPuJJ.setVisibility(View.GONE);
+                break;
+            case 5:
+                textViewTitle.setText("修改店铺名称");
+                editDianPuMC.setText(value);
+                editNickName.setVisibility(View.GONE);
+                viewShengRi.setVisibility(View.GONE);
+                viewSex.setVisibility(View.GONE);
+                editDiQu.setVisibility(View.GONE);
+                editDianPuMC.setVisibility(View.VISIBLE);
+                editDianPuJJ.setVisibility(View.GONE);
+                break;
+            case 6:
+                textViewTitle.setText("修改店铺简介");
+                editDianPuMC.setText(value);
+                editNickName.setVisibility(View.GONE);
+                viewShengRi.setVisibility(View.GONE);
+                viewSex.setVisibility(View.GONE);
+                editDiQu.setVisibility(View.GONE);
+                editDianPuMC.setVisibility(View.GONE);
+                editDianPuJJ.setVisibility(View.VISIBLE);
                 break;
         }
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
@@ -144,25 +176,25 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
                 Intent intent = new Intent();
                 switch (type) {
                     case 1:
-                        if (TextUtils.isEmpty(editNickName.getText().toString().trim())){
+                        if (TextUtils.isEmpty(editNickName.getText().toString().trim())) {
                             Toast.makeText(EditActivity.this, "请输入昵称", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        intent.putExtra("type",type);
+                        intent.putExtra("type", type);
                         intent.putExtra("key", "nickName");
                         intent.putExtra("value", editNickName.getText().toString().trim());
                         break;
                     case 2:
-                        if (TextUtils.isEmpty(textShengRi.getText().toString().trim())){
+                        if (TextUtils.isEmpty(textShengRi.getText().toString().trim())) {
                             Toast.makeText(EditActivity.this, "请选择生日", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        intent.putExtra("type",type);
+                        intent.putExtra("type", type);
                         intent.putExtra("key", "birthday");
                         intent.putExtra("value", textShengRi.getText().toString().trim());
                         break;
                     case 3:
-                        intent.putExtra("type",type);
+                        intent.putExtra("type", type);
                         intent.putExtra("key", "sex");
                         if (radioNan.isChecked()) {
                             intent.putExtra("value", "1");
@@ -171,13 +203,31 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
                         }
                         break;
                     case 4:
-                        if (TextUtils.isEmpty(editDiQu.getText().toString().trim())){
+                        if (TextUtils.isEmpty(editDiQu.getText().toString().trim())) {
                             Toast.makeText(EditActivity.this, "请输入地区", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        intent.putExtra("type",type);
+                        intent.putExtra("type", type);
                         intent.putExtra("key", "area");
                         intent.putExtra("value", editDiQu.getText().toString().trim());
+                        break;
+                    case 5:
+                        if (TextUtils.isEmpty(editDianPuMC.getText().toString().trim())) {
+                            Toast.makeText(EditActivity.this, "请输入店铺名称", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        intent.putExtra("type", type);
+                        intent.putExtra("key", "name");
+                        intent.putExtra("value", editDianPuMC.getText().toString().trim());
+                        break;
+                    case 6:
+                        if (TextUtils.isEmpty(editDianPuJJ.getText().toString().trim())) {
+                            Toast.makeText(EditActivity.this, "请输入店铺简介", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        intent.putExtra("type", type);
+                        intent.putExtra("key", "intro");
+                        intent.putExtra("value", editDianPuJJ.getText().toString().trim());
                         break;
                 }
                 setResult(Constant.REQUEST_RESULT_CODE.BaoCun, intent);

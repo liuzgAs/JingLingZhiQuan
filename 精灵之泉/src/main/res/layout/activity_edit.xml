@@ -117,4 +117,26 @@
         android:paddingLeft="10dp"
         android:textSize="@dimen/normal_textsize" />
 
+    <EditText
+        android:id="@+id/editDianPuMC"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:hint="请输入店铺名称"
+        android:paddingLeft="10dp"
+        android:textSize="@dimen/normal_textsize" />
+
+    <EditText
+        android:gravity="left|top"
+        android:padding="10dp"
+        android:id="@+id/editDianPuJJ"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:hint="请输入店铺简介"
+        android:paddingLeft="10dp"
+        android:textSize="@dimen/normal_textsize" />
+
 </LinearLayout>

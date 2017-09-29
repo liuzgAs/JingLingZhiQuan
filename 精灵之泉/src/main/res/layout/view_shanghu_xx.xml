@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/viewDianMing"
         android:background="@drawable/layout_selector_white_system_gray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
@@ -33,7 +34,7 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView184"
+            android:id="@+id/textName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -45,6 +46,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/viewDianPuJS"
         android:background="@drawable/layout_selector_white_system_gray"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
@@ -79,7 +81,7 @@
             android:ellipsize="end"
             android:gravity="right"
             android:layout_toEndOf="@+id/textView186"
-            android:id="@+id/textView187"
+            android:id="@+id/textIntro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -92,6 +94,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/viewDianPuLOGO"
         android:background="@drawable/layout_selector_white_system_gray"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
@@ -124,7 +127,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/imageView69"
+            android:id="@+id/imageLogo"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imageView95"
             android:layout_toStartOf="@+id/imageView95" />
@@ -132,6 +135,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/viewDianZhao"
         android:background="@drawable/layout_selector_white_system_gray"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -165,7 +169,7 @@
             android:layout_width="70dp"
             android:scaleType="centerCrop"
             android:layout_height="35dp"
-            android:id="@+id/imageView101"
+            android:id="@+id/imageBanner"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imageView96"
             android:layout_toStartOf="@+id/imageView96" />
@@ -173,6 +177,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/viewWX"
         android:background="@drawable/layout_selector_white_system_gray"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -205,7 +210,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/imageView110"
+            android:id="@+id/imageWx"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imageView102"
             android:layout_toStartOf="@+id/imageView102" />

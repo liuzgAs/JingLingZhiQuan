@@ -166,6 +166,10 @@ public class Constant {
         public static final String INDEX_DOWNGOODS = "&g=App&m=Index&a=downGoods";
         //会员佣金提现
         public static final String USER_WITHDRAW = "&g=App&m=User&a=withdraw";
+        //店铺信息
+        public static final String STORE_STOREINFO = "&g=App&m=Store&a=storeInfo";
+        //我的店铺信息保存
+        public static final String STORE_STORESAVE = "&g=App&m=Store&a=storeSave";
     }
 
     public static class PERMISSION {
@@ -243,6 +247,7 @@ public class Constant {
         public static final String zhiFuGuanBi = "zhiFuGuanBi";
         public static final String ShuaXinDingDan = "ShuaXinDingDan";
         public static final String ShuaXinYongJin = "ShuaXinYongJin";
+        public static final String ShuaXinWoDeDP = "ShuaXinWoDeDP";
     }
 
 }

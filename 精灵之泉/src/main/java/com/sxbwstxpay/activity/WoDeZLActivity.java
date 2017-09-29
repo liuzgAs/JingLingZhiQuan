@@ -202,7 +202,9 @@ public class WoDeZLActivity extends ZjbBaseActivity implements View.OnClickListe
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     if (simpleInfo.getStatus() == 1) {
-
+                        adapter.clear();
+                        adapter.add(userProfile);
+                        adapter.notifyDataSetChanged();
                     } else if (simpleInfo.getStatus() == 3) {
                         MyDialog.showReLoginDialog(WoDeZLActivity.this);
                     } else {
@@ -350,9 +352,6 @@ public class WoDeZLActivity extends ZjbBaseActivity implements View.OnClickListe
                     userProfile.setArea(value);
                     break;
             }
-            adapter.clear();
-            adapter.add(userProfile);
-            adapter.notifyDataSetChanged();
             baoCun(key, value);
         }
     }

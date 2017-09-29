@@ -1,6 +1,9 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,6 +34,17 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
     private TextView textNum04;
     private TextView textStoreNmae;
     private ImageView imageStoreLogo;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.ShuaXinWoDeDP:
+                    initData();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +80,8 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     protected void setListeners() {
-findViewById(R.id.buttonGuanLi).setOnClickListener(this);
+        findViewById(R.id.buttonGuanLi).setOnClickListener(this);
+        findViewById(R.id.imageStoreLogo).setOnClickListener(this);
     }
 
     /**
@@ -124,12 +139,30 @@ findViewById(R.id.buttonGuanLi).setOnClickListener(this);
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        Intent intent = new Intent();
+        switch (v.getId()) {
             case R.id.buttonGuanLi:
-                Intent intent = new Intent();
-                intent.setClass(this,GuanLiWDDPActivity.class);
+                intent.setClass(this, GuanLiWDDPActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.imageStoreLogo:
+                intent.setClass(this, DianPuXXActivity.class);
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.ShuaXinWoDeDP);
+        registerReceiver(reciver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }
