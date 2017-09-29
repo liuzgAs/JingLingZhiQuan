@@ -50,7 +50,7 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
         $(R.id.imageShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getContext()).share(data.getShare());
+                ((MainActivity)getContext()).share(data.getId(),"goods",data.getShare());
             }
         });
         buttonShangJia.setOnClickListener(new View.OnClickListener() {
