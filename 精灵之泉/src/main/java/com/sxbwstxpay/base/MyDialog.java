@@ -287,6 +287,7 @@ public class MyDialog {
                         dialog_fen_xiang_erm.findViewById(R.id.textWeiXin).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                alertDialog.dismiss();
                                 shareImg(api,viewJieTu,0);
                             }
 
@@ -295,6 +296,7 @@ public class MyDialog {
                         dialog_fen_xiang_erm.findViewById(R.id.textPengYouQuan).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                alertDialog.dismiss();
                                 shareImg(api,viewJieTu,1);
                             }
                         });
