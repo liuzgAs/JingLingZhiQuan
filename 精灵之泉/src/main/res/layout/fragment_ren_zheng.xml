@@ -236,7 +236,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <ImageView
-                android:id="@+id/imageView29"
+                android:id="@+id/imageRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -313,6 +313,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/viewYanZhengMa"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"
             android:layout_gravity="center_horizontal"

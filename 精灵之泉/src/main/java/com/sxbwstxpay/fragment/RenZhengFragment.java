@@ -80,6 +80,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private ImagePicker mImagePicker;
     private String[] path = new String[5];
     private Button buttonTiJiao;
+    private ImageView imageRight;
+    private View viewYanZhengMa;
+    private int verify =0;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -134,6 +137,8 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         image04 = (ImageView) mInflate.findViewById(R.id.image04);
         image05 = (ImageView) mInflate.findViewById(R.id.image05);
         buttonTiJiao = (Button) mInflate.findViewById(R.id.buttonTiJiao);
+        imageRight = (ImageView) mInflate.findViewById(R.id.imageRight);
+        viewYanZhengMa = mInflate.findViewById(R.id.viewYanZhengMa);
     }
 
     @Override
@@ -178,82 +183,95 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        showLoadingDialog();
-        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
-            @Override
-            public void onSuccess(String s) {
-                cancelLoadingDialog();
-                LogUtil.LogShitou("RenZhengFragment--会员身份认证请求", "" + s);
-                try {
-                    userCardbefore = GsonUtils.parseJSON(s, UserCardbefore.class);
-                    if (userCardbefore.getStatus() == 1) {
-                        textTip.setText(userCardbefore.getTipsText());
-                        editName.setText(userCardbefore.getData().getName());
-                        editCard.setText(userCardbefore.getData().getCard());
-                        textBankName.setText(userCardbefore.getData().getBankName());
-                        editBankCard.setText(userCardbefore.getData().getBankCard());
-                        editPhone.setText(userCardbefore.getData().getPhone());
-                        Glide.with(getActivity())
-                                .load(userCardbefore.getData().getImg())
-                                .placeholder(R.mipmap.shenfenzhengmian)
-                                .into(image01);
-                        Glide.with(getActivity())
-                                .load(userCardbefore.getData().getImg2())
-                                .placeholder(R.mipmap.shenfenbeimain)
-                                .into(image02);
-                        Glide.with(getActivity())
-                                .load(userCardbefore.getData().getImg3())
-                                .placeholder(R.mipmap.xingyongkademo)
-                                .into(image03);
-                        Glide.with(getActivity())
-                                .load(userCardbefore.getData().getImg4())
-                                .placeholder(R.mipmap.yinhangkazhengmian)
-                                .into(image04);
-                        Glide.with(getActivity())
-                                .load(userCardbefore.getData().getImg5())
-                                .placeholder(R.mipmap.shouchibanshen)
-                                .into(image05);
-                        if (userCardbefore.getSubmitStatus() == 1) {
-                            editName.setEnabled(true);
-                            editCard.setEnabled(true);
-                            viewKaiHuYH.setEnabled(true);
-                            editBankCard.setEnabled(true);
-                            editPhone.setEnabled(true);
-                            editCode.setEnabled(true);
-                            buttonSms.setEnabled(true);
-                            image01.setEnabled(true);
-                            image02.setEnabled(true);
-                            image03.setEnabled(true);
-                            image04.setEnabled(true);
-                            image05.setEnabled(true);
+        if (verify!=1){
+            showLoadingDialog();
+            ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+                @Override
+                public void onSuccess(String s) {
+                    cancelLoadingDialog();
+                    LogUtil.LogShitou("RenZhengFragment--会员身份认证请求", "" + s);
+                    try {
+                        userCardbefore = GsonUtils.parseJSON(s, UserCardbefore.class);
+                        if (userCardbefore.getStatus() == 1) {
+                            textTip.setText(userCardbefore.getTipsText());
+                            editName.setText(userCardbefore.getData().getName());
+                            editCard.setText(userCardbefore.getData().getCard());
+                            textBankName.setText(userCardbefore.getData().getBankName());
+                            editBankCard.setText(userCardbefore.getData().getBankCard());
+                            editPhone.setText(userCardbefore.getData().getPhone());
+                            Glide.with(getActivity())
+                                    .load(userCardbefore.getData().getImg())
+                                    .placeholder(R.mipmap.shenfenzhengmian)
+                                    .into(image01);
+                            Glide.with(getActivity())
+                                    .load(userCardbefore.getData().getImg2())
+                                    .placeholder(R.mipmap.shenfenbeimain)
+                                    .into(image02);
+                            Glide.with(getActivity())
+                                    .load(userCardbefore.getData().getImg3())
+                                    .placeholder(R.mipmap.xingyongkademo)
+                                    .into(image03);
+                            Glide.with(getActivity())
+                                    .load(userCardbefore.getData().getImg4())
+                                    .placeholder(R.mipmap.yinhangkazhengmian)
+                                    .into(image04);
+                            Glide.with(getActivity())
+                                    .load(userCardbefore.getData().getImg5())
+                                    .placeholder(R.mipmap.shouchibanshen)
+                                    .into(image05);
+                            if (userCardbefore.getSubmitStatus() == 1) {
+                                editName.setEnabled(true);
+                                editCard.setEnabled(true);
+                                viewKaiHuYH.setEnabled(true);
+                                editBankCard.setEnabled(true);
+                                editPhone.setEnabled(true);
+                                editCode.setEnabled(true);
+                                buttonSms.setEnabled(true);
+                                image01.setEnabled(true);
+                                image02.setEnabled(true);
+                                image03.setEnabled(true);
+                                image04.setEnabled(true);
+                                image05.setEnabled(true);
+                            } else {
+                                editName.setEnabled(false);
+                                editCard.setEnabled(false);
+                                viewKaiHuYH.setEnabled(false);
+                                editBankCard.setEnabled(false);
+                                editPhone.setEnabled(false);
+                                editCode.setEnabled(false);
+                                buttonSms.setEnabled(false);
+                                image01.setEnabled(false);
+                                image02.setEnabled(false);
+                                image03.setEnabled(false);
+                                image04.setEnabled(false);
+                                image05.setEnabled(false);
+                            }
+                            verify = userCardbefore.getVerify();
+                            if (verify ==1){
+                                imageRight.setVisibility(View.GONE);
+                                viewYanZhengMa.setVisibility(View.GONE);
+                                buttonNext.setVisibility(View.GONE);
+                            }else {
+                                MyDialog.showTipDialog(getActivity(),userCardbefore.getTipsText());
+                                imageRight.setVisibility(View.VISIBLE);
+                                viewYanZhengMa.setVisibility(View.VISIBLE);
+                                buttonNext.setVisibility(View.VISIBLE);
+                            }
                         } else {
-                            editName.setEnabled(false);
-                            editCard.setEnabled(false);
-                            viewKaiHuYH.setEnabled(false);
-                            editBankCard.setEnabled(false);
-                            editPhone.setEnabled(false);
-                            editCode.setEnabled(false);
-                            buttonSms.setEnabled(false);
-                            image01.setEnabled(false);
-                            image02.setEnabled(false);
-                            image03.setEnabled(false);
-                            image04.setEnabled(false);
-                            image05.setEnabled(false);
+                            Toast.makeText(getActivity(), userCardbefore.getInfo(), Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(getActivity(), userCardbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                 }
-            }
 
-            @Override
-            public void onError(Response response) {
-                cancelLoadingDialog();
-                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onError(Response response) {
+                    cancelLoadingDialog();
+                    Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
