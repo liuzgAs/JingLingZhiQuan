@@ -3,6 +3,7 @@ package com.sxbwstxpay.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +13,34 @@ import android.widget.Toast;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.RespondAppimgadd;
 import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.model.StoreStoreinfo;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.ImgToBase64;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.PicassoImageLoader;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.DianPuXXViewHolder;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import okhttp3.Call;
 import okhttp3.Response;
 
 public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickListener {
@@ -35,11 +49,15 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
     private RecyclerArrayAdapter<StoreStoreinfo> adapter;
     private EasyRecyclerView recyclerView;
     private StoreStoreinfo storeStoreinfo;
+    private ImagePicker imagePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shang_hu_xx);
+        imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new PicassoImageLoader());   //设置图片加载器
+        imagePicker.setShowCamera(true);  //显示拍照按钮
         init();
     }
 
@@ -112,9 +130,6 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
                 try {
                     storeStoreinfo = GsonUtils.parseJSON(s, StoreStoreinfo.class);
                     if (storeStoreinfo.getStatus() == 1) {
-                        Intent intent = new Intent();
-                        intent.setAction(Constant.BROADCASTCODE.ShuaXinWoDeDP);
-                        sendBroadcast(intent);
                         adapter.clear();
                         adapter.add(storeStoreinfo);
                         adapter.notifyDataSetChanged();
@@ -167,6 +182,192 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
             }
             baoCun(key, value);
         }
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Constant.REQUEST_RESULT_CODE.IMAGE_HEAD) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                showLoadingDialog();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("uid", userInfo.getUid());
+                params.put("tokenTime", tokenTime);
+                params.put("code", "logo");
+                params.put("brand", "android");
+                params.put("img", ImgToBase64.toBase64(images.get(0).path));
+                JSONObject jsonObject = new JSONObject(params);
+                OkGo.post(Constant.HOST + Constant.Url.RESPOND_APPIMGADD)//
+                        .tag(this)//
+                        .upJson(jsonObject.toString())//
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(String s, Call call, Response response) {
+                                cancelLoadingDialog();
+                                try {
+                                    RespondAppimgadd respondAppimgadd = GsonUtils.parseJSON(s, RespondAppimgadd.class);
+                                    if (respondAppimgadd.getStatus() == 1) {
+                                        Log.e("MyHomeActivity", "MyHomeActivity--onSuccess--上传头像" + respondAppimgadd.getImg());
+                                        storeStoreinfo.setLogo(respondAppimgadd.getImg());
+                                        baoCun("logo", respondAppimgadd.getImgId() + "");
+                                    } else if (respondAppimgadd.getStatus() == 1) {
+                                        MyDialog.showReLoginDialog(DianPuXXActivity.this);
+                                    } else {
+                                        Toast.makeText(DianPuXXActivity.this, respondAppimgadd.getInfo(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(DianPuXXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                cancelLoadingDialog();
+                                Toast.makeText(DianPuXXActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            } else {
+
+            }
+            if (data != null && requestCode == Constant.REQUEST_RESULT_CODE.IMAGE_WX) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                showLoadingDialog();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("uid", userInfo.getUid());
+                params.put("tokenTime", tokenTime);
+                params.put("code", "wxewm");
+                params.put("brand", "android");
+                params.put("img", ImgToBase64.toBase64(images.get(0).path));
+                JSONObject jsonObject = new JSONObject(params);
+                OkGo.post(Constant.HOST + Constant.Url.RESPOND_APPIMGADD)//
+                        .tag(this)//
+                        .upJson(jsonObject.toString())//
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(String s, Call call, Response response) {
+                                cancelLoadingDialog();
+                                try {
+                                    RespondAppimgadd respondAppimgadd = GsonUtils.parseJSON(s, RespondAppimgadd.class);
+                                    if (respondAppimgadd.getStatus() == 1) {
+                                        Log.e("MyHomeActivity", "MyHomeActivity--onSuccess--上传微信" + respondAppimgadd.getImg());
+                                        storeStoreinfo.setWx(respondAppimgadd.getImg());
+                                        baoCun("wx", respondAppimgadd.getImgId() + "");
+                                    } else if (respondAppimgadd.getStatus() == 1) {
+                                        MyDialog.showReLoginDialog(DianPuXXActivity.this);
+                                    } else {
+                                        Toast.makeText(DianPuXXActivity.this, respondAppimgadd.getInfo(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(DianPuXXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                cancelLoadingDialog();
+                                Toast.makeText(DianPuXXActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            } else {
+            }
+            if (data != null && requestCode == Constant.REQUEST_RESULT_CODE.IMAGE_DIANZHAO) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                showLoadingDialog();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("uid", userInfo.getUid());
+                params.put("tokenTime", tokenTime);
+                params.put("code", "banner");
+                params.put("brand", "android");
+                params.put("img", ImgToBase64.toBase64(images.get(0).path));
+                JSONObject jsonObject = new JSONObject(params);
+                OkGo.post(Constant.HOST + Constant.Url.RESPOND_APPIMGADD)//
+                        .tag(this)//
+                        .upJson(jsonObject.toString())//
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(String s, Call call, Response response) {
+                                cancelLoadingDialog();
+                                try {
+                                    RespondAppimgadd respondAppimgadd = GsonUtils.parseJSON(s, RespondAppimgadd.class);
+                                    if (respondAppimgadd.getStatus() == 1) {
+                                        storeStoreinfo.setBanner(respondAppimgadd.getImg());
+                                        baoCun("banner", respondAppimgadd.getImgId() + "");
+                                    } else if (respondAppimgadd.getStatus() == 1) {
+                                        MyDialog.showReLoginDialog(DianPuXXActivity.this);
+                                    } else {
+                                        Toast.makeText(DianPuXXActivity.this, respondAppimgadd.getInfo(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(DianPuXXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                cancelLoadingDialog();
+                                Toast.makeText(DianPuXXActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            } else {
+            }
+        }
+    }
+
+    /**
+     * des： 选择图片
+     * author： ZhangJieBo
+     * date： 2017/7/6 0006 下午 2:31
+     */
+    public void chooseHead() {
+        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+        imagePicker.setSelectLimit(9);    //选中数量限制
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(500);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(500);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
+        imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+        imagePicker.setMultiMode(false);
+        Intent intent = new Intent();
+        intent.setClass(this, ImageGridActivity.class);
+        startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.IMAGE_HEAD);
+    }
+
+    /**
+     * des： 选择图片
+     * author： ZhangJieBo
+     * date： 2017/7/6 0006 下午 2:31
+     */
+    public void chooseDianZhao() {
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+        float width = ScreenUtils.getScreenWidth(this);
+        imagePicker.setFocusWidth((int) width);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight((int) (width * 0.5));  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(800);//保存文件的宽度。单位像素
+        imagePicker.setOutPutY(400);//保存文件的高度。单位像素
+        Intent intent = new Intent();
+        intent.setClass(this, ImageGridActivity.class);
+        startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.IMAGE_DIANZHAO);
+    }
+
+    /**
+     * des： 选择图片
+     * author： ZhangJieBo
+     * date： 2017/7/6 0006 下午 2:31
+     */
+    public void chooseWX() {
+        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+        imagePicker.setSelectLimit(9);    //选中数量限制
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(500);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(500);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
+        imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+        imagePicker.setMultiMode(false);
+        Intent intent = new Intent();
+        intent.setClass(this, ImageGridActivity.class);
+        startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.IMAGE_WX);
     }
 
     /**
@@ -177,10 +378,10 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
     private OkObject getOkObjectSave(String key, String value) {
         String url = Constant.HOST + Constant.Url.STORE_STORESAVE;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
-        params.put("tokenTime",tokenTime);
-        params.put("key",key);
-        params.put("value",value);
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("key", key);
+        params.put("value", value);
         return new OkObject(params, url);
     }
 
@@ -191,24 +392,27 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
      */
     private void baoCun(String key, String value) {
         showLoadingDialog();
-        ApiClient.post(DianPuXXActivity.this, getOkObjectSave(key,value), new ApiClient.CallBack() {
+        ApiClient.post(DianPuXXActivity.this, getOkObjectSave(key, value), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
                 LogUtil.LogShitou("DianPuXXActivity--我的店铺信息保存", "");
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                    if (simpleInfo.getStatus()==1){
+                    if (simpleInfo.getStatus() == 1) {
+                        Intent intent = new Intent();
+                        intent.setAction(Constant.BROADCASTCODE.ShuaXinWoDeDP);
+                        sendBroadcast(intent);
                         adapter.clear();
                         adapter.add(storeStoreinfo);
                         adapter.notifyDataSetChanged();
-                    }else if (simpleInfo.getStatus()==3){
+                    } else if (simpleInfo.getStatus() == 3) {
                         MyDialog.showReLoginDialog(DianPuXXActivity.this);
-                    }else {
+                    } else {
                         Toast.makeText(DianPuXXActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(DianPuXXActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DianPuXXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
