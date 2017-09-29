@@ -21,7 +21,6 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.DiZhiGLActivity;
 import com.sxbwstxpay.activity.EditActivity;
-import com.sxbwstxpay.activity.WeiXinMPMaActivity;
 import com.sxbwstxpay.activity.WoDeZLActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ToLoginActivity;
@@ -171,11 +170,36 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
                 if (TextUtils.isEmpty(data.getWx())) {
                     ((WoDeZLActivity) getContext()).chooseWX();
                 } else {
-                    Intent intent = new Intent();
-                    intent.setClass(getContext(), WeiXinMPMaActivity.class);
-                    intent.putExtra(Constant.INTENT_KEY.img, data.getWx());
-                    intent.putExtra(Constant.INTENT_KEY.TITLE,"我的微信名片");
-                    getContext().startActivity(intent);
+                    View dialog_tu_pian = LayoutInflater.from(getContext()).inflate(R.layout.dialog_tu_pian, null);
+                    final AlertDialog alertDialog = new AlertDialog.Builder(getContext(), R.style.dialog)
+                            .setView(dialog_tu_pian)
+                            .create();
+                    dialog_tu_pian.findViewById(R.id.textChaKan).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                            MyDialog.showPicDialog(getContext(),data.getWx());
+                        }
+                    });dialog_tu_pian.findViewById(R.id.textShangChuan).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                            ((WoDeZLActivity) getContext()).chooseWX();
+                        }
+                    });dialog_tu_pian.findViewById(R.id.textQuXiao).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                    Window dialogWindow = alertDialog.getWindow();
+                    dialogWindow.setGravity(Gravity.BOTTOM);
+                    dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
+                    WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+                    DisplayMetrics d = getContext().getResources().getDisplayMetrics(); // 获取屏幕宽、高用
+                    lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
+                    dialogWindow.setAttributes(lp);
                 }
             }
         });

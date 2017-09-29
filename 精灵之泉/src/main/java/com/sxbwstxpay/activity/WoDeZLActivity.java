@@ -279,6 +279,7 @@ public class WoDeZLActivity extends ZjbBaseActivity implements View.OnClickListe
                             }
                         });
             } else {
+
             }
             if (data != null && requestCode == Constant.REQUEST_RESULT_CODE.IMAGE_WX) {
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
