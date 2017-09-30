@@ -45,6 +45,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
             }
         }
     };
+    private TextView textNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
         textNum04 = (TextView) findViewById(R.id.textNum04);
         textStoreNmae = (TextView) findViewById(R.id.textStoreNmae);
         imageStoreLogo = (ImageView) findViewById(R.id.imageStoreLogo);
+        textNo = (TextView) findViewById(R.id.textNo);
     }
 
     @Override
@@ -114,6 +116,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
                         textNum02.setText(storeMystoreNum.get(1));
                         textNum03.setText(storeMystoreNum.get(2));
                         textNum04.setText(storeMystoreNum.get(3));
+                        textNo.setText(storeMystore.getNo());
                         textStoreNmae.setText(storeMystore.getStoreNmae());
                         Glide.with(WoDeDPActivity.this)
                                 .load(storeMystore.getStoreLogo())

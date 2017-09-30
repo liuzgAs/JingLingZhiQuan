@@ -181,7 +181,7 @@ public class MyDialog {
                 break;
             case "ChanPinXQActivity":
                 params.put("uid", ((ChanPinXQActivity) context).userInfo.getUid());
-                params.put("tokenTime", ((MainActivity) context).tokenTime);
+                params.put("tokenTime", ((ChanPinXQActivity) context).tokenTime);
                 break;
         }
         params.put("id", id);
@@ -231,7 +231,7 @@ public class MyDialog {
                                 .into(imageImg);
                         Glide.with(context)
                                 .load(goodsEwm.getEwmImg())
-                                .placeholder(R.mipmap.ic_empty)
+                                .placeholder(R.mipmap.ic_empty01)
                                 .into(imageEwmImg);
                         text1.setText(goodsEwm.getText1());
                         text2.setText(goodsEwm.getText2());

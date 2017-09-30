@@ -10,6 +10,7 @@
         android:layout_gravity="center_horizontal">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:layout_marginLeft="10dp"
             android:src="@mipmap/denglu_touxiang"
             android:layout_width="60dp"

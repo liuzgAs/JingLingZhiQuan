@@ -31,7 +31,7 @@ public class ShangHuLBViewHolder extends BaseViewHolder<UserTeam.DataBean> {
         super.setData(data);
         Glide.with(getContext())
                 .load(data.getHeadImg())
-                .placeholder(R.mipmap.ic_empty)
+                .placeholder(R.mipmap.ic_empty01)
                 .into(imageHeadImg);
         textNickName.setText(data.getNickName());
         textRegTime.setText(data.getRegTime());
