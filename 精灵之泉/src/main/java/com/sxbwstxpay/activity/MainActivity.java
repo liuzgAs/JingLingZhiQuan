@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -85,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
     public UserInfo userInfo;
     private IWXAPI api = WXAPIFactory.createWXAPI(MainActivity.this, Constant.WXAPPID, true);
     private Tencent mTencent;
-    private Bitmap bitmap;
     private AlertDialog mAlertDialog;
     public String tokenTime;
     private boolean isShow;

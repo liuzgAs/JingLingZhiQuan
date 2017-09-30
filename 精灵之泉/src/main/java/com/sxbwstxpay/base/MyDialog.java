@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -26,27 +27,33 @@ import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.activity.MainActivity;
+import com.sxbwstxpay.activity.TuiGuangEWMActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.GoodsEwm;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ShareBean;
+import com.sxbwstxpay.model.ShareIndex;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.FileUtil;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.tencent.connect.share.QQShare;
+import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import okhttp3.Response;
@@ -288,7 +295,7 @@ public class MyDialog {
                             @Override
                             public void onClick(View v) {
                                 alertDialog.dismiss();
-                                shareImg(api,viewJieTu,0);
+                                shareImg(api, viewJieTu, 0);
                             }
 
 
@@ -297,7 +304,7 @@ public class MyDialog {
                             @Override
                             public void onClick(View v) {
                                 alertDialog.dismiss();
-                                shareImg(api,viewJieTu,1);
+                                shareImg(api, viewJieTu, 1);
                             }
                         });
                         alertDialog.show();
@@ -331,7 +338,7 @@ public class MyDialog {
                 Toast.makeText(context, "请求失败", Toast.LENGTH_SHORT).show();
             }
 
-            private void shareImg(IWXAPI api,View viewJieTu,int flag) {
+            private void shareImg(IWXAPI api, View viewJieTu, int flag) {
                 api.registerApp(Constant.WXAPPID);
                 viewJieTu.setDrawingCacheEnabled(true);
                 viewJieTu.buildDrawingCache();  //启用DrawingCache并创建位图
@@ -341,13 +348,13 @@ public class MyDialog {
                 WXMediaMessage msg = new WXMediaMessage();
                 msg.mediaObject = imgObj;
                 //设置缩略图
-                Bitmap.createScaledBitmap(bitmap,500,500,true);
+                Bitmap.createScaledBitmap(bitmap, 500, 500, true);
                 bitmap.recycle();
                 msg.setThumbImage(bitmap);
                 //构造一个req
                 SendMessageToWX.Req req = new SendMessageToWX.Req();
                 req.transaction = buildTransaction("img");
-                req.message =msg;
+                req.message = msg;
                 switch (flag) {
                     case 0:
                         req.scene = SendMessageToWX.Req.WXSceneSession;
@@ -392,7 +399,7 @@ public class MyDialog {
                     Toast.makeText(context, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                wxShare(api, 0, share);
+                wxShare(api, 0, share.getShareUrl(), share.getShareTitle(), share.getShareDes(), share.getShareImg());
                 alertDialog1.dismiss();
             }
         });
@@ -403,14 +410,14 @@ public class MyDialog {
                     Toast.makeText(context, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                wxShare(api, 1, share);
+                wxShare(api, 1, share.getShareUrl(), share.getShareTitle(), share.getShareDes(), share.getShareImg());
                 alertDialog1.dismiss();
             }
         });
         dialog_shengji.findViewById(R.id.viewErWeiMa).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyDialog.erWeiMa(context,api, id, type, activity);
+                MyDialog.erWeiMa(context, api, id, type, activity);
                 alertDialog1.dismiss();
             }
         });
@@ -427,7 +434,7 @@ public class MyDialog {
     /**
      * qq回调
      */
-    private class BaseUiListener implements IUiListener {
+    private static class BaseUiListener implements IUiListener {
 
         @Override
         public void onComplete(Object o) {
@@ -446,17 +453,17 @@ public class MyDialog {
         }
     }
 
-    private static void wxShare(final IWXAPI api, final int flag, final ShareBean share) {
+    private static void wxShare(final IWXAPI api, final int flag, String url, String title, String des, final String img) {
         api.registerApp(Constant.WXAPPID);
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = share.getShareUrl();
+        webpage.webpageUrl = url;
         final WXMediaMessage msg = new WXMediaMessage(webpage);
-        msg.title = share.getShareTitle();
-        msg.description = share.getShareDes();
+        msg.title = title;
+        msg.description = des;
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Bitmap bitmap = netPicToBmp(share.getShareImg());
+                Bitmap bitmap = netPicToBmp(img);
                 msg.setThumbImage(bitmap);
                 SendMessageToWX.Req req = new SendMessageToWX.Req();
                 req.transaction = buildTransaction("webpage");
@@ -521,4 +528,103 @@ public class MyDialog {
             return null;
         }
     }
+
+    public static void share01(final Context context, final IWXAPI api, final Tencent mTencent, final String activity, final ShareIndex shareIndex) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialog_shengji = inflater.inflate(R.layout.dianlog_share, null);
+        final AlertDialog alertDialog1 = new AlertDialog.Builder(context, R.style.dialog)
+                .setView(dialog_shengji)
+                .create();
+        alertDialog1.show();
+        dialog_shengji.findViewById(R.id.textViewCancle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog1.dismiss();
+            }
+        });
+        dialog_shengji.findViewById(R.id.weixin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!checkIsSupportedWeachatPay(api)) {
+                    Toast.makeText(context, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                wxShare(api, 0, shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
+                alertDialog1.dismiss();
+            }
+        });
+        dialog_shengji.findViewById(R.id.pengyouquan).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!checkIsSupportedWeachatPay(api)) {
+                    Toast.makeText(context, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                wxShare(api, 0, shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
+                alertDialog1.dismiss();
+            }
+        });
+        dialog_shengji.findViewById(R.id.relaShouCang).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                wxShare(api, 0, shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
+                alertDialog1.dismiss();
+                alertDialog1.dismiss();
+            }
+        });
+        dialog_shengji.findViewById(R.id.relatQQ).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Bundle params = new Bundle();
+                params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+                params.putString(QQShare.SHARE_TO_QQ_TITLE, shareIndex.getShare_title());
+                params.putString(QQShare.SHARE_TO_QQ_SUMMARY, shareIndex.getShare_description());
+                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, shareIndex.getShare_register_url());
+                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, shareIndex.getShare_icon());
+                params.putString(QQShare.SHARE_TO_QQ_APP_NAME, context.getResources().getString(R.string.app_name));
+//                        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, );
+                switch (activity) {
+                    case "TuiGuangEWMActivity":
+                        mTencent.shareToQQ((TuiGuangEWMActivity) context, params, new BaseUiListener());
+                        break;
+                    case "MainActivity":
+                        mTencent.shareToQQ((MainActivity) context, params, new BaseUiListener());
+                        break;
+                }
+                alertDialog1.dismiss();
+            }
+        });
+        dialog_shengji.findViewById(R.id.relaQzone).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Bundle params = new Bundle();
+                params.putString(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_KEY_TYPE);
+                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, shareIndex.getShare_title());
+                params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, shareIndex.getShare_description());
+                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, shareIndex.getShare_register_url());
+                params.putString(QzoneShare.SHARE_TO_QQ_IMAGE_URL, shareIndex.getShare_icon());
+                params.putString(QzoneShare.SHARE_TO_QQ_APP_NAME, context.getResources().getString(R.string.app_name));
+                ArrayList<String> value = new ArrayList<String>();
+                value.add(shareIndex.getShare_icon());
+                params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, value);
+                switch (activity) {
+                    case "TuiGuangEWMActivity":
+                        mTencent.shareToQzone((TuiGuangEWMActivity) context, params, new BaseUiListener());
+                        break;
+                    case "MainActivity":
+                        mTencent.shareToQQ((MainActivity) context, params, new BaseUiListener());
+                        break;
+                }
+                alertDialog1.dismiss();
+            }
+        });
+        Window dialogWindow = alertDialog1.getWindow();
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        DisplayMetrics d = context.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
+        lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
+        dialogWindow.setAttributes(lp);
+    }
+
 }
