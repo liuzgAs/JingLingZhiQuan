@@ -20,6 +20,9 @@ import com.sxbwstxpay.model.StoreMystore;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.tauth.Tencent;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,19 +41,34 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.ShuaXinWoDeDP:
                     initData();
+                    break;
+                case Constant.BROADCASTCODE.WX_SHARE:
+                    if (isShow) {
+                        MyDialog.showTipDialog(WoDeDPActivity.this, "分享成功");
+                    }
+                    break;
+                case Constant.BROADCASTCODE.WX_SHARE_FAIL:
+                    if (isShow) {
+                        MyDialog.showTipDialog(WoDeDPActivity.this, "取消分享");
+                    }
                     break;
             }
         }
     };
     private TextView textNo;
+    private IWXAPI api = WXAPIFactory.createWXAPI(WoDeDPActivity.this, Constant.WXAPPID, true);
+    private Tencent mTencent;
+    private boolean isShow;
+    private StoreMystore.ShareDianPuBean storeMystoreShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wo_de_dp);
+        mTencent = Tencent.createInstance(Constant.QQ_ID, this.getApplicationContext());
         init();
     }
 
@@ -119,6 +137,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
                         textNum04.setText(storeMystoreNum.get(3));
                         textNo.setText(storeMystore.getNo());
                         textStoreNmae.setText(storeMystore.getStoreNmae());
+                        storeMystoreShare = storeMystore.getShare();
                         Glide.with(WoDeDPActivity.this)
                                 .load(storeMystore.getStoreLogo())
                                 .dontAnimate()
@@ -147,10 +166,10 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.viewShare:
-
+                MyDialog.share01(this,api,mTencent,"WoDeDPActivity",storeMystoreShare.getShareUrl(),storeMystoreShare.getShareTitle(),storeMystoreShare.getShareDes(),storeMystoreShare.getShareImg());
                 break;
             case R.id.viewFangKeGL:
-                intent.setClass(this,FangKeGLActivity.class);
+                intent.setClass(this, FangKeGLActivity.class);
                 startActivity(intent);
                 break;
             case R.id.buttonGuanLi:
@@ -165,11 +184,31 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mTencent.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isShow = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isShow = false;
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
+        filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
         filter.addAction(Constant.BROADCASTCODE.ShuaXinWoDeDP);
-        registerReceiver(reciver,filter);
+        registerReceiver(reciver, filter);
     }
 
     @Override

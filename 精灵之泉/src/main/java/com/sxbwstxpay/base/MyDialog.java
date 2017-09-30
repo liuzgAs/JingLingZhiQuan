@@ -28,11 +28,11 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.activity.TuiGuangEWMActivity;
+import com.sxbwstxpay.activity.WoDeDPActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.GoodsEwm;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ShareBean;
-import com.sxbwstxpay.model.ShareIndex;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.FileUtil;
@@ -529,7 +529,7 @@ public class MyDialog {
         }
     }
 
-    public static void share01(final Context context, final IWXAPI api, final Tencent mTencent, final String activity, final ShareIndex shareIndex) {
+    public static void share01(final Context context, final IWXAPI api, final Tencent mTencent, final String activity, final String url, final String title, final String des, final String img) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialog_shengji = inflater.inflate(R.layout.dianlog_share, null);
         final AlertDialog alertDialog1 = new AlertDialog.Builder(context, R.style.dialog)
@@ -549,7 +549,7 @@ public class MyDialog {
                     Toast.makeText(context, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                wxShare(api, 0, shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
+                wxShare(api, 0, url, title, des, img);
                 alertDialog1.dismiss();
             }
         });
@@ -560,14 +560,14 @@ public class MyDialog {
                     Toast.makeText(context, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                wxShare(api, 0, shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
+                wxShare(api, 0, url, title, des, img);
                 alertDialog1.dismiss();
             }
         });
         dialog_shengji.findViewById(R.id.relaShouCang).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wxShare(api, 0, shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
+                wxShare(api, 0, url, title, des, img);
                 alertDialog1.dismiss();
                 alertDialog1.dismiss();
             }
@@ -577,10 +577,10 @@ public class MyDialog {
             public void onClick(View view) {
                 final Bundle params = new Bundle();
                 params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-                params.putString(QQShare.SHARE_TO_QQ_TITLE, shareIndex.getShare_title());
-                params.putString(QQShare.SHARE_TO_QQ_SUMMARY, shareIndex.getShare_description());
-                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, shareIndex.getShare_register_url());
-                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, shareIndex.getShare_icon());
+                params.putString(QQShare.SHARE_TO_QQ_TITLE, title);
+                params.putString(QQShare.SHARE_TO_QQ_SUMMARY, des);
+                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, url);
+                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, img);
                 params.putString(QQShare.SHARE_TO_QQ_APP_NAME, context.getResources().getString(R.string.app_name));
 //                        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, );
                 switch (activity) {
@@ -589,6 +589,9 @@ public class MyDialog {
                         break;
                     case "MainActivity":
                         mTencent.shareToQQ((MainActivity) context, params, new BaseUiListener());
+                        break;
+                    case "WoDeDPActivity":
+                        mTencent.shareToQQ((WoDeDPActivity) context, params, new BaseUiListener());
                         break;
                 }
                 alertDialog1.dismiss();
@@ -599,13 +602,13 @@ public class MyDialog {
             public void onClick(View view) {
                 final Bundle params = new Bundle();
                 params.putString(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_KEY_TYPE);
-                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, shareIndex.getShare_title());
-                params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, shareIndex.getShare_description());
-                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, shareIndex.getShare_register_url());
-                params.putString(QzoneShare.SHARE_TO_QQ_IMAGE_URL, shareIndex.getShare_icon());
+                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, title);
+                params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, des);
+                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, url);
+                params.putString(QzoneShare.SHARE_TO_QQ_IMAGE_URL, img);
                 params.putString(QzoneShare.SHARE_TO_QQ_APP_NAME, context.getResources().getString(R.string.app_name));
                 ArrayList<String> value = new ArrayList<String>();
-                value.add(shareIndex.getShare_icon());
+                value.add(img);
                 params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, value);
                 switch (activity) {
                     case "TuiGuangEWMActivity":
@@ -613,6 +616,9 @@ public class MyDialog {
                         break;
                     case "MainActivity":
                         mTencent.shareToQQ((MainActivity) context, params, new BaseUiListener());
+                        break;
+                    case "WoDeDPActivity":
+                        mTencent.shareToQQ((WoDeDPActivity) context, params, new BaseUiListener());
                         break;
                 }
                 alertDialog1.dismiss();

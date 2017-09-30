@@ -19,7 +19,7 @@ public class StoreMystore {
     private String no;
     private String storeNmae;
     private String storeLogo;
-    private ShareBean share;
+    private ShareDianPuBean share;
     private int status;
     private String info;
     private List<String> num;
@@ -48,11 +48,11 @@ public class StoreMystore {
         this.storeLogo = storeLogo;
     }
 
-    public ShareBean getShare() {
+    public ShareDianPuBean getShare() {
         return share;
     }
 
-    public void setShare(ShareBean share) {
+    public void setShare(ShareDianPuBean share) {
         this.share = share;
     }
 
@@ -80,7 +80,7 @@ public class StoreMystore {
         this.num = num;
     }
 
-    public static class ShareBean {
+    public static class ShareDianPuBean {
         /**
          * shareImg : http://api.jlzquan.com/Uploads/avstar.png
          * shareTitle : 店铺名

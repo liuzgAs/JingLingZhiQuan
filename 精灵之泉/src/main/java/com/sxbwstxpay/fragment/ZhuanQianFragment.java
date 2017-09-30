@@ -69,7 +69,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     }
                     break;
                 case Constant.BROADCASTCODE.FenXiangZCLJ:
-                    MyDialog.share01(context,api,mTencent,"MainActivity",shareIndex);
+                    MyDialog.share01(context,api,mTencent,"MainActivity",shareIndex.getShare_register_url(),shareIndex.getShare_title(),shareIndex.getShare_description(),shareIndex.getShare_icon());
                     break;
             }
         }

@@ -146,7 +146,7 @@ public class TuiGuangEWMActivity extends ZjbBaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageShare:
-                MyDialog.share01(this,api,mTencent,"TuiGuangEWMActivity",shareIndex);
+                MyDialog.share01(this,api,mTencent,"TuiGuangEWMActivity",shareIndex.getShare_register_url(),shareIndex.getShare_title(),shareIndex.getShare_description(),shareIndex.getShare_icon());
                 break;
             case R.id.imageBack:
                 finish();
