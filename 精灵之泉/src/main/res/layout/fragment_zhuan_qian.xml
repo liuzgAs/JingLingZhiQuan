@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context="com.sxbwstxpay.fragment.ShengQianFragment">
+    >
 
-    <com.sxbwstxpay.customview.ResizableImageView
+    <ImageView
+        android:scaleType="centerCrop"
         android:src="@mipmap/zhuan_qian_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:id="@+id/viewImg" />
 
     <RelativeLayout
