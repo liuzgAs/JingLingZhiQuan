@@ -63,8 +63,7 @@
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="热门搜索"
-                android:id="@+id/textView87" />
+                android:text="热门搜索" />
 
             <RelativeLayout
                 android:background="@color/white"
@@ -91,8 +90,7 @@
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="历史搜索"
-                android:id="@+id/textView92" />
+                android:text="历史搜索" />
 
             <RelativeLayout
                 android:layout_marginBottom="40dp"
@@ -166,7 +164,6 @@
                 android:textSize="@dimen/bigText" />
 
             <TextView
-                android:id="@+id/textView158"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -190,7 +187,6 @@
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/imageView98"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"

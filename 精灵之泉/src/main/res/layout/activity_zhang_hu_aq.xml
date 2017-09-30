@@ -15,7 +15,6 @@
         android:background="@drawable/layout_selector_white_system_gray" >
 
         <ImageView
-            android:id="@+id/imageView57"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -25,7 +24,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView105"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

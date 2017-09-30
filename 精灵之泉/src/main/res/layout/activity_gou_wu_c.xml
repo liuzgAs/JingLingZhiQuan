@@ -33,7 +33,6 @@
             android:background="@color/background" />
 
         <RelativeLayout
-            android:id="@+id/relativeLayout4"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"
             android:layout_alignParentBottom="true"
@@ -81,7 +80,6 @@
                     android:src="@mipmap/weixuanzhong" />
 
                 <TextView
-                    android:id="@+id/textView204"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -92,7 +90,6 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/textView203"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

@@ -15,7 +15,7 @@
             android:layout_height="180dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:src="@mipmap/item_shangcheng_img" />
+            android:src="@mipmap/ic_empty" />
 
         <TextView
             android:id="@+id/textStock_num"

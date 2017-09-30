@@ -21,7 +21,6 @@
             android:src="@mipmap/mine01" />
 
         <TextView
-            android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView8"
@@ -46,7 +45,6 @@
             android:src="@mipmap/mine02" />
 
         <TextView
-            android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView9"
@@ -71,7 +69,6 @@
             android:src="@mipmap/mine03" />
 
         <TextView
-            android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView10"
@@ -96,7 +93,6 @@
             android:src="@mipmap/mine04" />
 
         <TextView
-            android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView11"

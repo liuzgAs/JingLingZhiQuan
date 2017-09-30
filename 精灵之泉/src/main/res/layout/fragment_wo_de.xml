@@ -46,7 +46,7 @@
                     android:layout_below="@+id/relaTitleStatue01"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:src="@mipmap/head"
+                    android:src="@mipmap/ic_empty01"
                     app:civ_border_color="@color/white"
                     app:civ_border_width="2dp" />
 
@@ -70,7 +70,6 @@
                         android:textSize="@dimen/bigLitterText" />
 
                     <TextView
-                        android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -343,8 +342,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="23dp"
-                                android:text="立即了解"
-                                android:id="@+id/textView22" />
+                                android:text="立即了解" />
                         </RelativeLayout>
 
                         <View
@@ -391,7 +389,6 @@
                             android:src="@mipmap/mine_menu01" />
 
                         <TextView
-                            android:id="@+id/textView17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -403,7 +400,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -413,7 +409,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/textView24"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
@@ -438,7 +433,6 @@
                             android:src="@mipmap/mine_menu10" />
 
                         <TextView
-                            android:id="@+id/textView18"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -450,7 +444,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView15"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -460,7 +453,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/textView25"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
@@ -485,7 +477,6 @@
                             android:src="@mipmap/mine_menu11" />
 
                         <TextView
-                            android:id="@+id/textView114"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -497,7 +488,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView63"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -507,7 +497,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/textView115"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
@@ -532,7 +521,6 @@
                             android:src="@mipmap/mine_menu08" />
 
                         <TextView
-                            android:id="@+id/textView106"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -544,7 +532,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView75"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -554,7 +541,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/textView151"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
@@ -579,7 +565,6 @@
                             android:src="@mipmap/mine_menu09" />
 
                         <TextView
-                            android:id="@+id/textView116"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -591,7 +576,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView65"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -601,7 +585,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/textView117"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
@@ -626,7 +609,6 @@
                             android:src="@mipmap/mine_menu03" />
 
                         <TextView
-                            android:id="@+id/textView19"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -638,7 +620,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -648,7 +629,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/textView26"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
@@ -673,7 +653,6 @@
                             android:src="@mipmap/mine_menu04" />
 
                         <TextView
-                            android:id="@+id/textView20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -685,7 +664,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView19"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -695,7 +673,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/textView27"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
@@ -720,7 +697,6 @@
                             android:src="@mipmap/mine_menu05" />
 
                         <TextView
-                            android:id="@+id/textView21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -732,7 +708,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -742,7 +717,6 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/textView28"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
@@ -768,7 +742,6 @@
                             android:src="@mipmap/mine_menu07" />
 
                         <TextView
-                            android:id="@+id/textView23"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -780,7 +753,6 @@
                             android:textSize="@dimen/normal_textsize" />
 
                         <ImageView
-                            android:id="@+id/imageView25"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"

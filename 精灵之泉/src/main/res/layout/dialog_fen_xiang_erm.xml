@@ -24,7 +24,7 @@
                 android:layout_height="275dp"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/erweima_head" />
+                android:src="@mipmap/ic_empty" />
 
             <RelativeLayout
                 android:visibility="gone"
@@ -50,7 +50,6 @@
                     android:textSize="@dimen/normal_textsize" />
 
                 <TextView
-                    android:id="@+id/textView90"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/textView73"
@@ -94,7 +93,6 @@
 
                 <ImageView
                     android:visibility="gone"
-                    android:id="@+id/imageView101"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -140,7 +138,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="-55dp"
-                android:src="@mipmap/share_erweima" />
+                android:src="@mipmap/ic_empty01" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -186,7 +184,6 @@
             android:textSize="@dimen/bigText" />
 
         <TextView
-            android:id="@+id/textView133"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"

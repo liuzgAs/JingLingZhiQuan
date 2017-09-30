@@ -11,7 +11,6 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/textView94"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -23,7 +22,6 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView122"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -165,7 +163,6 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/textView129"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -177,7 +174,6 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <TextView
-                android:id="@+id/textView159"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -189,7 +185,6 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView163"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width"
             android:layout_marginLeft="10dp"
@@ -210,7 +205,6 @@
             app:tabTextColor="@color/light_black" />
 
         <TextView
-            android:id="@+id/textView161"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width"
             android:layout_marginLeft="10dp"
@@ -218,7 +212,6 @@
             android:background="@color/line_gray" />
 
         <TextView
-            android:id="@+id/textView160"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@color/white"
@@ -242,7 +235,6 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/textView164"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -254,7 +246,6 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <TextView
-                android:id="@+id/textView165"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -266,7 +257,6 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView166"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width"
             android:layout_marginLeft="10dp"

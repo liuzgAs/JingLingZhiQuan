@@ -14,7 +14,6 @@
         android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
-            android:id="@+id/textView97"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -60,7 +59,6 @@
         android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
-            android:id="@+id/textView98"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -94,7 +92,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView100"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -118,7 +115,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView60"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -144,7 +140,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView103"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -168,7 +163,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView62"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -193,7 +187,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView65"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -217,7 +210,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -258,7 +250,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView71"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -282,7 +273,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView75"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -306,7 +296,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView82"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -340,7 +329,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView101"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -364,7 +352,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView102"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -377,7 +364,6 @@
 
         <TextView
             android:hint="新建/修改"
-            android:id="@+id/textView104"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

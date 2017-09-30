@@ -15,7 +15,7 @@
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/dingdandemo" />
+        android:src="@mipmap/ic_empty01" />
 
     <TextView
         android:id="@+id/textGoods_title"

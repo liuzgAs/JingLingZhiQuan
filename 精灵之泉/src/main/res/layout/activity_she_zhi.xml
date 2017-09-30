@@ -15,7 +15,6 @@
         android:background="@drawable/layout_selector_white_system_gray" >
 
         <ImageView
-            android:id="@+id/imageView57"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -25,7 +24,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView105"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -39,7 +37,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView155"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -63,7 +60,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView145"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -87,7 +83,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView156"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -101,7 +96,6 @@
         android:background="@drawable/layout_selector_white_system_gray" >
 
         <ImageView
-            android:id="@+id/imageView72"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -111,7 +105,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView149"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -142,7 +135,6 @@
             android:src="@mipmap/right" />
 
         <TextView
-            android:id="@+id/textView153"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

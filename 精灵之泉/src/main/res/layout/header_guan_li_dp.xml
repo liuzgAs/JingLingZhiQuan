@@ -12,10 +12,9 @@
 
         <ImageView
             android:scaleType="centerCrop"
-            android:src="@mipmap/katongmeinv"
+            android:src="@mipmap/ic_empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageView86"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -49,7 +48,7 @@
 
                 <com.sxbwstxpay.customview.CircleImageView
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/head"
+                    android:src="@mipmap/ic_empty01"
                     app:civ_border_color="@color/white"
                     app:civ_border_width="2dp"
                     android:layout_width="65dp"
@@ -109,7 +108,6 @@
                         android:layout_height="wrap_content"
                         android:text="店铺分享"
                         android:layout_marginTop="5dp"
-                        android:id="@+id/textView120"
                         android:layout_below="@+id/imageView100"
                         android:layout_centerHorizontal="true" />
                 </RelativeLayout>
@@ -157,7 +155,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/background"
-            android:id="@+id/textView52"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/textView46"
             android:layout_toStartOf="@+id/textView46" />

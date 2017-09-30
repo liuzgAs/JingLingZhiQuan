@@ -34,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:text="已实名认证"
                 android:textSize="@dimen/normal_textsize"
-                android:id="@+id/textView76"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView45"
                 android:layout_toEndOf="@+id/imageView45" />
@@ -90,7 +89,6 @@
                 android:layout_height="wrap_content"
                 android:text="未实名认证"
                 android:textSize="@dimen/normal_textsize"
-                android:id="@+id/textView761"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView451"
                 android:layout_toEndOf="@+id/imageView451" />
@@ -146,7 +144,6 @@
                 android:layout_height="wrap_content"
                 android:text="VIP推广消费商"
                 android:textSize="@dimen/normal_textsize"
-                android:id="@+id/textView762"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView452"
                 android:layout_toEndOf="@+id/imageView452" />
@@ -203,7 +200,6 @@
                 android:layout_height="wrap_content"
                 android:text="银牌消费商"
                 android:textSize="@dimen/normal_textsize"
-                android:id="@+id/textView7621"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView4521"
                 android:layout_toEndOf="@+id/imageView4521" />

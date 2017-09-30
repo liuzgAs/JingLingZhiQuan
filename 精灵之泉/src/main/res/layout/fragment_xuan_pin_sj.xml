@@ -49,7 +49,6 @@
             android:layout_height="match_parent"
             android:text="销量优先"
             android:textSize="@dimen/normal_textsize"
-            android:id="@+id/textView146"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/textView137"
             android:layout_toStartOf="@+id/textView137" />
@@ -71,7 +70,6 @@
             android:src="@mipmap/down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView91"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView147"
             android:layout_toEndOf="@+id/textView147" />
@@ -80,7 +78,6 @@
             android:src="@mipmap/down_gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView97"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView147"
             android:layout_toEndOf="@+id/textView147" />
@@ -138,7 +135,6 @@
                 android:textSize="@dimen/bigText" />
 
             <TextView
-                android:id="@+id/textView158"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -162,7 +158,6 @@
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/imageView98"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"

@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:text="直属VIP旗下商户"
                 android:textSize="@dimen/normal_textsize"
-                android:id="@+id/textView761"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView451"
                 android:layout_toEndOf="@+id/imageView451" />
@@ -91,7 +90,6 @@
                 android:layout_height="wrap_content"
                 android:text="直属银牌旗下商户"
                 android:textSize="@dimen/normal_textsize"
-                android:id="@+id/textView762"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView452"
                 android:layout_toEndOf="@+id/imageView452" />
@@ -148,7 +146,6 @@
                 android:layout_height="wrap_content"
                 android:text="直属银牌旗下VIP"
                 android:textSize="@dimen/normal_textsize"
-                android:id="@+id/textView7621"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView4521"
                 android:layout_toEndOf="@+id/imageView4521" />

@@ -69,7 +69,6 @@
         android:background="@drawable/layout_selector_white_system_gray" >
 
         <TextView
-            android:id="@+id/textView32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

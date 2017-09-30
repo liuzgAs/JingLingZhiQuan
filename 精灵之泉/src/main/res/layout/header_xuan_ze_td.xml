@@ -30,7 +30,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="银联支付"
-                android:id="@+id/textView41"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/textView40"
                 android:layout_toEndOf="@+id/textView40" />
@@ -77,6 +76,5 @@
         android:layout_height="wrap_content"
         android:text="请选择交易通道"
         android:textSize="@dimen/normal_textsize"
-        android:padding="10dp"
-        android:id="@+id/textView110" />
+        android:padding="10dp" />
 </LinearLayout>

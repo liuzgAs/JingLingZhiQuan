@@ -17,7 +17,6 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/textView141"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -115,7 +114,6 @@
         android:text="请输入华夏银行信用卡（9347）信息" />
 
     <TextView
-        android:id="@+id/textView150"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:background="@color/line_gray" />
@@ -139,7 +137,6 @@
             android:text="有效期：月份/年份" />
 
         <ImageView
-            android:id="@+id/imageView34"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -150,7 +147,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView152"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:background="@color/line_gray" />

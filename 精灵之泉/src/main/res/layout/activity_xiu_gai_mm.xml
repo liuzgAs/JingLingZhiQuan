@@ -41,7 +41,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView29"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
@@ -80,7 +79,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView12"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"

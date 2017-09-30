@@ -7,7 +7,6 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/viewJinE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -53,7 +52,6 @@
         android:textSize="@dimen/normal_textsize" />
 
     <TextView
-        android:id="@+id/textView397"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -97,7 +95,6 @@
                     android:src="@mipmap/zhifu_zhifubao" />
 
                 <TextView
-                    android:id="@+id/textView401"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -110,7 +107,6 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/textView398"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_width"
                 android:layout_marginLeft="10dp"
@@ -132,7 +128,6 @@
                     android:src="@mipmap/zhifu_weixin" />
 
                 <TextView
-                    android:id="@+id/textView402"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

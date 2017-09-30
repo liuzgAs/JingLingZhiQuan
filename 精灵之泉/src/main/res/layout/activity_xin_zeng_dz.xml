@@ -84,7 +84,6 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView174"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width"
             android:layout_marginLeft="10dp"
@@ -123,7 +122,6 @@
 
             <ImageView
                 android:visibility="gone"
-                android:id="@+id/imageView87"
                 android:layout_width="15dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -134,7 +132,6 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView107"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width"
             android:layout_marginLeft="10dp"
@@ -175,7 +172,6 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView175"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width"
             android:layout_marginLeft="10dp"
@@ -201,7 +197,6 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"

@@ -106,7 +106,6 @@
             android:layout_width="40dp"
             android:background="@color/basic_color"
             android:layout_height="1dp"
-            android:id="@+id/textView207"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView206"
             android:layout_toEndOf="@+id/textView206" />
@@ -116,7 +115,6 @@
             android:layout_width="40dp"
             android:background="@color/basic_color"
             android:layout_height="1dp"
-            android:id="@+id/textView208"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/textView206"
             android:layout_toStartOf="@+id/textView206" />

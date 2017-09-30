@@ -15,7 +15,6 @@
     <!--android:src="@drawable/progress"-->
     <!--/>-->
     <com.cunoraz.gifview.library.GifView
-        android:id="@+id/gif1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

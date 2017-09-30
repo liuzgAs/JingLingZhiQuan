@@ -18,7 +18,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView88"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -61,7 +60,6 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView91"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width"
             android:layout_marginLeft="10dp"

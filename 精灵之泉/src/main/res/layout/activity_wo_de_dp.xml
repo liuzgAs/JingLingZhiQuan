@@ -16,7 +16,6 @@
         android:id="@+id/relativeLayout3">
 
         <ImageView
-            android:id="@+id/imageView92"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_alignParentTop="true"
@@ -85,7 +84,6 @@
                             tools:text="265" />
 
                         <TextView
-                            android:id="@+id/textView61"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textNum01"
@@ -114,7 +112,6 @@
                             tools:text="265" />
 
                         <TextView
-                            android:id="@+id/textView86"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textNum02"
@@ -143,7 +140,6 @@
                             tools:text="265" />
 
                         <TextView
-                            android:id="@+id/textView131"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textNum03"
@@ -172,7 +168,6 @@
                             tools:text="265" />
 
                         <TextView
-                            android:id="@+id/textView211"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textNum04"
@@ -206,7 +201,7 @@
             android:id="@+id/imageStoreLogo"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@mipmap/head"
+            android:src="@mipmap/ic_empty01"
             app:civ_border_color="@color/white"
             app:civ_border_width="2dp"
             android:layout_alignParentBottom="true"
@@ -252,7 +247,6 @@
                 <TextView
                     android:layout_marginLeft="5dp"
                     android:layout_centerVertical="true"
-                    android:id="@+id/textView214"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="店铺分享"
@@ -312,7 +306,6 @@
                 android:src="@mipmap/kefu_dianpu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/imageView113"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -344,7 +337,6 @@
             android:text="全部订单"
             android:textSize="@dimen/normal_textsize"
             android:layout_marginRight="5dp"
-            android:id="@+id/textView215"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imageView114"
             android:layout_toStartOf="@+id/imageView114" />
@@ -356,7 +348,6 @@
             android:textColor="@color/light_black"
             android:layout_marginLeft="10dp"
             android:textSize="@dimen/normal_textsize"
-            android:id="@+id/textView216"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -395,7 +386,6 @@
                 android:text="待付款"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/light_black"
-                android:id="@+id/textView217"
                 android:layout_below="@+id/imageView115"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
@@ -405,8 +395,7 @@
             android:layout_marginBottom="15dp"
             android:src="@mipmap/dingdanfenge"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView118" />
+            android:layout_height="wrap_content" />
 
         <RelativeLayout
             android:id="@+id/viewDaiShouHuo"
@@ -432,7 +421,6 @@
                 android:text="待收货"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/light_black"
-                android:id="@+id/textView220"
                 android:layout_below="@+id/imageView116"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
@@ -442,8 +430,7 @@
             android:layout_marginBottom="15dp"
             android:src="@mipmap/dingdanfenge"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView119" />
+            android:layout_height="wrap_content" />
 
         <RelativeLayout
             android:id="@+id/viewYiWanCheng"
@@ -469,7 +456,6 @@
                 android:text="已完成"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/light_black"
-                android:id="@+id/textView221"
                 android:layout_below="@+id/imageView117"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
@@ -498,7 +484,6 @@
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView120"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
@@ -520,7 +505,6 @@
             android:text="访客管理"
             android:textColor="@color/light_black"
             android:textSize="@dimen/litterText"
-            android:id="@+id/textView222"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView121"
             android:layout_toEndOf="@+id/imageView121" />
@@ -541,7 +525,6 @@
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView122"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
@@ -563,7 +546,6 @@
             android:text="我的素材"
             android:textColor="@color/light_black"
             android:textSize="@dimen/litterText"
-            android:id="@+id/textView223"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView123"
             android:layout_toEndOf="@+id/imageView123" />

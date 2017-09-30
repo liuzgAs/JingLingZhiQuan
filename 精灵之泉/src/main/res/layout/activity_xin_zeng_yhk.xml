@@ -85,7 +85,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView31"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:background="@color/line_gray" />
@@ -98,7 +97,6 @@
         android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
-            android:id="@+id/textView109"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -134,7 +132,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView113"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:background="@color/line_gray" />
@@ -176,7 +173,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView139"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:background="@color/line_gray" />
@@ -218,7 +214,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView143"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
         android:background="@color/line_gray" />

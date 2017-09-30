@@ -27,7 +27,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/banner_middle"
+        android:src="@mipmap/ic_empty"
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:id="@+id/imageMiddle" />

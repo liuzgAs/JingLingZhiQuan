@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/kouhong" />
+        android:src="@mipmap/ic_empty01" />
 
     <TextView
         android:id="@+id/textTitle"

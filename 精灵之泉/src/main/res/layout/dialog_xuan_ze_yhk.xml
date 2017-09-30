@@ -21,7 +21,6 @@
             android:text="选择收款储蓄卡"
             android:textColor="@color/light_black"
             android:textSize="@dimen/MoreBigText"
-            android:id="@+id/textView141"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
@@ -71,7 +70,6 @@
             android:text="新增收款储蓄卡"
             android:textColor="@color/light_black"
             android:layout_marginLeft="10dp"
-            android:id="@+id/textView140"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView70"
             android:layout_toEndOf="@+id/imageView70" />
@@ -81,7 +79,6 @@
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView71"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />

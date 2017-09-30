@@ -19,7 +19,6 @@
         android:background="@drawable/btn_jianbian0_basic_0dp">
 
         <ImageView
-            android:id="@+id/imageView104"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentLeft="true"
@@ -42,7 +41,6 @@
             android:textSize="@dimen/litterText" />
 
         <TextView
-            android:id="@+id/textView177"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -209,7 +207,6 @@
         android:background="@drawable/layout_selector_white_system_gray">
 
         <TextView
-            android:id="@+id/textView196"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -220,7 +217,6 @@
             android:textSize="@dimen/normal_textsize" />
 
         <ImageView
-            android:id="@+id/imageView108"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -239,7 +235,6 @@
         android:visibility="gone">
 
         <TextView
-            android:id="@+id/textView197"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -260,7 +255,6 @@
             android:src="@mipmap/right_big" />
 
         <TextView
-            android:id="@+id/textView198"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -327,7 +321,6 @@
             android:textSize="@dimen/normal_textsize" />
 
         <TextView
-            android:id="@+id/textView200"
             android:layout_width="40dp"
             android:layout_height="1dp"
             android:layout_centerVertical="true"
@@ -337,7 +330,6 @@
             android:background="@color/basic_color" />
 
         <TextView
-            android:id="@+id/textView201"
             android:layout_width="40dp"
             android:layout_height="1dp"
             android:layout_centerVertical="true"

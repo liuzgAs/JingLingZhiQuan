@@ -56,7 +56,6 @@
                 android:textSize="@dimen/bigText" />
 
             <TextView
-                android:id="@+id/textView158"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -80,7 +79,6 @@
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/imageView98"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"

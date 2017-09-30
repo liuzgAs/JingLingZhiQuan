@@ -90,7 +90,6 @@
             android:background="@color/gray_white" />
 
         <ImageView
-            android:id="@+id/imageView28"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -127,7 +126,6 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <EditText
-                android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -398,7 +396,6 @@
                         android:src="@mipmap/shenfenzhengmiandemo"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView30"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
 
@@ -435,7 +432,6 @@
                         android:src="@mipmap/shenfenfanmiandemo"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView31"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
 
@@ -471,7 +467,6 @@
                         android:src="@mipmap/xingyongka"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView48"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
 
@@ -507,7 +502,6 @@
                         android:src="@mipmap/yinhangkademo"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView33"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
 
@@ -543,7 +537,6 @@
                         android:src="@mipmap/shouchishenfendemo"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imageView35"
                         android:layout_gravity="center_vertical" />
                 </RelativeLayout>
 

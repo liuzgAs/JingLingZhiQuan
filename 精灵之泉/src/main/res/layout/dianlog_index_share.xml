@@ -60,7 +60,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="微信"
-                    android:id="@+id/textView225"
                     android:layout_below="@+id/imageView89"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
@@ -86,7 +85,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="朋友圈"
-                    android:id="@+id/textView226"
                     android:layout_below="@+id/imageView124"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
@@ -112,7 +110,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="二维码"
-                    android:id="@+id/textView227"
                     android:layout_below="@+id/imageView125"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
@@ -125,7 +122,7 @@
             android:layout_height="80dp">
 
             <ImageView
-                android:src="@mipmap/quxiao"
+                android:src="@drawable/cancle_selector"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/imageCancle"

@@ -42,7 +42,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="待收返佣："
-                    android:id="@+id/textView83"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/textDaiShouFY"
                     android:layout_toStartOf="@+id/textDaiShouFY" />
@@ -51,8 +50,7 @@
             <TextView
                 android:background="@mipmap/fengexian_huise"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:id="@+id/textView81" />
+                android:layout_height="1dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

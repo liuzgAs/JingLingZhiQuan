@@ -36,8 +36,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/text_gray"
-            android:id="@+id/textView93" />
+            android:background="@color/text_gray" />
 
         <TextView
             android:textColor="@color/light_black"

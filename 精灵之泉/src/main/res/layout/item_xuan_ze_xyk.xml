@@ -35,8 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageImg"
-                android:layout_toEndOf="@+id/imageImg"
-                android:id="@+id/relativeLayout">
+                android:layout_toEndOf="@+id/imageImg">
 
                 <TextView
                     android:textSize="17dp"
