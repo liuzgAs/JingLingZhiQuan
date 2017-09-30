@@ -82,6 +82,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
     protected void setListeners() {
         findViewById(R.id.buttonGuanLi).setOnClickListener(this);
         findViewById(R.id.imageStoreLogo).setOnClickListener(this);
+        findViewById(R.id.viewFangKeGL).setOnClickListener(this);
     }
 
     /**
@@ -141,6 +142,10 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewFangKeGL:
+                intent.setClass(this,FangKeGLActivity.class);
+                startActivity(intent);
+                break;
             case R.id.buttonGuanLi:
                 intent.setClass(this, GuanLiWDDPActivity.class);
                 startActivity(intent);

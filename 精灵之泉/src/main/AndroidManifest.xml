@@ -349,7 +349,8 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- 支付宝h5 -->
         <activity android:name=".activity.GuanLiWDDPActivity" />
-        <activity android:name=".activity.SouSuoActivity"></activity>
+        <activity android:name=".activity.SouSuoActivity" />
+        <activity android:name=".activity.FangKeGLActivity"></activity>
     </application>
 
 </manifest>

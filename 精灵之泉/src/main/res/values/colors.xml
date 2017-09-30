@@ -26,4 +26,16 @@
     <color name="tranblack">#66000000</color>
     <color name="textYellow">#ff6e0b</color>
     <color name="textBlue">#4f9cdd</color>
+    <!--波形图-->
+    <color name="hengxian">#ededee</color>
+    <color name="hengxianBase">#ededee</color>
+    <color name="quXian01">#37d726</color>
+    <color name="quXian0101">#c9e3c6</color>
+    <color name="quXian02">#fabe51</color>
+    <color name="quXian0201">#f4ead5</color>
+    <color name="basicLight">#aaf5f7f5</color>
+    <color name="basic">#aa78fa7b</color>
+    <color name="textColor">#a5a5a6</color>
+    <color name="textColorBlack">#000000</color>
+    <!--波形图-->
 </resources>
