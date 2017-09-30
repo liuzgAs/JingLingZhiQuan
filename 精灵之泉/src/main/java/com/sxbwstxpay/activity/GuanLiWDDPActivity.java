@@ -4,29 +4,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -51,19 +38,10 @@ import com.sxbwstxpay.util.RecycleViewDistancaUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.LocalImageGuanLiWDDPHolderView;
 import com.sxbwstxpay.viewholder.WoDeDPGLViewHolder;
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
@@ -82,7 +60,6 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
     private TextView textTitle;
     private IWXAPI api = WXAPIFactory.createWXAPI(GuanLiWDDPActivity.this, Constant.WXAPPID, true);
     private Tencent mTencent;
-    private Bitmap bitmap;
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -97,6 +74,8 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
             }
         }
     };
+    private String previewUrl;
+    private StoreGoods.ShareBean share;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +116,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
+        findViewById(R.id.textYuLan).setOnClickListener(this);
     }
 
     @Override
@@ -173,6 +153,8 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                         storeNmae = storeGoods.getStoreNmae();
                         storeDes = storeGoods.getStoreDes();
                         storeGoodsBanner = storeGoods.getBanner();
+                        previewUrl = storeGoods.getPreviewUrl();
+                        share = storeGoods.getShare();
                         textTitle.setText(storeNmae);
                         List<IndexDataBean> storeGoodsData = storeGoods.getData();
                         adapter.clear();
@@ -239,6 +221,12 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                 imageStoreLogo = (ImageView) header_xian_shi_qg.findViewById(R.id.imageStoreLogo);
                 textStoreNmae = (TextView) header_xian_shi_qg.findViewById(R.id.textStoreNmae);
                 textStoreDes = (TextView) header_xian_shi_qg.findViewById(R.id.textStoreDes);
+                header_xian_shi_qg.findViewById(R.id.viewShare).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyDialog.share01(GuanLiWDDPActivity.this, api, mTencent, "GuanLiWDDPActivity", share.getShareUrl(), share.getShareTitle(), share.getShareDes(), share.getShareImg());
+                    }
+                });
                 return header_xian_shi_qg;
             }
 
@@ -346,6 +334,13 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.textYuLan:
+                Intent intent = new Intent();
+                intent.setClass(this, WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "我的店铺预览");
+                intent.putExtra(Constant.INTENT_KEY.URL, previewUrl);
+                startActivity(intent);
+                break;
             case R.id.imageBack:
                 finish();
                 break;
@@ -379,158 +374,8 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
      * author： ZhangJieBo
      * date： 2017/9/25 0025 上午 11:54
      */
-    public void share(final ShareBean share) {
-        LayoutInflater inflater = LayoutInflater.from(GuanLiWDDPActivity.this);
-        View dialog_shengji = inflater.inflate(R.layout.dianlog_index_share, null);
-        TextView textDes1 = (TextView) dialog_shengji.findViewById(R.id.textDes1);
-        TextView textDes2 = (TextView) dialog_shengji.findViewById(R.id.textDes2);
-        textDes1.setText(share.getTitle());
-        SpannableString span = new SpannableString(share.getDes1() + share.getDesMoney() + share.getDes2());
-        span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.basic_color)), share.getDes1().length(), share.getDes1().length() + share.getDesMoney().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textDes2.setText(span);
-        final AlertDialog alertDialog1 = new AlertDialog.Builder(GuanLiWDDPActivity.this, R.style.dialog)
-                .setView(dialog_shengji)
-                .create();
-        alertDialog1.show();
-        dialog_shengji.findViewById(R.id.imageCancle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog1.dismiss();
-            }
-        });
-        dialog_shengji.findViewById(R.id.viewWeiXin).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!checkIsSupportedWeachatPay()) {
-                    Toast.makeText(GuanLiWDDPActivity.this, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                wxShare(0, share);
-                alertDialog1.dismiss();
-            }
-        });
-        dialog_shengji.findViewById(R.id.viewPengYouQuan).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!checkIsSupportedWeachatPay()) {
-                    Toast.makeText(GuanLiWDDPActivity.this, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                wxShare(1, share);
-                alertDialog1.dismiss();
-            }
-        });
-        dialog_shengji.findViewById(R.id.viewErWeiMa).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(GuanLiWDDPActivity.this, "此功能暂未开放", Toast.LENGTH_SHORT).show();
-                alertDialog1.dismiss();
-            }
-        });
-        Window dialogWindow = alertDialog1.getWindow();
-        dialogWindow.setGravity(Gravity.BOTTOM);
-        dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
-        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        DisplayMetrics d = GuanLiWDDPActivity.this.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
-        lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
-        dialogWindow.setAttributes(lp);
+    public void share(String id, String type, ShareBean share) {
+        MyDialog.share(GuanLiWDDPActivity.this, "GuanLiWDDPActivity", api, id, type, share);
     }
 
-    /**
-     * qq回调
-     */
-    private class BaseUiListener implements IUiListener {
-
-        @Override
-        public void onComplete(Object o) {
-            Log.e("BaseUiListener", "BaseUiListener--onComplete--QQ分享" + o.toString());
-        }
-
-        @Override
-        public void onError(UiError e) {
-            Log.e("BaseUiListener", "code:" + e.errorCode + ", msg:"
-                    + e.errorMessage + ", detail:" + e.errorDetail);
-        }
-
-        @Override
-        public void onCancel() {
-            Log.e("BaseUiListener", "BaseUiListener--onCancel--");
-        }
-    }
-
-    private void wxShare(final int flag, final ShareBean share) {
-        api.registerApp(Constant.WXAPPID);
-        WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = share.getShareUrl();
-        final WXMediaMessage msg = new WXMediaMessage(webpage);
-        msg.title = share.getShareTitle();
-        msg.description = share.getShareDes();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                bitmap = netPicToBmp(share.getShareImg());
-                msg.setThumbImage(bitmap);
-                SendMessageToWX.Req req = new SendMessageToWX.Req();
-                req.transaction = buildTransaction("webpage");
-                req.message = msg;
-                switch (flag) {
-                    case 0:
-                        req.scene = SendMessageToWX.Req.WXSceneSession;
-                        break;
-                    case 1:
-                        req.scene = SendMessageToWX.Req.WXSceneTimeline;
-                        break;
-                    case 2:
-                        req.scene = SendMessageToWX.Req.WXSceneFavorite;
-                        break;
-                }
-                api.sendReq(req);
-            }
-        }).start();
-    }
-
-    private String buildTransaction(final String type) {
-        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
-    }
-
-    /**
-     * 检查微信版本是否支付支付或是否安装可支付的微信版本
-     */
-    private boolean checkIsSupportedWeachatPay() {
-        boolean isPaySupported = api.getWXAppSupportAPI() >= com.tencent.mm.opensdk.constants.Build.PAY_SUPPORTED_SDK_INT;
-        return isPaySupported;
-    }
-
-    public Bitmap netPicToBmp(String src) {
-        try {
-            Log.d("FileUtil", src);
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-
-            //设置固定大小
-            //需要的大小
-            float newWidth = 200f;
-            float newHeigth = 200f;
-
-            //图片大小
-            int width = myBitmap.getWidth();
-            int height = myBitmap.getHeight();
-
-            //缩放比例
-            float scaleWidth = newWidth / width;
-            float scaleHeigth = newHeigth / height;
-            Matrix matrix = new Matrix();
-            matrix.postScale(scaleWidth, scaleHeigth);
-
-            Bitmap bitmap = Bitmap.createBitmap(myBitmap, 0, 0, width, height, matrix, true);
-            return bitmap;
-        } catch (IOException e) {
-            // Log exception
-            return null;
-        }
-    }
 }

@@ -205,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
         mTencent.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void share(final String id, final String type, final ShareBean share){
-        MyDialog.share(MainActivity.this,"MainActivity",api,id,type,share);
+    public void share(String id, String type, ShareBean share) {
+        MyDialog.share(MainActivity.this, "MainActivity", api, id, type, share);
     }
 
     public void showLoadingDialog() {

@@ -51,7 +51,7 @@ public class WoDeDPGLViewHolder extends BaseViewHolder<IndexDataBean> {
         $(R.id.imageShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((GuanLiWDDPActivity) getContext()).share(data.getShare());
+                ((GuanLiWDDPActivity) getContext()).share(data.getId(),"goods",data.getShare());
             }
         });
         buttonShangJia.setOnClickListener(new View.OnClickListener() {

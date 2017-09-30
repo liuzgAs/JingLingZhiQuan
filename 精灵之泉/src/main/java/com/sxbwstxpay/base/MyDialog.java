@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChanPinXQActivity;
+import com.sxbwstxpay.activity.GuanLiWDDPActivity;
 import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.activity.TuiGuangEWMActivity;
 import com.sxbwstxpay.activity.WoDeDPActivity;
@@ -209,6 +210,9 @@ public class MyDialog {
             case "ChanPinXQActivity":
                 ((ChanPinXQActivity) context).showLoadingDialog();
                 break;
+            case "GuanLiWDDPActivity":
+                ((GuanLiWDDPActivity) context).showLoadingDialog();
+                break;
         }
         ApiClient.post(context, getOkObjectShareEWM(context, activity, id, type), new ApiClient.CallBack() {
             @Override
@@ -219,6 +223,9 @@ public class MyDialog {
                         break;
                     case "ChanPinXQActivity":
                         ((ChanPinXQActivity) context).cancelLoadingDialog();
+                        break;
+                    case "GuanLiWDDPActivity":
+                        ((GuanLiWDDPActivity) context).cancelLoadingDialog();
                         break;
                 }
                 LogUtil.LogShitou("MyDialog--图文二维码", s + "");
@@ -283,6 +290,14 @@ public class MyDialog {
                                                         }
                                                     });
                                                     break;
+                                                case "GuanLiWDDPActivity":
+                                                    ((GuanLiWDDPActivity) context).runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Toast.makeText(context, "图片保存在\"/sdcard/精灵之泉/\"目录下", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                    break;
                                             }
                                         } catch (IOException e) {
                                             e.printStackTrace();
@@ -332,6 +347,9 @@ public class MyDialog {
                         ((MainActivity) context).cancelLoadingDialog();
                         break;
                     case "ChanPinXQActivity":
+                        ((ChanPinXQActivity) context).cancelLoadingDialog();
+                        break;
+                    case "GuanLiWDDPActivity":
                         ((ChanPinXQActivity) context).cancelLoadingDialog();
                         break;
                 }
@@ -593,6 +611,9 @@ public class MyDialog {
                     case "WoDeDPActivity":
                         mTencent.shareToQQ((WoDeDPActivity) context, params, new BaseUiListener());
                         break;
+                    case "GuanLiWDDPActivity":
+                        mTencent.shareToQQ((GuanLiWDDPActivity) context, params, new BaseUiListener());
+                        break;
                 }
                 alertDialog1.dismiss();
             }
@@ -618,6 +639,9 @@ public class MyDialog {
                         mTencent.shareToQQ((MainActivity) context, params, new BaseUiListener());
                         break;
                     case "WoDeDPActivity":
+                        mTencent.shareToQQ((WoDeDPActivity) context, params, new BaseUiListener());
+                        break;
+                    case "GuanLiWDDPActivity":
                         mTencent.shareToQQ((WoDeDPActivity) context, params, new BaseUiListener());
                         break;
                 }
