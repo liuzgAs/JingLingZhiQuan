@@ -321,12 +321,12 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:background="@color/white"
+        android:background="@drawable/layout_selector_white_system_gray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
         android:layout_below="@+id/relativeLayout3"
         android:layout_centerHorizontal="true"
-        android:id="@+id/relativeLayout5">
+        android:id="@+id/viewDingDan">
 
         <ImageView
             android:layout_marginRight="10dp"
@@ -367,11 +367,13 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/relativeLayout5"
+        android:layout_below="@+id/viewDingDan"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout4">
 
         <RelativeLayout
+            android:id="@+id/viewDaiFuKuan"
+            android:background="@drawable/layout_selector_white_system_gray"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -407,6 +409,8 @@
             android:id="@+id/imageView118" />
 
         <RelativeLayout
+            android:id="@+id/viewDaiShouHuo"
+            android:background="@drawable/layout_selector_white_system_gray"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -442,6 +446,8 @@
             android:id="@+id/imageView119" />
 
         <RelativeLayout
+            android:id="@+id/viewYiWanCheng"
+            android:background="@drawable/layout_selector_white_system_gray"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_width="match_parent"

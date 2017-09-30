@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,7 @@ public class WoDeDDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
     private ViewPager viewPager;
     private View viewBar;
     private List<UserOrder.TypeBean> userOrderType;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class WoDeDDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
     @Override
     protected void initIntent() {
+        Intent intent = getIntent();
+        type = intent.getIntExtra(Constant.INTENT_KEY.type, 0);
     }
 
     @Override
@@ -102,6 +106,7 @@ public class WoDeDDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
                         for (int i = 0; i < userOrderType.size(); i++) {
                             tablayout.getTabAt(i).setText(userOrderType.get(i).getN());
                         }
+                        viewPager.setCurrentItem(type);
                     }else if (userOrder.getStatus()==3){
                         MyDialog.showReLoginDialog(WoDeDDActivity.this);
                     }else {

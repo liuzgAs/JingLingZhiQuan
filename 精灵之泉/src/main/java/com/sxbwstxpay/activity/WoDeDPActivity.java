@@ -104,6 +104,10 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.imageStoreLogo).setOnClickListener(this);
         findViewById(R.id.viewFangKeGL).setOnClickListener(this);
         findViewById(R.id.viewShare).setOnClickListener(this);
+        findViewById(R.id.viewDingDan).setOnClickListener(this);
+        findViewById(R.id.viewDaiFuKuan).setOnClickListener(this);
+        findViewById(R.id.viewDaiShouHuo).setOnClickListener(this);
+        findViewById(R.id.viewYiWanCheng).setOnClickListener(this);
     }
 
     /**
@@ -165,8 +169,27 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewDingDan:
+                intent.setClass(this, WoDeDDActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.viewDaiFuKuan:
+                intent.setClass(this, WoDeDDActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type,1);
+                startActivity(intent);
+                break;
+            case R.id.viewDaiShouHuo:
+                intent.setClass(this, WoDeDDActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type,2);
+                startActivity(intent);
+                break;
+            case R.id.viewYiWanCheng:
+                intent.setClass(this, WoDeDDActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.type,3);
+                startActivity(intent);
+                break;
             case R.id.viewShare:
-                MyDialog.share01(this,api,mTencent,"WoDeDPActivity",storeMystoreShare.getShareUrl(),storeMystoreShare.getShareTitle(),storeMystoreShare.getShareDes(),storeMystoreShare.getShareImg());
+                MyDialog.share01(this, api, mTencent, "WoDeDPActivity", storeMystoreShare.getShareUrl(), storeMystoreShare.getShareTitle(), storeMystoreShare.getShareDes(), storeMystoreShare.getShareImg());
                 break;
             case R.id.viewFangKeGL:
                 intent.setClass(this, FangKeGLActivity.class);
