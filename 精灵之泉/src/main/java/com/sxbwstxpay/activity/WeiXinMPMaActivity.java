@@ -56,6 +56,7 @@ public class WeiXinMPMaActivity extends ZjbBaseActivity {
         layoutParams1.height = (int) (ScreenUtils.getScreenWidth(this)*0.6f);
         Glide.with(WeiXinMPMaActivity.this)
                 .load(img)
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageEWM);
     }

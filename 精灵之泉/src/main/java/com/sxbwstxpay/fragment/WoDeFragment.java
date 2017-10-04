@@ -132,6 +132,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         texttXName.setVisibility(View.GONE);
         Glide.with(getActivity())
                 .load(userInfo.getHeadImg())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageTouXiang);
         textNickName.setText(userInfo.getNickName());
@@ -194,6 +195,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                     if (userIndex.getStatus() == 1) {
                         Glide.with(getActivity())
                                 .load(userIndex.getHeadImg())
+                                .asBitmap()
                                 .dontAnimate()
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageTouXiang);

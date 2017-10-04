@@ -201,22 +201,27 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             editPhone.setText(userCardbefore.getData().getPhone());
                             Glide.with(getActivity())
                                     .load(userCardbefore.getData().getImg())
+                                    .asBitmap()
                                     .placeholder(R.mipmap.shenfenzhengmian)
                                     .into(image01);
                             Glide.with(getActivity())
                                     .load(userCardbefore.getData().getImg2())
+                                    .asBitmap()
                                     .placeholder(R.mipmap.shenfenbeimain)
                                     .into(image02);
                             Glide.with(getActivity())
                                     .load(userCardbefore.getData().getImg3())
+                                    .asBitmap()
                                     .placeholder(R.mipmap.xingyongkademo)
                                     .into(image03);
                             Glide.with(getActivity())
                                     .load(userCardbefore.getData().getImg4())
+                                    .asBitmap()
                                     .placeholder(R.mipmap.yinhangkazhengmian)
                                     .into(image04);
                             Glide.with(getActivity())
                                     .load(userCardbefore.getData().getImg5())
+                                    .asBitmap()
                                     .placeholder(R.mipmap.shouchibanshen)
                                     .into(image05);
                             if (userCardbefore.getSubmitStatus() == 1) {
@@ -289,6 +294,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[0] = images01.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[0])
+                            .asBitmap()
                             .placeholder(R.mipmap.ic_empty)
                             .into(image01);
                     break;
@@ -297,6 +303,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[1] = images02.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[1])
+                            .asBitmap()
                             .placeholder(R.mipmap.ic_empty)
                             .into(image02);
                     break;
@@ -305,6 +312,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[2] = images03.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[2])
+                            .asBitmap()
                             .placeholder(R.mipmap.ic_empty)
                             .into(image03);
                     break;
@@ -313,6 +321,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[3] = images04.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[3])
+                            .asBitmap()
                             .placeholder(R.mipmap.ic_empty)
                             .into(image04);
                     break;
@@ -321,6 +330,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[4] = images05.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[4])
+                            .asBitmap()
                             .placeholder(R.mipmap.ic_empty)
                             .into(image05);
                     break;

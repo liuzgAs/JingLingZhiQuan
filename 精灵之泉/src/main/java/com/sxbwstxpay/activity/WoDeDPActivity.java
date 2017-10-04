@@ -144,6 +144,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
                         storeMystoreShare = storeMystore.getShare();
                         Glide.with(WoDeDPActivity.this)
                                 .load(storeMystore.getStoreLogo())
+                                .asBitmap()
                                 .dontAnimate()
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageStoreLogo);

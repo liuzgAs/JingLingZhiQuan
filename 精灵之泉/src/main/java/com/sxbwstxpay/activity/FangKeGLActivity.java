@@ -150,6 +150,7 @@ public class FangKeGLActivity extends ZjbBaseActivity implements View.OnClickLis
                         TextView textName = (TextView) item_zuireleimu.findViewById(R.id.textName);
                         Glide.with(FangKeGLActivity.this)
                                 .load(storeViewsCate.get(i).getImg())
+                                .asBitmap()
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageImg);
                         textName.setText(storeViewsCate.get(i).getName());

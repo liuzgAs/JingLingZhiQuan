@@ -116,6 +116,7 @@ public class TuiGuangEWMActivity extends ZjbBaseActivity implements View.OnClick
                     if (shareIndex.getStatus() == 1) {
                         Glide.with(TuiGuangEWMActivity.this)
                                 .load(shareIndex.getQrcode())
+                                .asBitmap()
                                 .placeholder(R.mipmap.ic_empty03)
                                 .into(imageImg);
                     } else if (shareIndex.getStatus() == 3) {

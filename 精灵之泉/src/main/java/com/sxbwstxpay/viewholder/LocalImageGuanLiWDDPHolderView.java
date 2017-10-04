@@ -31,6 +31,7 @@ public class LocalImageGuanLiWDDPHolderView implements Holder<BannerBean> {
     public void UpdateUI(final Context context, int position, final BannerBean data) {
         Glide.with(context)
                 .load(data.getImg())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {

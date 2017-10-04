@@ -6,10 +6,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.lzy.imagepicker.loader.ImageLoader;
+import com.sxbwstxpay.R;
 
 import java.io.File;
-
-import com.sxbwstxpay.R;
 
 
 public class PicassoImageLoader implements ImageLoader {
@@ -18,6 +17,7 @@ public class PicassoImageLoader implements ImageLoader {
         public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
             Glide.with(activity)
                     .load(Uri.fromFile(new File(path)))
+                    .asBitmap()
                     .placeholder(R.mipmap.default_image)
                     .override(width, height)
                     .into(imageView);

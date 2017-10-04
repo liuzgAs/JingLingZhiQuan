@@ -107,6 +107,7 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
             }
             Glide.with(getContext())
                     .load(data.getShare_images().get(position))
+                    .asBitmap()
                     .placeholder(R.mipmap.ic_empty)
                     .into(holder.imageImg);
             return convertView;

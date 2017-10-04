@@ -37,6 +37,7 @@ public class QueRenDDViewHolder extends BaseViewHolder<CartOrder.CartBean> {
         super.setData(data);
         Glide.with(getContext())
                 .load(data.getGoods_img())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageGoods_img);
         textGoods_title.setText(data.getGoods_title());

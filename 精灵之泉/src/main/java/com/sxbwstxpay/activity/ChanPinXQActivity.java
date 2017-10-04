@@ -357,6 +357,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     }
                     Glide.with(ChanPinXQActivity.this)
                             .load(goodsInfoAdImgs.get(position).getImg())
+                            .asBitmap()
                             .placeholder(R.mipmap.ic_empty)
                             .override(screenWidth, (int) ((float) screenWidth * ((float) goodsInfoAdImgs.get(position).getH() / (float) goodsInfoAdImgs.get(position).getW())))
                             .into(holder.imageImg);
@@ -416,6 +417,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         textZhuan.setText("赚" + goodsInfoAd.getGoods_money());
         Glide.with(ChanPinXQActivity.this)
                 .load(goodsInfoAd.getImg())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
 

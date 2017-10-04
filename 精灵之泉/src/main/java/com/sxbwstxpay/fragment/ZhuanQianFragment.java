@@ -196,6 +196,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     if (indexMakemoney.getStatus() == 1) {
                         Glide.with(getActivity())
                                 .load(indexMakemoney.getImg())
+                                .asBitmap()
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(viewImg);
                         adapter.clear();

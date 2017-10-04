@@ -108,6 +108,7 @@ public class MyDialog {
         ImageView imageView = (ImageView) dialog_img_show.findViewById(R.id.imageView);
         Glide.with(context)
                 .load(img)
+                .asBitmap()
                 .dontAnimate()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageView);
@@ -241,10 +242,12 @@ public class MyDialog {
                         TextView text3 = (TextView) dialog_fen_xiang_erm.findViewById(R.id.text3);
                         Glide.with(context)
                                 .load(goodsEwm.getImg())
+                                .asBitmap()
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageImg);
                         Glide.with(context)
                                 .load(goodsEwm.getEwmImg())
+                                .asBitmap()
                                 .placeholder(R.mipmap.ic_empty01)
                                 .into(imageEwmImg);
                         text1.setText(goodsEwm.getText1());

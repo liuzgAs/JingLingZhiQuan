@@ -26,6 +26,7 @@ public class LocalImageChanPinHolderView implements Holder<String> {
     public void UpdateUI(final Context context, int position, final String data) {
         Glide.with(context)
                 .load(data)
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageView);
     }

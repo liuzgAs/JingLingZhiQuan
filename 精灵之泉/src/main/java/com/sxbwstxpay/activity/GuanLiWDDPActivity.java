@@ -245,6 +245,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                 textStoreNmae.setText(storeNmae);
                 Glide.with(GuanLiWDDPActivity.this)
                         .load(storeLogo)
+                        .asBitmap()
                         .dontAnimate()
                         .placeholder(R.mipmap.ic_empty)
                         .into(imageStoreLogo);

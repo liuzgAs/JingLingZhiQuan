@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/imageImg"
                 android:layout_width="match_parent"
-                android:layout_height="275dp"
+                android:layout_height="300dp"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_empty" />

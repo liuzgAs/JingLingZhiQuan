@@ -251,6 +251,7 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
         this.data = data;
         Glide.with(getContext())
                 .load(data.getHeadImg())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageHeadImg);
         if (TextUtils.isEmpty(data.getWx())) {
@@ -261,6 +262,7 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
             textWx.setVisibility(View.GONE);
             Glide.with(getContext())
                     .load(data.getWx())
+                    .asBitmap()
                     .placeholder(R.mipmap.ic_empty)
                     .into(imageWx);
         }

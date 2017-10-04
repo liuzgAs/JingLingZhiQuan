@@ -189,14 +189,17 @@ public class DianPuXXViewHolder extends BaseViewHolder<StoreStoreinfo> {
         textIntro.setText(data.getIntro());
         Glide.with(getContext())
                 .load(data.getLogo())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageLogo);
         Glide.with(getContext())
                 .load(data.getBanner())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageBanner);
         Glide.with(getContext())
                 .load(data.getWx())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageWx);
     }

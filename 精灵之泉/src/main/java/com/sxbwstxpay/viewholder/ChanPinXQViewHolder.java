@@ -31,6 +31,7 @@ public class ChanPinXQViewHolder extends BaseViewHolder<RecommBean> {
         super.setData(data);
         Glide.with(getContext())
                 .load(data.getImg())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
         textTitle.setText(data.getTitle());

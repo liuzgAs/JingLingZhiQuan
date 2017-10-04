@@ -35,6 +35,7 @@ public class XuanZeXYKViewHolder extends BaseViewHolder<BankCardlist.DataBean> {
         super.setData(data);
         Glide.with(getContext())
                 .load(data.getImg())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
         textBankName.setText(data.getBankName());

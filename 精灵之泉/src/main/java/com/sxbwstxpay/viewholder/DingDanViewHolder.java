@@ -236,6 +236,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
             }
             Glide.with(getContext())
                     .load(data.getOg().get(position).getGoods_img())
+                    .asBitmap()
                     .placeholder(R.mipmap.ic_empty)
                     .into(holder.imageGoods_img);
             holder.textGoods_title.setText(data.getOg().get(position).getGoods_name());

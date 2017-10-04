@@ -304,6 +304,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 }
                 Glide.with(getActivity())
                         .load(indexGoodsImg)
+                        .asBitmap()
                         .placeholder(R.mipmap.ic_empty)
                         .into(imageMiddle);
             }

@@ -112,6 +112,7 @@ public class XuanPinSJViewHolder extends BaseViewHolder<IndexDataBean> {
         this.data=data;
         Glide.with(getContext())
                 .load(data.getImg())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty01)
                 .into(imageImg);
         textTitle.setText(data.getTitle());

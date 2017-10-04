@@ -333,6 +333,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             holder.textBank.setText(bankCardlistData.get(position).getBank());
             Glide.with(XuanZeTDActivity.this)
                     .load(bankCardlistData.get(position).getImg())
+                    .asBitmap()
                     .placeholder(R.mipmap.ic_empty)
                     .into(holder.imageImg);
             return convertView;

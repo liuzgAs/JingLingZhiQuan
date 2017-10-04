@@ -118,6 +118,7 @@ public class WoDeDPGLViewHolder extends BaseViewHolder<IndexDataBean> {
         this.data = data;
         Glide.with(getContext())
                 .load(data.getRecom_img())
+                .asBitmap()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageRecom_img);
         textStock_num.setText("库存" + data.getStock_num());
