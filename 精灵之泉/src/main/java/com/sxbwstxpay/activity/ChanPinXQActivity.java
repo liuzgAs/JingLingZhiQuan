@@ -156,7 +156,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
 
     @Override
     protected void initData() {
-        LogUtil.LogShitou("ChanPinXQActivity--initData", "" + userInfo.getUid());
         onRefresh();
     }
 
@@ -369,7 +368,10 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
+                intent.setClass(ChanPinXQActivity.this,ChanPinXQActivity.class);
+                startActivity(intent);
             }
         });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

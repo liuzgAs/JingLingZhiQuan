@@ -6,6 +6,7 @@
     tools:context="com.sxbwstxpay.fragment.XuanPinSJFragment">
 
     <RelativeLayout
+        android:visibility="gone"
         android:layout_marginBottom="1dp"
         android:layout_marginTop="1dp"
         android:background="@color/white"
