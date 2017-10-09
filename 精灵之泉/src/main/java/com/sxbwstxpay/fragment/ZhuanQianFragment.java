@@ -50,7 +50,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private View mRelaTitleStatue;
     private RecyclerArrayAdapter<IndexMakemoney> adapter;
     private ImageView viewImg;
-    private IWXAPI api ;
+    private IWXAPI api;
     private Tencent mTencent;
     private ShareIndex shareIndex;
     private BroadcastReceiver reciver = new BroadcastReceiver() {
@@ -59,17 +59,20 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
             String action = intent.getAction();
             switch (action) {
                 case Constant.BROADCASTCODE.WX_SHARE:
-                    if (isShow){
+                    if (isShow) {
                         MyDialog.showTipDialog(getActivity(), "分享成功");
                     }
                     break;
                 case Constant.BROADCASTCODE.WX_SHARE_FAIL:
-                    if (isShow){
+                    if (isShow) {
                         MyDialog.showTipDialog(getActivity(), "取消分享");
                     }
                     break;
                 case Constant.BROADCASTCODE.FenXiangZCLJ:
-                    MyDialog.share01(context,api,mTencent,"MainActivity",shareIndex.getShare_register_url(),shareIndex.getShare_title(),shareIndex.getShare_description(),shareIndex.getShare_icon());
+                    MyDialog.share01(context, api, mTencent, "MainActivity", shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
+                    break;
+                case Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG:
+                    onRefresh();
                     break;
             }
         }
@@ -273,6 +276,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
         filter.addAction(Constant.BROADCASTCODE.FenXiangZCLJ);
+        filter.addAction(Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG);
         getActivity().registerReceiver(reciver, filter);
     }
 
@@ -291,6 +295,6 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     @Override
     public void onPause() {
         super.onPause();
-        isShow=false;
+        isShow = false;
     }
 }

@@ -54,6 +54,9 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 cancelLoadingDialog();
                 int error = intent.getIntExtra("error", -1);
                 if (error == 0) {
+                    Intent intent1 = new Intent();
+                    intent1.setAction(Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG);
+                    sendBroadcast(intent1);
                     MyDialog.dialogFinish(TuiGuangActivity.this, "支付成功");
                 } else if (error == -1) {
                     MyDialog.showTipDialog(TuiGuangActivity.this, "支付失败");
@@ -182,8 +185,8 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private OkObject getOkObject1() {
         String url = Constant.HOST + Constant.Url.ORDER_VIPPAY;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
-        params.put("tokenTime",tokenTime);
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
 
@@ -194,7 +197,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 Intent intent = new Intent();
                 intent.setClass(this, WebActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.TITLE, "精灵之泉推广商服务协议");
-                intent.putExtra(Constant.INTENT_KEY.URL,Constant.HOST+ Constant.Url.INFO_POLICY2);
+                intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_POLICY2);
                 startActivity(intent);
                 break;
             case R.id.textJiaRu:
@@ -203,18 +206,18 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(String s) {
                         cancelLoadingDialog();
-                        LogUtil.LogShitou("TuiGuangActivity--VIP推广商支付",s+ "");
+                        LogUtil.LogShitou("TuiGuangActivity--VIP推广商支付", s + "");
                         try {
                             OrderVippay orderVippay = GsonUtils.parseJSON(s, OrderVippay.class);
-                            if (orderVippay.getStatus()==1){
+                            if (orderVippay.getStatus() == 1) {
                                 wechatPay(orderVippay);
-                            }else if (orderVippay.getStatus()==2){
+                            } else if (orderVippay.getStatus() == 2) {
                                 MyDialog.showReLoginDialog(TuiGuangActivity.this);
-                            }else {
+                            } else {
                                 Toast.makeText(TuiGuangActivity.this, orderVippay.getInfo(), Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
-                            Toast.makeText(TuiGuangActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TuiGuangActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                         }
                     }
 
