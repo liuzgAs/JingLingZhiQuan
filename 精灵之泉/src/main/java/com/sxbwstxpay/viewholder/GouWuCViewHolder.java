@@ -202,7 +202,7 @@ public class GouWuCViewHolder extends BaseViewHolder<CartIndex.CartBean> {
                     if (cartUpdatecart.getStatus()==1){
                         data.setNum(num);
                         textNum.setText(num+"");
-                        ((GouWuCActivity) getContext()).setSum(cartUpdatecart.getSum());
+                        ((GouWuCActivity) getContext()).quanXuan();
                     }else if (cartUpdatecart.getStatus()==2){
                         MyDialog.showReLoginDialog(getContext());
                     }else {

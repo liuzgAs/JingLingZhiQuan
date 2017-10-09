@@ -26,6 +26,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.CartIndex;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.Arith;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -42,14 +43,14 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
     private EasyRecyclerView recyclerView;
     private View viewBar;
     private ImageView imageQuanXuan;
-    private boolean isQuanXuna = true;
+    private boolean isQuanXuan = true;
     private TextView textSum;
     private View viewQuJieSuan;
     private BroadcastReceiver reciver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.zhiFuGuanBi:
                     finish();
                     break;
@@ -132,7 +133,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.viewQuanXuan:
-                if (isQuanXuna) {
+                if (isQuanXuan) {
                     for (int i = 0; i < adapter.getAllData().size(); i++) {
                         adapter.getAllData().get(i).setIscheck(false);
                     }
@@ -206,6 +207,8 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
                         } else {
                             textSum.setText("¥" + cartIndex.getSum());
                         }
+                        isQuanXuan = true;
+                        imageQuanXuan.setImageResource(R.mipmap.xuanzhong);
                         adapter.clear();
                         adapter.addAll(cartIndexCart);
                         viewQuJieSuan.setVisibility(View.VISIBLE);
@@ -243,15 +246,22 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
 
 
     public void quanXuan() {
+        double sum = 0;
+        isQuanXuan = true;
         for (int i = 0; i < adapter.getAllData().size(); i++) {
             if (!adapter.getAllData().get(i).ischeck()) {
-                imageQuanXuan.setImageResource(R.mipmap.weixuanzhong);
-                isQuanXuna = false;
-                return;
+                isQuanXuan = false;
+            }else {
+                Double mul = Arith.mul(Double.parseDouble(adapter.getAllData().get(i).getGoods_price()), (double) adapter.getAllData().get(i).getNum());
+                sum = Arith.add(mul, sum);
             }
         }
-        isQuanXuna = true;
-        imageQuanXuan.setImageResource(R.mipmap.xuanzhong);
+        if (isQuanXuan) {
+            imageQuanXuan.setImageResource(R.mipmap.xuanzhong);
+        } else {
+            imageQuanXuan.setImageResource(R.mipmap.weixuanzhong);
+        }
+        setSum(sum+"");
     }
 
     public void setSum(String sum) {
@@ -273,7 +283,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
-        registerReceiver(reciver,filter);
+        registerReceiver(reciver, filter);
     }
 
     @Override
