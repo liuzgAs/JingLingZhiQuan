@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.MainActivity;
+import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.IndexDataBean;
@@ -39,7 +40,7 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
     private final Button buttonShangJia;
     private IndexDataBean data;
 
-    public XianShiQGViewHolder(ViewGroup parent, @LayoutRes int res) {
+    public XianShiQGViewHolder(ViewGroup parent, @LayoutRes int res, final String activity) {
         super(parent, res);
         imageRecom_img = $(R.id.imageRecom_img);
         textStock_num = $(R.id.textStock_num);
@@ -50,17 +51,38 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
         $(R.id.imageShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getContext()).share(data.getId(),"goods",data.getShare());
+                switch (activity) {
+                    case "MainActivity":
+                        ((MainActivity) getContext()).share(data.getId(), "goods", data.getShare());
+                        break;
+                    case "SouSuoActivity":
+                        ((SouSuoActivity) getContext()).share(data.getId(), "goods", data.getShare());
+                        break;
+                }
             }
         });
         buttonShangJia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getContext()).showLoadingDialog();
-                ApiClient.post(getContext(), getOkObject1(), new ApiClient.CallBack() {
+                switch (activity) {
+                    case "MainActivity":
+                        ((MainActivity) getContext()).showLoadingDialog();
+                        break;
+                    case "SouSuoActivity":
+                        ((SouSuoActivity) getContext()).showLoadingDialog();
+                        break;
+                }
+                ApiClient.post(getContext(), getOkObject1(activity), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
-                        ((MainActivity) getContext()).cancelLoadingDialog();
+                        switch (activity) {
+                            case "MainActivity":
+                                ((MainActivity) getContext()).cancelLoadingDialog();
+                                break;
+                            case "SouSuoActivity":
+                                ((SouSuoActivity) getContext()).cancelLoadingDialog();
+                                break;
+                        }
                         LogUtil.LogShitou("XianShiQGViewHolder--商品上架", s + "");
                         try {
                             IndexUpgoods indexUpgoods = GsonUtils.parseJSON(s, IndexUpgoods.class);
@@ -83,7 +105,14 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
 
                     @Override
                     public void onError(Response response) {
-                        ((MainActivity) getContext()).cancelLoadingDialog();
+                        switch (activity) {
+                            case "MainActivity":
+                                ((MainActivity) getContext()).cancelLoadingDialog();
+                                break;
+                            case "SouSuoActivity":
+                                ((SouSuoActivity) getContext()).cancelLoadingDialog();
+                                break;
+                        }
                         Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -97,11 +126,19 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
      * author： ZhangJieBo
      * date： 2017/8/28 0028 上午 9:55
      */
-    private OkObject getOkObject1() {
+    private OkObject getOkObject1(String activity) {
         String url = Constant.HOST + Constant.Url.INDEX_UPGOODS;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", ((MainActivity) getContext()).userInfo.getUid());
-        params.put("tokenTime", ((MainActivity) getContext()).tokenTime);
+        switch (activity) {
+            case "MainActivity":
+                params.put("uid", ((MainActivity) getContext()).userInfo.getUid());
+                params.put("tokenTime", ((MainActivity) getContext()).tokenTime);
+                break;
+            case "SouSuoActivity":
+                params.put("uid", ((SouSuoActivity) getContext()).userInfo.getUid());
+                params.put("tokenTime", ((SouSuoActivity) getContext()).tokenTime);
+                break;
+        }
         params.put("id", data.getId());
         return new OkObject(params, url);
     }
@@ -121,7 +158,7 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
         textGoods_money.setText("赚" + data.getGoods_money());
         if (data.getAct() == 1) {
             buttonShangJia.setText("√");
-        } else if (data.getAct()==2) {
+        } else if (data.getAct() == 2) {
             buttonShangJia.setText("－");
         } else {
             buttonShangJia.setText("＋");

@@ -184,7 +184,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qg;
-                return new XianShiQGViewHolder(parent, layout);
+                return new XianShiQGViewHolder(parent, layout,"MainActivity");
             }
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {

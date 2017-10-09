@@ -36,12 +36,16 @@ import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.IndexGoods;
 import com.sxbwstxpay.model.IndexSearch;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.XianShiQGViewHolder;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.tauth.Tencent;
 
 import java.util.HashMap;
 import java.util.List;
@@ -106,6 +110,16 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
                         }, 2000, 1000);
                     }
                     break;
+                case Constant.BROADCASTCODE.WX_SHARE:
+                    if (isShow) {
+                        MyDialog.showTipDialog(SouSuoActivity.this, "分享成功");
+                    }
+                    break;
+                case Constant.BROADCASTCODE.WX_SHARE_FAIL:
+                    if (isShow) {
+                        MyDialog.showTipDialog(SouSuoActivity.this, "取消分享");
+                    }
+                    break;
             }
         }
     };
@@ -115,11 +129,15 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     private ImageView imageSouSuo;
     private ScrollView scrollHot;
     private View include3;
+    private boolean isShow;
+    private IWXAPI api = WXAPIFactory.createWXAPI(SouSuoActivity.this, Constant.WXAPPID, true);
+    private Tencent mTencent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sou_suo);
+        mTencent = Tencent.createInstance(Constant.QQ_ID, this.getApplicationContext());
         init();
     }
 
@@ -155,7 +173,7 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
 
     @Override
     protected void initViews() {
-        ((TextView)include3.findViewById(R.id.textViewTitle)).setText("搜索");
+        ((TextView) include3.findViewById(R.id.textViewTitle)).setText("搜索");
         viewShangJiaTip.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         ViewGroup.LayoutParams layoutParams = include3.getLayoutParams();
@@ -172,7 +190,7 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qg;
-                return new XianShiQGViewHolder(parent, layout);
+                return new XianShiQGViewHolder(parent, layout, "SouSuoActivity");
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -433,12 +451,36 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         timer = null;
     }
 
+    public void share(String id, String type, ShareBean share) {
+        MyDialog.share(SouSuoActivity.this, "SouSuoActivity", api, id, type, share);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isShow = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isShow = false;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mTencent.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.ShangJia01);
+        filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
+        filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
         registerReceiver(reciver, filter);
     }
 
