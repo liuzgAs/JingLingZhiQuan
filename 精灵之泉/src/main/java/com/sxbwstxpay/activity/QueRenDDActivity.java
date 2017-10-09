@@ -173,16 +173,24 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         });
         adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
 
+            private TextView textGoods_money;
+            private TextView textSum;
+
             @Override
             public View onCreateView(ViewGroup parent) {
                 View item_queren_dd = LayoutInflater.from(QueRenDDActivity.this).inflate(R.layout.item_queren_dd, null);
                 editPayMsg = (EditText) item_queren_dd.findViewById(R.id.editPayMsg);
+                textSum = (TextView) item_queren_dd.findViewById(R.id.textSum);
+                textGoods_money = (TextView) item_queren_dd.findViewById(R.id.textGoods_money);
                 return item_queren_dd;
             }
 
             @Override
             public void onBindView(View headerView) {
-
+                if (cartOrder!=null){
+                    textSum.setText("¥"+cartOrder.getSum());
+                    textGoods_money.setText("¥"+cartOrder.getGoods_money());
+                }
             }
         });
     }

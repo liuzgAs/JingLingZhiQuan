@@ -158,7 +158,7 @@
                 android:textSize="@dimen/normal_textsize"
                 android:textColor="@color/light_black"
                 android:layout_marginRight="10dp"
-                android:id="@+id/textView47"
+                android:id="@+id/textSum"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -169,8 +169,8 @@
                 android:text="合计："
                 android:textSize="@dimen/normal_textsize"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/textView47"
-                android:layout_toStartOf="@+id/textView47" />
+                android:layout_toLeftOf="@+id/textSum"
+                android:layout_toStartOf="@+id/textSum" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -187,7 +187,7 @@
                 android:textSize="@dimen/normal_textsize"
                 android:textColor="@color/light_black"
                 android:layout_marginRight="10dp"
-                android:id="@+id/textView49"
+                android:id="@+id/textGoods_money"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -198,8 +198,8 @@
                 android:text="赚："
                 android:textSize="@dimen/normal_textsize"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/textView49"
-                android:layout_toStartOf="@+id/textView49" />
+                android:layout_toLeftOf="@+id/textGoods_money"
+                android:layout_toStartOf="@+id/textGoods_money" />
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>
