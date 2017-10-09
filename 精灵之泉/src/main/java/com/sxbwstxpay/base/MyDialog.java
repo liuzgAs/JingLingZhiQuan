@@ -28,6 +28,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.activity.GuanLiWDDPActivity;
 import com.sxbwstxpay.activity.MainActivity;
+import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.activity.TuiGuangEWMActivity;
 import com.sxbwstxpay.activity.WoDeDPActivity;
 import com.sxbwstxpay.constant.Constant;
@@ -214,6 +215,9 @@ public class MyDialog {
             case "GuanLiWDDPActivity":
                 ((GuanLiWDDPActivity) context).showLoadingDialog();
                 break;
+            case "SouSuoActivity":
+                ((SouSuoActivity) context).showLoadingDialog();
+                break;
         }
         ApiClient.post(context, getOkObjectShareEWM(context, activity, id, type), new ApiClient.CallBack() {
             @Override
@@ -227,6 +231,9 @@ public class MyDialog {
                         break;
                     case "GuanLiWDDPActivity":
                         ((GuanLiWDDPActivity) context).cancelLoadingDialog();
+                        break;
+                    case "SouSuoActivity":
+                        ((SouSuoActivity) context).cancelLoadingDialog();
                         break;
                 }
                 LogUtil.LogShitou("MyDialog--图文二维码", s + "");
@@ -300,6 +307,13 @@ public class MyDialog {
                                                             Toast.makeText(context, "图片保存在\"/sdcard/精灵之泉/\"目录下", Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
+                                                case "SouSuoActivity":
+                                                    ((SouSuoActivity) context).runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Toast.makeText(context, "图片保存在\"/sdcard/精灵之泉/\"目录下", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                                     break;
                                             }
                                         } catch (IOException e) {
@@ -354,6 +368,9 @@ public class MyDialog {
                         break;
                     case "GuanLiWDDPActivity":
                         ((ChanPinXQActivity) context).cancelLoadingDialog();
+                        break;
+                    case "SouSuoActivity":
+                        ((SouSuoActivity) context).cancelLoadingDialog();
                         break;
                 }
                 Toast.makeText(context, "请求失败", Toast.LENGTH_SHORT).show();
