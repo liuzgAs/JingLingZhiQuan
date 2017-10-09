@@ -83,6 +83,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private ImageView imageRight;
     private View viewYanZhengMa;
     private int verify =0;
+    private boolean isChoosePic = false;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -183,7 +184,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        if (verify!=1){
+        if (verify!=1&&isChoosePic==false){
             showLoadingDialog();
             ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                 @Override
@@ -257,7 +258,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 viewYanZhengMa.setVisibility(View.GONE);
                                 buttonNext.setVisibility(View.GONE);
                             }else {
-                                MyDialog.showTipDialog(getActivity(),userCardbefore.getTipsText());
+                                if (!TextUtils.isEmpty(userCardbefore.getTipsText())){
+                                    MyDialog.showTipDialog(getActivity(),userCardbefore.getTipsText());
+                                }
                                 imageRight.setVisibility(View.VISIBLE);
                                 viewYanZhengMa.setVisibility(View.VISIBLE);
                                 buttonNext.setVisibility(View.VISIBLE);
@@ -277,6 +280,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 }
             });
         }
+        isChoosePic=false;
     }
 
     @Override
@@ -636,6 +640,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     }
 
     private void chooseTuPian(int requestCode) {
+        isChoosePic = true;
         mImagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
         mImagePicker.setCrop(true);        //允许裁剪（单选才有效）
         float width = ScreenUtils.getScreenWidth(getActivity());
