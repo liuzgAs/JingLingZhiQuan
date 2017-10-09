@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.WoDeDDActivity;
+import com.sxbwstxpay.activity.ZhiFuActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
@@ -65,7 +66,10 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
             @Override
             public void onClick(View v) {
                 if (data.getIs_pay() == 1) {
-                    buttonSure.setText("去付款");
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(),ZhiFuActivity.class);
+                    intent.putExtra(Constant.INTENT_KEY.id,Integer.parseInt(data.getId()));
+                    getContext().startActivity(intent);
                 }
                 if (data.getIs_confirm() == 1) {
                     dingDanCaoZuo("confirm");

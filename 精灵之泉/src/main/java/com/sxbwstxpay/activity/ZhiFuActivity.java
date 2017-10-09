@@ -68,7 +68,9 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
     public void paySuccess() {
         Intent intent1 = new Intent();
         intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        intent1.setAction(Constant.BROADCASTCODE.ShuaXinDingDan);
         sendBroadcast(intent1);
+        finish();
         Intent intent = new Intent();
         intent.putExtra(Constant.INTENT_KEY.id, oid);
         intent.setClass(this, ZhiFuCGActivity.class);
