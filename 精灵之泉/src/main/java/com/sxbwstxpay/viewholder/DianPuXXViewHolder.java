@@ -104,7 +104,7 @@ public class DianPuXXViewHolder extends BaseViewHolder<StoreStoreinfo> {
         $(R.id.viewDianZhao).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(data.getWx())) {
+                if (TextUtils.isEmpty(data.getBanner())) {
                     ((DianPuXXActivity) getContext()).chooseDianZhao();
                 } else {
                     View dialog_tu_pian = LayoutInflater.from(getContext()).inflate(R.layout.dialog_tu_pian, null);
