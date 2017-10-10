@@ -21,6 +21,15 @@ public class GoodsEwm {
     private String ewmImg;
     private int status;
     private String info;
+    private String price;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public String getImg() {
         return img;

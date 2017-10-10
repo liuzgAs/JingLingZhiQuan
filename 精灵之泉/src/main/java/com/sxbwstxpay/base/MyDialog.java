@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -245,9 +246,9 @@ public class MyDialog {
                         View dialog_fen_xiang_erm = LayoutInflater.from(context).inflate(R.layout.dialog_fen_xiang_erm, null);
                         final View viewJieTu = dialog_fen_xiang_erm.findViewById(R.id.viewJieTu);
                         ImageView imageImg = (ImageView) dialog_fen_xiang_erm.findViewById(R.id.imageImg);
-                        ViewGroup.LayoutParams layoutParams = imageImg.getLayoutParams();
+                        ViewGroup.LayoutParams layoutParams = viewJieTu.getLayoutParams();
                         layoutParams.height = (int) (ScreenUtils.getScreenWidth(context)- DpUtils.convertDpToPixel(20, context));
-                        imageImg.setLayoutParams(layoutParams);
+                        viewJieTu.setLayoutParams(layoutParams);
                         ImageView imageEwmImg = (ImageView) dialog_fen_xiang_erm.findViewById(R.id.imageEwmImg);
                         TextView text1 = (TextView) dialog_fen_xiang_erm.findViewById(R.id.text1);
                         TextView text2 = (TextView) dialog_fen_xiang_erm.findViewById(R.id.text2);
@@ -265,6 +266,10 @@ public class MyDialog {
                         text1.setText(goodsEwm.getText1());
                         text2.setText(goodsEwm.getText2());
                         text3.setText(goodsEwm.getText3());
+                        TextView textPrice = (TextView) dialog_fen_xiang_erm.findViewById(R.id.textPrice);
+                        SpannableString span = new SpannableString("¥"+goodsEwm.getPrice());
+                        span.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textPrice.setText(span);
                         final AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.dialog)
                                 .setView(dialog_fen_xiang_erm)
                                 .create();
