@@ -21,7 +21,6 @@ import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.UserOrder;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
-import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 
 import java.util.HashMap;
@@ -29,7 +28,7 @@ import java.util.List;
 
 import okhttp3.Response;
 
-public class WoDeDDActivity extends ZjbBaseNotLeftActivity implements View.OnClickListener{
+public class ShangChengDDActivity extends ZjbBaseNotLeftActivity implements View.OnClickListener{
     private TabLayout tablayout;
     private ViewPager viewPager;
     private View viewBar;
@@ -63,7 +62,7 @@ public class WoDeDDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("我的订单");
+        ((TextView) findViewById(R.id.textViewTitle)).setText("商城订单");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
@@ -91,11 +90,10 @@ public class WoDeDDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
     @Override
     protected void initData() {
         showLoadingDialog();
-        ApiClient.post(WoDeDDActivity.this, getOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(ShangChengDDActivity.this, getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("WoDeDDActivity--我的订单", s+"");
                 try {
                     UserOrder userOrder = GsonUtils.parseJSON(s, UserOrder.class);
                     if (userOrder.getStatus()==1){
@@ -108,19 +106,19 @@ public class WoDeDDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
                         }
                         viewPager.setCurrentItem(type);
                     }else if (userOrder.getStatus()==3){
-                        MyDialog.showReLoginDialog(WoDeDDActivity.this);
+                        MyDialog.showReLoginDialog(ShangChengDDActivity.this);
                     }else {
-                        Toast.makeText(WoDeDDActivity.this, userOrder.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShangChengDDActivity.this, userOrder.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(WoDeDDActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShangChengDDActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                Toast.makeText(WoDeDDActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShangChengDDActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
     }

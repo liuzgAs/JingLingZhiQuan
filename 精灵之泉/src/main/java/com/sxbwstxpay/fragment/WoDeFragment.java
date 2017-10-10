@@ -21,7 +21,7 @@ import com.sxbwstxpay.activity.GuanLiYHKActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.WebActivity;
-import com.sxbwstxpay.activity.WoDeDDActivity;
+import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.WoDeDPActivity;
 import com.sxbwstxpay.activity.WoDeSHActivity;
 import com.sxbwstxpay.activity.WoDeSYActivity;
@@ -372,7 +372,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
 
     private void dingDan() {
         Intent intent = new Intent();
-        intent.setClass(getActivity(), WoDeDDActivity.class);
+        intent.setClass(getActivity(), ShangChengDDActivity.class);
         startActivity(intent);
     }
 

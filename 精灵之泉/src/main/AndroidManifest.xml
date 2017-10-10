@@ -170,7 +170,7 @@
             android:name=".activity.GongGaoActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".activity.WoDeDDActivity"
+            android:name=".activity.ShangChengDDActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.DianPuXXActivity"

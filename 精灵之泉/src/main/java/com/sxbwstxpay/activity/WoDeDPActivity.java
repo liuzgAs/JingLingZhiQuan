@@ -171,21 +171,21 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.viewDingDan:
-                intent.setClass(this, WoDeDDActivity.class);
+                intent.setClass(this, ShangChengDDActivity.class);
                 startActivity(intent);
                 break;
             case R.id.viewDaiFuKuan:
-                intent.setClass(this, WoDeDDActivity.class);
+                intent.setClass(this, ShangChengDDActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.type,1);
                 startActivity(intent);
                 break;
             case R.id.viewDaiShouHuo:
-                intent.setClass(this, WoDeDDActivity.class);
+                intent.setClass(this, ShangChengDDActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.type,2);
                 startActivity(intent);
                 break;
             case R.id.viewYiWanCheng:
-                intent.setClass(this, WoDeDDActivity.class);
+                intent.setClass(this, ShangChengDDActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.type,3);
                 startActivity(intent);
                 break;

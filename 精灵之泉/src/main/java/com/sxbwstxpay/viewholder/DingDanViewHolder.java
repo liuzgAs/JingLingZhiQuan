@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.activity.WoDeDDActivity;
+import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.ZhiFuActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
@@ -97,8 +97,8 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
     private OkObject getOkObject(String type) {
         String url = Constant.HOST + Constant.Url.USER_ORDERDONE;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", ((WoDeDDActivity) getContext()).userInfo.getUid());
-        params.put("tokenTime", ((WoDeDDActivity) getContext()).tokenTime);
+        params.put("uid", ((ShangChengDDActivity) getContext()).userInfo.getUid());
+        params.put("tokenTime", ((ShangChengDDActivity) getContext()).tokenTime);
         params.put("id", data.getId());
         params.put("type", type);
         return new OkObject(params, url);
@@ -129,11 +129,11 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((WoDeDDActivity) getContext()).showLoadingDialog();
+                        ((ShangChengDDActivity) getContext()).showLoadingDialog();
                         ApiClient.post(getContext(), getOkObject(type), new ApiClient.CallBack() {
                             @Override
                             public void onSuccess(String s) {
-                                ((WoDeDDActivity) getContext()).cancelLoadingDialog();
+                                ((ShangChengDDActivity) getContext()).cancelLoadingDialog();
                                 LogUtil.LogShitou("DingDanViewHolder--订单操作",s+ "");
                                 try {
                                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
@@ -153,7 +153,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
 
                             @Override
                             public void onError(Response response) {
-                                ((WoDeDDActivity) getContext()).cancelLoadingDialog();
+                                ((ShangChengDDActivity) getContext()).cancelLoadingDialog();
                                 Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
                             }
                         });

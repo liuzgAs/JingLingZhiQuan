@@ -603,14 +603,14 @@ public class MyDialog {
                     Toast.makeText(context, "您暂未安装微信,请下载安装最新版本的微信", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                wxShare(api, 0, url, title, des, img);
+                wxShare(api, 1, url, title, des, img);
                 alertDialog1.dismiss();
             }
         });
         dialog_shengji.findViewById(R.id.relaShouCang).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wxShare(api, 0, url, title, des, img);
+                wxShare(api, 2, url, title, des, img);
                 alertDialog1.dismiss();
                 alertDialog1.dismiss();
             }
