@@ -55,6 +55,7 @@ public class DangQianBBActivity extends ZjbBaseActivity implements View.OnClickL
         findViewById(R.id.viewXieYi).setOnClickListener(this);
         findViewById(R.id.viewGongNeng).setOnClickListener(this);
         findViewById(R.id.viewTouSu).setOnClickListener(this);
+        findViewById(R.id.imageBack).setOnClickListener(this);
     }
 
     @Override
@@ -84,6 +85,9 @@ public class DangQianBBActivity extends ZjbBaseActivity implements View.OnClickL
                 intent.putExtra(Constant.INTENT_KEY.TITLE, "投诉");
                 intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_COMPLAINT);
                 startActivity(intent);
+                break;
+            case R.id.imageBack:
+                finish();
                 break;
         }
     }

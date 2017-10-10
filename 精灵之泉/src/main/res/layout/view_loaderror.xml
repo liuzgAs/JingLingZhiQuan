@@ -13,13 +13,12 @@
         android:id="@+id/textMsg"
         android:layout_gravity="center_horizontal"/>
 
-    <Button
+    <TextView
         android:layout_marginTop="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/basic_color"
         android:textSize="@dimen/bigText"
-        android:background="@drawable/selector_btn_5dp"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="点击重试"
         android:id="@+id/buttonReLoad"
         android:layout_gravity="center_horizontal"/>
