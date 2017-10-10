@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ShareIndex;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.FileUtil;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -26,6 +28,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.Tencent;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import okhttp3.Response;
@@ -88,6 +91,7 @@ public class TuiGuangEWMActivity extends ZjbBaseActivity implements View.OnClick
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.imageShare).setOnClickListener(this);
+        findViewById(R.id.buttonBaoCun).setOnClickListener(this);
     }
 
     /**
@@ -146,8 +150,29 @@ public class TuiGuangEWMActivity extends ZjbBaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.buttonBaoCun:
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            imageImg.setDrawingCacheEnabled(true);
+                            Bitmap bm = imageImg.getDrawingCache();
+                            FileUtil.saveMyBitmap(TuiGuangEWMActivity.this, "分享二维码" + System.currentTimeMillis(), bm);
+                            imageImg.setDrawingCacheEnabled(false);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(TuiGuangEWMActivity.this, "图片保存在\"/sdcard/精灵之泉/\"目录下", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+                break;
             case R.id.imageShare:
-                MyDialog.share01(this,api,mTencent,"TuiGuangEWMActivity",shareIndex.getShare_register_url(),shareIndex.getShare_title(),shareIndex.getShare_description(),shareIndex.getShare_icon());
+                MyDialog.share01(this, api, mTencent, "TuiGuangEWMActivity", shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
                 break;
             case R.id.imageBack:
                 finish();

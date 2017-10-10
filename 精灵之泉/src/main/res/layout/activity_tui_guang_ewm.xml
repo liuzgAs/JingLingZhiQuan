@@ -60,8 +60,18 @@
     </LinearLayout>
 
     <ImageView
+        android:layout_weight="1"
         android:id="@+id/imageImg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
+
+    <Button
+        android:background="@drawable/btn_jianbian180_basic_0dp"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/normal_textsize"
+        android:layout_height="35dp"
+        android:textColor="@color/white"
+        android:text="保存到相册"
+        android:id="@+id/buttonBaoCun" />
 </LinearLayout>
