@@ -14,13 +14,13 @@ public class IndexCate {
 
     private int status;
     private String info;
-    private String vipNum;
+    private int vipNum;
 
-    public String getVipNum() {
+    public int getVipNum() {
         return vipNum;
     }
 
-    public void setVipNum(String vipNum) {
+    public void setVipNum(int vipNum) {
         this.vipNum = vipNum;
     }
 

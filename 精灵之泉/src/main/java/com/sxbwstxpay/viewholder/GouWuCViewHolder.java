@@ -1,6 +1,7 @@
 package com.sxbwstxpay.viewholder;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -148,6 +149,9 @@ public class GouWuCViewHolder extends BaseViewHolder<CartIndex.CartBean> {
                                     if (cartUpdatecart.getStatus()==1){
                                         ((GouWuCActivity) getContext()).remove(getDataPosition());
                                         ((GouWuCActivity) getContext()).setSum(cartUpdatecart.getSum());
+                                        Intent intent = new Intent();
+                                        intent.setAction(Constant.BROADCASTCODE.GouWuCheNum);
+                                        getContext().sendBroadcast(intent);
                                     }else if (cartUpdatecart.getStatus()==2){
                                         MyDialog.showReLoginDialog(getContext());
                                     }else {

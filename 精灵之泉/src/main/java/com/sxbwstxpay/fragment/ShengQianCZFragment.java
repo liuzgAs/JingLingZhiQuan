@@ -5,12 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChengShiXZActivity;
+import com.sxbwstxpay.activity.GouWuCActivity;
 import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
@@ -36,6 +39,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Response;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,12 +60,16 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                     IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
                     textCity.setText(cityBean.getName());
                     break;
+                case Constant.BROADCASTCODE.GouWuCheNum:
+                    gouWuCheNum(true);
+                    break;
             }
         }
     };
     private String mCity;
     private List<IndexCate.CateBean> indexCateCate;
-    private TextView textVipNum;
+    private Badge badge;
+    private View viewVip;
 
     public ShengQianCZFragment() {
         // Required empty public constructor
@@ -104,7 +113,13 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         tablayout = (TabLayout) mInflate.findViewById(R.id.tablayout);
         viewPager = (ViewPager) mInflate.findViewById(R.id.viewPager);
         textCity = (TextView) mInflate.findViewById(R.id.textCity);
-        textVipNum = (TextView) mInflate.findViewById(R.id.textVipNum);
+        viewVip = mInflate.findViewById(R.id.viewVip);
+        badge = new QBadgeView(getActivity())
+                .setBadgeTextColor(Color.WHITE)
+                .setBadgeTextSize(8f, true)
+                .setBadgeBackgroundColor(getResources().getColor(R.color.red))
+                .setBadgeGravity(Gravity.END | Gravity.TOP)
+                .setGravityOffset(3f, 3f, true);
     }
 
     @Override
@@ -119,7 +134,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     @Override
     protected void setListeners() {
         textCity.setOnClickListener(this);
-        mInflate.findViewById(R.id.viewVip).setOnClickListener(this);
+        viewVip.setOnClickListener(this);
         mInflate.findViewById(R.id.textSouSuo).setOnClickListener(this);
     }
 
@@ -131,12 +146,18 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.INDEX_CATE;
         HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
 
     @Override
     protected void initData() {
         showLoadingDialog();
+        gouWuCheNum(false);
+    }
+
+    private void gouWuCheNum(final boolean isRefresh) {
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
@@ -145,11 +166,16 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 try {
                     IndexCate indexCate = GsonUtils.parseJSON(s, IndexCate.class);
                     if (indexCate.getStatus() == 1) {
+                        if (isRefresh) {
+                            badge.setBadgeNumber(indexCate.getVipNum()).bindTarget(viewVip);
+                            return;
+                        }
+                        badge.setBadgeNumber(indexCate.getVipNum()).bindTarget(viewVip);
                         indexCateCate = indexCate.getCate();
                         viewPager.setAdapter(new MyViewPagerAdapter(getChildFragmentManager()));
                         tablayout.setupWithViewPager(viewPager);
                         tablayout.removeAllTabs();
-                        textVipNum.setText(indexCate.getVipNum());
+                        LogUtil.LogShitou("ShengQianCZFragment--indexCate.getVipNum()", "" + indexCate.getVipNum());
                         for (int i = 0; i < indexCateCate.size(); i++) {
                             View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_tablayout, null);
                             TextView textTitle = (TextView) view.findViewById(R.id.textTitle);
@@ -208,8 +234,8 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.viewVip:
-//                intent.setClass(getActivity(), WoDeVIPActivity.class);
-//                startActivity(intent);
+                intent.setClass(getActivity(), GouWuCActivity.class);
+                startActivity(intent);
                 break;
             case R.id.textCity:
                 intent.setClass(getActivity(), ChengShiXZActivity.class);
@@ -223,6 +249,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
+        filter.addAction(Constant.BROADCASTCODE.GouWuCheNum);
         getActivity().registerReceiver(reciver, filter);
     }
 

@@ -165,7 +165,7 @@ public class UserOrder {
         private String status;
         private String orderAmount;
         private String status_text;
-        private int goods_money;
+        private double goods_money;
         private double sum;
         private String sumDes;
         private int is_cancle;
@@ -215,11 +215,11 @@ public class UserOrder {
             this.status_text = status_text;
         }
 
-        public int getGoods_money() {
+        public double getGoods_money() {
             return goods_money;
         }
 
-        public void setGoods_money(int goods_money) {
+        public void setGoods_money(double goods_money) {
             this.goods_money = goods_money;
         }
 

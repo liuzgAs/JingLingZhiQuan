@@ -54,7 +54,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.zhiFuGuanBi:
                     finish();
                     break;
@@ -151,7 +151,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.setClass(QueRenDDActivity.this, XuanZeSHDZActivity.class);
-                        startActivityForResult(intent,Constant.REQUEST_RESULT_CODE.address);
+                        startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.address);
                     }
                 });
                 return header_queren_dd;
@@ -187,9 +187,9 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
             @Override
             public void onBindView(View headerView) {
-                if (cartOrder!=null){
-                    textSum.setText("¥"+cartOrder.getSum());
-                    textGoods_money.setText("¥"+cartOrder.getGoods_money());
+                if (cartOrder != null) {
+                    textSum.setText("¥" + cartOrder.getSum());
+                    textGoods_money.setText("¥" + cartOrder.getGoods_money());
                 }
             }
         });
@@ -198,7 +198,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==Constant.REQUEST_RESULT_CODE.address&&resultCode==Constant.REQUEST_RESULT_CODE.address){
+        if (requestCode == Constant.REQUEST_RESULT_CODE.address && resultCode == Constant.REQUEST_RESULT_CODE.address) {
             UserAddress.DataBean dataBean = (UserAddress.DataBean) data.getSerializableExtra(Constant.INTENT_KEY.value);
             cartOrderAd.setConsignee(dataBean.getConsignee());
             cartOrderAd.setId(dataBean.getId());
@@ -230,8 +230,12 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         adapter.clear();
                         adapter.addAll(cartOrderCart);
                         viewTiJiao.setVisibility(View.VISIBLE);
-                        textSum.setText("¥"+cartOrder.getSum());
+                        textSum.setText("¥" + cartOrder.getSum());
                         textYunFei.setText(cartOrder.getSumDes());
+                        //刷新购物车小红点
+                        Intent intent = new Intent();
+                        intent.setAction(Constant.BROADCASTCODE.GouWuCheNum);
+                        sendBroadcast(intent);
                     } else if (cartOrder.getStatus() == 3) {
                         MyDialog.showReLoginDialog(QueRenDDActivity.this);
                     } else {
@@ -268,7 +272,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonTiJiao:
-                if (cartOrderAd==null){
+                if (cartOrderAd == null) {
                     Toast.makeText(QueRenDDActivity.this, "请选择收货地址", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -283,29 +287,29 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
     private void tiJiao() {
         showLoadingDialog();
-        CartNeworderUpload cartNeworderUpload = new CartNeworderUpload(cartOrderUpload.getCart(),userInfo.getUid(),cartOrderAd.getId(),tokenTime,cartOrder.getSum(),editPayMsg.getText().toString().trim());
-        ApiClient.postJson(QueRenDDActivity.this, Constant.HOST+Constant.Url.CART_NEWORDER,GsonUtils.parseObject(cartNeworderUpload), new ApiClient.CallBack() {
+        CartNeworderUpload cartNeworderUpload = new CartNeworderUpload(cartOrderUpload.getCart(), userInfo.getUid(), cartOrderAd.getId(), tokenTime, cartOrder.getSum(), editPayMsg.getText().toString().trim());
+        ApiClient.postJson(QueRenDDActivity.this, Constant.HOST + Constant.Url.CART_NEWORDER, GsonUtils.parseObject(cartNeworderUpload), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("QueRenDDActivity--确认提交订单",s+ "");
+                LogUtil.LogShitou("QueRenDDActivity--确认提交订单", s + "");
                 try {
                     CartNeworder cartNeworder = GsonUtils.parseJSON(s, CartNeworder.class);
-                    if (cartNeworder.getStatus()==1){
+                    if (cartNeworder.getStatus() == 1) {
                         Intent intent1 = new Intent();
                         intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
                         sendBroadcast(intent1);
                         Intent intent = new Intent();
-                        intent.setClass(QueRenDDActivity.this,ZhiFuActivity.class);
-                        intent.putExtra(Constant.INTENT_KEY.id,cartNeworder.getOid());
+                        intent.setClass(QueRenDDActivity.this, ZhiFuActivity.class);
+                        intent.putExtra(Constant.INTENT_KEY.id, cartNeworder.getOid());
                         startActivity(intent);
-                    }else if (cartNeworder.getStatus()==2){
+                    } else if (cartNeworder.getStatus() == 2) {
                         MyDialog.showReLoginDialog(QueRenDDActivity.this);
-                    }else {
+                    } else {
                         Toast.makeText(QueRenDDActivity.this, cartNeworder.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(QueRenDDActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QueRenDDActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -322,7 +326,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
-        registerReceiver(reciver,filter);
+        registerReceiver(reciver, filter);
     }
 
     @Override

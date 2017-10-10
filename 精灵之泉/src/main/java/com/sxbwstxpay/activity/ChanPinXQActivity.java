@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -40,6 +41,7 @@ import com.sxbwstxpay.customview.FlowTagLayout;
 import com.sxbwstxpay.customview.OnTagSelectListener;
 import com.sxbwstxpay.model.CartAddcart;
 import com.sxbwstxpay.model.GoodsInfo;
+import com.sxbwstxpay.model.IndexCate;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.RecommBean;
 import com.sxbwstxpay.model.ShareBean;
@@ -63,6 +65,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import okhttp3.Response;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private View viewBar;
@@ -84,17 +88,20 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             String action = intent.getAction();
             switch (action) {
                 case Constant.BROADCASTCODE.WX_SHARE:
-                    if (isShow){
+                    if (isShow) {
                         MyDialog.showTipDialog(ChanPinXQActivity.this, "分享成功");
                     }
                     break;
                 case Constant.BROADCASTCODE.WX_SHARE_FAIL:
-                    if (isShow){
+                    if (isShow) {
                         MyDialog.showTipDialog(ChanPinXQActivity.this, "取消分享");
                     }
                     break;
                 case Constant.BROADCASTCODE.zhiFuGuanBi:
                     finish();
+                    break;
+                case Constant.BROADCASTCODE.GouWuCheNum:
+                    gouWuCheNum();
                     break;
             }
         }
@@ -105,6 +112,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
     private View viewKeGouMai;
     private View viewMaiMaiMai;
     private boolean isShow;
+    private ImageView imageBack;
+    private Badge badge;
+    private View viewGouWuChe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +141,14 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
         viewMaiMaiMai = findViewById(R.id.viewMaiMaiMai);
+        imageBack = (ImageView) findViewById(R.id.imageBack);
+        viewGouWuChe = findViewById(R.id.viewGouWuChe);
+        badge = new QBadgeView(this)
+                .setBadgeTextColor(Color.WHITE)
+                .setBadgeTextSize(8f, true)
+                .setBadgeBackgroundColor(getResources().getColor(R.color.red))
+                .setBadgeGravity(Gravity.END | Gravity.TOP)
+                .setGravityOffset(3f, 0f, true);
     }
 
     @Override
@@ -141,6 +159,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         layoutParams.height = viewBarHeight;
         viewBar.setLayoutParams(layoutParams);
         viewBar.getBackground().mutate().setAlpha(0);
+        imageBack.getBackground().mutate().setAlpha(255);
         textViewTitle.setAlpha(0);
         viewMaiMaiMai.setVisibility(View.GONE);
         initRecycle();
@@ -148,8 +167,8 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
 
     @Override
     protected void setListeners() {
-        findViewById(R.id.viewGouWuChe).setOnClickListener(this);
-        findViewById(R.id.imageBack).setOnClickListener(this);
+        viewGouWuChe.setOnClickListener(this);
+        imageBack.setOnClickListener(this);
         findViewById(R.id.textMai1).setOnClickListener(this);
         findViewById(R.id.textMai2).setOnClickListener(this);
     }
@@ -205,6 +224,10 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 textStock_num = (TextView) header_xhan_pin_xq.findViewById(R.id.textStock_num);
                 screenWidth = ScreenUtils.getScreenWidth(ChanPinXQActivity.this);
                 banner = (ConvenientBanner) header_xhan_pin_xq.findViewById(R.id.banner);
+                ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
+                layoutParams.width = screenWidth;
+                layoutParams.height = screenWidth;
+                banner.setLayoutParams(layoutParams);
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
                 textIntro = (TextView) header_xhan_pin_xq.findViewById(R.id.textIntro);
@@ -371,7 +394,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             public void onItemClick(int position) {
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
-                intent.setClass(ChanPinXQActivity.this,ChanPinXQActivity.class);
+                intent.setClass(ChanPinXQActivity.this, ChanPinXQActivity.class);
                 startActivity(intent);
             }
         });
@@ -384,6 +407,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 if (scrollY <= guangGaoHeight - viewBarHeight && scrollY >= 0) {
                     int i = (int) ((double) scrollY / (double) (guangGaoHeight - viewBar.getHeight()) * 255);
                     viewBar.getBackground().mutate().setAlpha(i);
+                    imageBack.getBackground().mutate().setAlpha(255 - i);
                     textViewTitle.setAlpha((float) i / 255f);
                 } else {
                     viewBar.getBackground().mutate().setAlpha(255);
@@ -526,7 +550,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
      * date： 2017/9/26 0026 下午 2:20
      */
     private void addCar(final boolean quick) {
-        if (goodsInfoAdDes.size()>0){
+        if (goodsInfoAdDes.size() > 0) {
             boolean hasId = false;
             for (int i = 0; i < goodsInfoAdDes.size(); i++) {
                 if (goodsInfoAdDes.get(i).isSelect()) {
@@ -553,6 +577,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                             intent.setClass(ChanPinXQActivity.this, GouWuCActivity.class);
                             startActivity(intent);
                         }
+                        Intent intent = new Intent();
+                        intent.setAction(Constant.BROADCASTCODE.GouWuCheNum);
+                        sendBroadcast(intent);
                     } else if (cartAddcart.getStatus() == 3) {
                         MyDialog.showReLoginDialog(ChanPinXQActivity.this);
                     } else {
@@ -633,6 +660,48 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 recyclerView.showError();
             }
         });
+        gouWuCheNum();
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObjectGouWuChe() {
+        String url = Constant.HOST + Constant.Url.INDEX_CATE;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        return new OkObject(params, url);
+    }
+
+    private void gouWuCheNum() {
+        ApiClient.post(ChanPinXQActivity.this, getOkObjectGouWuChe(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("ChanPinXQActivity--onSuccess", "");
+                try {
+                    IndexCate indexCate = GsonUtils.parseJSON(s, IndexCate.class);
+                    if (indexCate.getStatus() == 1) {
+                        badge.setBadgeNumber(indexCate.getVipNum()).bindTarget(viewGouWuChe);
+                    } else if (indexCate.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(ChanPinXQActivity.this);
+                    } else {
+                        Toast.makeText(ChanPinXQActivity.this, indexCate.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(ChanPinXQActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(ChanPinXQActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -669,6 +738,8 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
         filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        filter.addAction(Constant.BROADCASTCODE.GouWuCheNum);
         registerReceiver(receiver, filter);
     }
 
@@ -693,7 +764,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
      * date： 2017/9/25 0025 上午 11:54
      */
     public void share(final ShareBean share) {
-        MyDialog.share(this,"ChanPinXQActivity",api,id,"goods",share);
+        MyDialog.share(this, "ChanPinXQActivity", api, id, "goods", share);
     }
 
 }
