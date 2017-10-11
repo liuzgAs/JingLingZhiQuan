@@ -37,7 +37,7 @@ public class BangZhuZXActivity extends ZjbBaseActivity implements View.OnClickLi
     private int page = 1;
     private EasyRecyclerView recyclerView;
     private View viewBar;
-    //撒大声地
+    //测试分支
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
