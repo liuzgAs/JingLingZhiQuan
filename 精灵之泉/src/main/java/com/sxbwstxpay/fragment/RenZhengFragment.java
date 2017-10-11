@@ -475,6 +475,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
             public void run() {
                 final int[] count = {0};
                 final List<Integer> imgList = new ArrayList<>();
+                for (int i = 0; i < 5; i++) {
+                    imgList.add(0);
+                }
                 for (int i = 0; i < path.length; i++) {
                     if (isBreak[0]) {
                         break;
@@ -516,6 +519,19 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
                             }
                         });
+                    }else {
+                        count[0]++;
+                        progressDialog.setProgress(count[0]);
+                        progressDialog.setMessage("已上传" + count[0] + "/5");
+                        if (count[0] == 5) {
+                            progressDialog.dismiss();
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    tiJiao();
+                                }
+                            });
+                        }
                     }
                 }
             }
