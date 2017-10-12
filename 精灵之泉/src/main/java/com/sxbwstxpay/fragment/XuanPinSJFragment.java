@@ -29,6 +29,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.GoodsIndex;
 import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
@@ -100,6 +101,9 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         }
     };
     private TextView textNum;
+    private String lat;
+    private String lng;
+
     public void hideView(){
         Animation animation02 = AnimationUtils.loadAnimation(getActivity(),R.anim.push_down_out);
         viewShangJiaTip.startAnimation(animation02);
@@ -142,7 +146,12 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     @Override
     protected void initSP() {
-
+        final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+        String cityAcache = aCache.getAsString(Constant.ACACHE.CITY);
+        if (cityAcache != null) {
+            lat = aCache.getAsString(Constant.ACACHE.LAT);
+            lng = aCache.getAsString(Constant.ACACHE.LNG);
+        }
     }
 
     @Override
@@ -258,6 +267,10 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         HashMap<String, String> params = new HashMap<>();
         params.put("id", id+"");
         params.put("p", page+"");
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("lat", lat);
+        params.put("lng", lng);
         return new OkObject(params, url);
     }
 
