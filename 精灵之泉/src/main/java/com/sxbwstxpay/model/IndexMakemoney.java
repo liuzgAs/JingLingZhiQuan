@@ -7,18 +7,19 @@ import java.util.List;
  */
 public class IndexMakemoney {
     /**
-     * list : [{"title":"成为VIP精灵推广商，费率直降、在线收款+购物、自用省钱、分享赚钱","des":"邀请好友赚现金邀请好友赚现金邀请好友"},{"title":"分享注册链接，佣金大家赚","des":"邀请好友赚现金邀请好友赚现金邀请好友"},{"title":"分享个人二维码","des":"邀请好友赚现金邀请好友赚现金邀请好友"},{"title":"每日一键推广图文，轻松赚佣金","des":"邀请好友赚现金邀请好友赚现金邀请好友"}]
-     * img : http://api.jlzquan.com
-     * url : http://sxb.wstxpay.com/Mall/Html/101572/Default.htm?time=1505986717
-     * status : 1
+     * grade : 1
+     * img : http://api.jlzquan.com/Uploads/banner/59cdd84a532e6.jpg
      * info : 返回成功！
+     * list : [{"act":1,"des":"邀请好友赚现金邀请好友赚现金邀请好友","jump":1,"title":"成为VIP精灵推广商，费率直降、在线收款+购物、自用省钱、分享赚钱"},{"act":1,"des":"邀请好友赚现金邀请好友赚现金邀请好友","jump":2,"title":"分享注册链接，佣金大家赚"},{"act":1,"des":"邀请好友赚现金邀请好友赚现金邀请好友","jump":3,"title":"分享个人二维码"},{"act":1,"des":"邀请好友赚现金邀请好友赚现金邀请好友","jump":4,"title":"每日一键推广图文，轻松赚佣金"}]
+     * status : 1
+     * url : http://api.jlzquan.com/Mobile/Index/index/sid/1
      */
 
-    private String img;
-    private String url;
-    private int status;
     private int grade;
+    private String img;
     private String info;
+    private int status;
+    private String url;
     private List<ListBean> list;
 
     public int getGrade() {
@@ -37,12 +38,12 @@ public class IndexMakemoney {
         this.img = img;
     }
 
-    public String getUrl() {
-        return url;
+    public String getInfo() {
+        return info;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public int getStatus() {
@@ -53,12 +54,12 @@ public class IndexMakemoney {
         this.status = status;
     }
 
-    public String getInfo() {
-        return info;
+    public String getUrl() {
+        return url;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public List<ListBean> getList() {
@@ -71,19 +72,23 @@ public class IndexMakemoney {
 
     public static class ListBean {
         /**
-         * title : 成为VIP精灵推广商，费率直降、在线收款+购物、自用省钱、分享赚钱
+         * act : 1
          * des : 邀请好友赚现金邀请好友赚现金邀请好友
+         * jump : 1
+         * title : 成为VIP精灵推广商，费率直降、在线收款+购物、自用省钱、分享赚钱
          */
 
-        private String title;
+        private int act;
         private String des;
+        private int jump;
+        private String title;
 
-        public String getTitle() {
-            return title;
+        public int getAct() {
+            return act;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
+        public void setAct(int act) {
+            this.act = act;
         }
 
         public String getDes() {
@@ -92,6 +97,22 @@ public class IndexMakemoney {
 
         public void setDes(String des) {
             this.des = des;
+        }
+
+        public int getJump() {
+            return jump;
+        }
+
+        public void setJump(int jump) {
+            this.jump = jump;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
         }
     }
 }

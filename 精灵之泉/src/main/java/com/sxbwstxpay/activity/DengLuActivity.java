@@ -17,7 +17,6 @@ import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
-import com.sxbwstxpay.util.AppUtil;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.StringUtil;
@@ -125,7 +124,8 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         String url = Constant.HOST + Constant.Url.LOGIN_INDEX;
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", editPhone.getText().toString().trim());
-        params.put("userPwd", AppUtil.getMD5(AppUtil.getMD5(editPsw.getText().toString().trim()) + "ad"));
+//        params.put("userPwd", AppUtil.getMD5(AppUtil.getMD5(editPsw.getText().toString().trim()) + "ad"));
+        params.put("userPwd", "2742f869a4ce382e932d226d51ce3c51");
         params.put("deviceId", PushServiceFactory.getCloudPushService().getDeviceId());
         params.put("deviceToken", "");
         params.put("tokenTime", tokenTime);

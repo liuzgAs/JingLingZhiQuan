@@ -154,6 +154,14 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.address);
                     }
                 });
+                textAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setClass(QueRenDDActivity.this, XuanZeSHDZActivity.class);
+                        startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.address);
+                    }
+                });
                 return header_queren_dd;
             }
 

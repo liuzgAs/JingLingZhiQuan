@@ -82,8 +82,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private Button buttonTiJiao;
     private ImageView imageRight;
     private View viewYanZhengMa;
-    private int verify =0;
+    private int verify = 0;
     private boolean isChoosePic = false;
+    private int submitStatus;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -192,40 +193,10 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     cancelLoadingDialog();
                     LogUtil.LogShitou("RenZhengFragment--会员身份认证请求", "" + s);
                     try {
-                        userCardbefore = GsonUtils.parseJSON(s, UserCardbefore.class);
-                        if (userCardbefore.getStatus() == 1) {
-                            textTip.setText(userCardbefore.getTipsText());
-                            editName.setText(userCardbefore.getData().getName());
-                            editCard.setText(userCardbefore.getData().getCard());
-                            textBankName.setText(userCardbefore.getData().getBankName());
-                            editBankCard.setText(userCardbefore.getData().getBankCard());
-                            editPhone.setText(userCardbefore.getData().getPhone());
-                            Glide.with(getActivity())
-                                    .load(userCardbefore.getData().getImg())
-                                    .asBitmap()
-                                    .placeholder(R.mipmap.shenfenzhengmian)
-                                    .into(image01);
-                            Glide.with(getActivity())
-                                    .load(userCardbefore.getData().getImg2())
-                                    .asBitmap()
-                                    .placeholder(R.mipmap.shenfenbeimain)
-                                    .into(image02);
-                            Glide.with(getActivity())
-                                    .load(userCardbefore.getData().getImg3())
-                                    .asBitmap()
-                                    .placeholder(R.mipmap.xingyongkademo)
-                                    .into(image03);
-                            Glide.with(getActivity())
-                                    .load(userCardbefore.getData().getImg4())
-                                    .asBitmap()
-                                    .placeholder(R.mipmap.yinhangkazhengmian)
-                                    .into(image04);
-                            Glide.with(getActivity())
-                                    .load(userCardbefore.getData().getImg5())
-                                    .asBitmap()
-                                    .placeholder(R.mipmap.shouchibanshen)
-                                    .into(image05);
-                            if (userCardbefore.getSubmitStatus() == 1) {
+                        UserCardbefore userCardbefore1 = GsonUtils.parseJSON(s, UserCardbefore.class);
+                        if (userCardbefore1.getStatus() == 1) {
+                            submitStatus = userCardbefore1.getSubmitStatus();
+                            if (submitStatus == 1) {
                                 editName.setEnabled(true);
                                 editCard.setEnabled(true);
                                 viewKaiHuYH.setEnabled(true);
@@ -252,21 +223,21 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 image04.setEnabled(false);
                                 image05.setEnabled(false);
                             }
-                            verify = userCardbefore.getVerify();
+                            verify = userCardbefore1.getVerify();
                             if (verify ==1){
                                 imageRight.setVisibility(View.GONE);
                                 viewYanZhengMa.setVisibility(View.GONE);
                                 buttonNext.setVisibility(View.GONE);
                             }else {
-                                if (!TextUtils.isEmpty(userCardbefore.getTipsText())){
-                                    MyDialog.showTipDialog(getActivity(),userCardbefore.getTipsText());
+                                if (!TextUtils.isEmpty(userCardbefore1.getTipsText())){
+                                    MyDialog.showTipDialog(getActivity(),userCardbefore1.getTipsText());
                                 }
                                 imageRight.setVisibility(View.VISIBLE);
                                 viewYanZhengMa.setVisibility(View.VISIBLE);
                                 buttonNext.setVisibility(View.VISIBLE);
                             }
                         } else {
-                            Toast.makeText(getActivity(), userCardbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), userCardbefore1.getInfo(), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
                         Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
@@ -285,7 +256,101 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 
     @Override
     protected void initData() {
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("RenZhengFragment--会员身份认证请求", "" + s);
+                try {
+                    userCardbefore = GsonUtils.parseJSON(s, UserCardbefore.class);
+                    if (userCardbefore.getStatus() == 1) {
+                        textTip.setText(userCardbefore.getTipsText());
+                        editName.setText(userCardbefore.getData().getName());
+                        editCard.setText(userCardbefore.getData().getCard());
+                        textBankName.setText(userCardbefore.getData().getBankName());
+                        editBankCard.setText(userCardbefore.getData().getBankCard());
+                        editPhone.setText(userCardbefore.getData().getPhone());
+                        Glide.with(getActivity())
+                                .load(userCardbefore.getData().getImg())
+                                .asBitmap()
+                                .placeholder(R.mipmap.shenfenzhengmian)
+                                .into(image01);
+                        Glide.with(getActivity())
+                                .load(userCardbefore.getData().getImg2())
+                                .asBitmap()
+                                .placeholder(R.mipmap.shenfenbeimain)
+                                .into(image02);
+                        Glide.with(getActivity())
+                                .load(userCardbefore.getData().getImg3())
+                                .asBitmap()
+                                .placeholder(R.mipmap.xingyongkademo)
+                                .into(image03);
+                        Glide.with(getActivity())
+                                .load(userCardbefore.getData().getImg4())
+                                .asBitmap()
+                                .placeholder(R.mipmap.yinhangkazhengmian)
+                                .into(image04);
+                        Glide.with(getActivity())
+                                .load(userCardbefore.getData().getImg5())
+                                .asBitmap()
+                                .placeholder(R.mipmap.shouchibanshen)
+                                .into(image05);
+                        submitStatus = userCardbefore.getSubmitStatus();
+//                        if (submitStatus == 1) {
+//                            editName.setEnabled(true);
+//                            editCard.setEnabled(true);
+//                            viewKaiHuYH.setEnabled(true);
+//                            editBankCard.setEnabled(true);
+//                            editPhone.setEnabled(true);
+//                            editCode.setEnabled(true);
+//                            buttonSms.setEnabled(true);
+//                            image01.setEnabled(true);
+//                            image02.setEnabled(true);
+//                            image03.setEnabled(true);
+//                            image04.setEnabled(true);
+//                            image05.setEnabled(true);
+//                        } else {
+//                            editName.setEnabled(false);
+//                            editCard.setEnabled(false);
+//                            viewKaiHuYH.setEnabled(false);
+//                            editBankCard.setEnabled(false);
+//                            editPhone.setEnabled(false);
+//                            editCode.setEnabled(false);
+//                            buttonSms.setEnabled(false);
+//                            image01.setEnabled(false);
+//                            image02.setEnabled(false);
+//                            image03.setEnabled(false);
+//                            image04.setEnabled(false);
+//                            image05.setEnabled(false);
+//                        }
+//                        verify = userCardbefore.getVerify();
+//                        if (verify == 1) {
+//                            imageRight.setVisibility(View.GONE);
+//                            viewYanZhengMa.setVisibility(View.GONE);
+//                            buttonNext.setVisibility(View.GONE);
+//                        } else {
+//                            if (!TextUtils.isEmpty(userCardbefore.getTipsText())) {
+//                                MyDialog.showTipDialog(getActivity(), userCardbefore.getTipsText());
+//                            }
+//                            imageRight.setVisibility(View.VISIBLE);
+//                            viewYanZhengMa.setVisibility(View.VISIBLE);
+//                            buttonNext.setVisibility(View.VISIBLE);
+//                        }
+                    } else {
+                        Toast.makeText(getActivity(), userCardbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -346,7 +411,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonTiJiao:
-                if (userCardbefore.getSubmitStatus() != 1) {
+                if (submitStatus != 1) {
                     Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -407,7 +472,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 sendSMS();
                 break;
             case R.id.buttonNext:
-                if (userCardbefore.getSubmitStatus() != 1) {
+                if (submitStatus!= 1) {
                     Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -483,17 +548,18 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                         break;
                     }
                     if (!TextUtils.isEmpty(path[i])) {
+                        final int finalI = i;
                         ApiClient.post(getActivity(), getOkObject4(i), new ApiClient.CallBack() {
                             @Override
                             public void onSuccess(String s) {
-                                LogUtil.LogShitou("RenZhengFragment--单个图片上传返回", ""+s);
+                                LogUtil.LogShitou("RenZhengFragment--单个图片上传返回", "" + s);
                                 try {
                                     RespondAppimgadd respondAppimgadd = GsonUtils.parseJSON(s, RespondAppimgadd.class);
                                     if (respondAppimgadd.getStatus() == 1) {
                                         count[0]++;
                                         progressDialog.setProgress(count[0]);
                                         progressDialog.setMessage("已上传" + count[0] + "/5");
-                                        imgList.add(respondAppimgadd.getImgId());
+                                        imgList.set(finalI,respondAppimgadd.getImgId());
                                         if (count[0] == 5) {
                                             progressDialog.dismiss();
                                             userCardbefore.getData().setImgId(imgList.get(0));
@@ -519,7 +585,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
                             }
                         });
-                    }else {
+                    } else {
                         count[0]++;
                         progressDialog.setProgress(count[0]);
                         progressDialog.setMessage("已上传" + count[0] + "/5");
@@ -562,18 +628,18 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private OkObject getOkObject3() {
         String url = Constant.HOST + Constant.Url.USER_CARDADD;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid()+"");
-        params.put("tokenTime",tokenTime);
-        params.put("card",userCardbefore.getData().getCard());
-        params.put("phone",userCardbefore.getData().getPhone());
-        params.put("name",userCardbefore.getData().getName());
-        params.put("bankCard",userCardbefore.getData().getBankCard());
-        params.put("bank",userCardbefore.getData().getBank()+"");
-        params.put("imgId",userCardbefore.getData().getImgId()+"");
-        params.put("imgId2",userCardbefore.getData().getImgId2()+"");
-        params.put("imgId3",userCardbefore.getData().getImgId3()+"");
-        params.put("imgId4",userCardbefore.getData().getImgId4()+"");
-        params.put("imgId5",userCardbefore.getData().getImgId5()+"");
+        params.put("uid", userInfo.getUid() + "");
+        params.put("tokenTime", tokenTime);
+        params.put("card", userCardbefore.getData().getCard());
+        params.put("phone", userCardbefore.getData().getPhone());
+        params.put("name", userCardbefore.getData().getName());
+        params.put("bankCard", userCardbefore.getData().getBankCard());
+        params.put("bank", userCardbefore.getData().getBank() + "");
+        params.put("imgId", userCardbefore.getData().getImgId() + "");
+        params.put("imgId2", userCardbefore.getData().getImgId2() + "");
+        params.put("imgId3", userCardbefore.getData().getImgId3() + "");
+        params.put("imgId4", userCardbefore.getData().getImgId4() + "");
+        params.put("imgId5", userCardbefore.getData().getImgId5() + "");
         return new OkObject(params, url);
     }
 
@@ -587,12 +653,12 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
-                    if (simpleInfo.getStatus()==1){
+                    if (simpleInfo.getStatus() == 1) {
                         viewTianXinXi.setVisibility(View.VISIBLE);
                         scrollView.setVisibility(View.GONE);
                         viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop1);
                         //// TODO: 2017/9/12 0012 弹窗
-                       onResume();
+                        onResume();
                     }
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
@@ -729,7 +795,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("RenZhengFragment--获取短信", ""+s);
+                LogUtil.LogShitou("RenZhengFragment--获取短信", "" + s);
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
