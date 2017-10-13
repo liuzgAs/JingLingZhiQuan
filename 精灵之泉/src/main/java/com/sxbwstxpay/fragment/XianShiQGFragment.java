@@ -39,6 +39,7 @@ import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.LocalImageHolderView;
 import com.sxbwstxpay.viewholder.XianShiQGViewHolder;
 
@@ -198,6 +199,11 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             public View onCreateView(ViewGroup parent) {
                 View header_xian_shi_qg = LayoutInflater.from(getActivity()).inflate(R.layout.header_xian_shi_qg, null);
                 banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
+                ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
+                int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+                layoutParams.width = screenWidth;
+                layoutParams.height = (int) ((float)screenWidth*398f/1080f);
+                banner.setLayoutParams(layoutParams);
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
                 tablayoutHeader = (TabLayout) header_xian_shi_qg.findViewById(R.id.tablayoutHeader);

@@ -58,7 +58,7 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
         tablayout.setupWithViewPager(viewPager);
         tablayout.getTabAt(0).setText("收款");
-        tablayout.getTabAt(1).setText("结算");
+        tablayout.getTabAt(1).setText("返佣");
         tablayout.getTabAt(2).setText("分润");
         tablayout.getTabAt(3).setText("推广");
         switch (id) {

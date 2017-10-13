@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -130,8 +131,8 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
 
             @Override
             public void onItemClick(int position) {
-                if (Double.parseDouble(amount)>adapter.getItem(position).getLimitAmount()){
-                    MyDialog.showTipDialog(XuanZeXYKActivity.this,"单卡限额"+adapter.getItem(position).getMaxAmount()+"\n本次限额"+adapter.getItem(position).getLimitAmount());
+                if (Double.parseDouble(amount) > adapter.getItem(position).getLimitAmount()) {
+                    MyDialog.showTipDialog(XuanZeXYKActivity.this, "单卡限额" + adapter.getItem(position).getMaxAmount() + "\n本次限额" + adapter.getItem(position).getLimitAmount());
                     return;
                 }
                 final BankCardlist.DataBean dataBean = adapter.getItem(position);
@@ -205,17 +206,18 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                     private OkObject getOkObjectTiJiao() {
                         String url = Constant.HOST + Constant.Url.ORDER_NEWORDER;
                         HashMap<String, String> params = new HashMap<>();
-                        params.put("uid",userInfo.getUid());
-                        params.put("tokenTime",tokenTime);
-                        params.put("payId",tongDaoId);
-                        params.put("baknId",id);
-                        params.put("baknId2",dataBean.getId());
-                        params.put("orderAmount",amount);
-                        params.put("name",nameTiJiao.toString().trim());
-                        params.put("phone",phoneTiJiao.toString().trim());
-                        params.put("code",editCode.getText().toString().trim());
+                        params.put("uid", userInfo.getUid());
+                        params.put("tokenTime", tokenTime);
+                        params.put("payId", tongDaoId);
+                        params.put("baknId", id);
+                        params.put("baknId2", dataBean.getId());
+                        params.put("orderAmount", amount);
+                        params.put("name", nameTiJiao.toString().trim());
+                        params.put("phone", phoneTiJiao.toString().trim());
+                        params.put("code", editCode.getText().toString().trim());
                         return new OkObject(params, url);
                     }
+
                     @Override
                     public void onClick(View v) {
                         if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
@@ -238,9 +240,9 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                         String[] nowArr = sf.format(d).split("");
                         String[] youXiaoQiArr = youXiaoQi.split("");
                         String[] md5PhoneArr = AppUtil.getMD5(editCode.getText().toString().trim() + dataBean.getId() + "ad").split("");
-                        md5PhoneArr[Integer.parseInt(nowArr[2])+1] = youXiaoQiArr[1];
-                        md5PhoneArr[Integer.parseInt(nowArr[4]) + 10+1] = youXiaoQiArr[2];
-                        md5PhoneArr[Integer.parseInt(nowArr[6]) + 20+1] = youXiaoQiArr[3];
+                        md5PhoneArr[Integer.parseInt(nowArr[2]) + 1] = youXiaoQiArr[1];
+                        md5PhoneArr[Integer.parseInt(nowArr[4]) + 10 + 1] = youXiaoQiArr[2];
+                        md5PhoneArr[Integer.parseInt(nowArr[6]) + 20 + 1] = youXiaoQiArr[3];
                         if (Integer.parseInt(userInfo.getUid()) % 2 == 1) {
                             md5PhoneArr[31] = youXiaoQiArr[4];
                         } else {
@@ -252,9 +254,9 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                         }
                         String[] cvv2Arr = cvv2.split("");
                         String[] md5NameArr = AppUtil.getMD5(editCode.getText().toString().trim() + id + "ad").split("");
-                        md5NameArr[Integer.parseInt(nowArr[2])+1] = cvv2Arr[1];
-                        md5NameArr[Integer.parseInt(nowArr[4]) + 10+1] = cvv2Arr[2];
-                        md5NameArr[Integer.parseInt(nowArr[6]) + 20+1] = cvv2Arr[3];
+                        md5NameArr[Integer.parseInt(nowArr[2]) + 1] = cvv2Arr[1];
+                        md5NameArr[Integer.parseInt(nowArr[4]) + 10 + 1] = cvv2Arr[2];
+                        md5NameArr[Integer.parseInt(nowArr[6]) + 20 + 1] = cvv2Arr[3];
                         nameTiJiao = new StringBuffer();
                         for (int i = 1; i < md5NameArr.length; i++) {
                             nameTiJiao.append(md5NameArr[i]);
@@ -267,19 +269,32 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                                 LogUtil.LogShitou("XuanZeXYKActivity--onSuccess", "");
                                 try {
                                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                                    if (simpleInfo.getStatus()==1){
-                                        Intent intent = new Intent();
-                                        intent.setClass(XuanZeXYKActivity.this,WoDeZDActivity.class);
-                                        startActivity(intent);
+                                    if (simpleInfo.getStatus() == 1) {
+                                        Intent intent1 = new Intent();
+                                        intent1.setAction(Constant.BROADCASTCODE.GuanBiShouKuan);
+                                        sendBroadcast(intent1);
+                                        new AlertDialog.Builder(XuanZeXYKActivity.this)
+                                                .setMessage(simpleInfo.getInfo())
+                                                .setCancelable(false)
+                                                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        Intent intent = new Intent();
+                                                        intent.setClass(XuanZeXYKActivity.this, WoDeZDActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
+                                                })
+                                                .create()
+                                                .show();
                                         zhiFuDialog.dismiss();
-                                        finish();
-                                    }else if (simpleInfo.getStatus()==2){
+                                    } else if (simpleInfo.getStatus() == 2) {
                                         MyDialog.showReLoginDialog(XuanZeXYKActivity.this);
-                                    }else {
+                                    } else {
                                     }
                                     Toast.makeText(XuanZeXYKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                                 } catch (Exception e) {
-                                    Toast.makeText(XuanZeXYKActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(XuanZeXYKActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                                 }
                             }
 

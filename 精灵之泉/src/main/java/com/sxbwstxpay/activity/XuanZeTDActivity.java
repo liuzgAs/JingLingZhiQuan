@@ -1,6 +1,9 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -48,6 +51,17 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
     private String amount;
     private List<BankCardlist.DataBean> bankCardlistData;
     private String tongDaoId;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.GuanBiShouKuan:
+                    finish();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,7 +279,6 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                 intent.putExtra(Constant.INTENT_KEY.tongDaoId, tongDaoId);
                 intent.putExtra(Constant.INTENT_KEY.amount, amount);
                 startActivity(intent);
-                finish();
                 XuanZeYHKDialog.dismiss();
             }
         });
@@ -338,5 +351,19 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
                     .into(holder.imageImg);
             return convertView;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.GuanBiShouKuan);
+        registerReceiver(reciver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }
