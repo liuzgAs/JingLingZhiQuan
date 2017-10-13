@@ -724,12 +724,12 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private void chooseTuPian(int requestCode) {
         isChoosePic = true;
         mImagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        mImagePicker.setCrop(true);        //允许裁剪（单选才有效）
-        float width = ScreenUtils.getScreenWidth(getActivity());
-        mImagePicker.setFocusWidth((int) width);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        mImagePicker.setFocusHeight((int) (width * 0.625));  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-        mImagePicker.setOutPutX(800);//保存文件的宽度。单位像素
-        mImagePicker.setOutPutY(500);//保存文件的高度。单位像素
+        mImagePicker.setCrop(false);        //允许裁剪（单选才有效）
+//        float width = ScreenUtils.getScreenWidth(getActivity());
+//        mImagePicker.setFocusWidth((int) width);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+//        mImagePicker.setFocusHeight((int) (width * 0.625));  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+//        mImagePicker.setOutPutX(800);//保存文件的宽度。单位像素
+//        mImagePicker.setOutPutY(500);//保存文件的高度。单位像素
         Intent intent = new Intent();
         intent.setClass(getActivity(), ImageGridActivity.class);
         startActivityForResult(intent, requestCode);
