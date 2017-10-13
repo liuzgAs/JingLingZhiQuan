@@ -377,7 +377,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                             @Override
                             public void onSuccess(String s) {
                                 cancelLoadingDialog();
-                                LogUtil.LogShitou("ShouKuanFragment--微信代收", "");
+                                LogUtil.LogShitou("ShouKuanFragment--微信代收", s+"");
                                 try {
                                     OrderWxPay orderWxPay = GsonUtils.parseJSON(s, OrderWxPay.class);
                                     if (orderWxPay.getStatus()==1){
