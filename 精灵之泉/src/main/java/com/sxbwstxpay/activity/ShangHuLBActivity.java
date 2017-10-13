@@ -173,6 +173,7 @@ public class ShangHuLBActivity extends ZjbBaseActivity implements SwipeRefreshLa
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
         params.put("type", type + "");
+        params.put("p",page+"");
         return new OkObject(params, url);
     }
 
