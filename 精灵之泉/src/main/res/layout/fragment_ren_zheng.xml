@@ -98,276 +98,376 @@
             android:src="@mipmap/shimingtext" />
     </LinearLayout>
 
-    <LinearLayout
-        android:visibility="visible"
+    <ScrollView
         android:id="@+id/viewTianXinXi"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         >
 
-        <RelativeLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="推荐人"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/textView6"
-                android:layout_toRightOf="@+id/textView6"
-                android:background="@null"
-                android:hint="请输入推荐人手机号码（选填）"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/textView33"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="姓名"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
-
-            <EditText
-                android:id="@+id/editName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/textView33"
-                android:layout_toRightOf="@+id/textView33"
-                android:background="@null"
-                android:hint="请输入真实姓名"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="1dp"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/textView34"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="身份证"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
-
-            <EditText
-                android:maxLength="18"
-                android:digits="0123456789Xx"
-                android:id="@+id/editCard"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/textView34"
-                android:layout_toRightOf="@+id/textView34"
-                android:background="@null"
-                android:hint="请输入本人身份证号码"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/viewKaiHuYH"
+        <LinearLayout
             android:visibility="visible"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/layout_selector_white_system_gray">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView36"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="开户银行"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
-
-            <TextView
-                android:textColor="@color/light_black"
-                android:id="@+id/textBankName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/textView36"
-                android:layout_toRightOf="@+id/textView36"
-                android:background="@null"
-                android:hint="请选择开户银行"
-                android:textSize="@dimen/normal_textsize" />
-
-            <ImageView
-                android:id="@+id/imageRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@mipmap/right" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="1dp"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/textView35"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="储蓄卡"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
-
-            <EditText
-                android:maxLength="19"
-                android:inputType="number"
-                android:id="@+id/editBankCard"
+            <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/textView35"
-                android:layout_toRightOf="@+id/textView35"
-                android:background="@null"
-                android:hint="请输入本人提现储蓄卡卡号"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@color/white">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="1dp"
-            android:background="@color/white">
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="推荐人"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
 
-            <TextView
-                android:id="@+id/textView37"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="预留号码"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView6"
+                    android:layout_toRightOf="@+id/textView6"
+                    android:background="@null"
+                    android:hint="请输入推荐人手机号码（选填）"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
 
-            <EditText
-                android:maxLength="11"
-                android:inputType="number"
-                android:id="@+id/editPhone"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/textView37"
-                android:layout_toRightOf="@+id/textView37"
-                android:background="@null"
-                android:hint="请输入银行预留手机号"
-                android:textSize="@dimen/normal_textsize" />
-        </RelativeLayout>
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
 
-        <RelativeLayout
-            android:id="@+id/viewYanZhengMa"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="1dp"
-            android:background="@color/white">
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="姓名"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
 
-            <TextView
-                android:id="@+id/textView38"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="验证码"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
+                <EditText
+                    android:id="@+id/editName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView33"
+                    android:layout_toRightOf="@+id/textView33"
+                    android:background="@null"
+                    android:hint="请输入真实姓名"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
 
-            <EditText
-                android:maxLength="6"
-                android:inputType="number"
-                android:id="@+id/editCode"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/textView38"
-                android:layout_toLeftOf="@+id/buttonSms"
-                android:layout_toRightOf="@+id/textView38"
-                android:layout_toStartOf="@+id/buttonSms"
-                android:background="@null"
-                android:hint="请输入验证码"
-                android:textSize="@dimen/normal_textsize" />
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="身份证"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <EditText
+                    android:maxLength="18"
+                    android:digits="0123456789Xx"
+                    android:id="@+id/editCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView34"
+                    android:layout_toRightOf="@+id/textView34"
+                    android:background="@null"
+                    android:hint="请输入本人身份证号码"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="微信号"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <EditText
+                    android:id="@+id/editWXHao"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView3"
+                    android:layout_toRightOf="@+id/textView3"
+                    android:background="@null"
+                    android:hint="请输入微信号"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="邮箱"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <EditText
+                    android:id="@+id/editYouXiang"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView4"
+                    android:layout_toRightOf="@+id/textView4"
+                    android:background="@null"
+                    android:hint="请输入邮箱"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/viewKaiHuYH"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/layout_selector_white_system_gray">
+
+                <TextView
+                    android:id="@+id/textView36"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="开户银行"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <TextView
+                    android:textColor="@color/light_black"
+                    android:id="@+id/textBankName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView36"
+                    android:layout_toRightOf="@+id/textView36"
+                    android:background="@null"
+                    android:hint="请选择开户银行"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <ImageView
+                    android:id="@+id/imageRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/right" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="银行支行"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <EditText
+                    android:id="@+id/editZhiHang"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView2"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:background="@null"
+                    android:hint="请输入银行支行（选填）"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="储蓄卡"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <EditText
+                    android:maxLength="19"
+                    android:inputType="number"
+                    android:id="@+id/editBankCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView35"
+                    android:layout_toRightOf="@+id/textView35"
+                    android:background="@null"
+                    android:hint="请输入本人提现储蓄卡卡号"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/textView37"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="预留号码"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <EditText
+                    android:maxLength="11"
+                    android:inputType="number"
+                    android:id="@+id/editPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/textView37"
+                    android:layout_toRightOf="@+id/textView37"
+                    android:background="@null"
+                    android:hint="请输入银行预留手机号"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/viewYanZhengMa"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normalItemHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="验证码"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <EditText
+                    android:maxLength="6"
+                    android:inputType="number"
+                    android:id="@+id/editCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/textView38"
+                    android:layout_toLeftOf="@+id/buttonSms"
+                    android:layout_toRightOf="@+id/textView38"
+                    android:layout_toStartOf="@+id/buttonSms"
+                    android:background="@null"
+                    android:hint="请输入验证码"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <Button
+                    android:id="@+id/buttonSms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_basic1dp_20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="获取验证码"
+                    android:textColor="@color/basic_color" />
+            </RelativeLayout>
 
             <Button
-                android:id="@+id/buttonSms"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
+                android:layout_marginBottom="25dp"
+                android:id="@+id/buttonNext"
+                style="@style/MyButton"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/shape_basic1dp_20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="获取验证码"
-                android:textColor="@color/basic_color" />
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/buttonNext"
-            style="@style/MyButton"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:text="下一步" />
-    </LinearLayout>
+                android:layout_marginTop="20dp"
+                android:text="下一步" />
+        </LinearLayout>
+    </ScrollView>
 
     <ScrollView
         android:visibility="gone"

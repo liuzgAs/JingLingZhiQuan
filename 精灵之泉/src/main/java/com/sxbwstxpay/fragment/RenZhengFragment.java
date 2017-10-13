@@ -85,6 +85,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private int verify = 0;
     private boolean isChoosePic = false;
     private int submitStatus;
+    private EditText editWXHao;
+    private EditText editYouXiang;
+    private EditText editZhiHang;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -141,6 +144,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         buttonTiJiao = (Button) mInflate.findViewById(R.id.buttonTiJiao);
         imageRight = (ImageView) mInflate.findViewById(R.id.imageRight);
         viewYanZhengMa = mInflate.findViewById(R.id.viewYanZhengMa);
+        editWXHao = (EditText) mInflate.findViewById(R.id.editWXHao);
+        editYouXiang = (EditText) mInflate.findViewById(R.id.editYouXiang);
+        editZhiHang = (EditText) mInflate.findViewById(R.id.editZhiHang);
     }
 
     @Override
@@ -185,7 +191,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        if (verify!=1&&isChoosePic==false){
+        if (verify != 1 && isChoosePic == false) {
             showLoadingDialog();
             ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                 @Override
@@ -203,6 +209,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 editBankCard.setEnabled(true);
                                 editPhone.setEnabled(true);
                                 editCode.setEnabled(true);
+                                editWXHao.setEnabled(true);
+                                editYouXiang.setEnabled(true);
+                                editZhiHang.setEnabled(true);
                                 buttonSms.setEnabled(true);
                                 image01.setEnabled(true);
                                 image02.setEnabled(true);
@@ -216,6 +225,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 editBankCard.setEnabled(false);
                                 editPhone.setEnabled(false);
                                 editCode.setEnabled(false);
+                                editWXHao.setEnabled(false);
+                                editYouXiang.setEnabled(false);
+                                editZhiHang.setEnabled(false);
                                 buttonSms.setEnabled(false);
                                 image01.setEnabled(false);
                                 image02.setEnabled(false);
@@ -224,13 +236,13 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 image05.setEnabled(false);
                             }
                             verify = userCardbefore1.getVerify();
-                            if (verify ==1){
+                            if (verify == 1) {
                                 imageRight.setVisibility(View.GONE);
                                 viewYanZhengMa.setVisibility(View.GONE);
                                 buttonNext.setVisibility(View.GONE);
-                            }else {
-                                if (!TextUtils.isEmpty(userCardbefore1.getTipsText())){
-                                    MyDialog.showTipDialog(getActivity(),userCardbefore1.getTipsText());
+                            } else {
+                                if (!TextUtils.isEmpty(userCardbefore1.getTipsText())) {
+                                    MyDialog.showTipDialog(getActivity(), userCardbefore1.getTipsText());
                                 }
                                 imageRight.setVisibility(View.VISIBLE);
                                 viewYanZhengMa.setVisibility(View.VISIBLE);
@@ -251,7 +263,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 }
             });
         }
-        isChoosePic=false;
+        isChoosePic = false;
     }
 
     @Override
@@ -271,6 +283,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                         textBankName.setText(userCardbefore.getData().getBankName());
                         editBankCard.setText(userCardbefore.getData().getBankCard());
                         editPhone.setText(userCardbefore.getData().getPhone());
+                        editWXHao.setText(userCardbefore.getData().getWeixin());
+                        editYouXiang.setText(userCardbefore.getData().getEmail());
+                        editZhiHang.setText(userCardbefore.getData().getSubbranch());
                         Glide.with(getActivity())
                                 .load(userCardbefore.getData().getImg())
                                 .asBitmap()
@@ -472,7 +487,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 sendSMS();
                 break;
             case R.id.buttonNext:
-                if (submitStatus!= 1) {
+                if (submitStatus != 1) {
                     Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -483,6 +498,14 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
                 if (!checkIdCard.validate()) {
                     Toast.makeText(getActivity(), "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(editWXHao.getText().toString().toString().trim())) {
+                    Toast.makeText(getActivity(), "请输入微信号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!StringUtil.checkEmail(editYouXiang.getText().toString().toString().trim())) {
+                    Toast.makeText(getActivity(), "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(userCardbefore.getData().getBankName()) || userCardbefore.getData().getBank() <= 0) {
@@ -559,7 +582,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                         count[0]++;
                                         progressDialog.setProgress(count[0]);
                                         progressDialog.setMessage("已上传" + count[0] + "/5");
-                                        imgList.set(finalI,respondAppimgadd.getImgId());
+                                        imgList.set(finalI, respondAppimgadd.getImgId());
                                         if (count[0] == 5) {
                                             progressDialog.dismiss();
                                             userCardbefore.getData().setImgId(imgList.get(0));
@@ -635,6 +658,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         params.put("name", userCardbefore.getData().getName());
         params.put("bankCard", userCardbefore.getData().getBankCard());
         params.put("bank", userCardbefore.getData().getBank() + "");
+        params.put("email", userCardbefore.getData().getEmail());
+        params.put("weixin", userCardbefore.getData().getWeixin());
+        params.put("subbranch", userCardbefore.getData().getSubbranch());
         params.put("imgId", userCardbefore.getData().getImgId() + "");
         params.put("imgId2", userCardbefore.getData().getImgId2() + "");
         params.put("imgId3", userCardbefore.getData().getImgId3() + "");
@@ -702,6 +728,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                         userCardbefore.getData().setCard(editCard.getText().toString().trim());
                         userCardbefore.getData().setBankCard(editBankCard.getText().toString().trim());
                         userCardbefore.getData().setPhone(editPhone.getText().toString().trim());
+                        userCardbefore.getData().setWeixin(editWXHao.getText().toString().trim());
+                        userCardbefore.getData().setEmail(editYouXiang.getText().toString().trim());
+                        userCardbefore.getData().setSubbranch(editZhiHang.getText().toString().trim());
                         viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
                         viewTianXinXi.setVisibility(View.GONE);
                         scrollView.setVisibility(View.VISIBLE);

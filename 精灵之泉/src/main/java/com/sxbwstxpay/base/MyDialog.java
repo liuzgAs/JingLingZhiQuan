@@ -268,7 +268,7 @@ public class MyDialog {
                         text3.setText(goodsEwm.getText3());
                         TextView textPrice = (TextView) dialog_fen_xiang_erm.findViewById(R.id.textPrice);
                         SpannableString span = new SpannableString("¥"+goodsEwm.getPrice());
-                        span.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        span.setSpan(new RelativeSizeSpan(0.7f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textPrice.setText(span);
                         final AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.dialog)
                                 .setView(dialog_fen_xiang_erm)

@@ -106,11 +106,38 @@ public class UserCardbefore {
         private String img3;
         private String img4;
         private String img5;
+        private String email;
+        private String weixin;
+        private String subbranch;
         private int imgId;
         private int imgId2;
         private int imgId3;
         private int imgId4;
         private int imgId5;
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getWeixin() {
+            return weixin;
+        }
+
+        public void setWeixin(String weixin) {
+            this.weixin = weixin;
+        }
+
+        public String getSubbranch() {
+            return subbranch;
+        }
+
+        public void setSubbranch(String subbranch) {
+            this.subbranch = subbranch;
+        }
 
         public String getImg5() {
             return img5;
