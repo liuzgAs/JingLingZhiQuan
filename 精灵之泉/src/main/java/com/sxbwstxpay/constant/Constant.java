@@ -226,6 +226,7 @@ public class Constant {
         public static final int BaoCun = 2026;
         public static final int address = 2027;
         public static final int IMAGE_DIANZHAO = 2028;
+        public static final int IMAGE_PICKER = 2029;
     }
 
     public static class ACACHE {

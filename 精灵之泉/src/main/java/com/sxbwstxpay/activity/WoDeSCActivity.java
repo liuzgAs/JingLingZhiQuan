@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,6 +31,7 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     private int page = 1;
     private View viewBar;
     private TextView textFaBuEmpty;
+    private View viewFaBu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
         viewBar = findViewById(R.id.viewBar);
         textFaBuEmpty = (TextView) recyclerView.getEmptyView().findViewById(R.id.textFaBu);
+        viewFaBu = findViewById(R.id.viewFaBu);
     }
 
     @Override
@@ -122,6 +125,7 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
         textFaBuEmpty.setOnClickListener(this);
+        viewFaBu.setOnClickListener(this);
     }
 
     @Override
@@ -156,6 +160,11 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.viewFaBu:
+                Intent intent = new Intent();
+                intent.setClass(this,FaBuSCActivity.class);
+                startActivity(intent);
+                break;
             case R.id.textFaBu:
                 LogUtil.LogShitou("WoDeSCActivity--onClick", "点击空布局");
                 break;
