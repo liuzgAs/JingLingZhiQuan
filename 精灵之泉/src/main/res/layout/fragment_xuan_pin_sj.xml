@@ -5,84 +5,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.sxbwstxpay.fragment.XuanPinSJFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:visibility="gone"
+        android:orientation="horizontal"
         android:layout_marginBottom="1dp"
         android:layout_marginTop="1dp"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/relativeLayout8">
+        >
 
-        <TextView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="距离"
-            android:textSize="@dimen/normal_textsize"
-            android:id="@+id/textView135"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:gravity="center_vertical"
-            android:textColor="@color/basic_color"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="佣金"
-            android:textSize="@dimen/normal_textsize"
-            android:id="@+id/textView137"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textView135"
-            android:layout_toStartOf="@+id/textView135" />
+            <TextView
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="综合排序"
+                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textView147"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-        <TextView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="销量优先"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textView137"
-            android:layout_toStartOf="@+id/textView137" />
+            <ImageView
+                android:src="@mipmap/down_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/textView147"
+                android:layout_toEndOf="@+id/textView147" />
+        </RelativeLayout>
 
-        <TextView
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="综合排序"
-            android:textSize="@dimen/normal_textsize"
-            android:id="@+id/textView147"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:src="@mipmap/down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView147"
-            android:layout_toEndOf="@+id/textView147" />
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="销量优先"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_centerVertical="true"
+                android:id="@+id/textView23" />
 
-        <ImageView
-            android:src="@mipmap/down_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView147"
-            android:layout_toEndOf="@+id/textView147" />
-    </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="佣金"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_centerVertical="true"
+                android:id="@+id/textView24" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recyclerView"
@@ -91,7 +89,7 @@
         app:scrollbarStyle="insideOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout8" />
+         />
     <RelativeLayout
         android:id="@+id/viewShangJiaTip"
         android:layout_width="match_parent"
@@ -168,4 +166,5 @@
             android:src="@mipmap/shangjia_toast" />
 
     </RelativeLayout>
+
 </RelativeLayout>

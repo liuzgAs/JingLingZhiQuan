@@ -1,10 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:orientation="vertical"
     tools:context="com.sxbwstxpay.fragment.ShengQianCZFragment">
 
     <RelativeLayout
@@ -112,21 +111,58 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.TabLayout
-        app:tabMode="scrollable"
-        android:id="@+id/tablayout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/basic_color"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/basic_color"
-        app:tabTextAppearance="@style/TabLayoutTextStyle"
-        app:tabTextColor="@color/light_black" />
+        android:id="@+id/relativeLayout8"
+        android:layout_below="@+id/relaTitleStatue">
+
+        <android.support.design.widget.TabLayout
+            app:tabMode="scrollable"
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/basic_color"
+            app:tabIndicatorHeight="0dp"
+            app:tabSelectedTextColor="@color/basic_color"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextColor="@color/light_black"
+            android:layout_toLeftOf="@+id/imageShaiXuan"
+            android:layout_toStartOf="@+id/imageShaiXuan" />
+
+        <ImageView
+            android:background="@color/white"
+            android:paddingRight="10dp"
+            android:paddingLeft="15dp"
+            android:src="@mipmap/shaixuan"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageShaiXuan"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout8" />
+    <RelativeLayout
+        android:background="@color/tranblack"
+        android:id="@+id/viewShaiXuan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/viewPager">
 
-</LinearLayout>
+        <ListView
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewShaiXuan"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</RelativeLayout>

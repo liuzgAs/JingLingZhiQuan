@@ -61,11 +61,11 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.ShangJia02:
                     String value = intent.getStringExtra(Constant.INTENT_KEY.value);
                     textNum.setText(value);
-                    if (viewShangJiaTip.getVisibility()==View.VISIBLE){
+                    if (viewShangJiaTip.getVisibility() == View.VISIBLE) {
                         timer.cancel();
                         timer = new Timer();
                         timer.schedule(new TimerTask() {
@@ -79,8 +79,8 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                                 });
                             }
                         }, 2000, 1000);
-                    }else {
-                        Animation animation01 = AnimationUtils.loadAnimation(getActivity(),R.anim.push_up_in);
+                    } else {
+                        Animation animation01 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_up_in);
                         viewShangJiaTip.startAnimation(animation01);
                         viewShangJiaTip.setVisibility(View.VISIBLE);
                         timer = new Timer();
@@ -97,28 +97,36 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         }, 2000, 1000);
                     }
                     break;
+                case Constant.BROADCASTCODE.ShaiXuan:
+                    sort = intent.getStringExtra(Constant.INTENT_KEY.value);
+                    recyclerView.showProgress();
+                    onRefresh();
+                    break;
             }
         }
     };
     private TextView textNum;
     private String lat;
     private String lng;
+    private int position;
+    private String sort;
 
-    public void hideView(){
-        Animation animation02 = AnimationUtils.loadAnimation(getActivity(),R.anim.push_down_out);
+    public void hideView() {
+        Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
         viewShangJiaTip.startAnimation(animation02);
         viewShangJiaTip.setVisibility(View.GONE);
-        if (timer!=null){
+        if (timer != null) {
             timer.cancel();
         }
-        timer =null;
+        timer = null;
     }
 
     public XuanPinSJFragment() {
         // Required empty public constructor
     }
 
-    public XuanPinSJFragment(int id) {
+    public XuanPinSJFragment(int position, int id) {
+        this.position = position;
         this.id = id;
     }
 
@@ -181,32 +189,32 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-              ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
-                  @Override
-                  public void onSuccess(String s) {
-                      LogUtil.LogShitou("XuanPinSJFragment--选品上架更多", s+"");
-                      try {
-                          page++;
-                          GoodsIndex goodsIndex = GsonUtils.parseJSON(s, GoodsIndex.class);
-                          int status = goodsIndex.getStatus();
-                          if (status == 1) {
-                              List<IndexDataBean> goodsIndexData = goodsIndex.getData();
-                              adapter.addAll(goodsIndexData);
-                          } else if (status == 3) {
-                              MyDialog.showReLoginDialog(getActivity());
-                          } else {
-                              adapter.pauseMore();
-                          }
-                      } catch (Exception e) {
-                          adapter.pauseMore();
-                      }
-                  }
+                ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        LogUtil.LogShitou("XuanPinSJFragment--选品上架更多", s + "");
+                        try {
+                            page++;
+                            GoodsIndex goodsIndex = GsonUtils.parseJSON(s, GoodsIndex.class);
+                            int status = goodsIndex.getStatus();
+                            if (status == 1) {
+                                List<IndexDataBean> goodsIndexData = goodsIndex.getData();
+                                adapter.addAll(goodsIndexData);
+                            } else if (status == 3) {
+                                MyDialog.showReLoginDialog(getActivity());
+                            } else {
+                                adapter.pauseMore();
+                            }
+                        } catch (Exception e) {
+                            adapter.pauseMore();
+                        }
+                    }
 
-                  @Override
-                  public void onError(Response response) {
-                      adapter.pauseMore();
-                  }
-              });
+                    @Override
+                    public void onError(Response response) {
+                        adapter.pauseMore();
+                    }
+                });
             }
 
             @Override
@@ -240,7 +248,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent();
-                intent.putExtra(Constant.INTENT_KEY.id,adapter.getItem(position).getId());
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
                 intent.setClass(getActivity(), ChanPinXQActivity.class);
                 startActivity(intent);
             }
@@ -265,12 +273,13 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.GOODS_INDEX;
         HashMap<String, String> params = new HashMap<>();
-        params.put("id", id+"");
-        params.put("p", page+"");
+        params.put("id", id + "");
+        params.put("p", page + "");
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
         params.put("lat", lat);
         params.put("lng", lng);
+        params.put("sort", sort);
         return new OkObject(params, url);
     }
 
@@ -321,11 +330,17 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.ShangJia02);
-        getActivity().registerReceiver(reciver,filter);
+        filter.addAction(Constant.BROADCASTCODE.ShaiXuan);
+        getActivity().registerReceiver(reciver, filter);
     }
 
     @Override
@@ -333,4 +348,5 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         super.onDestroy();
         getActivity().unregisterReceiver(reciver);
     }
+
 }

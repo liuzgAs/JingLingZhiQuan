@@ -261,6 +261,7 @@ public class Constant {
         public static final String VIP_TUI_GUANG_SHANG = "vip_tui_guang_shang";
         public static final String GouWuCheNum = "GouWuCheNum";
         public static final String GuanBiShouKuan = "GuanBiShouKuan";
+        public static final String ShaiXuan = "ShaiXuan";
     }
 
 }
