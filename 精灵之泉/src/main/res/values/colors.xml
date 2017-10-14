@@ -10,7 +10,7 @@
     <color name="text_gray">#c7c7c7</color>
     <color name="gray_white">#dcd5d5</color>
     <color name="background">#f0f9ee</color>
-    <color name="light_black">#444444</color>
+    <color name="light_black">#000000</color>
     <color name="gray_deep">#5c5c5c</color>
     <color name="tranwhite">#66ffffff</color>
     <color name="tranwhite1">#ccffffff</color>

@@ -46,10 +46,12 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text="成为VIP精灵推广商，费率直降、自用省钱、分享赚钱"
-                        android:textColor="@color/light_black"
+                        android:textColor="#444444"
                         android:textSize="16dp" />
 
                     <TextView
+                        android:textSize="@dimen/normal_textsize"
+                        android:textColor="#bababa"
                         android:id="@+id/textDes1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -125,10 +127,12 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text="分享注册链接，佣金大家赚"
-                        android:textColor="@color/light_black"
+                        android:textColor="#444444"
                         android:textSize="16dp" />
 
                     <TextView
+                        android:textColor="#bababa"
+                        android:textSize="@dimen/normal_textsize"
                         android:id="@+id/textDes2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -206,10 +210,12 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text="分享个人二维码"
-                        android:textColor="@color/light_black"
+                        android:textColor="#444444"
                         android:textSize="16dp" />
 
                     <TextView
+                        android:textColor="#bababa"
+                        android:textSize="@dimen/normal_textsize"
                         android:id="@+id/textDes3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -236,7 +242,7 @@
         <ImageView
             android:id="@+id/imageView42"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -288,10 +294,12 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text="每日一键推广图文，轻松赚佣金"
-                        android:textColor="@color/light_black"
+                        android:textColor="#444444"
                         android:textSize="16dp" />
 
                     <TextView
+                        android:textColor="#bababa"
+                        android:textSize="@dimen/normal_textsize"
                         android:id="@+id/textDes4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -318,7 +326,7 @@
         <ImageView
             android:id="@+id/imageView43"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"

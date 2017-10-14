@@ -21,6 +21,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -130,7 +131,14 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     @Override
     protected void setListeners() {
-
+        viewImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), TuiGuangActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     @Override
