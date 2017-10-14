@@ -350,7 +350,8 @@
         <!-- 支付宝h5 -->
         <activity android:name=".activity.GuanLiWDDPActivity" />
         <activity android:name=".activity.SouSuoActivity" />
-        <activity android:name=".activity.FangKeGLActivity"></activity>
+        <activity android:name=".activity.FangKeGLActivity" />
+        <activity android:name=".activity.WoDeSCActivity"></activity>
     </application>
 
 </manifest>

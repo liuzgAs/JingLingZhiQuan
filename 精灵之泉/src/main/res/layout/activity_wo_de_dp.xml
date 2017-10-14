@@ -511,7 +511,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="gone"
+        android:id="@+id/viewWoDeSuCai"
         android:layout_marginTop="1dp"
         android:background="@color/white"
         android:layout_width="match_parent"

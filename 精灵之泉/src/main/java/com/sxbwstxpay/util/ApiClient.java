@@ -7,6 +7,8 @@ import com.lzy.okgo.callback.StringCallback;
 
 import com.sxbwstxpay.model.OkObject;
 
+import java.util.HashMap;
+
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -22,6 +24,10 @@ public class ApiClient {
     }
 
     public static void post(Context context, OkObject okObject, final CallBack callBack) {
+        HashMap<String, String> params = okObject.getParams();
+        params.put("platform","android");
+        params.put("version",VersionUtils.getCurrVersion(context)+"");
+        okObject.setParams(params);
         LogUtil.LogShitou("ApiClient--发送", "" + okObject.getJson());
         OkGo.post(okObject.getUrl())//
                 .tag(context)//
