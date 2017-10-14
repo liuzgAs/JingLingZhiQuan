@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +11,12 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.WoDeSCViewHolder;
 
@@ -26,6 +29,8 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     private RecyclerArrayAdapter<Integer> adapter;
     private int page = 1;
     private View viewBar;
+    private TextView textFaBuEmpty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,7 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     protected void findID() {
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
         viewBar = findViewById(R.id.viewBar);
+        textFaBuEmpty = (TextView) recyclerView.getEmptyView().findViewById(R.id.textFaBu);
     }
 
     @Override
@@ -55,16 +61,20 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
+        textFaBuEmpty.setText("发布一篇素材");
         initRecycler();
     }
 
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.line_width), 0, 0);
+        itemDecoration.setDrawLastItem(false);
+        recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(WoDeSCActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_gonggao;
+                int layout = R.layout.item_su_cai;
                 return new WoDeSCViewHolder(parent, layout);
             }
         });
@@ -111,6 +121,7 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
+        textFaBuEmpty.setOnClickListener(this);
     }
 
     @Override
@@ -138,12 +149,16 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         page = 1;
         adapter.clear();
         List<Integer> list = new ArrayList<>();
+        list.add(0);
         adapter.addAll(list);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.textFaBu:
+                LogUtil.LogShitou("WoDeSCActivity--onClick", "点击空布局");
+                break;
             case R.id.imageBack:
                 finish();
                 break;

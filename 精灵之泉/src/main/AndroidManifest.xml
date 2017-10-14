@@ -351,7 +351,8 @@
         <activity android:name=".activity.GuanLiWDDPActivity" />
         <activity android:name=".activity.SouSuoActivity" />
         <activity android:name=".activity.FangKeGLActivity" />
-        <activity android:name=".activity.WoDeSCActivity"></activity>
+        <activity android:name=".activity.WoDeSCActivity" />
+        <activity android:name=".activity.FaBuSCActivity"></activity>
     </application>
 
 </manifest>

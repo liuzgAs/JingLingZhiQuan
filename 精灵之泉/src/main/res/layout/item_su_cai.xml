@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView15"
+        android:lineSpacingMultiplier="1.5"
+        android:id="@+id/textDes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -14,5 +16,41 @@
         android:text="2017新款女鞋2017新款女鞋2017新款女鞋2017新款女鞋2017新款女鞋2017新款女鞋2017新款女鞋2017新款女鞋2017新款女鞋2017新款女鞋"
         android:textColor="@color/light_black"
         android:textSize="@dimen/normal_textsize" />
+    <com.sxbwstxpay.customview.GridView4ScrollView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:horizontalSpacing="8dp"
+        android:numColumns="3"
+        android:verticalSpacing="8dp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/light_black"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-10-14"
+            android:id="@+id/textView15"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:src="@mipmap/more"
+            android:paddingRight="10dp"
+            android:paddingLeft="15dp"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView15"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 </LinearLayout>

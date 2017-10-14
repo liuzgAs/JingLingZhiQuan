@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="发布一篇素材"
             android:layout_marginTop="10dp"
-            android:id="@+id/textView17"
+            android:id="@+id/textFaBu"
             android:layout_below="@+id/textView16"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
