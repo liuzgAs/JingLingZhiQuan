@@ -40,7 +40,7 @@ import okhttp3.Response;
 public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<UserMoneylog.DataBean> adapter;
+    private RecyclerArrayAdapter<List<UserMoneylog.DataBean>> adapter;
     private int page = 1;
     private int type = 1;
     private String s_time;
@@ -109,10 +109,10 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<UserMoneylog.DataBean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<List<UserMoneylog.DataBean>>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_shouyi_mx;
+                int layout = R.layout.item_zhangdan_list;
                 return new ZhangDanViewHolder(parent, layout);
             }
         });
@@ -168,12 +168,13 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                 ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
+                        LogUtil.LogShitou("ZhangDanFragment--我的账单更多", s+"");
                         try {
                             page++;
                             UserMoneylog userMoneylog = GsonUtils.parseJSON(s, UserMoneylog.class);
                             int status = userMoneylog.getStatus();
                             if (status == 1) {
-                                List<UserMoneylog.DataBean> userMoneylogData = userMoneylog.getData();
+                                List<List<UserMoneylog.DataBean>> userMoneylogData = userMoneylog.getData();
                                 adapter.addAll(userMoneylogData);
                             } else if (status == 3) {
                                 MyDialog.showReLoginDialog(getActivity());
@@ -254,7 +255,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                     page++;
                     UserMoneylog userMoneylog = GsonUtils.parseJSON(s, UserMoneylog.class);
                     if (userMoneylog.getStatus() == 1) {
-                        List<UserMoneylog.DataBean> userMoneylogData = userMoneylog.getData();
+                        List<List<UserMoneylog.DataBean>> userMoneylogData = userMoneylog.getData();
                         adapter.clear();
                         adapter.addAll(userMoneylogData);
                     } else if (userMoneylog.getStatus() == 3) {

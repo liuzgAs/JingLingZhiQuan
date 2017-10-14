@@ -1,106 +1,89 @@
 package com.sxbwstxpay.viewholder;
 
 import android.support.annotation.LayoutRes;
-import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.UserMoneylog;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
  */
-public class ZhangDanViewHolder extends BaseViewHolder<UserMoneylog.DataBean> {
-    private final ImageView imageZhanKai;
-    private UserMoneylog.DataBean data;
-    private final View viewDetail;
-    private final TextView textTitle;
-    private final TextView textDate;
-    private final TextView textText;
-    private final TextView textMoney;
-    private final TextView textBlance;
-    private final TextView textToMoney;
-    private final TextView textPaymen;
-    private final TextView textFee;
-    private final TextView textRate;
-    private final TextView textOrderSn;
-    private int yingCangNum = 0;
+public class ZhangDanViewHolder extends BaseViewHolder<List<UserMoneylog.DataBean>> {
+
+    private final ListView listView;
+    private List<UserMoneylog.DataBean> data;
 
     public ZhangDanViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
-        imageZhanKai = $(R.id.imageZhanKai);
-        viewDetail = $(R.id.viewDetail);
-        textTitle = $(R.id.textTitle);
-        textDate = $(R.id.textDate);
-        textText = $(R.id.textText);
-        textMoney = $(R.id.textMoney);
-        textBlance = $(R.id.textBlance);
-        textToMoney = $(R.id.textToMoney);
-        textPaymen = $(R.id.textPaymen);
-        textFee = $(R.id.textFee);
-        textRate = $(R.id.textRate);
-        textOrderSn = $(R.id.textOrderSn);
-
-        imageZhanKai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!data.isZhanKai()) {
-                    data.setZhanKai(true);
-                    imageZhanKai.setImageResource(R.mipmap.shousuo);
-                    switch (yingCangNum) {
-                        case 0:
-                            viewDetail.setBackgroundResource(R.mipmap.dingdan8);
-                            break;
-                        case 1:
-                            viewDetail.setBackgroundResource(R.mipmap.dingdan7);
-                            break;
-                        case 2:
-                            viewDetail.setBackgroundResource(R.mipmap.dingdan6);
-                            break;
-                        case 3:
-                            viewDetail.setBackgroundResource(R.mipmap.dingdan5);
-                            break;
-                    }
-                } else {
-                    data.setZhanKai(false);
-                    imageZhanKai.setImageResource(R.mipmap.zhankai);
-                    viewDetail.setBackgroundResource(R.mipmap.dingdan4);
-                }
-            }
-        });
+        listView = $(R.id.listView);
     }
 
     @Override
-    public void setData(UserMoneylog.DataBean data) {
+    public void setData(List<UserMoneylog.DataBean> data) {
         super.setData(data);
         this.data = data;
-        textTitle.setText(data.getTitle());
-        textDate.setText(data.getDate());
-        textText.setText(data.getText());
-        textMoney.setText("¥" + data.getMoney());
-        textBlance.setText("¥" + data.getBlance());
-        textToMoney.setText("¥" + data.getToMoney());
-        if (TextUtils.isEmpty(data.getPaymen())) {
-            yingCangNum++;
+        listView.setAdapter(new MyAdapter());
+    }
+
+    class MyAdapter extends BaseAdapter {
+        class ViewHolder {
+            public TextView textDes;
+            public TextView textName;
+            public TextView textLine;
         }
-        if (TextUtils.isEmpty(data.getFee())) {
-            yingCangNum++;
+
+        @Override
+        public int getCount() {
+            return data.size();
         }
-        if (TextUtils.isEmpty(data.getRate())) {
-            yingCangNum++;
+
+        @Override
+        public Object getItem(int position) {
+            return null;
         }
-        if (TextUtils.isEmpty(data.getOrderSn())) {
-            yingCangNum++;
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
         }
-        textPaymen.setText(data.getPaymen());
-        textFee.setText("¥" + data.getFee());
-        textRate.setText(data.getRate());
-        textOrderSn.setText(data.getOrderSn());
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                holder = new ViewHolder();
+                if (position == 0) {
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_zhang_dan01, null);
+                } else if (position == 1) {
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_zhang_dan02, null);
+                } else {
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_zhang_dan03, null);
+                }
+                holder.textDes = (TextView) convertView.findViewById(R.id.textDes);
+                holder.textName = (TextView) convertView.findViewById(R.id.textName);
+                holder.textLine = (TextView) convertView.findViewById(R.id.textLine);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            if (position == data.size() - 1) {
+                holder.textLine.setVisibility(View.GONE);
+            }else {
+                holder.textLine.setVisibility(View.VISIBLE);
+            }
+            holder.textDes.setText(data.get(position).getRight());
+            holder.textName.setText(data.get(position).getLeft());
+            return convertView;
+        }
     }
 
 }

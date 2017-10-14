@@ -192,6 +192,7 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.WoDeZDActivity"
+            android:hardwareAccelerated="false"
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.WoDeZLActivity"
