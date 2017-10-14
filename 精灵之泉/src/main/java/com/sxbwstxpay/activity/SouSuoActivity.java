@@ -42,7 +42,7 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
-import com.sxbwstxpay.viewholder.XianShiQGViewHolder;
+import com.sxbwstxpay.viewholder.XuanPinSJViewHolder;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.Tencent;
@@ -189,8 +189,8 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(SouSuoActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_xian_shi_qg;
-                return new XianShiQGViewHolder(parent, layout, "SouSuoActivity");
+                int layout = R.layout.item_xuan_pin_sj;
+                return new XuanPinSJViewHolder(parent, layout, "SouSuoActivity");
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -367,7 +367,7 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObjectSouSuo() {
-        String url = Constant.HOST + Constant.Url.INDEX_GOODS;
+        String url = Constant.HOST + Constant.Url.GOODS_INDEX;
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);

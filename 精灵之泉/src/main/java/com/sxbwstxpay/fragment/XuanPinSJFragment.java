@@ -183,7 +183,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xuan_pin_sj;
-                return new XuanPinSJViewHolder(parent, layout);
+                return new XuanPinSJViewHolder(parent, layout,"MainActivity");
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
