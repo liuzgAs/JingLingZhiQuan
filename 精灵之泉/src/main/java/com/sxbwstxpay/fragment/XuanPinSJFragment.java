@@ -250,6 +250,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
                 intent.setClass(getActivity(), ChanPinXQActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });
