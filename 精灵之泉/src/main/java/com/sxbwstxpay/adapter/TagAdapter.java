@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.customview.OnInitSelectedPosition;
-import com.sxbwstxpay.model.GoodsInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 public class TagAdapter extends BaseAdapter implements OnInitSelectedPosition {
 
     private final Context mContext;
-    private final List<GoodsInfo.AdBean.DesBean> mDataList;
+    private final List<String> mDataList;
 
     public TagAdapter(Context context) {
         this.mContext = context;
@@ -34,7 +33,7 @@ public class TagAdapter extends BaseAdapter implements OnInitSelectedPosition {
     }
 
     @Override
-    public GoodsInfo.AdBean.DesBean getItem(int position) {
+    public String getItem(int position) {
         return mDataList.get(position);
     }
 
@@ -49,7 +48,7 @@ public class TagAdapter extends BaseAdapter implements OnInitSelectedPosition {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_guige, null);
 
         TextView textView = (TextView) view.findViewById(R.id.textDes);
-        String t = mDataList.get(position).getName();
+        String t = mDataList.get(position);
 
 //        if (t instanceof String) {
             textView.setText(t);
@@ -57,12 +56,12 @@ public class TagAdapter extends BaseAdapter implements OnInitSelectedPosition {
         return view;
     }
 
-    public void onlyAddAll(List<GoodsInfo.AdBean.DesBean> datas) {
+    public void onlyAddAll(List<String> datas) {
         mDataList.addAll(datas);
         notifyDataSetChanged();
     }
 
-    public void clearAndAddAll(List<GoodsInfo.AdBean.DesBean> datas) {
+    public void clearAndAddAll(List<String> datas) {
         mDataList.clear();
         onlyAddAll(datas);
     }

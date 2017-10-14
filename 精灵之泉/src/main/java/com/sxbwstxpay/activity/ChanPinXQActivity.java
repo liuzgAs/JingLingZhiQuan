@@ -39,6 +39,7 @@ import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.FlowTagLayout;
 import com.sxbwstxpay.customview.OnTagSelectListener;
+import com.sxbwstxpay.model.AddCar;
 import com.sxbwstxpay.model.CartAddcart;
 import com.sxbwstxpay.model.GoodsInfo;
 import com.sxbwstxpay.model.IndexCate;
@@ -76,7 +77,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
     private int viewBarHeight;
     private String id;
     private GoodsInfo.AdBean goodsInfoAd;
-    private List<GoodsInfo.AdBean.DesBean> goodsInfoAdDes;
+    //    private List<GoodsInfo.AdBean.DesBean> goodsInfoAdDes;
     private int num = 1;
     private AlertDialog alertDialog1;
     private TagAdapter tagAdapter;
@@ -425,8 +426,15 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
      */
 
     private void mai() {
-        for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-            goodsInfoAdDes.get(i).setSelect(false);
+//        for (int i = 0; i < goodsInfoAdDes.size(); i++) {
+//            goodsInfoAdDes.get(i).setSelect(false);
+//        }
+        for (int i = 0; i < goodsInfoAd.getSize_str().size(); i++) {
+            List<Boolean> isSelect = new ArrayList<>();
+            for (int j = 0; j < goodsInfoAd.getSize_str().get(i).getContent().size(); j++) {
+                isSelect.add(false);
+            }
+            goodsInfoAd.getSize_str().get(i).setIsSelect(isSelect);
         }
         LayoutInflater inflater = LayoutInflater.from(ChanPinXQActivity.this);
         View dialog_chan_pin = inflater.inflate(R.layout.dialog_chan_pin, null);
@@ -445,7 +453,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
 
-        View viewGuiGe = dialog_chan_pin.findViewById(R.id.viewGuiGe);
         if (countdown > 0) {
             textDaoJiShi.setVisibility(View.VISIBLE);
             viewKeGouMai.setVisibility(View.GONE);
@@ -487,27 +494,32 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 }
             }
         });
-        if (goodsInfoAdDes.size() > 0) {
-            viewGuiGe.setVisibility(View.VISIBLE);
-            FlowTagLayout flowTagLayout = (FlowTagLayout) dialog_chan_pin.findViewById(R.id.flowTagLayout);
-            flowTagLayout.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
-            tagAdapter = new TagAdapter(ChanPinXQActivity.this);
-            flowTagLayout.setAdapter(tagAdapter);
-            tagAdapter.clearAndAddAll(goodsInfoAdDes);
-            flowTagLayout.setOnTagSelectListener(new OnTagSelectListener() {
-                @Override
-                public void onItemSelect(FlowTagLayout parent, List<Integer> selectedList) {
-                    for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-                        goodsInfoAdDes.get(i).setSelect(false);
-                    }
-                    for (int i = 0; i < selectedList.size(); i++) {
-                        LogUtil.LogShitou("DaiYingYaoFragment--onItemSelect", "" + selectedList.get(i));
-                        goodsInfoAdDes.get(selectedList.get(i)).setSelect(true);
-                    }
-                }
-            });
+//        if (goodsInfoAdDes.size() > 0) {
+//            FlowTagLayout flowTagLayout = (FlowTagLayout) dialog_chan_pin.findViewById(R.id.flowTagLayout);
+//            flowTagLayout.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+//            tagAdapter = new TagAdapter(ChanPinXQActivity.this);
+//            flowTagLayout.setAdapter(tagAdapter);
+//            tagAdapter.clearAndAddAll(goodsInfoAdDes);
+//            flowTagLayout.setOnTagSelectListener(new OnTagSelectListener() {
+//                @Override
+//                public void onItemSelect(FlowTagLayout parent, List<Integer> selectedList) {
+//                    for (int i = 0; i < goodsInfoAdDes.size(); i++) {
+//                        goodsInfoAdDes.get(i).setSelect(false);
+//                    }
+//                    for (int i = 0; i < selectedList.size(); i++) {
+//                        LogUtil.LogShitou("DaiYingYaoFragment--onItemSelect", "" + selectedList.get(i));
+//                        goodsInfoAdDes.get(selectedList.get(i)).setSelect(true);
+//                    }
+//                }
+//            });
+//        } else {
+//        }
+        ListView listGuiZe = (ListView) dialog_chan_pin.findViewById(R.id.listGuiZe);
+        if (goodsInfoAd.getSize_str().size() > 0) {
+            listGuiZe.setVisibility(View.VISIBLE);
+            listGuiZe.setAdapter(new MySizeAdapter());
         } else {
-            viewGuiGe.setVisibility(View.GONE);
+            listGuiZe.setVisibility(View.GONE);
         }
         alertDialog1 = new AlertDialog.Builder(ChanPinXQActivity.this, R.style.dialog)
                 .setView(dialog_chan_pin)
@@ -522,27 +534,83 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         dialogWindow.setAttributes(lp);
     }
 
+    class MySizeAdapter extends BaseAdapter {
+        class ViewHolder {
+            public TextView textName;
+            public FlowTagLayout flowTagLayout;
+        }
+
+        @Override
+        public int getCount() {
+            return goodsInfoAd.getSize_str().size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                holder = new ViewHolder();
+                convertView = LayoutInflater.from(ChanPinXQActivity.this).inflate(R.layout.item_guige_list, null);
+                holder.textName = (TextView) convertView.findViewById(R.id.textName);
+                holder.flowTagLayout = (FlowTagLayout) convertView.findViewById(R.id.flowTagLayout);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            List<GoodsInfo.AdBean.SizeStrBean> sizeStrBeanList = goodsInfoAd.getSize_str();
+            holder.textName.setText(sizeStrBeanList.get(position).getName());
+            holder.flowTagLayout.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+            tagAdapter = new TagAdapter(ChanPinXQActivity.this);
+            holder.flowTagLayout.setAdapter(tagAdapter);
+            List<String> content = sizeStrBeanList.get(position).getContent();
+            tagAdapter.clearAndAddAll(content);
+            holder.flowTagLayout.setOnTagSelectListener(new OnTagSelectListener() {
+                @Override
+                public void onItemSelect(FlowTagLayout parent, List<Integer> selectedList) {
+                    for (int i = 0; i < goodsInfoAd.getSize_str().get(position).getIsSelect().size(); i++) {
+                        goodsInfoAd.getSize_str().get(position).getIsSelect().set(i, false);
+                    }
+                    for (int i = 0; i < selectedList.size(); i++) {
+                        LogUtil.LogShitou("DaiYingYaoFragment--onItemSelect", "" + selectedList.get(i));
+                        goodsInfoAd.getSize_str().get(position).getIsSelect().set(selectedList.get(i), true);
+                    }
+                }
+            });
+            return convertView;
+        }
+    }
+
     /**
      * des： 网络请求参数
      * author： ZhangJieBo
      * date： 2017/8/28 0028 上午 9:55
      */
-    private OkObject getOkObjectAddCar() {
-        String url = Constant.HOST + Constant.Url.CART_ADDCART;
-        HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
-        params.put("tokenTime", tokenTime);
-        params.put("num", num + "");
-        params.put("id", id);
-        String speId = "";
-        for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-            if (goodsInfoAdDes.get(i).isSelect()) {
-                speId = goodsInfoAdDes.get(i).getId();
-            }
-        }
-        params.put("speId", speId);
-        return new OkObject(params, url);
-    }
+//    private OkObject getOkObjectAddCar() {
+//        String url = Constant.HOST + Constant.Url.CART_ADDCART;
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("uid", userInfo.getUid());
+//        params.put("tokenTime", tokenTime);
+//        params.put("num", num + "");
+//        params.put("id", id);
+//        String speId = "";
+//        for (int i = 0; i < goodsInfoAdDes.size(); i++) {
+//            if (goodsInfoAdDes.get(i).isSelect()) {
+//                speId = goodsInfoAdDes.get(i).getId();
+//            }
+//        }
+//        params.put("speId", speId);
+//        return new OkObject(params, url);
+//    }
 
     /**
      * des： 购物车新增
@@ -550,20 +618,24 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
      * date： 2017/9/26 0026 下午 2:20
      */
     private void addCar(final boolean quick) {
-        if (goodsInfoAdDes.size() > 0) {
-            boolean hasId = false;
-            for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-                if (goodsInfoAdDes.get(i).isSelect()) {
-                    hasId = true;
+        List<String> spe_name = new ArrayList<>();
+        if (goodsInfoAd.getSize_str().size() > 0) {
+            for (int i = 0; i < goodsInfoAd.getSize_str().size(); i++) {
+                for (int j = 0; j < goodsInfoAd.getSize_str().get(i).getIsSelect().size(); j++) {
+                    if (goodsInfoAd.getSize_str().get(i).getIsSelect().get(j)) {
+                        spe_name.add(goodsInfoAd.getSize_str().get(i).getContent().get(j));
+                    }
                 }
             }
-            if (!hasId) {
-                Toast.makeText(ChanPinXQActivity.this, "请选择规格", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        }
+        if (spe_name.size() < goodsInfoAd.getSize_str().size()) {
+            Toast.makeText(ChanPinXQActivity.this, "请选择规格", Toast.LENGTH_SHORT).show();
+            return;
         }
         showLoadingDialog();
-        ApiClient.post(ChanPinXQActivity.this, getOkObjectAddCar(), new ApiClient.CallBack() {
+        String url = Constant.HOST + Constant.Url.CART_ADDCART;
+        AddCar addCar = new AddCar(userInfo.getUid(), tokenTime, num + "", id, spe_name);
+        ApiClient.postJson(ChanPinXQActivity.this, url, GsonUtils.parseObject(addCar), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
@@ -596,6 +668,39 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 Toast.makeText(ChanPinXQActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
+//        ApiClient.post(ChanPinXQActivity.this, getOkObjectAddCar(), new ApiClient.CallBack() {
+//            @Override
+//            public void onSuccess(String s) {
+//                cancelLoadingDialog();
+//                LogUtil.LogShitou("ChanPinXQActivity-购物车新增", s + "");
+//                try {
+//                    CartAddcart cartAddcart = GsonUtils.parseJSON(s, CartAddcart.class);
+//                    if (cartAddcart.getStatus() == 1) {
+//                        alertDialog1.dismiss();
+//                        if (quick) {
+//                            Intent intent = new Intent();
+//                            intent.setClass(ChanPinXQActivity.this, GouWuCActivity.class);
+//                            startActivity(intent);
+//                        }
+//                        Intent intent = new Intent();
+//                        intent.setAction(Constant.BROADCASTCODE.GouWuCheNum);
+//                        sendBroadcast(intent);
+//                    } else if (cartAddcart.getStatus() == 3) {
+//                        MyDialog.showReLoginDialog(ChanPinXQActivity.this);
+//                    } else {
+//                        Toast.makeText(ChanPinXQActivity.this, cartAddcart.getInfo(), Toast.LENGTH_SHORT).show();
+//                    }
+//                } catch (Exception e) {
+//                    Toast.makeText(ChanPinXQActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onError(Response response) {
+//                cancelLoadingDialog();
+//                Toast.makeText(ChanPinXQActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     /**
@@ -622,10 +727,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     GoodsInfo goodsInfo = GsonUtils.parseJSON(s, GoodsInfo.class);
                     if (goodsInfo.getStatus() == 1) {
                         goodsInfoAd = goodsInfo.getAd();
-                        goodsInfoAdDes = goodsInfoAd.getDes();
-                        for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-                            goodsInfoAdDes.get(i).setSelect(false);
-                        }
                         List<RecommBean> goodsInfoRecomm = goodsInfo.getRecomm();
                         adapter.clear();
                         adapter.addAll(goodsInfoRecomm);

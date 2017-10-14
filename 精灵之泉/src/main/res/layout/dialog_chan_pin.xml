@@ -117,6 +117,14 @@
             android:layout_toRightOf="@+id/textView229" />
     </RelativeLayout>
 
+    <ListView
+        android:layout_marginBottom="10dp"
+        android:divider="@null"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listGuiZe" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -125,7 +133,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/textName"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/textDelete"

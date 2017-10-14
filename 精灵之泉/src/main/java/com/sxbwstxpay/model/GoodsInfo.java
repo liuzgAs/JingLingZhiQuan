@@ -83,6 +83,15 @@ public class GoodsInfo {
         private List<DesBean> des;
         private List<ImgsBean> imgs;
         private List<ImgsBean> imgs2;
+        private List<SizeStrBean> size_str;
+
+        public List<SizeStrBean> getSize_str() {
+            return size_str;
+        }
+
+        public void setSize_str(List<SizeStrBean> size_str) {
+            this.size_str = size_str;
+        }
 
         public String getImg() {
             return img;
@@ -204,6 +213,40 @@ public class GoodsInfo {
             this.imgs2 = imgs2;
         }
 
+        public static class SizeStrBean {
+            /**
+             * content : ["红色","绿色","金色"]
+             * name : 颜色
+             */
+
+            private String name;
+            private List<String> content;
+            private List<Boolean> isSelect;
+
+            public List<Boolean> getIsSelect() {
+                return isSelect;
+            }
+
+            public void setIsSelect(List<Boolean> isSelect) {
+                this.isSelect = isSelect;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public List<String> getContent() {
+                return content;
+            }
+
+            public void setContent(List<String> content) {
+                this.content = content;
+            }
+        }
         public static class DesBean {
             /**
              * name : a123
