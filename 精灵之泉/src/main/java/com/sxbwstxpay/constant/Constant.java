@@ -212,6 +212,8 @@ public class Constant {
         public static final String EXTRAMAP = "ExtraMap";
         public static final String CITY = "city";
         public static final String position = "position";
+        public static final String BIG_IMG_POSITION = "bigImgPosition";
+        public static final String BIG_IMG = "bigImg";
     }
 
     public static class REQUEST_RESULT_CODE {

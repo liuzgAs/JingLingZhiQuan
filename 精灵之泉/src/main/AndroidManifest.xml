@@ -349,11 +349,24 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- 支付宝h5 -->
-        <activity android:name=".activity.GuanLiWDDPActivity" />
-        <activity android:name=".activity.SouSuoActivity" />
-        <activity android:name=".activity.FangKeGLActivity" />
-        <activity android:name=".activity.WoDeSCActivity" />
-        <activity android:name=".activity.FaBuSCActivity"></activity>
+        <activity
+            android:name=".activity.GuanLiWDDPActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.SouSuoActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.FangKeGLActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeSCActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.FaBuSCActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.BigImgActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

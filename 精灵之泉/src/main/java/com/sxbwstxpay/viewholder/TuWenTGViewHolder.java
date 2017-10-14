@@ -2,20 +2,27 @@ package com.sxbwstxpay.viewholder;
 
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.LayoutRes;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.BigImgActivity;
+import com.sxbwstxpay.activity.TuWenTGActivity;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.GridView4ScrollView;
+import com.sxbwstxpay.model.BigImgList;
 import com.sxbwstxpay.model.ShareShareDay;
 import com.sxbwstxpay.util.SDFileHelper;
 
@@ -43,10 +50,12 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
         $(R.id.viewBaoCun).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((TuWenTGActivity)getContext()).showLoadingDialog();
                 SDFileHelper helper = new SDFileHelper(getContext());
                 for (int i = 0; i < data.getShare_images().size(); i++) {
-                    helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getShare_images().get(i));
+                    helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getImgs().get(i));
                 }
+                ((TuWenTGActivity)getContext()).cancelLoadingDialog();
                 Toast.makeText(getContext(), "已保存到本地相册", Toast.LENGTH_SHORT).show();
             }
         });
@@ -56,6 +65,20 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
                 ClipboardManager cmb = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 cmb.setText(textShare_contents.getText().toString().trim()); //将内容放入粘贴管理器,在别的地方长按选择"粘贴"即可
                 Toast.makeText(getContext(), "复制文本成功", Toast.LENGTH_SHORT).show();
+            }
+        });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
+                Intent intent = new Intent();
+                intent.setClass(getContext(), BigImgActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.BIG_IMG, new BigImgList(data.getImgs()));
+                intent.putExtra(Constant.INTENT_KEY.BIG_IMG_POSITION, position);
+                intent.putExtra(Constant.INTENT_KEY.value,data.getShare_contents());
+                String transitionName = getContext().getString(R.string.TransitionsBigImg);
+                ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(((TuWenTGActivity)getContext()), imageImg, transitionName);
+                getContext().startActivity(intent, transitionActivityOptions.toBundle());
             }
         });
     }

@@ -4,6 +4,7 @@
     <string name="noMore">(*￣ω￣) 没有更多了</string>
     <string name="internetError">网络错误,点击重试</string>
     <string name="nothing">╮(╯▽╰)╭什么都没有</string>
+    <string name="TransitionsBigImg">bigImg</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
