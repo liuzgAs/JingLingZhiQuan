@@ -19,7 +19,43 @@ public class ShareIndex {
     private String share_description;
     private String share_icon;
     private String info;
+    private String downDes;
+    private String downIco;
+    private String downTitle;
+    private String downUrl;
     private int status;
+
+    public String getDownDes() {
+        return downDes;
+    }
+
+    public void setDownDes(String downDes) {
+        this.downDes = downDes;
+    }
+
+    public String getDownIco() {
+        return downIco;
+    }
+
+    public void setDownIco(String downIco) {
+        this.downIco = downIco;
+    }
+
+    public String getDownTitle() {
+        return downTitle;
+    }
+
+    public void setDownTitle(String downTitle) {
+        this.downTitle = downTitle;
+    }
+
+    public String getDownUrl() {
+        return downUrl;
+    }
+
+    public void setDownUrl(String downUrl) {
+        this.downUrl = downUrl;
+    }
 
     public String getInfo() {
         return info;

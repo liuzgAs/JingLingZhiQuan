@@ -123,6 +123,15 @@ public class IndexCate {
 
         private int id;
         private String name;
+        private String jump;
+
+        public String getJump() {
+            return jump;
+        }
+
+        public void setJump(String jump) {
+            this.jump = jump;
+        }
 
         public int getId() {
             return id;

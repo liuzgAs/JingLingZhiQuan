@@ -27,6 +27,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.GoodsIndex;
+import com.sxbwstxpay.model.IndexCate;
 import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ACache;
@@ -53,7 +54,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexDataBean> adapter;
     private int page = 1;
-    private int id = 0;
+    private IndexCate.CateBean cateBean;
     private View viewShangJiaTip;
     private Timer timer;
     private BroadcastReceiver reciver = new BroadcastReceiver() {
@@ -110,6 +111,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private String lng;
     private int position;
     private String sort;
+    private TextView textTitle;
 
     public void hideView() {
         Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
@@ -125,9 +127,8 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         // Required empty public constructor
     }
 
-    public XuanPinSJFragment(int position, int id) {
-        this.position = position;
-        this.id = id;
+    public XuanPinSJFragment(int position, IndexCate.CateBean cateBean) {
+        this.cateBean = cateBean;
     }
 
 
@@ -243,6 +244,19 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 adapter.resumeMore();
             }
         });
+        View emptyView = recyclerView.getEmptyView();
+        textTitle = (TextView) emptyView.findViewById(R.id.textTitle);
+        switch (cateBean.getJump()){
+            case "time":
+                textTitle.setText(getResources().getString(R.string.nothing));
+                break;
+            case "list":
+                textTitle.setText(getResources().getString(R.string.nothing));
+                break;
+            case "future":
+                textTitle.setText("本地优质商家火热招募中");
+                break;
+        }
         recyclerView.setRefreshListener(this);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
@@ -274,7 +288,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.GOODS_INDEX;
         HashMap<String, String> params = new HashMap<>();
-        params.put("id", id + "");
+        params.put("id", cateBean.getId() + "");
         params.put("p", page + "");
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
