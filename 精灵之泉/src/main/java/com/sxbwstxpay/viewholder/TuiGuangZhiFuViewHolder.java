@@ -104,7 +104,7 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
             viewZheKou.setVisibility(View.VISIBLE);
         } else {
             params.put("isCut", "0");
-            viewZheKou.setVisibility(View.GONE);
+            viewZheKou.setVisibility(View.INVISIBLE);
         }
         return new OkObject(params, url);
     }
