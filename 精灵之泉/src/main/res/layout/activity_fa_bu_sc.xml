@@ -33,6 +33,7 @@
                 android:textSize="@dimen/normal_textsize" />
 
             <RelativeLayout
+                android:id="@+id/viewTuiJian"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/layout_selector_white_system_gray">

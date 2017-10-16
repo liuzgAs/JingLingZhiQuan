@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
+import com.sxbwstxpay.activity.WuLiuXQActivity;
 import com.sxbwstxpay.activity.ZhiFuActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
@@ -49,6 +50,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
     private final ListView listView;
     private UserOrder.ListBean data;
     private final View viewBtn;
+    private final Button buttonWuLiu;
 
     public DingDanViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -62,13 +64,14 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         buttonSure = $(R.id.buttonSure);
         listView = $(R.id.listView);
         viewBtn = $(R.id.viewBtn);
+        buttonWuLiu = $(R.id.buttonWuLiu);
         buttonSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (data.getIs_pay() == 1) {
                     Intent intent = new Intent();
-                    intent.setClass(getContext(),ZhiFuActivity.class);
-                    intent.putExtra(Constant.INTENT_KEY.id,Integer.parseInt(data.getId()));
+                    intent.setClass(getContext(), ZhiFuActivity.class);
+                    intent.putExtra(Constant.INTENT_KEY.id, Integer.parseInt(data.getId()));
                     getContext().startActivity(intent);
                 }
                 if (data.getIs_confirm() == 1) {
@@ -85,6 +88,14 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
                 if (data.getIs_del() == 1) {
                     dingDanCaoZuo("del");
                 }
+            }
+        });
+        buttonWuLiu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), WuLiuXQActivity.class);
+                getContext().startActivity(intent);
             }
         });
     }
@@ -125,7 +136,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         new AlertDialog.Builder(getContext())
                 .setTitle("提示")
                 .setMessage(message)
-                .setNegativeButton("取消",null)
+                .setNegativeButton("取消", null)
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -134,7 +145,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
                             @Override
                             public void onSuccess(String s) {
                                 ((ShangChengDDActivity) getContext()).cancelLoadingDialog();
-                                LogUtil.LogShitou("DingDanViewHolder--订单操作",s+ "");
+                                LogUtil.LogShitou("DingDanViewHolder--订单操作", s + "");
                                 try {
                                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                                     if (simpleInfo.getStatus() == 1) {

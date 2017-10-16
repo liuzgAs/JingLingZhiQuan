@@ -25,7 +25,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FaBuSCActivity extends ZjbBaseActivity {
+public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private GridView4ScrollView mGridView;
     private View viewBar;
@@ -79,7 +79,7 @@ public class FaBuSCActivity extends ZjbBaseActivity {
 
     @Override
     protected void setListeners() {
-
+        findViewById(R.id.viewTuiJian).setOnClickListener(this);
     }
 
     @Override
@@ -103,6 +103,15 @@ public class FaBuSCActivity extends ZjbBaseActivity {
             } else {
                 Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.viewTuiJian:
+                
+                break;
         }
     }
 

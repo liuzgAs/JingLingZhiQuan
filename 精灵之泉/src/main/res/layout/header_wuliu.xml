@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@color/white"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_empty01"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageView25"
+            android:layout_gravity="center_vertical" />
+
+        <LinearLayout
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <RelativeLayout
+                android:layout_weight="0.8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textColor="@color/light_black"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/bigText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="物流状态"
+                    android:id="@+id/textView25"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/basic_color"
+                    android:textSize="@dimen/bigText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已签收"
+                    android:id="@+id/textView26"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textView25"
+                    android:layout_toEndOf="@+id/textView25" />
+            </RelativeLayout>
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/litterText"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="承运来源：中通快递"
+                android:id="@+id/textView27" />
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/litterText"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="运单编号：45676434375354"
+                android:id="@+id/textView28" />
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/litterText"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="官方电话：955211"
+                android:id="@+id/textView29" />
+        </LinearLayout>
+    </LinearLayout>
+    <com.sxbwstxpay.customview.ListView4ScrollView
+        android:id="@+id/listWuLIu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

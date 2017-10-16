@@ -16,7 +16,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
-import com.sxbwstxpay.fragment.DingDanFragment;
+import com.sxbwstxpay.fragment.ShangChengDDFragment;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.UserOrder;
 import com.sxbwstxpay.util.ApiClient;
@@ -140,7 +140,7 @@ public class ShangChengDDActivity extends ZjbBaseNotLeftActivity implements View
 
         @Override
         public Fragment getItem(int position) {
-            return new DingDanFragment(userOrderType.get(position).getV());
+            return new ShangChengDDFragment(userOrderType.get(position).getV());
         }
 
         @Override

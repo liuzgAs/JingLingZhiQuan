@@ -41,7 +41,7 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ShangChengDDFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
 
     private View mInflate;
@@ -61,11 +61,11 @@ public class DingDanFragment extends ZjbBaseFragment implements SwipeRefreshLayo
         }
     };
 
-    public DingDanFragment() {
+    public ShangChengDDFragment() {
         // Required empty public constructor
     }
 
-    public DingDanFragment(String state) {
+    public ShangChengDDFragment(String state) {
         // Required empty public constructor
         this.state = state;
     }
