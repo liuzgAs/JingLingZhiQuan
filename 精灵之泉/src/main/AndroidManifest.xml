@@ -188,7 +188,7 @@
             android:name=".activity.TuiGuangYJActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".activity.LiJiTXActivity"
+            android:name=".activity.TXActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.WoDeZDActivity"

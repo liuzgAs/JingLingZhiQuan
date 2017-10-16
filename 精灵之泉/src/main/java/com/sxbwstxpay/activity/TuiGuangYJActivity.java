@@ -174,7 +174,7 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
             case R.id.buttonLiJiTX:
                 intent.putExtra(Constant.INTENT_KEY.id,id);
                 intent.putExtra(Constant.INTENT_KEY.value,userIncomeMx);
-                intent.setClass(this, LiJiTXActivity.class);
+                intent.setClass(this, TXActivity.class);
                 startActivity(intent);
                 break;
             case R.id.buttonShouYiMX:

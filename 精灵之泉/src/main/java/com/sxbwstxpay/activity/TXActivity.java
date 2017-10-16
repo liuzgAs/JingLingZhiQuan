@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 import okhttp3.Response;
 
-public class LiJiTXActivity extends ZjbBaseActivity implements View.OnClickListener {
+public class TXActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private View viewBar;
     private EditText editJinE;
@@ -152,32 +152,32 @@ public class LiJiTXActivity extends ZjbBaseActivity implements View.OnClickListe
      */
     private void tiXian() {
         showLoadingDialog();
-        ApiClient.post(LiJiTXActivity.this, getOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(TXActivity.this, getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("LiJiTXActivity--onSuccess", "");
+                LogUtil.LogShitou("TXActivity--onSuccess", "");
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     if (simpleInfo.getStatus() == 1) {
                         Intent intent = new Intent();
                         intent.setAction(Constant.BROADCASTCODE.ShuaXinYongJin);
                         sendBroadcast(intent);
-                        MyDialog.dialogFinish(LiJiTXActivity.this,"申请提现成功");
+                        MyDialog.dialogFinish(TXActivity.this,"申请提现成功");
                     } else if (simpleInfo.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(LiJiTXActivity.this);
+                        MyDialog.showReLoginDialog(TXActivity.this);
                     } else {
-                        Toast.makeText(LiJiTXActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TXActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(LiJiTXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                Toast.makeText(LiJiTXActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TXActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
