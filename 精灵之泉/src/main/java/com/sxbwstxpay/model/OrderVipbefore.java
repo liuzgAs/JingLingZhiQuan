@@ -1,38 +1,81 @@
 package com.sxbwstxpay.model;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangjiebo on 2017/9/17 0017.
  */
-public class OrderVipbefore {
+public class OrderVipbefore implements Serializable{
     /**
-     * img : http://api.jlzquan.com/Uploads/news/59be31162b24d.jpg
-     * text1 : 活动优惠399.00元
-     * text2 : 原价3990.00元
-     * status : 1
+     * amount : 499
+     * cutAmount : 20
+     * cutDes : 使用实名认证奖励20元抵扣
+     * img : http://api.jlzquan.com/index.php?g=App&m=Web&a=vip
      * info : 返回成功！
+     * status : 1
+     * text1 : 活动优惠499.00元
+     * text2 : 原价4990.00元
+     * url : http://api.jlzquan.com/index.php?g=App&m=Web&a=vip
+     * urlTitle : 成为VIP精灵推广商
      */
 
-    private String url;
-    private String urlTitle;
+    private double amount;
+    private double cutAmount;
+    private String cutDes;
+    private String img;
+    private String info;
+    private int status;
     private String text1;
     private String text2;
-    private int status;
-    private String info;
+    private String url;
+    private String urlTitle;
 
-    public String getUrl() {
-        return url;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public String getUrlTitle() {
-        return urlTitle;
+    public double getCutAmount() {
+        return cutAmount;
     }
 
-    public void setUrlTitle(String urlTitle) {
-        this.urlTitle = urlTitle;
+    public void setCutAmount(double cutAmount) {
+        this.cutAmount = cutAmount;
+    }
+
+    public String getCutDes() {
+        return cutDes;
+    }
+
+    public void setCutDes(String cutDes) {
+        this.cutDes = cutDes;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getText1() {
@@ -51,19 +94,19 @@ public class OrderVipbefore {
         this.text2 = text2;
     }
 
-    public int getStatus() {
-        return status;
+    public String getUrl() {
+        return url;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getInfo() {
-        return info;
+    public String getUrlTitle() {
+        return urlTitle;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setUrlTitle(String urlTitle) {
+        this.urlTitle = urlTitle;
     }
 }

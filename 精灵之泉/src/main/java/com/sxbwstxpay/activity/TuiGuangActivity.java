@@ -1,18 +1,15 @@
 package com.sxbwstxpay.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,30 +43,32 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private TextView textText1;
     private TextView textText2;
     final IWXAPI api = WXAPIFactory.createWXAPI(this, null);
-    private BroadcastReceiver recevier = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (TextUtils.equals(action, Constant.BROADCASTCODE.PAY_RECEIVER)) {
-                cancelLoadingDialog();
-                int error = intent.getIntExtra("error", -1);
-                if (error == 0) {
-                    Intent intent1 = new Intent();
-                    intent1.setAction(Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG);
-                    sendBroadcast(intent1);
-                    MyDialog.dialogFinish(TuiGuangActivity.this, "支付成功");
-                } else if (error == -1) {
-                    MyDialog.showTipDialog(TuiGuangActivity.this, "支付失败");
-                } else if (error == -2) {
-                    MyDialog.showTipDialog(TuiGuangActivity.this, "支付取消");
-                }
-            }
-        }
-    };
+//    private BroadcastReceiver recevier = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            if (TextUtils.equals(action, Constant.BROADCASTCODE.PAY_RECEIVER)) {
+//                cancelLoadingDialog();
+//                int error = intent.getIntExtra("error", -1);
+//                if (error == 0) {
+//                    Intent intent1 = new Intent();
+//                    intent1.setAction(Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG);
+//                    sendBroadcast(intent1);
+//                    MyDialog.dialogFinish(TuiGuangActivity.this, "支付成功");
+//                } else if (error == -1) {
+//                    MyDialog.showTipDialog(TuiGuangActivity.this, "支付失败");
+//                } else if (error == -2) {
+//                    MyDialog.showTipDialog(TuiGuangActivity.this, "支付取消");
+//                }
+//            }
+//        }
+//    };
     private WebSettings mSettings;
     private ProgressBar pb1;
     private WebView mWebView;
     private TextView textViewTitle;
+    private OrderVipbefore orderVipbefore;
+    private CheckBox checkXieYi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +96,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
         mWebView = (WebView) findViewById(R.id.webView);
         pb1 = (ProgressBar) findViewById(R.id.progressBar2);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
-
+        checkXieYi = (CheckBox) findViewById(R.id.checkXieYi);
     }
 
     @Override
@@ -153,7 +152,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 cancelLoadingDialog();
                 LogUtil.LogShitou("TuiGuangActivity--推广商", s + "");
                 try {
-                    OrderVipbefore orderVipbefore = GsonUtils.parseJSON(s, OrderVipbefore.class);
+                    orderVipbefore = GsonUtils.parseJSON(s, OrderVipbefore.class);
                     if (orderVipbefore.getStatus() == 1) {
                         mWebView.loadUrl(orderVipbefore.getUrl());
                         textViewTitle.setText(orderVipbefore.getUrlTitle());
@@ -192,41 +191,22 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.textXieYI:
-                Intent intent = new Intent();
                 intent.setClass(this, WebActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.TITLE, "精灵之泉推广商服务协议");
                 intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_POLICY2);
                 startActivity(intent);
                 break;
             case R.id.textJiaRu:
-                showLoadingDialog();
-                ApiClient.post(TuiGuangActivity.this, getOkObject1(), new ApiClient.CallBack() {
-                    @Override
-                    public void onSuccess(String s) {
-                        cancelLoadingDialog();
-                        LogUtil.LogShitou("TuiGuangActivity--VIP推广商支付", s + "");
-                        try {
-                            OrderVippay orderVippay = GsonUtils.parseJSON(s, OrderVippay.class);
-                            if (orderVippay.getStatus() == 1) {
-                                wechatPay(orderVippay);
-                            } else if (orderVippay.getStatus() == 2) {
-                                MyDialog.showReLoginDialog(TuiGuangActivity.this);
-                            } else {
-                                Toast.makeText(TuiGuangActivity.this, orderVippay.getInfo(), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (Exception e) {
-                            Toast.makeText(TuiGuangActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response response) {
-                        cancelLoadingDialog();
-                        Toast.makeText(TuiGuangActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                if (checkXieYi.isChecked()){
+                    intent.setClass(this,TuiGuangZFActivity.class);
+                    intent.putExtra(Constant.INTENT_KEY.value,orderVipbefore);
+                    startActivity(intent);
+                }else {
+                    MyDialog.showTipDialog(this,"请阅读并同意《精灵之泉推广商服务协议》");
+                }
                 break;
             case R.id.imageBack:
                 finish();
@@ -266,14 +246,14 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Constant.BROADCASTCODE.PAY_RECEIVER);
-        registerReceiver(recevier, filter);
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(Constant.BROADCASTCODE.PAY_RECEIVER);
+//        registerReceiver(recevier, filter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(recevier);
+//        unregisterReceiver(recevier);
     }
 }

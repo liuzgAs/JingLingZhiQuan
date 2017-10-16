@@ -43,8 +43,8 @@ public class FeiLvViewHolder extends BaseViewHolder<UserRate.DataBean> {
         textNameDes.setText(data.getNameDes());
         textRate.setText(data.getRate());
         textFee.setText(data.getFee());
-        textMaxDay.setText(data.getMaxDay());
-        textMaxAmount.setText(data.getMaxAmount());
+        textMaxDay.setText(data.getMaxAmount());
+        textMaxAmount.setText(data.getMaxDay());
         switch (data.getType()) {
             case 0:
                 imageImg.setImageResource(R.mipmap.fei_lv_yinlian);

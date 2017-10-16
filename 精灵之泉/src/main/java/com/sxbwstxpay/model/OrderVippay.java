@@ -8,13 +8,15 @@ import com.google.gson.annotations.SerializedName;
 public class OrderVippay {
     /**
      * wechatUrl : http://api.jlzquan.com/App/Respond/wechat.html
-     * pay : {"pay_info":"AVIP201709172058109","payment_name":"微信支付","pay_money":399,"class_name":"WxApp","config":{"appid":"wxfef0031f5d8f3ed0","noncestr":"yh3ryp6q21pg1peo9tzjb7gk1hhfttu4","package":"prepay_id=wx2017091720580949dda055b10607671400","partnerid":"1484853072","prepayid":"wx2017091720580949dda055b10607671400","timestamp":1505653090,"sign":"d72e423d33c050c8d65ff89644bbe271","ios":{"appid":"wxfef0031f5d8f3ed0","noncestr":"yh3ryp6q21pg1peo9tzjb7gk1hhfttu4","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx2017091720580949dda055b10607671400","timestamp":1505653090,"sign":"c9d047b6cb2d84b19b638937a4925d5a"},"packagevalue":"prepay_id=wx2017091720580949dda055b10607671400","subject":"AVIP201709172058109","body":null,"total_fee":399,"total_fee_format":399,"out_trade_no":null,"notify_url":"http://api.jlzquan.com/App/Respond/wechat.html","key":"f20b18c7ed7913bbf45c6ffda95c6d1a","secret":"02d7e0ca570f95630b552bd055fdd14a"}}
+     * pay : {"pay_info":"AVIP201710161611116","payment_name":"微信支付","pay_money":479,"class_name":"WxApp","config":{"appid":"wxfef0031f5d8f3ed0","noncestr":"cw1q1guyhwam9w9t9z6xu0tpgqzhhvcb","package":"prepay_id=wx20171016161112aaed4a635f0042565194","partnerid":"1484853072","prepayid":"wx20171016161112aaed4a635f0042565194","timestamp":1508141472,"sign":"65a85a3c0a56d51503eb18a43790abfd","ios":{"appid":"wxfef0031f5d8f3ed0","noncestr":"cw1q1guyhwam9w9t9z6xu0tpgqzhhvcb","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx20171016161112aaed4a635f0042565194","timestamp":1508141472,"sign":"9dffa1fb47b077b119a79cbcceabeb93"},"packagevalue":"prepay_id=wx20171016161112aaed4a635f0042565194","subject":"AVIP201710161611116","body":null,"total_fee":479,"total_fee_format":479,"out_trade_no":null,"notify_url":"http://api.jlzquan.com/App/Respond/wechat.html","key":"f20b18c7ed7913bbf45c6ffda95c6d1a","secret":"02d7e0ca570f95630b552bd055fdd14a"}}
+     * payAli : alipay_sdk=alipay-sdk-php-20161101&app_id=2017070407644871&biz_content=%7B%22body%22%3A%22%22%2C%22subject%22%3A+%22%22%2C%22out_trade_no%22%3A+%22%22%2C%22timeout_express%22%3A+%2230m%22%2C%22total_amount%22%3A+%22%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2Fapi.jlzquan.com%2FApp%2FRespond%2Falipay.html&sign_type=RSA2&timestamp=2017-10-16+16%3A11%3A12&version=1.0&sign=su8ZQzu%2BDW0W%2BxHI5uuIPsfjy5TDI0xm786SLWex6wUU58%2BN0ZsTMOEpxGsGqBpwN9RQt3soZH5bFaP3wMm9DkN0cbiQG7wCUQ5YgrA1QHe2cw1hfMZ6f%2B1rrBojEMmfCGpnjVDD3mpD93FJKVgkQdtBU558%2BT1bXOJs1erviCXMChvV05nFLzFkFhMdrp1p9S2Drn49TAbF4pNcwQoO8JGiMZpzQr%2Fq2f%2F9smvpTlGDUU%2FGMpy%2B0afDJ8hZmJ7CZ3cqwG09slVMrtvfZZjhlCLdVgapGRa5BwTDZRR4fA5Dri80vhVQENBgTPlq5tVwwxFitd9m4o5K1SXingoizQ%3D%3D
      * status : 1
      * info : 返回成功！
      */
 
     private String wechatUrl;
     private PayBean pay;
+    private String payAli;
     private int status;
     private String info;
 
@@ -32,6 +34,14 @@ public class OrderVippay {
 
     public void setPay(PayBean pay) {
         this.pay = pay;
+    }
+
+    public String getPayAli() {
+        return payAli;
+    }
+
+    public void setPayAli(String payAli) {
+        this.payAli = payAli;
     }
 
     public int getStatus() {
@@ -52,11 +62,11 @@ public class OrderVippay {
 
     public static class PayBean {
         /**
-         * pay_info : AVIP201709172058109
+         * pay_info : AVIP201710161611116
          * payment_name : 微信支付
-         * pay_money : 399
+         * pay_money : 479
          * class_name : WxApp
-         * config : {"appid":"wxfef0031f5d8f3ed0","noncestr":"yh3ryp6q21pg1peo9tzjb7gk1hhfttu4","package":"prepay_id=wx2017091720580949dda055b10607671400","partnerid":"1484853072","prepayid":"wx2017091720580949dda055b10607671400","timestamp":1505653090,"sign":"d72e423d33c050c8d65ff89644bbe271","ios":{"appid":"wxfef0031f5d8f3ed0","noncestr":"yh3ryp6q21pg1peo9tzjb7gk1hhfttu4","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx2017091720580949dda055b10607671400","timestamp":1505653090,"sign":"c9d047b6cb2d84b19b638937a4925d5a"},"packagevalue":"prepay_id=wx2017091720580949dda055b10607671400","subject":"AVIP201709172058109","body":null,"total_fee":399,"total_fee_format":399,"out_trade_no":null,"notify_url":"http://api.jlzquan.com/App/Respond/wechat.html","key":"f20b18c7ed7913bbf45c6ffda95c6d1a","secret":"02d7e0ca570f95630b552bd055fdd14a"}
+         * config : {"appid":"wxfef0031f5d8f3ed0","noncestr":"cw1q1guyhwam9w9t9z6xu0tpgqzhhvcb","package":"prepay_id=wx20171016161112aaed4a635f0042565194","partnerid":"1484853072","prepayid":"wx20171016161112aaed4a635f0042565194","timestamp":1508141472,"sign":"65a85a3c0a56d51503eb18a43790abfd","ios":{"appid":"wxfef0031f5d8f3ed0","noncestr":"cw1q1guyhwam9w9t9z6xu0tpgqzhhvcb","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx20171016161112aaed4a635f0042565194","timestamp":1508141472,"sign":"9dffa1fb47b077b119a79cbcceabeb93"},"packagevalue":"prepay_id=wx20171016161112aaed4a635f0042565194","subject":"AVIP201710161611116","body":null,"total_fee":479,"total_fee_format":479,"out_trade_no":null,"notify_url":"http://api.jlzquan.com/App/Respond/wechat.html","key":"f20b18c7ed7913bbf45c6ffda95c6d1a","secret":"02d7e0ca570f95630b552bd055fdd14a"}
          */
 
         private String pay_info;
@@ -108,18 +118,18 @@ public class OrderVippay {
         public static class ConfigBean {
             /**
              * appid : wxfef0031f5d8f3ed0
-             * noncestr : yh3ryp6q21pg1peo9tzjb7gk1hhfttu4
-             * package : prepay_id=wx2017091720580949dda055b10607671400
+             * noncestr : cw1q1guyhwam9w9t9z6xu0tpgqzhhvcb
+             * package : prepay_id=wx20171016161112aaed4a635f0042565194
              * partnerid : 1484853072
-             * prepayid : wx2017091720580949dda055b10607671400
-             * timestamp : 1505653090
-             * sign : d72e423d33c050c8d65ff89644bbe271
-             * ios : {"appid":"wxfef0031f5d8f3ed0","noncestr":"yh3ryp6q21pg1peo9tzjb7gk1hhfttu4","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx2017091720580949dda055b10607671400","timestamp":1505653090,"sign":"c9d047b6cb2d84b19b638937a4925d5a"}
-             * packagevalue : prepay_id=wx2017091720580949dda055b10607671400
-             * subject : AVIP201709172058109
+             * prepayid : wx20171016161112aaed4a635f0042565194
+             * timestamp : 1508141472
+             * sign : 65a85a3c0a56d51503eb18a43790abfd
+             * ios : {"appid":"wxfef0031f5d8f3ed0","noncestr":"cw1q1guyhwam9w9t9z6xu0tpgqzhhvcb","package":"Sign=Wxpay","partnerid":"1484853072","prepayid":"wx20171016161112aaed4a635f0042565194","timestamp":1508141472,"sign":"9dffa1fb47b077b119a79cbcceabeb93"}
+             * packagevalue : prepay_id=wx20171016161112aaed4a635f0042565194
+             * subject : AVIP201710161611116
              * body : null
-             * total_fee : 399
-             * total_fee_format : 399
+             * total_fee : 479
+             * total_fee_format : 479
              * out_trade_no : null
              * notify_url : http://api.jlzquan.com/App/Respond/wechat.html
              * key : f20b18c7ed7913bbf45c6ffda95c6d1a
@@ -284,12 +294,12 @@ public class OrderVippay {
             public static class IosBean {
                 /**
                  * appid : wxfef0031f5d8f3ed0
-                 * noncestr : yh3ryp6q21pg1peo9tzjb7gk1hhfttu4
+                 * noncestr : cw1q1guyhwam9w9t9z6xu0tpgqzhhvcb
                  * package : Sign=Wxpay
                  * partnerid : 1484853072
-                 * prepayid : wx2017091720580949dda055b10607671400
-                 * timestamp : 1505653090
-                 * sign : c9d047b6cb2d84b19b638937a4925d5a
+                 * prepayid : wx20171016161112aaed4a635f0042565194
+                 * timestamp : 1508141472
+                 * sign : 9dffa1fb47b077b119a79cbcceabeb93
                  */
 
                 private String appid;

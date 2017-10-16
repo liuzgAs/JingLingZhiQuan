@@ -367,7 +367,12 @@
         <activity
             android:name=".activity.BigImgActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.WuLiuXQActivity"></activity>
+        <activity
+            android:name=".activity.WuLiuXQActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.TuiGuangZFActivity"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

@@ -156,7 +156,7 @@ public class TXActivity extends ZjbBaseActivity implements View.OnClickListener 
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("TXActivity--onSuccess", "");
+                LogUtil.LogShitou("TXActivity--提现",s+ "");
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     if (simpleInfo.getStatus() == 1) {

@@ -37,6 +37,7 @@ public class ZhiFuViewHolder extends BaseViewHolder<OrderPay> {
         super(parent, res);
         textJinE = $(R.id.textJinE);
         textDes = $(R.id.textDes);
+        $(R.id.viewZheKou).setVisibility(View.GONE);
         $(R.id.buttonZhiFu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
