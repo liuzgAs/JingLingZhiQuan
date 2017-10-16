@@ -160,26 +160,12 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:gravity="center_vertical|right"
         android:id="@+id/viewBtn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal">
-
-        <Button
-            android:id="@+id/buttonSure"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/btn_jianbian270_basic_30dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="确认付款"
-            android:textColor="@color/white"
-            android:textSize="@dimen/normal_textsize" />
 
         <TextView
             android:id="@+id/textBtn"
@@ -195,7 +181,7 @@
             android:layout_toStartOf="@+id/buttonWuLiu" />
 
         <Button
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/buttonWuLiu"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
@@ -208,5 +194,20 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/buttonSure"
             android:layout_toStartOf="@+id/buttonSure" />
-    </RelativeLayout>
+
+        <Button
+            android:id="@+id/buttonSure"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_jianbian270_basic_30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="确认付款"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize" />
+    </LinearLayout>
 </LinearLayout>

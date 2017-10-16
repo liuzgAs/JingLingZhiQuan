@@ -13,7 +13,6 @@ import com.alipay.sdk.app.PayTask;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.TuiGuangZFActivity;
-import com.sxbwstxpay.activity.ZhiFuActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.AliPayBean;
@@ -46,6 +45,7 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
     private int payMode = 1;
     private final CheckBox checkZheKou;
     private final TextView textZheKou;
+    private final View viewZheKou;
 
     public TuiGuangZhiFuViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -54,6 +54,7 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
         checkZheKou = $(R.id.checkZheKou);
         checkZheKou.setChecked(true);
         textZheKou = $(R.id.textZheKou);
+        viewZheKou = $(R.id.viewZheKou);
         $(R.id.buttonZhiFu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +101,10 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
         params.put("tokenTime", ((TuiGuangZFActivity) getContext()).tokenTime);
         if (checkZheKou.isChecked()) {
             params.put("isCut", "1");
+            viewZheKou.setVisibility(View.VISIBLE);
         } else {
             params.put("isCut", "0");
+            viewZheKou.setVisibility(View.GONE);
         }
         return new OkObject(params, url);
     }
@@ -117,9 +120,11 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
                     OrderVippay orderVippay = GsonUtils.parseJSON(s, OrderVippay.class);
                     if (orderVippay.getStatus() == 1) {
                         if (payMode==1){
+                            LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onSuccess", "1111111");
                             String payAli = orderVippay.getPayAli();
                             zhiFuBao(payAli);
                         }else {
+                            LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onSuccess", "2222222");
                             OrderVippay.PayBean orderVippayPay = orderVippay.getPay();
                             wechatPay(orderVippayPay);
                         }
@@ -146,15 +151,16 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
             @Override
             public void run() {
                 try {
-                    PayTask alipay = new PayTask((ZhiFuActivity) getContext());
+                    PayTask alipay = new PayTask((TuiGuangZFActivity) getContext());
+                    LogUtil.LogShitou("TuiGuangZhiFuViewHolder--run", payAli+"");
                     Map<String, String> stringMap = alipay.payV2(payAli, true);
                     AliPayBean aliPayBean = GsonUtils.parseJSON(stringMap.get("result"), AliPayBean.class);
                     switch (aliPayBean.getAlipay_trade_app_pay_response().getCode()) {
                         case 10000:
-                            ((ZhiFuActivity) getContext()).paySuccess();
+                            ((TuiGuangZFActivity) getContext()).paySuccess();
                             break;
                         case 8000:
-                            ((ZhiFuActivity) getContext()).paySuccess();
+                            ((TuiGuangZFActivity) getContext()).paySuccess();
                             break;
                         case 4000:
                             MyDialog.showTipDialog(getContext(), "订单支付失败");
@@ -189,6 +195,9 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
         super.setData(data);
         this.data = data;
         textJinE.setText(Arith.sub(data.getAmount(), data.getCutAmount()) + "");
+        if (data.getCutAmount()==0){
+            textZheKou.setVisibility(View.GONE);
+        }
         textZheKou.setText("使用实名认证奖励"+data.getCutAmount()+"元抵扣");
     }
 

@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
-import com.sxbwstxpay.activity.WuLiuXQActivity;
+import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.ZhiFuActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
@@ -93,8 +93,13 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         buttonWuLiu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setClass(getContext(), WuLiuXQActivity.class);
+//                getContext().startActivity(intent);
                 Intent intent = new Intent();
-                intent.setClass(getContext(), WuLiuXQActivity.class);
+                intent.setClass(getContext(), WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, data.getShip_title());
+                intent.putExtra(Constant.INTENT_KEY.URL, data.getShip_url());
                 getContext().startActivity(intent);
             }
         });
@@ -204,6 +209,11 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         }
         if (data.getIs_confirm() == 0 && data.getIs_pay() == 0 && data.getIs_del() == 0 && data.getIs_cancle() == 0) {
             viewBtn.setVisibility(View.GONE);
+        }
+        if (data.getIs_ship()==1){
+            buttonWuLiu.setVisibility(View.VISIBLE);
+        }else {
+            buttonWuLiu.setVisibility(View.GONE);
         }
         listView.setAdapter(new MyAdapter());
     }
