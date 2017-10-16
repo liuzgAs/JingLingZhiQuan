@@ -17,6 +17,8 @@ public class Constant {
     public static String QQ_KEY = "HcA9s2rpKkLO2M5w";//qq
 
     public static class Url {
+        //app下载链接
+        public static final String WEB_DOWN = "http://api.jlzquan.com/App/Web/down.html";
         //关于我们
         public static final String INFO_ABOUT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=about";
         //联系客服
@@ -264,6 +266,7 @@ public class Constant {
         public static final String GouWuCheNum = "GouWuCheNum";
         public static final String GuanBiShouKuan = "GuanBiShouKuan";
         public static final String ShaiXuan = "ShaiXuan";
+        public static final String FenXiangXiaZaiLJ = "FenXiangXiaZaiLJ";
     }
 
 }

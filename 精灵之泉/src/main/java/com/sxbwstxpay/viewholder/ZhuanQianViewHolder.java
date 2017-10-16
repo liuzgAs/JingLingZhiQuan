@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.TuWenTGActivity;
-import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.TuiGuangEWMActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
@@ -37,14 +36,6 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
         $(R.id.view01).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getContext(), TuiGuangActivity.class);
-                getContext().startActivity(intent);
-            }
-        });
-        $(R.id.view02).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 if (data.getGrade()>0){
                     Intent intent = new Intent();
                     intent.setAction(Constant.BROADCASTCODE.FenXiangZCLJ);
@@ -54,7 +45,7 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
                 }
             }
         });
-        $(R.id.view03).setOnClickListener(new View.OnClickListener() {
+        $(R.id.view02).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (data.getGrade()>0){
@@ -64,6 +55,14 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
                 }else {
                     MyDialog.showTipDialog(getContext(),"请先成为VIP推广商");
                 }
+            }
+        });
+        $(R.id.view03).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Constant.BROADCASTCODE.FenXiangXiaZaiLJ);
+                getContext().sendBroadcast(intent);
             }
         });
         $(R.id.view04).setOnClickListener(new View.OnClickListener() {

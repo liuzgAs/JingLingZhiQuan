@@ -75,6 +75,9 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 case Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG:
                     onRefresh();
                     break;
+                case Constant.BROADCASTCODE.FenXiangXiaZaiLJ:
+                    MyDialog.share01(context, api, mTencent, "MainActivity", Constant.Url.WEB_DOWN, "精灵之泉下载链接", "点击下载精灵之泉客户端", shareIndex.getShare_icon());
+                    break;
             }
         }
     };
@@ -285,6 +288,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
         filter.addAction(Constant.BROADCASTCODE.FenXiangZCLJ);
         filter.addAction(Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG);
+        filter.addAction(Constant.BROADCASTCODE.FenXiangXiaZaiLJ);
         getActivity().registerReceiver(reciver, filter);
     }
 

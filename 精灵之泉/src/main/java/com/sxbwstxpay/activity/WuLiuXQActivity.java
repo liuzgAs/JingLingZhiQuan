@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -19,6 +18,7 @@ import com.sxbwstxpay.model.RecommBean;
 import com.sxbwstxpay.provider.DataProvider;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.ChanPinXQViewHolder;
+import com.sxbwstxpay.viewholder.MyBaseViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,20 +84,30 @@ public class WuLiuXQActivity extends ZjbBaseActivity implements View.OnClickList
             }
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+            private RecyclerArrayAdapter<Integer> adapterWuLiu;
+            private EasyRecyclerView recyclerViewWuLiu;
 
 
-            private ListView listWuLIu;
 
             @Override
             public View onCreateView(ViewGroup parent) {
                 View header_wuliu = LayoutInflater.from(WuLiuXQActivity.this).inflate(R.layout.header_wuliu, null);
-                listWuLIu = (ListView) header_wuliu.findViewById(R.id.listWuLIu);
+                recyclerViewWuLiu = (EasyRecyclerView) header_wuliu.findViewById(R.id.recyclerView);
+                recyclerViewWuLiu.setLayoutManager(new LinearLayoutManager(WuLiuXQActivity.this));
+                recyclerViewWuLiu.setAdapterWithProgress(adapterWuLiu = new RecyclerArrayAdapter<Integer>(WuLiuXQActivity.this) {
+                    @Override
+                    public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                        int layout = R.layout.item_wuliu00;
+                        return new MyBaseViewHolder(parent, layout);
+                    }
+                });
                 return header_wuliu;
             }
 
             @Override
             public void onBindView(View headerView) {
-                listWuLIu.setAdapter(new MyAdapter());
+                adapterWuLiu.clear();
+                adapterWuLiu.addAll(DataProvider.getPersonList(1));
             }
 
 
