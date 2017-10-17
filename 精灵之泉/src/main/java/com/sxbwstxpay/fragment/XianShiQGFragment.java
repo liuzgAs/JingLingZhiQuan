@@ -202,7 +202,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
                 int screenWidth = ScreenUtils.getScreenWidth(getActivity());
                 layoutParams.width = screenWidth;
-                layoutParams.height = (int) ((float)screenWidth*398f/1080f);
+                layoutParams.height = (int) ((float)screenWidth*452f/1080f);
                 banner.setLayoutParams(layoutParams);
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
