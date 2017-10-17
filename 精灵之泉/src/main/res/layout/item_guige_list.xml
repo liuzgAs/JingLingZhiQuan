@@ -4,15 +4,16 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
         android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
         android:text="规格"
-        android:textSize="@dimen/normal_textsize" />
+        android:textSize="@dimen/normal_textsize"
+        android:layout_alignTop="@+id/flowTagLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <com.sxbwstxpay.customview.FlowTagLayout
         android:layout_marginBottom="10dp"
