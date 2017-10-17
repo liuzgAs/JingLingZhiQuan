@@ -276,6 +276,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     }
                 });
                 imageMiddle = (ImageView) header_xian_shi_qg.findViewById(R.id.imageMiddle);
+                imageMiddle.setVisibility(View.GONE);
                 return header_xian_shi_qg;
             }
 

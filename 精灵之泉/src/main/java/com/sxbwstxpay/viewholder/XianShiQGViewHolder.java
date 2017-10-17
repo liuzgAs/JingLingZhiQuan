@@ -22,6 +22,7 @@ import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.ScreenUtils;
 
 import java.util.HashMap;
 
@@ -48,6 +49,11 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
         textPrice = $(R.id.textPrice);
         textGoods_money = $(R.id.textGoods_money);
         buttonShangJia = $(R.id.buttonShangJia);
+        int screenWidth = ScreenUtils.getScreenWidth(getContext());
+        ViewGroup.LayoutParams layoutParams = imageRecom_img.getLayoutParams();
+        layoutParams.width = screenWidth;
+        layoutParams.height = screenWidth/2;
+        imageRecom_img.setLayoutParams(layoutParams);
         $(R.id.imageShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
