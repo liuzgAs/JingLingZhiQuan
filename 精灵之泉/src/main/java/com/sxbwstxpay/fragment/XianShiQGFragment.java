@@ -111,6 +111,9 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         }, 2000, 1000);
                     }
                     break;
+                case Constant.BROADCASTCODE.VIP:
+                    onRefresh();
+                    break;
             }
         }
     };
@@ -467,6 +470,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.ShangJia01);
+        filter.addAction(Constant.BROADCASTCODE.VIP);
         getActivity().registerReceiver(reciver, filter);
     }
 

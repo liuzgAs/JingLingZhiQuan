@@ -32,6 +32,7 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
     private GridAdapter mAdapter;
     private ImagePicker mImagePicker;
     private List<ImageItem> mResults = new ArrayList<>();
+    private int photoNum =6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 mResults.remove(mResults.size() - 1);
                 mResults.addAll(images);
-                if (mResults.size() < 9) {
+                if (mResults.size() < photoNum) {
                     mResults.add(new ImageItem());
                 }
                 mAdapter.notifyDataSetChanged();
@@ -162,7 +163,7 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
-                        mImagePicker.setSelectLimit(6 - (mResults.size() - 1));    //选中数量限制
+                        mImagePicker.setSelectLimit(photoNum - (mResults.size() - 1));    //选中数量限制
                         intent.setClass(FaBuSCActivity.this, ImageGridActivity.class);
                         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.IMAGE_PICKER);
                     }
@@ -178,8 +179,8 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
                     @Override
                     public void onClick(View v) {
                         mResults.remove(position);
-                        if (mResults.size() == 8) {
-                            if (mResults.get(7).path != null) {
+                        if (mResults.size() == photoNum-1) {
+                            if (mResults.get(photoNum-2).path != null) {
                                 mResults.add(new ImageItem());
                             }
                         } else {

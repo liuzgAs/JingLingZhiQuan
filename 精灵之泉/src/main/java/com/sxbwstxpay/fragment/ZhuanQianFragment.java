@@ -72,7 +72,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 case Constant.BROADCASTCODE.FenXiangZCLJ:
                     MyDialog.share01(context, api, mTencent, "MainActivity", shareIndex.getShare_register_url(), shareIndex.getShare_title(), shareIndex.getShare_description(), shareIndex.getShare_icon());
                     break;
-                case Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG:
+                case Constant.BROADCASTCODE.VIP:
                     onRefresh();
                     break;
                 case Constant.BROADCASTCODE.FenXiangXiaZaiLJ:
@@ -287,8 +287,8 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
         filter.addAction(Constant.BROADCASTCODE.FenXiangZCLJ);
-        filter.addAction(Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG);
         filter.addAction(Constant.BROADCASTCODE.FenXiangXiaZaiLJ);
+        filter.addAction(Constant.BROADCASTCODE.VIP);
         getActivity().registerReceiver(reciver, filter);
     }
 

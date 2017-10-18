@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="145dp" />
     <android.support.design.widget.TabLayout
+        android:layout_marginBottom="5dp"
         app:tabMaxWidth="80dp"
         android:layout_marginTop="5dp"
         app:tabMode="scrollable"

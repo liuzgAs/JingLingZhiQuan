@@ -103,6 +103,9 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     recyclerView.showProgress();
                     onRefresh();
                     break;
+                case Constant.BROADCASTCODE.VIP:
+                    onRefresh();
+                    break;
             }
         }
     };
@@ -355,6 +358,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.ShangJia02);
         filter.addAction(Constant.BROADCASTCODE.ShaiXuan);
+        filter.addAction(Constant.BROADCASTCODE.VIP);
         getActivity().registerReceiver(reciver, filter);
     }
 

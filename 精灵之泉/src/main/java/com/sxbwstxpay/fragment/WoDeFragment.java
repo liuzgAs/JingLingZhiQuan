@@ -1,7 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -67,6 +70,19 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     private TextView texttXName;
     private TextView textGradeName;
     private TextView textVipTime;
+    private int grade;
+    private View viewWoDeDianPu;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Constant.BROADCASTCODE.VIP:
+                    initData();
+                    break;
+            }
+        }
+    };
 
     public WoDeFragment() {
         // Required empty public constructor
@@ -118,6 +134,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         texttXName = (TextView) mInflate.findViewById(R.id.texttXName);
         textGradeName = (TextView) mInflate.findViewById(R.id.textGradeName);
         textVipTime = (TextView) mInflate.findViewById(R.id.textVipTime);
+        viewWoDeDianPu = mInflate.findViewById(R.id.viewWoDeDianPu);
     }
 
     @Override
@@ -154,7 +171,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewShangHu2).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShouYi2).setOnClickListener(this);
         mInflate.findViewById(R.id.viewDingDan2).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewWoDeDianPu).setOnClickListener(this);
+        viewWoDeDianPu.setOnClickListener(this);
         mInflate.findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
         mInflate.findViewById(R.id.viewWoDeZL).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZhanNeiGG).setOnClickListener(this);
@@ -200,13 +217,15 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageTouXiang);
                         textNickName.setText(userIndex.getNickName());
-                        if (userIndex.getGrade() == 0) {
+                        grade = userIndex.getGrade();
+                        if (grade == 0) {
                             viewHuiYuan01.setVisibility(View.GONE);
                             viewHuiYuan02.setVisibility(View.GONE);
                             viewHuiYuan03.setVisibility(View.GONE);
                             viewFeiHuiYuan01.setVisibility(View.VISIBLE);
                             viewFeiHuiYuan02.setVisibility(View.VISIBLE);
                             viewFeiHuiYuan03.setVisibility(View.VISIBLE);
+                            viewWoDeDianPu.setVisibility(View.GONE);
                         } else {
                             viewHuiYuan01.setVisibility(View.VISIBLE);
                             viewHuiYuan02.setVisibility(View.VISIBLE);
@@ -214,6 +233,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                             viewFeiHuiYuan01.setVisibility(View.GONE);
                             viewFeiHuiYuan02.setVisibility(View.GONE);
                             viewFeiHuiYuan03.setVisibility(View.GONE);
+                            viewWoDeDianPu.setVisibility(View.VISIBLE);
                         }
                         if (TextUtils.isEmpty(userIndex.getTxName())) {
                             texttXName.setVisibility(View.GONE);
@@ -402,5 +422,19 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 viewTips.setVisibility(View.GONE);
             }
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.VIP);
+        getActivity().registerReceiver(reciver,filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(reciver);
     }
 }

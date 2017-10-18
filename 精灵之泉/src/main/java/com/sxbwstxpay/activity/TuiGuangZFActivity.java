@@ -54,7 +54,10 @@ public class TuiGuangZFActivity extends ZjbBaseActivity implements View.OnClickL
      * date： 2017/7/6 0006 下午 2:34
      */
     public void paySuccess() {
-       MyDialog.dialogFinish(this,"");
+        Intent intent = new Intent();
+        intent.setAction(Constant.BROADCASTCODE.VIP);
+        sendBroadcast(intent);
+        MyDialog.dialogFinish(this, "成功开通VIP");
     }
 
     @Override
