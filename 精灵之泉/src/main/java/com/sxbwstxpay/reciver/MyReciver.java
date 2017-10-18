@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.alibaba.sdk.android.push.MessageReceiver;
-import com.sxbwstxpay.activity.MainActivity;
+import com.sxbwstxpay.activity.LockActivity;
 import com.sxbwstxpay.activity.ReciverActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.ExtraMap;
@@ -29,7 +29,7 @@ public class MyReciver extends MessageReceiver {
             intent.putExtra(Constant.INTENT_KEY.EXTRAMAP, extraMapBean);
             context.sendBroadcast(intent);
         } else {
-            intent.setClass(context, MainActivity.class);
+            intent.setClass(context, LockActivity.class);
             intent.putExtra(Constant.INTENT_KEY.EXTRAMAP, extraMapBean);
             context.startActivity(intent);
         }

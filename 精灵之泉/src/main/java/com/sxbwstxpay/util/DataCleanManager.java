@@ -55,6 +55,7 @@ public class DataCleanManager {
                         TextUtils.equals(children[i], Constant.ACACHE.LNG)||
                         TextUtils.equals(children[i], Constant.ACACHE.CITY)||
                         TextUtils.equals(children[i], Constant.ACACHE.FRIST)||
+                        TextUtils.equals(children[i], Constant.ACACHE.PAINT_PASSWORD)||
                         TextUtils.equals(children[i], Constant.ACACHE.CITY_ID)
                         ) {
 

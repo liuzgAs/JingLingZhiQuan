@@ -247,7 +247,7 @@ public class MyDialog {
                         final View viewJieTu = dialog_fen_xiang_erm.findViewById(R.id.viewJieTu);
                         ImageView imageImg = (ImageView) dialog_fen_xiang_erm.findViewById(R.id.imageImg);
                         ViewGroup.LayoutParams layoutParams = viewJieTu.getLayoutParams();
-                        layoutParams.height = (int) (ScreenUtils.getScreenWidth(context)- DpUtils.convertDpToPixel(20, context));
+                        layoutParams.height = (int) (ScreenUtils.getScreenWidth(context) - DpUtils.convertDpToPixel(20, context));
                         viewJieTu.setLayoutParams(layoutParams);
                         ImageView imageEwmImg = (ImageView) dialog_fen_xiang_erm.findViewById(R.id.imageEwmImg);
                         TextView text1 = (TextView) dialog_fen_xiang_erm.findViewById(R.id.text1);
@@ -267,7 +267,7 @@ public class MyDialog {
                         text2.setText(goodsEwm.getText2());
                         text3.setText(goodsEwm.getText3());
                         TextView textPrice = (TextView) dialog_fen_xiang_erm.findViewById(R.id.textPrice);
-                        SpannableString span = new SpannableString("¥"+goodsEwm.getPrice());
+                        SpannableString span = new SpannableString("¥" + goodsEwm.getPrice());
                         span.setSpan(new RelativeSizeSpan(0.7f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textPrice.setText(span);
                         final AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.dialog)

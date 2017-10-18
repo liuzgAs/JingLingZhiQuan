@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context="com.sxbwstxpay.activity.LockActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.sxbwstxpay.customview.Lock9View
+            android:id="@+id/lock9View"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            app:lock9_autoLink="false"
+            app:lock9_enableVibrate="true"
+            app:lock9_lineColor="@color/basic_color"
+            app:lock9_lineWidth="8dp"
+            app:lock9_nodeOnAnim="@anim/node_on_1"
+            app:lock9_nodeOnSrc="@mipmap/node_active"
+            app:lock9_nodeSrc="@mipmap/node_normal"
+            app:lock9_padding="28dp"
+            app:lock9_spacing="28dp"
+            app:lock9_vibrateTime="20"/>
+
+        <TextView
+            android:id="@+id/textView_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="请绘制手势密码"
+            android:textColor="@color/red"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+</LinearLayout>

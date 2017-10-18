@@ -226,7 +226,7 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
             aCache.put(Constant.ACACHE.TOKENTIME, tokenTime);
             Constant.changeControl++;
             Intent intent = new Intent();
-            intent.setClass(DengLuActivity.this, MainActivity.class);
+            intent.setClass(DengLuActivity.this, LockActivity.class);
             startActivity(intent);
             finish();
         }

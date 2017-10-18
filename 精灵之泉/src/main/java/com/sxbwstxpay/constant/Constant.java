@@ -243,6 +243,7 @@ public class Constant {
         public static final String LNG = "lng";
         public static final String CITY = "city";
         public static final String CITY_ID = "cityId";
+        public static final String PAINT_PASSWORD= "paintPassword";
     }
 
     public static class BROADCASTCODE {

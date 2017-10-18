@@ -369,10 +369,12 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.WuLiuXQActivity"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.TuiGuangZFActivity"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
+        <activity android:name=".activity.LockActivity"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

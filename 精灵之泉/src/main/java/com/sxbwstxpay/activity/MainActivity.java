@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog mAlertDialog;
     public String tokenTime;
     private boolean isShow;
+    public boolean isBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +145,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        ExtraMap extramap = (ExtraMap) intent.getSerializableExtra(Constant.INTENT_KEY.EXTRAMAP);
+        try {
+            action(extramap);
+        } catch (Exception e) {
+        }
+    }
+
     private void action(ExtraMap extramap) {
         if (extramap != null) {
             Intent intent = new Intent();
@@ -186,9 +199,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        if (isBackground) {
+            //app 从后台唤醒，进入前台
+            isBackground = false;
+            Log.e("ACTIVITY", "程序从后台唤醒");
+            Intent intent = new Intent();
+            intent.setClass(this, LockActivity.class);
+            startActivity(intent);
+        }
+        super.onStart();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         isShow = false;
+        isBackground = true;//记录当前已经进入后台
     }
 
     @Override

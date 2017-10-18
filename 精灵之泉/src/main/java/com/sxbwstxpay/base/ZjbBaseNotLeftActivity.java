@@ -1,16 +1,19 @@
 package com.sxbwstxpay.base;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sxbwstxpay.activity.LockActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import com.sxbwstxpay.R;
@@ -26,6 +29,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
     public UserInfo userInfo;
     public boolean isLogin = false;
     public String tokenTime;
+    public boolean isBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,14 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
+        if (isBackground) {
+            //app 从后台唤醒，进入前台
+            isBackground = false;
+            Log.e("ACTIVITY", "程序从后台唤醒");
+            Intent intent = new Intent();
+            intent.setClass(this, LockActivity.class);
+            startActivity(intent);
+        }
         super.onStart();
     }
 
@@ -67,6 +79,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+        isBackground = true;//记录当前已经进入后台
     }
 
     @Override

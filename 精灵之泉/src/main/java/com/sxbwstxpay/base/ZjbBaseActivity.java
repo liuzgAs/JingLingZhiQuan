@@ -1,16 +1,19 @@
 package com.sxbwstxpay.base;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.LockActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
@@ -28,6 +31,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
     public boolean isLogin = false;
     private AlertDialog reLoginDialog;
     public String tokenTime;
+    public boolean isBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,14 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
 
     @Override
     public void onStart() {
+        if (isBackground) {
+            //app 从后台唤醒，进入前台
+            isBackground = false;
+            Log.e("ACTIVITY", "程序从后台唤醒");
+            Intent intent = new Intent();
+            intent.setClass(this, LockActivity.class);
+            startActivity(intent);
+        }
         super.onStart();
     }
 
@@ -70,8 +82,8 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
 
     @Override
     protected void onPause() {
+        isBackground = true;//记录当前已经进入后台
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -140,4 +152,5 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
             mAlertDialog = null;
         }
     }
+
 }
