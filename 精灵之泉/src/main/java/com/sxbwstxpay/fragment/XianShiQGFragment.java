@@ -11,6 +11,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -215,11 +216,18 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     public void onTabSelected(TabLayout.Tab tab) {
                         if (isSelect) {
                             for (int i = 0; i < indexGoodsTimes.size(); i++) {
+                                TextView textQiangGouTitle = (TextView) tablayoutHeader.getTabAt(i).getCustomView().findViewById(R.id.textQiangGouTitle);
+                                TextPaint paint = textQiangGouTitle.getPaint();
+                                paint.setFakeBoldText(false);
                                 indexGoodsTimes.get(i).setAct(0);
                             }
+                            TextView textQiangGouTitle = (TextView) tablayoutHeader.getTabAt(tab.getPosition()).getCustomView().findViewById(R.id.textQiangGouTitle);
+                            TextPaint paint = textQiangGouTitle.getPaint();
+                            paint.setFakeBoldText(true);
                             indexGoodsTimes.get(tab.getPosition()).setAct(1);
                             page = 1;
                             id = indexGoodsTimes.get(tab.getPosition()).getId();
+
                             showLoadingDialog();
                             ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                                 @Override
@@ -304,9 +312,12 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         textQiangGouTitle.setText(indexGoodsTimes.get(i).getTimes());
                         textQiangGouDes.setText(indexGoodsTimes.get(i).getDes());
                         isSelect = false;
+                        TextPaint paint = textQiangGouTitle.getPaint();
                         if (indexGoodsTimes.get(i).getAct() == 1) {
+                            paint.setFakeBoldText(true);
                             tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), true);
                         } else {
+                            paint.setFakeBoldText(false);
                             tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), false);
                         }
                         isSelect = true;
