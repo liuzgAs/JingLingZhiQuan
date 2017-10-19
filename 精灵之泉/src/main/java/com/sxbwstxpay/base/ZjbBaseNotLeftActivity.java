@@ -31,7 +31,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
     public UserInfo userInfo;
     public boolean isLogin = false;
     public String tokenTime;
-    public boolean isBackground;
+    public boolean isBackground =false;
     public String paintPassword;
     private Class cls;
 
@@ -65,10 +65,11 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
+        LogUtil.LogShitou("ZjbBaseNotLeftActivity--onStart", cls.getName()+isBackground);
+
         if (isBackground) {
             //app 从后台唤醒，进入前台
             isBackground = false;
-            LogUtil.LogShitou("ZjbBaseNotLeftActivity--onStart", "1111111");
             boolean activityTop = isActivityTop(cls, this);
             if (!TextUtils.isEmpty(paintPassword)&&activityTop){
                 Intent intent = new Intent();
@@ -89,6 +90,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
         super.onPause();
         MobclickAgent.onPause(this);
         isBackground = true;//记录当前已经进入后台
+        LogUtil.LogShitou("ZjbBaseNotLeftActivity--onPause", cls.getName()+""+isBackground);
     }
 
     @Override

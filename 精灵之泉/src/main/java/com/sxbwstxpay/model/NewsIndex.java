@@ -107,6 +107,24 @@ public class NewsIndex {
         private String intro;
         private String id;
         private String addTime;
+        private String url;
+        private String urlTitle;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getUrlTitle() {
+            return urlTitle;
+        }
+
+        public void setUrlTitle(String urlTitle) {
+            this.urlTitle = urlTitle;
+        }
 
         public String getAddTime() {
             return addTime;

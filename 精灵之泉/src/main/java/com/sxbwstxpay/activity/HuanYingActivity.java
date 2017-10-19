@@ -260,9 +260,14 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        isBackground =false;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     private void toMainActivity() {

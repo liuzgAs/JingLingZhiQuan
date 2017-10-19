@@ -79,6 +79,7 @@
         android:layout_height="280dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        app:lock9_nodeSize="60dp"
         app:lock9_autoLink="false"
         app:lock9_enableVibrate="true"
         app:lock9_lineColor="@color/basic_color"

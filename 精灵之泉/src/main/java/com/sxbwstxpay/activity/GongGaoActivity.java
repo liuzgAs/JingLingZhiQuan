@@ -131,11 +131,6 @@ public class GongGaoActivity extends ZjbBaseActivity implements SwipeRefreshLayo
                 adapter.resumeMore();
             }
         });
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-            }
-        });
         recyclerView.setRefreshListener(this);
     }
 
