@@ -56,7 +56,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xuan_ze_xyk);
-        init();
+        init(XuanZeXYKActivity.class);
     }
 
     @Override

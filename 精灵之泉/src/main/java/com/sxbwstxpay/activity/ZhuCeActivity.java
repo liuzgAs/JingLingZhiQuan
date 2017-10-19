@@ -8,8 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
@@ -20,6 +18,9 @@ import com.sxbwstxpay.util.AppUtil;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.StringUtil;
+
+import java.util.HashMap;
+
 import okhttp3.Response;
 
 public class ZhuCeActivity extends ZjbBaseActivity implements View.OnClickListener {
@@ -34,7 +35,7 @@ public class ZhuCeActivity extends ZjbBaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhu_ce);
-        init();
+        init(ZhuCeActivity.class);
     }
 
     @Override

@@ -216,6 +216,9 @@ public class Constant {
         public static final String position = "position";
         public static final String BIG_IMG_POSITION = "bigImgPosition";
         public static final String BIG_IMG = "bigImg";
+        public static final String shezhi = "shezhi";
+        public static final String isFrist = "isFrist";
+        public static final String Main = "Main";
     }
 
     public static class REQUEST_RESULT_CODE {

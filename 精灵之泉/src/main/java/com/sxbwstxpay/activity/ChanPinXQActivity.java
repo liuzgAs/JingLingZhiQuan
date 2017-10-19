@@ -122,7 +122,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chan_pin_xq);
         mTencent = Tencent.createInstance(Constant.QQ_ID, this.getApplicationContext());
-        init();
+        init(ChanPinXQActivity.class);
     }
 
     @Override

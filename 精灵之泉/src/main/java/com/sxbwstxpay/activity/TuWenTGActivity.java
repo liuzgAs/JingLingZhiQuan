@@ -39,7 +39,7 @@ public class TuWenTGActivity extends ZjbBaseActivity implements SwipeRefreshLayo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tu_wen_tg);
-        init();
+        init(TuWenTGActivity.class);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         setContentView(R.layout.activity_deng_lu);
         //检查更新
         UpgradeUtils.checkUpgrade(DengLuActivity.this, Constant.HOST + Constant.Url.INDEX_VERSION);
-        init();
+        init(DengLuActivity.class);
     }
 
     @Override
@@ -227,6 +227,7 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
             Constant.changeControl++;
             Intent intent = new Intent();
             intent.setClass(DengLuActivity.this, LockActivity.class);
+            intent.putExtra(Constant.INTENT_KEY.Main,"Main");
             startActivity(intent);
             finish();
         }

@@ -62,7 +62,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gou_wu_c);
-        init();
+        init(GouWuCActivity.class);
     }
 
     @Override

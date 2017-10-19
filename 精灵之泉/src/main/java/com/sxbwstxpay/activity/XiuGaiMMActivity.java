@@ -37,7 +37,7 @@ public class XiuGaiMMActivity extends ZjbBaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xiu_gai_mm);
-        init();
+        init(XiuGaiMMActivity.class);
     }
 
     @Override

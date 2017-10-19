@@ -74,7 +74,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tui_guang);
-        init();
+        init(TuiGuangActivity.class);
     }
 
     @Override

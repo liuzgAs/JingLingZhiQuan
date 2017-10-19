@@ -39,7 +39,7 @@ public class FeiLvActivity extends ZjbBaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fei_lv);
-        init();
+        init(FeiLvActivity.class);
     }
 
     @Override

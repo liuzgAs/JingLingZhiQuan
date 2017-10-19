@@ -37,7 +37,7 @@ public class WebActivity extends ZjbBaseActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
-        init();
+        init(WebActivity.class);
     }
 
     @Override

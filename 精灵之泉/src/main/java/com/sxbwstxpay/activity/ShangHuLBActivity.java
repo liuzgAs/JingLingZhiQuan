@@ -20,6 +20,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.UserTeam;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
@@ -44,7 +45,7 @@ public class ShangHuLBActivity extends ZjbBaseActivity implements SwipeRefreshLa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shang_hu_lb);
-        init();
+        init(ShangHuLBActivity.class);
     }
 
     @Override

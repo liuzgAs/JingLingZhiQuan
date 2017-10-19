@@ -2,7 +2,7 @@ package com.sxbwstxpay.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Process;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +16,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.Lock9View;
 import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.util.ACache;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.StringUtil;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -32,12 +33,17 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
     private TextView textPhone;
     private TextView textWangJiMM;
     private TextView textSkip;
+    private String isFristAQ;
+    private TextView textOhter;
+    private String shezhi;
+    private String Main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
-        init();
+        LogUtil.LogShitou("LockActivity--onCreate", "启动了");
+        init(LockActivity.class);
     }
 
     @Override
@@ -55,6 +61,9 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
     protected void initIntent() {
         Intent intent = getIntent();
         extramap = (ExtraMap) intent.getSerializableExtra(Constant.INTENT_KEY.EXTRAMAP);
+        isFristAQ = intent.getStringExtra(Constant.INTENT_KEY.isFrist);
+        shezhi = intent.getStringExtra(Constant.INTENT_KEY.shezhi);
+        Main = intent.getStringExtra(Constant.INTENT_KEY.Main);
     }
 
     @Override
@@ -65,6 +74,7 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
         textPhone = (TextView) findViewById(R.id.textPhone);
         textWangJiMM = (TextView) findViewById(R.id.textWangJiMM);
         textSkip = (TextView) findViewById(R.id.textSkip);
+        textOhter = (TextView) findViewById(R.id.textOhter);
     }
 
     @Override
@@ -75,12 +85,21 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
                 .placeholder(R.mipmap.ic_empty01)
                 .into(imageTouXiang);
         textPhone.setText(StringUtil.hidePhone(userInfo.getUserName()));
-        if (isFrist){
+        if (isFrist) {
             textWangJiMM.setVisibility(View.INVISIBLE);
             textSkip.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             textWangJiMM.setVisibility(View.VISIBLE);
             textSkip.setVisibility(View.GONE);
+        }
+        if (!TextUtils.isEmpty(isFristAQ)) {
+            textSkip.setVisibility(View.GONE);
+            textOhter.setVisibility(View.GONE);
+            mTextView_tip.setText("请验证手势密码");
+        }
+        if (!TextUtils.isEmpty(shezhi)) {
+            textSkip.setVisibility(View.GONE);
+            textOhter.setVisibility(View.GONE);
         }
     }
 
@@ -90,7 +109,7 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
             @Override
             public void onFinish(String password) {
                 if (isFrist) {
-                    if (password.length() >= 4 && password.length() <= 6) {
+                    if (password.length() >= 4 && password.length() <= 9) {
                         if (paintCount == 0) {
                             mPassword = password;
                             mTextView_tip.setText("请再次绘制");
@@ -114,7 +133,12 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
                     }
                 } else {
                     if (password.equals(mPaintPassword)) {
-                        startToMainAvtivity();
+                        if (!TextUtils.isEmpty(isFristAQ)) {
+                            mTextView_tip.setText("设置手势密码");
+                            isFrist = true;
+                        } else {
+                            startToMainAvtivity();
+                        }
                     } else {
                         mTextView_tip.setText("错误，请重新绘制");
                     }
@@ -123,16 +147,18 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
         });
         textWangJiMM.setOnClickListener(this);
         textSkip.setOnClickListener(this);
-        findViewById(R.id.textOhter).setOnClickListener(this);
+        textOhter.setOnClickListener(this);
     }
 
     private void startToMainAvtivity() {
-        Intent intent = new Intent();
-        intent.setClass(LockActivity.this, MainActivity.class);
-        if (extramap != null) {
-            intent.putExtra(Constant.INTENT_KEY.EXTRAMAP, extramap);
+        if (!TextUtils.isEmpty(Main)) {
+            Intent intent = new Intent();
+            intent.setClass(LockActivity.this, MainActivity.class);
+            if (extramap != null) {
+                intent.putExtra(Constant.INTENT_KEY.EXTRAMAP, extramap);
+            }
+            startActivity(intent);
         }
-        startActivity(intent);
         finish();
     }
 
@@ -144,8 +170,13 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
-        Process.killProcess(Process.myPid());
-        System.exit(0);
+        if (!TextUtils.isEmpty(isFristAQ)) {
+            finish();
+        } else {
+            LogUtil.LogShitou("LockActivity--onBackPressed", "退出app");
+            android.os.Process.killProcess(android.os.Process.myPid());   //获取PID
+            System.exit(0);
+        }
     }
 
     @Override

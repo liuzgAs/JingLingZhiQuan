@@ -50,7 +50,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wo_de_sy);
-        init();
+        init(WoDeSYActivity.class);
     }
 
     @Override

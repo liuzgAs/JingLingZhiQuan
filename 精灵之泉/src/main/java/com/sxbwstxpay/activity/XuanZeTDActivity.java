@@ -67,7 +67,7 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xuan_ze_td);
-        init();
+        init(XuanZeTDActivity.class);
     }
 
     @Override

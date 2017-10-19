@@ -58,7 +58,7 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
         imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new PicassoImageLoader());   //设置图片加载器
         imagePicker.setShowCamera(true);  //显示拍照按钮
-        init();
+        init(DianPuXXActivity.class);
     }
 
     @Override

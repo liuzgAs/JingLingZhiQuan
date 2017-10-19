@@ -43,7 +43,7 @@ public class BangZhuZXActivity extends ZjbBaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bang_zhu_zx);
-        init();
+        init(BangZhuZXActivity.class);
     }
     @Override
     protected void initSP() {

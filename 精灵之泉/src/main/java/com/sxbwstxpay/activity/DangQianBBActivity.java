@@ -22,7 +22,7 @@ public class DangQianBBActivity extends ZjbBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_qian_bb);
-        init();
+        init(DangQianBBActivity.class);
     }
 
     @Override

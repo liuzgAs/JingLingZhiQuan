@@ -24,7 +24,7 @@ public class WeiXinMPMaActivity extends ZjbBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_er_wei_ma);
-        init();
+        init(WeiXinMPMaActivity.class);
     }
 
     @Override

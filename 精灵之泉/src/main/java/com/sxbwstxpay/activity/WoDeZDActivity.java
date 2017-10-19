@@ -28,7 +28,7 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wo_de_zd);
-        init();
+        init(WoDeZDActivity.class);
     }
 
     @Override

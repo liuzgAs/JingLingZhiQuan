@@ -64,7 +64,7 @@ public class TuiGuangZFActivity extends ZjbBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhi_fu);
-        init();
+        init(TuiGuangZFActivity.class);
     }
 
     @Override

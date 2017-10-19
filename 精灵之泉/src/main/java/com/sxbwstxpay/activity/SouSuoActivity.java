@@ -138,7 +138,7 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sou_suo);
         mTencent = Tencent.createInstance(Constant.QQ_ID, this.getApplicationContext());
-        init();
+        init(SouSuoActivity.class);
     }
 
     @Override

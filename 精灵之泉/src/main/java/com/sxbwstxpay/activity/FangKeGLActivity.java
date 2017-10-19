@@ -52,7 +52,7 @@ public class FangKeGLActivity extends ZjbBaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fang_ke_gl);
-        init();
+        init(FangKeGLActivity.class);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,6 +35,7 @@ import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.BackHandlerHelper;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.UpgradeUtils;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -142,7 +144,9 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
                 currentTime = System.currentTimeMillis();
             } else {
-                finish();
+                LogUtil.LogShitou("MainActivity--onBackPressed", "退出app");
+                android.os.Process.killProcess(android.os.Process.myPid());   //获取PID
+                System.exit(0);
             }
         }
     }
@@ -151,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
+        ACache aCache = ACache.get(MainActivity.this, Constant.ACACHE.App);
+        paintPassword = aCache.getAsString(Constant.ACACHE.PAINT_PASSWORD);
         ExtraMap extramap = (ExtraMap) intent.getSerializableExtra(Constant.INTENT_KEY.EXTRAMAP);
         try {
             action(extramap);
@@ -206,7 +212,8 @@ public class MainActivity extends AppCompatActivity {
             //app 从后台唤醒，进入前台
             isBackground = false;
             Log.e("ACTIVITY", "程序从后台唤醒");
-            if (!TextUtils.isEmpty(paintPassword)){
+            boolean activityTop = isActivityTop(MainActivity.class, this);
+            if (!TextUtils.isEmpty(paintPassword)&&activityTop){
                 Intent intent = new Intent();
                 intent.setClass(this, LockActivity.class);
                 startActivity(intent);
@@ -271,4 +278,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     *
+     * 判断某activity是否处于栈顶
+     * @return  true在栈顶 false不在栈顶
+     */
+    private boolean isActivityTop(Class cls,Context context){
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        String name = manager.getRunningTasks(1).get(0).topActivity.getClassName();
+        return name.equals(cls.getName());
+    }
 }

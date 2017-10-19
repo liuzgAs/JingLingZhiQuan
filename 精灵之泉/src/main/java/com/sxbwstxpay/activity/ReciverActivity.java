@@ -2,20 +2,21 @@ package com.sxbwstxpay.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.ExtraMap;
 
-public class ReciverActivity extends AppCompatActivity {
+public class ReciverActivity extends ZjbBaseNotLeftActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reciver);
+        init(ReciverActivity.class);
         TextView textTitle = (TextView) findViewById(R.id.textTitle);
         TextView textDes = (TextView) findViewById(R.id.textDes);
         TextView textCancle = (TextView) findViewById(R.id.textCancle);
@@ -41,5 +42,35 @@ public class ReciverActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void initSP() {
+
+    }
+
+    @Override
+    protected void initIntent() {
+
+    }
+
+    @Override
+    protected void findID() {
+
+    }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    protected void setListeners() {
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 }

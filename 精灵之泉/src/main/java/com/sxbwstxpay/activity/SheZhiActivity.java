@@ -24,7 +24,7 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_she_zhi);
-        init();
+        init(SheZhiActivity.class);
     }
 
     @Override

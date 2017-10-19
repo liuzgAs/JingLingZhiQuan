@@ -1,4 +1,4 @@
-package com.sxbwstxpay.activity;
+package com.sxbwstxpay.model;
 
 import java.util.List;
 

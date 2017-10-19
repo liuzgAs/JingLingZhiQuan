@@ -49,7 +49,7 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
         mImagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
         mImagePicker.setOutPutY(1000);//保存文件的高度。单位像素
         mImagePicker.setMultiMode(true);
-        init();
+        init(FaBuSCActivity.class);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class DingDanXQActivity extends ZjbBaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ding_dan_xq);
-        init();
+        init(DingDanXQActivity.class);
     }
 
     @Override

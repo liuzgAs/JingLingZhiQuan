@@ -53,7 +53,7 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xin_zeng_dz);
-        init();
+        init(XinZengDZActivity.class);
     }
 
     @Override

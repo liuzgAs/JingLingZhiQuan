@@ -82,7 +82,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guan_li_wddp);
         mTencent = Tencent.createInstance(Constant.QQ_ID, this.getApplicationContext());
-        init();
+        init(GuanLiWDDPActivity.class);
     }
 
     @Override

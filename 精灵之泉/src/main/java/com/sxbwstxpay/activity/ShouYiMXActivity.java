@@ -28,7 +28,7 @@ public class ShouYiMXActivity extends ZjbBaseNotLeftActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shou_yi_mx);
-        init();
+        init(ShouYiMXActivity.class);
     }
 
     @Override

@@ -9,8 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
@@ -22,6 +20,9 @@ import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.util.StringUtil;
+
+import java.util.HashMap;
+
 import okhttp3.Response;
 
 public class WangJiMMActivity extends ZjbBaseActivity implements View.OnClickListener {
@@ -36,7 +37,7 @@ public class WangJiMMActivity extends ZjbBaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wang_ji_mm);
-        init();
+        init(WangJiMMActivity.class);
     }
 
     @Override

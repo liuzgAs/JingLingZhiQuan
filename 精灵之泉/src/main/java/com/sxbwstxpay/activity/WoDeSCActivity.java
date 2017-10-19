@@ -37,7 +37,7 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wo_de_sc);
-        init();
+        init(WoDeSCActivity.class);
     }
 
     @Override

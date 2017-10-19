@@ -56,7 +56,7 @@ public class DiZhiGLActivity extends ZjbBaseActivity implements SwipeRefreshLayo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_di_zhi_gl);
-        init();
+        init(DiZhiGLActivity.class);
     }
 
     @Override

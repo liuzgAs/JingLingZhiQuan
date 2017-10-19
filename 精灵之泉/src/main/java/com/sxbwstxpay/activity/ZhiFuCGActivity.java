@@ -47,7 +47,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhi_fu_cg);
-        init();
+        init(ZhiFuCGActivity.class);
     }
 
     @Override

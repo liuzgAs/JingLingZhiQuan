@@ -40,7 +40,7 @@ public class EditActivity extends ZjbBaseActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        init();
+        init(EditActivity.class);
     }
 
     @Override

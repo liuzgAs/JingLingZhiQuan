@@ -38,7 +38,7 @@ public class GongGaoActivity extends ZjbBaseActivity implements SwipeRefreshLayo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gong_gao);
-        init();
+        init(GongGaoActivity.class);
     }
 
     @Override

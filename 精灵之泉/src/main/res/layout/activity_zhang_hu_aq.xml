@@ -9,6 +9,7 @@
     <include layout="@layout/view_bar" />
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:id="@+id/viewXiuGaiMM"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
@@ -34,6 +35,35 @@
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="1dp"
+        android:id="@+id/viewShouShiMM"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:background="@drawable/layout_selector_white_system_gray" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/right" />
+
+        <TextView
+            android:id="@+id/textShouShiMM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="设置手势密码"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
 </LinearLayout>

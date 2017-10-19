@@ -69,7 +69,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wo_de_dp);
         mTencent = Tencent.createInstance(Constant.QQ_ID, this.getApplicationContext());
-        init();
+        init(WoDeDPActivity.class);
     }
 
     @Override

@@ -66,7 +66,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_que_ren_dd);
-        init();
+        init(QueRenDDActivity.class);
     }
 
     @Override

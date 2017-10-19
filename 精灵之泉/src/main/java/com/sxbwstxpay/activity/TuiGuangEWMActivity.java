@@ -60,7 +60,7 @@ public class TuiGuangEWMActivity extends ZjbBaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tui_guang_ewm);
         mTencent = Tencent.createInstance(Constant.QQ_ID, this.getApplicationContext());
-        init();
+        init(TuiGuangEWMActivity.class);
     }
 
     @Override

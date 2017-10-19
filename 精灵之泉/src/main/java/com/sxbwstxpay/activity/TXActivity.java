@@ -39,7 +39,7 @@ public class TXActivity extends ZjbBaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_li_ji_tx);
-        init();
+        init(TXActivity.class);
     }
 
     @Override

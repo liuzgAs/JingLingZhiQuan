@@ -142,7 +142,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity {
         setContentView(R.layout.activity_huan_ying);
         initPermission();
         initLocation();
-        init();
+        init(HuanYingActivity.class);
     }
 
     @Override
@@ -268,9 +268,16 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity {
     private void toMainActivity() {
         Intent intent = new Intent();
         if (isLogin) {
-            intent.setClass(HuanYingActivity.this, LockActivity.class);
-            startActivity(intent);
-            finish();
+            if (!TextUtils.isEmpty(paintPassword)){
+                intent.setClass(HuanYingActivity.this, LockActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.Main,"Main");
+                startActivity(intent);
+                finish();
+            }else {
+                intent.setClass(HuanYingActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         } else {
             intent.setClass(HuanYingActivity.this, DengLuActivity.class);
             startActivity(intent);

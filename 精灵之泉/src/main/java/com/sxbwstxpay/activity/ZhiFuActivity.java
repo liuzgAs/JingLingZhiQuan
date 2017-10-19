@@ -81,7 +81,7 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhi_fu);
-        init();
+        init(ZhiFuActivity.class);
     }
 
     @Override

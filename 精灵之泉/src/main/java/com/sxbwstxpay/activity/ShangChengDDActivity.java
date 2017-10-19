@@ -39,7 +39,7 @@ public class ShangChengDDActivity extends ZjbBaseNotLeftActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shang_cheng_dd);
-        init();
+        init(ShangChengDDActivity.class);
     }
 
     @Override

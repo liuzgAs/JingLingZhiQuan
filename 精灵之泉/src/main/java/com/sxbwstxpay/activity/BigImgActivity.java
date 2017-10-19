@@ -48,7 +48,7 @@ public class BigImgActivity extends ZjbBaseNotLeftActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_big_img);
-        init();
+        init(BigImgActivity.class);
     }
 
     @Override

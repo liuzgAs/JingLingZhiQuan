@@ -50,7 +50,7 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tui_guang_yj);
-        init();
+        init(TuiGuangYJActivity.class);
     }
 
     @Override

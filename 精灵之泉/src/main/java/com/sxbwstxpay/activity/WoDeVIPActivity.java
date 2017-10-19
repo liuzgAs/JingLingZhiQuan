@@ -11,7 +11,7 @@ public class WoDeVIPActivity extends ZjbBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wo_de_vip);
-        init();
+        init(WoDeVIPActivity.class);
     }
 
     @Override

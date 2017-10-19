@@ -23,7 +23,7 @@ public class GuanLiYHKActivity extends ZjbBaseNotLeftActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guan_li_yhk);
-        init();
+        init(GuanLiYHKActivity.class);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class ChengShiXZActivity extends ZjbBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheng_shi_xz);
-        init();
+        init(ChengShiXZActivity.class);
     }
 
     @Override

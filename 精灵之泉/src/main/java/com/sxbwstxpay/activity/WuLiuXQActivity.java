@@ -35,7 +35,7 @@ public class WuLiuXQActivity extends ZjbBaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wu_liu_xq);
-        init();
+        init(WuLiuXQActivity.class);
     }
 
     @Override

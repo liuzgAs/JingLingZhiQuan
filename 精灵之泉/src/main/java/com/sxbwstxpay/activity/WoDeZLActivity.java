@@ -69,7 +69,7 @@ public class WoDeZLActivity extends ZjbBaseActivity implements View.OnClickListe
         imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
         imagePicker.setMultiMode(false);
-        init();
+        init(WoDeZLActivity.class);
     }
 
     @Override

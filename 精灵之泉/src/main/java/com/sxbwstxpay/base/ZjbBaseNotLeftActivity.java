@@ -1,5 +1,7 @@
 package com.sxbwstxpay.base;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,19 +10,18 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.sxbwstxpay.activity.LockActivity;
-import com.umeng.analytics.MobclickAgent;
-
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.LockActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
+import com.sxbwstxpay.util.LogUtil;
+import com.umeng.analytics.MobclickAgent;
 
 
 public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
@@ -31,7 +32,8 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
     public boolean isLogin = false;
     public String tokenTime;
     public boolean isBackground;
-    private String paintPassword;
+    public String paintPassword;
+    private Class cls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,8 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
-    public void init() {
+    public void init(Class cls) {
+        this.cls =cls;
         ACache aCache = ACache.get(this, Constant.ACACHE.App);
         userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
@@ -65,8 +68,9 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
         if (isBackground) {
             //app 从后台唤醒，进入前台
             isBackground = false;
-            Log.e("ACTIVITY", "程序从后台唤醒");
-            if (!TextUtils.isEmpty(paintPassword)){
+            LogUtil.LogShitou("ZjbBaseNotLeftActivity--onStart", "1111111");
+            boolean activityTop = isActivityTop(cls, this);
+            if (!TextUtils.isEmpty(paintPassword)&&activityTop){
                 Intent intent = new Intent();
                 intent.setClass(this, LockActivity.class);
                 startActivity(intent);
@@ -155,6 +159,17 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
             } catch (Exception e) {
             }
         }
+    }
+
+    /**
+     *
+     * 判断某activity是否处于栈顶
+     * @return  true在栈顶 false不在栈顶
+     */
+    private boolean isActivityTop(Class cls,Context context){
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        String name = manager.getRunningTasks(1).get(0).topActivity.getClassName();
+        return name.equals(cls.getName());
     }
 
 }
