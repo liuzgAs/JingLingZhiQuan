@@ -131,7 +131,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
             @Override
             public void onBindView(View headerView) {
                 textStatusText.setText(statusText);
-                if (isVip == 1) {
+                if (isVip == 0) {
                     textVipText.setText(vipText);
                     textVipText.setVisibility(View.VISIBLE);
                     textLiJiLiaoJie.setVisibility(View.VISIBLE);

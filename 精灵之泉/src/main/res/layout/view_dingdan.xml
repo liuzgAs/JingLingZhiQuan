@@ -62,8 +62,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginBottom="8dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageGoods_img"
         android:layout_toRightOf="@+id/imageGoods_img"
@@ -91,6 +90,17 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textGoods_price"
             android:layout_toEndOf="@+id/textGoods_price" />
+
+        <TextView
+            android:padding="10dp"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看物流"
+            android:id="@+id/buttonWuLiu"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -168,39 +168,12 @@ public class UserOrder {
         private double goods_money;
         private double sum;
         private String sumDes;
-        private String ship_title;
-        private String ship_url;
         private int is_cancle;
         private int is_pay;
         private int is_confirm;
         private int is_del;
         private int saleState;
-        private int is_ship;
         private List<OgBean> og;
-
-        public String getShip_title() {
-            return ship_title;
-        }
-
-        public void setShip_title(String ship_title) {
-            this.ship_title = ship_title;
-        }
-
-        public String getShip_url() {
-            return ship_url;
-        }
-
-        public void setShip_url(String ship_url) {
-            this.ship_url = ship_url;
-        }
-
-        public int getIs_ship() {
-            return is_ship;
-        }
-
-        public void setIs_ship(int is_ship) {
-            this.is_ship = is_ship;
-        }
 
         public String getId() {
             return id;
@@ -332,6 +305,33 @@ public class UserOrder {
             private String goods_price;
             private String goods_money;
             private String goods_desc;
+            private String ship_title;
+            private String ship_url;
+            private int is_ship;
+
+            public String getShip_title() {
+                return ship_title;
+            }
+
+            public void setShip_title(String ship_title) {
+                this.ship_title = ship_title;
+            }
+
+            public String getShip_url() {
+                return ship_url;
+            }
+
+            public void setShip_url(String ship_url) {
+                this.ship_url = ship_url;
+            }
+
+            public int getIs_ship() {
+                return is_ship;
+            }
+
+            public void setIs_ship(int is_ship) {
+                this.is_ship = is_ship;
+            }
 
             public String getGoods_id() {
                 return goods_id;

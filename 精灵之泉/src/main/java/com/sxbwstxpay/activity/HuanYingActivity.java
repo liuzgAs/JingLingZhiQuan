@@ -56,7 +56,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity {
                     aCache.put(Constant.ACACHE.CITY, city);
                     getData();
                 } else {
-                    MyDialog.dialogFinish(HuanYingActivity.this, "定位失败,请重新打开app");
+                    MyDialog.dialogFinish(HuanYingActivity.this, "无法获取您的地理位置信息，请退出后重试");
                 }
             }
         }

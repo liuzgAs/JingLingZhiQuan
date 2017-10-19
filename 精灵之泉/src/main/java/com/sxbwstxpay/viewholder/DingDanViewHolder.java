@@ -50,7 +50,6 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
     private final ListView listView;
     private UserOrder.ListBean data;
     private final View viewBtn;
-    private final Button buttonWuLiu;
 
     public DingDanViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -64,7 +63,6 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         buttonSure = $(R.id.buttonSure);
         listView = $(R.id.listView);
         viewBtn = $(R.id.viewBtn);
-        buttonWuLiu = $(R.id.buttonWuLiu);
         buttonSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,19 +86,6 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
                 if (data.getIs_del() == 1) {
                     dingDanCaoZuo("del");
                 }
-            }
-        });
-        buttonWuLiu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(getContext(), WuLiuXQActivity.class);
-//                getContext().startActivity(intent);
-                Intent intent = new Intent();
-                intent.setClass(getContext(), WebActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.TITLE, data.getShip_title());
-                intent.putExtra(Constant.INTENT_KEY.URL, data.getShip_url());
-                getContext().startActivity(intent);
             }
         });
     }
@@ -210,11 +195,6 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         if (data.getIs_confirm() == 0 && data.getIs_pay() == 0 && data.getIs_del() == 0 && data.getIs_cancle() == 0) {
             viewBtn.setVisibility(View.GONE);
         }
-        if (data.getIs_ship()==1){
-            buttonWuLiu.setVisibility(View.VISIBLE);
-        }else {
-            buttonWuLiu.setVisibility(View.GONE);
-        }
         listView.setAdapter(new MyAdapter());
     }
 
@@ -226,6 +206,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
             public TextView textNum;
             public TextView textGoods_price;
             public TextView textGoods_money;
+            public TextView buttonWuLiu;
         }
 
         @Override
@@ -244,7 +225,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
                 holder = new ViewHolder();
@@ -255,6 +236,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
                 holder.textNum = (TextView) convertView.findViewById(R.id.textNum);
                 holder.textGoods_price = (TextView) convertView.findViewById(R.id.textGoods_price);
                 holder.textGoods_money = (TextView) convertView.findViewById(R.id.textGoods_money);
+                holder.buttonWuLiu = (TextView) convertView.findViewById(R.id.buttonWuLiu);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -269,6 +251,24 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
             holder.textNum.setText("×" + data.getOg().get(position).getQuantity());
             holder.textGoods_price.setText("¥" + data.getOg().get(position).getGoods_price());
             holder.textGoods_money.setText("赚" + data.getOg().get(position).getGoods_money());
+            holder.buttonWuLiu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setClass(getContext(), WuLiuXQActivity.class);
+//                getContext().startActivity(intent);
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), WebActivity.class);
+                    intent.putExtra(Constant.INTENT_KEY.TITLE, data.getOg().get(position).getShip_title());
+                    intent.putExtra(Constant.INTENT_KEY.URL, data.getOg().get(position).getShip_url());
+                    getContext().startActivity(intent);
+                }
+            });
+            if (data.getOg().get(position).getIs_ship()==1){
+                holder.buttonWuLiu.setVisibility(View.VISIBLE);
+            }else {
+                holder.buttonWuLiu.setVisibility(View.GONE);
+            }
             return convertView;
         }
     }
