@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public String tokenTime;
     private boolean isShow;
     public boolean isBackground;
+    private String paintPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         ACache aCache = ACache.get(this, Constant.ACACHE.App);
         userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
+        paintPassword = aCache.getAsString(Constant.ACACHE.PAINT_PASSWORD);
         tabsItem[0] = "省钱";
         tabsItem[1] = "赚钱";
         tabsItem[2] = "收款";
@@ -204,9 +206,11 @@ public class MainActivity extends AppCompatActivity {
             //app 从后台唤醒，进入前台
             isBackground = false;
             Log.e("ACTIVITY", "程序从后台唤醒");
-            Intent intent = new Intent();
-            intent.setClass(this, LockActivity.class);
-            startActivity(intent);
+            if (!TextUtils.isEmpty(paintPassword)){
+                Intent intent = new Intent();
+                intent.setClass(this, LockActivity.class);
+                startActivity(intent);
+            }
         }
         super.onStart();
     }

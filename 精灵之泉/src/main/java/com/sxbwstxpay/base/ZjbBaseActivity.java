@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,6 +33,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
     private AlertDialog reLoginDialog;
     public String tokenTime;
     public boolean isBackground;
+    private String paintPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
         ACache aCache = ACache.get(this, Constant.ACACHE.App);
         userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
+        paintPassword = aCache.getAsString(Constant.ACACHE.PAINT_PASSWORD);
         initSP();
         initIntent();
         findID();
@@ -68,9 +71,11 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
             //app 从后台唤醒，进入前台
             isBackground = false;
             Log.e("ACTIVITY", "程序从后台唤醒");
-            Intent intent = new Intent();
-            intent.setClass(this, LockActivity.class);
-            startActivity(intent);
+            if (!TextUtils.isEmpty(paintPassword)){
+                Intent intent = new Intent();
+                intent.setClass(this, LockActivity.class);
+                startActivity(intent);
+            }
         }
         super.onStart();
     }

@@ -4,16 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.base.ZjbBaseActivity;
+import com.sxbwstxpay.base.ToLoginActivity;
+import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.Lock9View;
 import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.util.ACache;
+import com.sxbwstxpay.util.StringUtil;
 
-public class LockActivity extends ZjbBaseActivity {
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
+public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClickListener {
     private Lock9View mLock9View;
     private TextView mTextView_tip;
     private String mPassword;
@@ -21,6 +28,10 @@ public class LockActivity extends ZjbBaseActivity {
     private boolean isFrist = false;
     private String mPaintPassword;
     private ExtraMap extramap;
+    private ImageView imageTouXiang;
+    private TextView textPhone;
+    private TextView textWangJiMM;
+    private TextView textSkip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +42,7 @@ public class LockActivity extends ZjbBaseActivity {
 
     @Override
     protected void initSP() {
-        ACache aCache = ACache.get(LockActivity.this,Constant.ACACHE.App);
+        ACache aCache = ACache.get(LockActivity.this, Constant.ACACHE.App);
         mPaintPassword = aCache.getAsString(Constant.ACACHE.PAINT_PASSWORD);
         if (mPaintPassword == null) {
             isFrist = true;
@@ -50,11 +61,27 @@ public class LockActivity extends ZjbBaseActivity {
     protected void findID() {
         mLock9View = (Lock9View) findViewById(R.id.lock9View);
         mTextView_tip = (TextView) findViewById(R.id.textView_tip);
+        imageTouXiang = (ImageView) findViewById(R.id.imageTouXiang);
+        textPhone = (TextView) findViewById(R.id.textPhone);
+        textWangJiMM = (TextView) findViewById(R.id.textWangJiMM);
+        textSkip = (TextView) findViewById(R.id.textSkip);
     }
 
     @Override
     protected void initViews() {
-
+        Glide.with(LockActivity.this)
+                .load(userInfo.getHeadImg())
+                .bitmapTransform(new CropCircleTransformation(this))
+                .placeholder(R.mipmap.ic_empty01)
+                .into(imageTouXiang);
+        textPhone.setText(StringUtil.hidePhone(userInfo.getUserName()));
+        if (isFrist){
+            textWangJiMM.setVisibility(View.INVISIBLE);
+            textSkip.setVisibility(View.VISIBLE);
+        }else {
+            textWangJiMM.setVisibility(View.VISIBLE);
+            textSkip.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -71,7 +98,7 @@ public class LockActivity extends ZjbBaseActivity {
                         } else if (paintCount == 1) {
                             if (password.equals(mPassword)) {
                                 Log.e("onFinish", "成功设置手势密码");
-                                ACache aCache = ACache.get(LockActivity.this,Constant.ACACHE.App);
+                                ACache aCache = ACache.get(LockActivity.this, Constant.ACACHE.App);
                                 aCache.put(Constant.ACACHE.PAINT_PASSWORD, mPassword);
                                 startToMainAvtivity();
                             } else {
@@ -94,12 +121,15 @@ public class LockActivity extends ZjbBaseActivity {
                 }
             }
         });
+        textWangJiMM.setOnClickListener(this);
+        textSkip.setOnClickListener(this);
+        findViewById(R.id.textOhter).setOnClickListener(this);
     }
 
     private void startToMainAvtivity() {
         Intent intent = new Intent();
         intent.setClass(LockActivity.this, MainActivity.class);
-        if (extramap!=null){
+        if (extramap != null) {
             intent.putExtra(Constant.INTENT_KEY.EXTRAMAP, extramap);
         }
         startActivity(intent);
@@ -116,5 +146,20 @@ public class LockActivity extends ZjbBaseActivity {
     public void onBackPressed() {
         Process.killProcess(Process.myPid());
         System.exit(0);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.textSkip:
+                startToMainAvtivity();
+                break;
+            case R.id.textWangJiMM:
+                ToLoginActivity.toLoginActivity(this);
+                break;
+            case R.id.textOhter:
+                ToLoginActivity.toLoginActivity(this);
+                break;
+        }
     }
 }

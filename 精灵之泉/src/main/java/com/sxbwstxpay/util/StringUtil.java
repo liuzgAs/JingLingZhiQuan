@@ -129,7 +129,19 @@ public class StringUtil {
         int min = progress % 3600 / 60;
         int sec = progress % 60;
         //设置整数的输出格式：  %02d  d代表int  2代码位数    0代表位数不够时前面补0
-        String time = String.format("%02d", hour) + ":" +String.format("%02d", min) + ":" + String.format("%02d", sec);
+        String time = String.format("%02d", hour) + ":" + String.format("%02d", min) + ":" + String.format("%02d", sec);
         return time;
+    }
+
+
+    /**
+     * des： 隐藏电话号码
+     * author： ZhangJieBo
+     * date： 2017/10/19 0019 下午 2:05
+     */
+    public static String hidePhone(String phone) {
+        String substring01 = phone.substring(0, 3);
+        String substring02 = phone.substring(7, phone.length());
+        return substring01 + "****" + substring02;
     }
 }

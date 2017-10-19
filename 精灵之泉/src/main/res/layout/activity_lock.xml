@@ -1,45 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
-    android:orientation="vertical"
-    tools:context="com.sxbwstxpay.activity.LockActivity">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.sxbwstxpay.customview.Lock9View
-            android:id="@+id/lock9View"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            app:lock9_autoLink="false"
-            app:lock9_enableVibrate="true"
-            app:lock9_lineColor="@color/basic_color"
-            app:lock9_lineWidth="8dp"
-            app:lock9_nodeOnAnim="@anim/node_on_1"
-            app:lock9_nodeOnSrc="@mipmap/node_active"
-            app:lock9_nodeSrc="@mipmap/node_normal"
-            app:lock9_padding="28dp"
-            app:lock9_spacing="28dp"
-            app:lock9_vibrateTime="20"/>
+        android:layout_height="50dp">
 
         <TextView
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:paddingLeft="20dp"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="跳过"
+            android:id="@+id/textSkip"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <ImageView
+            android:src="@mipmap/ic_empty01"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:id="@+id/imageTouXiang"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            tools:text="158****5320"
+            android:textSize="@dimen/litterText"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textPhone"
+            android:layout_below="@+id/imageTouXiang"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/textView_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:text="请绘制手势密码"
             android:textColor="@color/red"
-            android:textSize="20dp" />
+            android:textSize="@dimen/normal_textsize"
+            android:layout_below="@+id/textPhone"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
+
+    <com.sxbwstxpay.customview.Lock9View
+        android:id="@+id/lock9View"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:lock9_autoLink="false"
+        app:lock9_enableVibrate="true"
+        app:lock9_lineColor="@color/basic_color"
+        app:lock9_lineWidth="2dp"
+        app:lock9_nodeOnAnim="@anim/node_on_1"
+        app:lock9_nodeOnSrc="@drawable/lock_select"
+        app:lock9_nodeSrc="@drawable/lock_normal"
+        app:lock9_spacing="35dp"
+        app:lock9_padding="10dp"
+        app:lock9_vibrateTime="20" />
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:textSize="@dimen/litterText"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="忘记手势密码"
+            android:id="@+id/textWangJiMM" />
+
+        <TextView
+            android:textSize="@dimen/litterText"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="登录其他账户"
+            android:id="@+id/textOhter" />
+    </LinearLayout>
+
 </LinearLayout>
