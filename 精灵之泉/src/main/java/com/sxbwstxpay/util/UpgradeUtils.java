@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.sxbwstxpay.BuildConfig;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.model.OkObject;
 
 import java.io.File;
@@ -201,6 +202,7 @@ public class UpgradeUtils extends Activity {
                     .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            MyApplication.getInstance().exit();
                             System.exit(0);
                         }
                     }).show();

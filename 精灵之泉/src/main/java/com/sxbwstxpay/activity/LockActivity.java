@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.ToLoginActivity;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
@@ -173,9 +174,7 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
         if (!TextUtils.isEmpty(isFristAQ)) {
             finish();
         } else {
-            LogUtil.LogShitou("LockActivity--onBackPressed", "退出app");
-            android.os.Process.killProcess(android.os.Process.myPid());   //获取PID
-            System.exit(0);
+            MyApplication.getInstance().exit();
         }
     }
 

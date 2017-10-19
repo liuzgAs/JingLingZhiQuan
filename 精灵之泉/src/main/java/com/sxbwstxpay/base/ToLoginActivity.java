@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Process;
 
 import com.sxbwstxpay.activity.DengLuActivity;
+import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.util.ACache;
 
@@ -20,6 +21,7 @@ public class ToLoginActivity {
      * date： 2017/7/6 0006 下午 2:14
      */
     public static void toLoginActivity(Context context) {
+        MyApplication.getInstance().exit();
         ACache aCache = ACache.get(context, Constant.ACACHE.App);
         aCache.clear();
         Intent intent = new Intent(context, DengLuActivity.class);

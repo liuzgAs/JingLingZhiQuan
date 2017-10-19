@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.fragment.RenZhengFragment;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             // Translucent status bar
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+        MyApplication.getInstance().addActivity(this);
         Constant.MainActivityAlive = 1;
         //禁止横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -145,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 currentTime = System.currentTimeMillis();
             } else {
                 LogUtil.LogShitou("MainActivity--onBackPressed", "退出app");
+                MyApplication.getInstance().exit();
                 android.os.Process.killProcess(android.os.Process.myPid());   //获取PID
                 System.exit(0);
             }

@@ -17,6 +17,7 @@ import android.view.WindowManager;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.LockActivity;
+import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.UserInfo;
 import com.sxbwstxpay.util.ACache;
@@ -51,6 +52,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
 
     public void init(Class cls) {
         this.cls =cls;
+        MyApplication.getInstance().addActivity(this);
         ACache aCache = ACache.get(this, Constant.ACACHE.App);
         userInfo = (UserInfo) aCache.getAsObject(Constant.ACACHE.USER_INFO);
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
