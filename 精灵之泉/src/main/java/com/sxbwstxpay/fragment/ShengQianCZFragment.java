@@ -65,6 +65,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                     textCity.setText(cityBean.getName());
                     break;
                 case Constant.BROADCASTCODE.GouWuCheNum:
+                    LogUtil.LogShitou("ShengQianCZFragment--onReceive", "刷新购物车");
                     gouWuCheNum(true);
                     break;
             }

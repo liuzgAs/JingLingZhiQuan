@@ -212,11 +212,11 @@
             android:layout_toStartOf="@+id/imageView102" />
     </RelativeLayout>
 
-    <Button
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        style="@style/MyButton"
-        android:text="提交" />
+    <!--<Button-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--style="@style/MyButton"-->
+        <!--android:text="提交" />-->
 
 </LinearLayout>

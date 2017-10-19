@@ -240,10 +240,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         viewTiJiao.setVisibility(View.VISIBLE);
                         textSum.setText("¥" + cartOrder.getSum());
                         textYunFei.setText(cartOrder.getSumDes());
-                        //刷新购物车小红点
-                        Intent intent = new Intent();
-                        intent.setAction(Constant.BROADCASTCODE.GouWuCheNum);
-                        sendBroadcast(intent);
+
                     } else if (cartOrder.getStatus() == 3) {
                         MyDialog.showReLoginDialog(QueRenDDActivity.this);
                     } else {
@@ -307,6 +304,10 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         Intent intent1 = new Intent();
                         intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
                         sendBroadcast(intent1);
+                        //刷新购物车小红点
+                        Intent intent2 = new Intent();
+                        intent2.setAction(Constant.BROADCASTCODE.GouWuCheNum);
+                        sendBroadcast(intent2);
                         Intent intent = new Intent();
                         intent.setClass(QueRenDDActivity.this, ZhiFuActivity.class);
                         intent.putExtra(Constant.INTENT_KEY.id, cartNeworder.getOid());
