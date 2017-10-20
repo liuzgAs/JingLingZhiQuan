@@ -357,6 +357,7 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.FangKeGLActivity"
+            android:hardwareAccelerated="true"
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.WoDeSCActivity"
@@ -374,6 +375,7 @@
             android:name=".activity.TuiGuangZFActivity"
             android:launchMode="singleTop" />
         <activity android:name=".activity.LockActivity"
+            android:hardwareAccelerated="true"
             android:launchMode="singleTop"></activity>
     </application>
 
