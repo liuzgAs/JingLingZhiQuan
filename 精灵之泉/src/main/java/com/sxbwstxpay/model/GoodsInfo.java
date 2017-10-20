@@ -71,6 +71,7 @@ public class GoodsInfo {
         private String title;
         private String id;
         private String price;
+        private String countdownDes;
         private int countdown;
         private String goods_money;
         private int num;
@@ -84,6 +85,14 @@ public class GoodsInfo {
         private List<ImgsBean> imgs;
         private List<ImgsBean> imgs2;
         private List<SizeStrBean> size_str;
+
+        public String getCountdownDes() {
+            return countdownDes;
+        }
+
+        public void setCountdownDes(String countdownDes) {
+            this.countdownDes = countdownDes;
+        }
 
         public List<SizeStrBean> getSize_str() {
             return size_str;

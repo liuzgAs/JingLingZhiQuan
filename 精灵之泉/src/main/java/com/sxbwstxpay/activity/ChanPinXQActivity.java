@@ -200,6 +200,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(2));
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+            private TextView textCountdownDes;
             private TextView textCountdown;
             private TextView textStock_num;
             private TextView textSale_add;
@@ -279,6 +280,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     }
                 });
                 textCountdown = (TextView) header_xhan_pin_xq.findViewById(R.id.textCountdown);
+                textCountdownDes = (TextView) header_xhan_pin_xq.findViewById(R.id.textCountdownDes);
                 return header_xhan_pin_xq;
             }
 
@@ -307,6 +309,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     textSale_add.setText(goodsInfoAd.getSale_add() + "人在售");
                     textStock_num.setText("剩余" + goodsInfoAd.getStock_num() + "库存");
                     countdown = goodsInfoAd.getCountdown();
+                    textCountdownDes.setText(goodsInfoAd.getCountdownDes());
                     LogUtil.LogShitou("ChanPinXQActivity--countdown", "" + countdown);
                     if (timer != null) {
                         timer.cancel();
@@ -426,9 +429,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
      */
 
     private void mai() {
-//        for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-//            goodsInfoAdDes.get(i).setSelect(false);
-//        }
         for (int i = 0; i < goodsInfoAd.getSize_str().size(); i++) {
             List<Boolean> isSelect = new ArrayList<>();
             for (int j = 0; j < goodsInfoAd.getSize_str().get(i).getContent().size(); j++) {
@@ -494,26 +494,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 }
             }
         });
-//        if (goodsInfoAdDes.size() > 0) {
-//            FlowTagLayout flowTagLayout = (FlowTagLayout) dialog_chan_pin.findViewById(R.id.flowTagLayout);
-//            flowTagLayout.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
-//            tagAdapter = new TagAdapter(ChanPinXQActivity.this);
-//            flowTagLayout.setAdapter(tagAdapter);
-//            tagAdapter.clearAndAddAll(goodsInfoAdDes);
-//            flowTagLayout.setOnTagSelectListener(new OnTagSelectListener() {
-//                @Override
-//                public void onItemSelect(FlowTagLayout parent, List<Integer> selectedList) {
-//                    for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-//                        goodsInfoAdDes.get(i).setSelect(false);
-//                    }
-//                    for (int i = 0; i < selectedList.size(); i++) {
-//                        LogUtil.LogShitou("DaiYingYaoFragment--onItemSelect", "" + selectedList.get(i));
-//                        goodsInfoAdDes.get(selectedList.get(i)).setSelect(true);
-//                    }
-//                }
-//            });
-//        } else {
-//        }
         ListView listGuiZe = (ListView) dialog_chan_pin.findViewById(R.id.listGuiZe);
         if (goodsInfoAd.getSize_str().size() > 0) {
             listGuiZe.setVisibility(View.VISIBLE);
@@ -590,27 +570,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         }
     }
 
-    /**
-     * des： 网络请求参数
-     * author： ZhangJieBo
-     * date： 2017/8/28 0028 上午 9:55
-     */
-//    private OkObject getOkObjectAddCar() {
-//        String url = Constant.HOST + Constant.Url.CART_ADDCART;
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("uid", userInfo.getUid());
-//        params.put("tokenTime", tokenTime);
-//        params.put("num", num + "");
-//        params.put("id", id);
-//        String speId = "";
-//        for (int i = 0; i < goodsInfoAdDes.size(); i++) {
-//            if (goodsInfoAdDes.get(i).isSelect()) {
-//                speId = goodsInfoAdDes.get(i).getId();
-//            }
-//        }
-//        params.put("speId", speId);
-//        return new OkObject(params, url);
-//    }
 
     /**
      * des： 购物车新增
@@ -668,39 +627,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 Toast.makeText(ChanPinXQActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
-//        ApiClient.post(ChanPinXQActivity.this, getOkObjectAddCar(), new ApiClient.CallBack() {
-//            @Override
-//            public void onSuccess(String s) {
-//                cancelLoadingDialog();
-//                LogUtil.LogShitou("ChanPinXQActivity-购物车新增", s + "");
-//                try {
-//                    CartAddcart cartAddcart = GsonUtils.parseJSON(s, CartAddcart.class);
-//                    if (cartAddcart.getStatus() == 1) {
-//                        alertDialog1.dismiss();
-//                        if (quick) {
-//                            Intent intent = new Intent();
-//                            intent.setClass(ChanPinXQActivity.this, GouWuCActivity.class);
-//                            startActivity(intent);
-//                        }
-//                        Intent intent = new Intent();
-//                        intent.setAction(Constant.BROADCASTCODE.GouWuCheNum);
-//                        sendBroadcast(intent);
-//                    } else if (cartAddcart.getStatus() == 3) {
-//                        MyDialog.showReLoginDialog(ChanPinXQActivity.this);
-//                    } else {
-//                        Toast.makeText(ChanPinXQActivity.this, cartAddcart.getInfo(), Toast.LENGTH_SHORT).show();
-//                    }
-//                } catch (Exception e) {
-//                    Toast.makeText(ChanPinXQActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Response response) {
-//                cancelLoadingDialog();
-//                Toast.makeText(ChanPinXQActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     /**
