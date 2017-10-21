@@ -9,7 +9,9 @@ import java.util.List;
 public class DataProvider {
     public static List<Integer> getPersonList(int page) {
         ArrayList<Integer> arr = new ArrayList<>();
-        if (page == 4) return arr;
+        if (page == 4){
+            return arr;
+        }
         arr.add(1);
         arr.add(1);
         arr.add(1);
@@ -26,7 +28,9 @@ public class DataProvider {
 
     public static List<Boolean> getShouYi(int page) {
         ArrayList<Boolean> arr = new ArrayList<>();
-        if (page == 4) return arr;
+        if (page == 4){
+            return arr;
+        }
         arr.add(false);
         arr.add(false);
         arr.add(false);

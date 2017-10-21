@@ -20,8 +20,11 @@ public class StringUtil {
 		总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
 		*/
         String telRegex = "[1][0123456789]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        if (TextUtils.isEmpty(mobiles)) return false;
-        else return mobiles.matches(telRegex);
+        if (TextUtils.isEmpty(mobiles)) {
+            return false;
+        } else {
+            return mobiles.matches(telRegex);
+        }
     }
 
     /**
@@ -32,8 +35,11 @@ public class StringUtil {
      */
     public static boolean isPassword(String password) {
         String pass = "^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9]{6,}$";
-        if (TextUtils.isEmpty(password)) return false;
-        else return password.matches(pass);
+        if (TextUtils.isEmpty(password)) {
+            return false;
+        } else {
+            return password.matches(pass);
+        }
     }
 
     /**
@@ -75,9 +81,14 @@ public class StringUtil {
 
     public static boolean isCarID(String carId) {
         String telRegex = "[\\u4e00-\\u9fa5|WJ]{1}[A-Z0-9]{6}";
-        if (TextUtils.isEmpty(carId)) return false;
-        else return carId.matches(telRegex);
+        if (TextUtils.isEmpty(carId)) {
+            return false;
+        } else {
+            return carId.matches(telRegex);
+        }
     }
+
+    private static Pattern p = Pattern.compile("[\u4e00-\u9fa5]*");
 
     /**
      * 验证姓名
@@ -85,7 +96,6 @@ public class StringUtil {
     public static boolean checkChineseName(String name) {
         boolean flag = false;
         try {
-            Pattern p = Pattern.compile("[\u4e00-\u9fa5]*");
             Matcher matcher = p.matcher(name);
             flag = matcher.matches();
             if (name.length() < 2 || name.length() > 15) {
@@ -108,9 +118,11 @@ public class StringUtil {
         return district.contains("县") ? district.substring(0, district.length() - 1) : city.substring(0, city.length() - 1);
     }
 
+    private static Pattern pattern = Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 判断小数点后2位的数字的正则表达式
+
+
     //金额验证
     public static boolean isAmount(String str) {
-        Pattern pattern = Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 判断小数点后2位的数字的正则表达式
         Matcher match = pattern.matcher(str);
         if (match.matches() == false) {
             return false;

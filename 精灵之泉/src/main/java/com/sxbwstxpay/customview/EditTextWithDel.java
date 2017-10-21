@@ -57,10 +57,12 @@ public class EditTextWithDel extends EditText {
 
     // 设置删除图片
     private void setDrawable() {
-        if (length() < 1)
+        if (length() < 1){
             setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-        else
+        }
+        else{
             setCompoundDrawablesWithIntrinsicBounds(null, null, imgInable, null);
+        }
     }
 
     // 处理删除事件
@@ -72,8 +74,9 @@ public class EditTextWithDel extends EditText {
             Rect rect = new Rect();
             getGlobalVisibleRect(rect);
             rect.left = rect.right - 100;
-            if (rect.contains(eventX, eventY))
+            if (rect.contains(eventX, eventY)){
                 setText("");
+            }
         }
         return super.onTouchEvent(event);
     }

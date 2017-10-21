@@ -50,8 +50,9 @@ public class FileUtil {
      */
     @TargetApi(19)
     public static String getImageAbsolutePath(Activity context, Uri imageUri) {
-        if (context == null || imageUri == null)
+        if (context == null || imageUri == null){
             return null;
+        }
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(context, imageUri)) {
             if (isExternalStorageDocument(imageUri)) {
                 String docId = DocumentsContract.getDocumentId(imageUri);
@@ -83,8 +84,9 @@ public class FileUtil {
         } // MediaStore (and general)
         else if ("content".equalsIgnoreCase(imageUri.getScheme())) {
             // Return the remote address
-            if (isGooglePhotosUri(imageUri))
+            if (isGooglePhotosUri(imageUri)){
                 return imageUri.getLastPathSegment();
+            }
             return getDataColumn(context, imageUri, null, null);
         }
         // File
@@ -105,8 +107,9 @@ public class FileUtil {
                 return cursor.getString(index);
             }
         } finally {
-            if (cursor != null)
+            if (cursor != null){
                 cursor.close();
+            }
         }
         return null;
     }
@@ -150,8 +153,9 @@ public class FileUtil {
      */
     public static void saveMyBitmap(Context context,String bitName,Bitmap mBitmap) throws IOException {
         File f = new File("/sdcard/精灵之泉/");
-        if(!f.exists())
+        if(!f.exists()){
             f.mkdirs();//如果没有这个文件夹的话，会报file not found错误
+        }
         f=new File("/sdcard/精灵之泉/"+bitName+".png");
         f.createNewFile();
         try {

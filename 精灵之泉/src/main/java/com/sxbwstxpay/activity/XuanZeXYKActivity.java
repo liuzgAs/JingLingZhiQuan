@@ -167,7 +167,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                                 .setType(Type.YEAR_MONTH)
                                 .setTitleStringId("有效期")
                                 .setMinMillseconds(System.currentTimeMillis())
-                                .setMaxMillseconds(System.currentTimeMillis() + 1000l * 60l * 60l * 24l * 365l * 50l)
+                                .setMaxMillseconds(System.currentTimeMillis() + 1000L * 60L * 60L * 24L * 365L * 50L)
                                 .setThemeColor(getResources().getColor(R.color.basic_color))
                                 .setCallBack(new OnDateSetListener() {
 

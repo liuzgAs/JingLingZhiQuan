@@ -29,10 +29,12 @@ public class AppUtil {
             StringBuilder buf = new StringBuilder("");
             for (byte aB : b) {
                 i = aB;
-                if (i < 0)
+                if (i < 0){
                     i += 256;
-                if (i < 16)
+                }
+                if (i < 16){
                     buf.append("0");
+                }
                 buf.append(Integer.toHexString(i));
             }
 

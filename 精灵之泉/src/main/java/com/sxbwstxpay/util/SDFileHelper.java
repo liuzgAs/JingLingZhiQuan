@@ -54,6 +54,8 @@ public class SDFileHelper {
             // 最后通知图库更新
             context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                     Uri.fromFile(new File(filename))));
-        } else Toast.makeText(context, "SD卡不存在或者不可读写", Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(context, "SD卡不存在或者不可读写", Toast.LENGTH_SHORT).show();
+        }
     }
 }

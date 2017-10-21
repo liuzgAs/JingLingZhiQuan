@@ -11,7 +11,7 @@
     <include layout="@layout/view_bar" />
 
     <TextView
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:text="长按删除银行卡~"
