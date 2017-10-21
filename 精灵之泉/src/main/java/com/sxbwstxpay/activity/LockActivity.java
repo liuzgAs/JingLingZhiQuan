@@ -27,6 +27,7 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
     private TextView mTextView_tip;
     private String mPassword;
     private int paintCount = 0;
+    private int paintCount01 = 0;
     private boolean isFrist = false;
     private String mPaintPassword;
     private ExtraMap extramap;
@@ -141,7 +142,24 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
                             startToMainAvtivity();
                         }
                     } else {
-                        mTextView_tip.setText("错误，请重新绘制");
+                        paintCount01++;
+                        switch (paintCount01) {
+                            case 1:
+                                mTextView_tip.setText("错误，还有四次输入机会");
+                                break;
+                            case 2:
+                                mTextView_tip.setText("错误，还有三次输入机会");
+                                break;
+                            case 3:
+                                mTextView_tip.setText("错误，还有两次输入机会");
+                                break;
+                            case 4:
+                                mTextView_tip.setText("错误，还有一次输入机会");
+                                break;
+                            case 5:
+                                ToLoginActivity.toLoginActivity(LockActivity.this);
+                                break;
+                        }
                     }
                 }
             }
