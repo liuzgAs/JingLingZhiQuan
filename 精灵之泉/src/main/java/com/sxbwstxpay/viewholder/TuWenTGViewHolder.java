@@ -20,11 +20,21 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.BigImgActivity;
 import com.sxbwstxpay.activity.TuWenTGActivity;
+import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.GridView4ScrollView;
 import com.sxbwstxpay.model.BigImgList;
+import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ShareShareDay;
+import com.sxbwstxpay.model.SimpleInfo;
+import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GsonUtils;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.SDFileHelper;
+
+import java.util.HashMap;
+
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -51,12 +61,37 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
             @Override
             public void onClick(View v) {
                 ((TuWenTGActivity)getContext()).showLoadingDialog();
-                SDFileHelper helper = new SDFileHelper(getContext());
-                for (int i = 0; i < data.getShare_images().size(); i++) {
-                    helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getImgs().get(i));
-                }
-                ((TuWenTGActivity)getContext()).cancelLoadingDialog();
-                Toast.makeText(getContext(), "已保存到本地相册", Toast.LENGTH_SHORT).show();
+                ApiClient.post(getContext(), getOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        ((TuWenTGActivity)getContext()).cancelLoadingDialog();
+                        LogUtil.LogShitou("TuWenTGViewHolder--onSuccess",s+ "");
+                        try {
+                            SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                            if (simpleInfo.getStatus()==1){
+                                ((TuWenTGActivity)getContext()).showLoadingDialog();
+                                SDFileHelper helper = new SDFileHelper(getContext());
+                                for (int i = 0; i < data.getShare_images().size(); i++) {
+                                    helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getImgs().get(i));
+                                }
+                                ((TuWenTGActivity)getContext()).cancelLoadingDialog();
+                                Toast.makeText(getContext(), "已保存到本地相册", Toast.LENGTH_SHORT).show();
+                            }else if (simpleInfo.getStatus()==3){
+                                MyDialog.showReLoginDialog(getContext());
+                            }else {
+                                Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(),"数据出错", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        ((TuWenTGActivity)getContext()).cancelLoadingDialog();
+                        Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         textShare_contents.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +116,20 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
                 getContext().startActivity(intent, transitionActivityOptions.toBundle());
             }
         });
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.INDEX_ITEM;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid",((TuWenTGActivity)getContext()).userInfo.getUid());
+        params.put("tokenTime",((TuWenTGActivity)getContext()).tokenTime);
+        params.put("id",data.getId()+"");
+        return new OkObject(params, url);
     }
 
     @Override

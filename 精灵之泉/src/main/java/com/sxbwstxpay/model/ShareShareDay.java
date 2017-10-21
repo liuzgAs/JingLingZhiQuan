@@ -49,10 +49,19 @@ public class ShareShareDay {
          */
 
         private int Downloads;
+        private int id;
         private String date;
         private String share_contents;
         private List<String> imgs;
         private List<String> share_images;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
 
         public int getDownloads() {
             return Downloads;

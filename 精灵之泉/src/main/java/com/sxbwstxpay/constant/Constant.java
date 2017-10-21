@@ -179,6 +179,8 @@ public class Constant {
         public static final String INDEX_SEARCH = "&g=App&m=Index&a=search";
         //访客管理
         public static final String STORE_VIEWS = "&g=App&m=Store&a=views";
+        //下载图文请求
+        public static final String INDEX_ITEM = "&g=App&m=Index&a=item";
     }
 
     public static class PERMISSION {
