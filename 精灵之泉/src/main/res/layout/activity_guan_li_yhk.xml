@@ -14,7 +14,7 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="长按删除银行~"
+        android:text="长按删除银行卡~"
         android:gravity="center"
         android:background="@color/textYellow"
         android:textColor="@color/white"
