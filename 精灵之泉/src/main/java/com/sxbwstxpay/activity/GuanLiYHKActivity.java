@@ -19,6 +19,8 @@ public class GuanLiYHKActivity extends ZjbBaseNotLeftActivity implements View.On
     private View viewBar;
     private TabLayout tablayout;
     private ViewPager viewPager;
+    private TextView textShanChu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@ public class GuanLiYHKActivity extends ZjbBaseNotLeftActivity implements View.On
         tablayout = (TabLayout) findViewById(R.id.tablayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewBar = findViewById(R.id.viewBar);
+        textShanChu = (TextView) findViewById(R.id.textShanChu);
     }
 
     @Override
@@ -53,6 +56,13 @@ public class GuanLiYHKActivity extends ZjbBaseNotLeftActivity implements View.On
         tablayout.setupWithViewPager(viewPager);
         tablayout.getTabAt(0).setText("储蓄卡管理");
         tablayout.getTabAt(1).setText("信用卡管理");
+        textShanChu.setVisibility(View.VISIBLE);
+        textShanChu.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                textShanChu.setVisibility(View.GONE);
+            }
+        }, 2000);
     }
 
     @Override
