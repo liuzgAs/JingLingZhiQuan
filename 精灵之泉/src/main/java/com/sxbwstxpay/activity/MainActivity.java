@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             isBackground = false;
             Log.e("ACTIVITY", "程序从后台唤醒");
             boolean activityTop = isActivityTop(MainActivity.class, this);
-            if (!TextUtils.isEmpty(paintPassword)&&activityTop){
+            if (!TextUtils.isEmpty(paintPassword)&&activityTop&&!isChoosePic){
                 Intent intent = new Intent();
                 intent.setClass(this, LockActivity.class);
                 startActivity(intent);
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
             /**
              * 记录当前已经进入后台
              */
-            isBackground = true;
+            isBackground = true;//
         }
     }
 

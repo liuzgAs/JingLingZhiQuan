@@ -8,8 +8,8 @@ android {
         applicationId "com.sxbwstxpay"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 17102002
-        versionName "0.3.6"
+        versionCode 17102301
+        versionName "0.3.7"
     }
     buildTypes {
         release {

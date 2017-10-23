@@ -77,7 +77,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
             //app 从后台唤醒，进入前台
             isBackground = false;
             boolean activityTop = isActivityTop(cls, this);
-            if (!TextUtils.isEmpty(paintPassword)&&activityTop){
+            if (!TextUtils.isEmpty(paintPassword)&&activityTop&&!isChoosePic){
                 Intent intent = new Intent();
                 intent.setClass(this, LockActivity.class);
                 startActivity(intent);
