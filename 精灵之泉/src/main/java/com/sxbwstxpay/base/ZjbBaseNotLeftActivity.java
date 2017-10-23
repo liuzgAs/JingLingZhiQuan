@@ -35,6 +35,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
     public boolean isBackground =false;
     public String paintPassword;
     private Class cls;
+    public boolean isChoosePic = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +92,12 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
-        isBackground = true;//记录当前已经进入后台
-        LogUtil.LogShitou("ZjbBaseNotLeftActivity--onPause", cls.getName()+""+isBackground);
+        if (!isChoosePic){
+            /**
+             * 记录当前已经进入后台
+             */
+            isBackground = true;
+        }
     }
 
     @Override

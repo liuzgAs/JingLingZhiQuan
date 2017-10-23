@@ -162,6 +162,7 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
                 holder.imageView2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        isChoosePic = true;
                         Intent intent = new Intent();
                         mImagePicker.setSelectLimit(photoNum - (mResults.size() - 1));    //选中数量限制
                         intent.setClass(FaBuSCActivity.this, ImageGridActivity.class);
@@ -196,5 +197,11 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
                     .into(holder.imageView);
             return convertView;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        isChoosePic=false;
     }
 }

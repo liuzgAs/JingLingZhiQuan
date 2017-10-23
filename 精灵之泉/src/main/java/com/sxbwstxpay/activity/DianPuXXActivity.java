@@ -318,6 +318,7 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
      * date： 2017/7/6 0006 下午 2:31
      */
     public void chooseHead() {
+        isChoosePic = true;
         imagePicker.setCrop(true);        //允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true); //是否按矩形区域保存
         imagePicker.setSelectLimit(9);    //选中数量限制
@@ -338,6 +339,7 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
      * date： 2017/7/6 0006 下午 2:31
      */
     public void chooseDianZhao() {
+        isChoosePic = true;
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
         imagePicker.setCrop(true);        //允许裁剪（单选才有效）
         float width = ScreenUtils.getScreenWidth(this);
@@ -350,12 +352,19 @@ public class DianPuXXActivity extends ZjbBaseActivity implements View.OnClickLis
         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.IMAGE_DIANZHAO);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        isChoosePic = false;
+    }
+
     /**
      * des： 选择图片
      * author： ZhangJieBo
      * date： 2017/7/6 0006 下午 2:31
      */
     public void chooseWX() {
+        isChoosePic=true;
         imagePicker.setCrop(true);        //允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true); //是否按矩形区域保存
         imagePicker.setSelectLimit(9);    //选中数量限制

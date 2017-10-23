@@ -356,12 +356,19 @@ public class WoDeZLActivity extends ZjbBaseActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        isChoosePic=false;
+    }
+
     /**
      * des： 选择图片
      * author： ZhangJieBo
      * date： 2017/7/6 0006 下午 2:31
      */
     public void chooseHead() {
+        isChoosePic=true;
         Intent intent = new Intent();
         intent.setClass(WoDeZLActivity.this, ImageGridActivity.class);
         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.IMAGE_HEAD);
@@ -373,6 +380,7 @@ public class WoDeZLActivity extends ZjbBaseActivity implements View.OnClickListe
      * date： 2017/7/6 0006 下午 2:31
      */
     public void chooseWX() {
+        isChoosePic =true;
         Intent intent = new Intent();
         intent.setClass(WoDeZLActivity.this, ImageGridActivity.class);
         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.IMAGE_WX);

@@ -20,11 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.sxbwstxpay.R;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
+import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -33,7 +34,7 @@ import com.sxbwstxpay.model.RespondAppimgadd;
 import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.model.UserCardbefore;
 import com.sxbwstxpay.util.ApiClient;
-import com.sxbwstxpay.util.CheckIdCard;
+import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.ImgToBase64;
 import com.sxbwstxpay.util.LogUtil;
@@ -83,7 +84,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private ImageView imageRight;
     private View viewYanZhengMa;
     private int verify = 0;
-    private boolean isChoosePic = false;
     private int submitStatus;
     private EditText editWXHao;
     private EditText editYouXiang;
@@ -191,7 +191,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        if (verify != 1 && isChoosePic == false) {
+        LogUtil.LogShitou("RenZhengFragment--onResume", "isChoosePic"+((MainActivity)getActivity()).isChoosePic);
+
+        if (verify != 1 && scrollView.getVisibility()!=View.VISIBLE) {
             showLoadingDialog();
             ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                 @Override
@@ -263,7 +265,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 }
             });
         }
-        isChoosePic = false;
+        ((MainActivity)getActivity()).isChoosePic = false;
     }
 
     @Override
@@ -372,6 +374,8 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            LogUtil.LogShitou("RenZhengFragment--onActivityResult", "111111111111"+((MainActivity) getActivity()).isBackground);
+            ((MainActivity)getActivity()).isChoosePic = false;
             switch (requestCode) {
                 case Constant.REQUEST_RESULT_CODE.IMG01:
                     ArrayList<ImageItem> images01 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
@@ -418,6 +422,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             .placeholder(R.mipmap.ic_empty)
                             .into(image05);
                     break;
+                default:
+
+                    break;
             }
         }
     }
@@ -451,7 +458,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     return;
                 }
                 shangChuanPic();
-//                tiJiao();
                 break;
             case R.id.image01:
                 chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG01);
@@ -487,44 +493,50 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 sendSMS();
                 break;
             case R.id.buttonNext:
-                if (submitStatus != 1) {
-                    Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editName.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入真实姓名", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
-                if (!checkIdCard.validate()) {
-                    Toast.makeText(getActivity(), "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editWXHao.getText().toString().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入微信号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (!StringUtil.checkEmail(editYouXiang.getText().toString().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(userCardbefore.getData().getBankName()) || userCardbefore.getData().getBank() <= 0) {
-                    Toast.makeText(getActivity(), "请选择开户银行", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editBankCard.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入本人提现储蓄卡号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editPhone.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入银行预留手机号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入验证码", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                next();
+//                if (submitStatus != 1) {
+//                    Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editName.getText().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入真实姓名", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
+//                if (!checkIdCard.validate()) {
+//                    Toast.makeText(getActivity(), "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editWXHao.getText().toString().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入微信号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (!StringUtil.checkEmail(editYouXiang.getText().toString().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userCardbefore.getData().getBankName()) || userCardbefore.getData().getBank() <= 0) {
+//                    Toast.makeText(getActivity(), "请选择开户银行", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editBankCard.getText().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入本人提现储蓄卡号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editPhone.getText().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入银行预留手机号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入验证码", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                next();
+                viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
+                viewTianXinXi.setVisibility(View.GONE);
+                scrollView.setVisibility(View.VISIBLE);
+                break;
+            default:
+
                 break;
         }
     }
@@ -751,14 +763,16 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     }
 
     private void chooseTuPian(int requestCode) {
-        isChoosePic = true;
+        ((MainActivity)getActivity()).isChoosePic = true;
+        LogUtil.LogShitou("RenZhengFragment--chooseTuPian", "isChoosePic"+((MainActivity)getActivity()).isChoosePic);
         mImagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        mImagePicker.setCrop(false);        //允许裁剪（单选才有效）
-//        float width = ScreenUtils.getScreenWidth(getActivity());
-//        mImagePicker.setFocusWidth((int) width);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-//        mImagePicker.setFocusHeight((int) (width * 0.625));  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-//        mImagePicker.setOutPutX(800);//保存文件的宽度。单位像素
-//        mImagePicker.setOutPutY(500);//保存文件的高度。单位像素
+        mImagePicker.setCrop(true);        //允许裁剪（单选才有效）
+        float width = ScreenUtils.getScreenWidth(getActivity());
+        int focusWidth = (int) width - (int) DpUtils.convertDpToPixel(60f, getActivity());
+        mImagePicker.setFocusWidth(focusWidth);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        mImagePicker.setFocusHeight((int) (focusWidth * 1.6f));  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        mImagePicker.setOutPutX(500);//保存文件的宽度。单位像素
+        mImagePicker.setOutPutY(800);//保存文件的高度。单位像素
         Intent intent = new Intent();
         intent.setClass(getActivity(), ImageGridActivity.class);
         startActivityForResult(intent, requestCode);

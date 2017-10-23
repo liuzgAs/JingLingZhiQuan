@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isShow;
     public boolean isBackground;
     private String paintPassword;
+    public boolean isChoosePic = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,7 +230,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         isShow = false;
-        isBackground = true;//记录当前已经进入后台
+        if (!isChoosePic){
+            /**
+             * 记录当前已经进入后台
+             */
+            isBackground = true;
+        }
     }
 
     @Override

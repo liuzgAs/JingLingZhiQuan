@@ -37,6 +37,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
     public boolean isBackground;
     public String paintPassword;
     private Class cls;
+    public boolean isChoosePic = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,12 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
 
     @Override
     protected void onPause() {
-        isBackground = true;//记录当前已经进入后台
+        if (!isChoosePic){
+            /**
+             * 记录当前已经进入后台
+             */
+            isBackground = true;
+        }
         super.onPause();
     }
 
