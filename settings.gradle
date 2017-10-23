@@ -1,1 +1,1 @@
-include ':精灵之泉'
+include ':精灵之泉', ':imagepicker'

@@ -29,6 +29,7 @@ import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.customview.RotateTransformation;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.RespondAppimgadd;
 import com.sxbwstxpay.model.SimpleInfo;
@@ -382,7 +383,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[0] = images01.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[0])
-                            .asBitmap()
+                            .transform(new RotateTransformation(getActivity(),-90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image01);
                     break;
@@ -391,7 +392,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[1] = images02.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[1])
-                            .asBitmap()
+                            .transform(new RotateTransformation(getActivity(),-90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image02);
                     break;
@@ -400,7 +401,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[2] = images03.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[2])
-                            .asBitmap()
+                            .transform(new RotateTransformation(getActivity(),-90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image03);
                     break;
@@ -409,7 +410,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[3] = images04.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[3])
-                            .asBitmap()
+                            .transform(new RotateTransformation(getActivity(),-90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image04);
                     break;
@@ -418,7 +419,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[4] = images05.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[4])
-                            .asBitmap()
+                            .transform(new RotateTransformation(getActivity(),-90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image05);
                     break;

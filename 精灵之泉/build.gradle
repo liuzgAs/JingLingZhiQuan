@@ -37,7 +37,7 @@ dependencies {
     compile 'com.romandanylyk:pageindicatorview:0.1.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'
-    compile 'com.lzy.widget:imagepicker:0.5.3'
+    //    compile 'com.lzy.widget:imagepicker:0.5.3'
     compile 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
     compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
     compile 'com.bigkoo:convenientbanner:2.0.5'
@@ -45,4 +45,5 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.6'
     compile 'com.github.Cutta:GifView:1.1'
     compile 'q.rorbin:badgeview:1.1.0'
+    compile project(':imagepicker')
 }
