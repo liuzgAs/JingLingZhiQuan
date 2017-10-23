@@ -44,6 +44,9 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
 
         imagePicker = ImagePicker.getInstance();
 
+        TextView textTip = (TextView) findViewById(R.id.textTip);
+        textTip.setRotation(90f);
+
         //初始化View
         findViewById(R.id.btn_back).setOnClickListener(this);
         Button btn_ok = (Button) findViewById(R.id.btn_ok);

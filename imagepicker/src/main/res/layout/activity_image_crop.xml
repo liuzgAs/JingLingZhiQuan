@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:custom="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#000"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:orientation="vertical">
 
-    <include layout="@layout/include_top_bar"/>
+    <include layout="@layout/include_top_bar"
+        android:id="@+id/include4" />
 
-   <!-- <com.lzy.imagepicker.view.CropImageView
-        android:id="@+id/cv_crop_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>-->
+    <!-- <com.lzy.imagepicker.view.CropImageView
+         android:id="@+id/cv_crop_image"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"/>-->
+
+
 
     <com.lzy.imagepicker.view.CropImageView
         android:id="@+id/cv_crop_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include4" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/cv_crop_image">
+
+        <TextView
+            android:textSize="15dp"
+            android:textColor="@color/ip_color_accent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请将图片置于框内(可旋转图片调整方向)"
+            android:id="@+id/textTip"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
     <!-- <com.lzy.imagepicker.view.crop.CropImageView2
          android:id="@+id/cv_crop_image"
@@ -37,4 +56,4 @@
          custom:overlayColor="#AA1C1C1C"
          custom:touchPadding="8dp"/>-->
 
-</LinearLayout>
+</RelativeLayout>
