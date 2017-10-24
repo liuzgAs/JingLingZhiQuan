@@ -90,6 +90,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private EditText editWXHao;
     private EditText editYouXiang;
     private EditText editZhiHang;
+    private ProgressDialog progressDialog;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -193,9 +194,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        LogUtil.LogShitou("RenZhengFragment--onResume", "isChoosePic"+((MainActivity)getActivity()).isChoosePic);
+        LogUtil.LogShitou("RenZhengFragment--onResume", "isChoosePic" + ((MainActivity) getActivity()).isChoosePic);
 
-        if (verify != 1 && scrollView.getVisibility()!=View.VISIBLE) {
+        if (verify != 1 && scrollView.getVisibility() != View.VISIBLE) {
             showLoadingDialog();
             ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                 @Override
@@ -267,7 +268,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 }
             });
         }
-        ((MainActivity)getActivity()).isChoosePic = false;
+        ((MainActivity) getActivity()).isChoosePic = false;
     }
 
     @Override
@@ -376,15 +377,15 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-            LogUtil.LogShitou("RenZhengFragment--onActivityResult", "111111111111"+((MainActivity) getActivity()).isBackground);
-            ((MainActivity)getActivity()).isChoosePic = false;
+            LogUtil.LogShitou("RenZhengFragment--onActivityResult", "111111111111" + ((MainActivity) getActivity()).isBackground);
+            ((MainActivity) getActivity()).isChoosePic = false;
             switch (requestCode) {
                 case Constant.REQUEST_RESULT_CODE.IMG01:
                     ArrayList<ImageItem> images01 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                     path[0] = images01.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[0])
-                            .transform(new RotateTransformation(getActivity(),-90))
+                            .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image01);
                     break;
@@ -393,7 +394,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[1] = images02.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[1])
-                            .transform(new RotateTransformation(getActivity(),-90))
+                            .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image02);
                     break;
@@ -402,7 +403,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[2] = images03.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[2])
-                            .transform(new RotateTransformation(getActivity(),-90))
+                            .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image03);
                     break;
@@ -411,7 +412,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[3] = images04.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[3])
-                            .transform(new RotateTransformation(getActivity(),-90))
+                            .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image04);
                     break;
@@ -420,7 +421,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     path[4] = images05.get(0).path;
                     Glide.with(RenZhengFragment.this)
                             .load(path[4])
-                            .transform(new RotateTransformation(getActivity(),-90))
+                            .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image05);
                     break;
@@ -545,7 +546,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 
     private void shangChuanPic() {
         final boolean[] isBreak = {false};
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("上传图片");
         progressDialog.setMessage("已上传0/5");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -623,18 +624,36 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             }
                         });
                     } else {
+                        switch (i) {
+                            case 0:
+                                imgList.set(i, userCardbefore.getData().getImgId());
+                                break;
+                            case 1:
+                                imgList.set(i, userCardbefore.getData().getImgId2());
+                                break;
+                            case 2:
+                                imgList.set(i, userCardbefore.getData().getImgId3());
+                                break;
+                            case 3:
+                                imgList.set(i, userCardbefore.getData().getImgId4());
+                                break;
+                            case 4:
+                                imgList.set(i, userCardbefore.getData().getImgId5());
+                                break;
+                        }
                         count[0]++;
-                        progressDialog.setProgress(count[0]);
-                        progressDialog.setMessage("已上传" + count[0] + "/5");
-                        if (count[0] == 5) {
-                            progressDialog.dismiss();
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.setProgress(count[0]);
+                                progressDialog.setMessage("已上传" + count[0] + "/5");
+                                if (count[0] == 5) {
+                                    progressDialog.dismiss();
                                     tiJiao();
                                 }
-                            });
-                        }
+                            }
+                        });
+
                     }
                 }
             }
@@ -765,8 +784,8 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     }
 
     private void chooseTuPian(int requestCode) {
-        ((MainActivity)getActivity()).isChoosePic = true;
-        LogUtil.LogShitou("RenZhengFragment--chooseTuPian", "isChoosePic"+((MainActivity)getActivity()).isChoosePic);
+        ((MainActivity) getActivity()).isChoosePic = true;
+        LogUtil.LogShitou("RenZhengFragment--chooseTuPian", "isChoosePic" + ((MainActivity) getActivity()).isChoosePic);
         mImagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
         mImagePicker.setCrop(true);        //允许裁剪（单选才有效）
         float width = ScreenUtils.getScreenWidth(getActivity());
@@ -869,6 +888,16 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
             return true;
         } else {
             return super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (progressDialog != null) {
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
         }
     }
 }
