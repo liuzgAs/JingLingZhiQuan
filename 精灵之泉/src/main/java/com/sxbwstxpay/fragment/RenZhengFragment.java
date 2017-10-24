@@ -206,6 +206,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     try {
                         UserCardbefore userCardbefore1 = GsonUtils.parseJSON(s, UserCardbefore.class);
                         if (userCardbefore1.getStatus() == 1) {
+                            textTip.setText(userCardbefore.getTipsText());
                             submitStatus = userCardbefore1.getSubmitStatus();
                             if (submitStatus == 1) {
                                 editName.setEnabled(true);
