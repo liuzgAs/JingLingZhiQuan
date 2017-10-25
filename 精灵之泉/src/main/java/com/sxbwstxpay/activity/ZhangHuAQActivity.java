@@ -16,6 +16,7 @@ public class ZhangHuAQActivity extends ZjbBaseActivity implements View.OnClickLi
 
     private View viewBar;
     private TextView textShouShiMM;
+    private View viewGuanBiSSMM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class ZhangHuAQActivity extends ZjbBaseActivity implements View.OnClickLi
     protected void findID() {
         viewBar = findViewById(R.id.viewBar);
         textShouShiMM = (TextView) findViewById(R.id.textShouShiMM);
+        viewGuanBiSSMM = findViewById(R.id.viewGuanBiSSMM);
     }
 
     @Override
@@ -51,6 +53,11 @@ public class ZhangHuAQActivity extends ZjbBaseActivity implements View.OnClickLi
         } else {
             textShouShiMM.setText("修改手势密码");
         }
+        if (TextUtils.isEmpty(paintPassword)) {
+            viewGuanBiSSMM.setVisibility(View.GONE);
+        } else {
+            viewGuanBiSSMM.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -58,6 +65,7 @@ public class ZhangHuAQActivity extends ZjbBaseActivity implements View.OnClickLi
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.viewXiuGaiMM).setOnClickListener(this);
         findViewById(R.id.viewShouShiMM).setOnClickListener(this);
+        viewGuanBiSSMM.setOnClickListener(this);
     }
 
     @Override
@@ -69,6 +77,12 @@ public class ZhangHuAQActivity extends ZjbBaseActivity implements View.OnClickLi
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewGuanBiSSMM:
+                intent.putExtra(Constant.INTENT_KEY.guanBi, "guanBi");
+                intent.putExtra(Constant.INTENT_KEY.Main, "Main");
+                intent.setClass(this, LockActivity.class);
+                startActivity(intent);
+                break;
             case R.id.viewShouShiMM:
                 if (TextUtils.isEmpty(paintPassword)) {
                     intent.putExtra(Constant.INTENT_KEY.shezhi, "shezhi");

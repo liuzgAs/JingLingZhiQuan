@@ -221,6 +221,7 @@ public class Constant {
         public static final String shezhi = "shezhi";
         public static final String isFrist = "isFrist";
         public static final String Main = "Main";
+        public static final String guanBi = "guanBi";
     }
 
     public static class REQUEST_RESULT_CODE {

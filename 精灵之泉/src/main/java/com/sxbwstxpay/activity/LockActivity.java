@@ -17,7 +17,6 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.Lock9View;
 import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.util.ACache;
-import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.StringUtil;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -39,12 +38,12 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
     private TextView textOhter;
     private String shezhi;
     private String Main;
+    private String guanBi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
-        LogUtil.LogShitou("LockActivity--onCreate", "启动了");
         init(LockActivity.class);
     }
 
@@ -66,6 +65,7 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
         isFristAQ = intent.getStringExtra(Constant.INTENT_KEY.isFrist);
         shezhi = intent.getStringExtra(Constant.INTENT_KEY.shezhi);
         Main = intent.getStringExtra(Constant.INTENT_KEY.Main);
+        guanBi = intent.getStringExtra(Constant.INTENT_KEY.guanBi);
     }
 
     @Override
@@ -100,6 +100,7 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
             mTextView_tip.setText("请验证手势密码");
         }
         if (!TextUtils.isEmpty(shezhi)) {
+            mTextView_tip.setText("请验证手势密码");
             textSkip.setVisibility(View.GONE);
             textOhter.setVisibility(View.GONE);
         }
@@ -139,7 +140,13 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
                             mTextView_tip.setText("设置手势密码");
                             isFrist = true;
                         } else {
-                            startToMainAvtivity();
+                            if (!TextUtils.isEmpty(guanBi)){
+                                ACache aCache = ACache.get(LockActivity.this, Constant.ACACHE.App);
+                                aCache.put(Constant.ACACHE.PAINT_PASSWORD, "");
+                                startToMainAvtivity();
+                            }else {
+                                startToMainAvtivity();
+                            }
                         }
                     } else {
                         paintCount01++;

@@ -534,6 +534,13 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     Toast.makeText(getActivity(), "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                userCardbefore.getData().setName(editName.getText().toString().trim());
+                userCardbefore.getData().setCard(editCard.getText().toString().trim());
+                userCardbefore.getData().setBankCard(editBankCard.getText().toString().trim());
+                userCardbefore.getData().setPhone(editPhone.getText().toString().trim());
+                userCardbefore.getData().setWeixin(editWXHao.getText().toString().trim());
+                userCardbefore.getData().setEmail(editYouXiang.getText().toString().trim());
+                userCardbefore.getData().setSubbranch(editZhiHang.getText().toString().trim());
                 next();
 //                viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
 //                viewTianXinXi.setVisibility(View.GONE);
@@ -758,13 +765,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     if (simpleInfo.getStatus() == 1) {
-                        userCardbefore.getData().setName(editName.getText().toString().trim());
-                        userCardbefore.getData().setCard(editCard.getText().toString().trim());
-                        userCardbefore.getData().setBankCard(editBankCard.getText().toString().trim());
-                        userCardbefore.getData().setPhone(editPhone.getText().toString().trim());
-                        userCardbefore.getData().setWeixin(editWXHao.getText().toString().trim());
-                        userCardbefore.getData().setEmail(editYouXiang.getText().toString().trim());
-                        userCardbefore.getData().setSubbranch(editZhiHang.getText().toString().trim());
                         viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
                         viewTianXinXi.setVisibility(View.GONE);
                         scrollView.setVisibility(View.VISIBLE);
