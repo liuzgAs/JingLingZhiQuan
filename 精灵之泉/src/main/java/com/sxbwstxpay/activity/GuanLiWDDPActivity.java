@@ -31,6 +31,7 @@ import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.model.StoreGoods;
+import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
@@ -76,6 +77,10 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
     };
     private String previewUrl;
     private StoreGoods.ShareBean share;
+    private String id;
+    private int type;
+    private String lat;
+    private String lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +92,19 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     protected void initSP() {
-
+        final ACache aCache = ACache.get(this, Constant.ACACHE.LOCATION);
+        String cityAcache = aCache.getAsString(Constant.ACACHE.CITY);
+        if (cityAcache != null) {
+            lat = aCache.getAsString(Constant.ACACHE.LAT);
+            lng = aCache.getAsString(Constant.ACACHE.LNG);
+        }
     }
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        id = intent.getStringExtra(Constant.INTENT_KEY.id);
+        type = intent.getIntExtra(Constant.INTENT_KEY.type, 0);
     }
 
     @Override
@@ -129,19 +141,97 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
      * author： ZhangJieBo
      * date： 2017/8/28 0028 上午 9:55
      */
-    private OkObject getOkObject() {
+    private OkObject getWoDeDPOkObject() {
         String url = Constant.HOST + Constant.Url.STORE_GOODS;
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
         params.put("p", page + "");
+        params.put("lat", lat);
+        params.put("lng", lng);
         return new OkObject(params, url);
     }
 
     @Override
     public void onRefresh() {
         page = 1;
-        ApiClient.post(this, getOkObject(), new ApiClient.CallBack() {
+        if (type == 0) {
+            woDeDP();
+        } else {
+            benDiYD();
+        }
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getBenDiYDOkObject() {
+        String url = Constant.HOST + Constant.Url.STORE_INDEX;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("lat", lat);
+        params.put("lng", lng);
+        params.put("p", page + "");
+        params.put("id", id);
+        return new OkObject(params, url);
+    }
+
+    private void benDiYD() {
+        ApiClient.post(this, getBenDiYDOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                LogUtil.LogShitou("本地优店店铺", s);
+                try {
+                    page++;
+                    StoreGoods storeGoods = GsonUtils.parseJSON(s, StoreGoods.class);
+                    if (storeGoods.getStatus() == 1) {
+                        storeLogo = storeGoods.getStoreLogo();
+                        storeNmae = storeGoods.getStoreNmae();
+                        storeDes = storeGoods.getStoreDes();
+                        storeGoodsBanner = storeGoods.getBanner();
+                        previewUrl = storeGoods.getPreviewUrl();
+                        share = storeGoods.getShare();
+                        textTitle.setText(storeNmae);
+                        List<IndexDataBean> storeGoodsData = storeGoods.getData();
+                        adapter.clear();
+                        adapter.addAll(storeGoodsData);
+                    } else if (storeGoods.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(GuanLiWDDPActivity.this);
+                    } else {
+                        showError(storeGoods.getInfo());
+                    }
+                } catch (Exception e) {
+                    showError("数据出错");
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                showError("网络出错");
+            }
+
+            public void showError(String msg) {
+                View view_loaderror = LayoutInflater.from(GuanLiWDDPActivity.this).inflate(R.layout.view_loaderror, null);
+                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                textMsg.setText(msg);
+                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        recyclerView.showProgress();
+                        initData();
+                    }
+                });
+                recyclerView.setErrorView(view_loaderror);
+                recyclerView.showError();
+            }
+        });
+    }
+
+    private void woDeDP() {
+        ApiClient.post(this, getWoDeDPOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("管理我的店铺", s);
@@ -215,9 +305,18 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
             @Override
             public View onCreateView(ViewGroup parent) {
                 View header_xian_shi_qg = LayoutInflater.from(GuanLiWDDPActivity.this).inflate(R.layout.header_guan_li_dp, null);
+                View viewJingPinTuiJian = header_xian_shi_qg.findViewById(R.id.viewJingPinTuiJian);
                 banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
-                banner.setScrollDuration(1000);
-                banner.startTurning(3000);
+                if (type==0){
+                    viewJingPinTuiJian.setVisibility(View.VISIBLE);
+                    banner.setVisibility(View.VISIBLE);
+                    banner.setScrollDuration(1000);
+                    banner.startTurning(3000);
+                }else {
+                    viewJingPinTuiJian.setVisibility(View.GONE);
+                    banner.setVisibility(View.GONE);
+                }
+
                 imageStoreLogo = (ImageView) header_xian_shi_qg.findViewById(R.id.imageStoreLogo);
                 textStoreNmae = (TextView) header_xian_shi_qg.findViewById(R.id.textStoreNmae);
                 textStoreDes = (TextView) header_xian_shi_qg.findViewById(R.id.textStoreDes);
@@ -232,7 +331,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
 
             @Override
             public void onBindView(View headerView) {
-                if (storeGoodsBanner != null) {
+                if (storeGoodsBanner != null&&type==0) {
                     banner.setPages(new CBViewHolderCreator() {
                         @Override
                         public Object createHolder() {
@@ -254,7 +353,16 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-                ApiClient.post(GuanLiWDDPActivity.this, getOkObject(), new ApiClient.CallBack() {
+                if (type == 0) {
+                    woDeDPMore();
+                } else {
+                    benDiYDMore();
+                }
+
+            }
+
+            private void benDiYDMore() {
+                ApiClient.post(GuanLiWDDPActivity.this, getBenDiYDOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         try {
@@ -279,7 +387,34 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                         adapter.pauseMore();
                     }
                 });
+            }
 
+            private void woDeDPMore() {
+                ApiClient.post(GuanLiWDDPActivity.this, getWoDeDPOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        try {
+                            page++;
+                            StoreGoods storeGoods = GsonUtils.parseJSON(s, StoreGoods.class);
+                            int status = storeGoods.getStatus();
+                            if (status == 1) {
+                                List<IndexDataBean> storeGoodsData = storeGoods.getData();
+                                adapter.addAll(storeGoodsData);
+                            } else if (status == 3) {
+                                MyDialog.showReLoginDialog(GuanLiWDDPActivity.this);
+                            } else {
+                                adapter.pauseMore();
+                            }
+                        } catch (Exception e) {
+                            adapter.pauseMore();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        adapter.pauseMore();
+                    }
+                });
             }
 
             @Override

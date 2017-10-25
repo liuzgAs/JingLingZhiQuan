@@ -161,10 +161,19 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             @Override
             public void onPageSelected(int position) {
                 positionX = position;
-                if (position == 0) {
-                    imageShaiXuan.setVisibility(View.GONE);
-                } else {
-                    imageShaiXuan.setVisibility(View.VISIBLE);
+                switch (indexCateCate.get(position).getJump()){
+                    case "time":
+                        imageShaiXuan.setVisibility(View.GONE);
+                        break;
+                    case "product":
+                        imageShaiXuan.setVisibility(View.GONE);
+                        break;
+                    case "store":
+                        imageShaiXuan.setVisibility(View.GONE);
+                        break;
+                    default:
+                        imageShaiXuan.setVisibility(View.VISIBLE);
+                        break;
                 }
             }
 
@@ -280,11 +289,16 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
-                return new XianShiQGFragment();
-            } else {
-                IndexCate.CateBean cateBean = indexCateCate.get(position);
-                return new XuanPinSJFragment(position, cateBean);
+            switch (indexCateCate.get(position).getJump()){
+                case "time":
+                    return new XianShiQGFragment(0);
+                case "product":
+                    return new XianShiQGFragment(1);
+                case "store":
+                    return new BenDiYDFragment();
+                default:
+                    IndexCate.CateBean cateBean = indexCateCate.get(position);
+                    return new XuanPinSJFragment(position, cateBean);
             }
         }
 

@@ -181,6 +181,12 @@ public class Constant {
         public static final String STORE_VIEWS = "&g=App&m=Store&a=views";
         //下载图文请求
         public static final String INDEX_ITEM = "&g=App&m=Index&a=item";
+        //本地优品
+        public static final String INDEX_PRODUCT = "&g=App&m=Index&a=product";
+        //本地优店
+        public static final String INDEX_STORE = "&g=App&m=Index&a=store";
+        //本地优店店铺
+        public static final String STORE_INDEX = "&g=App&m=Store&a=index";
     }
 
     public static class PERMISSION {

@@ -8,8 +8,8 @@ android {
         applicationId "com.sxbwstxpay"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 17102501
-        versionName "0.3.9"
+        versionCode 17102502
+        versionName "0.4.0"
     }
     buildTypes {
         release {
@@ -24,6 +24,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/gson-2.2.4.jar')
     compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
+    compile files('libs/AMap2DMap_4.2.0_AMapSearch_5.1.0_AMapLocation_3.4.0_20170517.jar')
+    compile project(':imagepicker')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
@@ -37,13 +39,10 @@ dependencies {
     compile 'com.romandanylyk:pageindicatorview:0.1.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'
-    //    compile 'com.lzy.widget:imagepicker:0.5.3'
     compile 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
     compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
     compile 'com.bigkoo:convenientbanner:2.0.5'
-    compile files('libs/AMap2DMap_4.2.0_AMapSearch_5.1.0_AMapLocation_3.4.0_20170517.jar')
     compile 'com.contrarywind:Android-PickerView:3.2.6'
     compile 'com.github.Cutta:GifView:1.1'
     compile 'q.rorbin:badgeview:1.1.0'
-    compile project(':imagepicker')
 }

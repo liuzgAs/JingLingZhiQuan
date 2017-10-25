@@ -206,6 +206,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.buttonGuanLi:
+                intent.putExtra(Constant.INTENT_KEY.type,0);
                 intent.setClass(this, GuanLiWDDPActivity.class);
                 startActivity(intent);
                 break;
