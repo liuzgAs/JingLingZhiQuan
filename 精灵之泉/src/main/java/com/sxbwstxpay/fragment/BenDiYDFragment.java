@@ -44,7 +44,13 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
     private RecyclerArrayAdapter<IndexStore.DataBean> adapter;
     private String lat;
     private String lng;
-    private int page =1;
+    private int page = 1;
+    private int type;
+
+    public BenDiYDFragment(int type) {
+        // Required empty public constructor
+        this.type = type;
+    }
 
     public BenDiYDFragment() {
         // Required empty public constructor
@@ -166,7 +172,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
             public void onItemClick(int position) {
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
-                intent.putExtra(Constant.INTENT_KEY.type,1);
+                intent.putExtra(Constant.INTENT_KEY.type, 1);
                 intent.setClass(getActivity(), GuanLiWDDPActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
@@ -190,18 +196,24 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObject() {
-        String url = Constant.HOST + Constant.Url.INDEX_STORE;
+        String url;
+        if (type==0){
+            url = Constant.HOST + Constant.Url.INDEX_PRODUCT;
+        }else {
+            url = Constant.HOST + Constant.Url.INDEX_STORE;
+        }
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
-        params.put("tokenTime",tokenTime);
-        params.put("lat",lat);
-        params.put("lng",lng);
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("lat", lat);
+        params.put("lng", lng);
+        params.put("p", page+"");
         return new OkObject(params, url);
     }
 
     @Override
     public void onRefresh() {
-        page =1;
+        page = 1;
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
@@ -213,7 +225,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
                         List<IndexStore.DataBean> indexStoreData = indexStore.getData();
                         adapter.clear();
                         adapter.addAll(indexStoreData);
-                    } else if (indexStore.getStatus()== 3) {
+                    } else if (indexStore.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
                         showError(indexStore.getInfo());
@@ -227,6 +239,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
             public void onError(Response response) {
                 showError("网络出错");
             }
+
             public void showError(String msg) {
                 View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
                 TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);

@@ -35,7 +35,6 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.BannerBean;
 import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.IndexGoods;
-import com.sxbwstxpay.model.IndexProduct;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
@@ -72,7 +71,6 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private String indexGoodsImg;
     private View viewShangJiaTip;
     private Timer timer;
-    private int what;
     private BroadcastReceiver reciver = new BroadcastReceiver() {
 
         @Override
@@ -132,9 +130,6 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         timer = null;
     }
 
-    public XianShiQGFragment(int what) {
-        this.what=what;
-    }
     public XianShiQGFragment() {
         // Required empty public constructor
     }
@@ -194,185 +189,151 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qg;
-                return new XianShiQGViewHolder(parent, layout,"MainActivity");
+                return new XianShiQGViewHolder(parent, layout, "MainActivity");
             }
         });
-        if (what==0){
-            adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
-                private ImageView imageMiddle;
-                private TabLayout tablayoutHeader;
-                private ConvenientBanner banner;
-                private boolean isSelect = false;
+            private ImageView imageMiddle;
+            private TabLayout tablayoutHeader;
+            private ConvenientBanner banner;
+            private boolean isSelect = false;
 
-                @Override
-                public View onCreateView(ViewGroup parent) {
-                    View header_xian_shi_qg = LayoutInflater.from(getActivity()).inflate(R.layout.header_xian_shi_qg, null);
-                    banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
-                    ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
-                    int screenWidth = ScreenUtils.getScreenWidth(getActivity());
-                    layoutParams.width = screenWidth;
-                    layoutParams.height = (int) ((float)screenWidth*452f/1080f);
-                    banner.setLayoutParams(layoutParams);
-                    banner.setScrollDuration(1000);
-                    banner.startTurning(3000);
-                    tablayoutHeader = (TabLayout) header_xian_shi_qg.findViewById(R.id.tablayoutHeader);
-                    tablayoutHeader.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                        @Override
-                        public void onTabSelected(TabLayout.Tab tab) {
-                            if (isSelect) {
-                                for (int i = 0; i < indexGoodsTimes.size(); i++) {
-                                    TextView textQiangGouTitle = (TextView) tablayoutHeader.getTabAt(i).getCustomView().findViewById(R.id.textQiangGouTitle);
-                                    TextPaint paint = textQiangGouTitle.getPaint();
-                                    paint.setFakeBoldText(false);
-                                    indexGoodsTimes.get(i).setAct(0);
-                                }
-                                TextView textQiangGouTitle = (TextView) tablayoutHeader.getTabAt(tab.getPosition()).getCustomView().findViewById(R.id.textQiangGouTitle);
+            @Override
+            public View onCreateView(ViewGroup parent) {
+                View header_xian_shi_qg = LayoutInflater.from(getActivity()).inflate(R.layout.header_xian_shi_qg, null);
+                banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
+                ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
+                int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+                layoutParams.width = screenWidth;
+                layoutParams.height = (int) ((float) screenWidth * 452f / 1080f);
+                banner.setLayoutParams(layoutParams);
+                banner.setScrollDuration(1000);
+                banner.startTurning(3000);
+                tablayoutHeader = (TabLayout) header_xian_shi_qg.findViewById(R.id.tablayoutHeader);
+                tablayoutHeader.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        if (isSelect) {
+                            for (int i = 0; i < indexGoodsTimes.size(); i++) {
+                                TextView textQiangGouTitle = (TextView) tablayoutHeader.getTabAt(i).getCustomView().findViewById(R.id.textQiangGouTitle);
                                 TextPaint paint = textQiangGouTitle.getPaint();
-                                paint.setFakeBoldText(true);
-                                indexGoodsTimes.get(tab.getPosition()).setAct(1);
-                                page = 1;
-                                id = indexGoodsTimes.get(tab.getPosition()).getId();
-
-                                showLoadingDialog();
-                                ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
-                                    @Override
-                                    public void onSuccess(String s) {
-                                        cancelLoadingDialog();
-                                        LogUtil.LogShitou("限时购时段", s);
-                                        try {
-                                            page++;
-                                            IndexGoods indexGoods = GsonUtils.parseJSON(s, IndexGoods.class);
-                                            if (indexGoods.getStatus() == 1) {
-                                                List<IndexDataBean> indexGoodsData = indexGoods.getData();
-                                                adapter.removeAll();
-                                                adapter.addAll(indexGoodsData);
-                                            } else if (indexGoods.getStatus() == 3) {
-                                                MyDialog.showReLoginDialog(getActivity());
-                                            } else {
-                                                showError(indexGoods.getInfo());
-                                            }
-                                        } catch (Exception e) {
-                                            showError("数据出错");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(Response response) {
-                                        cancelLoadingDialog();
-                                        showError("网络出错");
-                                    }
-
-                                    public void showError(String msg) {
-                                        View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
-                                        TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
-                                        textMsg.setText(msg);
-                                        view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                recyclerView.showProgress();
-                                                initData();
-                                            }
-                                        });
-                                        recyclerView.setErrorView(view_loaderror);
-                                        recyclerView.showError();
-                                    }
-                                });
-                            }
-
-                        }
-
-                        @Override
-                        public void onTabUnselected(TabLayout.Tab tab) {
-
-                        }
-
-                        @Override
-                        public void onTabReselected(TabLayout.Tab tab) {
-
-                        }
-                    });
-                    imageMiddle = (ImageView) header_xian_shi_qg.findViewById(R.id.imageMiddle);
-                    imageMiddle.setVisibility(View.GONE);
-                    return header_xian_shi_qg;
-                }
-
-                @Override
-                public void onBindView(View headerView) {
-                    if (indexGoodsBanner != null) {
-                        banner.setPages(new CBViewHolderCreator() {
-                            @Override
-                            public Object createHolder() {
-                                return new LocalImageHolderView();
-                            }
-                        }, indexGoodsBanner);
-                        banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
-                    }
-                    if (indexGoodsTimes != null) {
-                        tablayoutHeader.removeAllTabs();
-                        tablayoutHeader.setTabMode(TabLayout.MODE_SCROLLABLE);
-                        for (int i = 0; i < indexGoodsTimes.size(); i++) {
-                            View item_qiang_gou_sj = LayoutInflater.from(getActivity()).inflate(R.layout.item_qiang_gou_sj, null);
-                            TextView textQiangGouTitle = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouTitle);
-                            TextView textQiangGouDes = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouDes);
-                            textQiangGouTitle.setText(indexGoodsTimes.get(i).getTimes());
-                            textQiangGouDes.setText(indexGoodsTimes.get(i).getDes());
-                            isSelect = false;
-                            TextPaint paint = textQiangGouTitle.getPaint();
-                            if (indexGoodsTimes.get(i).getAct() == 1) {
-                                paint.setFakeBoldText(true);
-                                tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), true);
-                            } else {
                                 paint.setFakeBoldText(false);
-                                tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), false);
+                                indexGoodsTimes.get(i).setAct(0);
                             }
-                            isSelect = true;
+                            TextView textQiangGouTitle = (TextView) tablayoutHeader.getTabAt(tab.getPosition()).getCustomView().findViewById(R.id.textQiangGouTitle);
+                            TextPaint paint = textQiangGouTitle.getPaint();
+                            paint.setFakeBoldText(true);
+                            indexGoodsTimes.get(tab.getPosition()).setAct(1);
+                            page = 1;
+                            id = indexGoodsTimes.get(tab.getPosition()).getId();
+
+                            showLoadingDialog();
+                            ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+                                @Override
+                                public void onSuccess(String s) {
+                                    cancelLoadingDialog();
+                                    LogUtil.LogShitou("限时购时段", s);
+                                    try {
+                                        page++;
+                                        IndexGoods indexGoods = GsonUtils.parseJSON(s, IndexGoods.class);
+                                        if (indexGoods.getStatus() == 1) {
+                                            List<IndexDataBean> indexGoodsData = indexGoods.getData();
+                                            adapter.removeAll();
+                                            adapter.addAll(indexGoodsData);
+                                        } else if (indexGoods.getStatus() == 3) {
+                                            MyDialog.showReLoginDialog(getActivity());
+                                        } else {
+                                            showError(indexGoods.getInfo());
+                                        }
+                                    } catch (Exception e) {
+                                        showError("数据出错");
+                                    }
+                                }
+
+                                @Override
+                                public void onError(Response response) {
+                                    cancelLoadingDialog();
+                                    showError("网络出错");
+                                }
+
+                                public void showError(String msg) {
+                                    View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                                    TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                                    textMsg.setText(msg);
+                                    view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            recyclerView.showProgress();
+                                            initData();
+                                        }
+                                    });
+                                    recyclerView.setErrorView(view_loaderror);
+                                    recyclerView.showError();
+                                }
+                            });
                         }
+
                     }
-                    Glide.with(getActivity())
-                            .load(indexGoodsImg)
-                            .asBitmap()
-                            .placeholder(R.mipmap.ic_empty)
-                            .into(imageMiddle);
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
+                imageMiddle = (ImageView) header_xian_shi_qg.findViewById(R.id.imageMiddle);
+                imageMiddle.setVisibility(View.GONE);
+                return header_xian_shi_qg;
+            }
+
+            @Override
+            public void onBindView(View headerView) {
+                if (indexGoodsBanner != null) {
+                    banner.setPages(new CBViewHolderCreator() {
+                        @Override
+                        public Object createHolder() {
+                            return new LocalImageHolderView();
+                        }
+                    }, indexGoodsBanner);
+                    banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
                 }
-            });
-        }
+                if (indexGoodsTimes != null) {
+                    tablayoutHeader.removeAllTabs();
+                    tablayoutHeader.setTabMode(TabLayout.MODE_SCROLLABLE);
+                    for (int i = 0; i < indexGoodsTimes.size(); i++) {
+                        View item_qiang_gou_sj = LayoutInflater.from(getActivity()).inflate(R.layout.item_qiang_gou_sj, null);
+                        TextView textQiangGouTitle = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouTitle);
+                        TextView textQiangGouDes = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouDes);
+                        textQiangGouTitle.setText(indexGoodsTimes.get(i).getTimes());
+                        textQiangGouDes.setText(indexGoodsTimes.get(i).getDes());
+                        isSelect = false;
+                        TextPaint paint = textQiangGouTitle.getPaint();
+                        if (indexGoodsTimes.get(i).getAct() == 1) {
+                            paint.setFakeBoldText(true);
+                            tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), true);
+                        } else {
+                            paint.setFakeBoldText(false);
+                            tablayoutHeader.addTab(tablayoutHeader.newTab().setCustomView(item_qiang_gou_sj), false);
+                        }
+                        isSelect = true;
+                    }
+                }
+                Glide.with(getActivity())
+                        .load(indexGoodsImg)
+                        .asBitmap()
+                        .placeholder(R.mipmap.ic_empty)
+                        .into(imageMiddle);
+            }
+        });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-                if (what==0){
-                    XianShiQGMore();
-                }else {
-                    benDiYouPinMore();
-                }
-            }
-
-            private void benDiYouPinMore() {
-                ApiClient.post(getActivity(), getOkBenDiYouPinObject(), new ApiClient.CallBack() {
-                    @Override
-                    public void onSuccess(String s) {
-                        try {
-                            page++;
-                            IndexProduct indexProduct = GsonUtils.parseJSON(s, IndexProduct.class);
-                            int status = indexProduct.getStatus();
-                            if (status == 1) {
-                                List<IndexDataBean> indexProductData = indexProduct.getData();
-                                adapter.addAll(indexProductData);
-                            } else if (status == 3) {
-                                MyDialog.showReLoginDialog(getActivity());
-                            } else {
-                                adapter.pauseMore();
-                            }
-                        } catch (Exception e) {
-                            adapter.pauseMore();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response response) {
-                        adapter.pauseMore();
-                    }
-                });
+                XianShiQGMore();
             }
 
             private void XianShiQGMore() {
@@ -487,56 +448,9 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     @Override
     public void onRefresh() {
-        if (what==0){
-            xianShiQiangGou();
-        }else {
-            benDiYouPin();
-        }
+        xianShiQiangGou();
     }
 
-    private void benDiYouPin() {
-        page = 1;
-        ApiClient.post(getActivity(), getOkBenDiYouPinObject(), new ApiClient.CallBack() {
-            @Override
-            public void onSuccess(String s) {
-                LogUtil.LogShitou("本地优品", s);
-                try {
-                    page++;
-                    IndexProduct indexProduct = GsonUtils.parseJSON(s, IndexProduct.class);
-                    if (indexProduct.getStatus() == 1) {
-                        List<IndexDataBean> indexProductData = indexProduct.getData();
-                        adapter.clear();
-                        adapter.addAll(indexProductData);
-                    } else if (indexProduct.getStatus()== 3) {
-                        MyDialog.showReLoginDialog(getActivity());
-                    } else {
-                        showError(indexProduct.getInfo());
-                    }
-                } catch (Exception e) {
-                    showError("数据出错");
-                }
-            }
-
-            @Override
-            public void onError(Response response) {
-                showError("网络出错");
-            }
-            public void showError(String msg) {
-                View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
-                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
-                textMsg.setText(msg);
-                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        recyclerView.showProgress();
-                        initData();
-                    }
-                });
-                recyclerView.setErrorView(view_loaderror);
-                recyclerView.showError();
-            }
-        });
-    }
 
     private void xianShiQiangGou() {
         id = "0";

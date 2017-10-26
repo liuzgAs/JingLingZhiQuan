@@ -291,11 +291,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         public Fragment getItem(int position) {
             switch (indexCateCate.get(position).getJump()){
                 case "time":
-                    return new XianShiQGFragment(0);
+                    return new XianShiQGFragment();
                 case "product":
-                    return new XianShiQGFragment(1);
+                    return new BenDiYDFragment(0);
                 case "store":
-                    return new BenDiYDFragment();
+                    return new BenDiYDFragment(1);
                 default:
                     IndexCate.CateBean cateBean = indexCateCate.get(position);
                     return new XuanPinSJFragment(position, cateBean);
