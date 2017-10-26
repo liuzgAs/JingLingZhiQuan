@@ -42,6 +42,7 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.viewholder.TuiJianViewHolder;
 import com.sxbwstxpay.viewholder.XuanPinSJViewHolder;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -132,6 +133,7 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
     private boolean isShow;
     private IWXAPI api = WXAPIFactory.createWXAPI(SouSuoActivity.this, Constant.WXAPPID, true);
     private Tencent mTencent;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +157,8 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        type = intent.getIntExtra(Constant.INTENT_KEY.type, 0);
     }
 
     @Override
@@ -189,8 +192,13 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(SouSuoActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_xuan_pin_sj;
-                return new XuanPinSJViewHolder(parent, layout, "SouSuoActivity");
+                if (type==0){
+                    int layout = R.layout.item_xuan_pin_sj;
+                    return new XuanPinSJViewHolder(parent, layout, "SouSuoActivity");
+                }else {
+                    int layout = R.layout.item_tui_jian;
+                    return new TuiJianViewHolder(parent, layout);
+                }
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -253,10 +261,12 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent();
-                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
-                intent.setClass(SouSuoActivity.this, ChanPinXQActivity.class);
-                startActivity(intent);
+                if (type==0){
+                    Intent intent = new Intent();
+                    intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
+                    intent.setClass(SouSuoActivity.this, ChanPinXQActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.sxbwstxpay.model;
 
-public class ShareBean {
+import java.io.Serializable;
+
+public class ShareBean implements Serializable{
     /**
      * title : 赚10.00
      * des1 : 只要你的好友通过你的分享购买此商品，你就能赚到至少

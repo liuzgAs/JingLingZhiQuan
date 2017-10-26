@@ -187,6 +187,10 @@ public class Constant {
         public static final String INDEX_STORE = "&g=App&m=Index&a=store";
         //本地优店店铺
         public static final String STORE_INDEX = "&g=App&m=Store&a=index";
+        //我的素材
+        public static final String USER_ITEM = "&g=App&m=User&a=item";
+        //发布素材提交
+        public static final String ITEM_ADDAFTER = "&g=App&m=Item&a=addAfter";
     }
 
     public static class PERMISSION {
@@ -243,6 +247,7 @@ public class Constant {
         public static final int address = 2027;
         public static final int IMAGE_DIANZHAO = 2028;
         public static final int IMAGE_PICKER = 2029;
+        public static final int TuiJian = 2030;
     }
 
     public static class ACACHE {

@@ -39,7 +39,7 @@
                 android:background="@drawable/layout_selector_white_system_gray">
 
                 <ImageView
-                    android:id="@+id/imageView17"
+                    android:id="@+id/imageImg"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_alignParentLeft="true"
@@ -50,14 +50,14 @@
                     android:src="@mipmap/ic_empty01" />
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/textTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/imageView17"
+                    android:layout_alignTop="@+id/imageImg"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="30dp"
-                    android:layout_toEndOf="@+id/imageView17"
-                    android:layout_toRightOf="@+id/imageView17"
+                    android:layout_toEndOf="@+id/imageImg"
+                    android:layout_toRightOf="@+id/imageImg"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textSize="@dimen/normal_textsize"
@@ -75,6 +75,36 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/viewTuiJianEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/layout_selector_white_system_gray" >
+
+                <ImageView
+                    android:id="@+id/imageView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/right_big" />
+
+                <TextView
+                    android:textSize="@dimen/normal_textsize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择要推荐的商品"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/basic_color"
+                    android:id="@+id/textView43"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/imageView29"
+                    android:layout_toStartOf="@+id/imageView29" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/normalItemHeight"
                 android:layout_marginTop="1dp"
@@ -115,12 +145,13 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:background="@color/white">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/editXinDe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
@@ -160,7 +191,7 @@
 
             <Button
                 android:layout_marginBottom="40dp"
-                android:id="@+id/button2"
+                android:id="@+id/buttonFaBu"
                 style="@style/MyButton"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"

@@ -321,6 +321,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 }
                 break;
             case R.id.textSouSuo:
+                intent.putExtra(Constant.INTENT_KEY.type,0);
                 intent.setClass(getActivity(), SouSuoActivity.class);
                 startActivity(intent);
                 break;

@@ -1,6 +1,8 @@
 package com.sxbwstxpay.model;
 
-public class IndexDataBean {
+import java.io.Serializable;
+
+public class IndexDataBean implements Serializable{
     /**
      * id : 1
      * title : 测试商品
