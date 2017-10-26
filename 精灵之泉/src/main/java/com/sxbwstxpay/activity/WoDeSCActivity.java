@@ -19,7 +19,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
-import com.sxbwstxpay.model.SimpleInfo;
+import com.sxbwstxpay.model.UserItem;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
@@ -27,16 +27,19 @@ import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.WoDeSCViewHolder;
 
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Response;
 
 public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<Integer> adapter;
+    private RecyclerArrayAdapter<UserItem.DataBean> adapter;
     private int page = 1;
     private View viewBar;
     private TextView textFaBuEmpty;
     private View viewFaBu;
+    private TextView textCount;
+    private TextView textRecoNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         viewBar = findViewById(R.id.viewBar);
         textFaBuEmpty = (TextView) recyclerView.getEmptyView().findViewById(R.id.textFaBu);
         viewFaBu = findViewById(R.id.viewFaBu);
+        textCount = (TextView) findViewById(R.id.textCount);
+        textRecoNum = (TextView) findViewById(R.id.textRecoNum);
     }
 
     @Override
@@ -79,7 +84,7 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Integer>(WoDeSCActivity.this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<UserItem.DataBean>(WoDeSCActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_su_cai;
@@ -89,6 +94,31 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
+                ApiClient.post(WoDeSCActivity.this, getOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        try {
+                            page++;
+                            UserItem userItem = GsonUtils.parseJSON(s, UserItem.class);
+                            int status = userItem.getStatus();
+                            if (status == 1) {
+                                List<UserItem.DataBean> userItemData = userItem.getData();
+                                adapter.addAll(userItemData);
+                            } else if (status == 3) {
+                                MyDialog.showReLoginDialog(WoDeSCActivity.this);
+                            } else {
+                                adapter.pauseMore();
+                            }
+                        } catch (Exception e) {
+                            adapter.pauseMore();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        adapter.pauseMore();
+                    }
+                });
             }
 
             @Override
@@ -161,12 +191,17 @@ public class WoDeSCActivity extends ZjbBaseActivity implements SwipeRefreshLayou
                 LogUtil.LogShitou("我的素材", s);
                 try {
                     page++;
-                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                    if (simpleInfo.getStatus() == 1) {
-                    } else if (simpleInfo.getStatus() == 3) {
+                    UserItem userItem = GsonUtils.parseJSON(s, UserItem.class);
+                    if (userItem.getStatus() == 1) {
+                        textCount.setText(userItem.getCount());
+                        textRecoNum.setText(userItem.getRecoNum()+"");
+                        adapter.clear();
+                        List<UserItem.DataBean> userItemData = userItem.getData();
+                        adapter.addAll(userItemData);
+                    } else if (userItem.getStatus() == 3) {
                         MyDialog.showReLoginDialog(WoDeSCActivity.this);
                     } else {
-                        showError(simpleInfo.getInfo());
+                        showError(userItem.getInfo());
                     }
                 } catch (Exception e) {
                     showError("数据出错");
