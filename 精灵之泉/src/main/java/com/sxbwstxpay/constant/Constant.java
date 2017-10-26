@@ -191,6 +191,8 @@ public class Constant {
         public static final String USER_ITEM = "&g=App&m=User&a=item";
         //发布素材提交
         public static final String ITEM_ADDAFTER = "&g=App&m=Item&a=addAfter";
+        //商品素材
+        public static final String ITEM_INDEX = "&g=App&m=Item&a=index";
     }
 
     public static class PERMISSION {

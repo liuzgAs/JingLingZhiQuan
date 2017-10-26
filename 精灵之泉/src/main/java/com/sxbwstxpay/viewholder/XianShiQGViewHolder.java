@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.MainActivity;
+import com.sxbwstxpay.activity.ShangPinScActivity;
 import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
@@ -54,6 +55,15 @@ public class XianShiQGViewHolder extends BaseViewHolder<IndexDataBean> {
         layoutParams.width = screenWidth;
         layoutParams.height = screenWidth/2;
         imageRecom_img.setLayoutParams(layoutParams);
+        $(R.id.imageSuCai).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id,data.getId());
+                intent.setClass(getContext(), ShangPinScActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
         $(R.id.imageShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

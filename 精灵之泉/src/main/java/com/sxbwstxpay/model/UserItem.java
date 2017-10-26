@@ -129,9 +129,27 @@ public class UserItem {
 
         private String addTime;
         private int recommend;
+        private int id;
         private String title;
+        private String Downloads;
         private List<String> img;
         private List<String> imgs;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getDownloads() {
+            return Downloads;
+        }
+
+        public void setDownloads(String downloads) {
+            Downloads = downloads;
+        }
 
         public String getAddTime() {
             return addTime;
