@@ -22,6 +22,15 @@ public class UserIndex {
     private int status;
     private String vipTime;
     private String txName;
+    private String storeTips;
+
+    public String getStoreTips() {
+        return storeTips;
+    }
+
+    public void setStoreTips(String storeTips) {
+        this.storeTips = storeTips;
+    }
 
     public String getTxName() {
         return txName;

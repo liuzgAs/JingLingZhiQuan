@@ -76,13 +76,14 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.VIP:
                     initData();
                     break;
             }
         }
     };
+    private String storeTips;
 
     public WoDeFragment() {
         // Required empty public constructor
@@ -218,6 +219,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                                 .into(imageTouXiang);
                         textNickName.setText(userIndex.getNickName());
                         grade = userIndex.getGrade();
+                        storeTips = userIndex.getStoreTips();
                         if (grade == 0) {
                             viewHuiYuan01.setVisibility(View.GONE);
                             viewHuiYuan02.setVisibility(View.GONE);
@@ -225,7 +227,6 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                             viewFeiHuiYuan01.setVisibility(View.VISIBLE);
                             viewFeiHuiYuan02.setVisibility(View.VISIBLE);
                             viewFeiHuiYuan03.setVisibility(View.VISIBLE);
-                            viewWoDeDianPu.setVisibility(View.GONE);
                         } else {
                             viewHuiYuan01.setVisibility(View.VISIBLE);
                             viewHuiYuan02.setVisibility(View.VISIBLE);
@@ -233,7 +234,6 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                             viewFeiHuiYuan01.setVisibility(View.GONE);
                             viewFeiHuiYuan02.setVisibility(View.GONE);
                             viewFeiHuiYuan03.setVisibility(View.GONE);
-                            viewWoDeDianPu.setVisibility(View.VISIBLE);
                         }
                         if (TextUtils.isEmpty(userIndex.getTxName())) {
                             texttXName.setVisibility(View.GONE);
@@ -316,8 +316,12 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 startActivity(intent);
                 break;
             case R.id.viewWoDeDianPu:
-                intent.setClass(getActivity(),WoDeDPActivity.class);
-                startActivity(intent);
+                if (TextUtils.isEmpty(storeTips)) {
+                    intent.setClass(getActivity(), WoDeDPActivity.class);
+                    startActivity(intent);
+                } else {
+                    MyDialog.showTipDialog(getActivity(), storeTips);
+                }
                 break;
             case R.id.viewHuiYuan:
                 break;
@@ -429,7 +433,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.VIP);
-        getActivity().registerReceiver(reciver,filter);
+        getActivity().registerReceiver(reciver, filter);
     }
 
     @Override
