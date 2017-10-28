@@ -200,6 +200,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(2));
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+            private TextView textItem_num;
             private TextView textCountdownDes;
             private TextView textCountdown;
             private TextView textStock_num;
@@ -226,6 +227,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 textStock_num = (TextView) header_xhan_pin_xq.findViewById(R.id.textStock_num);
                 screenWidth = ScreenUtils.getScreenWidth(ChanPinXQActivity.this);
                 banner = (ConvenientBanner) header_xhan_pin_xq.findViewById(R.id.banner);
+                textItem_num = (TextView) header_xhan_pin_xq.findViewById(R.id.textItem_num);
                 ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
                 layoutParams.width = screenWidth;
                 layoutParams.height = screenWidth;
@@ -319,6 +321,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     textStock_num.setText("剩余" + goodsInfoAd.getStock_num() + "库存");
                     countdown = goodsInfoAd.getCountdown();
                     textCountdownDes.setText(goodsInfoAd.getCountdownDes());
+                    textItem_num.setText(goodsInfoAd.getItem_num()+"组");
                     LogUtil.LogShitou("ChanPinXQActivity--countdown", "" + countdown);
                     if (timer != null) {
                         timer.cancel();
@@ -602,7 +605,12 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         }
         showLoadingDialog();
         String url = Constant.HOST + Constant.Url.CART_ADDCART;
-        AddCar addCar = new AddCar(userInfo.getUid(), tokenTime, num + "", id, spe_name);
+        AddCar addCar ;
+        if (quick){
+            addCar = new AddCar(userInfo.getUid(), tokenTime, num + "", id,"1" ,spe_name);
+        }else {
+            addCar = new AddCar(userInfo.getUid(), tokenTime, num + "", id,"0", spe_name);
+        }
         ApiClient.postJson(ChanPinXQActivity.this, url, GsonUtils.parseObject(addCar), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {

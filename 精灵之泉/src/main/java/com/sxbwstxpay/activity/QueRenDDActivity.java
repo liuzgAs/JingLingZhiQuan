@@ -61,6 +61,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
             }
         }
     };
+    private int is_address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,15 +168,20 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
             @Override
             public void onBindView(View headerView) {
-                if (cartOrderAd != null) {
-                    viewXuanZeSHDZ.setVisibility(View.VISIBLE);
-                    textAdd.setVisibility(View.GONE);
-                    textConsignee.setText("收件人：" + cartOrderAd.getConsignee());
-                    textPhone.setText(cartOrderAd.getPhone());
-                    textAreaAddress.setText("收货地址：" + cartOrderAd.getArea() + "-" + cartOrderAd.getAddress());
-                } else {
+                if (is_address==1){
+                    if (cartOrderAd != null) {
+                        viewXuanZeSHDZ.setVisibility(View.VISIBLE);
+                        textAdd.setVisibility(View.GONE);
+                        textConsignee.setText("收件人：" + cartOrderAd.getConsignee());
+                        textPhone.setText(cartOrderAd.getPhone());
+                        textAreaAddress.setText("收货地址：" + cartOrderAd.getArea() + "-" + cartOrderAd.getAddress());
+                    } else {
+                        viewXuanZeSHDZ.setVisibility(View.GONE);
+                        textAdd.setVisibility(View.VISIBLE);
+                    }
+                }else {
                     viewXuanZeSHDZ.setVisibility(View.GONE);
-                    textAdd.setVisibility(View.VISIBLE);
+                    textAdd.setVisibility(View.GONE);
                 }
             }
         });
@@ -233,6 +239,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                 try {
                     cartOrder = GsonUtils.parseJSON(s, CartOrder.class);
                     if (cartOrder.getStatus() == 1) {
+                        is_address = cartOrder.getIs_address();
                         cartOrderAd = cartOrder.getAd();
                         List<CartOrder.CartBean> cartOrderCart = cartOrder.getCart();
                         adapter.clear();
@@ -277,7 +284,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonTiJiao:
-                if (cartOrderAd == null) {
+                if (cartOrderAd == null&&is_address==1) {
                     Toast.makeText(QueRenDDActivity.this, "请选择收货地址", Toast.LENGTH_SHORT).show();
                     return;
                 }

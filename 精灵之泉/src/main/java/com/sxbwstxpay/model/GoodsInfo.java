@@ -78,6 +78,7 @@ public class GoodsInfo {
         private int stock_num;
         private int sale_add;
         private String intro;
+        private String item_num;
         private String img;
         private ShareBean share;
         private List<String> banner;
@@ -85,6 +86,14 @@ public class GoodsInfo {
         private List<ImgsBean> imgs;
         private List<ImgsBean> imgs2;
         private List<SizeStrBean> size_str;
+
+        public String getItem_num() {
+            return item_num;
+        }
+
+        public void setItem_num(String item_num) {
+            this.item_num = item_num;
+        }
 
         public String getCountdownDes() {
             return countdownDes;

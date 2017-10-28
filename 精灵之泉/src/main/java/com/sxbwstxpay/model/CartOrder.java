@@ -23,9 +23,18 @@ public class CartOrder {
     private String info;
     private int shipment;
     private int status;
+    private int is_address;
     private String sum;
     private String sumDes;
     private List<CartBean> cart;
+
+    public int getIs_address() {
+        return is_address;
+    }
+
+    public void setIs_address(int is_address) {
+        this.is_address = is_address;
+    }
 
     public AdBean getAd() {
         return ad;

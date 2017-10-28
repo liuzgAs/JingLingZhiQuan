@@ -10,14 +10,24 @@ public class AddCar {
     private String tokenTime;
     private String num;
     private String id;
+    private String buy_now;
     private List<String> spe_name;
 
-    public AddCar(String uid, String tokenTime, String num, String id, List<String> spe_name) {
+    public AddCar(String uid, String tokenTime, String num, String id, String buy_now, List<String> spe_name) {
         this.uid = uid;
         this.tokenTime = tokenTime;
         this.num = num;
         this.id = id;
+        this.buy_now = buy_now;
         this.spe_name = spe_name;
+    }
+
+    public String getBuy_now() {
+        return buy_now;
+    }
+
+    public void setBuy_now(String buy_now) {
+        this.buy_now = buy_now;
     }
 
     public String getUid() {
