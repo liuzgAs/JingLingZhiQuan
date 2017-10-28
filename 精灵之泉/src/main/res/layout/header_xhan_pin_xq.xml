@@ -228,12 +228,13 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/viewChaKanSC"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/layout_selector_white_system_gray"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -256,6 +257,7 @@
             android:src="@mipmap/right_big" />
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

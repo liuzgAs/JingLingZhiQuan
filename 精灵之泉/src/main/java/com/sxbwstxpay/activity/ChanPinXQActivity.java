@@ -281,6 +281,15 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 });
                 textCountdown = (TextView) header_xhan_pin_xq.findViewById(R.id.textCountdown);
                 textCountdownDes = (TextView) header_xhan_pin_xq.findViewById(R.id.textCountdownDes);
+                header_xhan_pin_xq.findViewById(R.id.viewChaKanSC).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.putExtra(Constant.INTENT_KEY.id,id);
+                        intent.setClass(ChanPinXQActivity.this,ShangPinScActivity.class);
+                        startActivity(intent);
+                    }
+                });
                 return header_xhan_pin_xq;
             }
 

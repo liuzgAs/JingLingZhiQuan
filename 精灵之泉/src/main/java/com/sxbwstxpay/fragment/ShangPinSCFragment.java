@@ -118,6 +118,7 @@ public class ShangPinSCFragment extends ZjbBaseFragment implements SwipeRefreshL
                 ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
+                        LogUtil.LogShitou("ShangPinSCFragment--素材更多", s+"");
                         try {
                             page++;
                             UserItem userItem = GsonUtils.parseJSON(s, UserItem.class);
@@ -190,6 +191,7 @@ public class ShangPinSCFragment extends ZjbBaseFragment implements SwipeRefreshL
 
     @Override
     public void onRefresh() {
+        page = 1;
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
