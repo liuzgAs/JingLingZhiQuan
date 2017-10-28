@@ -20,7 +20,16 @@ public class IndexCate {
     private int status;
     private String info;
     private List<SortBean> sort;
+    private List<SortBean> sort1;
     private List<CateBean> cate;
+
+    public List<SortBean> getSort1() {
+        return sort1;
+    }
+
+    public void setSort1(List<SortBean> sort1) {
+        this.sort1 = sort1;
+    }
 
     public int getVipNum() {
         return vipNum;

@@ -1,7 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -52,6 +55,21 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
     private int page = 1;
     private int type;
     private List<BannerBean> indexStoreBanner;
+    private String sort;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.ShaiXuan01:
+                    sort = intent.getStringExtra(Constant.INTENT_KEY.value);
+                    recyclerView.showProgress();
+                    onRefresh();
+                    break;
+            }
+        }
+    };
 
     public BenDiYDFragment(int type) {
         // Required empty public constructor
@@ -245,6 +263,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
         params.put("lat", lat);
         params.put("lng", lng);
         params.put("p", page + "");
+        params.put("sort", sort);
         return new OkObject(params, url);
     }
 
@@ -293,5 +312,19 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
                 recyclerView.showError();
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.ShaiXuan);
+        getActivity().registerReceiver(reciver, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(reciver);
     }
 }

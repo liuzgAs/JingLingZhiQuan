@@ -285,6 +285,7 @@ public class Constant {
         public static final String GouWuCheNum = "GouWuCheNum";
         public static final String GuanBiShouKuan = "GuanBiShouKuan";
         public static final String ShaiXuan = "ShaiXuan";
+        public static final String ShaiXuan01 = "ShaiXuan01";
         public static final String FenXiangXiaZaiLJ = "FenXiangXiaZaiLJ";
         public static final String VIP = "VIP";
     }

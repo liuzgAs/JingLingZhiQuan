@@ -81,7 +81,10 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     private boolean isShaiXuan = false;
     private ListView listViewShaiXuan;
     private MyAdapter myAdapter;
+    private MyAdapter myAdapter01;
     private List<IndexCate.SortBean> indexCateSort;
+    private List<IndexCate.SortBean> indexCateSort1;
+    private ListView listViewShaiXuan01;
 
     public ShengQianCZFragment() {
         // Required empty public constructor
@@ -134,6 +137,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         imageShaiXuan = (ImageView) mInflate.findViewById(R.id.imageShaiXuan);
         viewShaiXuan = mInflate.findViewById(R.id.viewShaiXuan);
         listViewShaiXuan = (ListView) mInflate.findViewById(R.id.listViewShaiXuan);
+        listViewShaiXuan01 = (ListView) mInflate.findViewById(R.id.listViewShaiXuan01);
     }
 
     @Override
@@ -161,18 +165,24 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             @Override
             public void onPageSelected(int position) {
                 positionX = position;
-                switch (indexCateCate.get(position).getJump()){
+                switch (indexCateCate.get(position).getJump()) {
                     case "time":
                         imageShaiXuan.setVisibility(View.GONE);
                         break;
                     case "product":
-                        imageShaiXuan.setVisibility(View.GONE);
+                        imageShaiXuan.setVisibility(View.VISIBLE);
+                        listViewShaiXuan.setVisibility(View.GONE);
+                        listViewShaiXuan01.setVisibility(View.VISIBLE);
                         break;
                     case "store":
-                        imageShaiXuan.setVisibility(View.GONE);
+                        imageShaiXuan.setVisibility(View.VISIBLE);
+                        listViewShaiXuan.setVisibility(View.GONE);
+                        listViewShaiXuan01.setVisibility(View.VISIBLE);
                         break;
                     default:
                         imageShaiXuan.setVisibility(View.VISIBLE);
+                        listViewShaiXuan.setVisibility(View.VISIBLE);
+                        listViewShaiXuan01.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -195,7 +205,23 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 myAdapter.notifyDataSetChanged();
                 Intent intent = new Intent();
                 intent.setAction(Constant.BROADCASTCODE.ShaiXuan);
-                intent.putExtra(Constant.INTENT_KEY.value,indexCateSort.get(position).getV());
+                intent.putExtra(Constant.INTENT_KEY.value, indexCateSort.get(position).getV());
+                getActivity().sendBroadcast(intent);
+            }
+        });
+        listViewShaiXuan01.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                isShaiXuan = false;
+                viewShaiXuan.setVisibility(View.GONE);
+                for (int i = 0; i < indexCateSort1.size(); i++) {
+                    indexCateSort1.get(i).setSelect(false);
+                }
+                indexCateSort1.get(position).setSelect(true);
+                myAdapter01.notifyDataSetChanged();
+                Intent intent = new Intent();
+                intent.setAction(Constant.BROADCASTCODE.ShaiXuan01);
+                intent.putExtra(Constant.INTENT_KEY.value, indexCateSort1.get(position).getV());
                 getActivity().sendBroadcast(intent);
             }
         });
@@ -245,8 +271,17 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                             indexCateSort.get(i).setSelect(false);
                         }
                         indexCateSort.get(0).setSelect(true);
-                        myAdapter = new MyAdapter();
+                        myAdapter = new MyAdapter(indexCateSort);
                         listViewShaiXuan.setAdapter(myAdapter);
+
+                        indexCateSort1 = indexCate.getSort1();
+                        for (int i = 0; i < indexCateSort1.size(); i++) {
+                            indexCateSort1.get(i).setSelect(false);
+                        }
+                        indexCateSort1.get(0).setSelect(true);
+                        myAdapter01 = new MyAdapter(indexCateSort1);
+                        listViewShaiXuan01.setAdapter(myAdapter01);
+
                         badge.setBadgeNumber(indexCate.getVipNum()).bindTarget(viewVip);
                         indexCateCate = indexCate.getCate();
                         viewPager.setAdapter(new MyViewPagerAdapter(getChildFragmentManager()));
@@ -289,7 +324,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
 
         @Override
         public Fragment getItem(int position) {
-            switch (indexCateCate.get(position).getJump()){
+            switch (indexCateCate.get(position).getJump()) {
                 case "time":
                     return new XianShiQGFragment();
                 case "product":
@@ -321,7 +356,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 }
                 break;
             case R.id.textSouSuo:
-                intent.putExtra(Constant.INTENT_KEY.type,0);
+                intent.putExtra(Constant.INTENT_KEY.type, 0);
                 intent.setClass(getActivity(), SouSuoActivity.class);
                 startActivity(intent);
                 break;
@@ -352,13 +387,17 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     }
 
     class MyAdapter extends BaseAdapter {
+        List<IndexCate.SortBean> indexCateSortX;
+        public MyAdapter(List<IndexCate.SortBean> indexCateSort){
+            this.indexCateSortX=indexCateSort;
+        }
         class ViewHolder {
             public TextView textName;
         }
 
         @Override
         public int getCount() {
-            return (indexCateSort.size());
+            return (indexCateSortX.size());
         }
 
         @Override
@@ -384,12 +423,12 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             }
             int light_black = getActivity().getResources().getColor(R.color.light_black);
             int basic_color = getActivity().getResources().getColor(R.color.basic_color);
-            if (indexCateSort.get(position).isSelect()) {
+            if (indexCateSortX.get(position).isSelect()) {
                 holder.textName.setTextColor(basic_color);
             } else {
                 holder.textName.setTextColor(light_black);
             }
-            holder.textName.setText(indexCateSort.get(position).getName());
+            holder.textName.setText(indexCateSortX.get(position).getName());
             return convertView;
         }
     }
