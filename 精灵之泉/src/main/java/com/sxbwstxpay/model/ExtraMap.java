@@ -17,6 +17,15 @@ public class ExtraMap implements Serializable{
     private String title;
     private String summary;
     private String url;
+    private String itemId;
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
 
     public String getSummary() {
         return summary;
@@ -26,11 +35,12 @@ public class ExtraMap implements Serializable{
         this.summary = summary;
     }
 
-    public ExtraMap(String uid, String code, String title,String url) {
+    public ExtraMap(String uid, String code, String title,String url,String itemId) {
         this.uid = uid;
         this.code = code;
         this.title = title;
         this.url = url;
+        this.itemId =itemId;
     }
 
     public String getUrl() {

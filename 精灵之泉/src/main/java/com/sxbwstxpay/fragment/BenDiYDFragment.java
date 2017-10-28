@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -21,13 +23,16 @@ import com.sxbwstxpay.activity.GuanLiWDDPActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.BannerBean;
 import com.sxbwstxpay.model.IndexStore;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.BenDiYouDianViewHolder;
+import com.sxbwstxpay.viewholder.LocalImageHolderView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +51,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
     private String lng;
     private int page = 1;
     private int type;
+    private List<BannerBean> indexStoreBanner;
 
     public BenDiYDFragment(int type) {
         // Required empty public constructor
@@ -107,6 +113,37 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_ben_di_yd;
                 return new BenDiYouDianViewHolder(parent, layout);
+            }
+        });
+        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+
+            private ConvenientBanner banner;
+
+            @Override
+            public View onCreateView(ViewGroup parent) {
+                View header_ben_di = LayoutInflater.from(getActivity()).inflate(R.layout.header_ben_di, null);
+                banner = (ConvenientBanner) header_ben_di.findViewById(R.id.banner);
+                ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
+                int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+                layoutParams.width = screenWidth;
+                layoutParams.height = (int) ((float) screenWidth * 452f / 1080f);
+                banner.setLayoutParams(layoutParams);
+                banner.setScrollDuration(1000);
+                banner.startTurning(3000);
+                return header_ben_di;
+            }
+
+            @Override
+            public void onBindView(View headerView) {
+                if (indexStoreBanner != null) {
+                    banner.setPages(new CBViewHolderCreator() {
+                        @Override
+                        public Object createHolder() {
+                            return new LocalImageHolderView();
+                        }
+                    }, indexStoreBanner);
+                    banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
+                }
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -197,9 +234,9 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
      */
     private OkObject getOkObject() {
         String url;
-        if (type==0){
+        if (type == 0) {
             url = Constant.HOST + Constant.Url.INDEX_PRODUCT;
-        }else {
+        } else {
             url = Constant.HOST + Constant.Url.INDEX_STORE;
         }
         HashMap<String, String> params = new HashMap<>();
@@ -207,7 +244,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
         params.put("tokenTime", tokenTime);
         params.put("lat", lat);
         params.put("lng", lng);
-        params.put("p", page+"");
+        params.put("p", page + "");
         return new OkObject(params, url);
     }
 
@@ -222,6 +259,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
                     page++;
                     IndexStore indexStore = GsonUtils.parseJSON(s, IndexStore.class);
                     if (indexStore.getStatus() == 1) {
+                        indexStoreBanner = indexStore.getBanner();
                         List<IndexStore.DataBean> indexStoreData = indexStore.getData();
                         adapter.clear();
                         adapter.addAll(indexStoreData);

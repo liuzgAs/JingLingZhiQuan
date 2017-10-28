@@ -46,7 +46,8 @@ public class MyReciver extends MessageReceiver {
         String uid = map.get("uid");
         String code = map.get("code");
         String url = map.get("url");
-        ExtraMap extraMapBean = new ExtraMap(uid, code,  s,url);
+        String itemId = map.get("itemId");
+        ExtraMap extraMapBean = new ExtraMap(uid, code,  s,url,itemId);
         extraMapBean.setSummary(s1);
         Intent intent = new Intent();
         intent.setClass(context, ReciverActivity.class);

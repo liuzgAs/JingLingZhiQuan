@@ -37,7 +37,7 @@ public class LocalImageHolderView implements Holder<BannerBean> {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExtraMap extraMapBean = new ExtraMap(((MainActivity)context).userInfo.getUid(), data.getCode(),  data.getTitle(),data.getUrl());
+                ExtraMap extraMapBean = new ExtraMap(((MainActivity)context).userInfo.getUid(), data.getCode(),  data.getTitle(),data.getUrl(),data.getItemId());
                 Intent intent = new Intent();
                 intent.setAction(Constant.BROADCASTCODE.EXTRAMAP);
                 intent.putExtra(Constant.INTENT_KEY.EXTRAMAP, extraMapBean);

@@ -186,6 +186,12 @@ public class MainActivity extends AppCompatActivity {
                     intent.setClass(this, TuiGuangActivity.class);
                     startActivity(intent);
                     break;
+                case "storeIndex":
+                    intent.putExtra(Constant.INTENT_KEY.id, extramap.getItemId());
+                    intent.putExtra(Constant.INTENT_KEY.type, 1);
+                    intent.setClass(this, GuanLiWDDPActivity.class);
+                    startActivity(intent);
+                    break;
                 case "web":
                     if (!TextUtils.isEmpty(extramap.getUrl())) {
                         Intent intent1 = new Intent();
@@ -217,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
             isBackground = false;
             Log.e("ACTIVITY", "程序从后台唤醒");
             boolean activityTop = isActivityTop(MainActivity.class, this);
-            if (!TextUtils.isEmpty(paintPassword)&&activityTop&&!isChoosePic){
+            if (!TextUtils.isEmpty(paintPassword) && activityTop && !isChoosePic) {
                 Intent intent = new Intent();
                 intent.setClass(this, LockActivity.class);
                 startActivity(intent);
@@ -230,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         isShow = false;
-        if (!isChoosePic){
+        if (!isChoosePic) {
             /**
              * 记录当前已经进入后台
              */
@@ -289,11 +295,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     *
      * 判断某activity是否处于栈顶
-     * @return  true在栈顶 false不在栈顶
+     *
+     * @return true在栈顶 false不在栈顶
      */
-    private boolean isActivityTop(Class cls,Context context){
+    private boolean isActivityTop(Class cls, Context context) {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         String name = manager.getRunningTasks(1).get(0).topActivity.getClassName();
         return name.equals(cls.getName());
