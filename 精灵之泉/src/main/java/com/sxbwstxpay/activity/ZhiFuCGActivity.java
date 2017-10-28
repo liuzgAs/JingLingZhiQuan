@@ -171,7 +171,11 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
+                intent.setClass(ZhiFuCGActivity.this, ChanPinXQActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
     }
