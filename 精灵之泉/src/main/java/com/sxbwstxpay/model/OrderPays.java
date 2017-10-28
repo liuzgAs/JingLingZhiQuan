@@ -18,9 +18,27 @@ public class OrderPays {
     private int payStatus;
     private int status;
     private int isVip;
+    private int jump;
     private String statusText;
     private String vipText;
+    private String btnText;
     private List<RecommBean> recomm;
+
+    public int getJump() {
+        return jump;
+    }
+
+    public void setJump(int jump) {
+        this.jump = jump;
+    }
+
+    public String getBtnText() {
+        return btnText;
+    }
+
+    public void setBtnText(String btnText) {
+        this.btnText = btnText;
+    }
 
     public int getIsVip() {
         return isVip;

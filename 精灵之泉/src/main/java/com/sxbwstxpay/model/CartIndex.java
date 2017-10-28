@@ -56,6 +56,11 @@ public class CartIndex implements Serializable{
     }
 
     public static class CartBean implements Serializable{
+        public CartBean(String id) {
+            this.id = id;
+
+        }
+
         /**
          * id : 249
          * uid : 2

@@ -446,6 +446,11 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
+                intent.setClass(GuanLiWDDPActivity.this, ChanPinXQActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
         recyclerView.setRefreshListener(this);

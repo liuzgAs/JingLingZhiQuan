@@ -41,6 +41,7 @@ import com.sxbwstxpay.customview.FlowTagLayout;
 import com.sxbwstxpay.customview.OnTagSelectListener;
 import com.sxbwstxpay.model.AddCar;
 import com.sxbwstxpay.model.CartAddcart;
+import com.sxbwstxpay.model.CartIndex;
 import com.sxbwstxpay.model.GoodsInfo;
 import com.sxbwstxpay.model.IndexCate;
 import com.sxbwstxpay.model.OkObject;
@@ -621,9 +622,18 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     if (cartAddcart.getStatus() == 1) {
                         alertDialog1.dismiss();
                         if (quick) {
+
                             Intent intent = new Intent();
-                            intent.setClass(ChanPinXQActivity.this, GouWuCActivity.class);
+                            intent.setClass(ChanPinXQActivity.this, QueRenDDActivity.class);
+                            List<CartIndex.CartBean> cartBeanList = new ArrayList<CartIndex.CartBean>();
+                            cartBeanList.add(new CartIndex.CartBean(cartAddcart.getCartId()+""));
+                            intent.putExtra(Constant.INTENT_KEY.value, new CartIndex(cartBeanList));
                             startActivity(intent);
+
+
+//                            Intent intent = new Intent();
+//                            intent.setClass(ChanPinXQActivity.this, GouWuCActivity.class);
+//                            startActivity(intent);
                         }
                         Intent intent = new Intent();
                         intent.setAction(Constant.BROADCASTCODE.GouWuCheNum);

@@ -42,6 +42,8 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
     private String statusText;
     private String vipText;
     private int isVip;
+    private String btnText;
+    private int jump;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
     @Override
     protected void initIntent() {
         Intent intent = getIntent();
-        oid = intent.getIntExtra(Constant.INTENT_KEY.id,0);
+        oid = intent.getIntExtra(Constant.INTENT_KEY.id, 0);
     }
 
     @Override
@@ -125,12 +127,35 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
                         finish();
                     }
                 });
+                textLiJiLiaoJie.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        switch (jump) {
+                            case 1:
+                                intent.setClass(ZhiFuCGActivity.this,MainActivity.class);
+                                startActivity(intent);
+                                break;
+                            case 2:
+                                intent.setClass(ZhiFuCGActivity.this,TuiGuangActivity   .class);
+                                startActivity(intent);
+                                break;
+                            case 3:
+                                intent.setClass(ZhiFuCGActivity.this,ShangChengDDActivity.class);
+                                startActivity(intent);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
                 return header_zhi_fu_cg;
             }
 
             @Override
             public void onBindView(View headerView) {
                 textStatusText.setText(statusText);
+                textLiJiLiaoJie.setText(btnText);
                 if (isVip == 0) {
                     textVipText.setText(vipText);
                     textVipText.setVisibility(View.VISIBLE);
@@ -161,7 +186,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
-        params.put("oid", oid+"");
+        params.put("oid", oid + "");
         return new OkObject(params, url);
     }
 
@@ -174,6 +199,8 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
                 try {
                     OrderPays orderPays = GsonUtils.parseJSON(s, OrderPays.class);
                     if (orderPays.getStatus() == 1) {
+                        btnText = orderPays.getBtnText();
+                        jump = orderPays.getJump();
                         statusText = orderPays.getStatusText();
                         vipText = orderPays.getVipText();
                         isVip = orderPays.getIsVip();
