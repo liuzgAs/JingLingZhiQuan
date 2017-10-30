@@ -251,7 +251,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 viewYanZhengMa.setVisibility(View.VISIBLE);
                                 buttonNext.setVisibility(View.VISIBLE);
                             }
-                        } else {
+                        } else if (userCardbefore1.getStatus() == 3){
+                            MyDialog.showReLoginDialog(getActivity());
+                        }else {
                             Toast.makeText(getActivity(), userCardbefore1.getInfo(), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
