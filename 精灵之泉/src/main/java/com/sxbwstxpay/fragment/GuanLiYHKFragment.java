@@ -183,7 +183,7 @@ public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLa
                                            SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                                            if (simpleInfo.getStatus()==1){
                                                onRefresh();
-                                           }else if (simpleInfo.getStatus()==2){
+                                           }else if (simpleInfo.getStatus()==3){
                                                MyDialog.showReLoginDialog(getActivity());
                                            }else {
                                            }

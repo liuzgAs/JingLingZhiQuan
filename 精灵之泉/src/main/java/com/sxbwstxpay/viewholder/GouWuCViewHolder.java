@@ -152,7 +152,7 @@ public class GouWuCViewHolder extends BaseViewHolder<CartIndex.CartBean> {
                                         Intent intent = new Intent();
                                         intent.setAction(Constant.BROADCASTCODE.GouWuCheNum);
                                         getContext().sendBroadcast(intent);
-                                    }else if (cartUpdatecart.getStatus()==2){
+                                    }else if (cartUpdatecart.getStatus()==3){
                                         MyDialog.showReLoginDialog(getContext());
                                     }else {
                                         Toast.makeText(getContext(), cartUpdatecart.getInfo(), Toast.LENGTH_SHORT).show();
@@ -207,7 +207,7 @@ public class GouWuCViewHolder extends BaseViewHolder<CartIndex.CartBean> {
                         data.setNum(num);
                         textNum.setText(num+"");
                         ((GouWuCActivity) getContext()).quanXuan();
-                    }else if (cartUpdatecart.getStatus()==2){
+                    }else if (cartUpdatecart.getStatus()==3){
                         MyDialog.showReLoginDialog(getContext());
                     }else {
                         Toast.makeText(getContext(), cartUpdatecart.getInfo(), Toast.LENGTH_SHORT).show();

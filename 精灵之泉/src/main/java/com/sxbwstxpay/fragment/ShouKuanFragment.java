@@ -339,7 +339,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                                         intent.putExtra(Constant.INTENT_KEY.TITLE,"支付宝代收");
                                         intent.putExtra(Constant.INTENT_KEY.img, orderWxPay.getImg());
                                         startActivity(intent);
-                                    }else if (orderWxPay.getStatus()==2){
+                                    }else if (orderWxPay.getStatus()==3){
                                         MyDialog.showReLoginDialog(getActivity());
                                     }else {
                                         Toast.makeText(getActivity(), orderWxPay.getInfo(), Toast.LENGTH_SHORT).show();
@@ -386,7 +386,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                                         intent.putExtra(Constant.INTENT_KEY.TITLE,"微信代收");
                                         intent.putExtra(Constant.INTENT_KEY.img, orderWxPay.getImg());
                                         startActivity(intent);
-                                    }else if (orderWxPay.getStatus()==2){
+                                    }else if (orderWxPay.getStatus()==3){
                                         MyDialog.showReLoginDialog(getActivity());
                                     }else {
                                         Toast.makeText(getActivity(), orderWxPay.getInfo(), Toast.LENGTH_SHORT).show();

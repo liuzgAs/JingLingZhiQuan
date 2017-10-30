@@ -129,7 +129,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
                         SpannableString span2 = new SpannableString("¥" + userIncome.getAmount3());
                         span2.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textFanYong.setText(span2);
-                    }else if (userIncome.getStatus()==2){
+                    }else if (userIncome.getStatus()==3){
                         MyDialog.showReLoginDialog(WoDeSYActivity.this);
                     }else {
                         Toast.makeText(WoDeSYActivity.this, userIncome.getInfo(), Toast.LENGTH_SHORT).show();

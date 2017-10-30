@@ -110,7 +110,7 @@ public class DiZhiGLViewHolder extends BaseViewHolder<UserAddress.DataBean> {
                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                    if (simpleInfo.getStatus()==1){
                        ((DiZhiGLActivity) getContext()).adapter.remove(getDataPosition());
-                   }else if (simpleInfo.getStatus()==2){
+                   }else if (simpleInfo.getStatus()==3){
                        MyDialog.showReLoginDialog(getContext());
                    }else {
                        Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();

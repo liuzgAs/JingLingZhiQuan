@@ -101,7 +101,7 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
                                             ToLoginActivity.toLoginActivity(getContext());
                                             SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                                             if (simpleInfo.getStatus()==1){
-                                            }else if (simpleInfo.getStatus()==2){
+                                            }else if (simpleInfo.getStatus()==3){
                                                 MyDialog.showReLoginDialog(getContext());
                                             }else {
                                                 Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();

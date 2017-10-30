@@ -103,7 +103,7 @@ public class XuanPinSJViewHolder extends BaseViewHolder<IndexDataBean> {
                                 intent.putExtra(Constant.INTENT_KEY.value,indexUpgoods.getG_num());
                                 intent.setAction(Constant.BROADCASTCODE.ShangJia02);
                                 getContext().sendBroadcast(intent);
-                            }else if (indexUpgoods.getStatus()==2){
+                            }else if (indexUpgoods.getStatus()==3){
                                 MyDialog.showReLoginDialog(getContext());
                             }else {
                                 Toast.makeText(getContext(), indexUpgoods.getInfo(), Toast.LENGTH_SHORT).show();
