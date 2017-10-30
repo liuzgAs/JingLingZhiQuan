@@ -581,21 +581,23 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 return false;
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final int[] count = {0};
-                final List<Integer> imgList = new ArrayList<>();
-                for (int i = 0; i < 5; i++) {
-                    imgList.add(0);
-                }
-                for (int i = 0; i < path.length; i++) {
-                    if (isBreak[0]) {
-                        break;
-                    }
-                    if (!TextUtils.isEmpty(path[i])) {
-                        final int finalI = i;
-                        ApiClient.post(getActivity(), getOkObject4(i), new ApiClient.CallBack() {
+
+        final int[] count = {0};
+        final List<Integer> imgList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            imgList.add(0);
+        }
+        for (int i = 0; i < path.length; i++) {
+            if (isBreak[0]) {
+                break;
+            }
+            if (!TextUtils.isEmpty(path[i])) {
+                final int finalI = i;
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ApiClient.post(getActivity(), getOkObject4(finalI), new ApiClient.CallBack() {
                             @Override
                             public void onSuccess(String s) {
                                 LogUtil.LogShitou("RenZhengFragment--单个图片上传返回", "" + s);
@@ -631,57 +633,55 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
                             }
                         });
-                    } else {
-                        switch (i) {
-                            case 0:
-                                imgList.set(i, userCardbefore.getData().getImgId());
-                                break;
-                            case 1:
-                                imgList.set(i, userCardbefore.getData().getImgId2());
-                                break;
-                            case 2:
-                                imgList.set(i, userCardbefore.getData().getImgId3());
-                                break;
-                            case 3:
-                                imgList.set(i, userCardbefore.getData().getImgId4());
-                                break;
-                            case 4:
-                                imgList.set(i, userCardbefore.getData().getImgId5());
-                                break;
-                        }
-                        count[0]++;
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressDialog.setProgress(count[0]);
-                                progressDialog.setMessage("已上传" + count[0] + "/5");
-                                if (count[0] == 5) {
-                                    progressDialog.dismiss();
-                                    tiJiao();
-                                }
-                            }
-                        });
-
                     }
-                }
-            }
 
-            /**
-             * des： 网络请求参数
-             * author： ZhangJieBo
-             * date： 2017/8/28 0028 上午 9:55
-             */
-            private OkObject getOkObject4(int i) {
-                String url = Constant.HOST + Constant.Url.RESPOND_APPIMGADD;
-                HashMap<String, String> params = new HashMap<>();
-                params.put("uid", userInfo.getUid());
-                params.put("tokenTime", tokenTime);
-                params.put("code", "card");
-                params.put("img", ImgToBase64.toBase64(path[i]));
-                params.put("brand", "android");
-                return new OkObject(params, url);
+
+                }).start();
+            } else {
+                switch (i) {
+                    case 0:
+                        imgList.set(i, userCardbefore.getData().getImgId());
+                        break;
+                    case 1:
+                        imgList.set(i, userCardbefore.getData().getImgId2());
+                        break;
+                    case 2:
+                        imgList.set(i, userCardbefore.getData().getImgId3());
+                        break;
+                    case 3:
+                        imgList.set(i, userCardbefore.getData().getImgId4());
+                        break;
+                    case 4:
+                        imgList.set(i, userCardbefore.getData().getImgId5());
+                        break;
+                }
+                count[0]++;
+                progressDialog.setProgress(count[0]);
+                progressDialog.setMessage("已上传" + count[0] + "/5");
+                if (count[0] == 5) {
+                    progressDialog.dismiss();
+                    tiJiao();
+                }
+
             }
-        }).start();
+        }
+
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject4(int i) {
+        String url = Constant.HOST + Constant.Url.RESPOND_APPIMGADD;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("code", "card");
+        params.put("img", ImgToBase64.toBase64(path[i]));
+        params.put("brand", "android");
+        return new OkObject(params, url);
     }
 
     /**
