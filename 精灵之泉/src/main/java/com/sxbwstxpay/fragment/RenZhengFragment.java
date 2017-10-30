@@ -77,11 +77,10 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private String mPhone_sms;
     private ImageView image01;
     private ImageView image02;
-    private ImageView image03;
     private ImageView image04;
     private ImageView image05;
     private ImagePicker mImagePicker;
-    private String[] path = new String[5];
+    private String[] path;
     private Button buttonTiJiao;
     private ImageView imageRight;
     private View viewYanZhengMa;
@@ -91,6 +90,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private EditText editYouXiang;
     private EditText editZhiHang;
     private ProgressDialog progressDialog;
+    private int imgNum =4;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -125,6 +125,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 
     @Override
     protected void findID() {
+        path = new String[imgNum];
         mRelaTitleStatue = mInflate.findViewById(R.id.relaTitleStatue);
         viewTianXinXi = mInflate.findViewById(R.id.viewTianXinXi);
         scrollView = (ScrollView) mInflate.findViewById(R.id.scrollView);
@@ -141,7 +142,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         editCode = (EditText) mInflate.findViewById(R.id.editCode);
         image01 = (ImageView) mInflate.findViewById(R.id.image01);
         image02 = (ImageView) mInflate.findViewById(R.id.image02);
-        image03 = (ImageView) mInflate.findViewById(R.id.image03);
         image04 = (ImageView) mInflate.findViewById(R.id.image04);
         image05 = (ImageView) mInflate.findViewById(R.id.image05);
         buttonTiJiao = (Button) mInflate.findViewById(R.id.buttonTiJiao);
@@ -172,7 +172,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         viewKaiHuYH.setOnClickListener(this);
         image01.setOnClickListener(this);
         image02.setOnClickListener(this);
-        image03.setOnClickListener(this);
         image04.setOnClickListener(this);
         image05.setOnClickListener(this);
         buttonTiJiao.setOnClickListener(this);
@@ -181,7 +180,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     /**
      * des： 网络请求参数
      * author： ZhangJieBo
-     * date： 2017/8/28 0028 上午 9:55
+     * date： 2017/8/28 0028 上午 9:00
      */
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.USER_CARDBEFORE;
@@ -221,7 +220,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 buttonSms.setEnabled(true);
                                 image01.setEnabled(true);
                                 image02.setEnabled(true);
-                                image03.setEnabled(true);
                                 image04.setEnabled(true);
                                 image05.setEnabled(true);
                             } else {
@@ -237,7 +235,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 buttonSms.setEnabled(false);
                                 image01.setEnabled(false);
                                 image02.setEnabled(false);
-                                image03.setEnabled(false);
                                 image04.setEnabled(false);
                                 image05.setEnabled(false);
                             }
@@ -303,11 +300,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 .placeholder(R.mipmap.shenfenbeimain)
                                 .into(image02);
                         Glide.with(getActivity())
-                                .load(userCardbefore.getData().getImg3())
-                                .asBitmap()
-                                .placeholder(R.mipmap.xingyongkademo)
-                                .into(image03);
-                        Glide.with(getActivity())
                                 .load(userCardbefore.getData().getImg4())
                                 .asBitmap()
                                 .placeholder(R.mipmap.yinhangkazhengmian)
@@ -328,7 +320,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 //                            buttonSms.setEnabled(true);
 //                            image01.setEnabled(true);
 //                            image02.setEnabled(true);
-//                            image03.setEnabled(true);
 //                            image04.setEnabled(true);
 //                            image05.setEnabled(true);
 //                        } else {
@@ -341,7 +332,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 //                            buttonSms.setEnabled(false);
 //                            image01.setEnabled(false);
 //                            image02.setEnabled(false);
-//                            image03.setEnabled(false);
 //                            image04.setEnabled(false);
 //                            image05.setEnabled(false);
 //                        }
@@ -399,29 +389,20 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             .placeholder(R.mipmap.ic_empty)
                             .into(image02);
                     break;
-                case Constant.REQUEST_RESULT_CODE.IMG03:
-                    ArrayList<ImageItem> images03 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path[2] = images03.get(0).path;
-                    Glide.with(RenZhengFragment.this)
-                            .load(path[2])
-                            .transform(new RotateTransformation(getActivity(), -90))
-                            .placeholder(R.mipmap.ic_empty)
-                            .into(image03);
-                    break;
                 case Constant.REQUEST_RESULT_CODE.IMG04:
                     ArrayList<ImageItem> images04 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path[3] = images04.get(0).path;
+                    path[2] = images04.get(0).path;
                     Glide.with(RenZhengFragment.this)
-                            .load(path[3])
+                            .load(path[2])
                             .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image04);
                     break;
                 case Constant.REQUEST_RESULT_CODE.IMG05:
                     ArrayList<ImageItem> images05 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path[4] = images05.get(0).path;
+                    path[3] = images05.get(0).path;
                     Glide.with(RenZhengFragment.this)
-                            .load(path[4])
+                            .load(path[3])
                             .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image05);
@@ -449,15 +430,11 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     Toast.makeText(getActivity(), "请选择身份证背面照", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(path[2]) && TextUtils.isEmpty(userCardbefore.getData().getImg3())) {
-                    Toast.makeText(getActivity(), "请选择本人任一信用卡正面照", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(path[3]) && TextUtils.isEmpty(userCardbefore.getData().getImg4())) {
+                if (TextUtils.isEmpty(path[2]) && TextUtils.isEmpty(userCardbefore.getData().getImg4())) {
                     Toast.makeText(getActivity(), "请选择银行卡正面照", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(path[4]) && TextUtils.isEmpty(userCardbefore.getData().getImg5())) {
+                if (TextUtils.isEmpty(path[3]) && TextUtils.isEmpty(userCardbefore.getData().getImg5())) {
                     Toast.makeText(getActivity(), "请选择手持银行卡和身份证半身照", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -468,9 +445,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 break;
             case R.id.image02:
                 chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG02);
-                break;
-            case R.id.image03:
-                chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG03);
                 break;
             case R.id.image04:
                 chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG04);
@@ -510,13 +484,11 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     Toast.makeText(getActivity(), "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(editWXHao.getText().toString().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入微信号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (!StringUtil.checkEmail(editYouXiang.getText().toString().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
-                    return;
+                if (!TextUtils.isEmpty(editYouXiang.getText().toString().toString().trim())){
+                    if (!StringUtil.checkEmail(editYouXiang.getText().toString().toString().trim())) {
+                        Toast.makeText(getActivity(), "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
                 if (TextUtils.isEmpty(userCardbefore.getData().getBankName()) || userCardbefore.getData().getBank() <= 0) {
                     Toast.makeText(getActivity(), "请选择开户银行", Toast.LENGTH_SHORT).show();
@@ -556,9 +528,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         final boolean[] isBreak = {false};
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("上传图片");
-        progressDialog.setMessage("已上传0/5");
+        progressDialog.setMessage("已上传0/"+imgNum);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMax(5);
+        progressDialog.setMax(imgNum);
         progressDialog.setCancelable(false);
         progressDialog.show();
         progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
@@ -584,7 +556,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 
         final int[] count = {0};
         final List<Integer> imgList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < imgNum; i++) {
             imgList.add(0);
         }
         for (int i = 0; i < path.length; i++) {
@@ -606,15 +578,14 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                     if (respondAppimgadd.getStatus() == 1) {
                                         count[0]++;
                                         progressDialog.setProgress(count[0]);
-                                        progressDialog.setMessage("已上传" + count[0] + "/5");
+                                        progressDialog.setMessage("已上传" + count[0] + "/"+imgNum);
                                         imgList.set(finalI, respondAppimgadd.getImgId());
-                                        if (count[0] == 5) {
+                                        if (count[0] == imgNum) {
                                             progressDialog.dismiss();
                                             userCardbefore.getData().setImgId(imgList.get(0));
                                             userCardbefore.getData().setImgId2(imgList.get(1));
-                                            userCardbefore.getData().setImgId3(imgList.get(2));
-                                            userCardbefore.getData().setImgId4(imgList.get(3));
-                                            userCardbefore.getData().setImgId5(imgList.get(4));
+                                            userCardbefore.getData().setImgId4(imgList.get(2));
+                                            userCardbefore.getData().setImgId5(imgList.get(3));
                                             tiJiao();
                                         }
                                     } else if (respondAppimgadd.getStatus() == 3) {
@@ -645,9 +616,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     case 1:
                         imgList.set(i, userCardbefore.getData().getImgId2());
                         break;
-                    case 2:
-                        imgList.set(i, userCardbefore.getData().getImgId3());
-                        break;
                     case 3:
                         imgList.set(i, userCardbefore.getData().getImgId4());
                         break;
@@ -657,8 +625,8 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 }
                 count[0]++;
                 progressDialog.setProgress(count[0]);
-                progressDialog.setMessage("已上传" + count[0] + "/5");
-                if (count[0] == 5) {
+                progressDialog.setMessage("已上传" + count[0] + "/"+imgNum);
+                if (count[0] == imgNum) {
                     progressDialog.dismiss();
                     tiJiao();
                 }
@@ -671,7 +639,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     /**
      * des： 网络请求参数
      * author： ZhangJieBo
-     * date： 2017/8/28 0028 上午 9:55
+     * date： 2017/8/28 0028 上午 9:00
      */
     private OkObject getOkObject4(int i) {
         String url = Constant.HOST + Constant.Url.RESPOND_APPIMGADD;
@@ -687,7 +655,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     /**
      * des： 网络请求参数
      * author： ZhangJieBo
-     * date： 2017/8/28 0028 上午 9:55
+     * date： 2017/8/28 0028 上午 9:00
      */
     private OkObject getOkObject3() {
         String url = Constant.HOST + Constant.Url.USER_CARDADD;
@@ -704,7 +672,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         params.put("subbranch", userCardbefore.getData().getSubbranch());
         params.put("imgId", userCardbefore.getData().getImgId() + "");
         params.put("imgId2", userCardbefore.getData().getImgId2() + "");
-        params.put("imgId3", userCardbefore.getData().getImgId3() + "");
         params.put("imgId4", userCardbefore.getData().getImgId4() + "");
         params.put("imgId5", userCardbefore.getData().getImgId5() + "");
         return new OkObject(params, url);
@@ -716,7 +683,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("RenZhengFragment--onSuccess", "");
+                LogUtil.LogShitou("RenZhengFragment--提交", s+"");
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
@@ -743,7 +710,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     /**
      * des： 网络请求参数
      * author： ZhangJieBo
-     * date： 2017/8/28 0028 上午 9:55
+     * date： 2017/8/28 0028 上午 9:00
      */
     private OkObject getOkObject2() {
         String url = Constant.HOST + Constant.Url.LOGIN_BINDNEXT;
@@ -838,7 +805,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     /**
      * des： 网络请求参数
      * author： ZhangJieBo
-     * date： 2017/8/28 0028 上午 9:55
+     * date： 2017/8/28 0028 上午 9:00
      */
     private OkObject getOkObject1() {
         String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
