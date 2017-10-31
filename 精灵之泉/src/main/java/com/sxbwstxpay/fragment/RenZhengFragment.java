@@ -293,22 +293,22 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                         editZhiHang.setText(userCardbefore.getData().getSubbranch());
                         Glide.with(getActivity())
                                 .load(userCardbefore.getData().getImg())
-                                .asBitmap()
+                                .transform(new RotateTransformation(getActivity(), -90))
                                 .placeholder(R.mipmap.shenfenzhengmian)
                                 .into(image01);
                         Glide.with(getActivity())
                                 .load(userCardbefore.getData().getImg2())
-                                .asBitmap()
+                                .transform(new RotateTransformation(getActivity(), -90))
                                 .placeholder(R.mipmap.shenfenbeimain)
                                 .into(image02);
                         Glide.with(getActivity())
                                 .load(userCardbefore.getData().getImg4())
-                                .asBitmap()
+                                .transform(new RotateTransformation(getActivity(), -90))
                                 .placeholder(R.mipmap.yinhangkazhengmian)
                                 .into(image04);
                         Glide.with(getActivity())
                                 .load(userCardbefore.getData().getImg5())
-                                .asBitmap()
+                                .transform(new RotateTransformation(getActivity(), -90))
                                 .placeholder(R.mipmap.shouchibanshen)
                                 .into(image05);
                         submitStatus = userCardbefore.getSubmitStatus();
