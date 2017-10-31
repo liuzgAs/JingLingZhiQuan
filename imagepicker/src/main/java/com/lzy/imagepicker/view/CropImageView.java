@@ -486,9 +486,6 @@ public class CropImageView extends AppCompatImageView {
      * @return 裁剪后的图片的Bitmap
      */
     private Bitmap makeCropBitmap(Bitmap bitmap, RectF focusRect, RectF imageMatrixRect, int expectWidth, int exceptHeight, boolean isSaveRectangle) {
-        if (imageMatrixRect == null || bitmap == null){
-            return null;
-        }
         float scale = imageMatrixRect.width() / bitmap.getWidth();
         int left = (int) ((focusRect.left - imageMatrixRect.left) / scale);
         int top = (int) ((focusRect.top - imageMatrixRect.top) / scale);
