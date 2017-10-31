@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -183,8 +184,12 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private OkObject getOkObject1() {
         String url = Constant.HOST + Constant.Url.SHARE_INDEX;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
-        params.put("tokenTime", tokenTime);
+        if (!TextUtils.isEmpty(userInfo.getUid())){
+            params.put("uid", userInfo.getUid());
+        }
+        if (!TextUtils.isEmpty(tokenTime)){
+            params.put("tokenTime", tokenTime);
+        }
         return new OkObject(params, url);
     }
 

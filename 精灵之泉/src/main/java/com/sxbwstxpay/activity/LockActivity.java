@@ -81,12 +81,16 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
 
     @Override
     protected void initViews() {
-        Glide.with(LockActivity.this)
-                .load(userInfo.getHeadImg())
-                .bitmapTransform(new CropCircleTransformation(this))
-                .placeholder(R.mipmap.ic_empty01)
-                .into(imageTouXiang);
-        textPhone.setText(StringUtil.hidePhone(userInfo.getUserName()));
+        if (userInfo!=null){
+            if (!TextUtils.isEmpty(userInfo.getHeadImg())){
+                Glide.with(LockActivity.this)
+                        .load(userInfo.getHeadImg())
+                        .bitmapTransform(new CropCircleTransformation(this))
+                        .placeholder(R.mipmap.ic_empty01)
+                        .into(imageTouXiang);
+            }
+            textPhone.setText(StringUtil.hidePhone(userInfo.getUserName()));
+        }
         if (isFrist) {
             textWangJiMM.setVisibility(View.INVISIBLE);
             textSkip.setVisibility(View.VISIBLE);

@@ -111,8 +111,11 @@ public class TXActivity extends ZjbBaseActivity implements View.OnClickListener 
                 tiXian();
                 break;
             case R.id.textQuanBuTX:
-                editJinE.setText(userIncomeMx.getAmount() + "");
-                editJinE.setSelection((userIncomeMx.getAmount() + "").length());
+                try {
+                    editJinE.setText(userIncomeMx.getAmount() + "");
+                    editJinE.setSelection((userIncomeMx.getAmount() + "").length());
+                } catch (Exception e) {
+                }
                 break;
             case R.id.imageBack:
                 finish();

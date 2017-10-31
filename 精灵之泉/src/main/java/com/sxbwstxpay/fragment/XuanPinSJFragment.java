@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -249,16 +250,18 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         });
         View emptyView = recyclerView.getEmptyView();
         textTitle = (TextView) emptyView.findViewById(R.id.textTitle);
-        switch (cateBean.getJump()){
-            case "time":
-                textTitle.setText(getResources().getString(R.string.nothing));
-                break;
-            case "list":
-                textTitle.setText(getResources().getString(R.string.nothing));
-                break;
-            case "future":
-                textTitle.setText("本地优质商家火热招募中");
-                break;
+        if (!TextUtils.isEmpty(cateBean.getJump())){
+            switch (cateBean.getJump()){
+                case "time":
+                    textTitle.setText(getResources().getString(R.string.nothing));
+                    break;
+                case "list":
+                    textTitle.setText(getResources().getString(R.string.nothing));
+                    break;
+                case "future":
+                    textTitle.setText("本地优质商家火热招募中");
+                    break;
+            }
         }
         recyclerView.setRefreshListener(this);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
