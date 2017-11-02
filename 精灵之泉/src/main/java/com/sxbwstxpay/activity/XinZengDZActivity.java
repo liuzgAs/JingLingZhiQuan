@@ -127,7 +127,7 @@ public class XinZengDZActivity extends ZjbBaseActivity implements View.OnClickLi
                         textArea.setText(options1Items.get(options1).getPickerViewText() + "-" + options2Items.get(options1).get(options2) + "-" + options3Items.get(options1).get(options2).get(options3));
                     }
                 })
-                        .setTitleText("城市选择")
+                        .setTitleText("地区选择")
                         .setContentTextSize(20)//设置滚轮文字大小
                         .setDividerColor(Color.LTGRAY)//设置分割线的颜色
                         .setSelectOptions(0, 0, 0)//默认选中项
