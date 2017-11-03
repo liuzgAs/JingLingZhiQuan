@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.ZhiFuActivity;
@@ -86,6 +88,15 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
                 if (data.getIs_del() == 1) {
                     dingDanCaoZuo("del");
                 }
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id, data.getOg().get(position).getGoods_id());
+                intent.setClass(getContext(), ChanPinXQActivity.class);
+                getContext().startActivity(intent);
             }
         });
     }

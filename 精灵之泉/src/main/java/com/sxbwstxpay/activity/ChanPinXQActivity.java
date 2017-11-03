@@ -78,7 +78,6 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
     private int viewBarHeight;
     private String id;
     private GoodsInfo.AdBean goodsInfoAd;
-    //    private List<GoodsInfo.AdBean.DesBean> goodsInfoAdDes;
     private int num = 1;
     private AlertDialog alertDialog1;
     private TagAdapter tagAdapter;

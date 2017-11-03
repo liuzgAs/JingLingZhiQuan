@@ -21,7 +21,6 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.activity.DingDanXQActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -120,7 +119,7 @@ public class ShangChengDDFragment extends ZjbBaseFragment implements SwipeRefres
     private void initRecycle() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) DpUtils.convertDpToPixel(10, getActivity()), 0, 0);
+        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) DpUtils.convertDpToPixel(5, getActivity()), 0, 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
@@ -193,16 +192,16 @@ public class ShangChengDDFragment extends ZjbBaseFragment implements SwipeRefres
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), DingDanXQActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(getActivity(), DingDanXQActivity.class);
+//                startActivity(intent);
             }
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 View view = new View(getContext());
-                view.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DpUtils.convertDpToPixel(10, getActivity())));
+                view.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DpUtils.convertDpToPixel(5, getActivity())));
                 return view;
             }
 
