@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             tabs_img.setImageResource(imgRes[i]);
             mTabHost.addTab(mTabHost.newTabSpec(tabsItem[i]).setIndicator(inflate), fragment[i], null);
         }
-        mTabHost.setCurrentTab(1);
+//        mTabHost.setCurrentTab(1);
     }
 
     /**

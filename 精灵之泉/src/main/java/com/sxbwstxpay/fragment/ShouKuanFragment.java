@@ -64,6 +64,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
     private int type = 1;
     private View viewShouKuan;
     private ImageView imageBuShouKuan;
+    private View viewJianPan;
 
     public ShouKuanFragment() {
         // Required empty public constructor
@@ -106,6 +107,7 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
         viewTabBg = mInflate.findViewById(R.id.viewTabBg);
         viewShouKuan = mInflate.findViewById(R.id.viewShouKuan);
         imageBuShouKuan = (ImageView) mInflate.findViewById(R.id.imageBuShouKuan);
+        viewJianPan = mInflate.findViewById(R.id.viewJianPan);
     }
 
     @Override
@@ -114,6 +116,9 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(getActivity()));
         mRelaTitleStatue.setLayoutParams(layoutParams);
         mRelaTitleStatue.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
+        ViewGroup.LayoutParams layoutParams1 = viewJianPan.getLayoutParams();
+        layoutParams1.height = (int) (ScreenUtils.getScreenWidth(getActivity()) * 0.655f);
+        viewJianPan.setLayoutParams(layoutParams1);
         SpannableString span = new SpannableString("¥");
         span.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textAmount.setText(span);
@@ -213,20 +218,20 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 if (amount.contains(".")) {
                     if (amount.length() >= 4) {
                         String amountSub;
-                        LogUtil.LogShitou("ShouKuanFragment--onClick1", ""+amount.substring(amount.length()-1));
-                        LogUtil.LogShitou("ShouKuanFragment--onClick2", ""+amount.substring(amount.length()-2));
-                        if (TextUtils.equals(amount.substring(amount.length()-2),"00")){
-                            amountSub = amount.substring(amount.length() - 6,amount.length() - 1);
-                        }else if (TextUtils.equals(amount.substring(amount.length()-1),"0")){
-                            amountSub = amount.substring(amount.length() - 5,amount.length() - 2);
-                        }else {
+                        LogUtil.LogShitou("ShouKuanFragment--onClick1", "" + amount.substring(amount.length() - 1));
+                        LogUtil.LogShitou("ShouKuanFragment--onClick2", "" + amount.substring(amount.length() - 2));
+                        if (TextUtils.equals(amount.substring(amount.length() - 2), "00")) {
+                            amountSub = amount.substring(amount.length() - 6, amount.length() - 1);
+                        } else if (TextUtils.equals(amount.substring(amount.length() - 1), "0")) {
+                            amountSub = amount.substring(amount.length() - 5, amount.length() - 2);
+                        } else {
                             amountSub = amount.substring(amount.length() - 4);
                         }
                         LogUtil.LogShitou("ShouKuanFragment--amountsubstring", "" + amountSub);
                         String[] split = amountSub.split("");
                         List<String> list = new ArrayList<>();
                         for (int i = 0; i < split.length; i++) {
-                            if (!TextUtils.equals(".",split[i])){
+                            if (!TextUtils.equals(".", split[i])) {
                                 list.add(split[i]);
                             }
                         }
@@ -319,8 +324,8 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                     private OkObject getOkObjectZFB() {
                         String url = Constant.HOST + Constant.Url.ORDER_ALIPAY;
                         HashMap<String, String> params = new HashMap<>();
-                        params.put("uid",userInfo.getUid());
-                        params.put("tokenTime",tokenTime);
+                        params.put("uid", userInfo.getUid());
+                        params.put("tokenTime", tokenTime);
                         return new OkObject(params, url);
                     }
 
@@ -330,25 +335,25 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                             @Override
                             public void onSuccess(String s) {
                                 cancelLoadingDialog();
-                                LogUtil.LogShitou("ShouKuanFragment--支付宝代收", s+"");
+                                LogUtil.LogShitou("ShouKuanFragment--支付宝代收", s + "");
                                 try {
                                     OrderWxPay orderWxPay = GsonUtils.parseJSON(s, OrderWxPay.class);
-                                    if (orderWxPay.getStatus()==1){
+                                    if (orderWxPay.getStatus() == 1) {
                                         Intent intent = new Intent();
                                         intent.setClass(getContext(), WeiXinMPMaActivity.class);
-                                        intent.putExtra(Constant.INTENT_KEY.TITLE,"支付宝代收");
+                                        intent.putExtra(Constant.INTENT_KEY.TITLE, "支付宝代收");
                                         intent.putExtra(Constant.INTENT_KEY.img, orderWxPay.getImg());
                                         startActivity(intent);
-                                    }else if (orderWxPay.getStatus()==3){
+                                    } else if (orderWxPay.getStatus() == 3) {
                                         MyDialog.showReLoginDialog(getActivity());
-                                    }else {
+                                    } else {
                                         Toast.makeText(getActivity(), orderWxPay.getInfo(), Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (Exception e) {
-                                    Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        
+
                             @Override
                             public void onError(Response response) {
                                 cancelLoadingDialog();
@@ -365,9 +370,9 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                     private OkObject getOkObjectWX() {
                         String url = Constant.HOST + Constant.Url.ORDER_WXPAY;
                         HashMap<String, String> params = new HashMap<>();
-                        params.put("uid",userInfo.getUid());
-                        params.put("tokenTime",tokenTime);
-                        params.put("orderAmount",amount);
+                        params.put("uid", userInfo.getUid());
+                        params.put("tokenTime", tokenTime);
+                        params.put("orderAmount", amount);
                         return new OkObject(params, url);
                     }
 
@@ -377,22 +382,22 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                             @Override
                             public void onSuccess(String s) {
                                 cancelLoadingDialog();
-                                LogUtil.LogShitou("ShouKuanFragment--微信代收", s+"");
+                                LogUtil.LogShitou("ShouKuanFragment--微信代收", s + "");
                                 try {
                                     OrderWxPay orderWxPay = GsonUtils.parseJSON(s, OrderWxPay.class);
-                                    if (orderWxPay.getStatus()==1){
+                                    if (orderWxPay.getStatus() == 1) {
                                         Intent intent = new Intent();
                                         intent.setClass(getContext(), WeiXinMPMaActivity.class);
-                                        intent.putExtra(Constant.INTENT_KEY.TITLE,"微信代收");
+                                        intent.putExtra(Constant.INTENT_KEY.TITLE, "微信代收");
                                         intent.putExtra(Constant.INTENT_KEY.img, orderWxPay.getImg());
                                         startActivity(intent);
-                                    }else if (orderWxPay.getStatus()==3){
+                                    } else if (orderWxPay.getStatus() == 3) {
                                         MyDialog.showReLoginDialog(getActivity());
-                                    }else {
+                                    } else {
                                         Toast.makeText(getActivity(), orderWxPay.getInfo(), Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (Exception e) {
-                                    Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
