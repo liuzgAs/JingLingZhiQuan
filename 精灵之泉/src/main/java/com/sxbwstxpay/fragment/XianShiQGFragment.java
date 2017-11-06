@@ -119,6 +119,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         }
     };
     private TextView textNum;
+    private TabLayout tablayoutHeader;
 
     public void hideView() {
         Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
@@ -173,6 +174,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         recyclerView = (EasyRecyclerView) mInflate.findViewById(R.id.recyclerView);
         viewShangJiaTip = mInflate.findViewById(R.id.viewShangJiaTip);
         textNum = (TextView) mInflate.findViewById(R.id.textNum);
+        tablayoutHeader = (TabLayout) mInflate.findViewById(R.id.tablayoutHeader);
     }
 
     @Override
@@ -401,6 +403,9 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 int distance = RecycleViewDistancaUtil.getDistance(recyclerView, 0);
                 LogUtil.LogShitou("XianShiQGFragment--distance", "" + distance);
                 onScrollListener.scroll(distance);
+                int[] outLocation = new int[2];
+                tablayoutHeader.getLocationOnScreen(outLocation);
+                LogUtil.LogShitou("XianShiQGFragment--outLocation", ""+outLocation[1]);
             }
         });
     }
