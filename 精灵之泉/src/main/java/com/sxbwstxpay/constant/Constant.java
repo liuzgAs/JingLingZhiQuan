@@ -290,4 +290,8 @@ public class Constant {
         public static final String VIP = "VIP";
     }
 
+    public static class VALUE{
+        public static final float IndexBannerHeight = 452f;
+    }
+
 }

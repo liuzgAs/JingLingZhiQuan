@@ -35,6 +35,7 @@ import com.sxbwstxpay.model.IndexCitylist;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -85,6 +86,10 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     private List<IndexCate.SortBean> indexCateSort;
     private List<IndexCate.SortBean> indexCateSort1;
     private ListView listViewShaiXuan01;
+    private View viewTabLayout;
+    private XianShiQGFragment xianShiQGFragment;
+    private int indexBannerHeight;
+    private int indexBannerTabHeight;
 
     public ShengQianCZFragment() {
         // Required empty public constructor
@@ -138,10 +143,14 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         viewShaiXuan = mInflate.findViewById(R.id.viewShaiXuan);
         listViewShaiXuan = (ListView) mInflate.findViewById(R.id.listViewShaiXuan);
         listViewShaiXuan01 = (ListView) mInflate.findViewById(R.id.listViewShaiXuan01);
+        viewTabLayout = mInflate.findViewById(R.id.viewTabLayout);
     }
 
     @Override
     protected void initViews() {
+        int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+        indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(5, getActivity());
+        indexBannerTabHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(45, getActivity());
         ViewGroup.LayoutParams layoutParams = mRelaTitleStatue.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(getActivity()));
         mRelaTitleStatue.setLayoutParams(layoutParams);
@@ -149,6 +158,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         textCity.setText(mCity);
         imageShaiXuan.setVisibility(View.GONE);
         viewShaiXuan.setVisibility(View.GONE);
+        xianShiQGFragment = new XianShiQGFragment();
     }
 
     @Override
@@ -230,6 +240,21 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             public void onClick(View v) {
                 isShaiXuan = false;
                 viewShaiXuan.setVisibility(View.GONE);
+            }
+        });
+        xianShiQGFragment.setOnScrollListener(new XianShiQGFragment.OnScrollListener() {
+            @Override
+            public void scroll(int distance) {
+                LogUtil.LogShitou("ShengQianCZFragment--distance", "" + distance);
+                if (distance >= indexBannerHeight && distance <= indexBannerTabHeight) {
+                    int tabTranYDistance = indexBannerTabHeight - distance;
+                    viewTabLayout.setTranslationY(tabTranYDistance - DpUtils.convertDpToPixel(40f, getContext()));
+                    LogUtil.LogShitou("ShengQianCZFragment--tabTranYDistance", "" + tabTranYDistance);
+                } else if (distance >= 0 && distance < indexBannerHeight) {
+                    viewTabLayout.setTranslationY(0);
+                } else {
+                    viewTabLayout.setTranslationY(DpUtils.convertDpToPixel(-40f, getContext()));
+                }
             }
         });
     }
@@ -326,7 +351,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         public Fragment getItem(int position) {
             switch (indexCateCate.get(position).getJump()) {
                 case "time":
-                    return new XianShiQGFragment();
+                    return xianShiQGFragment;
                 case "product":
                     return new BenDiYDFragment(0);
                 case "store":
@@ -388,9 +413,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
 
     class MyAdapter extends BaseAdapter {
         List<IndexCate.SortBean> indexCateSortX;
-        public MyAdapter(List<IndexCate.SortBean> indexCateSort){
-            this.indexCateSortX=indexCateSort;
+
+        public MyAdapter(List<IndexCate.SortBean> indexCateSort) {
+            this.indexCateSortX = indexCateSort;
         }
+
         class ViewHolder {
             public TextView textName;
         }

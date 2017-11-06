@@ -11,18 +11,17 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -40,6 +39,7 @@ import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.RecycleViewDistancaUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.LocalImageHolderView;
 import com.sxbwstxpay.viewholder.XianShiQGViewHolder;
@@ -185,6 +185,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
+        recyclerView.getSwipeToRefresh().setProgressViewOffset(true, 30, 220);
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
@@ -194,7 +195,6 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
-            private ImageView imageMiddle;
             private TabLayout tablayoutHeader;
             private ConvenientBanner banner;
             private boolean isSelect = false;
@@ -206,7 +206,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
                 int screenWidth = ScreenUtils.getScreenWidth(getActivity());
                 layoutParams.width = screenWidth;
-                layoutParams.height = (int) ((float) screenWidth * 452f / 1080f);
+                layoutParams.height = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f);
                 banner.setLayoutParams(layoutParams);
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
@@ -286,8 +286,6 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
                     }
                 });
-                imageMiddle = (ImageView) header_xian_shi_qg.findViewById(R.id.imageMiddle);
-                imageMiddle.setVisibility(View.GONE);
                 return header_xian_shi_qg;
             }
 
@@ -323,11 +321,6 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         isSelect = true;
                     }
                 }
-                Glide.with(getActivity())
-                        .load(indexGoodsImg)
-                        .asBitmap()
-                        .placeholder(R.mipmap.ic_empty)
-                        .into(imageMiddle);
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -399,6 +392,15 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 intent.setClass(getActivity(), ChanPinXQActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
+            }
+        });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int distance = RecycleViewDistancaUtil.getDistance(recyclerView, 0);
+                LogUtil.LogShitou("XianShiQGFragment--distance", "" + distance);
+                onScrollListener.scroll(distance);
             }
         });
     }
@@ -523,5 +525,15 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 hideView();
                 break;
         }
+    }
+
+    public OnScrollListener onScrollListener;
+
+    public void setOnScrollListener (OnScrollListener onScrollListener){
+        this.onScrollListener = onScrollListener;
+    }
+
+    interface OnScrollListener {
+        void scroll(int distance);
     }
 }
