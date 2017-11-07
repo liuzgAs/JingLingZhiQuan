@@ -206,6 +206,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/normalItemHeight"
                 android:layout_gravity="center_horizontal"
@@ -237,6 +238,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/normalItemHeight"
                 android:layout_gravity="center_horizontal"
@@ -312,6 +314,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/normalItemHeight"
                 android:layout_gravity="center_horizontal"
