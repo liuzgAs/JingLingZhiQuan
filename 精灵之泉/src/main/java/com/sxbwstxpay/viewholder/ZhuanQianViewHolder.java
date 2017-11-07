@@ -41,7 +41,7 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
                     intent.setAction(Constant.BROADCASTCODE.FenXiangZCLJ);
                     getContext().sendBroadcast(intent);
                 }else {
-                    MyDialog.showTipDialog(getContext(),"请先成为VIP推广商");
+                    MyDialog.showTipDialog(getContext(),data.getTipsText());
                 }
             }
         });
@@ -53,7 +53,7 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
                     intent.setClass(getContext(), TuiGuangEWMActivity.class);
                     getContext().startActivity(intent);
                 }else {
-                    MyDialog.showTipDialog(getContext(),"请先成为VIP推广商");
+                    MyDialog.showTipDialog(getContext(),data.getTipsText());
                 }
             }
         });
@@ -73,7 +73,7 @@ public class ZhuanQianViewHolder extends BaseViewHolder<IndexMakemoney> {
                     intent.setClass(getContext(), TuWenTGActivity.class);
                     getContext().startActivity(intent);
                 }else {
-                    MyDialog.showTipDialog(getContext(),"请先成为VIP推广商");
+                    MyDialog.showTipDialog(getContext(),data.getTipsText());
                 }
             }
         });

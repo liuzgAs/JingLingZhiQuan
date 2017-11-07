@@ -20,7 +20,16 @@ public class IndexMakemoney {
     private String url;
     private int status;
     private String info;
+    private String tipsText;
     private List<ListBean> list;
+
+    public String getTipsText() {
+        return tipsText;
+    }
+
+    public void setTipsText(String tipsText) {
+        this.tipsText = tipsText;
+    }
 
     public String getImg() {
         return img;

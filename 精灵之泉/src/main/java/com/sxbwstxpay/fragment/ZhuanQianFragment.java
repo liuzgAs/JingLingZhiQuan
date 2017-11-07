@@ -76,6 +76,9 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 case Constant.BROADCASTCODE.VIP:
                     onRefresh();
                     break;
+                case Constant.BROADCASTCODE.ShiMingTS:
+                    onRefresh();
+                    break;
                 case Constant.BROADCASTCODE.FenXiangXiaZaiLJ:
                     MyDialog.share01(context, api, mTencent, "MainActivity", shareIndex.getDownUrl(), shareIndex.getDownTitle(), shareIndex.getDownDes(), shareIndex.getDownIco());
                     break;
@@ -184,10 +187,10 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private OkObject getOkObject1() {
         String url = Constant.HOST + Constant.Url.SHARE_INDEX;
         HashMap<String, String> params = new HashMap<>();
-        if (!TextUtils.isEmpty(userInfo.getUid())){
+        if (!TextUtils.isEmpty(userInfo.getUid())) {
             params.put("uid", userInfo.getUid());
         }
-        if (!TextUtils.isEmpty(tokenTime)){
+        if (!TextUtils.isEmpty(tokenTime)) {
             params.put("tokenTime", tokenTime);
         }
         return new OkObject(params, url);
@@ -296,6 +299,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         filter.addAction(Constant.BROADCASTCODE.FenXiangZCLJ);
         filter.addAction(Constant.BROADCASTCODE.FenXiangXiaZaiLJ);
         filter.addAction(Constant.BROADCASTCODE.VIP);
+        filter.addAction(Constant.BROADCASTCODE.ShiMingTS);
         getActivity().registerReceiver(reciver, filter);
     }
 

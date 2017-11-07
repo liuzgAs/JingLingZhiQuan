@@ -176,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
                     mTabHost.setCurrentTab(2);
                     break;
                 case "app_user":
+                    intent.setAction(Constant.BROADCASTCODE.ShiMingTS);
+                    sendBroadcast(intent);
                     mTabHost.setCurrentTab(4);
                     break;
                 case "app_account":
