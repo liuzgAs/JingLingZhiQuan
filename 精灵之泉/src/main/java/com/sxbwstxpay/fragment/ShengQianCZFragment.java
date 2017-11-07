@@ -245,11 +245,9 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         xianShiQGFragment.setOnScrollListener(new XianShiQGFragment.OnScrollListener() {
             @Override
             public void scroll(int distance) {
-                LogUtil.LogShitou("ShengQianCZFragment--distance", "" + distance);
                 if (distance >= indexBannerHeight && distance <= indexBannerTabHeight) {
                     int tabTranYDistance = indexBannerTabHeight - distance;
                     viewTabLayout.setTranslationY(tabTranYDistance - DpUtils.convertDpToPixel(40f, getContext()));
-                    LogUtil.LogShitou("ShengQianCZFragment--tabTranYDistance", "" + tabTranYDistance);
                 } else if (distance >= 0 && distance < indexBannerHeight) {
                     viewTabLayout.setTranslationY(0);
                 } else {

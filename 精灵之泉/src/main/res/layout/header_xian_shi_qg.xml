@@ -19,7 +19,7 @@
         app:tabMode="scrollable"
         android:id="@+id/tablayoutHeader"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/tabHeight"
         android:background="@color/white"
         app:tabIndicatorColor="@color/basic_color"
         app:tabIndicatorHeight="0dp"

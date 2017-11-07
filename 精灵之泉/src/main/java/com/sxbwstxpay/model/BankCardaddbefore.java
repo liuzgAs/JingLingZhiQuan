@@ -14,8 +14,17 @@ public class BankCardaddbefore {
      */
 
     private String info;
+    private String name;
     private int status;
     private List<DataBean> data;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getInfo() {
         return info;

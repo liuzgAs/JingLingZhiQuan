@@ -103,6 +103,8 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.BANK_CARDADDBEFORE;
         HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
         params.put("type", type + "");//储蓄卡1  信用卡2
         return new OkObject(params, url);
     }
@@ -119,6 +121,10 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                     BankCardaddbefore bankCardaddbefore = GsonUtils.parseJSON(s, BankCardaddbefore.class);
                     if (bankCardaddbefore.getStatus() == 1) {
                         bankCardaddbeforeData = bankCardaddbefore.getData();
+                        if (!TextUtils.isEmpty(bankCardaddbefore.getName())){
+                            editName.setText(bankCardaddbefore.getName());
+                            editName.setEnabled(false);
+                        }
                     } else if (bankCardaddbefore.getStatus() == 3) {
                         MyDialog.showReLoginDialog(XinZengYHKActivity.this);
                     } else {
