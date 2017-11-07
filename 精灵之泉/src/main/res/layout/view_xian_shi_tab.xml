@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tabCarview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayoutHeaderX"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabHeight"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/basic_color"
+        app:tabIndicatorHeight="0dp"
+        app:tabMaxWidth="80dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/basic_color"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabTextColor="@color/light_black" />
+</RelativeLayout>

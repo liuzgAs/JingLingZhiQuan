@@ -124,6 +124,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private int indexBannerHeight;
     private float tabHeight;
     private TabLayout tablayoutHeader;
+    private View tabCarview;
 
     public void hideView() {
         Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
@@ -179,11 +180,13 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         viewShangJiaTip = mInflate.findViewById(R.id.viewShangJiaTip);
         textNum = (TextView) mInflate.findViewById(R.id.textNum);
         tablayoutHeaderX = (TabLayout) mInflate.findViewById(R.id.tablayoutHeaderX);
+        tabCarview =  mInflate.findViewById(R.id.tabCarview);
     }
 
     @Override
     protected void initViews() {
         tablayoutHeaderX.setVisibility(View.GONE);
+        tabCarview.setVisibility(View.GONE);
         viewShangJiaTip.setVisibility(View.GONE);
         int screenWidth = ScreenUtils.getScreenWidth(getActivity());
         indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(45, getActivity());
@@ -335,8 +338,10 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 onScrollListener.scroll(distance);
                 if (distance >= indexBannerHeight || distance == -1) {
                     tablayoutHeaderX.setVisibility(View.VISIBLE);
+                    tabCarview.setVisibility(View.VISIBLE);
                 } else {
                     tablayoutHeaderX.setVisibility(View.GONE);
+                    tabCarview.setVisibility(View.GONE);
                 }
             }
         });

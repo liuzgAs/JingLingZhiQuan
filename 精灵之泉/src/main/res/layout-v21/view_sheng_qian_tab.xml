@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/viewTabLayout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/normalItemHeight"
+    android:gravity="bottom"
+    app:cardCornerRadius="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:layout_toLeftOf="@+id/imageShaiXuan"
+            android:layout_toStartOf="@+id/imageShaiXuan"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/basic_color"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/basic_color"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextColor="@color/light_black" />
+
+        <ImageView
+            android:id="@+id/imageShaiXuan"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:src="@mipmap/shaixuan" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

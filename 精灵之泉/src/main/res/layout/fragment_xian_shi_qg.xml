@@ -13,18 +13,8 @@
         android:layout_alignParentTop="true"
         app:layout_progress="@layout/view_progress"
         app:scrollbarStyle="insideOverlay" />
-    <android.support.design.widget.TabLayout
-        app:tabMaxWidth="80dp"
-        app:tabMode="scrollable"
-        android:id="@+id/tablayoutHeaderX"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tabHeight"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/basic_color"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/basic_color"
-        app:tabTextAppearance="@style/TabLayoutTextStyle"
-        app:tabTextColor="@color/light_black" />
+
+    <include layout="@layout/view_xian_shi_tab" />
 
     <RelativeLayout
         android:id="@+id/viewShangJiaTip"
