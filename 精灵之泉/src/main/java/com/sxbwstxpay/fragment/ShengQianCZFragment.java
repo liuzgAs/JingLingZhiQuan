@@ -90,6 +90,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     private XianShiQGFragment xianShiQGFragment;
     private int indexBannerHeight;
     private int indexBannerTabHeight;
+    private float tabTranYDistance;
 
     public ShengQianCZFragment() {
         // Required empty public constructor
@@ -177,19 +178,23 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 positionX = position;
                 switch (indexCateCate.get(position).getJump()) {
                     case "time":
+                        viewTabLayout.setTranslationY(tabTranYDistance);
                         imageShaiXuan.setVisibility(View.GONE);
                         break;
                     case "product":
+                        viewTabLayout.setTranslationY(0);
                         imageShaiXuan.setVisibility(View.VISIBLE);
                         listViewShaiXuan.setVisibility(View.GONE);
                         listViewShaiXuan01.setVisibility(View.VISIBLE);
                         break;
                     case "store":
+                        viewTabLayout.setTranslationY(0);
                         imageShaiXuan.setVisibility(View.VISIBLE);
                         listViewShaiXuan.setVisibility(View.GONE);
                         listViewShaiXuan01.setVisibility(View.VISIBLE);
                         break;
                     default:
+                        viewTabLayout.setTranslationY(0);
                         imageShaiXuan.setVisibility(View.VISIBLE);
                         listViewShaiXuan.setVisibility(View.VISIBLE);
                         listViewShaiXuan01.setVisibility(View.GONE);
@@ -246,13 +251,13 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             @Override
             public void scroll(int distance) {
                 if (distance >= indexBannerHeight && distance <= indexBannerTabHeight) {
-                    int tabTranYDistance = indexBannerTabHeight - distance;
-                    viewTabLayout.setTranslationY(tabTranYDistance - DpUtils.convertDpToPixel(40f, getContext()));
+                    tabTranYDistance = indexBannerTabHeight - distance-DpUtils.convertDpToPixel(40f, getContext());
                 } else if (distance >= 0 && distance < indexBannerHeight) {
-                    viewTabLayout.setTranslationY(0);
+                    tabTranYDistance=0;
                 } else {
-                    viewTabLayout.setTranslationY(DpUtils.convertDpToPixel(-40f, getContext()));
+                    tabTranYDistance=DpUtils.convertDpToPixel(-40f, getContext());
                 }
+                viewTabLayout.setTranslationY(tabTranYDistance);
             }
         });
     }
