@@ -249,7 +249,7 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
                                                                     Toast.makeText(FaBuSCActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                                                                 }
                                                             } catch (Exception e) {
-                                                                Toast.makeText(FaBuSCActivity.this, "数据出错222", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(FaBuSCActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                                                             }
                                                         }
 
