@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Process;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +23,7 @@ import android.support.v4.content.FileProvider;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -58,10 +60,11 @@ public class UpgradeUtils extends Activity {
     private static RemoteViews mNotifiviews;
     private static Upgrade upgrade;
     private static int contentLength;
+    private static ProgressDialog progressDialog;
 
     private static OkObject getOkObject(String url) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("type","android");
+        params.put("type", "android");
         return new OkObject(params, url);
     }
 
@@ -121,22 +124,22 @@ public class UpgradeUtils extends Activity {
             alertDialog.show();
 
 
-//            if (){
-//                alertDialog.setCancelable(false);
-//                alertDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-//                    @Override
-//                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-//                        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-//                            dialog.dismiss();
-//                            MyApplication.getInstance().exit();
-//                            // 杀掉进程
-//                            Process.killProcess(Process.myPid());
-//                            System.exit(0);
-//                        }
-//                        return false;
-//                    }
-//                });
-//            }
+            if (upgrade.getUpStatus() == 1) {
+                alertDialog.setCancelable(false);
+                alertDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                    @Override
+                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+                            dialog.dismiss();
+                            MyApplication.getInstance().exit();
+                            // 杀掉进程
+                            Process.killProcess(Process.myPid());
+                            System.exit(0);
+                        }
+                        return false;
+                    }
+                });
+            }
 
 
             Button buttonShengJi = (Button) dialog_shengji.findViewById(R.id.buttonShengJi);
@@ -152,16 +155,30 @@ public class UpgradeUtils extends Activity {
                     } else {
                         upgrade(upgrade);
                         alertDialog.dismiss();
+                        if (upgrade.getUpStatus() == 1) {
+                            progressDialog = new ProgressDialog(mContext);
+                            progressDialog.setMessage("正在下载……");
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                            progressDialog.setProgress(0);
+                            progressDialog.setMax(100);
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+                        }
                     }
                 }
             });
             dialog_shengji.findViewById(R.id.imageViewCancle).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    if (){
-//
-//                    }
-                    alertDialog.dismiss();
+                    if (upgrade.getUpStatus() == 1) {
+                        alertDialog.dismiss();
+                        MyApplication.getInstance().exit();
+                        // 杀掉进程
+                        Process.killProcess(Process.myPid());
+                        System.exit(0);
+                    } else {
+                        alertDialog.dismiss();
+                    }
                 }
             });
             Window dialogWindow = alertDialog.getWindow();
@@ -169,7 +186,7 @@ public class UpgradeUtils extends Activity {
             DisplayMetrics d = mContext.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
             lp.width = (int) (d.widthPixels * 0.8); // 高度设置为屏幕的0.6
             dialogWindow.setAttributes(lp);
-        }else {
+        } else {
             Toast.makeText(mContext, "已是最新版本", Toast.LENGTH_SHORT).show();
         }
     }
@@ -254,7 +271,7 @@ public class UpgradeUtils extends Activity {
                 int loadedLen = 0;// 当前已下载文件大小
                 // 更新13次
 //				int updateSize = upgrade.filelen / 13;
-                int updateSize = contentLength / 10;
+                int updateSize = contentLength / 100;
                 int num = 0;
                 while (-1 != (len = is.read(buffer))) {
                     loadedLen += len;
@@ -333,6 +350,7 @@ public class UpgradeUtils extends Activity {
     private static void updateNotify(int loadedLen) {
 //		int progress = loadedLen * 100 / upgrade.filelen;
         int progress = (int) (((double) loadedLen / (double) contentLength) * 100);
+        progressDialog.setProgress(progress);
         mNotifiviews.setTextViewText(R.id.tv_subtitle, progress + "%");
 //		mNotifiviews.setProgressBar(R.id.progressBar1, upgrade.filelen,loadedLen, false);
         mNotifiviews.setProgressBar(R.id.progressBar1, contentLength, loadedLen, false);
@@ -341,15 +359,19 @@ public class UpgradeUtils extends Activity {
     }
 
     private static void finishNotify() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(APK_UPGRADE)),
-                "application/vnd.android.package-archive");
-        PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
-        mNotifi.contentIntent = contentIntent;
-        mNotifiviews.setTextViewText(R.id.tv_title, "下载完成，请点击完成升级");
+        try {
+            progressDialog.dismiss();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(new File(APK_UPGRADE)),
+                    "application/vnd.android.package-archive");
+            PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+            mNotifi.contentIntent = contentIntent;
+            mNotifiviews.setTextViewText(R.id.tv_title, "下载完成，请点击完成升级");
 //		mNotifiviews.setViewVisibility(R.id.tv_subtitle, View.INVISIBLE);
 //		mNotifiviews.setViewVisibility(R.id.progressBar1, View.INVISIBLE);
-        mNotifiMgr.notify(12345, mNotifi);
+            mNotifiMgr.notify(12345, mNotifi);
+        } catch (Exception e) {
+        }
     }
 
     /***

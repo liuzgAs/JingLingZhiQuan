@@ -7,7 +7,16 @@ public class Upgrade {
 	String title;
 	String intro;
 	String fileSize;
+	int upStatus;
 	int filelen;
+
+	public int getUpStatus() {
+		return upStatus;
+	}
+
+	public void setUpStatus(int upStatus) {
+		this.upStatus = upStatus;
+	}
 
 	public String getTitle() {
 		return title;
