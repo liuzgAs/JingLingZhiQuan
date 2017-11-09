@@ -441,6 +441,25 @@
             android:hardwareAccelerated="true"
             android:launchMode="singleTop" />
         <activity android:name=".activity.ShangPinScActivity"></activity>
+
+        <activity android:name=".activity.imagepicker.ImageBaseActivity" />
+        <activity
+            android:name=".activity.imagepicker.ImageGridActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/ImagePickerTheme" />
+        <activity
+            android:name=".activity.imagepicker.ImageCropActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="false"
+            android:theme="@style/ImagePickerTheme" />
+        <activity
+            android:name=".activity.imagepicker.ImagePreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/ImagePickerThemeFullScreen" />
+        <activity
+            android:name=".activity.imagepicker.ImagePreviewDelActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/ImagePickerThemeFullScreen" />
     </application>
 
 </manifest>

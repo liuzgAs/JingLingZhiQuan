@@ -1,4 +1,4 @@
-package com.lzy.imagepicker.ui;
+package com.sxbwstxpay.activity.imagepicker;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -23,13 +23,12 @@ import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImageFolderAdapter;
-import com.lzy.imagepicker.adapter.ImageRecyclerAdapter;
-import com.lzy.imagepicker.adapter.ImageRecyclerAdapter.OnImageItemClickListener;
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.FolderPopUpWindow;
 import com.lzy.imagepicker.view.GridSpacingItemDecoration;
+import com.sxbwstxpay.adapter.ImageRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,7 @@ import java.util.List;
  *         新增可直接传递是否裁剪参数，以及直接拍照
  *         ================================================
  */
-public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, OnImageItemClickListener, ImagePicker.OnImageSelectedListener, View.OnClickListener {
+public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, ImagePicker.OnImageSelectedListener, View.OnClickListener, ImageRecyclerAdapter.OnImageItemClickListener {
 
     public static final int REQUEST_PERMISSION_STORAGE = 0x01;
     public static final int REQUEST_PERMISSION_CAMERA = 0x02;
@@ -86,7 +85,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_grid);
-
+        init(ImageGridActivity.class);
         imagePicker = ImagePicker.getInstance();
         imagePicker.clear();
         imagePicker.addOnImageSelectedListener(this);
@@ -164,6 +163,36 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     protected void onDestroy() {
         imagePicker.removeOnImageSelectedListener(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected void initSP() {
+
+    }
+
+    @Override
+    protected void initIntent() {
+
+    }
+
+    @Override
+    protected void findID() {
+
+    }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    protected void setListeners() {
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override

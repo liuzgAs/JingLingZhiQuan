@@ -1,4 +1,4 @@
-package com.lzy.imagepicker.ui;
+package com.sxbwstxpay.activity.imagepicker;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.lzy.imagepicker.util.BitmapUtil;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.util.BitmapUtil;
 import com.lzy.imagepicker.view.CropImageView;
 
 import java.io.File;
@@ -41,7 +41,7 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_crop);
-
+        init(ImageCropActivity.class);
         imagePicker = ImagePicker.getInstance();
 
         TextView textTip = (TextView) findViewById(R.id.textTip);
@@ -137,5 +137,35 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
             mBitmap.recycle();
             mBitmap = null;
         }
+    }
+
+    @Override
+    protected void initSP() {
+
+    }
+
+    @Override
+    protected void initIntent() {
+
+    }
+
+    @Override
+    protected void findID() {
+
+    }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    protected void setListeners() {
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 }

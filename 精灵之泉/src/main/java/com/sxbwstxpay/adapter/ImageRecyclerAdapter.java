@@ -1,4 +1,4 @@
-package com.lzy.imagepicker.adapter;
+package com.sxbwstxpay.adapter;
 
 import android.Manifest;
 import android.app.Activity;
@@ -15,10 +15,10 @@ import android.widget.Toast;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.ui.ImageBaseActivity;
-import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.SuperCheckBox;
+import com.sxbwstxpay.activity.imagepicker.ImageBaseActivity;
+import com.sxbwstxpay.activity.imagepicker.ImageGridActivity;
 
 import java.util.ArrayList;
 

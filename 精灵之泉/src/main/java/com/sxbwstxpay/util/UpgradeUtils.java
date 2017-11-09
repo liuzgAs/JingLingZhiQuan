@@ -78,7 +78,7 @@ public class UpgradeUtils extends Activity {
             public void onSuccess(String s) {
                 Log.e("UpgradeUtils", "UpgradeUtils--onSuccess--升级返回" + s);
                 try {
-                    checkUpgrade(s);
+                    checkUpDialog(s);
                 } catch (Exception e) {
 
                 }
@@ -97,7 +97,6 @@ public class UpgradeUtils extends Activity {
             @Override
             public void onSuccess(String s) {
                 checkUpgradeIsAble(s);
-
             }
 
             @Override
@@ -107,32 +106,10 @@ public class UpgradeUtils extends Activity {
         });
     }
 
-    private static void checkUpgrade(String json) {
+    private static void checkUpDialog(String json) {
         upgrade = GsonUtils.parseJSON(json, Upgrade.class);
         int currVersion = VersionUtils.getCurrVersion(mContext);
         if (upgrade.version > currVersion) {
-//            new AlertDialog.Builder(mContext)
-//                    .setTitle("升级")
-//                    .setMessage(upgrade.feature)
-//                    .setPositiveButton("升级",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog,
-//                                                    int which) {
-//                                    if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                                            != PackageManager.PERMISSION_GRANTED) {
-//                                        //申请WRITE_EXTERNAL_STORAGE权限
-//                                        ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                                                0);
-//                                    } else {
-//                                        upgrade(upgrade);
-//                                    }
-//                                }
-//                            })
-//                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                        }
-//                    }).show();
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View dialog_shengji = inflater.inflate(R.layout.dialog_shengji, null);
             TextView tvShengJi = (TextView) dialog_shengji.findViewById(R.id.tvShengJi);
@@ -142,6 +119,26 @@ public class UpgradeUtils extends Activity {
                     .setView(dialog_shengji)
                     .create();
             alertDialog.show();
+
+
+//            if (){
+//                alertDialog.setCancelable(false);
+//                alertDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+//                    @Override
+//                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+//                        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+//                            dialog.dismiss();
+//                            MyApplication.getInstance().exit();
+//                            // 杀掉进程
+//                            Process.killProcess(Process.myPid());
+//                            System.exit(0);
+//                        }
+//                        return false;
+//                    }
+//                });
+//            }
+
+
             Button buttonShengJi = (Button) dialog_shengji.findViewById(R.id.buttonShengJi);
             buttonShengJi.setText("立即升级（" + upgrade.getFileSize() + "）");
             buttonShengJi.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +158,9 @@ public class UpgradeUtils extends Activity {
             dialog_shengji.findViewById(R.id.imageViewCancle).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+//                    if (){
+//
+//                    }
                     alertDialog.dismiss();
                 }
             });

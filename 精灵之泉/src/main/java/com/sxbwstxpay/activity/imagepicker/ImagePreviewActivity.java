@@ -1,4 +1,4 @@
-package com.lzy.imagepicker.ui;
+package com.sxbwstxpay.activity.imagepicker;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -42,7 +42,7 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        init(ImagePreviewActivity.class);
         isOrigin = getIntent().getBooleanExtra(ImagePreviewActivity.ISORIGIN, false);
         imagePicker.addOnImageSelectedListener(this);
         mBtnOk = (Button) findViewById(R.id.btn_ok);
@@ -123,7 +123,6 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
     }
 
 
-
     /**
      * 图片添加成功后，修改当前图片的选中数量
      * 当调用 addSelectedImageItem 或 deleteSelectedImageItem 都会触发当前回调
@@ -198,6 +197,36 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
     protected void onDestroy() {
         imagePicker.removeOnImageSelectedListener(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected void initSP() {
+
+    }
+
+    @Override
+    protected void initIntent() {
+
+    }
+
+    @Override
+    protected void findID() {
+
+    }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    protected void setListeners() {
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.lzy.imagepicker.ui;
+package com.sxbwstxpay.activity.imagepicker;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,7 +28,7 @@ public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        init(ImagePreviewActivity.class);
         ImageView mBtnDel = (ImageView) findViewById(R.id.btn_del);
         mBtnDel.setOnClickListener(this);
         mBtnDel.setVisibility(View.VISIBLE);
@@ -55,6 +55,36 @@ public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements
                         topBar.setPadding(0, 0, 0, 0);
                     }
                 });
+    }
+
+    @Override
+    protected void initSP() {
+
+    }
+
+    @Override
+    protected void initIntent() {
+
+    }
+
+    @Override
+    protected void findID() {
+
+    }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    protected void setListeners() {
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override
@@ -104,13 +134,13 @@ public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements
     @Override
     public void onImageSingleTap() {
         if (topBar.getVisibility() == View.VISIBLE) {
-            topBar.setAnimation(AnimationUtils.loadAnimation(this, com.lzy.imagepicker.R.anim.top_out));
+            topBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.top_out));
             topBar.setVisibility(View.GONE);
             tintManager.setStatusBarTintResource(Color.TRANSPARENT);//通知栏所需颜色
             //给最外层布局加上这个属性表示，Activity全屏显示，且状态栏被隐藏覆盖掉。
 //            if (Build.VERSION.SDK_INT >= 16) content.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         } else {
-            topBar.setAnimation(AnimationUtils.loadAnimation(this, com.lzy.imagepicker.R.anim.top_in));
+            topBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.top_in));
             topBar.setVisibility(View.VISIBLE);
             tintManager.setStatusBarTintResource(R.color.ip_color_primary_dark);//通知栏所需颜色
             //Activity全屏显示，但状态栏不会被隐藏覆盖，状态栏依然可见，Activity顶端布局部分会被状态遮住
