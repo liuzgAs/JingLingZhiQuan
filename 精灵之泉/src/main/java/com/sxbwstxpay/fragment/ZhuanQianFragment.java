@@ -76,9 +76,6 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 case Constant.BROADCASTCODE.VIP:
                     onRefresh();
                     break;
-                case Constant.BROADCASTCODE.ShiMingTS:
-                    onRefresh();
-                    break;
                 case Constant.BROADCASTCODE.FenXiangXiaZaiLJ:
                     MyDialog.share01(context, api, mTencent, "MainActivity", shareIndex.getDownUrl(), shareIndex.getDownTitle(), shareIndex.getDownDes(), shareIndex.getDownIco());
                     break;
@@ -86,6 +83,8 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         }
     };
     private boolean isShow;
+    private int grade = 0;
+    private boolean isFrist = true;
 
     public ZhuanQianFragment() {
         // Required empty public constructor
@@ -150,7 +149,6 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     @Override
     protected void initData() {
-        onRefresh();
     }
 
     private void initRecycle() {
@@ -218,6 +216,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 try {
                     IndexMakemoney indexMakemoney = GsonUtils.parseJSON(s, IndexMakemoney.class);
                     if (indexMakemoney.getStatus() == 1) {
+                        grade = indexMakemoney.getGrade();
                         Glide.with(getActivity())
                                 .load(indexMakemoney.getImg())
                                 .asBitmap()
@@ -299,7 +298,6 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         filter.addAction(Constant.BROADCASTCODE.FenXiangZCLJ);
         filter.addAction(Constant.BROADCASTCODE.FenXiangXiaZaiLJ);
         filter.addAction(Constant.BROADCASTCODE.VIP);
-        filter.addAction(Constant.BROADCASTCODE.ShiMingTS);
         getActivity().registerReceiver(reciver, filter);
     }
 
@@ -313,6 +311,10 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     public void onResume() {
         super.onResume();
         isShow = true;
+        if (grade == 0 || isFrist) {
+            isFrist = false;
+            onRefresh();
+        }
     }
 
     @Override
