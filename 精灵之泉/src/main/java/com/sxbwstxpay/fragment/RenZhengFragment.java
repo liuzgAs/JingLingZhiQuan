@@ -203,10 +203,10 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     cancelLoadingDialog();
                     LogUtil.LogShitou("RenZhengFragment--会员身份认证请求", "" + s);
                     try {
-                        UserCardbefore userCardbefore1 = GsonUtils.parseJSON(s, UserCardbefore.class);
-                        if (userCardbefore1.getStatus() == 1) {
+                        userCardbefore = GsonUtils.parseJSON(s, UserCardbefore.class);
+                        if (userCardbefore.getStatus() == 1) {
                             textTip.setText(userCardbefore.getTipsText());
-                            submitStatus = userCardbefore1.getSubmitStatus();
+                            submitStatus = userCardbefore.getSubmitStatus();
                             if (submitStatus == 1) {
                                 editName.setEnabled(true);
                                 editCard.setEnabled(true);
@@ -238,23 +238,23 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 image04.setEnabled(false);
                                 image05.setEnabled(false);
                             }
-                            verify = userCardbefore1.getVerify();
+                            verify = userCardbefore.getVerify();
                             if (verify == 1) {
                                 imageRight.setVisibility(View.GONE);
                                 viewYanZhengMa.setVisibility(View.GONE);
                                 buttonNext.setVisibility(View.GONE);
                             } else {
-                                if (!TextUtils.isEmpty(userCardbefore1.getTipsText())) {
-                                    MyDialog.showTipDialog(getActivity(), userCardbefore1.getTipsText());
+                                if (!TextUtils.isEmpty(userCardbefore.getTipsText())) {
+                                    MyDialog.showTipDialog(getActivity(), userCardbefore.getTipsText());
                                 }
                                 imageRight.setVisibility(View.VISIBLE);
                                 viewYanZhengMa.setVisibility(View.VISIBLE);
                                 buttonNext.setVisibility(View.VISIBLE);
                             }
-                        } else if (userCardbefore1.getStatus() == 3){
+                        } else if (userCardbefore.getStatus() == 3){
                             MyDialog.showReLoginDialog(getActivity());
                         }else {
-                            Toast.makeText(getActivity(), userCardbefore1.getInfo(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), userCardbefore.getInfo(), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
                         Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
