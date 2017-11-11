@@ -45,7 +45,7 @@ public class HeadZoomScrollView extends ScrollView {
     }
 
     //    最大的放大倍数
-    private float mScaleTimes = 1.2f;
+    private float mScaleTimes = 1.4f;
     public void setmScaleTimes(int mScaleTimes) {
         this.mScaleTimes = mScaleTimes;
     }

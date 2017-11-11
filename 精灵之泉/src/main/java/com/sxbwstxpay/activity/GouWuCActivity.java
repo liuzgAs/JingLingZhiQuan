@@ -125,7 +125,8 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
             public void onItemClick(int position) {
             }
         });
-        recyclerView.setRefreshListener(this);
+        TextView textTitle = (TextView) recyclerView.getEmptyView().findViewById(R.id.textTitle);
+        textTitle.setText("购物车空空如也");
     }
 
     @Override

@@ -404,8 +404,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
 
         @Override
         public void onScroll(int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-            float heightYingHua = viewZoom.getMeasuredHeight() - DpUtils.convertDpToPixel(45f, getActivity()) - ScreenUtils.getStatusBarHeight(getActivity());
-            float heightYingHua1 = viewZoom.getMeasuredHeight() - 2 * DpUtils.convertDpToPixel(45f, getActivity()) - ScreenUtils.getStatusBarHeight(getActivity());
+            float heightYingHua = viewZoom.getMeasuredHeight()/2 - DpUtils.convertDpToPixel(45f, getActivity()) - ScreenUtils.getStatusBarHeight(getActivity());
+            float heightYingHua1 = viewZoom.getMeasuredHeight()/2 - 2 * DpUtils.convertDpToPixel(45f, getActivity()) - ScreenUtils.getStatusBarHeight(getActivity());
             if (scrollY >= 0 && scrollY <= heightYingHua) {
                 float baiFenBi = (float) scrollY / heightYingHua;
                 relaTitleStatue.getBackground().mutate().setAlpha((int) (255 * baiFenBi));
