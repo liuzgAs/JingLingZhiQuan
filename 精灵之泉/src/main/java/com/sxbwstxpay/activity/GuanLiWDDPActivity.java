@@ -111,7 +111,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
     protected void findID() {
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
         viewBar = findViewById(R.id.viewBar);
-        textTitle = (TextView) findViewById(R.id.textTitle);
+        textTitle = (TextView) findViewById(R.id.textName);
     }
 
     @Override
@@ -195,6 +195,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                         previewUrl = storeGoods.getPreviewUrl();
                         share = storeGoods.getShare();
                         textTitle.setText(storeNmae);
+                        LogUtil.LogShitou("GuanLiWDDPActivity--onSuccess textTitle", ""+textTitle.getText().toString().trim());
                         List<IndexDataBean> storeGoodsData = storeGoods.getData();
                         adapter.clear();
                         adapter.addAll(storeGoodsData);
@@ -287,11 +288,12 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColor(getResources().getColor(R.color.basic_color));
+        recyclerView.getSwipeToRefresh().setProgressViewOffset(true, 30, 220);
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(GuanLiWDDPActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qg;
-                return new WoDeDPGLViewHolder(parent, layout);
+                return new WoDeDPGLViewHolder(parent, layout,type);
             }
 
         });

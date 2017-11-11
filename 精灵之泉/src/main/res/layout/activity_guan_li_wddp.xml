@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="我的店铺"
-                android:id="@+id/textTitle"
+                android:id="@+id/textName"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageBack"
                 android:layout_toEndOf="@+id/imageBack" />

@@ -40,7 +40,7 @@ public class WoDeDPGLViewHolder extends BaseViewHolder<IndexDataBean> {
     private final Button buttonShangJia;
     private IndexDataBean data;
 
-    public WoDeDPGLViewHolder(ViewGroup parent, @LayoutRes int res) {
+    public WoDeDPGLViewHolder(ViewGroup parent, @LayoutRes int res,int type) {
         super(parent, res);
         imageRecom_img = $(R.id.imageRecom_img);
         textStock_num = $(R.id.textStock_num);
@@ -54,48 +54,53 @@ public class WoDeDPGLViewHolder extends BaseViewHolder<IndexDataBean> {
                 ((GuanLiWDDPActivity) getContext()).share(data.getId(),"goods",data.getShare());
             }
         });
-        buttonShangJia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("提示")
-                        .setMessage("确定要下架该商品吗？")
-                        .setNegativeButton("取消",null)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ((GuanLiWDDPActivity) getContext()).showLoadingDialog();
-                                ApiClient.post(getContext(), getOkObject1(), new ApiClient.CallBack() {
-                                    @Override
-                                    public void onSuccess(String s) {
-                                        ((GuanLiWDDPActivity) getContext()).cancelLoadingDialog();
-                                        LogUtil.LogShitou("XianShiQGViewHolder--商品下架", s + "");
-                                        try {
-                                            SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                                            if (simpleInfo.getStatus() == 1) {
-                                                ((GuanLiWDDPActivity) getContext()).adapter.remove(getDataPosition());
-                                            } else if (simpleInfo.getStatus() == 2) {
-                                                MyDialog.showReLoginDialog(getContext());
-                                            } else {
-                                                Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+        if (type==0){
+            buttonShangJia.setVisibility(View.VISIBLE);
+            buttonShangJia.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("提示")
+                            .setMessage("确定要下架该商品吗？")
+                            .setNegativeButton("取消",null)
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((GuanLiWDDPActivity) getContext()).showLoadingDialog();
+                                    ApiClient.post(getContext(), getOkObject1(), new ApiClient.CallBack() {
+                                        @Override
+                                        public void onSuccess(String s) {
+                                            ((GuanLiWDDPActivity) getContext()).cancelLoadingDialog();
+                                            LogUtil.LogShitou("XianShiQGViewHolder--商品下架", s + "");
+                                            try {
+                                                SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                                                if (simpleInfo.getStatus() == 1) {
+                                                    ((GuanLiWDDPActivity) getContext()).adapter.remove(getDataPosition());
+                                                } else if (simpleInfo.getStatus() == 2) {
+                                                    MyDialog.showReLoginDialog(getContext());
+                                                } else {
+                                                    Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (Exception e) {
+                                                Toast.makeText(getContext(), "数据出错", Toast.LENGTH_SHORT).show();
                                             }
-                                        } catch (Exception e) {
-                                            Toast.makeText(getContext(), "数据出错", Toast.LENGTH_SHORT).show();
                                         }
-                                    }
 
-                                    @Override
-                                    public void onError(Response response) {
-                                        ((GuanLiWDDPActivity) getContext()).cancelLoadingDialog();
-                                        Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        })
-                        .create()
-                        .show();
-            }
-        });
+                                        @Override
+                                        public void onError(Response response) {
+                                            ((GuanLiWDDPActivity) getContext()).cancelLoadingDialog();
+                                            Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            });
+        }else {
+            buttonShangJia.setVisibility(View.GONE);
+        }
     }
 
     /**

@@ -52,39 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="35dp">
 
-        <Button
-            android:textSize="15dp"
-            android:background="@drawable/btn_jianbian270_basic_30dp"
-            android:textColor="@color/white"
-            android:layout_width="50dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="20dp"
-            android:text="+"
-            android:id="@+id/buttonShangJia"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <ImageView
-            android:paddingRight="15dp"
-            android:src="@mipmap/tupian"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageSuCai"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/buttonShangJia"
-            android:layout_toStartOf="@+id/buttonShangJia" />
-
-        <ImageView
-            android:paddingRight="15dp"
-            android:src="@mipmap/fenxiang"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageShare"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/imageSuCai"
-            android:layout_toStartOf="@+id/imageSuCai" />
-
         <TextView
             android:layout_marginLeft="10dp"
             android:textColor="@color/light_black"
@@ -118,6 +85,45 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView99"
             android:layout_toEndOf="@+id/textView99" />
+
+        <LinearLayout
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/textGoods_money"
+            android:layout_toEndOf="@+id/textGoods_money">
+
+            <ImageView
+                android:paddingRight="15dp"
+                android:src="@mipmap/fenxiang"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageShare"
+                />
+
+            <ImageView
+                android:paddingRight="15dp"
+                android:src="@mipmap/tupian"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageSuCai"
+                 />
+
+            <Button
+                android:textSize="15dp"
+                android:background="@drawable/btn_jianbian270_basic_30dp"
+                android:textColor="@color/white"
+                android:layout_width="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="20dp"
+                android:text="+"
+                android:id="@+id/buttonShangJia"
+           />
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>
