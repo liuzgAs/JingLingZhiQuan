@@ -350,7 +350,9 @@ public class UpgradeUtils extends Activity {
     private static void updateNotify(int loadedLen) {
 //		int progress = loadedLen * 100 / upgrade.filelen;
         int progress = (int) (((double) loadedLen / (double) contentLength) * 100);
-        progressDialog.setProgress(progress);
+        if (progressDialog!=null){
+            progressDialog.setProgress(progress);
+        }
         mNotifiviews.setTextViewText(R.id.tv_subtitle, progress + "%");
 //		mNotifiviews.setProgressBar(R.id.progressBar1, upgrade.filelen,loadedLen, false);
         mNotifiviews.setProgressBar(R.id.progressBar1, contentLength, loadedLen, false);
@@ -360,7 +362,9 @@ public class UpgradeUtils extends Activity {
 
     private static void finishNotify() {
         try {
-            progressDialog.dismiss();
+            if (progressDialog!=null){
+                progressDialog.dismiss();
+            }
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(new File(APK_UPGRADE)),
                     "application/vnd.android.package-archive");
