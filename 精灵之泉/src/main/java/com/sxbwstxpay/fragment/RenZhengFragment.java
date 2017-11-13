@@ -84,12 +84,15 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private Button buttonTiJiao;
     private ImageView imageRight;
     private View viewYanZhengMa;
+    //是否认证
     private int verify = 0;
+    //能否点击下一步
     private int submitStatus;
     private EditText editWXHao;
     private EditText editYouXiang;
     private EditText editZhiHang;
     private ProgressDialog progressDialog;
+    //上传的图片数量
     private int imgNum =4;
 
     public RenZhengFragment() {
@@ -194,7 +197,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     public void onResume() {
         super.onResume();
         LogUtil.LogShitou("RenZhengFragment--onResume", "isChoosePic" + ((MainActivity) getActivity()).isChoosePic);
-
+        /**
+         * 刷新第一面界面里的view是不是可操作
+         */
         if (verify != 1 && scrollView.getVisibility() != View.VISIBLE) {
             showLoadingDialog();
             ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
@@ -273,6 +278,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 
     @Override
     protected void initData() {
+        /**
+         * 刷新
+         */
         showLoadingDialog();
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override

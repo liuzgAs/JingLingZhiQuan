@@ -15,13 +15,14 @@ public class MoneyInputFilter {
         editText.setFilters(new InputFilter[]{new InputFilter() {
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                if ((".".equals(source) && dest.toString().length() == 0)) {
+                if ((source.equals(".") && dest.toString().length() == 0)) {
                     return "0.";
                 }
-                if ("0".equals(source) && "0".equals(dest.toString())) {
+                if (source.equals("0") && dest.toString().equals("0")) {
                     return ".";
                 }
-                if (".".contains(dest.toString())) {
+                LogUtil.LogShitou("MoneyInputFilter--filter", ""+dest.toString());
+                if (dest.toString().contains(".")) {
                     int index = dest.toString().indexOf(".");
                     int mlength = dest.toString().substring(index).length();
                     if (mlength == 3) {
