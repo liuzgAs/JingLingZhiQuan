@@ -410,6 +410,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             public void onItemClick(int position) {
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setClass(ChanPinXQActivity.this, ChanPinXQActivity.class);
                 startActivity(intent);
             }

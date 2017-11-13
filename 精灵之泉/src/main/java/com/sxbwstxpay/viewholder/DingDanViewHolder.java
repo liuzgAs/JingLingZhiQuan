@@ -95,6 +95,7 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, data.getOg().get(position).getGoods_id());
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setClass(getContext(), ChanPinXQActivity.class);
                 getContext().startActivity(intent);
             }

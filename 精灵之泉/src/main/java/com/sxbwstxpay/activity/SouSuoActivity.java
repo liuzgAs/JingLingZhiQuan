@@ -264,6 +264,7 @@ public class SouSuoActivity extends ZjbBaseActivity implements SwipeRefreshLayou
                 if (type==0){
                     Intent intent = new Intent();
                     intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.setClass(SouSuoActivity.this, ChanPinXQActivity.class);
                     startActivity(intent);
                 }
