@@ -440,9 +440,9 @@
             android:name=".activity.LockActivity"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.ShangPinScActivity"></activity>
+        <activity android:name=".activity.ShangPinScActivity"
+            android:launchMode="singleTop" />
 
-        <activity android:name=".activity.imagepicker.ImageBaseActivity" />
         <activity
             android:name=".activity.imagepicker.ImageGridActivity"
             android:configChanges="orientation|screenSize"
