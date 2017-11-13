@@ -21,7 +21,6 @@ public class MoneyInputFilter {
                 if (source.equals("0") && dest.toString().equals("0")) {
                     return ".";
                 }
-                LogUtil.LogShitou("MoneyInputFilter--filter", ""+dest.toString());
                 if (dest.toString().contains(".")) {
                     int index = dest.toString().indexOf(".");
                     int mlength = dest.toString().substring(index).length();
