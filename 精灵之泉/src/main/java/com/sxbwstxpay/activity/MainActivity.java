@@ -38,6 +38,7 @@ import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.BackHandlerHelper;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.UpgradeUtils;
+import com.taobao.sophix.SophixManager;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.Tencent;
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             // Translucent status bar
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+        SophixManager.getInstance().queryAndLoadNewPatch();
         MyApplication.getInstance().addActivity(this);
         Constant.MainActivityAlive = 1;
         //禁止横屏

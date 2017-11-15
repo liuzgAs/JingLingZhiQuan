@@ -52,4 +52,5 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.6'
     compile 'com.github.Cutta:GifView:1.1'
     compile 'q.rorbin:badgeview:1.1.0'
+    compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.6'
 }

@@ -63,6 +63,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <!--热修复-->
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="24626107-1" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="cd6c163e9bb11d72f2afa500761e1b42" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCH2wNkq8mcP+fCGq1L+r5flaDatn30J6AGUsBTwLHfr1trcqrUwBKejPCdu4mfsZSkOApignX+ev+/1wo3hjwJjKnpwAtyB1IvlqBDce2VKQ6P05QXqAiIeGpcGB+0IdVTcuR2FM7mDaKR6922Jjos4p5PaeDcwBmjDLdFKptbaOWkZ2R1WNJ8BUQpdAd9drlv1KglPPe8fSzYu8HJZTD29O3UHbAsF2D83d/vwYb4wP6AdTdifmRDqRWd7Tn47JPEJ8HWC2JGXYHvQHvG37aQhYm9CWQ5n7cQPbbPaJrOZNhdTdIleduJG0D5vvL3CN4f3qlXV4Z7+Se5dR9OGXJtAgMBAAECggEACH4vkx6OJv9zvJWwWbyeJBmViba43wePIHYR4ep89C/hNjFf7pbnUxQagrHTo7EVSsLaG1huie8kh9ioodn5bNtnT96amJFOmP0AndbEdHuxlloyutvdVLK6a3Fyoe8vh9z53Uvlt0oI7LhjDt0K6/1qyiojTYmQ0Lmdx2wndCpd6K5vOo0AHekP6paueXyRg9rVRK0Tz3pGfhbSnVz8DNrZ9qcj5KHzSmK791L/Vo8YoRu0OpTgefs3/e+Os8wIgsVSfHq3fgg3tlilmh+JUVGQaA0O4IeNma9fXDGIBMQo7DR+QmqjsQdGVMK6ivhtQMZHea+h7zRY/ejMW6F7nQKBgQDe2hXu2KG6zfB/29PCmNwOk6jiZbUyNDl83ZNA6S7HjpmZF11MW802TK2joIzmjCPRQ54cRRIBZEg/8vfqlOEnDAKxMfEaBRiAGTsiKgAc8RV0xuBcNcFYVrZNn3DEFchjIhnCX8q/9e40J0407IlVvJLc9AIEbbb1TBqXBgxoTwKBgQCcEDeYqsKMSDhE2y3bCIe8BFOxSKmroQDEpAjnltFpGvG+Phalr86zokC1pq++IdrmXf+zL1mTHqHCCbaZGcRMPU9p4bMvJttMiFR1fs9DlyJ+Nb2f4Pmq8PRhp2Icr3osWet84E8P2Tk2T0f7u3T1eUHpAhnb20DfXm7SvIhOgwKBgQCjP+17R5TKbJx2fYnV7vadcwvvtYQUH+/RCdwaW/eZ1lusq1H8Yu+kjG1TBYTSSuzeGoOTwAFdpaHLvuhgHuoFGaZLOgOeBQeap2ELOOtWSEFoh1vKENLvLK5llJwd+LsP6+Yk3tl+3+C8seJ3oKNGfFq1o8ZqihjR/wsngRXLvwKBgHQGLn8mvJp0erjeRjooHllu0hXkUpgRi7OlzCT44FkGuiDYoheuG7s67mbeNJvjKY3I5nf9xNd2l4XdmM479M9FaYvrSz7L4ZAFbt0nWMoES5WPOJnrNVKb7uPHAE8ZOnhMpaFiVgUPVtSEnpyNIgf5jUHA2R6144Xs+/FaTvAnAoGBANIBen8hIPCGQJunjpDR2DxY69xL0Zo0VJlsWBF/rCt4yseHKMH3oTnt4IA6uRI8lbq6T9hL4Y4Z2N5mZ57zSgF8/kMTWsZ/c8t68tdYs+Dz72/DgjhFTlq4OEQVdV+5B5hpOBwWU3hmTODADS1jjO3zRF53oUn3suZ/zvWdLSbT" />
          <!--&lt;!&ndash;阿里云推送测试 &ndash;&gt;-->
          <!--<meta-data-->
          <!--android:name="com.alibaba.app.appkey"-->
