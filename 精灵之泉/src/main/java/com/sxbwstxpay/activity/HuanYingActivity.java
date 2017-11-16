@@ -65,7 +65,13 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
                     aCache.put(Constant.ACACHE.CITY, city);
                     getData();
                 } else {
-                    MyDialog.dialogFinish(HuanYingActivity.this, "无法获取您的地理位置信息，请检查手机GPS是否打开，开启后重试");
+                    final ACache aCache = ACache.get(HuanYingActivity.this, Constant.ACACHE.LOCATION);
+                    String city = aCache.getAsString(Constant.ACACHE.CITY);
+                    if (TextUtils.isEmpty(city)){
+                        MyDialog.dialogFinish(HuanYingActivity.this, "定位失败");
+                    }else {
+                        getData();
+                    }
                 }
             }
         }
