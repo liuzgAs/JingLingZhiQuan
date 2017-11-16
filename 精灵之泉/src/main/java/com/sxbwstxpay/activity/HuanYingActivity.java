@@ -44,11 +44,11 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
     private String lng;
     private long currentTimeMillis;
     private int GPS_REQUEST_CODE = 10;
-    //声明AMapLocationClient类对象
+    /**声明AMapLocationClient类对象*/
     public AMapLocationClient mLocationClient = null;
-    //声明AMapLocationClientOption对象
+    /**声明AMapLocationClientOption对象*/
     public AMapLocationClientOption mLocationOption = null;
-    //声明定位回调监听器
+    /**声明定位回调监听器*/
     public AMapLocationListener mLocationListener = new AMapLocationListener() {
         @Override
         public void onLocationChanged(AMapLocation aMapLocation) {
