@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                                 .setPositiveButton("是", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent mStartActivity = new Intent(MainActivity.this, MainActivity.class);
+                                        Intent mStartActivity = new Intent(MainActivity.this, HuanYingActivity.class);
                                         int mPendingIntentId = 123456;
                                         PendingIntent mPendingIntent = PendingIntent.getActivity(MainActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
                                         AlarmManager mgr = (AlarmManager)MainActivity.this.getSystemService(Context.ALARM_SERVICE);
