@@ -1,8 +1,13 @@
 package com.sxbwstxpay.activity;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -38,6 +43,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
     private String lat;
     private String lng;
     private long currentTimeMillis;
+    private int GPS_REQUEST_CODE = 10;
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
     //声明AMapLocationClientOption对象
@@ -59,7 +65,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
                     aCache.put(Constant.ACACHE.CITY, city);
                     getData();
                 } else {
-                    MyDialog.dialogFinish(HuanYingActivity.this, "无法获取您的地理位置信息，请退出后重试");
+                    MyDialog.dialogFinish(HuanYingActivity.this, "无法获取您的地理位置信息，请检查手机GPS是否打开，开启后重试");
                 }
             }
         }
@@ -144,7 +150,13 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huan_ying);
 //        initPermission();
-        methodRequiresTwoPermission();
+        if (!checkGPSIsOpen()){
+            LogUtil.LogShitou("HuanYingActivity--onCreate", "GPS未开启");
+            openGPSSettings();
+        }else {
+            LogUtil.LogShitou("HuanYingActivity--onCreate", "GPS开启");
+            methodRequiresTwoPermission();
+        }
         init(HuanYingActivity.class);
     }
 
@@ -330,6 +342,64 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
             new AppSettingsDialog.Builder(this).build().show();
         }else {
             methodRequiresTwoPermission();
+        }
+    }
+
+    /**
+     * 检测GPS是否打开
+     *
+     * @return
+     */
+    private boolean checkGPSIsOpen() {
+        boolean isOpen;
+        LocationManager locationManager = (LocationManager) this
+                .getSystemService(Context.LOCATION_SERVICE);
+        isOpen = locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER);
+        return isOpen;
+    }
+
+    /**
+     * 跳转GPS设置
+     */
+    private void openGPSSettings() {
+        if (checkGPSIsOpen()) {
+            methodRequiresTwoPermission();
+        } else {
+            //没有打开则弹出对话框
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.notifyTitle)
+                    .setMessage(R.string.gpsNotifyMsg)
+                    // 拒绝, 退出应用
+                    .setNegativeButton(R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+
+                    .setPositiveButton(R.string.setting,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //跳转GPS设置界面
+                                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    startActivityForResult(intent, GPS_REQUEST_CODE);
+                                }
+                            })
+
+                    .setCancelable(false)
+                    .show();
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GPS_REQUEST_CODE) {
+            //做需要做的事情，比如再次检测是否打开GPS了 或者定位
+            openGPSSettings();
         }
     }
 }
