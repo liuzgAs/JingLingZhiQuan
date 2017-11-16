@@ -113,7 +113,7 @@ public class MyApplication extends MultiDexApplication {
                             // 表明新补丁生效需要重启. 开发者可提示用户或者强制重启;
                             // 建议: 用户可以监听进入后台事件, 然后调用killProcessSafely自杀，以此加快应用补丁，详见1.3.2.3
                             LogUtil.LogShitou("MyApplication--onLoad", "补丁已生效");
-                            android.os.Process.killProcess(android.os.Process.myPid());
+                            SophixManager.getInstance().killProcessSafely();
                         } else {
                             // 其它错误信息, 查看PatchStatus类说明
                         }
