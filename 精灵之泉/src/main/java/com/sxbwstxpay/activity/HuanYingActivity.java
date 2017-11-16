@@ -155,7 +155,6 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huan_ying);
-//        initPermission();
         if (!checkGPSIsOpen()){
             LogUtil.LogShitou("HuanYingActivity--onCreate", "GPS未开启");
             openGPSSettings();
@@ -212,55 +211,6 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
     protected void initData() {
     }
 
-//    /**
-//     * des： 申请权限
-//     * author： ZhangJieBo
-//     * date： 2017/7/6 0006 下午 2:41
-//     */
-//    private void initPermission() {
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-//                    Constant.PERMISSION.ACCESS_COARSE_LOCATION);//自定义的code
-//        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                    Constant.PERMISSION.ACCESS_FINE_LOCATION);//自定义的code
-//        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                    Constant.PERMISSION.WRITE_EXTERNAL_STORAGE);//自定义的code
-//        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-//                    Constant.PERMISSION.READ_EXTERNAL_STORAGE);//自定义的code
-//        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
-//                    Constant.PERMISSION.READ_PHONE_STATE);//自定义的code
-//        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_BOOT_COMPLETED)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_BOOT_COMPLETED},
-//                    Constant.PERMISSION.RECEIVE_BOOT_COMPLETED);//自定义的code
-//        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请CALL_PHONE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE},
-//                    Constant.PERMISSION.CALL_PHONE);//自定义的code
-//        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.SYSTEM_ALERT_WINDOW)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请CALL_PHONE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SYSTEM_ALERT_WINDOW},
-//                    Constant.PERMISSION.SYSTEM_ALERT_WINDOW);//自定义的code
-//        }
-//
-//    }
 
     /**
      * des： 初始化定位参数
