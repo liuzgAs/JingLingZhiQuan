@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             tabs_img.setImageResource(imgRes[i]);
             mTabHost.addTab(mTabHost.newTabSpec(tabsItem[i]).setIndicator(inflate), fragment[i], null);
         }
-//        mTabHost.setCurrentTab(1);
+        /*mTabHost.setCurrentTab(1);*/
         MyApplication.setOnPatchLister(new OnPatchLister() {
             @Override
             public void patchSuccess() {
@@ -154,12 +154,12 @@ public class MainActivity extends AppCompatActivity {
                                         Intent mStartActivity = new Intent(MainActivity.this, HuanYingActivity.class);
                                         int mPendingIntentId = 123456;
                                         PendingIntent mPendingIntent = PendingIntent.getActivity(MainActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-                                        AlarmManager mgr = (AlarmManager)MainActivity.this.getSystemService(Context.ALARM_SERVICE);
+                                        AlarmManager mgr = (AlarmManager) MainActivity.this.getSystemService(Context.ALARM_SERVICE);
                                         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
                                         SophixManager.getInstance().killProcessSafely();
                                     }
                                 })
-                                .setNegativeButton("否",null)
+                                .setNegativeButton("否", null)
                                 .create()
                                 .show();
                     }
