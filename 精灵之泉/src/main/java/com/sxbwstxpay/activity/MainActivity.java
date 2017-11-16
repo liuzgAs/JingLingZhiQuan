@@ -1,6 +1,8 @@
 package com.sxbwstxpay.activity;
 
 import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,6 +33,7 @@ import com.sxbwstxpay.fragment.ShengQianCZFragment;
 import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
+import com.sxbwstxpay.interfacepage.OnPatchLister;
 import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.model.UserInfo;
@@ -83,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                     }
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -134,6 +139,33 @@ public class MainActivity extends AppCompatActivity {
             mTabHost.addTab(mTabHost.newTabSpec(tabsItem[i]).setIndicator(inflate), fragment[i], null);
         }
 //        mTabHost.setCurrentTab(1);
+        MyApplication.setOnPatchLister(new OnPatchLister() {
+            @Override
+            public void patchSuccess() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("提示")
+                                .setMessage("发现新的补丁，是否立即生效,需重启应用")
+                                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent mStartActivity = new Intent(MainActivity.this, MainActivity.class);
+                                        int mPendingIntentId = 123456;
+                                        PendingIntent mPendingIntent = PendingIntent.getActivity(MainActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                                        AlarmManager mgr = (AlarmManager)MainActivity.this.getSystemService(Context.ALARM_SERVICE);
+                                        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                                        SophixManager.getInstance().killProcessSafely();
+                                    }
+                                })
+                                .setNegativeButton("否",null)
+                                .create()
+                                .show();
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -202,6 +234,8 @@ public class MainActivity extends AppCompatActivity {
                         intent1.putExtra(Constant.INTENT_KEY.URL, extramap.getUrl() + "&uid=" + extramap.getUid());
                         startActivity(intent1);
                     }
+                    break;
+                default:
                     break;
             }
         }

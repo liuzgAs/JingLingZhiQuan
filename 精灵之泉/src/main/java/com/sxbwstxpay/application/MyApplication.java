@@ -8,6 +8,7 @@ import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.lzy.okgo.OkGo;
+import com.sxbwstxpay.interfacepage.OnPatchLister;
 import com.sxbwstxpay.util.LogUtil;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
@@ -25,11 +26,16 @@ public class MyApplication extends MultiDexApplication {
     private static Context context;
     private List<Activity> activityList = new LinkedList<Activity>();
     private static MyApplication instance;
+    private static OnPatchLister onPatchLister;
+
     @Override
     public void onCreate() {
         context = this.getApplicationContext();
         super.onCreate();
-        initHotfix();
+        try {
+            initHotfix();
+        } catch (Exception e) {
+        }
         OkGo.init(this);
         initCloudChannel(this);
     }
@@ -39,15 +45,16 @@ public class MyApplication extends MultiDexApplication {
         return context;
     }
 
-    //单例模式中获取唯一的MyApplication实例
-    public static MyApplication getInstance()
-    {
-        if(null == instance)
-        {
+    /**
+     * 单例模式中获取唯一的MyApplication实例
+     */
+    public static MyApplication getInstance() {
+        if (null == instance) {
             instance = new MyApplication();
         }
         return instance;
     }
+
     /**
      * 初始化云推送通道
      *
@@ -69,19 +76,21 @@ public class MyApplication extends MultiDexApplication {
         });
     }
 
-    //添加Activity到容器中
-    public void addActivity(Activity activity)
-    {
+    /**添加Activity到容器中*/
+    public void addActivity(Activity activity) {
         activityList.add(activity);
     }
-    //遍历所有Activity并finish
-    public void exit()
-    {
-        for(Activity activity:activityList)
-        {
+
+    /**遍历所有Activity并finish*/
+    public void exit() {
+        for (Activity activity : activityList) {
             activity.finish();
         }
         System.exit(0);
+    }
+
+    public static void setOnPatchLister(OnPatchLister onPatchLister){
+        MyApplication.onPatchLister =onPatchLister;
     }
 
     private void initHotfix() {
@@ -105,7 +114,7 @@ public class MyApplication extends MultiDexApplication {
                                 .append(" Code:").append(code)
                                 .append(" Info:").append(info)
                                 .append(" HandlePatchVersion:").append(handlePatchVersion).toString();
-                        LogUtil.LogShitou("MyApplication--onLoad", ""+msg);
+                        LogUtil.LogShitou("MyApplication--onLoad", "" + msg);
                         if (code == PatchStatus.CODE_LOAD_SUCCESS) {
                             // 表明补丁加载成功
                             LogUtil.LogShitou("MyApplication--onLoad", "补丁加载成功");
@@ -113,7 +122,7 @@ public class MyApplication extends MultiDexApplication {
                             // 表明新补丁生效需要重启. 开发者可提示用户或者强制重启;
                             // 建议: 用户可以监听进入后台事件, 然后调用killProcessSafely自杀，以此加快应用补丁，详见1.3.2.3
                             LogUtil.LogShitou("MyApplication--onLoad", "补丁已生效");
-                            SophixManager.getInstance().killProcessSafely();
+                            onPatchLister.patchSuccess();
                         } else {
                             // 其它错误信息, 查看PatchStatus类说明
                         }
