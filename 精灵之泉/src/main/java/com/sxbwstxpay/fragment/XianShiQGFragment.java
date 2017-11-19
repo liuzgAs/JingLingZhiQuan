@@ -32,6 +32,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.BannerBean;
+import com.sxbwstxpay.model.IndexCitylist;
 import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.IndexGoods;
 import com.sxbwstxpay.model.OkObject;
@@ -113,6 +114,11 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     }
                     break;
                 case Constant.BROADCASTCODE.VIP:
+                    onRefresh();
+                    break;
+                case Constant.BROADCASTCODE.CITY_CHOOSE:
+                    IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
+                    cityId = cityBean.getId();
                     onRefresh();
                     break;
             }
@@ -372,6 +378,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         params.put("lat", lat);
         params.put("lng", lng);
         params.put("id", id);
+        params.put("cityId", cityId);
         return new OkObject(params, url);
     }
 
@@ -436,6 +443,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.ShangJia01);
         filter.addAction(Constant.BROADCASTCODE.VIP);
+        filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
         getActivity().registerReceiver(reciver, filter);
     }
 

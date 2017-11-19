@@ -29,6 +29,7 @@ import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.GoodsIndex;
 import com.sxbwstxpay.model.IndexCate;
+import com.sxbwstxpay.model.IndexCitylist;
 import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ACache;
@@ -107,6 +108,11 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 case Constant.BROADCASTCODE.VIP:
                     onRefresh();
                     break;
+                case Constant.BROADCASTCODE.CITY_CHOOSE:
+                    IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
+                    cityId = cityBean.getId();
+                    onRefresh();
+                    break;
             }
         }
     };
@@ -116,6 +122,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private int position;
     private String sort;
     private TextView textTitle;
+    private String cityId;
 
     public void hideView() {
         Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
@@ -164,6 +171,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         if (cityAcache != null) {
             lat = aCache.getAsString(Constant.ACACHE.LAT);
             lng = aCache.getAsString(Constant.ACACHE.LNG);
+            cityId = aCache.getAsString(Constant.ACACHE.CITY_ID);
         }
     }
 
@@ -296,6 +304,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         HashMap<String, String> params = new HashMap<>();
         params.put("id", cateBean.getId() + "");
         params.put("p", page + "");
+        params.put("cityId", cityId);
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
         params.put("lat", lat);
@@ -362,6 +371,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         filter.addAction(Constant.BROADCASTCODE.ShangJia02);
         filter.addAction(Constant.BROADCASTCODE.ShaiXuan);
         filter.addAction(Constant.BROADCASTCODE.VIP);
+        filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
         getActivity().registerReceiver(reciver, filter);
     }
 

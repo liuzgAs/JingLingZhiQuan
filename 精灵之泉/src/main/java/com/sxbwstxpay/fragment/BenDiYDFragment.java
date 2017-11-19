@@ -27,6 +27,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.BannerBean;
+import com.sxbwstxpay.model.IndexCitylist;
 import com.sxbwstxpay.model.IndexStore;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ACache;
@@ -67,9 +68,15 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
                     recyclerView.showProgress();
                     onRefresh();
                     break;
+                case Constant.BROADCASTCODE.CITY_CHOOSE:
+                    IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
+                    cityId = cityBean.getId();
+                    onRefresh();
+                    break;
             }
         }
     };
+    private String cityId;
 
     public BenDiYDFragment(int type) {
         // Required empty public constructor
@@ -109,6 +116,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
         if (cityAcache != null) {
             lat = aCache.getAsString(Constant.ACACHE.LAT);
             lng = aCache.getAsString(Constant.ACACHE.LNG);
+            cityId = aCache.getAsString(Constant.ACACHE.CITY_ID);
         }
     }
 
@@ -264,6 +272,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
         params.put("lng", lng);
         params.put("p", page + "");
         params.put("sort", sort);
+        params.put("cityId", cityId);
         return new OkObject(params, url);
     }
 
@@ -318,7 +327,8 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
     public void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter();
-        filter.addAction(Constant.BROADCASTCODE.ShaiXuan);
+        filter.addAction(Constant.BROADCASTCODE.ShaiXuan01);
+        filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
         getActivity().registerReceiver(reciver, filter);
     }
 
