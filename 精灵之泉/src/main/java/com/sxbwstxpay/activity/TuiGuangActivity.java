@@ -1,8 +1,11 @@
 package com.sxbwstxpay.activity;
 
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StrikethroughSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -41,9 +44,8 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private ImageView imageImg;
     private View viewBar;
     private TextView textText1;
-    private TextView textText2;
     final IWXAPI api = WXAPIFactory.createWXAPI(this, null);
-//    private BroadcastReceiver recevier = new BroadcastReceiver() {
+    //    private BroadcastReceiver recevier = new BroadcastReceiver() {
 //        @Override
 //        public void onReceive(Context context, Intent intent) {
 //            String action = intent.getAction();
@@ -92,7 +94,6 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
         imageImg = (ImageView) findViewById(R.id.imageImg);
         viewBar = findViewById(R.id.viewBar);
         textText1 = (TextView) findViewById(R.id.textText1);
-        textText2 = (TextView) findViewById(R.id.textText2);
         mWebView = (WebView) findViewById(R.id.webView);
         pb1 = (ProgressBar) findViewById(R.id.progressBar2);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
@@ -105,7 +106,6 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
-        textText2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG); // 设置中划线并加清晰
         mWebView.setWebViewClient(new WebViewClient());//覆盖第三方浏览器
         mSettings = mWebView.getSettings();
         mSettings.setJavaScriptEnabled(true);
@@ -156,8 +156,12 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                     if (orderVipbefore.getStatus() == 1) {
                         mWebView.loadUrl(orderVipbefore.getUrl());
                         textViewTitle.setText(orderVipbefore.getUrlTitle());
-                        textText1.setText(orderVipbefore.getText1());
-                        textText2.setText(orderVipbefore.getText2());
+                        String text1 = orderVipbefore.getText1();
+                        String text2 = "("+orderVipbefore.getText2()+")";
+                        SpannableString span = new SpannableString(text1 + text2);
+                        span.setSpan(new StrikethroughSpan(), text1.length(), (text1 + text2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        span.setSpan(new RelativeSizeSpan(0.8f), text1.length(), (text1 + text2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textText1.setText(span);
                     } else if (orderVipbefore.getStatus() == 3) {
                         MyDialog.showReLoginDialog(TuiGuangActivity.this);
                     } else {
@@ -200,16 +204,18 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.textJiaRu:
-                if (checkXieYi.isChecked()){
-                    intent.setClass(this,TuiGuangZFActivity.class);
-                    intent.putExtra(Constant.INTENT_KEY.value,orderVipbefore);
+                if (checkXieYi.isChecked()) {
+                    intent.setClass(this, TuiGuangZFActivity.class);
+                    intent.putExtra(Constant.INTENT_KEY.value, orderVipbefore);
                     startActivity(intent);
-                }else {
-                    MyDialog.showTipDialog(this,"请阅读并同意《精灵之泉推广商服务协议》");
+                } else {
+                    MyDialog.showTipDialog(this, "请阅读并同意《精灵之泉推广商服务协议》");
                 }
                 break;
             case R.id.imageBack:
                 finish();
+                break;
+            default:
                 break;
         }
     }

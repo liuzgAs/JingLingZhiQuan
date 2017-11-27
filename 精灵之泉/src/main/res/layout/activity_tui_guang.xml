@@ -73,18 +73,6 @@
                 android:textSize="16dp"
                 android:layout_alignParentLeft="true" />
 
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="1dp"
-                android:id="@+id/textText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textText1"
-                android:layout_toEndOf="@+id/textText1"
-                android:text="原价00.00"
-                android:textColor="#3b1688"
-                android:textSize="@dimen/normal_textsize"
-                android:layout_toRightOf="@+id/textText1" />
         </RelativeLayout>
 
         <TextView
