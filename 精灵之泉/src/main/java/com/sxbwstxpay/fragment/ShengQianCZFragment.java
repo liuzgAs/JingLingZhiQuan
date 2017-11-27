@@ -251,11 +251,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             @Override
             public void scroll(int distance) {
                 if (distance >= indexBannerHeight && distance <= indexBannerTabHeight) {
-                    tabTranYDistance = indexBannerTabHeight - distance-DpUtils.convertDpToPixel(40f, getContext());
+                    tabTranYDistance = indexBannerTabHeight - distance - DpUtils.convertDpToPixel(40f, getContext());
                 } else if (distance >= 0 && distance < indexBannerHeight) {
-                    tabTranYDistance=0;
+                    tabTranYDistance = 0;
                 } else {
-                    tabTranYDistance=DpUtils.convertDpToPixel(-40f, getContext());
+                    tabTranYDistance = DpUtils.convertDpToPixel(-40f, getContext());
                 }
                 viewTabLayout.setTranslationY(tabTranYDistance);
             }
@@ -395,6 +395,8 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             case R.id.textCity:
                 intent.setClass(getActivity(), ChengShiXZActivity.class);
                 startActivity(intent);
+                break;
+            default:
                 break;
         }
     }

@@ -73,6 +73,8 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
                     cityId = cityBean.getId();
                     onRefresh();
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -241,6 +243,17 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
                 startActivity(intent);
             }
         });
+        TextView textTitleEmpty = (TextView) recyclerView.getEmptyView().findViewById(R.id.textTitle);
+        switch (type) {
+            case 0:
+                textTitleEmpty.setText("本地优质商家火热招募中");
+                break;
+            case 1:
+                textTitleEmpty.setText("本地优质商家火热招募中");
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -291,6 +304,9 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
                         List<IndexStore.DataBean> indexStoreData = indexStore.getData();
                         adapter.clear();
                         adapter.addAll(indexStoreData);
+                        if (indexStoreData.size()==0){
+                            recyclerView.showEmpty();
+                        }
                     } else if (indexStore.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
