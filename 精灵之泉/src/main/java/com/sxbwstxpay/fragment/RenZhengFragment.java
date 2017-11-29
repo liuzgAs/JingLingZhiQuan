@@ -35,7 +35,6 @@ import com.sxbwstxpay.model.RespondAppimgadd;
 import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.model.UserCardbefore;
 import com.sxbwstxpay.util.ApiClient;
-import com.sxbwstxpay.util.CheckIdCard;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.ImgToBase64;
@@ -429,22 +428,22 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         switch (v.getId()) {
             case R.id.buttonTiJiao:
                 if (submitStatus != 1) {
-                    Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), textTip.getText().toString().trim(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(path[0]) && TextUtils.isEmpty(userCardbefore.getData().getImg())) {
+                if (TextUtils.isEmpty(path[0]) && TextUtils.isEmpty(userCardbefore.getData().getImg())&&TextUtils.equals("0",userCardbefore.getData().getImg())) {
                     Toast.makeText(getActivity(), "请选择身份证正面照", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(path[1]) && TextUtils.isEmpty(userCardbefore.getData().getImg2())) {
+                if (TextUtils.isEmpty(path[1]) && TextUtils.isEmpty(userCardbefore.getData().getImg2())&&TextUtils.equals("0",userCardbefore.getData().getImg2())) {
                     Toast.makeText(getActivity(), "请选择身份证背面照", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(path[2]) && TextUtils.isEmpty(userCardbefore.getData().getImg4())) {
+                if (TextUtils.isEmpty(path[2]) && TextUtils.isEmpty(userCardbefore.getData().getImg4())&&TextUtils.equals("0",userCardbefore.getData().getImg4())) {
                     Toast.makeText(getActivity(), "请选择银行卡正面照", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(path[3]) && TextUtils.isEmpty(userCardbefore.getData().getImg5())) {
+                if (TextUtils.isEmpty(path[3]) && TextUtils.isEmpty(userCardbefore.getData().getImg5())&&TextUtils.equals("0",userCardbefore.getData().getImg5())) {
                     Toast.makeText(getActivity(), "请选择手持银行卡和身份证半身照", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -481,41 +480,41 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 sendSMS();
                 break;
             case R.id.buttonNext:
-                if (submitStatus != 1) {
-                    Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editName.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入真实姓名", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
-                if (!checkIdCard.validate()) {
-                    Toast.makeText(getActivity(), "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (!TextUtils.isEmpty(editYouXiang.getText().toString().toString().trim())){
-                    if (!StringUtil.checkEmail(editYouXiang.getText().toString().toString().trim())) {
-                        Toast.makeText(getActivity(), "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-                if (TextUtils.isEmpty(userCardbefore.getData().getBankName()) || userCardbefore.getData().getBank() <= 0) {
-                    Toast.makeText(getActivity(), "请选择开户银行", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editBankCard.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入本人提现储蓄卡号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editPhone.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入银行预留手机号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入验证码", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (submitStatus != 1) {
+//                    Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editName.getText().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入真实姓名", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
+//                if (!checkIdCard.validate()) {
+//                    Toast.makeText(getActivity(), "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (!TextUtils.isEmpty(editYouXiang.getText().toString().toString().trim())){
+//                    if (!StringUtil.checkEmail(editYouXiang.getText().toString().toString().trim())) {
+//                        Toast.makeText(getActivity(), "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                }
+//                if (TextUtils.isEmpty(userCardbefore.getData().getBankName()) || userCardbefore.getData().getBank() <= 0) {
+//                    Toast.makeText(getActivity(), "请选择开户银行", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editBankCard.getText().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入本人提现储蓄卡号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editPhone.getText().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入银行预留手机号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
+//                    Toast.makeText(getActivity(), "请输入验证码", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 userCardbefore.getData().setName(editName.getText().toString().trim());
                 userCardbefore.getData().setCard(editCard.getText().toString().trim());
                 userCardbefore.getData().setBankCard(editBankCard.getText().toString().trim());
@@ -523,10 +522,10 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 userCardbefore.getData().setWeixin(editWXHao.getText().toString().trim());
                 userCardbefore.getData().setEmail(editYouXiang.getText().toString().trim());
                 userCardbefore.getData().setSubbranch(editZhiHang.getText().toString().trim());
-                next();
-//                viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
-//                viewTianXinXi.setVisibility(View.GONE);
-//                scrollView.setVisibility(View.VISIBLE);
+//                next();
+                viewShiMingRZ.setBackgroundResource(R.mipmap.shimingtop2);
+                viewTianXinXi.setVisibility(View.GONE);
+                scrollView.setVisibility(View.VISIBLE);
                 break;
             default:
 
@@ -626,10 +625,10 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     case 1:
                         imgList.set(i, userCardbefore.getData().getImgId2());
                         break;
-                    case 3:
+                    case 2:
                         imgList.set(i, userCardbefore.getData().getImgId4());
                         break;
-                    case 4:
+                    case 3:
                         imgList.set(i, userCardbefore.getData().getImgId5());
                         break;
                 }
