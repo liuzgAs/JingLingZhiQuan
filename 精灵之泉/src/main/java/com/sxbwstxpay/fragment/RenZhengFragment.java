@@ -508,8 +508,8 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                     Toast.makeText(getActivity(), "请输入本人提现储蓄卡号", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(editPhone.getText().toString().trim())) {
-                    Toast.makeText(getActivity(), "请输入银行预留手机号", Toast.LENGTH_SHORT).show();
+                if (!StringUtil.isMobileNO(editPhone.getText().toString().trim())) {
+                    Toast.makeText(getActivity(), "请输入正确的手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
