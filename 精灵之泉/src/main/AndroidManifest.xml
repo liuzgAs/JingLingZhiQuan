@@ -229,6 +229,7 @@
         </activity>
 
         <activity
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:name=".activity.MainActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppThemeNoTranslucent" />
