@@ -262,14 +262,20 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                             Toast.makeText(getActivity(), userCardbefore1.getInfo(), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
-                        Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e1) {
+                        }
                     }
                 }
 
                 @Override
                 public void onError(Response response) {
-                    cancelLoadingDialog();
-                    Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                    try {
+                        cancelLoadingDialog();
+                        Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                    }
                 }
             });
         }
@@ -482,7 +488,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 break;
             case R.id.buttonNext:
                 if (submitStatus != 1) {
-                    Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
+                    if (!TextUtils.isEmpty(userCardbefore.getTipsText())){
+                        Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
+                    }
                     return;
                 }
                 if (TextUtils.isEmpty(editName.getText().toString().trim())) {

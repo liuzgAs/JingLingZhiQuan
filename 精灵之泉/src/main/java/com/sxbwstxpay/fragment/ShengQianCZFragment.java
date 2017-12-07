@@ -270,7 +270,10 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.INDEX_CATE;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
+        try {
+            params.put("uid", userInfo.getUid());
+        } catch (Exception e) {
+        }
         params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
@@ -332,7 +335,10 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                         Toast.makeText(getActivity(), indexCate.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                    try {
+                        Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e1) {
+                    }
                 }
             }
 

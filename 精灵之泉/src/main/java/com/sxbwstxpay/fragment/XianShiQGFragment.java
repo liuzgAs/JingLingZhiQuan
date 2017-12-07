@@ -186,7 +186,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         viewShangJiaTip = mInflate.findViewById(R.id.viewShangJiaTip);
         textNum = (TextView) mInflate.findViewById(R.id.textNum);
         tablayoutHeaderX = (TabLayout) mInflate.findViewById(R.id.tablayoutHeaderX);
-        tabCarview =  mInflate.findViewById(R.id.tabCarview);
+        tabCarview = mInflate.findViewById(R.id.tabCarview);
     }
 
     @Override
@@ -276,7 +276,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                                         index++;
                                         tablayoutHeaderX.setScrollPosition(index, 0, true);
                                         tablayoutHeaderX.getTabAt(index).select();
-                                    }else {
+                                    } else {
                                         adapter.addAll(indexGoodsData);
                                     }
                                 } else {
@@ -421,18 +421,21 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             }
 
             public void showError(String msg) {
-                View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
-                TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
-                textMsg.setText(msg);
-                view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        recyclerView.showProgress();
-                        initData();
-                    }
-                });
-                recyclerView.setErrorView(view_loaderror);
-                recyclerView.showError();
+                try {
+                    View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                    TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
+                    textMsg.setText(msg);
+                    view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            recyclerView.showProgress();
+                            initData();
+                        }
+                    });
+                    recyclerView.setErrorView(view_loaderror);
+                    recyclerView.showError();
+                } catch (Exception e) {
+                }
             }
         });
     }
@@ -450,7 +453,10 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(reciver);
+        try {
+            getActivity().unregisterReceiver(reciver);
+        } catch (Exception e) {
+        }
     }
 
     @Override

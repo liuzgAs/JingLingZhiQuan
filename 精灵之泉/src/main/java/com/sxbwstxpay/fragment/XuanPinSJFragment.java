@@ -196,7 +196,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xuan_pin_sj;
-                return new XuanPinSJViewHolder(parent, layout,"MainActivity");
+                return new XuanPinSJViewHolder(parent, layout, "MainActivity");
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -258,17 +258,25 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         });
         View emptyView = recyclerView.getEmptyView();
         textTitle = (TextView) emptyView.findViewById(R.id.textTitle);
-        if (!TextUtils.isEmpty(cateBean.getJump())){
-            switch (cateBean.getJump()){
-                case "time":
-                    textTitle.setText(getResources().getString(R.string.nothing));
-                    break;
-                case "list":
-                    textTitle.setText(getResources().getString(R.string.nothing));
-                    break;
-                case "future":
-                    textTitle.setText("本地优质商家火热招募中");
-                    break;
+        if (cateBean != null) {
+            if (!TextUtils.isEmpty(cateBean.getJump())) {
+                switch (cateBean.getJump()) {
+                    case "time":
+                        textTitle.setText(getResources().getString(R.string.nothing));
+                        break;
+                    case "list":
+                        textTitle.setText(getResources().getString(R.string.nothing));
+                        break;
+                    case "product":
+                        textTitle.setText("本地优质商家火热招募中");
+                        break;
+                    case "store":
+                        textTitle.setText("本地优质商家火热招募中");
+                        break;
+                    default:
+                        textTitle.setText(getResources().getString(R.string.nothing));
+                        break;
+                }
             }
         }
         recyclerView.setRefreshListener(this);

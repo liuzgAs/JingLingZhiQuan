@@ -265,9 +265,9 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                         ApiClient.post(XuanZeXYKActivity.this, getOkObjectTiJiao(), new ApiClient.CallBack() {
                             @Override
                             public void onSuccess(String s) {
-                                cancelLoadingDialog();
                                 LogUtil.LogShitou("XuanZeXYKActivity--onSuccess", "");
                                 try {
+                                    cancelLoadingDialog();
                                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                                     if (simpleInfo.getStatus() == 1) {
                                         Intent intent1 = new Intent();

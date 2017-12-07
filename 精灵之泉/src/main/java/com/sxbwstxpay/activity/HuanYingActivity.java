@@ -146,7 +146,10 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                MyDialog.dialogFinish(HuanYingActivity.this,"请求失败");
+                try {
+                    MyDialog.dialogFinish(HuanYingActivity.this,"请求失败");
+                } catch (Exception e) {
+                }
             }
         });
     }

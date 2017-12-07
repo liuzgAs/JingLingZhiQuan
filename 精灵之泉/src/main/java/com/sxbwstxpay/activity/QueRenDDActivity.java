@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -214,7 +215,9 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.REQUEST_RESULT_CODE.address && resultCode == Constant.REQUEST_RESULT_CODE.address) {
             UserAddress.DataBean dataBean = (UserAddress.DataBean) data.getSerializableExtra(Constant.INTENT_KEY.value);
-            cartOrderAd.setConsignee(dataBean.getConsignee());
+            if (!TextUtils.isEmpty(dataBean.getConsignee())){
+                cartOrderAd.setConsignee(dataBean.getConsignee());
+            }
             cartOrderAd.setId(dataBean.getId());
             cartOrderAd.setAddress(dataBean.getAddress());
             cartOrderAd.setArea(dataBean.getArea());

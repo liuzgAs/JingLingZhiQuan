@@ -25,6 +25,7 @@ import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,7 +34,7 @@ import okhttp3.Response;
 public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private View viewBar;
-    private List<BankCardaddbefore.DataBean> bankCardaddbeforeData;
+    private List<BankCardaddbefore.DataBean> bankCardaddbeforeData = new ArrayList<>();
     private TextView textBankName;
     private String id;
     private TextView buttonSms;

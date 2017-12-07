@@ -109,9 +109,9 @@ public class ZhiJieTJYHFragment extends ZjbBaseFragment implements View.OnClickL
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
-                cancelLoadingDialog();
                 LogUtil.LogShitou("WoDeSHActivity--我的商户", s + "");
                 try {
+                    cancelLoadingDialog();
                     UserMyteam userMyteam = GsonUtils.parseJSON(s, UserMyteam.class);
                     if (userMyteam.getStatus() == 1) {
                         List<Integer> data1 = userMyteam.getData1();

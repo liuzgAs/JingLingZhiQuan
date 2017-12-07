@@ -148,11 +148,13 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         relaTitleStatue.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
         zoomScrollView.setZoomView(viewZoom);
         texttXName.setVisibility(View.GONE);
-        Glide.with(getActivity())
-                .load(userInfo.getHeadImg())
-                .asBitmap()
-                .placeholder(R.mipmap.ic_empty)
-                .into(imageTouXiang);
+        if (!TextUtils.isEmpty(userInfo.getHeadImg())){
+            Glide.with(getActivity())
+                    .load(userInfo.getHeadImg())
+                    .asBitmap()
+                    .placeholder(R.mipmap.ic_empty)
+                    .into(imageTouXiang);
+        }
         textNickName.setText(userInfo.getNickName());
     }
 
@@ -249,7 +251,10 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                         Toast.makeText(getActivity(), userIndex.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                    try {
+                        Toast.makeText(getActivity(), R.string.dataErrer, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e1) {
+                    }
                 }
             }
 

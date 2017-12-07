@@ -104,7 +104,11 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.USER_INCOME;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
+        try {
+            params.put("uid",userInfo.getUid());
+        } catch (Exception e) {
+            finish();
+        }
         params.put("tokenTime",tokenTime);
         return new OkObject(params, url);
     }

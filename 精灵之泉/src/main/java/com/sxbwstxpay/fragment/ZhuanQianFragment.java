@@ -202,7 +202,10 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.INDEX_MAKEMONEY;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
+        try {
+            params.put("uid", userInfo.getUid());
+        } catch (Exception e) {
+        }
         params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
