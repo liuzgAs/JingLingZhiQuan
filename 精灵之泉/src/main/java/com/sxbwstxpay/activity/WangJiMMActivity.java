@@ -104,7 +104,7 @@ public class WangJiMMActivity extends ZjbBaseActivity implements View.OnClickLis
                     return;
                 }
                 if (!StringUtil.isPassword(editView[2].getText().toString().trim())) {
-                    Toast.makeText(WangJiMMActivity.this, "密码太简单", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WangJiMMActivity.this, "密码必须大于6位，且由字母及数字组合", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 forgetPSW();
