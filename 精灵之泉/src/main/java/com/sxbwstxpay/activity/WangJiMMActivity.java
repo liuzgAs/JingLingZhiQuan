@@ -217,6 +217,7 @@ public class WangJiMMActivity extends ZjbBaseActivity implements View.OnClickLis
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     Toast.makeText(WangJiMMActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                     if (simpleInfo.getStatus() == 1) {
+                        finish();
                         Intent intent = new Intent();
                         intent.setClass(WangJiMMActivity.this, DengLuActivity.class);
                         intent.putExtra(Constant.INTENT_KEY.PHONE, mPhone_sms);
