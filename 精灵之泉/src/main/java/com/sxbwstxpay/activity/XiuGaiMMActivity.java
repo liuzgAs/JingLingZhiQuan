@@ -20,7 +20,6 @@ import com.sxbwstxpay.util.AppUtil;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
-import com.sxbwstxpay.util.StringUtil;
 
 import java.util.HashMap;
 
@@ -117,8 +116,8 @@ public class XiuGaiMMActivity extends ZjbBaseActivity implements View.OnClickLis
                     editNewuserPwd02.setText("");
                     return;
                 }
-                if (!StringUtil.isPassword(editNewuserPwd01.getText().toString().trim())) {
-                    Toast.makeText(XiuGaiMMActivity.this, "密码太简单", Toast.LENGTH_SHORT).show();
+                if (editNewuserPwd01.getText().toString().trim().length()<6) {
+                    Toast.makeText(XiuGaiMMActivity.this, "密码不能小于6位", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 showLoadingDialog();

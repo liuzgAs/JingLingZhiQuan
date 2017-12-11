@@ -99,7 +99,7 @@ public class TXActivity extends ZjbBaseActivity implements View.OnClickListener 
                     Toast.makeText(this, "请输入正确的金额", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (Double.parseDouble(editJinE.getText().toString().trim()) >= userIncomeMx.getAmount()) {
+                if (Double.parseDouble(editJinE.getText().toString().trim()) > userIncomeMx.getAmount()) {
                     Toast.makeText(this, "可提现额度为" + userIncomeMx.getAmount(), Toast.LENGTH_SHORT).show();
                     editJinE.setText(userIncomeMx.getAmount() + "");
                     editJinE.setSelection((userIncomeMx.getAmount() + "").length());
