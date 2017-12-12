@@ -3,7 +3,6 @@ package com.sxbwstxpay.activity.imagepicker;
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.widget.Toast;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.view.SystemBarTintManager;
-import com.sxbwstxpay.activity.LockActivity;
 import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.UserInfo;
@@ -115,9 +113,9 @@ public abstract class ImageBaseActivity extends AppCompatActivity {
             isBackground = false;
             boolean activityTop = isActivityTop(cls, this);
             if (!TextUtils.isEmpty(paintPassword)&&activityTop&&!isChoosePic){
-                Intent intent = new Intent();
-                intent.setClass(this, LockActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(this, LockActivity.class);
+//                startActivity(intent);
             }
         }
         super.onStart();
