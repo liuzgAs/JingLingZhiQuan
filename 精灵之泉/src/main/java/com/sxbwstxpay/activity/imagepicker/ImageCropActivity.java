@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.util.BitmapUtil;
 import com.lzy.imagepicker.view.CropImageView;
@@ -40,21 +39,18 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_crop);
-        init(ImageCropActivity.class);
+        setContentView(com.lzy.imagepicker.R.layout.activity_image_crop);
+
         imagePicker = ImagePicker.getInstance();
 
-        TextView textTip = (TextView) findViewById(R.id.textTip);
-        textTip.setRotation(90f);
-
         //初始化View
-        findViewById(R.id.btn_back).setOnClickListener(this);
-        Button btn_ok = (Button) findViewById(R.id.btn_ok);
-        btn_ok.setText(getString(R.string.ip_complete));
+        findViewById(com.lzy.imagepicker.R.id.btn_back).setOnClickListener(this);
+        Button btn_ok = (Button) findViewById(com.lzy.imagepicker.R.id.btn_ok);
+        btn_ok.setText(getString(com.lzy.imagepicker.R.string.ip_complete));
         btn_ok.setOnClickListener(this);
-        TextView tv_des = (TextView) findViewById(R.id.tv_des);
-        tv_des.setText(getString(R.string.ip_photo_crop));
-        mCropImageView = (CropImageView) findViewById(R.id.cv_crop_image);
+        TextView tv_des = (TextView) findViewById(com.lzy.imagepicker.R.id.tv_des);
+        tv_des.setText(getString(com.lzy.imagepicker.R.string.ip_photo_crop));
+        mCropImageView = (CropImageView) findViewById(com.lzy.imagepicker.R.id.cv_crop_image);
         mCropImageView.setOnBitmapSaveCompleteListener(this);
 
         //获取需要的参数
@@ -100,10 +96,10 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_back) {
+        if (id == com.lzy.imagepicker.R.id.btn_back) {
             setResult(RESULT_CANCELED);
             finish();
-        } else if (id == R.id.btn_ok) {
+        } else if (id == com.lzy.imagepicker.R.id.btn_ok) {
             mCropImageView.saveBitmapToFile(imagePicker.getCropCacheFolder(this), mOutputX, mOutputY, mIsSaveRectangle);
         }
     }
@@ -137,35 +133,5 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
             mBitmap.recycle();
             mBitmap = null;
         }
-    }
-
-    @Override
-    protected void initSP() {
-
-    }
-
-    @Override
-    protected void initIntent() {
-
-    }
-
-    @Override
-    protected void findID() {
-
-    }
-
-    @Override
-    protected void initViews() {
-
-    }
-
-    @Override
-    protected void setListeners() {
-
-    }
-
-    @Override
-    protected void initData() {
-
     }
 }

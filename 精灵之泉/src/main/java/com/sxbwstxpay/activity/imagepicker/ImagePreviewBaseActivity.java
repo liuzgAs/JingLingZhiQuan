@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImagePageAdapter;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.util.Utils;
@@ -41,8 +40,8 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_preview);
-        init(ImagePreviewActivity.class);
+        setContentView(com.lzy.imagepicker.R.layout.activity_image_preview);
+
         mCurrentPosition = getIntent().getIntExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, 0);
         isFromItems = getIntent().getBooleanExtra(ImagePicker.EXTRA_FROM_ITEMS, false);
 
@@ -58,26 +57,26 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         selectedImages = imagePicker.getSelectedImages();
 
         //初始化控件
-        content = findViewById(R.id.content);
+        content = findViewById(com.lzy.imagepicker.R.id.content);
 
         //因为状态栏透明后，布局整体会上移，所以给头部加上状态栏的margin值，保证头部不会被覆盖
-        topBar = findViewById(R.id.top_bar);
+        topBar = findViewById(com.lzy.imagepicker.R.id.top_bar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) topBar.getLayoutParams();
             params.topMargin = Utils.getStatusHeight(this);
             topBar.setLayoutParams(params);
         }
-        topBar.findViewById(R.id.btn_ok).setVisibility(View.GONE);
-        topBar.findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+        topBar.findViewById(com.lzy.imagepicker.R.id.btn_ok).setVisibility(View.GONE);
+        topBar.findViewById(com.lzy.imagepicker.R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        mTitleCount = (TextView) findViewById(R.id.tv_des);
+        mTitleCount = (TextView) findViewById(com.lzy.imagepicker.R.id.tv_des);
 
-        mViewPager = (ViewPagerFixed) findViewById(R.id.viewpager);
+        mViewPager = (ViewPagerFixed) findViewById(com.lzy.imagepicker.R.id.viewpager);
         mAdapter = new ImagePageAdapter(this, mImageItems);
         mAdapter.setPhotoViewClickListener(new ImagePageAdapter.PhotoViewClickListener() {
             @Override
@@ -89,7 +88,7 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         mViewPager.setCurrentItem(mCurrentPosition, false);
 
         //初始化当前页面的状态
-        mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
+        mTitleCount.setText(getString(com.lzy.imagepicker.R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
     }
 
     /** 单击时，隐藏头和尾 */

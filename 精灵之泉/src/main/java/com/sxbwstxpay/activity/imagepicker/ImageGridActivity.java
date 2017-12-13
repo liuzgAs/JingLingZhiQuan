@@ -21,7 +21,6 @@ import android.widget.TextView;
 import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImageFolderAdapter;
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -46,7 +45,7 @@ import java.util.List;
  *         新增可直接传递是否裁剪参数，以及直接拍照
  *         ================================================
  */
-public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, ImagePicker.OnImageSelectedListener, View.OnClickListener, ImageRecyclerAdapter.OnImageItemClickListener {
+public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, ImageRecyclerAdapter.OnImageItemClickListener, ImagePicker.OnImageSelectedListener, View.OnClickListener {
 
     public static final int REQUEST_PERMISSION_STORAGE = 0x01;
     public static final int REQUEST_PERMISSION_CAMERA = 0x02;
@@ -84,8 +83,8 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_grid);
-        init(ImageGridActivity.class);
+        setContentView(com.lzy.imagepicker.R.layout.activity_image_grid);
+
         imagePicker = ImagePicker.getInstance();
         imagePicker.clear();
         imagePicker.addOnImageSelectedListener(this);
@@ -105,17 +104,17 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             imagePicker.setSelectedImages(images);
         }
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
+        mRecyclerView = (RecyclerView) findViewById(com.lzy.imagepicker.R.id.recycler);
 
-        findViewById(R.id.btn_back).setOnClickListener(this);
-        mBtnOk = (Button) findViewById(R.id.btn_ok);
+        findViewById(com.lzy.imagepicker.R.id.btn_back).setOnClickListener(this);
+        mBtnOk = (Button) findViewById(com.lzy.imagepicker.R.id.btn_ok);
         mBtnOk.setOnClickListener(this);
-        mBtnPre = (TextView) findViewById(R.id.btn_preview);
+        mBtnPre = (TextView) findViewById(com.lzy.imagepicker.R.id.btn_preview);
         mBtnPre.setOnClickListener(this);
-        mFooterBar = findViewById(R.id.footer_bar);
-        mllDir = findViewById(R.id.ll_dir);
+        mFooterBar = findViewById(com.lzy.imagepicker.R.id.footer_bar);
+        mllDir = findViewById(com.lzy.imagepicker.R.id.ll_dir);
         mllDir.setOnClickListener(this);
-        mtvDir = (TextView) findViewById(R.id.tv_dir);
+        mtvDir = (TextView) findViewById(com.lzy.imagepicker.R.id.tv_dir);
         if (imagePicker.isMultiMode()) {
             mBtnOk.setVisibility(View.VISIBLE);
             mBtnPre.setVisibility(View.VISIBLE);
@@ -166,44 +165,14 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     }
 
     @Override
-    protected void initSP() {
-
-    }
-
-    @Override
-    protected void initIntent() {
-
-    }
-
-    @Override
-    protected void findID() {
-
-    }
-
-    @Override
-    protected void initViews() {
-
-    }
-
-    @Override
-    protected void setListeners() {
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_ok) {
+        if (id == com.lzy.imagepicker.R.id.btn_ok) {
             Intent intent = new Intent();
             intent.putExtra(ImagePicker.EXTRA_RESULT_ITEMS, imagePicker.getSelectedImages());
             setResult(ImagePicker.RESULT_CODE_ITEMS, intent);  //多选不允许裁剪裁剪，返回数据
             finish();
-        } else if (id == R.id.ll_dir) {
+        } else if (id == com.lzy.imagepicker.R.id.ll_dir) {
             if (mImageFolders == null) {
                 Log.i("ImageGridActivity", "您的手机没有图片");
                 return;
@@ -220,14 +189,14 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                 index = index == 0 ? index : index - 1;
                 mFolderPopupWindow.setSelection(index);
             }
-        } else if (id == R.id.btn_preview) {
+        } else if (id == com.lzy.imagepicker.R.id.btn_preview) {
             Intent intent = new Intent(ImageGridActivity.this, ImagePreviewActivity.class);
             intent.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, 0);
             intent.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, imagePicker.getSelectedImages());
             intent.putExtra(ImagePreviewActivity.ISORIGIN, isOrigin);
             intent.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
             startActivityForResult(intent, ImagePicker.REQUEST_CODE_PREVIEW);
-        } else if (id == R.id.btn_back) {
+        } else if (id == com.lzy.imagepicker.R.id.btn_back) {
             //点击返回按钮
             finish();
         }
@@ -314,19 +283,19 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     @Override
     public void onImageSelected(int position, ImageItem item, boolean isAdd) {
         if (imagePicker.getSelectImageCount() > 0) {
-            mBtnOk.setText(getString(R.string.ip_select_complete, imagePicker.getSelectImageCount(), imagePicker.getSelectLimit()));
+            mBtnOk.setText(getString(com.lzy.imagepicker.R.string.ip_select_complete, imagePicker.getSelectImageCount(), imagePicker.getSelectLimit()));
             mBtnOk.setEnabled(true);
             mBtnPre.setEnabled(true);
-            mBtnPre.setText(getResources().getString(R.string.ip_preview_count, imagePicker.getSelectImageCount()));
-            mBtnPre.setTextColor(ContextCompat.getColor(this, R.color.ip_text_primary_inverted));
-            mBtnOk.setTextColor(ContextCompat.getColor(this, R.color.ip_text_primary_inverted));
+            mBtnPre.setText(getResources().getString(com.lzy.imagepicker.R.string.ip_preview_count, imagePicker.getSelectImageCount()));
+            mBtnPre.setTextColor(ContextCompat.getColor(this, com.lzy.imagepicker.R.color.ip_text_primary_inverted));
+            mBtnOk.setTextColor(ContextCompat.getColor(this, com.lzy.imagepicker.R.color.ip_text_primary_inverted));
         } else {
-            mBtnOk.setText(getString(R.string.ip_complete));
+            mBtnOk.setText(getString(com.lzy.imagepicker.R.string.ip_complete));
             mBtnOk.setEnabled(false);
             mBtnPre.setEnabled(false);
-            mBtnPre.setText(getResources().getString(R.string.ip_preview));
-            mBtnPre.setTextColor(ContextCompat.getColor(this, R.color.ip_text_secondary_inverted));
-            mBtnOk.setTextColor(ContextCompat.getColor(this, R.color.ip_text_secondary_inverted));
+            mBtnPre.setText(getResources().getString(com.lzy.imagepicker.R.string.ip_preview));
+            mBtnPre.setTextColor(ContextCompat.getColor(this, com.lzy.imagepicker.R.color.ip_text_secondary_inverted));
+            mBtnOk.setTextColor(ContextCompat.getColor(this, com.lzy.imagepicker.R.color.ip_text_secondary_inverted));
         }
 //        mImageGridAdapter.notifyDataSetChanged();
 //        mRecyclerAdapter.notifyItemChanged(position); // 17/4/21 fix the position while click img to preview
