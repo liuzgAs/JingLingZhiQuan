@@ -8,7 +8,7 @@ import com.sxbwstxpay.util.AppUtil;
  */
 public class Constant {
     //        public static String HOST = "http://192.168.1.181/index.php?key=" + AppUtil.getMD5Time();
-    public static String HOST = "http://api.jlzquan.com/index.php?key=" + AppUtil.getMD5Time();
+    public static String HOST = "https://img.jlzquan.com/index.php?key=" + AppUtil.getMD5Time();
     public static int MainActivityAlive = 0;
     public static int changeControl = 2017;//判断数据是否有改变
     public static String WXAPPID = "wxfef0031f5d8f3ed0";//微信appid
