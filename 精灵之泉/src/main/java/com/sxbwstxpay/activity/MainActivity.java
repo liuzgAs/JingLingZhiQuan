@@ -206,6 +206,10 @@ public class MainActivity extends AppCompatActivity {
         if (extramap != null) {
             Intent intent = new Intent();
             switch (extramap.getCode()) {
+                case "app_notice":
+                    intent.setClass(this, WoDeZDActivity.class);
+                    startActivity(intent);
+                    break;
                 case "app_pay":
                     mTabHost.setCurrentTab(2);
                     break;
