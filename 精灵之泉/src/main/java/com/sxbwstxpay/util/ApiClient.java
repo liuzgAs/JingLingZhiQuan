@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-
 import com.sxbwstxpay.model.OkObject;
 
 import java.util.HashMap;
@@ -27,6 +26,9 @@ public class ApiClient {
         HashMap<String, String> params = okObject.getParams();
         params.put("platform","android");
         params.put("version",VersionUtils.getCurrVersion(context)+"");
+        String formatUrlMap = ASCIIUtil.formatUrlMap(params);
+        String md5 = AppUtil.getMD5(formatUrlMap);
+        params.put("sign",md5);
         okObject.setParams(params);
         LogUtil.LogShitou("ApiClient--发送", "" + okObject.getJson());
         OkGo.post(okObject.getUrl())//

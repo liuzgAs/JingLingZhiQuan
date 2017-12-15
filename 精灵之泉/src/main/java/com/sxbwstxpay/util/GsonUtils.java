@@ -1,8 +1,10 @@
 package com.sxbwstxpay.util;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 
 public final class GsonUtils {
 
@@ -32,4 +34,9 @@ public final class GsonUtils {
 	}
 	
 	private GsonUtils(){}
+
+	public static HashMap<String,String> Json2Map(String json){
+		HashMap<String,String> map = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>(){}.getType());
+		return map;
+	}
 }
