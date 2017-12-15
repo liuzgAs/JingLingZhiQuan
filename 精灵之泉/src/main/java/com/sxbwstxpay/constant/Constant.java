@@ -193,6 +193,14 @@ public class Constant {
         public static final String ITEM_ADDAFTER = "&g=App&m=Item&a=addAfter";
         //商品素材
         public static final String ITEM_INDEX = "&g=App&m=Item&a=index";
+        /**
+         * 新通道信用卡支付短信请求
+         */
+        public static final String ORDER_BANKORDERBEFORE = "&g=App&m=Order&a=bankOrderBefore";
+        /**
+         * 新增信用卡支付验证码提交
+         */
+        public static final String ORDER_CARDBINDSUBMIT = "&g=App&m=Order&a=cardBindSubmit";
     }
 
     public static class PERMISSION {

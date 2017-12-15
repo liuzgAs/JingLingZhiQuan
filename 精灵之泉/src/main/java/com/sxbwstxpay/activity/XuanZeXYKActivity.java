@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sxbwstxpay.R;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -23,9 +22,11 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
+import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.BankBankorderbefore;
 import com.sxbwstxpay.model.BankCardlist;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.SimpleInfo;
@@ -124,10 +125,14 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
         });
         recyclerView.setRefreshListener(this);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            private String oid;
+            private BankCardlist.DataBean dataBean;
             private TextView buttonSms;
             private Runnable mR;
             private int[] mI;
             private String youXiaoQi;
+            private StringBuffer nameTiJiao;
+            private StringBuffer phoneTiJiao;
 
             @Override
             public void onItemClick(int position) {
@@ -135,7 +140,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                     MyDialog.showTipDialog(XuanZeXYKActivity.this, "单卡限额" + adapter.getItem(position).getMaxAmount() + "\n本次限额" + adapter.getItem(position).getLimitAmount());
                     return;
                 }
-                final BankCardlist.DataBean dataBean = adapter.getItem(position);
+                dataBean = adapter.getItem(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(XuanZeXYKActivity.this, R.style.mydialog);
                 View view = LayoutInflater.from(XuanZeXYKActivity.this).inflate(R.layout.dialog_zhi_fu, null);
                 final TextView textYouXiaoQi = (TextView) view.findViewById(R.id.textYouXiaoQi);
@@ -189,41 +194,6 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                 buttonSms.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sendSMS(phone);
-                    }
-                });
-                sendSMS(phone);
-                buttonZhiFu.setOnClickListener(new View.OnClickListener() {
-
-                    private StringBuffer nameTiJiao;
-                    private StringBuffer phoneTiJiao;
-
-                    /**
-                     * des： 网络请求参数
-                     * author： ZhangJieBo
-                     * date： 2017/8/28 0028 上午 9:55
-                     */
-                    private OkObject getOkObjectTiJiao() {
-                        String url = Constant.HOST + Constant.Url.ORDER_NEWORDER;
-                        HashMap<String, String> params = new HashMap<>();
-                        params.put("uid", userInfo.getUid());
-                        params.put("tokenTime", tokenTime);
-                        params.put("payId", tongDaoId);
-                        params.put("baknId", id);
-                        params.put("baknId2", dataBean.getId());
-                        params.put("orderAmount", amount);
-                        params.put("name", nameTiJiao.toString().trim());
-                        params.put("phone", phoneTiJiao.toString().trim());
-                        params.put("code", editCode.getText().toString().trim());
-                        return new OkObject(params, url);
-                    }
-
-                    @Override
-                    public void onClick(View v) {
-                        if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
-                            Toast.makeText(XuanZeXYKActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
                         if (TextUtils.isEmpty(youXiaoQi)) {
                             Toast.makeText(XuanZeXYKActivity.this, "请选择有效期", Toast.LENGTH_SHORT).show();
                             return;
@@ -233,7 +203,6 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                             Toast.makeText(XuanZeXYKActivity.this, "请输入CVV2银行卡背面的3位数", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        showLoadingDialog();
 
                         SimpleDateFormat sf = new SimpleDateFormat("yyMMdd");
                         Date d = new Date(System.currentTimeMillis());
@@ -261,6 +230,48 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                         for (int i = 1; i < md5NameArr.length; i++) {
                             nameTiJiao.append(md5NameArr[i]);
                         }
+                        sendSMS();
+                    }
+                });
+//                sendSMS(phone);
+                buttonZhiFu.setOnClickListener(new View.OnClickListener() {
+
+
+                    /**
+                     * des： 网络请求参数
+                     * author： ZhangJieBo
+                     * date： 2017/8/28 0028 上午 9:55
+                     */
+                    private OkObject getOkObjectTiJiao() {
+                        String url = Constant.HOST + Constant.Url.ORDER_CARDBINDSUBMIT;
+                        HashMap<String, String> params = new HashMap<>();
+                        params.put("uid", userInfo.getUid());
+                        params.put("tokenTime", tokenTime);
+                        params.put("oid", oid);
+                        params.put("code", editCode.getText().toString().trim());
+                        return new OkObject(params, url);
+                    }
+
+                    @Override
+                    public void onClick(View v) {
+                        if (TextUtils.isEmpty(youXiaoQi)) {
+                            Toast.makeText(XuanZeXYKActivity.this, "请选择有效期", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        String cvv2 = textCVV2.getText().toString().trim();
+                        if (cvv2.length() != 3) {
+                            Toast.makeText(XuanZeXYKActivity.this, "请输入CVV2银行卡背面的3位数", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
+                            Toast.makeText(XuanZeXYKActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (TextUtils.isEmpty(oid)) {
+                            Toast.makeText(XuanZeXYKActivity.this, "获取短信失败", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        showLoadingDialog();
 
                         ApiClient.post(XuanZeXYKActivity.this, getOkObjectTiJiao(), new ApiClient.CallBack() {
                             @Override
@@ -316,7 +327,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
              * author： ZhangJieBo
              * date： 2017/8/22 0022 上午 10:26
              */
-            private void sendSMS(String phone) {
+            private void sendSMS() {
                 buttonSms.removeCallbacks(mR);
                 buttonSms.setEnabled(false);
                 mI = new int[]{60};
@@ -336,7 +347,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                     }
                 };
                 buttonSms.postDelayed(mR, 0);
-                getSms(phone);
+                getSms();
             }
 
             /**
@@ -344,11 +355,17 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
              * author： ZhangJieBo
              * date： 2017/8/28 0028 上午 9:55
              */
-            private OkObject getOkObject1(String phone) {
-                String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
+            private OkObject getOkObject1() {
+                String url = Constant.HOST + Constant.Url.ORDER_BANKORDERBEFORE;
                 HashMap<String, String> params = new HashMap<>();
-                params.put("userName", phone);
-                params.put("type", "3");
+                params.put("uid", userInfo.getUid());
+                params.put("tokenTime", tokenTime);
+                params.put("payId", tongDaoId);
+                params.put("baknId", id);
+                params.put("baknId2", dataBean.getId());
+                params.put("orderAmount", amount);
+                params.put("name", nameTiJiao.toString().trim());
+                params.put("phone", phoneTiJiao.toString().trim());
                 return new OkObject(params, url);
             }
 
@@ -358,18 +375,18 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
              * author： ZhangJieBo
              * date： 2017/9/11 0011 下午 4:32
              */
-            private void getSms(String phone) {
+            private void getSms() {
                 showLoadingDialog();
-                ApiClient.post(XuanZeXYKActivity.this, getOkObject1(phone), new ApiClient.CallBack() {
+                ApiClient.post(XuanZeXYKActivity.this, getOkObject1(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         cancelLoadingDialog();
                         LogUtil.LogShitou("RenZhengFragment--获取短信", "" + s);
                         try {
-                            SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                            Toast.makeText(XuanZeXYKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
-                            if (simpleInfo.getStatus() == 1) {
-
+                            BankBankorderbefore bankBankorderbefore = GsonUtils.parseJSON(s, BankBankorderbefore.class);
+                            Toast.makeText(XuanZeXYKActivity.this, bankBankorderbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                            if (bankBankorderbefore.getStatus() == 1) {
+                                oid = bankBankorderbefore.getOid();
                             }
                         } catch (Exception e) {
                             Toast.makeText(XuanZeXYKActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
