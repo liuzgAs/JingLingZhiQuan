@@ -201,6 +201,10 @@ public class Constant {
          * 新增信用卡支付验证码提交
          */
         public static final String ORDER_CARDBINDSUBMIT = "&g=App&m=Order&a=cardBindSubmit";
+        /**
+         * 新通道添加银行卡短信请求
+         */
+        public static final String BANK_CARDBINDBEFORE = "&g=App&m=Bank&a=cardBindBefore";
     }
 
     public static class PERMISSION {
