@@ -122,7 +122,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                     BankCardaddbefore bankCardaddbefore = GsonUtils.parseJSON(s, BankCardaddbefore.class);
                     if (bankCardaddbefore.getStatus() == 1) {
                         bankCardaddbeforeData = bankCardaddbefore.getData();
-                        if (!TextUtils.isEmpty(bankCardaddbefore.getName())) {
+                        if (!TextUtils.isEmpty(bankCardaddbefore.getName())){
                             editName.setText(bankCardaddbefore.getName());
                             editName.setEnabled(false);
                         }
@@ -151,27 +151,6 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.buttonSms:
-                if (TextUtils.isEmpty(editName.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKActivity.this, "请输入真实姓名", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
-                if (!checkIdCard.validate()) {
-                    Toast.makeText(XinZengYHKActivity.this, "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(id)) {
-                    Toast.makeText(XinZengYHKActivity.this, "请选择开户银行", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editBankCard.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKActivity.this, "请输入持卡人卡号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(editPhone.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKActivity.this, "请输入银行预留手机号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 sendSMS();
                 break;
             case R.id.buttonTiJiao:
@@ -179,8 +158,8 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                     Toast.makeText(XinZengYHKActivity.this, "请输入真实姓名", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                CheckIdCard checkIdCard1 = new CheckIdCard(editCard.getText().toString().trim());
-                if (!checkIdCard1.validate()) {
+                CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
+                if (!checkIdCard.validate()) {
                     Toast.makeText(XinZengYHKActivity.this, "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -215,8 +194,6 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
                         id = bankBean.getId();
                     }
                 }).show();
-                break;
-            default:
                 break;
         }
 
@@ -263,13 +240,10 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObject1() {
-        String url = Constant.HOST + Constant.Url.BANK_CARDBINDBEFORE;
+        String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid() );
-        params.put("type", type + "");
-        params.put("tokenTime", tokenTime);
-        params.put("bankCard", editBankCard.getText().toString().trim());
-        params.put("phone", editPhone.getText().toString().trim());
+        params.put("userName", mPhone_sms);
+        params.put("type", type+"");
         return new OkObject(params, url);
     }
 
@@ -315,11 +289,10 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
-        params.put("type", type + "");
-        params.put("bankCard", editBankCard.getText().toString().trim());
-        params.put("phone", editPhone.getText().toString().trim());
         params.put("name", editName.getText().toString().trim());
         params.put("card", editCard.getText().toString().trim());
+        params.put("phone", editPhone.getText().toString().trim());
+        params.put("bankCard", editBankCard.getText().toString().trim());
         params.put("bank", id + "");
         params.put("code", editCode.getText().toString().trim());
         return new OkObject(params, url);

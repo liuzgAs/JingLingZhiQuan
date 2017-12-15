@@ -267,16 +267,12 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                             Toast.makeText(XuanZeXYKActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        if (TextUtils.isEmpty(oid)) {
-                            Toast.makeText(XuanZeXYKActivity.this, "获取短信失败", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
                         showLoadingDialog();
 
                         ApiClient.post(XuanZeXYKActivity.this, getOkObjectTiJiao(), new ApiClient.CallBack() {
                             @Override
                             public void onSuccess(String s) {
-                                LogUtil.LogShitou("XuanZeXYKActivity--onSuccess", "");
+                                LogUtil.LogShitou("XuanZeXYKActivity--onSuccess", "aaaaa"+s);
                                 try {
                                     cancelLoadingDialog();
                                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
