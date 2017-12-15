@@ -331,7 +331,7 @@ public class XinZengYHKActivity extends ZjbBaseActivity implements View.OnClickL
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("XinZengYHKActivity--onSuccess", "");
+                LogUtil.LogShitou("XinZengYHKActivity--onSuccess", s+"");
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     if (simpleInfo.getStatus() == 1) {
