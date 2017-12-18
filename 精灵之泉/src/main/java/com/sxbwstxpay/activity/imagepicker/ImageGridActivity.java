@@ -164,6 +164,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         super.onDestroy();
     }
 
+
     @Override
     public void onClick(View v) {
         int id = v.getId();

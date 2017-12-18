@@ -134,4 +134,5 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
             mBitmap = null;
         }
     }
+
 }

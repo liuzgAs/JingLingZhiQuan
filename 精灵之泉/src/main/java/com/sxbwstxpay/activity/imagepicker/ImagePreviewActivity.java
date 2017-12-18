@@ -199,6 +199,7 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
         super.onDestroy();
     }
 
+
     /**
      * 单击时，隐藏头和尾
      */
