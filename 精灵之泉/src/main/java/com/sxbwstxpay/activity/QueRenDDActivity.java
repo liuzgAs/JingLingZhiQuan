@@ -59,6 +59,9 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                 case Constant.BROADCASTCODE.zhiFuGuanBi:
                     finish();
                     break;
+                case Constant.BROADCASTCODE.address:
+                    onRefresh();
+                    break;
             }
         }
     };
@@ -244,6 +247,9 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                     if (cartOrder.getStatus() == 1) {
                         is_address = cartOrder.getIs_address();
                         cartOrderAd = cartOrder.getAd();
+                        if (cartOrderAd==null){
+                            cartOrderAd = new CartOrder.AdBean();
+                        }
                         List<CartOrder.CartBean> cartOrderCart = cartOrder.getCart();
                         adapter.clear();
                         adapter.addAll(cartOrderCart);

@@ -101,31 +101,34 @@ public class DiZhiGLViewHolder extends BaseViewHolder<UserAddress.DataBean> {
      */
     private void delete() {
         ((DiZhiGLActivity) getContext()).showLoadingDialog();
-       ApiClient.post(getContext(), getOkObjectDelete(), new ApiClient.CallBack() {
-           @Override
-           public void onSuccess(String s) {
-               ((DiZhiGLActivity) getContext()).cancelLoadingDialog();
-               LogUtil.LogShitou("DiZhiGLViewHolder--删除地址", s+"");
-               try {
-                   SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                   if (simpleInfo.getStatus()==1){
-                       ((DiZhiGLActivity) getContext()).adapter.remove(getDataPosition());
-                   }else if (simpleInfo.getStatus()==3){
-                       MyDialog.showReLoginDialog(getContext());
-                   }else {
-                       Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
-                   }
-               } catch (Exception e) {
-                   Toast.makeText(getContext(),"数据出错", Toast.LENGTH_SHORT).show();
-               }
-           }
-       
-           @Override
-           public void onError(Response response) {
-               ((DiZhiGLActivity) getContext()).cancelLoadingDialog();
-               Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
-           }
-       }); 
+        ApiClient.post(getContext(), getOkObjectDelete(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                ((DiZhiGLActivity) getContext()).cancelLoadingDialog();
+                LogUtil.LogShitou("DiZhiGLViewHolder--删除地址", s+"");
+                try {
+                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                    if (simpleInfo.getStatus()==1){
+                        ((DiZhiGLActivity) getContext()).adapter.remove(getDataPosition());
+                        Intent intent = new Intent();
+                        intent.setAction(Constant.BROADCASTCODE.address);
+                        getContext().sendBroadcast(intent);
+                    }else if (simpleInfo.getStatus()==3){
+                        MyDialog.showReLoginDialog(getContext());
+                    }else {
+                        Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getContext(),"数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                ((DiZhiGLActivity) getContext()).cancelLoadingDialog();
+                Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**
