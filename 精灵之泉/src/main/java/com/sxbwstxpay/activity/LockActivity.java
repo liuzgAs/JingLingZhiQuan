@@ -81,8 +81,8 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
 
     @Override
     protected void initViews() {
-        if (userInfo!=null){
-            if (!TextUtils.isEmpty(userInfo.getHeadImg())){
+        if (userInfo != null) {
+            if (!TextUtils.isEmpty(userInfo.getHeadImg())) {
                 Glide.with(LockActivity.this)
                         .load(userInfo.getHeadImg())
                         .bitmapTransform(new CropCircleTransformation(this))
@@ -104,7 +104,8 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
             mTextView_tip.setText("请验证手势密码");
         }
         if (!TextUtils.isEmpty(shezhi)) {
-            mTextView_tip.setText("请验证手势密码");
+            isFrist = true;
+//            mTextView_tip.setText("请验证手势密码");
             textSkip.setVisibility(View.GONE);
             textOhter.setVisibility(View.GONE);
         }
@@ -113,10 +114,12 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
     @Override
     protected void setListeners() {
         mLock9View.setCallBack(new Lock9View.CallBack() {
+
             @Override
             public void onFinish(String password) {
-                if (isFrist) {
-                    if (password.length() >= 4 && password.length() <= 9) {
+                if (password.length() >= 4 && password.length() <= 9) {
+
+                    if (isFrist) {
                         if (paintCount == 0) {
                             mPassword = password;
                             mTextView_tip.setText("请再次绘制");
@@ -133,45 +136,48 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
                             }
                         }
 
-                    } else if (password.length() > 9) {
-                        mTextView_tip.setText("连接的点过多，请重新绘制");
                     } else {
-                        mTextView_tip.setText("请连接至少四个点");
-                    }
-                } else {
-                    if (password.equals(mPaintPassword)) {
-                        if (!TextUtils.isEmpty(isFristAQ)) {
-                            mTextView_tip.setText("设置手势密码");
-                            isFrist = true;
+                        if (password.equals(mPaintPassword)) {
+                            if (!TextUtils.isEmpty(isFristAQ)) {
+                                mTextView_tip.setText("设置手势密码");
+                                isFrist = true;
+                            } else {
+                                if (!TextUtils.isEmpty(guanBi)) {
+                                    ACache aCache = ACache.get(LockActivity.this, Constant.ACACHE.App);
+                                    aCache.put(Constant.ACACHE.PAINT_PASSWORD, "");
+                                    startToMainAvtivity();
+                                } else {
+                                    startToMainAvtivity();
+                                }
+                            }
                         } else {
-                            if (!TextUtils.isEmpty(guanBi)){
-                                ACache aCache = ACache.get(LockActivity.this, Constant.ACACHE.App);
-                                aCache.put(Constant.ACACHE.PAINT_PASSWORD, "");
-                                startToMainAvtivity();
-                            }else {
-                                startToMainAvtivity();
+                            paintCount01++;
+                            switch (paintCount01) {
+                                case 1:
+                                    mTextView_tip.setText("错误，还有四次输入机会");
+                                    break;
+                                case 2:
+                                    mTextView_tip.setText("错误，还有三次输入机会");
+                                    break;
+                                case 3:
+                                    mTextView_tip.setText("错误，还有两次输入机会");
+                                    break;
+                                case 4:
+                                    mTextView_tip.setText("错误，还有一次输入机会");
+                                    break;
+                                case 5:
+                                    ToLoginActivity.toLoginActivity(LockActivity.this);
+                                    break;
+                                default:
+                                    break;
                             }
                         }
-                    } else {
-                        paintCount01++;
-                        switch (paintCount01) {
-                            case 1:
-                                mTextView_tip.setText("错误，还有四次输入机会");
-                                break;
-                            case 2:
-                                mTextView_tip.setText("错误，还有三次输入机会");
-                                break;
-                            case 3:
-                                mTextView_tip.setText("错误，还有两次输入机会");
-                                break;
-                            case 4:
-                                mTextView_tip.setText("错误，还有一次输入机会");
-                                break;
-                            case 5:
-                                ToLoginActivity.toLoginActivity(LockActivity.this);
-                                break;
-                        }
                     }
+
+                } else if (password.length() > 9) {
+                    mTextView_tip.setText("连接的点过多，请重新绘制");
+                } else {
+                    mTextView_tip.setText("请连接至少四个点");
                 }
             }
         });
