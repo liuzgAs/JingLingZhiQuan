@@ -207,7 +207,11 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
     @Override
     public void onBackPressed() {
         if (!TextUtils.isEmpty(isFristAQ)) {
-            finish();
+            if (textSkip.getVisibility()==View.VISIBLE){
+                startToMainAvtivity();
+            }else {
+                finish();
+            }
         } else {
             MyApplication.getInstance().exit();
         }
