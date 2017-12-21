@@ -14,11 +14,13 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:gravity="bottom"
+        android:background="@color/tranblack"
         android:minHeight="?attr/actionBarSize"
         android:orientation="vertical">
 
 
         <RelativeLayout
+            android:background="@color/background"
             android:layout_width="match_parent"
             android:layout_height="@dimen/titleHeight">
 
