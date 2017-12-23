@@ -125,9 +125,11 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         String url = Constant.HOST + Constant.Url.LOGIN_INDEX;
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", editPhone.getText().toString().trim());
+//        params.put("userName", "18992866686");
         params.put("userPwd", AppUtil.getMD5(AppUtil.getMD5(editPsw.getText().toString().trim()) + "ad"));
-//        params.put("userPwd", "2188b7302afca3ba6b0944b854a71f82");
+//        params.put("userPwd", "e8f5604cab9cf53c96efb3aada6dadac");
         params.put("deviceId", PushServiceFactory.getCloudPushService().getDeviceId());
+//        params.put("deviceId", "2e3515d39d9f4111aaeb7abf5255f4f0");
         params.put("deviceToken", "");
         params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
