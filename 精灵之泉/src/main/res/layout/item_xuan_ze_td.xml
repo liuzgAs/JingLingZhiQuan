@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/layout_selector_white_system_gray"
    >
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/textDes"
+        android:layout_marginBottom="15dp"
+        android:layout_toRightOf="@+id/imageImg"
+        android:id="@+id/textRateFee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="费率：0.55%    结算：2.00元/笔"
+        android:textColor="@color/basic_color"
+        android:textSize="@dimen/normal_textsize" />
+
+    <TextView
+        android:layout_toLeftOf="@+id/imageView6"
+        android:layout_toRightOf="@+id/imageImg"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/textDes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textName"
+        android:text="单笔2万，8:00-22:00秒到"
+        android:textSize="@dimen/normal_textsize" />
+
+    <TextView
+        android:layout_marginTop="-5dp"
+        android:layout_alignTop="@+id/imageImg"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/imageImg"
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="银联APPD+0"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/MoreBigText" />
+
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:id="@+id/imageImg"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:src="@mipmap/fei_lv_yinlian" />
 
     <ImageView
         android:layout_marginRight="10dp"
@@ -15,71 +59,4 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/imageView6"
-        android:layout_toStartOf="@+id/imageView6">
-
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/fei_lv_yinlian"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageImg"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <RelativeLayout
-                android:layout_marginLeft="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/imageImg"
-                android:layout_toEndOf="@+id/imageImg">
-
-                <TextView
-                    android:textColor="@color/light_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="银联APPD+0"
-                    android:textSize="@dimen/MoreBigText"
-                    android:id="@+id/textName"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:layout_marginTop="2dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="单笔2万，8:00-22:00秒到"
-                    android:textSize="@dimen/normal_textsize"
-                    android:id="@+id/textDes"
-                    android:layout_below="@+id/textName"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <TextView
-            android:textSize="@dimen/normal_textsize"
-            android:textColor="@color/basic_color"
-            android:layout_marginLeft="75dp"
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="费率：0.55%    结算：2.00元/笔"
-            android:id="@+id/textRateFee" />
-    </LinearLayout>
 </RelativeLayout>
