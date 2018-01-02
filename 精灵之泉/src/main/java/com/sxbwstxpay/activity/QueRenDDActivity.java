@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,7 +171,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
             @Override
             public void onBindView(View headerView) {
-                if (is_address==1){
+                if (is_address == 1) {
                     if (cartOrderAd != null) {
                         viewXuanZeSHDZ.setVisibility(View.VISIBLE);
                         textAdd.setVisibility(View.GONE);
@@ -183,7 +182,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         viewXuanZeSHDZ.setVisibility(View.GONE);
                         textAdd.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     viewXuanZeSHDZ.setVisibility(View.GONE);
                     textAdd.setVisibility(View.GONE);
                 }
@@ -218,9 +217,10 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.REQUEST_RESULT_CODE.address && resultCode == Constant.REQUEST_RESULT_CODE.address) {
             UserAddress.DataBean dataBean = (UserAddress.DataBean) data.getSerializableExtra(Constant.INTENT_KEY.value);
-            if (!TextUtils.isEmpty(dataBean.getConsignee())){
-                cartOrderAd.setConsignee(dataBean.getConsignee());
+            if (cartOrderAd==null){
+                cartOrderAd = new CartOrder.AdBean();
             }
+            cartOrderAd.setConsignee(dataBean.getConsignee());
             cartOrderAd.setId(dataBean.getId());
             cartOrderAd.setAddress(dataBean.getAddress());
             cartOrderAd.setArea(dataBean.getArea());
@@ -247,9 +247,6 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                     if (cartOrder.getStatus() == 1) {
                         is_address = cartOrder.getIs_address();
                         cartOrderAd = cartOrder.getAd();
-                        if (cartOrderAd==null){
-                            cartOrderAd = new CartOrder.AdBean();
-                        }
                         List<CartOrder.CartBean> cartOrderCart = cartOrder.getCart();
                         adapter.clear();
                         adapter.addAll(cartOrderCart);
@@ -293,7 +290,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonTiJiao:
-                if (cartOrderAd == null&&is_address==1) {
+                if (cartOrderAd == null && is_address == 1) {
                     Toast.makeText(QueRenDDActivity.this, "请选择收货地址", Toast.LENGTH_SHORT).show();
                     return;
                 }
