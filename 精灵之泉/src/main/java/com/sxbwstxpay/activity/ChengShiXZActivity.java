@@ -19,8 +19,10 @@ import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.SideLetterBar;
 import com.sxbwstxpay.model.IndexCitylist;
+import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.ListViewUtility;
+import com.sxbwstxpay.util.ScreenUtils;
 
 import org.json.JSONObject;
 
@@ -38,6 +40,7 @@ public class ChengShiXZActivity extends ZjbBaseActivity implements View.OnClickL
     private ListView mListview_all_star;
     private MyAdapter mAdapter;
     private List<IndexCitylist.CityEntity> indexCitylistCity = new ArrayList<>();
+    private View viewBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class ChengShiXZActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     protected void findID() {
+        viewBar = findViewById(R.id.viewBar);
         mLetterBar = (SideLetterBar) findViewById(R.id.side_letter_bar);
         mOverlay = (TextView) findViewById(R.id.tv_letter_overlay);
         mListview_all_star = (ListView) findViewById(R.id.listview_all_Star);
@@ -67,6 +71,9 @@ public class ChengShiXZActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     protected void initViews() {
+        ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
+        layoutParams.height = (int)DpUtils.convertDpToPixel(45f,this)+ ScreenUtils.getStatusBarHeight(this);
+        viewBar.setLayoutParams(layoutParams);
         ((TextView) findViewById(R.id.textViewTitle)).setText("城市选择");
         mLetterBar.setOverlay(mOverlay);
     }
