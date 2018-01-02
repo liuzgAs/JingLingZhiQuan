@@ -12,13 +12,15 @@ public class CartNeworderUpload {
     private String tokenTime;
     private String orderAmount;
     private String payMsg;
+    private int useScore;
 
-    public CartNeworderUpload(List<String> cart, String uid, String aid, String tokenTime,String orderAmount,String payMsg) {
+    public CartNeworderUpload(List<String> cart, String uid, String aid, String tokenTime,String orderAmount,String payMsg,int useScore) {
         this.cart = cart;
         this.uid = uid;
         this.aid = aid;
         this.tokenTime = tokenTime;
         this.orderAmount = orderAmount;
         this.payMsg = payMsg;
+        this.useScore = useScore;
     }
 }

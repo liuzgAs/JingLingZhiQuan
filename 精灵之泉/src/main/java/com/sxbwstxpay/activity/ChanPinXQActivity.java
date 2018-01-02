@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -116,6 +117,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
     private ImageView imageBack;
     private Badge badge;
     private View viewGouWuChe;
+    private GoodsInfo goodsInfo;
+    private Button btnDuiHuan;
+    private View viewGouWw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +154,8 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 .setBadgeBackgroundColor(getResources().getColor(R.color.red))
                 .setBadgeGravity(Gravity.END | Gravity.TOP)
                 .setGravityOffset(3f, 0f, true);
+        btnDuiHuan = (Button) findViewById(R.id.btnDuiHuan);
+        viewGouWw = findViewById(R.id.viewGouWw);
     }
 
     @Override
@@ -172,6 +178,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         imageBack.setOnClickListener(this);
         findViewById(R.id.textMai1).setOnClickListener(this);
         findViewById(R.id.textMai2).setOnClickListener(this);
+        btnDuiHuan.setOnClickListener(this);
     }
 
     @Override
@@ -200,6 +207,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(2));
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+            private View viewTuiJian;
+            private ImageView imageGoodType;
+            private TextView textXieGang;
             private TextView textItem_num;
             private TextView textCountdownDes;
             private TextView textCountdown;
@@ -287,11 +297,14 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
-                        intent.putExtra(Constant.INTENT_KEY.id,id);
-                        intent.setClass(ChanPinXQActivity.this,ShangPinScActivity.class);
+                        intent.putExtra(Constant.INTENT_KEY.id, id);
+                        intent.setClass(ChanPinXQActivity.this, ShangPinScActivity.class);
                         startActivity(intent);
                     }
                 });
+                textXieGang = (TextView) header_xhan_pin_xq.findViewById(R.id.textXieGang);
+                imageGoodType = (ImageView) header_xhan_pin_xq.findViewById(R.id.imageGoodType);
+                viewTuiJian = header_xhan_pin_xq.findViewById(R.id.viewTuiJian);
                 return header_xhan_pin_xq;
             }
 
@@ -314,14 +327,26 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     listView01.setAdapter(new MyAdapter(goodsInfoAd.getImgs()));
                     listView02.setAdapter(new MyAdapter(goodsInfoAd.getImgs2()));
                     textTitleChanPin.setText(goodsInfoAd.getTitle());
-                    textPrice.setText("¥" + goodsInfoAd.getPrice());
-                    textGoods_money.setText("赚" + goodsInfoAd.getGoods_money());
+                    if (TextUtils.equals(goodsInfo.getGoodsType(), "score")) {
+                        textPrice.setText(goodsInfo.getScore() + "积分");
+                        imageGoodType.setImageResource(R.mipmap.xianshiduihuan);
+                        textXieGang.setVisibility(View.GONE);
+                        textGoods_money.setVisibility(View.GONE);
+                        viewTuiJian.setVisibility(View.GONE);
+                    } else {
+                        imageGoodType.setImageResource(R.mipmap.xianshiqianggou);
+                        textPrice.setText("¥" + goodsInfoAd.getPrice());
+                        textGoods_money.setText("赚" + goodsInfoAd.getGoods_money());
+                        textXieGang.setVisibility(View.VISIBLE);
+                        textGoods_money.setVisibility(View.VISIBLE);
+                        viewTuiJian.setVisibility(View.VISIBLE);
+                    }
                     textNum.setText("浏览" + goodsInfoAd.getNum() + "次");
                     textSale_add.setText(goodsInfoAd.getSale_add() + "人在售");
                     textStock_num.setText("剩余" + goodsInfoAd.getStock_num() + "库存");
                     countdown = goodsInfoAd.getCountdown();
                     textCountdownDes.setText(goodsInfoAd.getCountdownDes());
-                    textItem_num.setText(goodsInfoAd.getItem_num()+"组");
+                    textItem_num.setText(goodsInfoAd.getItem_num() + "组");
                     LogUtil.LogShitou("ChanPinXQActivity--countdown", "" + countdown);
                     if (timer != null) {
                         timer.cancel();
@@ -457,6 +482,18 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         TextView textTitleDialog = (TextView) dialog_chan_pin.findViewById(R.id.textTitleDialog);
         TextView textPriceDialog = (TextView) dialog_chan_pin.findViewById(R.id.textPriceDialog);
         TextView textZhuan = (TextView) dialog_chan_pin.findViewById(R.id.textZhuan);
+        View viewGouMai = dialog_chan_pin.findViewById(R.id.viewGouMai);
+        Button btnDuiHuanDialog = (Button) dialog_chan_pin.findViewById(R.id.btnDuiHuanDialog);
+        switch (goodsInfo.getGoodsType()) {
+            case "score":
+                viewGouMai.setVisibility(View.GONE);
+                btnDuiHuanDialog.setVisibility(View.VISIBLE);
+                break;
+            default:
+                viewGouMai.setVisibility(View.VISIBLE);
+                btnDuiHuanDialog.setVisibility(View.GONE);
+                break;
+        }
         textTitleDialog.setText(goodsInfoAd.getTitle());
         textPriceDialog.setText("¥" + goodsInfoAd.getPrice());
         textZhuan.setText("赚" + goodsInfoAd.getGoods_money());
@@ -482,6 +519,12 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             }
         });
         dialog_chan_pin.findViewById(R.id.textQuick).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addCar(true);
+            }
+        });
+        btnDuiHuanDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addCar(true);
@@ -606,11 +649,11 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         }
         showLoadingDialog();
         String url = Constant.HOST + Constant.Url.CART_ADDCART;
-        AddCar addCar ;
-        if (quick){
-            addCar = new AddCar(userInfo.getUid(), tokenTime, num + "", id,"1" ,spe_name);
-        }else {
-            addCar = new AddCar(userInfo.getUid(), tokenTime, num + "", id,"0", spe_name);
+        AddCar addCar;
+        if (quick) {
+            addCar = new AddCar(userInfo.getUid(), tokenTime, num + "", id, "1", spe_name);
+        } else {
+            addCar = new AddCar(userInfo.getUid(), tokenTime, num + "", id, "0", spe_name);
         }
         ApiClient.postJson(ChanPinXQActivity.this, url, GsonUtils.parseObject(addCar), new ApiClient.CallBack() {
             @Override
@@ -626,7 +669,7 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                             Intent intent = new Intent();
                             intent.setClass(ChanPinXQActivity.this, QueRenDDActivity.class);
                             List<CartIndex.CartBean> cartBeanList = new ArrayList<CartIndex.CartBean>();
-                            cartBeanList.add(new CartIndex.CartBean(cartAddcart.getCartId()+""));
+                            cartBeanList.add(new CartIndex.CartBean(cartAddcart.getCartId() + ""));
                             intent.putExtra(Constant.INTENT_KEY.value, new CartIndex(cartBeanList));
                             startActivity(intent);
 
@@ -677,10 +720,21 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             public void onSuccess(String s) {
                 LogUtil.LogShitou("产品详情", s);
                 try {
-                    GoodsInfo goodsInfo = GsonUtils.parseJSON(s, GoodsInfo.class);
+                    goodsInfo = GsonUtils.parseJSON(s, GoodsInfo.class);
                     if (goodsInfo.getStatus() == 1) {
                         goodsInfoAd = goodsInfo.getAd();
                         List<RecommBean> goodsInfoRecomm = goodsInfo.getRecomm();
+                        switch (goodsInfo.getGoodsType()) {
+                            case "score":
+                                goodsInfoRecomm.clear();
+                                btnDuiHuan.setVisibility(View.VISIBLE);
+                                viewGouWw.setVisibility(View.GONE);
+                                break;
+                            default:
+                                btnDuiHuan.setVisibility(View.GONE);
+                                viewGouWw.setVisibility(View.VISIBLE);
+                                break;
+                        }
                         adapter.clear();
                         adapter.addAll(goodsInfoRecomm);
                         viewMaiMaiMai.setVisibility(View.VISIBLE);
@@ -762,6 +816,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.btnDuiHuan:
+                mai();
+                break;
             case R.id.textMai1:
                 mai();
                 break;
@@ -774,6 +831,8 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
             case R.id.viewGouWuChe:
                 intent.setClass(this, GouWuCActivity.class);
                 startActivity(intent);
+                break;
+            default:
                 break;
         }
     }

@@ -19,6 +19,7 @@
         android:background="@drawable/btn_jianbian0_basic_0dp">
 
         <ImageView
+            android:id="@+id/imageGoodType"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentLeft="true"
@@ -82,7 +83,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/textView180"
+            android:id="@+id/textXieGang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -97,8 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/textView180"
-            android:layout_toRightOf="@+id/textView180"
+            android:layout_toEndOf="@+id/textXieGang"
+            android:layout_toRightOf="@+id/textXieGang"
             android:text="赚150"
             android:textColor="@color/basic_color"
             android:textSize="@dimen/normal_textsize" />
@@ -312,6 +313,7 @@
         android:layout_height="wrap_content" />
 
     <RelativeLayout
+        android:id="@+id/viewTuiJian"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight">
 

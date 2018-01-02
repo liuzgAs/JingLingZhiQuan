@@ -69,6 +69,8 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                     LogUtil.LogShitou("ShengQianCZFragment--onReceive", "刷新购物车");
                     gouWuCheNum(true);
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -180,6 +182,15 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                     case "time":
                         viewTabLayout.setTranslationY(tabTranYDistance);
                         imageShaiXuan.setVisibility(View.GONE);
+                        break;
+                    /**
+                     * 积分商城
+                     */
+                    case "score":
+                        viewTabLayout.setTranslationY(0);
+                        imageShaiXuan.setVisibility(View.GONE);
+                        listViewShaiXuan.setVisibility(View.GONE);
+                        listViewShaiXuan01.setVisibility(View.GONE);
                         break;
                     case "product":
                         viewTabLayout.setTranslationY(0);

@@ -28,8 +28,51 @@
             android:background="@color/background"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width" />
-
         <RelativeLayout
+            android:id="@+id/viewDuiHuan"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white">
+
+            <Button
+                android:id="@+id/buttonDuiHuan"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_jianbian180_basic_0dp"
+                android:text="确认兑换"
+                android:textColor="@color/white"
+                android:textSize="@dimen/bigText" />
+
+            <TextView
+                android:id="@+id/textDiKouJF"
+                android:text="已抵扣888积分"
+                android:textColor="@color/light_black"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/textDiKouJF"
+                android:id="@+id/textDiKouHJ"
+                android:text="合计：¥233"
+                android:textColor="@color/light_black"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/viewTiJiaoDD"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"
             android:layout_alignParentBottom="true"

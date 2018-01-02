@@ -1,6 +1,7 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +38,7 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.viewholder.JiFenSCViewHolder;
 import com.sxbwstxpay.viewholder.XuanPinSJViewHolder;
 
 import java.util.HashMap;
@@ -138,6 +140,7 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         // Required empty public constructor
     }
 
+    @SuppressLint("ValidFragment")
     public XuanPinSJFragment(int position, IndexCate.CateBean cateBean) {
         this.cateBean = cateBean;
     }
@@ -195,8 +198,15 @@ public class XuanPinSJFragment extends ZjbBaseFragment implements SwipeRefreshLa
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_xuan_pin_sj;
-                return new XuanPinSJViewHolder(parent, layout, "MainActivity");
+                int layout;
+                switch (cateBean.getJump()) {
+                    case "score":
+                        layout = R.layout.item_ji_fen_sc;
+                        return new JiFenSCViewHolder(parent, layout, "MainActivity");
+                    default:
+                        layout = R.layout.item_xuan_pin_sj;
+                        return new XuanPinSJViewHolder(parent, layout, "MainActivity");
+                }
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {

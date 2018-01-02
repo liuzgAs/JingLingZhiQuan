@@ -16,7 +16,25 @@ public class GoodsInfo {
     private AdBean ad;
     private int status;
     private String info;
+    private String score;
+    private String goodsType;
     private List<RecommBean> recomm;
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
+    }
 
     public AdBean getAd() {
         return ad;

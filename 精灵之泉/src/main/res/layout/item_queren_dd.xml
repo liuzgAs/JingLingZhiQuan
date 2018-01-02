@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,10 +69,10 @@
         android:background="@color/background" />
 
     <RelativeLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_gravity="center_horizontal" >
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:id="@+id/textView358"
@@ -120,17 +120,17 @@
             android:textSize="@dimen/normal_textsize" />
 
         <EditText
-            android:background="@null"
-            android:hint="选填：对本次交易的说明"
-            android:textSize="@dimen/normal_edittextsize"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:id="@+id/editPayMsg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/editPayMsg"
             android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/textView358"
             android:layout_toRightOf="@+id/textView358"
-            android:layout_toEndOf="@+id/textView358" />
+            android:background="@null"
+            android:hint="选填：对本次交易的说明"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="@dimen/normal_edittextsize" />
 
     </RelativeLayout>
 
@@ -140,67 +140,103 @@
         android:background="@color/background" />
 
     <RelativeLayout
-        android:gravity="center_vertical"
+        android:id="@+id/viewHeJi"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_gravity="center_horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¥156.02"
-                android:textSize="@dimen/normal_textsize"
-                android:textColor="@color/light_black"
-                android:layout_marginRight="10dp"
                 android:id="@+id/textSum"
-                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="¥156.02"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/normal_textsize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="合计："
-                android:textSize="@dimen/normal_textsize"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/textSum"
-                android:layout_toStartOf="@+id/textSum" />
+                android:layout_toStartOf="@+id/textSum"
+                android:text="合计："
+                android:textSize="@dimen/normal_textsize" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¥40"
-                android:textSize="@dimen/normal_textsize"
-                android:textColor="@color/light_black"
-                android:layout_marginRight="10dp"
                 android:id="@+id/textGoods_money"
-                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="¥40"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/normal_textsize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="赚："
-                android:textSize="@dimen/normal_textsize"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/textGoods_money"
-                android:layout_toStartOf="@+id/textGoods_money" />
+                android:layout_toStartOf="@+id/textGoods_money"
+                android:text="赚："
+                android:textSize="@dimen/normal_textsize" />
         </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/viewJiFenDK"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="积分抵扣"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:id="@+id/textKeDiKouJF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/checkZheKou"
+            android:text="你有200积分可以抵扣"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+
+        <CheckBox
+            android:id="@+id/checkZheKou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp" />
     </RelativeLayout>
 </LinearLayout>

@@ -20,10 +20,19 @@ public class IndexDataBean implements Serializable{
     private String price;
     private String stock_num;
     private String goods_money;
+    private String score;
     private String recom_img;
     private String img;
     private int act;
     private ShareBean share;
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
 
     public String getId() {
         return id;

@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,10 +63,22 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                 case Constant.BROADCASTCODE.address:
                     onRefresh();
                     break;
+                default:
+                    break;
             }
         }
     };
     private int is_address;
+    private int is_dbb;
+    /**
+     * 是否抵扣积分
+     */
+    private int useScore = 1;
+    private View viewTiJiaoDD;
+    private View viewDuiHuan;
+    private TextView textDiKouJF;
+    private String dbbText;
+    private TextView textDiKouHJ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +105,10 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         viewTiJiao = findViewById(R.id.viewTiJiao);
         textSum = (TextView) findViewById(R.id.textSum);
         textYunFei = (TextView) findViewById(R.id.textYunFei);
+        viewTiJiaoDD = findViewById(R.id.viewTiJiaoDD);
+        viewDuiHuan = findViewById(R.id.viewDuiHuan);
+        textDiKouJF = (TextView) findViewById(R.id.textDiKouJF);
+        textDiKouHJ = (TextView) findViewById(R.id.textDiKouHJ);
     }
 
     @Override
@@ -107,6 +125,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.buttonTiJiao).setOnClickListener(this);
+        findViewById(R.id.buttonDuiHuan).setOnClickListener(this);
     }
 
     @Override
@@ -190,6 +209,9 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         });
         adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
 
+            private TextView textKeDiKouJF;
+            private View viewJiFenDK;
+            private View viewHeJi;
             private TextView textGoods_money;
             private TextView textSum;
 
@@ -199,14 +221,43 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                 editPayMsg = (EditText) item_queren_dd.findViewById(R.id.editPayMsg);
                 textSum = (TextView) item_queren_dd.findViewById(R.id.textSum);
                 textGoods_money = (TextView) item_queren_dd.findViewById(R.id.textGoods_money);
+                viewHeJi = item_queren_dd.findViewById(R.id.viewHeJi);
+                viewJiFenDK = item_queren_dd.findViewById(R.id.viewJiFenDK);
+                textKeDiKouJF = (TextView) item_queren_dd.findViewById(R.id.textKeDiKouJF);
+                CheckBox checkZheKou = (CheckBox) item_queren_dd.findViewById(R.id.checkZheKou);
+                checkZheKou.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (cartOrder!=null){
+                            if (b) {
+                                useScore = 1;
+                                textDiKouJF.setVisibility(View.VISIBLE);
+                                textDiKouHJ.setText("¥" + cartOrder.getMoneyAfter());
+                            } else {
+                                useScore = 0;
+                                textDiKouJF.setVisibility(View.INVISIBLE);
+                                textDiKouHJ.setText("¥" + cartOrder.getSum());
+                            }
+                        }
+                    }
+                });
+                checkZheKou.setChecked(true);
                 return item_queren_dd;
             }
 
             @Override
             public void onBindView(View headerView) {
                 if (cartOrder != null) {
-                    textSum.setText("¥" + cartOrder.getSum());
-                    textGoods_money.setText("¥" + cartOrder.getGoods_money());
+                    if (is_dbb == 1) {
+                        viewHeJi.setVisibility(View.GONE);
+                        viewJiFenDK.setVisibility(View.VISIBLE);
+                        textKeDiKouJF.setText(dbbText);
+                    } else {
+                        viewJiFenDK.setVisibility(View.GONE);
+                        viewHeJi.setVisibility(View.VISIBLE);
+                        textSum.setText("¥" + cartOrder.getSum());
+                        textGoods_money.setText("¥" + cartOrder.getGoods_money());
+                    }
                 }
             }
         });
@@ -217,7 +268,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.REQUEST_RESULT_CODE.address && resultCode == Constant.REQUEST_RESULT_CODE.address) {
             UserAddress.DataBean dataBean = (UserAddress.DataBean) data.getSerializableExtra(Constant.INTENT_KEY.value);
-            if (cartOrderAd==null){
+            if (cartOrderAd == null) {
                 cartOrderAd = new CartOrder.AdBean();
             }
             cartOrderAd.setConsignee(dataBean.getConsignee());
@@ -245,14 +296,30 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                 try {
                     cartOrder = GsonUtils.parseJSON(s, CartOrder.class);
                     if (cartOrder.getStatus() == 1) {
+                        is_dbb = cartOrder.getIs_dbb();
+                        dbbText = cartOrder.getDbbText();
+                        if (is_dbb == 1) {
+                            viewTiJiaoDD.setVisibility(View.GONE);
+                            viewDuiHuan.setVisibility(View.VISIBLE);
+                            textDiKouJF.setText(cartOrder.getScoreAfter());
+                            textDiKouHJ.setText("¥" + cartOrder.getMoneyAfter());
+                        } else {
+                            viewTiJiaoDD.setVisibility(View.VISIBLE);
+                            viewDuiHuan.setVisibility(View.GONE);
+                            textSum.setText("¥" + cartOrder.getSum());
+                            textYunFei.setText(cartOrder.getSumDes());
+                        }
+                        viewTiJiao.setVisibility(View.VISIBLE);
+
                         is_address = cartOrder.getIs_address();
                         cartOrderAd = cartOrder.getAd();
                         List<CartOrder.CartBean> cartOrderCart = cartOrder.getCart();
+                        for (int i = 0; i < cartOrderCart.size(); i++) {
+                            cartOrderCart.get(i).setIs_dbb(is_dbb);
+                        }
                         adapter.clear();
                         adapter.addAll(cartOrderCart);
-                        viewTiJiao.setVisibility(View.VISIBLE);
-                        textSum.setText("¥" + cartOrder.getSum());
-                        textYunFei.setText(cartOrder.getSumDes());
+
 
                     } else if (cartOrder.getStatus() == 3) {
                         MyDialog.showReLoginDialog(QueRenDDActivity.this);
@@ -289,6 +356,13 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.buttonDuiHuan:
+                if (cartOrderAd == null && is_address == 1) {
+                    Toast.makeText(QueRenDDActivity.this, "请选择收货地址", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                tiJiao();
+                break;
             case R.id.buttonTiJiao:
                 if (cartOrderAd == null && is_address == 1) {
                     Toast.makeText(QueRenDDActivity.this, "请选择收货地址", Toast.LENGTH_SHORT).show();
@@ -299,13 +373,15 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
             case R.id.imageBack:
                 finish();
                 break;
+            default:
+                break;
         }
     }
 
 
     private void tiJiao() {
         showLoadingDialog();
-        CartNeworderUpload cartNeworderUpload = new CartNeworderUpload(cartOrderUpload.getCart(), userInfo.getUid(), cartOrderAd.getId(), tokenTime, cartOrder.getSum(), editPayMsg.getText().toString().trim());
+        CartNeworderUpload cartNeworderUpload = new CartNeworderUpload(cartOrderUpload.getCart(), userInfo.getUid(), cartOrderAd.getId(), tokenTime, cartOrder.getSum(), editPayMsg.getText().toString().trim(), useScore);
         ApiClient.postJson(QueRenDDActivity.this, Constant.HOST + Constant.Url.CART_NEWORDER, GsonUtils.parseObject(cartNeworderUpload), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {

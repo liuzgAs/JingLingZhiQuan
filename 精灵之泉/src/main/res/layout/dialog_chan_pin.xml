@@ -211,30 +211,44 @@
     <LinearLayout
         android:id="@+id/viewKeGouMai"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textAddCar"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btnDuiHuanDialog"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="加入购物车"
-            android:textColor="@color/light_black"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/textQuick"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/btn_jianbian180_yellow_0dp"
-            android:gravity="center"
-            android:text="立即购买"
+            android:layout_height="45dp"
+            android:background="@drawable/btn_jianbian180_basic_0dp"
+            android:text="立即兑换"
             android:textColor="@color/white"
             android:textSize="16dp" />
+        <LinearLayout
+            android:id="@+id/viewGouMai"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <TextView
+                android:id="@+id/textAddCar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="加入购物车"
+                android:textColor="@color/light_black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textQuick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_jianbian180_yellow_0dp"
+                android:gravity="center"
+                android:text="立即购买"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

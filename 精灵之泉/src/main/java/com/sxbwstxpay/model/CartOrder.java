@@ -24,9 +24,45 @@ public class CartOrder {
     private int shipment;
     private int status;
     private int is_address;
+    private int is_dbb;
     private String sum;
+    private String dbbText;
+    private String scoreAfter;
+    private String moneyAfter;
     private String sumDes;
     private List<CartBean> cart;
+
+    public int getIs_dbb() {
+        return is_dbb;
+    }
+
+    public void setIs_dbb(int is_dbb) {
+        this.is_dbb = is_dbb;
+    }
+
+    public String getDbbText() {
+        return dbbText;
+    }
+
+    public void setDbbText(String dbbText) {
+        this.dbbText = dbbText;
+    }
+
+    public String getScoreAfter() {
+        return scoreAfter;
+    }
+
+    public void setScoreAfter(String scoreAfter) {
+        this.scoreAfter = scoreAfter;
+    }
+
+    public String getMoneyAfter() {
+        return moneyAfter;
+    }
+
+    public void setMoneyAfter(String moneyAfter) {
+        this.moneyAfter = moneyAfter;
+    }
 
     public int getIs_address() {
         return is_address;
@@ -180,6 +216,24 @@ public class CartOrder {
         private String spe_id;
         private String spe_name;
         private String uid;
+        private String goods_score;
+        private int is_dbb;
+
+        public int getIs_dbb() {
+            return is_dbb;
+        }
+
+        public void setIs_dbb(int is_dbb) {
+            this.is_dbb = is_dbb;
+        }
+
+        public String getGoods_score() {
+            return goods_score;
+        }
+
+        public void setGoods_score(String goods_score) {
+            this.goods_score = goods_score;
+        }
 
         public String getGoods_id() {
             return goods_id;

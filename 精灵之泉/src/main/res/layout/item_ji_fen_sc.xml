@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/imageImg"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_empty01" />
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageImg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toEndOf="@+id/imageImg"
+        android:layout_toRightOf="@+id/imageImg"
+        android:ellipsize="end"
+        android:lines="2"
+        android:text="骆驼女鞋2017秋季新款 英伦风百搭系带学院风内增高厚底高跟单鞋"
+        android:textSize="@dimen/normal_textsize" />
+
+    <TextView
+        android:id="@+id/textScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/imageImg"
+        android:layout_toRightOf="@+id/imageImg"
+        android:text="800积分"
+        android:textColor="@color/basic_color"
+        android:textSize="@dimen/bigText" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/imageImg"
+        android:layout_alignLeft="@+id/textTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/textTitle">
+
+        <Button
+            android:id="@+id/buttonAct"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_jianbian270_basic_30dp"
+            android:text="兑换"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:id="@+id/imageSuCai"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:paddingRight="15dp"
+            android:layout_toLeftOf="@+id/buttonAct"
+            android:layout_toStartOf="@+id/buttonAct"
+            android:src="@mipmap/tupian" />
+
+        <ImageView
+            android:id="@+id/imageShare"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:paddingRight="15dp"
+            android:layout_toLeftOf="@+id/imageSuCai"
+            android:layout_toStartOf="@+id/imageSuCai"
+            android:src="@mipmap/fenxiang" />
+
+        <TextView
+            android:id="@+id/textStock_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="库存1500"
+            android:textSize="@dimen/litterText" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
