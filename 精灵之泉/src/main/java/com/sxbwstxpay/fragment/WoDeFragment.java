@@ -23,6 +23,7 @@ import com.sxbwstxpay.activity.GuanLiYHKActivity;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
+import com.sxbwstxpay.activity.TuiGuangYJActivity;
 import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.WoDeDPActivity;
 import com.sxbwstxpay.activity.WoDeSHActivity;
@@ -85,6 +86,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     };
     private String storeTips;
     private String dbb;
+    private TextView textScore;
 
     public WoDeFragment() {
         // Required empty public constructor
@@ -137,6 +139,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         textGradeName = (TextView) mInflate.findViewById(R.id.textGradeName);
         textVipTime = (TextView) mInflate.findViewById(R.id.textVipTime);
         viewWoDeDianPu = mInflate.findViewById(R.id.viewWoDeDianPu);
+        textScore = (TextView) mInflate.findViewById(R.id.textScore);
     }
 
     @Override
@@ -184,6 +187,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewLianXiKF).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZiZhiZS).setOnClickListener(this);
         mInflate.findViewById(R.id.relatBanLiXYK).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewJiFen).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewJiFen01).setOnClickListener(this);
         viewFeiHuiYuan01.setOnClickListener(this);
         zoomScrollView.setOnScrollListener(new MyScrollListener());
         imageSheZhi.setOnClickListener(this);
@@ -247,6 +252,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                         textGradeName.setText(userIndex.getGradeName());
                         textVipTime.setText(userIndex.getVipTime());
                         dbb = userIndex.getDbb();
+                        textScore.setText(dbb);
                     } else if (userIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
@@ -272,6 +278,18 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewJiFen:
+                intent.setClass(getActivity(), TuiGuangYJActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id, 4);
+                intent.putExtra(Constant.INTENT_KEY.value, dbb);
+                startActivity(intent);
+                break;
+            case R.id.viewJiFen01:
+                intent.setClass(getActivity(), TuiGuangYJActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id, 4);
+                intent.putExtra(Constant.INTENT_KEY.value, dbb);
+                startActivity(intent);
+                break;
             case R.id.relatBanLiXYK:
                 intent.setClass(getActivity(), WebActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.TITLE, "办理信用卡");
@@ -376,7 +394,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     private void shouYi() {
         Intent intent = new Intent();
         intent.setClass(getActivity(), WoDeSYActivity.class);
-        intent.putExtra(Constant.INTENT_KEY.value,dbb);
+        intent.putExtra(Constant.INTENT_KEY.value, dbb);
         startActivity(intent);
     }
 

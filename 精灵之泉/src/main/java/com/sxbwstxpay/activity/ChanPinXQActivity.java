@@ -207,6 +207,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(2));
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+            private View viewChaKanSC;
+            private View viewLiuLan;
+            private View viewDaoJiShi;
             private View viewTuiJian;
             private ImageView imageGoodType;
             private TextView textXieGang;
@@ -305,6 +308,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 textXieGang = (TextView) header_xhan_pin_xq.findViewById(R.id.textXieGang);
                 imageGoodType = (ImageView) header_xhan_pin_xq.findViewById(R.id.imageGoodType);
                 viewTuiJian = header_xhan_pin_xq.findViewById(R.id.viewTuiJian);
+                viewDaoJiShi = header_xhan_pin_xq.findViewById(R.id.viewDaoJiShi);
+                viewLiuLan = header_xhan_pin_xq.findViewById(R.id.viewLiuLan);
+                viewChaKanSC = header_xhan_pin_xq.findViewById(R.id.viewChaKanSC);
                 return header_xhan_pin_xq;
             }
 
@@ -333,6 +339,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                         textXieGang.setVisibility(View.GONE);
                         textGoods_money.setVisibility(View.GONE);
                         viewTuiJian.setVisibility(View.GONE);
+                        viewDaoJiShi.setVisibility(View.GONE);
+                        viewLiuLan.setVisibility(View.GONE);
+                        viewChaKanSC.setVisibility(View.GONE);
                     } else {
                         imageGoodType.setImageResource(R.mipmap.xianshiqianggou);
                         textPrice.setText("¥" + goodsInfoAd.getPrice());
@@ -483,20 +492,24 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         TextView textPriceDialog = (TextView) dialog_chan_pin.findViewById(R.id.textPriceDialog);
         TextView textZhuan = (TextView) dialog_chan_pin.findViewById(R.id.textZhuan);
         View viewGouMai = dialog_chan_pin.findViewById(R.id.viewGouMai);
+        View textView44 = dialog_chan_pin.findViewById(R.id.textView44);
         Button btnDuiHuanDialog = (Button) dialog_chan_pin.findViewById(R.id.btnDuiHuanDialog);
         switch (goodsInfo.getGoodsType()) {
             case "score":
                 viewGouMai.setVisibility(View.GONE);
                 btnDuiHuanDialog.setVisibility(View.VISIBLE);
+                textPriceDialog.setText(goodsInfo.getScore()+"积分");
+                textZhuan.setVisibility(View.GONE);
+                textView44.setVisibility(View.GONE);
                 break;
             default:
                 viewGouMai.setVisibility(View.VISIBLE);
                 btnDuiHuanDialog.setVisibility(View.GONE);
+                textPriceDialog.setText("¥" + goodsInfoAd.getPrice());
+                textZhuan.setText("赚" + goodsInfoAd.getGoods_money());
                 break;
         }
         textTitleDialog.setText(goodsInfoAd.getTitle());
-        textPriceDialog.setText("¥" + goodsInfoAd.getPrice());
-        textZhuan.setText("赚" + goodsInfoAd.getGoods_money());
         GlideApp.with(ChanPinXQActivity.this)
                 .asBitmap()
                 .load(goodsInfoAd.getImg())

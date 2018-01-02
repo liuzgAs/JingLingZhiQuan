@@ -182,6 +182,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
             case R.id.viewJiFen:
                 intent.setClass(this, TuiGuangYJActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.id, 4);
+                intent.putExtra(Constant.INTENT_KEY.value,dbb);
                 startActivity(intent);
                 break;
             case R.id.imageBack:

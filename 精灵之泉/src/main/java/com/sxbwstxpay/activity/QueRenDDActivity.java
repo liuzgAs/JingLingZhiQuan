@@ -387,7 +387,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
             public void onSuccess(String s) {
                 cancelLoadingDialog();
                 LogUtil.LogShitou("QueRenDDActivity--确认提交订单", s + "");
-                try {
+//                try {
                     CartNeworder cartNeworder = GsonUtils.parseJSON(s, CartNeworder.class);
                     if (cartNeworder.getStatus() == 1) {
                         Intent intent1 = new Intent();
@@ -406,9 +406,9 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                     } else {
                         Toast.makeText(QueRenDDActivity.this, cartNeworder.getInfo(), Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(QueRenDDActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
-                }
+//                } catch (Exception e) {
+//                    Toast.makeText(QueRenDDActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+//                }
             }
 
             @Override
