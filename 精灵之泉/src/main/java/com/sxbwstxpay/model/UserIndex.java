@@ -23,6 +23,15 @@ public class UserIndex {
     private String vipTime;
     private String txName;
     private String storeTips;
+    private String dbb;
+
+    public String getDbb() {
+        return dbb;
+    }
+
+    public void setDbb(String dbb) {
+        this.dbb = dbb;
+    }
 
     public String getStoreTips() {
         return storeTips;

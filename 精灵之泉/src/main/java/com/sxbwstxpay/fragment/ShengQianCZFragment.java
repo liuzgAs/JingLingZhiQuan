@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChengShiXZActivity;
 import com.sxbwstxpay.activity.GouWuCActivity;
+import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
@@ -92,6 +94,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     private XianShiQGFragment xianShiQGFragment;
     private int indexBannerHeight;
     private int indexBannerTabHeight;
+    private int jiFenWeiZHi;
     private float tabTranYDistance;
 
     public ShengQianCZFragment() {
@@ -331,6 +334,9 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                         tablayout.removeAllTabs();
                         LogUtil.LogShitou("ShengQianCZFragment--indexCate.getVipNum()", "" + indexCate.getVipNum());
                         for (int i = 0; i < indexCateCate.size(); i++) {
+                            if (TextUtils.equals(indexCateCate.get(i).getJump(),"score")){
+                                jiFenWeiZHi = i;
+                            }
                             View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_tablayout, null);
                             TextView textTitle = (TextView) view.findViewById(R.id.textTitle);
                             textTitle.setText(indexCateCate.get(i).getName());
@@ -425,6 +431,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
         filter.addAction(Constant.BROADCASTCODE.GouWuCheNum);
         getActivity().registerReceiver(reciver, filter);
+        if (((MainActivity)getActivity()).isJiFen){
+            tablayout.setScrollPosition(jiFenWeiZHi, 0, false);
+            tablayout.getTabAt(jiFenWeiZHi).select();
+            ((MainActivity)getActivity()).isJiFen=false;
+        }
     }
 
     @Override

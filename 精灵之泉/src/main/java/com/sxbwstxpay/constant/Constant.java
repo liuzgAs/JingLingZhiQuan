@@ -246,6 +246,7 @@ public class Constant {
         public static final String isFrist = "isFrist";
         public static final String Main = "Main";
         public static final String guanBi = "guanBi";
+        public static final String isJiFen = "isJiFen";
     }
 
     public static class REQUEST_RESULT_CODE {

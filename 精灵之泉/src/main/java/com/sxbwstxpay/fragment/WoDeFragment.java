@@ -84,6 +84,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         }
     };
     private String storeTips;
+    private String dbb;
 
     public WoDeFragment() {
         // Required empty public constructor
@@ -148,7 +149,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         relaTitleStatue.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
         zoomScrollView.setZoomView(viewZoom);
         texttXName.setVisibility(View.GONE);
-        if (!TextUtils.isEmpty(userInfo.getHeadImg())){
+        if (!TextUtils.isEmpty(userInfo.getHeadImg())) {
             GlideApp.with(getActivity())
                     .asBitmap()
                     .load(userInfo.getHeadImg())
@@ -245,6 +246,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                         }
                         textGradeName.setText(userIndex.getGradeName());
                         textVipTime.setText(userIndex.getVipTime());
+                        dbb = userIndex.getDbb();
                     } else if (userIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
@@ -366,12 +368,15 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             case R.id.viewDingDan2:
                 dingDan();
                 break;
+            default:
+                break;
         }
     }
 
     private void shouYi() {
         Intent intent = new Intent();
         intent.setClass(getActivity(), WoDeSYActivity.class);
+        intent.putExtra(Constant.INTENT_KEY.value,dbb);
         startActivity(intent);
     }
 
@@ -409,8 +414,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
 
         @Override
         public void onScroll(int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-            float heightYingHua = viewZoom.getMeasuredHeight()/2 - DpUtils.convertDpToPixel(45f, getActivity()) - ScreenUtils.getStatusBarHeight(getActivity());
-            float heightYingHua1 = viewZoom.getMeasuredHeight()/2 - 2 * DpUtils.convertDpToPixel(45f, getActivity()) - ScreenUtils.getStatusBarHeight(getActivity());
+            float heightYingHua = viewZoom.getMeasuredHeight() / 2 - DpUtils.convertDpToPixel(45f, getActivity()) - ScreenUtils.getStatusBarHeight(getActivity());
+            float heightYingHua1 = viewZoom.getMeasuredHeight() / 2 - 2 * DpUtils.convertDpToPixel(45f, getActivity()) - ScreenUtils.getStatusBarHeight(getActivity());
             if (scrollY >= 0 && scrollY <= heightYingHua) {
                 float baiFenBi = (float) scrollY / heightYingHua;
                 relaTitleStatue.getBackground().mutate().setAlpha((int) (255 * baiFenBi));

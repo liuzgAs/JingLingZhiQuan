@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean isBackground;
     private String paintPassword;
     public boolean isChoosePic = false;
+    public boolean isJiFen =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,6 +200,10 @@ public class MainActivity extends AppCompatActivity {
         try {
             action(extramap);
         } catch (Exception e) {
+        }
+        isJiFen = intent.getBooleanExtra(Constant.INTENT_KEY.isJiFen, false);
+        if (isJiFen){
+            mTabHost.setCurrentTab(0);
         }
     }
 

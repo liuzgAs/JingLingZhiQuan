@@ -75,7 +75,7 @@
                     android:layout_toRightOf="@+id/imageView49">
 
                     <TextView
-                        android:id="@+id/textView85"
+                        android:id="@+id/textDes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -88,9 +88,9 @@
                         android:id="@+id/textJinE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@+id/textView85"
-                        android:layout_alignRight="@+id/textView85"
-                        android:layout_below="@+id/textView85"
+                        android:layout_alignEnd="@+id/textDes"
+                        android:layout_alignRight="@+id/textDes"
+                        android:layout_below="@+id/textDes"
                         android:text="0.0"
                         android:textColor="@color/light_black"
                         android:textSize="50dp" />

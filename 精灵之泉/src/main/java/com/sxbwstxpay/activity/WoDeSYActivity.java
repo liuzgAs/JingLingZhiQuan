@@ -38,13 +38,17 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.ShuaXinYongJin:
                     initData();
+                    break;
+                default:
                     break;
             }
         }
     };
+    private TextView textJiFen;
+    private String dbb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,8 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        dbb = intent.getStringExtra(Constant.INTENT_KEY.value);
     }
 
     @Override
@@ -69,6 +74,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         textFenRun = (TextView) findViewById(R.id.textFenRun);
         textYongJin = (TextView) findViewById(R.id.textYongJin);
         textFanYong = (TextView) findViewById(R.id.textFanYong);
+        textJiFen = (TextView) findViewById(R.id.textJiFen);
     }
 
     @Override
@@ -86,6 +92,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         SpannableString span2 = new SpannableString("¥" + "0.0");
         span2.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textFanYong.setText(span2);
+        textJiFen.setText(dbb);
     }
 
     @Override
@@ -94,6 +101,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.viewFenRun).setOnClickListener(this);
         findViewById(R.id.viewYongJin).setOnClickListener(this);
         findViewById(R.id.viewFanYong).setOnClickListener(this);
+        findViewById(R.id.viewJiFen).setOnClickListener(this);
     }
 
     /**
@@ -105,11 +113,11 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         String url = Constant.HOST + Constant.Url.USER_INCOME;
         HashMap<String, String> params = new HashMap<>();
         try {
-            params.put("uid",userInfo.getUid());
+            params.put("uid", userInfo.getUid());
         } catch (Exception e) {
             finish();
         }
-        params.put("tokenTime",tokenTime);
+        params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
 
@@ -120,10 +128,10 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("WoDeSYActivity--我的收益", ""+s);
+                LogUtil.LogShitou("WoDeSYActivity--我的收益", "" + s);
                 try {
                     UserIncome userIncome = GsonUtils.parseJSON(s, UserIncome.class);
-                    if (userIncome.getStatus()==1){
+                    if (userIncome.getStatus() == 1) {
                         SpannableString span = new SpannableString("¥" + userIncome.getAmount1());
                         span.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textFenRun.setText(span);
@@ -133,16 +141,16 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
                         SpannableString span2 = new SpannableString("¥" + userIncome.getAmount3());
                         span2.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textFanYong.setText(span2);
-                    }else if (userIncome.getStatus()==3){
+                    } else if (userIncome.getStatus() == 3) {
                         MyDialog.showReLoginDialog(WoDeSYActivity.this);
-                    }else {
+                    } else {
                         Toast.makeText(WoDeSYActivity.this, userIncome.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(WoDeSYActivity.this,"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WoDeSYActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
-        
+
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
@@ -157,21 +165,29 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.viewFenRun:
                 intent.setClass(this, TuiGuangYJActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.id,1);
+                intent.putExtra(Constant.INTENT_KEY.value,dbb);
+                intent.putExtra(Constant.INTENT_KEY.id, 1);
                 startActivity(intent);
                 break;
             case R.id.viewYongJin:
                 intent.setClass(this, TuiGuangYJActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.id,2);
+                intent.putExtra(Constant.INTENT_KEY.id, 2);
                 startActivity(intent);
                 break;
             case R.id.viewFanYong:
                 intent.setClass(this, TuiGuangYJActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.id,3);
+                intent.putExtra(Constant.INTENT_KEY.id, 3);
+                startActivity(intent);
+                break;
+            case R.id.viewJiFen:
+                intent.setClass(this, TuiGuangYJActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id, 4);
                 startActivity(intent);
                 break;
             case R.id.imageBack:
                 finish();
+                break;
+            default:
                 break;
         }
     }
@@ -180,7 +196,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
     public void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter();
-        registerReceiver(reciver,filter);
+        registerReceiver(reciver, filter);
     }
 
     @Override

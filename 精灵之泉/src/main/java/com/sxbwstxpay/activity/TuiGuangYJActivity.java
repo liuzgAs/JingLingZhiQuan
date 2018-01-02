@@ -7,6 +7,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,13 +40,18 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.ShuaXinYongJin:
                     initData();
                     break;
             }
         }
     };
+    private String dbb;
+    private Button buttonShouYiMX;
+    private Button buttonLiJiTX;
+    private TextView textDes;
+    private ImageView imageView49;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,7 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
     protected void initIntent() {
         Intent intent = getIntent();
         id = intent.getIntExtra(Constant.INTENT_KEY.id, 0);
+        dbb = intent.getStringExtra(Constant.INTENT_KEY.value);
     }
 
     @Override
@@ -71,6 +79,10 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
         textLeiJi = (TextView) findViewById(R.id.textLeiJi);
         textDaiShouFY = (TextView) findViewById(R.id.textDaiShouFY);
         textJinE = (TextView) findViewById(R.id.textJinE);
+        textDes = (TextView) findViewById(R.id.textDes);
+        buttonShouYiMX = (Button) findViewById(R.id.buttonShouYiMX);
+        buttonLiJiTX = (Button) findViewById(R.id.buttonLiJiTX);
+        imageView49 = (ImageView) findViewById(R.id.imageView49);
     }
 
     @Override
@@ -88,6 +100,17 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
                 ((TextView) findViewById(R.id.textViewTitle)).setText("平台返佣");
                 viewDaiShowFY.setVisibility(View.VISIBLE);
                 break;
+            case 4:
+                ((TextView) findViewById(R.id.textViewTitle)).setText("动宝积分");
+                viewDaiShowFY.setVisibility(View.GONE);
+                textLeiJi.setVisibility(View.INVISIBLE);
+                buttonShouYiMX.setVisibility(View.GONE);
+                buttonLiJiTX.setText("立即兑换");
+                textDes.setText("现有积分");
+                imageView49.setImageResource(R.mipmap.jifenimg);
+                break;
+            default:
+                break;
         }
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
@@ -97,8 +120,8 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
-        findViewById(R.id.buttonShouYiMX).setOnClickListener(this);
-        findViewById(R.id.buttonLiJiTX).setOnClickListener(this);
+        buttonShouYiMX.setOnClickListener(this);
+        buttonLiJiTX.setOnClickListener(this);
     }
 
     /**
@@ -127,44 +150,46 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     protected void initData() {
-        showLoadingDialog();
-        ApiClient.post(TuiGuangYJActivity.this, getOkObject(), new ApiClient.CallBack() {
-            @Override
-            public void onSuccess(String s) {
-                cancelLoadingDialog();
-                LogUtil.LogShitou("TuiGuangYJActivity--收益", "" + s);
-                try {
-                    userIncomeMx = GsonUtils.parseJSON(s, UserIncomeMx.class);
-                    if (userIncomeMx.getStatus() == 1) {
-                        textJinE.setText(userIncomeMx.getAmount()+"");
-                        switch (id) {
-                            case 1:
-                                textLeiJi.setText("累计我的分润¥" + userIncomeMx.getAmount1());
-                                break;
-                            case 2:
-                                textLeiJi.setText("累计推广佣金¥" + userIncomeMx.getAmount1());
-                                break;
-                            case 3:
-                                textLeiJi.setText("累计平台返佣¥" + userIncomeMx.getAmount1());
-                                textDaiShouFY.setText("¥"+ userIncomeMx.getAmount2());
-                                break;
+        if (id != 4) {
+            showLoadingDialog();
+            ApiClient.post(TuiGuangYJActivity.this, getOkObject(), new ApiClient.CallBack() {
+                @Override
+                public void onSuccess(String s) {
+                    cancelLoadingDialog();
+                    LogUtil.LogShitou("TuiGuangYJActivity--收益", "" + s);
+                    try {
+                        userIncomeMx = GsonUtils.parseJSON(s, UserIncomeMx.class);
+                        if (userIncomeMx.getStatus() == 1) {
+                            textJinE.setText(userIncomeMx.getAmount() + "");
+                            switch (id) {
+                                case 1:
+                                    textLeiJi.setText("累计我的分润¥" + userIncomeMx.getAmount1());
+                                    break;
+                                case 2:
+                                    textLeiJi.setText("累计推广佣金¥" + userIncomeMx.getAmount1());
+                                    break;
+                                case 3:
+                                    textLeiJi.setText("累计平台返佣¥" + userIncomeMx.getAmount1());
+                                    textDaiShouFY.setText("¥" + userIncomeMx.getAmount2());
+                                    break;
+                            }
+                        } else if (userIncomeMx.getStatus() == 3) {
+                            MyDialog.showReLoginDialog(TuiGuangYJActivity.this);
+                        } else {
+                            Toast.makeText(TuiGuangYJActivity.this, userIncomeMx.getInfo(), Toast.LENGTH_SHORT).show();
                         }
-                    } else if (userIncomeMx.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(TuiGuangYJActivity.this);
-                    } else {
-                        Toast.makeText(TuiGuangYJActivity.this, userIncomeMx.getInfo(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(TuiGuangYJActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(TuiGuangYJActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
-            }
 
-            @Override
-            public void onError(Response response) {
-                cancelLoadingDialog();
-                Toast.makeText(TuiGuangYJActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onError(Response response) {
+                    cancelLoadingDialog();
+                    Toast.makeText(TuiGuangYJActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
@@ -172,18 +197,26 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.buttonLiJiTX:
-                intent.putExtra(Constant.INTENT_KEY.id,id);
-                intent.putExtra(Constant.INTENT_KEY.value,userIncomeMx);
-                intent.setClass(this, TXActivity.class);
-                startActivity(intent);
+                if (id == 4) {
+                    intent.setClass(this,MainActivity.class);
+                    intent.putExtra(Constant.INTENT_KEY.isJiFen,true);
+                    startActivity(intent);
+                } else {
+                    intent.putExtra(Constant.INTENT_KEY.id, id);
+                    intent.putExtra(Constant.INTENT_KEY.value, userIncomeMx);
+                    intent.setClass(this, TXActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.buttonShouYiMX:
-                intent.putExtra(Constant.INTENT_KEY.id,id);
+                intent.putExtra(Constant.INTENT_KEY.id, id);
                 intent.setClass(this, WoDeZDActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageBack:
                 finish();
+                break;
+            default:
                 break;
         }
     }
@@ -192,7 +225,7 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
     public void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter();
-        registerReceiver(reciver,filter);
+        registerReceiver(reciver, filter);
     }
 
     @Override
