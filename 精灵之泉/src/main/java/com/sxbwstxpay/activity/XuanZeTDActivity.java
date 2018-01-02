@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -33,6 +32,7 @@ import com.sxbwstxpay.model.BankPayment;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -344,9 +344,9 @@ public class XuanZeTDActivity extends ZjbBaseActivity implements SwipeRefreshLay
             }
             holder.textBankNameBankCard.setText(bankCardlistData.get(position).getBankName() + "(" + bankCardlistData.get(position).getBankCard() + ")");
             holder.textBank.setText(bankCardlistData.get(position).getBank());
-            Glide.with(XuanZeTDActivity.this)
-                    .load(bankCardlistData.get(position).getImg())
+            GlideApp.with(XuanZeTDActivity.this)
                     .asBitmap()
+                    .load(bankCardlistData.get(position).getImg())
                     .placeholder(R.mipmap.ic_empty)
                     .into(holder.imageImg);
             return convertView;

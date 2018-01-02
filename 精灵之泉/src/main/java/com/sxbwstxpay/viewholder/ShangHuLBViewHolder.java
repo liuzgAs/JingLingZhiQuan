@@ -5,10 +5,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.UserTeam;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -29,9 +29,9 @@ public class ShangHuLBViewHolder extends BaseViewHolder<UserTeam.DataBean> {
     @Override
     public void setData(UserTeam.DataBean data) {
         super.setData(data);
-        Glide.with(getContext())
-                .load(data.getHeadImg())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getHeadImg())
                 .placeholder(R.mipmap.ic_empty01)
                 .into(imageHeadImg);
         textNickName.setText(data.getNickName());

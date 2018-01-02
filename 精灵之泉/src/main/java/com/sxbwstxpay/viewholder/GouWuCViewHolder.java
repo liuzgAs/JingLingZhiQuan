@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.GouWuCActivity;
@@ -20,6 +19,7 @@ import com.sxbwstxpay.model.CartIndex;
 import com.sxbwstxpay.model.CartUpdatecart;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 
@@ -100,9 +100,9 @@ public class GouWuCViewHolder extends BaseViewHolder<CartIndex.CartBean> {
         } else {
             imageXuanZhong.setImageResource(R.mipmap.weixuanzhong);
         }
-        Glide.with(getContext())
-                .load(data.getGoods_img())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getGoods_img())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageGoods_img);
         textGoods_title.setText(data.getGoods_title());

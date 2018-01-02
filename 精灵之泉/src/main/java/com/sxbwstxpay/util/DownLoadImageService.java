@@ -38,9 +38,9 @@ public class DownLoadImageService implements Runnable {
 //                    .load(url)  
 //                    .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)  
 //                    .get();  
-            bitmap = Glide.with(context)
-                    .load(url)
+            bitmap = GlideApp.with(context)
                     .asBitmap()
+                    .load(url)
                     .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                     .get();
             if (bitmap != null) {

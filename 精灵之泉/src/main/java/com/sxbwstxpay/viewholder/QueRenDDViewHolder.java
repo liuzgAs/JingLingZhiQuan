@@ -5,10 +5,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.CartOrder;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -35,9 +35,9 @@ public class QueRenDDViewHolder extends BaseViewHolder<CartOrder.CartBean> {
     @Override
     public void setData(CartOrder.CartBean data) {
         super.setData(data);
-        Glide.with(getContext())
-                .load(data.getGoods_img())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getGoods_img())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageGoods_img);
         textGoods_title.setText(data.getGoods_title());

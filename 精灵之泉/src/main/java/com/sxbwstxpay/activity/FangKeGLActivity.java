@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -24,6 +23,7 @@ import com.sxbwstxpay.customview.BoXingTu;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.StoreViews;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -148,9 +148,9 @@ public class FangKeGLActivity extends ZjbBaseActivity implements View.OnClickLis
                         View item_zuireleimu = LayoutInflater.from(FangKeGLActivity.this).inflate(R.layout.item_zuireleimu, null);
                         ImageView imageImg = (ImageView) item_zuireleimu.findViewById(R.id.imageImg);
                         TextView textName = (TextView) item_zuireleimu.findViewById(R.id.textName);
-                        Glide.with(FangKeGLActivity.this)
-                                .load(storeViewsCate.get(i).getImg())
+                        GlideApp.with(FangKeGLActivity.this)
                                 .asBitmap()
+                                .load(storeViewsCate.get(i).getImg())
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageImg);
                         textName.setText(storeViewsCate.get(i).getName());

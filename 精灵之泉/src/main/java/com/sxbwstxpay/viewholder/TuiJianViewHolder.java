@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.IndexDataBean;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -52,9 +52,9 @@ public class TuiJianViewHolder extends BaseViewHolder<IndexDataBean> {
     public void setData(IndexDataBean data) {
         super.setData(data);
         this.data=data;
-        Glide.with(getContext())
-                .load(data.getImg())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getImg())
                 .placeholder(R.mipmap.ic_empty01)
                 .into(imageImg);
         textTitle.setText(data.getTitle());

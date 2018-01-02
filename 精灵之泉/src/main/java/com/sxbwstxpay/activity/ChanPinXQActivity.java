@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -49,6 +48,7 @@ import com.sxbwstxpay.model.RecommBean;
 import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.RecycleViewDistancaUtil;
@@ -394,9 +394,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
                     } else {
                         holder = (ViewHolder) convertView.getTag();
                     }
-                    Glide.with(ChanPinXQActivity.this)
-                            .load(goodsInfoAdImgs.get(position).getImg())
+                    GlideApp.with(ChanPinXQActivity.this)
                             .asBitmap()
+                            .load(goodsInfoAdImgs.get(position).getImg())
                             .placeholder(R.mipmap.ic_empty)
                             .override(screenWidth, (int) ((float) screenWidth * ((float) goodsInfoAdImgs.get(position).getH() / (float) goodsInfoAdImgs.get(position).getW())))
                             .into(holder.imageImg);
@@ -460,9 +460,9 @@ public class ChanPinXQActivity extends ZjbBaseActivity implements SwipeRefreshLa
         textTitleDialog.setText(goodsInfoAd.getTitle());
         textPriceDialog.setText("¥" + goodsInfoAd.getPrice());
         textZhuan.setText("赚" + goodsInfoAd.getGoods_money());
-        Glide.with(ChanPinXQActivity.this)
-                .load(goodsInfoAd.getImg())
+        GlideApp.with(ChanPinXQActivity.this)
                 .asBitmap()
+                .load(goodsInfoAd.getImg())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
 

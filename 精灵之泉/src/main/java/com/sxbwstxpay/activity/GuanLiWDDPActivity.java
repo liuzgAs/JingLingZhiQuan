@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -33,6 +32,7 @@ import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.model.StoreGoods;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.RecycleViewDistancaUtil;
@@ -344,9 +344,9 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                 }
                 textStoreDes.setText(storeDes);
                 textStoreNmae.setText(storeNmae);
-                Glide.with(GuanLiWDDPActivity.this)
-                        .load(storeLogo)
+                GlideApp.with(GuanLiWDDPActivity.this)
                         .asBitmap()
+                        .load(storeLogo)
                         .dontAnimate()
                         .placeholder(R.mipmap.ic_empty)
                         .into(imageStoreLogo);

@@ -13,7 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.BigImgActivity;
@@ -23,6 +22,7 @@ import com.sxbwstxpay.customview.GridView4ScrollView;
 import com.sxbwstxpay.customview.MyIm;
 import com.sxbwstxpay.model.BigImgList;
 import com.sxbwstxpay.model.UserItem;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -104,9 +104,9 @@ public class WoDeSCViewHolder extends BaseViewHolder<UserItem.DataBean> {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            Glide.with(getContext())
-                    .load(data.getImg().get(position))
+            GlideApp.with(getContext())
                     .asBitmap()
+                    .load(data.getImg().get(position))
                     .placeholder(R.mipmap.ic_empty)
                     .into(holder.imageImg);
             return convertView;

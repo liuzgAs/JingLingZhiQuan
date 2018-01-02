@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.DiZhiGLActivity;
@@ -29,6 +28,7 @@ import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.model.UserProfile;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 
@@ -249,9 +249,9 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
     public void setData(UserProfile data) {
         super.setData(data);
         this.data = data;
-        Glide.with(getContext())
-                .load(data.getHeadImg())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getHeadImg())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageHeadImg);
         if (TextUtils.isEmpty(data.getWx())) {
@@ -260,9 +260,9 @@ public class WoDeZLViewHolder extends BaseViewHolder<UserProfile> {
         } else {
             imageWx.setVisibility(View.VISIBLE);
             textWx.setVisibility(View.GONE);
-            Glide.with(getContext())
-                    .load(data.getWx())
+            GlideApp.with(getContext())
                     .asBitmap()
+                    .load(data.getWx())
                     .placeholder(R.mipmap.ic_empty)
                     .into(imageWx);
         }

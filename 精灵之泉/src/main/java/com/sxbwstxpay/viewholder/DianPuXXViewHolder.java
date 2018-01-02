@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.DianPuXXActivity;
@@ -22,6 +21,7 @@ import com.sxbwstxpay.activity.EditActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.StoreStoreinfo;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -187,19 +187,19 @@ public class DianPuXXViewHolder extends BaseViewHolder<StoreStoreinfo> {
         this.data = data;
         textName.setText(data.getName());
         textIntro.setText(data.getIntro());
-        Glide.with(getContext())
-                .load(data.getLogo())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getLogo())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageLogo);
-        Glide.with(getContext())
-                .load(data.getBanner())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getBanner())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageBanner);
-        Glide.with(getContext())
-                .load(data.getWx())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getWx())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageWx);
     }

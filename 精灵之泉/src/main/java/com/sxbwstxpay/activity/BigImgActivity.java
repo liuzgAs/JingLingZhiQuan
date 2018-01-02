@@ -12,13 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.BigImgList;
 import com.sxbwstxpay.photoview.HackyViewPager;
-import com.sxbwstxpay.util.SDFileHelper;
+import com.sxbwstxpay.util.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,10 +104,10 @@ public class BigImgActivity extends ZjbBaseNotLeftActivity {
             @Override
             public void onClick(View v) {
                 showLoadingDialog();
-                SDFileHelper helper = new SDFileHelper(BigImgActivity.this);
-                for (int i = 0; i < imgList.size(); i++) {
-                    helper.savePicture(System.currentTimeMillis() + i + ".jpg", imgList.get(i));
-                }
+//                SDFileHelper helper = new SDFileHelper(BigImgActivity.this);
+//                for (int i = 0; i < imgList.size(); i++) {
+//                    helper.savePicture(System.currentTimeMillis() + i + ".jpg", imgList.get(i));
+//                }
                 cancelLoadingDialog();
                 Toast.makeText(BigImgActivity.this, "已保存到本地相册", Toast.LENGTH_SHORT).show();
             }
@@ -170,9 +169,9 @@ public class BigImgActivity extends ZjbBaseNotLeftActivity {
         @Override
         public View instantiateItem(ViewGroup container, final int position) {
             final PhotoView photoView = new PhotoView(container.getContext());
-            Glide.with(mContext)
-                    .load(imgList.get(position))
+            GlideApp.with(mContext)
                     .asBitmap()
+                    .load(imgList.get(position))
                     .placeholder(R.mipmap.ic_empty03)
                     .into(photoView);
             // Now just add PhotoView to ViewPager and return it

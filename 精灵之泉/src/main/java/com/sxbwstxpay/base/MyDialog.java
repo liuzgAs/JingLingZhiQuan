@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.activity.GuanLiWDDPActivity;
@@ -40,6 +39,7 @@ import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.FileUtil;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -110,9 +110,9 @@ public class MyDialog {
     public static void showPicDialog(Context context, String img) {
         View dialog_img_show = LayoutInflater.from(context).inflate(R.layout.dialog_img_show, null);
         ImageView imageView = (ImageView) dialog_img_show.findViewById(R.id.imageView);
-        Glide.with(context)
-                .load(img)
+        GlideApp.with(context)
                 .asBitmap()
+                .load(img)
                 .dontAnimate()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageView);
@@ -253,14 +253,14 @@ public class MyDialog {
                         TextView text1 = (TextView) dialog_fen_xiang_erm.findViewById(R.id.text1);
                         TextView text2 = (TextView) dialog_fen_xiang_erm.findViewById(R.id.text2);
                         TextView text3 = (TextView) dialog_fen_xiang_erm.findViewById(R.id.text3);
-                        Glide.with(context)
-                                .load(goodsEwm.getImg())
+                        GlideApp.with(context)
                                 .asBitmap()
+                                .load(goodsEwm.getImg())
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageImg);
-                        Glide.with(context)
-                                .load(goodsEwm.getEwmImg())
+                        GlideApp.with(context)
                                 .asBitmap()
+                                .load(goodsEwm.getEwmImg())
                                 .placeholder(R.mipmap.ic_empty01)
                                 .into(imageEwmImg);
                         text1.setText(goodsEwm.getText1());

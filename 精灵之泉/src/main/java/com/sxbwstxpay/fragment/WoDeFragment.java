@@ -15,16 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.BangZhuZXActivity;
 import com.sxbwstxpay.activity.FeiLvActivity;
 import com.sxbwstxpay.activity.GongGaoActivity;
 import com.sxbwstxpay.activity.GuanLiYHKActivity;
+import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.WebActivity;
-import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.WoDeDPActivity;
 import com.sxbwstxpay.activity.WoDeSHActivity;
 import com.sxbwstxpay.activity.WoDeSYActivity;
@@ -38,6 +37,7 @@ import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.UserIndex;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -149,9 +149,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         zoomScrollView.setZoomView(viewZoom);
         texttXName.setVisibility(View.GONE);
         if (!TextUtils.isEmpty(userInfo.getHeadImg())){
-            Glide.with(getActivity())
-                    .load(userInfo.getHeadImg())
+            GlideApp.with(getActivity())
                     .asBitmap()
+                    .load(userInfo.getHeadImg())
                     .placeholder(R.mipmap.ic_empty)
                     .into(imageTouXiang);
         }
@@ -213,9 +213,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 try {
                     UserIndex userIndex = GsonUtils.parseJSON(s, UserIndex.class);
                     if (userIndex.getStatus() == 1) {
-                        Glide.with(getActivity())
-                                .load(userIndex.getHeadImg())
+                        GlideApp.with(getActivity())
                                 .asBitmap()
+                                .load(userIndex.getHeadImg())
                                 .dontAnimate()
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageTouXiang);

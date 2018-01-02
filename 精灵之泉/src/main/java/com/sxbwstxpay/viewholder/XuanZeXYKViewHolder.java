@@ -5,11 +5,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.BankCardlist;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -33,9 +32,9 @@ public class XuanZeXYKViewHolder extends BaseViewHolder<BankCardlist.DataBean> {
     @Override
     public void setData(BankCardlist.DataBean data) {
         super.setData(data);
-        Glide.with(getContext())
-                .load(data.getImg())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getImg())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
         textBankName.setText(data.getBankName());

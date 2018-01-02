@@ -5,10 +5,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.StoreViews;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -31,9 +31,9 @@ public class FangKeGLViewHolder extends BaseViewHolder<StoreViews.GoodsBean> {
     @Override
     public void setData(StoreViews.GoodsBean data) {
         super.setData(data);
-        Glide.with(getContext())
-                .load(data.getImg())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getImg())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
         textTitle.setText(data.getTitle());

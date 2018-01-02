@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.BigImgActivity;
@@ -28,9 +27,9 @@ import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ShareShareDay;
 import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
-import com.sxbwstxpay.util.SDFileHelper;
 
 import java.util.HashMap;
 
@@ -70,10 +69,10 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
                             SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                             if (simpleInfo.getStatus()==1){
                                 ((TuWenTGActivity)getContext()).showLoadingDialog();
-                                SDFileHelper helper = new SDFileHelper(getContext());
-                                for (int i = 0; i < data.getShare_images().size(); i++) {
-                                    helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getImgs().get(i));
-                                }
+//                                SDFileHelper helper = new SDFileHelper(getContext());
+//                                for (int i = 0; i < data.getShare_images().size(); i++) {
+//                                    helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getImgs().get(i));
+//                                }
                                 ((TuWenTGActivity)getContext()).cancelLoadingDialog();
                                 Toast.makeText(getContext(), "已保存到本地相册", Toast.LENGTH_SHORT).show();
                             }else if (simpleInfo.getStatus()==3){
@@ -177,9 +176,9 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            Glide.with(getContext())
-                    .load(data.getShare_images().get(position))
+            GlideApp.with(getContext())
                     .asBitmap()
+                    .load(data.getShare_images().get(position))
                     .placeholder(R.mipmap.ic_empty)
                     .into(holder.imageImg);
             return convertView;

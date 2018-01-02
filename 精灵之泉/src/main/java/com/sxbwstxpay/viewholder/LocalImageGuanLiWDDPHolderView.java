@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.holder.Holder;
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.GuanLiWDDPActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.BannerBean;
 import com.sxbwstxpay.model.ExtraMap;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * des： banner image
@@ -29,9 +29,9 @@ public class LocalImageGuanLiWDDPHolderView implements Holder<BannerBean> {
 
     @Override
     public void UpdateUI(final Context context, int position, final BannerBean data) {
-        Glide.with(context)
-                .load(data.getImg())
+        GlideApp.with(context)
                 .asBitmap()
+                .load(data.getImg())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {

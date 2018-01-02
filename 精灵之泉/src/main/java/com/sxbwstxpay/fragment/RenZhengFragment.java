@@ -19,13 +19,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.view.CropImageView;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.MainActivity;
-import com.sxbwstxpay.activity.imagepicker.ImageGridActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -36,7 +36,7 @@ import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.model.UserCardbefore;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.CheckIdCard;
-import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.ImgToBase64;
 import com.sxbwstxpay.util.LogUtil;
@@ -49,6 +49,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Response;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,7 +95,8 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     private EditText editZhiHang;
     private ProgressDialog progressDialog;
     //上传的图片数量
-    private int imgNum =4;
+    private int imgNum = 4;
+    private int choosePistion;
 
     public RenZhengFragment() {
         // Required empty public constructor
@@ -196,7 +199,6 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        LogUtil.LogShitou("RenZhengFragment--onResume", "isChoosePic" + ((MainActivity) getActivity()).isChoosePic);
         /**
          * 刷新第一面界面里的view是不是可操作
          */
@@ -256,9 +258,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                 viewYanZhengMa.setVisibility(View.VISIBLE);
                                 buttonNext.setVisibility(View.VISIBLE);
                             }
-                        } else if (userCardbefore1.getStatus() == 3){
+                        } else if (userCardbefore1.getStatus() == 3) {
                             MyDialog.showReLoginDialog(getActivity());
-                        }else {
+                        } else {
                             Toast.makeText(getActivity(), userCardbefore1.getInfo(), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
@@ -305,22 +307,22 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                         editWXHao.setText(userCardbefore.getData().getWeixin());
                         editYouXiang.setText(userCardbefore.getData().getEmail());
                         editZhiHang.setText(userCardbefore.getData().getSubbranch());
-                        Glide.with(getActivity())
+                        GlideApp.with(getActivity())
                                 .load(userCardbefore.getData().getImg())
                                 .transform(new RotateTransformation(getActivity(), -90))
                                 .placeholder(R.mipmap.shenfenzhengmian)
                                 .into(image01);
-                        Glide.with(getActivity())
+                        GlideApp.with(getActivity())
                                 .load(userCardbefore.getData().getImg2())
                                 .transform(new RotateTransformation(getActivity(), -90))
                                 .placeholder(R.mipmap.shenfenbeimain)
                                 .into(image02);
-                        Glide.with(getActivity())
+                        GlideApp.with(getActivity())
                                 .load(userCardbefore.getData().getImg4())
                                 .transform(new RotateTransformation(getActivity(), -90))
                                 .placeholder(R.mipmap.yinhangkazhengmian)
                                 .into(image04);
-                        Glide.with(getActivity())
+                        GlideApp.with(getActivity())
                                 .load(userCardbefore.getData().getImg5())
                                 .transform(new RotateTransformation(getActivity(), -90))
                                 .placeholder(R.mipmap.shouchibanshen)
@@ -383,48 +385,117 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-            LogUtil.LogShitou("RenZhengFragment--onActivityResult", "111111111111" + ((MainActivity) getActivity()).isBackground);
-            ((MainActivity) getActivity()).isChoosePic = false;
-            switch (requestCode) {
-                case Constant.REQUEST_RESULT_CODE.IMG01:
-                    ArrayList<ImageItem> images01 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path[0] = images01.get(0).path;
-                    Glide.with(RenZhengFragment.this)
+//        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+//            LogUtil.LogShitou("RenZhengFragment--onActivityResult", "111111111111" + ((MainActivity) getActivity()).isBackground);
+//            ((MainActivity) getActivity()).isChoosePic = false;
+//            switch (requestCode) {
+//                case Constant.REQUEST_RESULT_CODE.IMG01:
+//                    ArrayList<ImageItem> images01 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+//                    path[0] = images01.get(0).path;
+//                    GlideApp.with(RenZhengFragment.this)
+//                            .load(path[0])
+//                            .transform(new RotateTransformation(getActivity(), -90))
+//                            .placeholder(R.mipmap.ic_empty)
+//                            .into(image01);
+//                    break;
+//                case Constant.REQUEST_RESULT_CODE.IMG02:
+//                    ArrayList<ImageItem> images02 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+//                    path[1] = images02.get(0).path;
+//                    GlideApp.with(RenZhengFragment.this)
+//                            .load(path[1])
+//                            .transform(new RotateTransformation(getActivity(), -90))
+//                            .placeholder(R.mipmap.ic_empty)
+//                            .into(image02);
+//                    break;
+//                case Constant.REQUEST_RESULT_CODE.IMG04:
+//                    ArrayList<ImageItem> images04 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+//                    path[2] = images04.get(0).path;
+//                    GlideApp.with(RenZhengFragment.this)
+//                            .load(path[2])
+//                            .transform(new RotateTransformation(getActivity(), -90))
+//                            .placeholder(R.mipmap.ic_empty)
+//                            .into(image04);
+//                    break;
+//                case Constant.REQUEST_RESULT_CODE.IMG05:
+//                    ArrayList<ImageItem> images05 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+//                    path[3] = images05.get(0).path;
+//                    GlideApp.with(RenZhengFragment.this)
+//                            .load(path[3])
+//                            .transform(new RotateTransformation(getActivity(), -90))
+//                            .placeholder(R.mipmap.ic_empty)
+//                            .into(image05);
+//                    break;
+//                default:
+//
+//                    break;
+//            }
+//        }
+        LogUtil.LogShitou("RenZhengFragment--onActivityResult", "000000");
+        if (resultCode == RESULT_OK&&requestCode==PictureConfig.CHOOSE_REQUEST) {
+            LogUtil.LogShitou("RenZhengFragment--onActivityResult", "11111");
+            switch (choosePistion) {
+                case 0:
+                    // 图片选择结果回调
+                    List<LocalMedia> selectList1 = PictureSelector.obtainMultipleResult(data);
+                    // 例如 LocalMedia 里面返回三种path
+                    // 1.media.getPath(); 为原图path
+                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                    path[0] = selectList1.get(0).getCutPath();
+                    LogUtil.LogShitou("RenZhengFragment--onActivityResult", ""+path[0]);
+                    GlideApp.with(RenZhengFragment.this)
                             .load(path[0])
                             .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image01);
                     break;
-                case Constant.REQUEST_RESULT_CODE.IMG02:
-                    ArrayList<ImageItem> images02 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path[1] = images02.get(0).path;
-                    Glide.with(RenZhengFragment.this)
+                case 1:
+                    // 图片选择结果回调
+                    List<LocalMedia> selectList2 = PictureSelector.obtainMultipleResult(data);
+                    // 例如 LocalMedia 里面返回三种path
+                    // 1.media.getPath(); 为原图path
+                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                    path[1] = selectList2.get(0).getCutPath();
+                    GlideApp.with(RenZhengFragment.this)
                             .load(path[1])
                             .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image02);
                     break;
-                case Constant.REQUEST_RESULT_CODE.IMG04:
-                    ArrayList<ImageItem> images04 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path[2] = images04.get(0).path;
-                    Glide.with(RenZhengFragment.this)
+                case 2:
+                    // 图片选择结果回调
+                    List<LocalMedia> selectList3 = PictureSelector.obtainMultipleResult(data);
+                    // 例如 LocalMedia 里面返回三种path
+                    // 1.media.getPath(); 为原图path
+                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                    path[2] = selectList3.get(0).getCutPath();
+                    GlideApp.with(RenZhengFragment.this)
                             .load(path[2])
                             .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image04);
                     break;
-                case Constant.REQUEST_RESULT_CODE.IMG05:
-                    ArrayList<ImageItem> images05 = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                    path[3] = images05.get(0).path;
-                    Glide.with(RenZhengFragment.this)
+                case 3:
+                    // 图片选择结果回调
+                    List<LocalMedia> selectList4 = PictureSelector.obtainMultipleResult(data);
+                    // 例如 LocalMedia 里面返回三种path
+                    // 1.media.getPath(); 为原图path
+                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                    path[3] = selectList4.get(0).getCutPath();
+                    GlideApp.with(RenZhengFragment.this)
                             .load(path[3])
                             .transform(new RotateTransformation(getActivity(), -90))
                             .placeholder(R.mipmap.ic_empty)
                             .into(image05);
                     break;
                 default:
-
                     break;
             }
         }
@@ -457,16 +528,16 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 shangChuanPic();
                 break;
             case R.id.image01:
-                chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG01);
+                chooseTuPian(0);
                 break;
             case R.id.image02:
-                chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG02);
+                chooseTuPian(1);
                 break;
             case R.id.image04:
-                chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG04);
+                chooseTuPian(2);
                 break;
             case R.id.image05:
-                chooseTuPian(Constant.REQUEST_RESULT_CODE.IMG05);
+                chooseTuPian(3);
                 break;
             case R.id.viewKaiHuYH:
                 CharSequence[] charSequence = new CharSequence[userCardbefore.getBank().size()];
@@ -489,7 +560,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
             case R.id.buttonNext:
                 if (submitStatus != 1) {
                     if (!TextUtils.isEmpty(userCardbefore.getTipsText())){
-                        Toast.makeText(getActivity(), userCardbefore.getTipsText(), Toast.LENGTH_SHORT).show();
+                        MyDialog.showTipDialog(getActivity(),userCardbefore.getTipsText());
                     }
                     return;
                 }
@@ -546,7 +617,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         final boolean[] isBreak = {false};
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("上传图片");
-        progressDialog.setMessage("已上传0/"+imgNum);
+        progressDialog.setMessage("已上传0/" + imgNum);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMax(imgNum);
         progressDialog.setCancelable(false);
@@ -596,7 +667,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                                     if (respondAppimgadd.getStatus() == 1) {
                                         count[0]++;
                                         progressDialog.setProgress(count[0]);
-                                        progressDialog.setMessage("已上传" + count[0] + "/"+imgNum);
+                                        progressDialog.setMessage("已上传" + count[0] + "/" + imgNum);
                                         imgList.set(finalI, respondAppimgadd.getImgId());
                                         if (count[0] == imgNum) {
                                             progressDialog.dismiss();
@@ -643,7 +714,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 }
                 count[0]++;
                 progressDialog.setProgress(count[0]);
-                progressDialog.setMessage("已上传" + count[0] + "/"+imgNum);
+                progressDialog.setMessage("已上传" + count[0] + "/" + imgNum);
                 if (count[0] == imgNum) {
                     progressDialog.dismiss();
                     tiJiao();
@@ -701,7 +772,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
-                LogUtil.LogShitou("RenZhengFragment--提交", s+"");
+                LogUtil.LogShitou("RenZhengFragment--提交", s + "");
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                     Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
@@ -771,18 +842,35 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
 
     private void chooseTuPian(int requestCode) {
         ((MainActivity) getActivity()).isChoosePic = true;
-        LogUtil.LogShitou("RenZhengFragment--chooseTuPian", "isChoosePic" + ((MainActivity) getActivity()).isChoosePic);
-        mImagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        mImagePicker.setCrop(true);        //允许裁剪（单选才有效）
-        float width = ScreenUtils.getScreenWidth(getActivity());
-        int focusWidth = (int) width - (int) DpUtils.convertDpToPixel(60f, getActivity());
-        mImagePicker.setFocusWidth(focusWidth);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        mImagePicker.setFocusHeight((int) (focusWidth * 1.6f));  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-        mImagePicker.setOutPutX(500);//保存文件的宽度。单位像素
-        mImagePicker.setOutPutY(800);//保存文件的高度。单位像素
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), ImageGridActivity.class);
-        startActivityForResult(intent, requestCode);
+//        mImagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+//        mImagePicker.setCrop(true);        //允许裁剪（单选才有效）
+//        float width = ScreenUtils.getScreenWidth(getActivity());
+//        int focusWidth = (int) width - (int) DpUtils.convertDpToPixel(60f, getActivity());
+//        mImagePicker.setFocusWidth(focusWidth);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+//        mImagePicker.setFocusHeight((int) (focusWidth * 1.6f));  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+//        mImagePicker.setOutPutX(500);//保存文件的宽度。单位像素
+//        mImagePicker.setOutPutY(800);//保存文件的高度。单位像素
+//        Intent intent = new Intent();
+//        intent.setClass(getActivity(), ImageGridActivity.class);
+//        startActivityForResult(intent, requestCode);
+        choosePistion = requestCode;
+        PictureSelector.create(RenZhengFragment.this)
+                .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                .selectionMode(PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
+                .isCamera(true)// 是否显示拍照按钮 true or false
+                .imageFormat(PictureMimeType.PNG)// 拍照保存图片格式后缀,默认jpeg
+                .sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
+                .enableCrop(true)// 是否裁剪 true or false
+                .compress(true)// 是否压缩 true or false
+                .withAspectRatio(5, 8)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
+                .showCropFrame(true)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
+                .showCropGrid(true)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
+                .cropCompressQuality(100)// 裁剪压缩质量 默认90 int
+                .minimumCompressSize(100)// 小于100kb的图片不压缩
+                .synOrAsy(true)//同步true或异步false 压缩 默认同步
+                .rotateEnabled(true) // 裁剪是否可旋转图片 true or false
+                .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
+                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
     }
 
     /**

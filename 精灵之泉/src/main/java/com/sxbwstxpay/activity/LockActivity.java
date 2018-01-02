@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.ToLoginActivity;
@@ -17,6 +16,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.Lock9View;
 import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.util.ACache;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.StringUtil;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -83,9 +83,9 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
     protected void initViews() {
         if (userInfo != null) {
             if (!TextUtils.isEmpty(userInfo.getHeadImg())) {
-                Glide.with(LockActivity.this)
+                GlideApp.with(LockActivity.this)
                         .load(userInfo.getHeadImg())
-                        .bitmapTransform(new CropCircleTransformation(this))
+                        .transform(new CropCircleTransformation(this))
                         .placeholder(R.mipmap.ic_empty01)
                         .into(imageTouXiang);
             }

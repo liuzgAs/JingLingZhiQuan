@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -30,6 +29,7 @@ import com.sxbwstxpay.model.IndexMakemoney;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ShareIndex;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -220,9 +220,9 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     IndexMakemoney indexMakemoney = GsonUtils.parseJSON(s, IndexMakemoney.class);
                     if (indexMakemoney.getStatus() == 1) {
                         grade = indexMakemoney.getGrade();
-                        Glide.with(getActivity())
-                                .load(indexMakemoney.getImg())
+                        GlideApp.with(getActivity())
                                 .asBitmap()
+                                .load(indexMakemoney.getImg())
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(viewImg);
                         adapter.clear();

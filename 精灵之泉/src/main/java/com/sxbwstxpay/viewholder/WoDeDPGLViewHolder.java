@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.GuanLiWDDPActivity;
@@ -20,6 +19,7 @@ import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 
@@ -121,9 +121,9 @@ public class WoDeDPGLViewHolder extends BaseViewHolder<IndexDataBean> {
     public void setData(IndexDataBean data) {
         super.setData(data);
         this.data = data;
-        Glide.with(getContext())
-                .load(data.getRecom_img())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getRecom_img())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageRecom_img);
         textStock_num.setText("库存" + data.getStock_num());

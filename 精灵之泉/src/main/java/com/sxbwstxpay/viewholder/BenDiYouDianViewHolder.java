@@ -5,10 +5,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.IndexStore;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.ScreenUtils;
 
 /**
@@ -33,9 +33,9 @@ public class BenDiYouDianViewHolder extends BaseViewHolder<IndexStore.DataBean> 
     @Override
     public void setData(IndexStore.DataBean data) {
         super.setData(data);
-        Glide.with(getContext())
-                .load(data.getImg())
+        GlideApp.with(getContext())
                 .asBitmap()
+                .load(data.getImg())
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageRecom_img);
         textTitle.setText(data.getName());

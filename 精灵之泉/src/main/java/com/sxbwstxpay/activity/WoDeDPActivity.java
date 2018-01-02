@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
@@ -18,6 +17,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.StoreMystore;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -144,9 +144,9 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
                         textNo.setText(storeMystore.getNo());
                         textStoreNmae.setText(storeMystore.getStoreNmae());
                         storeMystoreShare = storeMystore.getShare();
-                        Glide.with(WoDeDPActivity.this)
-                                .load(storeMystore.getStoreLogo())
+                        GlideApp.with(WoDeDPActivity.this)
                                 .asBitmap()
+                                .load(storeMystore.getStoreLogo())
                                 .dontAnimate()
                                 .placeholder(R.mipmap.ic_empty)
                                 .into(imageStoreLogo);

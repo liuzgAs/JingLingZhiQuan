@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.ScreenUtils;
 
 public class WeiXinMPMaActivity extends ZjbBaseActivity {
@@ -54,9 +54,9 @@ public class WeiXinMPMaActivity extends ZjbBaseActivity {
         ViewGroup.LayoutParams layoutParams1 = imageEWM.getLayoutParams();
         layoutParams1.width = (int) (ScreenUtils.getScreenWidth(this)*0.6f);
         layoutParams1.height = (int) (ScreenUtils.getScreenWidth(this)*0.6f);
-        Glide.with(WeiXinMPMaActivity.this)
-                .load(img)
+        GlideApp.with(WeiXinMPMaActivity.this)
                 .asBitmap()
+                .load(img)
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageEWM);
     }

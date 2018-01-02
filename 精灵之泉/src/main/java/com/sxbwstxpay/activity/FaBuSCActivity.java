@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.CropImageView;
@@ -32,6 +31,7 @@ import com.sxbwstxpay.model.RespondAppimgadd;
 import com.sxbwstxpay.model.ShangChuanImg;
 import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.ImgToBase64;
 import com.sxbwstxpay.util.LogUtil;
@@ -144,9 +144,9 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
             viewTuiJian.setVisibility(View.VISIBLE);
             viewTuiJianEmpty.setVisibility(View.GONE);
             indexDataBean = (IndexDataBean) data.getSerializableExtra(Constant.INTENT_KEY.value);
-            Glide.with(FaBuSCActivity.this)
-                    .load(indexDataBean.getImg())
+            GlideApp.with(FaBuSCActivity.this)
                     .asBitmap()
+                    .load(indexDataBean.getImg())
                     .placeholder(R.mipmap.ic_empty)
                     .into(imageImg);
             textTitle.setText(indexDataBean.getTitle());
@@ -388,7 +388,7 @@ public class FaBuSCActivity extends ZjbBaseActivity implements View.OnClickListe
                     }
                 });
             }
-            Glide.with(FaBuSCActivity.this)
+            GlideApp.with(FaBuSCActivity.this)
                     .load(new File(path))
                     .placeholder(R.mipmap.addphoto)
                     .into(holder.imageView);

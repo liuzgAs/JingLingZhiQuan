@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.holder.Holder;
-import com.bumptech.glide.Glide;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * des： banner image
@@ -24,9 +24,9 @@ public class LocalImageChanPinHolderView implements Holder<String> {
 
     @Override
     public void UpdateUI(final Context context, int position, final String data) {
-        Glide.with(context)
-                .load(data)
+        GlideApp.with(context)
                 .asBitmap()
+                .load(data)
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageView);
     }
