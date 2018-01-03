@@ -20,10 +20,46 @@ public class UserIndex {
     private String info;
     private String nickName;
     private int status;
+    private int is_db;
+    private int is_btn;
     private String vipTime;
+    private String btnText;
+    private String btnUrl;
     private String txName;
     private String storeTips;
     private String dbb;
+
+    public int getIs_db() {
+        return is_db;
+    }
+
+    public void setIs_db(int is_db) {
+        this.is_db = is_db;
+    }
+
+    public int getIs_btn() {
+        return is_btn;
+    }
+
+    public void setIs_btn(int is_btn) {
+        this.is_btn = is_btn;
+    }
+
+    public String getBtnText() {
+        return btnText;
+    }
+
+    public void setBtnText(String btnText) {
+        this.btnText = btnText;
+    }
+
+    public String getBtnUrl() {
+        return btnUrl;
+    }
+
+    public void setBtnUrl(String btnUrl) {
+        this.btnUrl = btnUrl;
+    }
 
     public String getDbb() {
         return dbb;

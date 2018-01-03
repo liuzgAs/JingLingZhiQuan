@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/viewJiFen"
         android:layout_width="match_parent"
@@ -46,111 +47,114 @@
             android:textColor="@color/basic_color"
             android:textSize="@dimen/litterText" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@mipmap/fengexian" />
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="100dp">
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_height="100dp"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/mine01" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView8"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="我的账单"
-            android:textSize="@dimen/litterText" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/mine01" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView8"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="我的账单"
+                android:textSize="@dimen/litterText" />
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/mine02" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView9"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="我的商户"
-            android:textSize="@dimen/litterText" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/mine02" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView9"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="我的商户"
+                android:textSize="@dimen/litterText" />
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/mine03" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView10"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="我的收益"
-            android:textSize="@dimen/litterText" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/mine03" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView10"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="我的收益"
+                android:textSize="@dimen/litterText" />
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/mine04" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView11"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="商城订单"
-            android:textSize="@dimen/litterText" />
-    </RelativeLayout>
-</LinearLayout>
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/mine04" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView11"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="商城订单"
+                android:textSize="@dimen/litterText" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

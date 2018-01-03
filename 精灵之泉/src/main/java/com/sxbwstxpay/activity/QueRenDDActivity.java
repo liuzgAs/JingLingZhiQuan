@@ -80,6 +80,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     private String dbbText;
     private TextView textDiKouHJ;
     private String sum;
+    private int isScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -298,19 +299,22 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                     cartOrder = GsonUtils.parseJSON(s, CartOrder.class);
                     if (cartOrder.getStatus() == 1) {
                         is_dbb = cartOrder.getIs_dbb();
+                        isScore = cartOrder.getIsScore();
                         dbbText = cartOrder.getDbbText();
-                        if (is_dbb == 1) {
+                        if (isScore == 1) {
+                            textDiKouJF.setText(cartOrder.getScoreAfter());
+                            textDiKouHJ.setText("合计：¥" + cartOrder.getMoneyAfter());
+                            textDiKouHJ.setVisibility(View.VISIBLE);
                             sum = cartOrder.getMoneyAfter();
                             viewTiJiaoDD.setVisibility(View.GONE);
                             viewDuiHuan.setVisibility(View.VISIBLE);
-                            textDiKouJF.setText(cartOrder.getScoreAfter());
-                            textDiKouHJ.setText("合计：¥" + cartOrder.getMoneyAfter());
                         } else {
+                            textSum.setText("合计：¥" + cartOrder.getSum());
+                            textYunFei.setText(cartOrder.getSumDes());
+                            textDiKouHJ.setVisibility(View.GONE);
                             sum = cartOrder.getSum();
                             viewTiJiaoDD.setVisibility(View.VISIBLE);
                             viewDuiHuan.setVisibility(View.GONE);
-                            textSum.setText("合计：¥" + cartOrder.getSum());
-                            textYunFei.setText(cartOrder.getSumDes());
                         }
                         viewTiJiao.setVisibility(View.VISIBLE);
 
@@ -319,6 +323,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         List<CartOrder.CartBean> cartOrderCart = cartOrder.getCart();
                         for (int i = 0; i < cartOrderCart.size(); i++) {
                             cartOrderCart.get(i).setIs_dbb(is_dbb);
+                            cartOrderCart.get(i).setIsScore(isScore);
                         }
                         adapter.clear();
                         adapter.addAll(cartOrderCart);

@@ -25,12 +25,21 @@ public class CartOrder {
     private int status;
     private int is_address;
     private int is_dbb;
+    private int isScore;
     private String sum;
     private String dbbText;
     private String scoreAfter;
     private String moneyAfter;
     private String sumDes;
     private List<CartBean> cart;
+
+    public int getIsScore() {
+        return isScore;
+    }
+
+    public void setIsScore(int isScore) {
+        this.isScore = isScore;
+    }
 
     public int getIs_dbb() {
         return is_dbb;
@@ -218,6 +227,15 @@ public class CartOrder {
         private String uid;
         private String goods_score;
         private int is_dbb;
+        private int isScore;
+
+        public int getIsScore() {
+            return isScore;
+        }
+
+        public void setIsScore(int isScore) {
+            this.isScore = isScore;
+        }
 
         public int getIs_dbb() {
             return is_dbb;

@@ -32,6 +32,8 @@ public class QueRenDDViewHolder extends BaseViewHolder<CartOrder.CartBean> {
         textNum = $(R.id.textNum);
         textGoods_price = $(R.id.textGoods_price);
         textGoods_money = $(R.id.textGoods_money);
+        TextView buttonWuLiu = $(R.id.buttonWuLiu);
+        buttonWuLiu.setVisibility(View.GONE);
     }
 
     @Override
@@ -45,7 +47,7 @@ public class QueRenDDViewHolder extends BaseViewHolder<CartOrder.CartBean> {
         textGoods_title.setText(data.getGoods_title());
         textSpe_name.setText(data.getSpe_name());
         textNum.setText("×"+data.getNum());
-        if (data.getIs_dbb()==1){
+        if (data.getIsScore()==1){
             textGoods_price.setText(data.getGoods_score()+"积分");
             textGoods_money.setVisibility(View.GONE);
         }else {
