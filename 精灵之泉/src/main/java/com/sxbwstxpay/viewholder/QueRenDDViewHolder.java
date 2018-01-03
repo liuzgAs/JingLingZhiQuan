@@ -1,6 +1,7 @@
 package com.sxbwstxpay.viewholder;
 
 import android.support.annotation.LayoutRes;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -49,8 +50,12 @@ public class QueRenDDViewHolder extends BaseViewHolder<CartOrder.CartBean> {
             textGoods_money.setVisibility(View.GONE);
         }else {
             textGoods_price.setText("¥"+data.getGoods_price());
-            textGoods_money.setText("赚"+data.getGoods_money());
-            textGoods_money.setVisibility(View.VISIBLE);
+            if (!TextUtils.isEmpty(data.getGoods_money())){
+                textGoods_money.setText("赚"+data.getGoods_money());
+                textGoods_money.setVisibility(View.VISIBLE);
+            }else {
+                textGoods_money.setVisibility(View.GONE);
+            }
         }
     }
     
