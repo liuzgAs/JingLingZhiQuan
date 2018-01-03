@@ -108,6 +108,7 @@ public class TuiGuangYJActivity extends ZjbBaseActivity implements View.OnClickL
                 buttonLiJiTX.setText("立即兑换");
                 textDes.setText("现有积分");
                 imageView49.setImageResource(R.mipmap.jifenimg);
+                textJinE.setText(dbb);
                 break;
             default:
                 break;
