@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/JingLingZhiQuan.iml" filepath="$PROJECT_DIR$/JingLingZhiQuan.iml" />
       <module fileurl="file://G:\project\JingLingZhiQuan0102\JingLingZhiQuan.iml" filepath="G:\project\JingLingZhiQuan0102\JingLingZhiQuan.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/JingLingZhiQuan0102.iml" filepath="$PROJECT_DIR$/.idea/JingLingZhiQuan0102.iml" />
+      <module fileurl="file://G:\project\JingLingZhiQuan\.idea\JingLingZhiQuan0102.iml" filepath="G:\project\JingLingZhiQuan\.idea\JingLingZhiQuan0102.iml" />
       <module fileurl="file://$PROJECT_DIR$/imagepicker/imagepicker.iml" filepath="$PROJECT_DIR$/imagepicker/imagepicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/精灵之泉/精灵之泉.iml" filepath="$PROJECT_DIR$/精灵之泉/精灵之泉.iml" />
     </modules>

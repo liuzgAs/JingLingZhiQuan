@@ -232,11 +232,11 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                             if (b) {
                                 useScore = 1;
                                 textDiKouJF.setVisibility(View.VISIBLE);
-                                textDiKouHJ.setText("¥" + cartOrder.getMoneyAfter());
+                                textDiKouHJ.setText("合计：¥" + cartOrder.getMoneyAfter());
                             } else {
                                 useScore = 0;
                                 textDiKouJF.setVisibility(View.INVISIBLE);
-                                textDiKouHJ.setText("¥" + cartOrder.getSum());
+                                textDiKouHJ.setText("合计：¥" + cartOrder.getSum());
                             }
                         }
                     }
