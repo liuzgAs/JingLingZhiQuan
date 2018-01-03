@@ -63,10 +63,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     private ImageView imageTouXiang;
     private TextView textNickName;
     private View viewHuiYuan01;
-    private View viewHuiYuan02;
     private View viewHuiYuan03;
     private View viewFeiHuiYuan01;
-    private View viewFeiHuiYuan02;
     private View viewFeiHuiYuan03;
     private TextView texttXName;
     private TextView textGradeName;
@@ -130,10 +128,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         imageTouXiang = (ImageView) mInflate.findViewById(R.id.imageTouXiang);
         textNickName = (TextView) mInflate.findViewById(R.id.textNickName);
         viewHuiYuan01 = mInflate.findViewById(R.id.viewHuiYuan01);
-        viewHuiYuan02 = mInflate.findViewById(R.id.viewHuiYuan02);
         viewHuiYuan03 = mInflate.findViewById(R.id.viewHuiYuan03);
         viewFeiHuiYuan01 = mInflate.findViewById(R.id.viewFeiHuiYuan01);
-        viewFeiHuiYuan02 = mInflate.findViewById(R.id.viewFeiHuiYuan02);
         viewFeiHuiYuan03 = mInflate.findViewById(R.id.viewFeiHuiYuan03);
         texttXName = (TextView) mInflate.findViewById(R.id.texttXName);
         textGradeName = (TextView) mInflate.findViewById(R.id.textGradeName);
@@ -170,10 +166,6 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewShangHu).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShouYi).setOnClickListener(this);
         mInflate.findViewById(R.id.viewDingDan).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewZhangDan1).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewShangHu1).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewShouYi1).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewDingDan1).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZhangDan2).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShangHu2).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShouYi2).setOnClickListener(this);
@@ -230,17 +222,13 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                         storeTips = userIndex.getStoreTips();
                         if (grade == 0) {
                             viewHuiYuan01.setVisibility(View.GONE);
-                            viewHuiYuan02.setVisibility(View.GONE);
                             viewHuiYuan03.setVisibility(View.GONE);
                             viewFeiHuiYuan01.setVisibility(View.VISIBLE);
-                            viewFeiHuiYuan02.setVisibility(View.VISIBLE);
                             viewFeiHuiYuan03.setVisibility(View.VISIBLE);
                         } else {
                             viewHuiYuan01.setVisibility(View.VISIBLE);
-                            viewHuiYuan02.setVisibility(View.VISIBLE);
                             viewHuiYuan03.setVisibility(View.VISIBLE);
                             viewFeiHuiYuan01.setVisibility(View.GONE);
-                            viewFeiHuiYuan02.setVisibility(View.GONE);
                             viewFeiHuiYuan03.setVisibility(View.GONE);
                         }
                         if (TextUtils.isEmpty(userIndex.getTxName())) {
@@ -360,18 +348,6 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 shouYi();
                 break;
             case R.id.viewDingDan:
-                dingDan();
-                break;
-            case R.id.viewZhangDan1:
-                zhangDan();
-                break;
-            case R.id.viewShangHu1:
-                woDeSH();
-                break;
-            case R.id.viewShouYi1:
-                shouYi();
-                break;
-            case R.id.viewDingDan1:
                 dingDan();
                 break;
             case R.id.viewZhangDan2:

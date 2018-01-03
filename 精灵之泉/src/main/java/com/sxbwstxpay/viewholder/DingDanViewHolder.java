@@ -207,7 +207,9 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         if (data.getIs_confirm() == 0 && data.getIs_pay() == 0 && data.getIs_del() == 0 && data.getIs_cancle() == 0) {
             viewBtn.setVisibility(View.GONE);
         }
-        listView.setAdapter(new MyAdapter());
+        if (data.getOg()!=null){
+            listView.setAdapter(new MyAdapter());
+        }
     }
 
     class MyAdapter extends BaseAdapter {

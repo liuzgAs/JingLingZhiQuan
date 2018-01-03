@@ -140,6 +140,8 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.ORDER_VIPBEFORE;
         HashMap<String, String> params = new HashMap<>();
+        params.put("uid",userInfo.getUid());
+        params.put("tokenTime",tokenTime);
         return new OkObject(params, url);
     }
 
