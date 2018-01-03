@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -29,54 +29,54 @@
             android:textStyle="bold" />
 
         <TextView
-            android:text="658"
             android:id="@+id/textJinE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/textView394"
             android:layout_toRightOf="@+id/textView394"
+            android:text="658"
             android:textColor="@color/light_black"
-            android:textSize="50dp"
-             />
+            android:textSize="50dp" />
     </RelativeLayout>
 
     <TextView
-        tools:text="本单可赚40元"
         android:id="@+id/textDes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="3dp"
         android:textColor="@color/light_black"
-        android:textSize="@dimen/normal_textsize" />
+        android:textSize="@dimen/normal_textsize"
+        tools:text="本单可赚40元" />
 
     <RelativeLayout
         android:id="@+id/viewZheKou"
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible">
 
         <TextView
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/textZheKou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="使用实名认证奖励20元抵扣"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/light_black"
-            android:id="@+id/textZheKou"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="使用实名认证奖励20元抵扣"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
 
         <CheckBox
-            android:layout_marginRight="10dp"
+            android:id="@+id/checkZheKou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkZheKou"
-            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp" />
     </RelativeLayout>
 
     <TextView
@@ -105,6 +105,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -165,6 +166,48 @@
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/normal_textsize" />
             </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_width"
+                android:layout_marginLeft="10dp"
+                android:background="@color/background" />
+            <RelativeLayout
+                android:id="@+id/viewDongBaoBi"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/imageView150"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitStart"
+                    android:src="@mipmap/adb" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/imageView150"
+                    android:layout_toRightOf="@+id/imageView150"
+                    android:text="动宝币"
+                    android:id="@+id/textDongBaoTitle"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+                <TextView
+                    android:id="@+id/textDongBaoDes"
+                    android:layout_toRightOf="@+id/textDongBaoTitle"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:text="您有0动宝币"
+                    android:textSize="@dimen/normal_textsize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -172,6 +215,7 @@
             android:id="@+id/radioGroup"
             android:layout_width="50dp"
             android:layout_height="match_parent">
+
 
             <RadioButton
                 android:id="@+id/radioZhiFuBao"
@@ -186,6 +230,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
+            <RadioButton
+                android:id="@+id/radioDongBaoBi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
         </RadioGroup>
     </LinearLayout>
 
@@ -196,13 +247,13 @@
         android:orientation="vertical">
 
         <Button
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:id="@+id/buttonZhiFu"
             style="@style/MyButton"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
             android:text="确认支付" />
     </LinearLayout>
 

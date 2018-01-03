@@ -24,11 +24,20 @@ public class OrderVipbefore implements Serializable{
     private String cutDes;
     private String img;
     private String info;
+    private String dbb;
     private int status;
     private String text1;
     private String text2;
     private String url;
     private String urlTitle;
+
+    public String getDbb() {
+        return dbb;
+    }
+
+    public void setDbb(String dbb) {
+        this.dbb = dbb;
+    }
 
     public double getAmount() {
         return amount;

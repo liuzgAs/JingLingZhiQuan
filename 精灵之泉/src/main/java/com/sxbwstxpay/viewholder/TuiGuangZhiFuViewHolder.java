@@ -1,10 +1,12 @@
 package com.sxbwstxpay.viewholder;
 
 import android.support.annotation.LayoutRes;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import com.sxbwstxpay.model.AliPayBean;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.OrderVipbefore;
 import com.sxbwstxpay.model.OrderVippay;
+import com.sxbwstxpay.model.SimpleInfo;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.Arith;
 import com.sxbwstxpay.util.GsonUtils;
@@ -46,6 +49,9 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
     private final CheckBox checkZheKou;
     private final TextView textZheKou;
     private final View viewZheKou;
+    private final TextView textDongBaoDes;
+    private final View viewDongBaoBi;
+    private final RadioButton radioDongBaoBi;
 
     public TuiGuangZhiFuViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -72,6 +78,9 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
                     case R.id.radioWeiXin:
                         payMode = 2;
                         break;
+                    case R.id.radioDongBaoBi:
+                        payMode = 3;
+                        break;
                 }
             }
         });
@@ -79,14 +88,17 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onCheckedChanged", Arith.sub(data.getAmount(), data.getCutAmount())+"");
+                    LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onCheckedChanged", Arith.sub(data.getAmount(), data.getCutAmount()) + "");
                     textJinE.setText(Arith.sub(data.getAmount(), data.getCutAmount()) + "");
                 } else {
-                    LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onCheckedChanged", data.getAmount()+"");
+                    LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onCheckedChanged", data.getAmount() + "");
                     textJinE.setText(data.getAmount() + "");
                 }
             }
         });
+        textDongBaoDes = $(R.id.textDongBaoDes);
+        viewDongBaoBi = $(R.id.viewDongBaoBi);
+        radioDongBaoBi = $(R.id.radioDongBaoBi);
     }
 
     /**
@@ -119,19 +131,65 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
                 try {
                     OrderVippay orderVippay = GsonUtils.parseJSON(s, OrderVippay.class);
                     if (orderVippay.getStatus() == 1) {
-                        if (payMode==1){
-                            LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onSuccess", "1111111");
+                        if (payMode == 1) {
                             String payAli = orderVippay.getPayAli();
                             zhiFuBao(payAli);
-                        }else {
-                            LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onSuccess", "2222222");
+                        } else if (payMode == 2) {
                             OrderVippay.PayBean orderVippayPay = orderVippay.getPay();
                             wechatPay(orderVippayPay);
+                        } else if (payMode == 3) {
+                            dongBaoBi(orderVippay.getOid());
                         }
                     } else if (orderVippay.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getContext());
                     } else {
                         Toast.makeText(getContext(), orderVippay.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                ((TuiGuangZFActivity) getContext()).cancelLoadingDialog();
+                Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getDongBaoBiOkObject(String oid) {
+        String url = Constant.HOST + Constant.Url.ORDER_DBPAY;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", ((TuiGuangZFActivity) getContext()).userInfo.getUid());
+        params.put("tokenTime", ((TuiGuangZFActivity) getContext()).tokenTime);
+        params.put("oid", oid);
+        return new OkObject(params, url);
+    }
+
+    /**
+     * 动宝币
+     */
+    private void dongBaoBi(String oid) {
+        ((TuiGuangZFActivity) getContext()).showLoadingDialog();
+        ApiClient.post(getContext(), getDongBaoBiOkObject(oid), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                ((TuiGuangZFActivity) getContext()).cancelLoadingDialog();
+                LogUtil.LogShitou("TuiGuangZhiFuViewHolder--onSuccess", s + "");
+                try {
+                    SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                    if (simpleInfo.getStatus() == 1) {
+                        ((TuiGuangZFActivity) getContext()).paySuccess();
+                    } else if (simpleInfo.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(getContext());
+                    } else {
+                        Toast.makeText(getContext(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "数据出错", Toast.LENGTH_SHORT).show();
@@ -152,7 +210,7 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
             public void run() {
                 try {
                     PayTask alipay = new PayTask((TuiGuangZFActivity) getContext());
-                    LogUtil.LogShitou("TuiGuangZhiFuViewHolder--run", payAli+"");
+                    LogUtil.LogShitou("TuiGuangZhiFuViewHolder--run", payAli + "");
                     Map<String, String> stringMap = alipay.payV2(payAli, true);
                     AliPayBean aliPayBean = GsonUtils.parseJSON(stringMap.get("result"), AliPayBean.class);
                     switch (aliPayBean.getAlipay_trade_app_pay_response().getCode()) {
@@ -195,10 +253,18 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
         super.setData(data);
         this.data = data;
         textJinE.setText(Arith.sub(data.getAmount(), data.getCutAmount()) + "");
-        if (data.getCutAmount()==0){
+        if (data.getCutAmount() == 0) {
             textZheKou.setVisibility(View.GONE);
         }
-        textZheKou.setText("使用实名认证奖励"+data.getCutAmount()+"元抵扣");
+        textZheKou.setText("使用实名认证奖励" + data.getCutAmount() + "元抵扣");
+        if (!TextUtils.isEmpty(data.getDbb())){
+            textDongBaoDes.setText(data.getDbb());
+            viewDongBaoBi.setVisibility(View.VISIBLE);
+            radioDongBaoBi.setVisibility(View.VISIBLE);
+        }else {
+            viewDongBaoBi.setVisibility(View.GONE);
+            radioDongBaoBi.setVisibility(View.GONE);
+        }
     }
 
     /**

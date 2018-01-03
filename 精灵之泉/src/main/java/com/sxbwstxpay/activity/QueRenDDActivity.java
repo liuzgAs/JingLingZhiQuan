@@ -79,6 +79,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     private TextView textDiKouJF;
     private String dbbText;
     private TextView textDiKouHJ;
+    private String sum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -299,11 +300,13 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         is_dbb = cartOrder.getIs_dbb();
                         dbbText = cartOrder.getDbbText();
                         if (is_dbb == 1) {
+                            sum = cartOrder.getMoneyAfter();
                             viewTiJiaoDD.setVisibility(View.GONE);
                             viewDuiHuan.setVisibility(View.VISIBLE);
                             textDiKouJF.setText(cartOrder.getScoreAfter());
                             textDiKouHJ.setText("合计：¥" + cartOrder.getMoneyAfter());
                         } else {
+                            sum = cartOrder.getSum();
                             viewTiJiaoDD.setVisibility(View.VISIBLE);
                             viewDuiHuan.setVisibility(View.GONE);
                             textSum.setText("合计：¥" + cartOrder.getSum());
@@ -381,7 +384,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
 
     private void tiJiao() {
         showLoadingDialog();
-        CartNeworderUpload cartNeworderUpload = new CartNeworderUpload(cartOrderUpload.getCart(), userInfo.getUid(), cartOrderAd.getId(), tokenTime, cartOrder.getSum(), editPayMsg.getText().toString().trim(), useScore);
+        CartNeworderUpload cartNeworderUpload = new CartNeworderUpload(cartOrderUpload.getCart(), userInfo.getUid(), cartOrderAd.getId(), tokenTime, sum, editPayMsg.getText().toString().trim(), useScore);
         ApiClient.postJson(QueRenDDActivity.this, Constant.HOST + Constant.Url.CART_NEWORDER, GsonUtils.parseObject(cartNeworderUpload), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {

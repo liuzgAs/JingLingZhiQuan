@@ -19,7 +19,7 @@
             <RelativeLayout
                 android:id="@+id/viewZoom"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_height="300dp"
                 android:background="@mipmap/mine_top">
 
                 <RelativeLayout

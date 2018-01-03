@@ -19,6 +19,15 @@ public class OrderVippay {
     private String payAli;
     private int status;
     private String info;
+    private String oid;
+
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
     public String getWechatUrl() {
         return wechatUrl;

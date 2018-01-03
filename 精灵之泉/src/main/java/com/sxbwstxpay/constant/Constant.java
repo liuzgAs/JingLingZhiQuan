@@ -205,6 +205,10 @@ public class Constant {
          * 新通道添加银行卡短信请求
          */
         public static final String BANK_CARDBINDBEFORE = "&g=App&m=Bank&a=cardBindBefore";
+        /**
+         * 动宝币支付
+         */
+        public static final String ORDER_DBPAY = "&g=App&m=Order&a=dbPay";
     }
 
     public static class PERMISSION {
