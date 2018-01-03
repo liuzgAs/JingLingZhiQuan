@@ -78,12 +78,16 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 case Constant.BROADCASTCODE.VIP:
                     initData();
                     break;
+                case Constant.BROADCASTCODE.MINE:
+                    initData();
+                    break;
             }
         }
     };
     private String storeTips;
     private String dbb;
     private TextView textScore;
+    private TextView textScore1;
     private View viewJiFen;
     private View viewJiFen01;
     private View cardViewHuiYuan;
@@ -146,7 +150,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         cardViewHuiYuan = mInflate.findViewById(R.id.cardViewHuiYuan);
         cardViewFeiHuiYuan = mInflate.findViewById(R.id.cardViewFeiHuiYuan);
         textScore = (TextView) cardViewHuiYuan.findViewById(R.id.textScore);
-        textScore = (TextView) cardViewFeiHuiYuan.findViewById(R.id.textScore);
+        textScore1 = (TextView) cardViewFeiHuiYuan.findViewById(R.id.textScore);
         textHuiYuanBtn = (TextView) mInflate.findViewById(R.id.textHuiYuanBtn);
         textHuiYuanBtn01 = (TextView) mInflate.findViewById(R.id.textHuiYuanBtn01);
     }
@@ -264,7 +268,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                             layoutParams.height = (int) DpUtils.convertDpToPixel(200f, getActivity());
                             cardViewFeiHuiYuan.setLayoutParams(layoutParams);
                         }
-                        if (userIndex.getIs_btn() == 1&&grade != 0) {
+                        if (userIndex.getIs_btn() == 1 && grade != 0) {
                             textHuiYuanBtn.setVisibility(View.VISIBLE);
                             textHuiYuanBtn01.setVisibility(View.VISIBLE);
                             btnText = userIndex.getBtnText();
@@ -278,6 +282,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                         textVipTime.setText(userIndex.getVipTime());
                         dbb = userIndex.getDbb();
                         textScore.setText(dbb);
+                        textScore1.setText(dbb);
                     } else if (userIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {
@@ -473,6 +478,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.VIP);
+        filter.addAction(Constant.BROADCASTCODE.MINE);
         getActivity().registerReceiver(reciver, filter);
     }
 

@@ -7,9 +7,18 @@ public class CartNeworder {
     private String info;
     private int status;
     private int oid;
+    private int goPay;
 
     public int getOid() {
         return oid;
+    }
+
+    public int getGoPay() {
+        return goPay;
+    }
+
+    public void setGoPay(int goPay) {
+        this.goPay = goPay;
     }
 
     public void setOid(int oid) {

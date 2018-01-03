@@ -69,12 +69,24 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
                             SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                             if (simpleInfo.getStatus()==1){
                                 ((TuWenTGActivity)getContext()).showLoadingDialog();
-//                                SDFileHelper helper = new SDFileHelper(getContext());
-//                                for (int i = 0; i < data.getShare_images().size(); i++) {
-//                                    helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getImgs().get(i));
-//                                }
-                                ((TuWenTGActivity)getContext()).cancelLoadingDialog();
-                                Toast.makeText(getContext(), "已保存到本地相册", Toast.LENGTH_SHORT).show();
+                                final int[] count = {0};
+                                for (int i = 0; i < data.getShare_images().size(); i++) {
+                                   ApiClient.downLoadFile(getContext(), data.getShare_images().get(i), "精灵之泉","图文推广" + System.currentTimeMillis()+".jpg", new ApiClient.CallBack() {
+                                       @Override
+                                       public void onSuccess(String s) {
+                                           count[0]++;
+                                           if (count[0]==data.getShare_images().size()){
+                                               Toast.makeText(getContext(), "图片保存在/精灵之泉", Toast.LENGTH_SHORT).show();
+                                               ((TuWenTGActivity)getContext()).cancelLoadingDialog();
+                                           }
+                                       }
+
+                                       @Override
+                                       public void onError(Response response) {
+                                           LogUtil.LogShitou("TuWenTGViewHolder--onError", "onError");
+                                       }
+                                   });
+                                }
                             }else if (simpleInfo.getStatus()==3){
                                 MyDialog.showReLoginDialog(getContext());
                             }else {

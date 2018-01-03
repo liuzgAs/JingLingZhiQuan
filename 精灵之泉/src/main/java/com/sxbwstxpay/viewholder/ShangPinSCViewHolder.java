@@ -20,6 +20,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.BigImgActivity;
 import com.sxbwstxpay.activity.ShangPinScActivity;
+import com.sxbwstxpay.activity.TuWenTGActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.GridView4ScrollView;
@@ -67,11 +68,24 @@ public class ShangPinSCViewHolder extends BaseViewHolder<UserItem.DataBean> {
                             SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
                             if (simpleInfo.getStatus()==1){
                                 ((ShangPinScActivity)getContext()).showLoadingDialog();
-//                                SDFileHelper helper = new SDFileHelper(getContext());
-//                                for (int i = 0; i < data.getImgs().size(); i++) {
-//                                    helper.savePicture(System.currentTimeMillis()+i + ".jpg", data.getImgs().get(i));
-//                                }
-                                ((ShangPinScActivity)getContext()).cancelLoadingDialog();
+                                final int[] count = {0};
+                                for (int i = 0; i < data.getImgs().size(); i++) {
+                                    ApiClient.downLoadFile(getContext(), data.getImgs().get(i), "精灵之泉","图文推广" + System.currentTimeMillis()+".jpg", new ApiClient.CallBack() {
+                                        @Override
+                                        public void onSuccess(String s) {
+                                            count[0]++;
+                                            if (count[0]==data.getImgs().size()){
+                                                Toast.makeText(getContext(), "图片保存在/精灵之泉", Toast.LENGTH_SHORT).show();
+                                                ((TuWenTGActivity)getContext()).cancelLoadingDialog();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(Response response) {
+                                            LogUtil.LogShitou("TuWenTGViewHolder--onError", "onError");
+                                        }
+                                    });
+                                }
                                 Toast.makeText(getContext(), "已保存到本地相册", Toast.LENGTH_SHORT).show();
                             }else if (simpleInfo.getStatus()==3){
                                 MyDialog.showReLoginDialog(getContext());

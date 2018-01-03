@@ -211,6 +211,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         });
         adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
 
+            private CheckBox checkZheKou;
             private TextView textKeDiKouJF;
             private View viewJiFenDK;
             private View viewHeJi;
@@ -226,19 +227,21 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                 viewHeJi = item_queren_dd.findViewById(R.id.viewHeJi);
                 viewJiFenDK = item_queren_dd.findViewById(R.id.viewJiFenDK);
                 textKeDiKouJF = (TextView) item_queren_dd.findViewById(R.id.textKeDiKouJF);
-                CheckBox checkZheKou = (CheckBox) item_queren_dd.findViewById(R.id.checkZheKou);
+                checkZheKou = (CheckBox) item_queren_dd.findViewById(R.id.checkZheKou);
                 checkZheKou.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                         if (cartOrder!=null){
                             if (b) {
+                                sum = cartOrder.getMoneyAfter();
                                 useScore = 1;
-                                textDiKouJF.setVisibility(View.VISIBLE);
-                                textDiKouHJ.setText("合计：¥" + cartOrder.getMoneyAfter());
+                                viewTiJiaoDD.setVisibility(View.GONE);
+                                viewDuiHuan.setVisibility(View.VISIBLE);
                             } else {
+                                sum = cartOrder.getSum();
                                 useScore = 0;
-                                textDiKouJF.setVisibility(View.INVISIBLE);
-                                textDiKouHJ.setText("合计：¥" + cartOrder.getSum());
+                                viewTiJiaoDD.setVisibility(View.VISIBLE);
+                                viewDuiHuan.setVisibility(View.GONE);
                             }
                         }
                     }
@@ -251,14 +254,20 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
             public void onBindView(View headerView) {
                 if (cartOrder != null) {
                     if (is_dbb == 1) {
-                        viewHeJi.setVisibility(View.GONE);
-                        viewJiFenDK.setVisibility(View.VISIBLE);
                         textKeDiKouJF.setText(dbbText);
+                        viewHeJi.setVisibility(View.GONE);
+                        viewTiJiaoDD.setVisibility(View.GONE);
+                        viewDuiHuan.setVisibility(View.VISIBLE);
                     } else {
                         viewJiFenDK.setVisibility(View.GONE);
                         viewHeJi.setVisibility(View.VISIBLE);
                         textSum.setText("¥" + cartOrder.getSum());
                         textGoods_money.setText("¥" + cartOrder.getGoods_money());
+                    }
+                    if (isScore==1){
+                        checkZheKou.setVisibility(View.INVISIBLE);
+                    }else {
+                        checkZheKou.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -301,17 +310,22 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         is_dbb = cartOrder.getIs_dbb();
                         isScore = cartOrder.getIsScore();
                         dbbText = cartOrder.getDbbText();
+                        textDiKouJF.setText(cartOrder.getScoreAfter());
+                        textDiKouHJ.setText("合计：¥" + cartOrder.getMoneyAfter());
+                        textSum.setText("¥" + cartOrder.getSum());
+                        textYunFei.setText(cartOrder.getSumDes());
                         if (isScore == 1) {
-                            textDiKouJF.setText(cartOrder.getScoreAfter());
-                            textDiKouHJ.setText("合计：¥" + cartOrder.getMoneyAfter());
+                            textDiKouHJ.setVisibility(View.GONE);
+
+                        } else {
                             textDiKouHJ.setVisibility(View.VISIBLE);
+
+                        }
+                        if (is_dbb==1){
                             sum = cartOrder.getMoneyAfter();
                             viewTiJiaoDD.setVisibility(View.GONE);
                             viewDuiHuan.setVisibility(View.VISIBLE);
-                        } else {
-                            textSum.setText("合计：¥" + cartOrder.getSum());
-                            textYunFei.setText(cartOrder.getSumDes());
-                            textDiKouHJ.setVisibility(View.GONE);
+                        }else {
                             sum = cartOrder.getSum();
                             viewTiJiaoDD.setVisibility(View.VISIBLE);
                             viewDuiHuan.setVisibility(View.GONE);
@@ -400,15 +414,24 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                     if (cartNeworder.getStatus() == 1) {
                         Intent intent1 = new Intent();
                         intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+                        intent1.setAction(Constant.BROADCASTCODE.ShuaXinDingDan);
+                        intent1.setAction(Constant.BROADCASTCODE.GouWuCheNum);
+                        intent1.setAction(Constant.BROADCASTCODE.MINE);
                         sendBroadcast(intent1);
-                        //刷新购物车小红点
-                        Intent intent2 = new Intent();
-                        intent2.setAction(Constant.BROADCASTCODE.GouWuCheNum);
-                        sendBroadcast(intent2);
-                        Intent intent = new Intent();
-                        intent.setClass(QueRenDDActivity.this, ZhiFuActivity.class);
-                        intent.putExtra(Constant.INTENT_KEY.id, cartNeworder.getOid());
-                        startActivity(intent);
+                        if (cartNeworder.getGoPay()==2){
+                            finish();
+                            Intent intent3 = new Intent();
+                            intent3.putExtra(Constant.INTENT_KEY.id, cartNeworder.getOid());
+                            intent3.setClass(QueRenDDActivity.this, ZhiFuCGActivity.class);
+                            startActivity(intent3);
+                        }else if (cartNeworder.getGoPay()==1){
+                            Intent intent = new Intent();
+                            intent.setClass(QueRenDDActivity.this, ZhiFuActivity.class);
+                            intent.putExtra(Constant.INTENT_KEY.id, cartNeworder.getOid());
+                            startActivity(intent);
+                        }else {
+
+                        }
                     } else if (cartNeworder.getStatus() == 2) {
                         MyDialog.showReLoginDialog(QueRenDDActivity.this);
                     } else {

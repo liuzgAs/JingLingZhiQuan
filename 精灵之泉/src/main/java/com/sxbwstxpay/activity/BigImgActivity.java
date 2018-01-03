@@ -2,6 +2,7 @@ package com.sxbwstxpay.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -17,8 +18,11 @@ import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.BigImgList;
 import com.sxbwstxpay.photoview.HackyViewPager;
+import com.sxbwstxpay.util.DownLoadImageService;
 import com.sxbwstxpay.util.GlideApp;
+import com.sxbwstxpay.util.ImageDownLoadCallBack;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,12 +108,29 @@ public class BigImgActivity extends ZjbBaseNotLeftActivity {
             @Override
             public void onClick(View v) {
                 showLoadingDialog();
-//                SDFileHelper helper = new SDFileHelper(BigImgActivity.this);
-//                for (int i = 0; i < imgList.size(); i++) {
-//                    helper.savePicture(System.currentTimeMillis() + i + ".jpg", imgList.get(i));
-//                }
-                cancelLoadingDialog();
-                Toast.makeText(BigImgActivity.this, "已保存到本地相册", Toast.LENGTH_SHORT).show();
+                final int[] count = {0};
+                for (int i = 0; i < imgList.size(); i++) {
+                    new DownLoadImageService(BigImgActivity.this, imgList.get(i), new ImageDownLoadCallBack() {
+                        @Override
+                        public void onDownLoadSuccess(File file) {
+                            count[0]++;
+                            if (count[0]==imgList.size()){
+                                cancelLoadingDialog();
+                                Toast.makeText(BigImgActivity.this, "已保存到本地相册", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onDownLoadSuccess(Bitmap bitmap) {
+
+                        }
+
+                        @Override
+                        public void onDownLoadFailed() {
+
+                        }
+                    }).run();
+                }
             }
         });
         mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

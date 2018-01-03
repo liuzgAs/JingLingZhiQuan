@@ -12,16 +12,20 @@ public class SDFileHelper {
 //    }     //Glide保存图片
 //
 //    public void savePicture(final String fileName, String url) {
-//        Glide.with(context).load(url).asBitmap().toBytes().into(new SimpleTarget<byte[]>() {
-//            @Override
-//            public void onResourceReady(byte[] bytes, GlideAnimation<? super byte[]> glideAnimation) {
-//                try {
-//                    savaFileToSD(fileName, bytes);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+//        GlideApp.with(context)
+//                .asBitmap().
+//                .load(url)
+//                .toBytes()
+//                .into(new SimpleTarget<byte[]>() {
+//                    @Override
+//                    public void onResourceReady(byte[] bytes, GlideAnimation<? super byte[]> glideAnimation) {
+//                        try {
+//                            savaFileToSD(fileName, bytes);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
 //    }   //往SD卡写入文件的方法
 //
 //    public void savaFileToSD(String filename, byte[] bytes) throws Exception {
@@ -37,11 +41,11 @@ public class SDFileHelper {
 //            output.write(bytes);       //将bytes写入到输出流中
 //            output.close();       //关闭输出流
 ////            Toast.makeText(context, "图片已成功保存到" + filePath, Toast.LENGTH_SHORT).show();
-//            LogUtil.LogShitou("SDFileHelper--savaFileToSD", ""+filename);
+//            LogUtil.LogShitou("SDFileHelper--savaFileToSD", "" + filename);
 //            // 最后通知图库更新
 //            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
 //                    Uri.fromFile(new File(filename))));
-//        } else{
+//        } else {
 //            Toast.makeText(context, "SD卡不存在或者不可读写", Toast.LENGTH_SHORT).show();
 //        }
 //    }
