@@ -1,5 +1,6 @@
 package com.sxbwstxpay.viewholder;
 
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.alipay.sdk.app.PayTask;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.TuiGuangZFActivity;
+import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.AliPayBean;
@@ -48,10 +50,11 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
     private int payMode = 1;
     private final CheckBox checkZheKou;
     private final TextView textZheKou;
-    private final View viewZheKou;
     private final TextView textDongBaoDes;
     private final View viewDongBaoBi;
     private final RadioButton radioDongBaoBi;
+    private final View viewXieYi;
+    private boolean isXieYi = true;
 
     public TuiGuangZhiFuViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
@@ -60,10 +63,15 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
         checkZheKou = $(R.id.checkZheKou);
         checkZheKou.setChecked(true);
         textZheKou = $(R.id.textZheKou);
-        viewZheKou = $(R.id.viewZheKou);
         $(R.id.buttonZhiFu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (payMode==3){
+                    if (!isXieYi){
+                        Toast.makeText(getContext(), "请同意并阅读《动宝积分使用规则》", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                 zhiFu();
             }
         });
@@ -74,12 +82,17 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
                 switch (checkedId) {
                     case R.id.radioZhiFuBao:
                         payMode = 1;
+                        viewXieYi.setVisibility(View.GONE);
                         break;
                     case R.id.radioWeiXin:
                         payMode = 2;
+                        viewXieYi.setVisibility(View.GONE);
                         break;
                     case R.id.radioDongBaoBi:
                         payMode = 3;
+                        viewXieYi.setVisibility(View.VISIBLE);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -99,6 +112,25 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
         textDongBaoDes = $(R.id.textDongBaoDes);
         viewDongBaoBi = $(R.id.viewDongBaoBi);
         radioDongBaoBi = $(R.id.radioDongBaoBi);
+        viewXieYi = $(R.id.viewXieYi);
+        viewXieYi.setVisibility(View.GONE);
+        CheckBox checkXieYi = $(R.id.checkXieYi);
+        checkXieYi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                isXieYi = b;
+            }
+        });
+        $(R.id.textXieYi01).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "动宝积分使用规则");
+                intent.putExtra(Constant.INTENT_KEY.URL, data.getDbUrl());
+                getContext().startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -113,10 +145,8 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
         params.put("tokenTime", ((TuiGuangZFActivity) getContext()).tokenTime);
         if (checkZheKou.isChecked()) {
             params.put("isCut", "1");
-            viewZheKou.setVisibility(View.VISIBLE);
         } else {
             params.put("isCut", "0");
-            viewZheKou.setVisibility(View.INVISIBLE);
         }
         return new OkObject(params, url);
     }
@@ -257,11 +287,11 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
             textZheKou.setVisibility(View.GONE);
         }
         textZheKou.setText("使用实名认证奖励" + data.getCutAmount() + "元抵扣");
-        if (!TextUtils.isEmpty(data.getDbb())){
+        if (!TextUtils.isEmpty(data.getDbb())) {
             textDongBaoDes.setText(data.getDbb());
             viewDongBaoBi.setVisibility(View.VISIBLE);
             radioDongBaoBi.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             viewDongBaoBi.setVisibility(View.GONE);
             radioDongBaoBi.setVisibility(View.GONE);
         }

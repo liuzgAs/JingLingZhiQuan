@@ -30,6 +30,15 @@ public class OrderVipbefore implements Serializable{
     private String text2;
     private String url;
     private String urlTitle;
+    private String dbUrl;
+
+    public String getDbUrl() {
+        return dbUrl;
+    }
+
+    public void setDbUrl(String dbUrl) {
+        this.dbUrl = dbUrl;
+    }
 
     public String getDbb() {
         return dbb;
