@@ -21,6 +21,7 @@ public class YinDaoActivity extends FragmentActivity {
     private int[] imgs = new int[]{
             R.mipmap.welcome01,
             R.mipmap.welcome02,
+            R.mipmap.welcome03,
             R.mipmap.welcome04,
             R.mipmap.welcome05
     };
