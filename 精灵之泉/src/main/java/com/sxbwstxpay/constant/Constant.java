@@ -209,6 +209,18 @@ public class Constant {
          * 动宝币支付
          */
         public static final String ORDER_DBPAY = "&g=App&m=Order&a=dbPay";
+        /**
+         * 红包雨请求
+         */
+        public static final String INDEX_BONUSDOWN = "&g=App&m=Index&a=bonusDown";
+        /**
+         * 红包雨H5
+         */
+        public static final String INDEX_BONUSBEFORE = "&g=App&m=Index&a=bonusBefore";
+        /**
+         * 红包灵气接口
+         */
+        public static final String INDEX_BONUSGET = "&g=App&m=Index&a=bonusGet";
     }
 
     public static class PERMISSION {

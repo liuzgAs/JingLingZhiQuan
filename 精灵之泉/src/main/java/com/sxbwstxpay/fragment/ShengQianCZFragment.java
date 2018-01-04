@@ -1,6 +1,11 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +35,13 @@ import com.sxbwstxpay.activity.ChengShiXZActivity;
 import com.sxbwstxpay.activity.GouWuCActivity;
 import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.activity.SouSuoActivity;
+import com.sxbwstxpay.activity.WebHongBaoActivity;
 import com.sxbwstxpay.base.MyDialog;
+import com.sxbwstxpay.base.ToLoginActivity;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.IndexBonusbefore;
+import com.sxbwstxpay.model.IndexBonusdown;
 import com.sxbwstxpay.model.IndexCate;
 import com.sxbwstxpay.model.IndexCitylist;
 import com.sxbwstxpay.model.OkObject;
@@ -96,6 +106,9 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     private int indexBannerTabHeight;
     private int jiFenWeiZHi;
     private float tabTranYDistance;
+    private Dialog mDialog;
+    private ImageView imageHongBaoDialog;
+    private boolean isHongBaoShow = false;
 
     public ShengQianCZFragment() {
         // Required empty public constructor
@@ -150,6 +163,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         listViewShaiXuan = (ListView) mInflate.findViewById(R.id.listViewShaiXuan);
         listViewShaiXuan01 = (ListView) mInflate.findViewById(R.id.listViewShaiXuan01);
         viewTabLayout = mInflate.findViewById(R.id.viewTabLayout);
+        imageHongBaoDialog = (ImageView) mInflate.findViewById(R.id.imageHongBaoDialog);
     }
 
     @Override
@@ -274,6 +288,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 viewTabLayout.setTranslationY(tabTranYDistance);
             }
         });
+        imageHongBaoDialog.setOnClickListener(this);
     }
 
     /**
@@ -334,7 +349,7 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                         tablayout.removeAllTabs();
                         LogUtil.LogShitou("ShengQianCZFragment--indexCate.getVipNum()", "" + indexCate.getVipNum());
                         for (int i = 0; i < indexCateCate.size(); i++) {
-                            if (TextUtils.equals(indexCateCate.get(i).getJump(),"score")){
+                            if (TextUtils.equals(indexCateCate.get(i).getJump(), "score")) {
                                 jiFenWeiZHi = i;
                             }
                             View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_tablayout, null);
@@ -398,6 +413,9 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.imageHongBaoDialog:
+                hongBaoQingQing();
+                break;
             case R.id.imageShaiXuan:
                 isShaiXuan = !isShaiXuan;
                 if (isShaiXuan) {
@@ -431,11 +449,436 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
         filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
         filter.addAction(Constant.BROADCASTCODE.GouWuCheNum);
         getActivity().registerReceiver(reciver, filter);
-        if (((MainActivity)getActivity()).isJiFen){
+        if (((MainActivity) getActivity()).isJiFen) {
             tablayout.setScrollPosition(jiFenWeiZHi, 0, false);
             tablayout.getTabAt(jiFenWeiZHi).select();
-            ((MainActivity)getActivity()).isJiFen=false;
+            ((MainActivity) getActivity()).isJiFen = false;
         }
+        if (!isHongBaoShow) {
+            hongBaoQingQing();
+            isHongBaoShow = true;
+        }
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getHongBaoQQOkObject() {
+        String url = Constant.HOST + Constant.Url.INDEX_BONUSDOWN;
+        HashMap<String, String> params = new HashMap<>();
+        if (isLogin) {
+            params.put("uid", userInfo.getUid());
+            params.put("tokenTime", tokenTime);
+        }
+        return new OkObject(params, url);
+    }
+
+    /**
+     * 红包请求
+     */
+    private void hongBaoQingQing() {
+
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getHongBaoQQOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("ShengQianCZFragment--onSuccess", s + "");
+                try {
+                    IndexBonusdown indexBonusdown = GsonUtils.parseJSON(s, IndexBonusdown.class);
+                    if (indexBonusdown.getStatus() == 1) {
+                        if (indexBonusdown.getDown() == 1) {
+                            hongBaoDialog();
+                            imageHongBaoDialog.setVisibility(View.VISIBLE);
+                        } else {
+                            imageHongBaoDialog.setVisibility(View.GONE);
+                        }
+                    } else if (indexBonusdown.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(getContext());
+                    } else {
+                        Toast.makeText(getActivity(), indexBonusdown.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    /**
+     * 红包弹窗
+     */
+    @SuppressLint("WrongConstant")
+    private void hongBaoDialog() {
+        if (mDialog == null) {
+            int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+            int screenHeight = ScreenUtils.getScreenHeight(getActivity());
+
+            View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hongbao, null);
+            RelativeLayout relaHongBao = (RelativeLayout) inflate.findViewById(R.id.relaHongBao);
+
+            ImageView imageHongBao09 = new ImageView(getActivity());
+            float hongbao09 = DpUtils.convertDpToPixel(62f, getActivity());
+            imageHongBao09.setImageResource(R.mipmap.hongbao02);
+            RelativeLayout.LayoutParams layoutParams09 = new RelativeLayout.LayoutParams((int) hongbao09, (int) hongbao09);
+            float widthF09 = 0.3f;
+            layoutParams09.addRule(RelativeLayout.ALIGN_PARENT_RIGHT | RelativeLayout.ALIGN_PARENT_TOP);
+            layoutParams09.rightMargin = -(int) hongbao09;
+            layoutParams09.topMargin = (int) (screenHeight * (1 - widthF09));
+            relaHongBao.addView(imageHongBao09, layoutParams09);
+            PropertyValuesHolder holder0901 = PropertyValuesHolder.ofFloat("translationX", -screenHeight * widthF09);
+            PropertyValuesHolder holder0902 = PropertyValuesHolder.ofFloat("translationY", (screenHeight * widthF09) * 1.64f);
+            ObjectAnimator animator09 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao09, holder0901, holder0902);
+            animator09.setDuration(1000);
+            animator09.setRepeatCount(ValueAnimator.INFINITE);
+            animator09.setRepeatMode(ValueAnimator.INFINITE);
+            animator09.start();
+            imageHongBao09.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao0801 = new ImageView(getActivity());
+            float hongbao08 = DpUtils.convertDpToPixel(85f, getActivity());
+            imageHongBao0801.setImageResource(R.mipmap.hongbao04);
+            RelativeLayout.LayoutParams layoutParams08 = new RelativeLayout.LayoutParams((int) hongbao08, (int) hongbao08);
+            float widthF08 = 1f;
+            layoutParams08.addRule(RelativeLayout.ALIGN_PARENT_RIGHT | RelativeLayout.ALIGN_PARENT_TOP);
+            layoutParams08.rightMargin = -(int) hongbao08 * 3;
+            layoutParams08.topMargin = -(int) hongbao08 * 3;
+            relaHongBao.addView(imageHongBao0801, layoutParams08);
+            PropertyValuesHolder holder0801 = PropertyValuesHolder.ofFloat("translationX", -screenWidth * widthF08 - hongbao08 * 3);
+            PropertyValuesHolder holder0802 = PropertyValuesHolder.ofFloat("translationY", (screenWidth * widthF08 + hongbao08 * 3) * 1.64f);
+            ObjectAnimator animator0801 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao0801, holder0801, holder0802);
+            animator0801.setDuration(1500);
+            animator0801.setStartDelay(900);
+            animator0801.setRepeatCount(ValueAnimator.INFINITE);
+            animator0801.setRepeatMode(ValueAnimator.INFINITE);
+            animator0801.start();
+            imageHongBao0801.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao08 = new ImageView(getActivity());
+            imageHongBao08.setImageResource(R.mipmap.hongbao04);
+            relaHongBao.addView(imageHongBao08, layoutParams08);
+            ObjectAnimator animator08 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao08, holder0801, holder0802);
+            animator08.setDuration(2000);
+            animator08.setRepeatCount(ValueAnimator.INFINITE);
+            animator08.setRepeatMode(ValueAnimator.INFINITE);
+            animator08.start();
+            imageHongBao08.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao07 = new ImageView(getActivity());
+            float hongbao07 = DpUtils.convertDpToPixel(42f, getActivity());
+            imageHongBao07.setImageResource(R.mipmap.hongbao01);
+            RelativeLayout.LayoutParams layoutParams07 = new RelativeLayout.LayoutParams((int) hongbao07, (int) hongbao07);
+            float widthF07 = 0.3f;
+            layoutParams07.addRule(RelativeLayout.ALIGN_PARENT_RIGHT | RelativeLayout.ALIGN_PARENT_TOP);
+            layoutParams07.rightMargin = -(int) hongbao07;
+            layoutParams07.topMargin = (int) (screenHeight * (1 - widthF07));
+            relaHongBao.addView(imageHongBao07, layoutParams07);
+            PropertyValuesHolder holder0701 = PropertyValuesHolder.ofFloat("translationX", -screenHeight * widthF07);
+            PropertyValuesHolder holder0702 = PropertyValuesHolder.ofFloat("translationY", (screenHeight * widthF07) * 1.64f);
+            ObjectAnimator animator07 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao07, holder0701, holder0702);
+            animator07.setDuration(1500);
+            animator07.setRepeatCount(ValueAnimator.INFINITE);
+            animator07.setRepeatMode(ValueAnimator.INFINITE);
+            animator07.start();
+            imageHongBao07.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao0601 = new ImageView(getActivity());
+            float hongbao06 = DpUtils.convertDpToPixel(42f, getActivity());
+            imageHongBao0601.setImageResource(R.mipmap.hongbao03);
+            RelativeLayout.LayoutParams layoutParams06 = new RelativeLayout.LayoutParams((int) hongbao06, (int) hongbao06);
+            float widthF06 = 1f;
+            layoutParams06.addRule(RelativeLayout.ALIGN_PARENT_RIGHT | RelativeLayout.ALIGN_PARENT_TOP);
+            layoutParams06.rightMargin = -(int) hongbao06 * 3;
+            layoutParams06.topMargin = -(int) hongbao06;
+            relaHongBao.addView(imageHongBao0601, layoutParams06);
+            PropertyValuesHolder holder0601 = PropertyValuesHolder.ofFloat("translationX", -screenWidth * widthF06 - hongbao06 * 3);
+            PropertyValuesHolder holder0602 = PropertyValuesHolder.ofFloat("translationY", (screenWidth * widthF06 + hongbao06 * 3) * 1.64f);
+            ObjectAnimator animator06 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao0601, holder0601, holder0602);
+            animator06.setDuration(2000);
+            animator06.setStartDelay(1150);
+            animator06.setRepeatCount(ValueAnimator.INFINITE);
+            animator06.setRepeatMode(ValueAnimator.INFINITE);
+            animator06.start();
+            imageHongBao0601.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao06 = new ImageView(getActivity());
+            imageHongBao06.setImageResource(R.mipmap.hongbao03);
+            relaHongBao.addView(imageHongBao06, layoutParams06);
+            ObjectAnimator animator0601 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao06, holder0601, holder0602);
+            animator0601.setDuration(2500);
+            animator0601.setRepeatCount(ValueAnimator.INFINITE);
+            animator0601.setRepeatMode(ValueAnimator.INFINITE);
+            animator0601.start();
+            imageHongBao06.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao0501 = new ImageView(getActivity());
+            float hongbao05 = DpUtils.convertDpToPixel(62f, getActivity());
+            imageHongBao0501.setImageResource(R.mipmap.hongbao03);
+            RelativeLayout.LayoutParams layoutParams05 = new RelativeLayout.LayoutParams((int) hongbao05, (int) hongbao05);
+            float widthF05 = 0.8f;
+            layoutParams05.addRule(RelativeLayout.ALIGN_PARENT_RIGHT | RelativeLayout.ALIGN_PARENT_TOP);
+            layoutParams05.leftMargin = (int) (screenWidth * widthF05);
+            layoutParams05.topMargin = -(int) hongbao05;
+            relaHongBao.addView(imageHongBao0501, layoutParams05);
+            PropertyValuesHolder holder0501 = PropertyValuesHolder.ofFloat("translationX", -screenWidth * widthF05 - hongbao05);
+            PropertyValuesHolder holder0502 = PropertyValuesHolder.ofFloat("translationY", (screenWidth * widthF05 + hongbao05) * 1.64f);
+            ObjectAnimator animator0501 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao0501, holder0501, holder0502);
+            animator0501.setDuration(2000);
+            animator06.setStartDelay(1000);
+            animator0501.setRepeatCount(ValueAnimator.INFINITE);
+            animator0501.setRepeatMode(ValueAnimator.INFINITE);
+            animator0501.start();
+            imageHongBao0501.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao05 = new ImageView(getActivity());
+            imageHongBao05.setImageResource(R.mipmap.hongbao03);
+            relaHongBao.addView(imageHongBao05, layoutParams05);
+            ObjectAnimator animator05 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao05, holder0501, holder0502);
+            animator05.setDuration(2500);
+            animator05.setRepeatCount(ValueAnimator.INFINITE);
+            animator05.setRepeatMode(ValueAnimator.INFINITE);
+            animator05.start();
+            imageHongBao05.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao0401 = new ImageView(getActivity());
+            float hongbao04 = DpUtils.convertDpToPixel(85f, getActivity());
+            imageHongBao0401.setImageResource(R.mipmap.hongbao04);
+            RelativeLayout.LayoutParams layoutParams04 = new RelativeLayout.LayoutParams((int) hongbao04, (int) hongbao04);
+            float widthF04 = 1f;
+            layoutParams04.addRule(RelativeLayout.ALIGN_PARENT_RIGHT | RelativeLayout.ALIGN_PARENT_TOP);
+            layoutParams04.rightMargin = -(int) hongbao04;
+            layoutParams04.topMargin = -(int) hongbao04;
+            relaHongBao.addView(imageHongBao0401, layoutParams04);
+            PropertyValuesHolder holder0401 = PropertyValuesHolder.ofFloat("translationX", -screenWidth * widthF04 - hongbao04);
+            PropertyValuesHolder holder0402 = PropertyValuesHolder.ofFloat("translationY", (screenWidth * widthF04 + hongbao04) * 1.64f);
+            ObjectAnimator animator0401 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao0401, holder0401, holder0402);
+            animator0401.setDuration(2600);
+            animator0401.setStartDelay(1100);
+            animator0401.setRepeatCount(ValueAnimator.INFINITE);
+            animator0401.setRepeatMode(ValueAnimator.INFINITE);
+            animator0401.start();
+            imageHongBao0401.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao04 = new ImageView(getActivity());
+            imageHongBao04.setImageResource(R.mipmap.hongbao04);
+            relaHongBao.addView(imageHongBao04, layoutParams04);
+            ObjectAnimator animator04 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao04, holder0401, holder0402);
+            animator04.setDuration(2000);
+            animator04.setRepeatCount(ValueAnimator.INFINITE);
+            animator04.setRepeatMode(ValueAnimator.INFINITE);
+            animator04.start();
+            imageHongBao04.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao0301 = new ImageView(getActivity());
+            float hongbao03 = DpUtils.convertDpToPixel(62f, getActivity());
+            imageHongBao0301.setImageResource(R.mipmap.hongbao03);
+            RelativeLayout.LayoutParams layoutParams03 = new RelativeLayout.LayoutParams((int) hongbao03, (int) hongbao03);
+            float widthF03 = 1f;
+            layoutParams03.addRule(RelativeLayout.ALIGN_PARENT_RIGHT | RelativeLayout.ALIGN_PARENT_TOP);
+            layoutParams03.rightMargin = -(int) hongbao03;
+            layoutParams03.topMargin = -(int) hongbao03;
+            relaHongBao.addView(imageHongBao0301, layoutParams03);
+            PropertyValuesHolder holder0301 = PropertyValuesHolder.ofFloat("translationX", -screenWidth * widthF03 - hongbao03);
+            PropertyValuesHolder holder0302 = PropertyValuesHolder.ofFloat("translationY", (screenWidth * widthF03 + hongbao03) * 1.64f);
+            ObjectAnimator animator0301 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao0301, holder0301, holder0302);
+            animator0301.setDuration(2000);
+            animator0301.setStartDelay(1200);
+            animator0301.setRepeatCount(ValueAnimator.INFINITE);
+            animator0301.setRepeatMode(ValueAnimator.INFINITE);
+            animator0301.start();
+            imageHongBao0301.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao03 = new ImageView(getActivity());
+            imageHongBao03.setImageResource(R.mipmap.hongbao03);
+            relaHongBao.addView(imageHongBao03, layoutParams03);
+            ObjectAnimator animator03 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao03, holder0301, holder0302);
+            animator03.setDuration(2500);
+            animator03.setRepeatCount(ValueAnimator.INFINITE);
+            animator03.setRepeatMode(ValueAnimator.INFINITE);
+            animator03.start();
+            imageHongBao03.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao02 = new ImageView(getActivity());
+            imageHongBao02.setImageResource(R.mipmap.hongbao02);
+            float hongbao02 = DpUtils.convertDpToPixel(60f, getActivity());
+            RelativeLayout.LayoutParams layoutParams02 = new RelativeLayout.LayoutParams((int) hongbao02, (int) hongbao02);
+            float widthF02 = 0.40f;
+            layoutParams02.leftMargin = (int) (screenWidth * widthF02);
+            layoutParams02.topMargin = -(int) hongbao02;
+            relaHongBao.addView(imageHongBao02, layoutParams02);
+            PropertyValuesHolder holder0201 = PropertyValuesHolder.ofFloat("translationX", -screenWidth * widthF02 - hongbao02);
+            PropertyValuesHolder holder0202 = PropertyValuesHolder.ofFloat("translationY", (screenWidth * widthF02 + hongbao02) * 1.64f);
+            ObjectAnimator animator02 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao02, holder0201, holder0202);
+            animator02.setDuration(1500);
+            animator02.setRepeatCount(ValueAnimator.INFINITE);
+            animator02.setRepeatMode(ValueAnimator.INFINITE);
+            animator02.start();
+            imageHongBao02.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            ImageView imageHongBao01 = new ImageView(getActivity());
+            imageHongBao01.setImageResource(R.mipmap.hongbao01);
+            float hongbao01 = DpUtils.convertDpToPixel(40f, getActivity());
+            RelativeLayout.LayoutParams layoutParams01 = new RelativeLayout.LayoutParams((int) hongbao01, (int) hongbao01);
+            float widthF01 = 0.40f;
+            layoutParams01.leftMargin = (int) (screenWidth * widthF01);
+            layoutParams01.topMargin = -(int) hongbao01;
+            relaHongBao.addView(imageHongBao01, layoutParams01);
+            PropertyValuesHolder holder0101 = PropertyValuesHolder.ofFloat("translationX", -screenWidth * widthF01 - hongbao01);
+            PropertyValuesHolder holder0102 = PropertyValuesHolder.ofFloat("translationY", (screenWidth * widthF01 + hongbao01) * 1.64f);
+            ObjectAnimator animator01 = ObjectAnimator.ofPropertyValuesHolder(imageHongBao01, holder0101, holder0102);
+            animator01.setDuration(2000);
+            animator01.setRepeatCount(ValueAnimator.INFINITE);
+            animator01.setRepeatMode(ValueAnimator.INFINITE);
+            animator01.start();
+            imageHongBao01.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    qiangHongBao();
+                }
+            });
+
+            mDialog = new Dialog(getActivity(), R.style.mydialog);
+            mDialog.setContentView(inflate);
+            mDialog.show();
+        } else {
+            mDialog.show();
+        }
+    }
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getQiangHongBAoOkObject() {
+        String url = Constant.HOST + Constant.Url.INDEX_BONUSBEFORE;
+        HashMap<String, String> params = new HashMap<>();
+        if (isLogin) {
+            params.put("uid", userInfo.getUid());
+            params.put("tokenTime", tokenTime);
+        }
+        return new OkObject(params, url);
+    }
+
+    /**
+     * 抢红包
+     */
+    private void qiangHongBao() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
+        if (!isLogin) {
+            ToLoginActivity.toLoginActivity(getActivity());
+            return;
+        }
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getQiangHongBAoOkObject(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("ShengQianCZFragment--onSuccess", s + "");
+                try {
+                    IndexBonusbefore indexBonusbefore = GsonUtils.parseJSON(s, IndexBonusbefore.class);
+                    if (indexBonusbefore.getStatus() == 1) {
+                        if (indexBonusbefore.getGoRealName() == 1) {
+                            MyDialog.showTipDialog(getActivity(), indexBonusbefore.getDes());
+                        } else {
+                            Intent intent = new Intent();
+                            intent.setClass(getActivity(), WebHongBaoActivity.class);
+                            intent.putExtra(Constant.INTENT_KEY.TITLE, "领取红包");
+                            intent.putExtra(Constant.INTENT_KEY.URL, indexBonusbefore.getUrl());
+                            startActivity(intent);
+                        }
+                    } else if (indexBonusbefore.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(getActivity());
+                    } else {
+                        Toast.makeText(getActivity(), indexBonusbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
