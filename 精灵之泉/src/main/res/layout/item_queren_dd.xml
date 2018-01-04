@@ -239,4 +239,45 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp" />
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/viewXieYi"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+
+        <TextView
+            android:id="@+id/textXieYi02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/checkXieYi"
+            android:text="的条款"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:id="@+id/textXieYi01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textXieYi02"
+            android:text="《动宝积分使用规则》"
+            android:textColor="@color/basic_color"
+            android:textSize="@dimen/normal_textsize" />
+        <TextView
+            android:id="@+id/textXieYi00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textXieYi01"
+            android:text="我同意"
+            android:textSize="@dimen/normal_textsize" />
+        <CheckBox
+            android:checked="true"
+            android:id="@+id/checkXieYi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp" />
+    </RelativeLayout>
 </LinearLayout>

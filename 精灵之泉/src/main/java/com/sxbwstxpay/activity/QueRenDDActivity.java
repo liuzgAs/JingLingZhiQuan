@@ -70,6 +70,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     };
     private int is_address;
     private int is_dbb;
+    private boolean isXieYi = true;
     /**
      * 是否抵扣积分
      */
@@ -81,6 +82,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     private TextView textDiKouHJ;
     private String sum;
     private int isScore;
+    private String dbUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +213,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
         });
         adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
 
+            private View viewXieYi;
             private CheckBox checkZheKou;
             private TextView textKeDiKouJF;
             private View viewJiFenDK;
@@ -247,6 +250,24 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                     }
                 });
                 checkZheKou.setChecked(true);
+                viewXieYi = item_queren_dd.findViewById(R.id.viewXieYi);
+                item_queren_dd.findViewById(R.id.textXieYi01).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent();
+                        intent.setClass(QueRenDDActivity.this, WebActivity.class);
+                        intent.putExtra(Constant.INTENT_KEY.TITLE, "动宝积分使用规则");
+                        intent.putExtra(Constant.INTENT_KEY.URL, dbUrl);
+                        startActivity(intent);
+                    }
+                });
+                CheckBox checkXieYi = (CheckBox) item_queren_dd.findViewById(R.id.checkXieYi);
+                checkXieYi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        isXieYi=b; 
+                    }
+                });
                 return item_queren_dd;
             }
 
@@ -258,11 +279,13 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         viewHeJi.setVisibility(View.GONE);
                         viewTiJiaoDD.setVisibility(View.GONE);
                         viewDuiHuan.setVisibility(View.VISIBLE);
+                        viewXieYi.setVisibility(View.VISIBLE);
                     } else {
                         viewJiFenDK.setVisibility(View.GONE);
                         viewHeJi.setVisibility(View.VISIBLE);
                         textSum.setText("¥" + cartOrder.getSum());
                         textGoods_money.setText("¥" + cartOrder.getGoods_money());
+                        viewXieYi.setVisibility(View.GONE);
                     }
                     if (isScore==1){
                         checkZheKou.setVisibility(View.INVISIBLE);
@@ -310,6 +333,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                         is_dbb = cartOrder.getIs_dbb();
                         isScore = cartOrder.getIsScore();
                         dbbText = cartOrder.getDbbText();
+                        dbUrl = cartOrder.getDbUrl();
                         textDiKouJF.setText(cartOrder.getScoreAfter());
                         textDiKouHJ.setText("合计：¥" + cartOrder.getMoneyAfter());
                         textSum.setText("¥" + cartOrder.getSum());
@@ -381,6 +405,10 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
             case R.id.buttonDuiHuan:
                 if (cartOrderAd == null && is_address == 1) {
                     Toast.makeText(QueRenDDActivity.this, "请选择收货地址", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!isXieYi){
+                    Toast.makeText(QueRenDDActivity.this, "请同意并阅读《动宝积分使用规则》", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 tiJiao();

@@ -31,7 +31,16 @@ public class CartOrder {
     private String scoreAfter;
     private String moneyAfter;
     private String sumDes;
+    private String dbUrl;
     private List<CartBean> cart;
+
+    public String getDbUrl() {
+        return dbUrl;
+    }
+
+    public void setDbUrl(String dbUrl) {
+        this.dbUrl = dbUrl;
+    }
 
     public int getIsScore() {
         return isScore;
