@@ -1,9 +1,11 @@
 package com.sxbwstxpay.model;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangjiebo on 2017/8/22 0022.
  */
-public class IndexBonusget {
+public class IndexBonusget implements Serializable{
     /**
      * message : 获取短信成功
      * statue : 1

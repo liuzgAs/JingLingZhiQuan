@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewhongBao"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/viewhongBao"
     android:background="@color/tranblack"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/linearhongBao"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="100dp"
         android:background="@mipmap/hongbaolingqu"
         android:orientation="vertical">
 
@@ -29,12 +30,12 @@
 
             <TextView
                 android:id="@+id/texthongBao"
-                android:layout_centerInParent="true"
-                android:textSize="40dp"
-                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.88元" />
+                android:layout_centerInParent="true"
+                android:text="0.88元"
+                android:textColor="@color/white"
+                android:textSize="40dp" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -1,10 +1,8 @@
 package com.sxbwstxpay.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -143,7 +141,10 @@ public class WebHongBaoActivity extends ZjbBaseActivity implements View.OnClickL
                         try {
                             IndexBonusget indexBonusget = GsonUtils.parseJSON(s, IndexBonusget.class);
                             if (indexBonusget.getStatus()==1){
-                                showHongBaoDialog(indexBonusget);
+                                Intent intent = new Intent();
+                                intent.putExtra(Constant.INTENT_KEY.value,indexBonusget);
+                                setResult(Constant.REQUEST_RESULT_CODE.HONG_BAO,intent);
+                                finish();
                             }else if (indexBonusget.getStatus()==3){
                                 MyDialog.showReLoginDialog(WebHongBaoActivity.this);
                             }else {
@@ -165,23 +166,6 @@ public class WebHongBaoActivity extends ZjbBaseActivity implements View.OnClickL
                 break;
 
         }
-    }
-
-    private void showHongBaoDialog(IndexBonusget indexBonusget) {
-        View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_hongbaolq, null);
-        TextView texthongBao = (TextView) inflate.findViewById(R.id.texthongBao);
-
-        texthongBao.setText(indexBonusget.getMoney()+"元");
-        final Dialog mDialog = new Dialog(this, R.style.mydialog);
-        mDialog.setContentView(inflate);
-        mDialog.show();
-        inflate.findViewById(R.id.viewhongBao).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDialog.dismiss();
-            }
-        });
-        Toast.makeText(WebHongBaoActivity.this, indexBonusget.getDes(), Toast.LENGTH_SHORT).show();
     }
 
     private void back() {
