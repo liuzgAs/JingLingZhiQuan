@@ -532,11 +532,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
             RelativeLayout relaHongBao = (RelativeLayout) inflate.findViewById(R.id.relaHongBao);
 
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 10; i++) {
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageResource(R.mipmap.hongbao002);
-                int anInt = new Random().nextInt(20);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 40), getActivity());
+                int anInt = new Random().nextInt(40);
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 60), getActivity());
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT );
                 layoutParams.rightMargin = new Random().nextInt(screenWidth)-(int) hongBaoSize;
@@ -557,11 +557,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                         qiangHongBao();
                     }
                 });
-            }  for (int i = 0; i < 15; i++) {
+            }  for (int i = 0; i < 10; i++) {
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageResource(R.mipmap.hongbao002);
-                int anInt = new Random().nextInt(20);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 40), getActivity());
+                int anInt = new Random().nextInt(40);
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 60), getActivity());
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT );
                 layoutParams.leftMargin = new Random().nextInt(screenWidth)-(int) hongBaoSize;
@@ -584,11 +584,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 });
             }
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 10; i++) {
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageResource(R.mipmap.hongbao001);
-                int anInt = new Random().nextInt(60);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 100), getActivity());
+                int anInt = new Random().nextInt(40);
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), getActivity());
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT );
                 layoutParams.rightMargin =  new Random().nextInt(screenWidth)-(int) hongBaoSize;
@@ -609,11 +609,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                         qiangHongBao();
                     }
                 });
-            } for (int i = 0; i < 15; i++) {
+            } for (int i = 0; i < 10; i++) {
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageResource(R.mipmap.hongbao001);
-                int anInt = new Random().nextInt(60);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 100), getActivity());
+                int anInt = new Random().nextInt(40);
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), getActivity());
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT );
                 layoutParams.leftMargin=  new Random().nextInt(screenWidth)-(int) hongBaoSize;
@@ -635,11 +635,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                     }
                 });
             }
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 10; i++) {
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageResource(R.mipmap.hongbao003);
-                int anInt = new Random().nextInt(60);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 100), getActivity());
+                int anInt = new Random().nextInt(40);
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), getActivity());
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 layoutParams.rightMargin =  new Random().nextInt(screenWidth)-(int) hongBaoSize;
@@ -662,11 +662,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 });
             }
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 10; i++) {
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageResource(R.mipmap.hongbao003);
-                int anInt = new Random().nextInt(60);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 100), getActivity());
+                int anInt = new Random().nextInt(40);
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), getActivity());
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 layoutParams.leftMargin =  new Random().nextInt(screenWidth)-(int) hongBaoSize;
