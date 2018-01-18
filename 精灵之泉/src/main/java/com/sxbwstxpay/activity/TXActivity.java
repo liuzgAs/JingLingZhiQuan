@@ -105,6 +105,10 @@ public class TXActivity extends ZjbBaseActivity implements View.OnClickListener 
                     editJinE.setSelection((userIncomeMx.getAmount() + "").length());
                     return;
                 }
+                if (Double.parseDouble(editJinE.getText().toString().trim())==0){
+                    Toast.makeText(TXActivity.this, "提现金额必须大于0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 tiXian();
                 break;
             case R.id.textQuanBuTX:
