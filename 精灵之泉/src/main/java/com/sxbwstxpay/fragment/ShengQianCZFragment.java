@@ -401,9 +401,11 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                     return new BenDiYDFragment(0);
                 case "store":
                     return new BenDiYDFragment(1);
-                default:
+                case "list":
                     IndexCate.CateBean cateBean = indexCateCate.get(position);
                     return new XuanPinSJFragment(position, cateBean);
+                default:
+                    return new BenDiYDFragment(0);
             }
         }
 
