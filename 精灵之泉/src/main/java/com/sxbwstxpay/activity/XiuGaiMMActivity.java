@@ -116,8 +116,8 @@ public class XiuGaiMMActivity extends ZjbBaseActivity implements View.OnClickLis
                     editNewuserPwd02.setText("");
                     return;
                 }
-                if (editNewuserPwd01.getText().toString().trim().length()<6) {
-                    Toast.makeText(XiuGaiMMActivity.this, "密码不能小于6位", Toast.LENGTH_SHORT).show();
+                if (editNewuserPwd01.getText().toString().trim().length()<=6) {
+                    Toast.makeText(XiuGaiMMActivity.this, "密码不能小于或等于6位", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 showLoadingDialog();
