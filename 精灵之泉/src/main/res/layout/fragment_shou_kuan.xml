@@ -276,7 +276,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_below="@+id/relaTitleStatue"
-        android:background="@mipmap/zuobian"
+        android:background="@mipmap/mingxitab1"
         android:orientation="horizontal"
         android:paddingBottom="10dp">
 

@@ -200,19 +200,19 @@ public class ShouKuanFragment extends ZjbBaseFragment implements View.OnClickLis
                 type = 1;
 //                imageBuShouKuan.setVisibility(View.GONE);
 //                viewShouKuan.setVisibility(View.VISIBLE);
-                viewTabBg.setBackgroundResource(R.mipmap.zuobian);
+                viewTabBg.setBackgroundResource(R.mipmap.mingxitab1);
                 break;
             case R.id.viewZhiFuBao:
                 type = 2;
 //                imageBuShouKuan.setVisibility(View.VISIBLE);
 //                viewShouKuan.setVisibility(View.GONE);
-                viewTabBg.setBackgroundResource(R.mipmap.zhongjian);
+                viewTabBg.setBackgroundResource(R.mipmap.mingxitab2);
                 break;
             case R.id.viewWeiXin:
                 type = 3;
 //                imageBuShouKuan.setVisibility(View.VISIBLE);
 //                viewShouKuan.setVisibility(View.GONE);
-                viewTabBg.setBackgroundResource(R.mipmap.youbian);
+                viewTabBg.setBackgroundResource(R.mipmap.mingxitab3);
                 break;
             case R.id.buttonShouKuan:
                 if (amount.contains(".")) {
