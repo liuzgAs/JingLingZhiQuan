@@ -302,7 +302,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView"
                 android:layout_centerHorizontal="true"
-                android:text="银联支付"
+                android:text="银联收款"
                 android:textColor="@color/white"
                 android:textSize="@dimen/normal_textsize" />
         </RelativeLayout>
@@ -328,7 +328,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView2"
                 android:layout_centerHorizontal="true"
-                android:text="支付宝支付"
+                android:text="支付宝收款"
                 android:textColor="@color/white"
                 android:textSize="@dimen/normal_textsize" />
         </RelativeLayout>
@@ -354,7 +354,33 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView3"
                 android:layout_centerHorizontal="true"
-                android:text="微信支付"
+                android:text="微信收款"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_textsize" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/viewShouKuanMa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:padding="5dp"
+                android:id="@+id/imageView4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/shoukuanma" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView4"
+                android:layout_centerHorizontal="true"
+                android:text="商家收款"
                 android:textColor="@color/white"
                 android:textSize="@dimen/normal_textsize" />
         </RelativeLayout>

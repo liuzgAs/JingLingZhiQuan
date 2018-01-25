@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:text="提现金额"
+            android:text="转入金额"
             android:textSize="@dimen/normal_textsize" />
 
         <RelativeLayout
@@ -46,7 +46,7 @@
             <EditText
                 android:inputType="numberDecimal"
                 android:textColorHint="@color/text_gray"
-                android:hint="输入提现金额"
+                android:hint="输入转入金额"
                 android:id="@+id/editJinE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:text="可提现额度2300"
+                android:text="可转入额度2300"
                 android:textSize="@dimen/normal_textsize" />
 
             <TextView
@@ -91,7 +91,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="全部提现"
+                android:text="全部转入"
                 android:textColor="@color/basic_color"
                 android:textSize="@dimen/normal_textsize" />
         </RelativeLayout>
@@ -102,7 +102,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:text="立即提现"
+        android:text="立即转入"
         android:id="@+id/buttonTiXian"
         android:layout_gravity="center_horizontal" />
 

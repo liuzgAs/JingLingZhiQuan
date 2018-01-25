@@ -81,7 +81,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:text="可提现金额"
+                        android:text="可转入金额"
                         android:textSize="@dimen/normal_textsize" />
 
                     <TextView
@@ -116,7 +116,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
-        android:text="立即提现" />
+        android:text="立即转入" />
 
     <Button
         android:id="@+id/buttonShouYiMX"

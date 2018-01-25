@@ -102,6 +102,12 @@ public class ZhiFuViewHolder extends BaseViewHolder<OrderPay> {
                     case R.id.radioWeiXin:
                         payMode = 2;
                         break;
+                    case R.id.radioYinLian:
+                        payMode = 3;
+                        break;
+                    case R.id.radioDongBaoBi:
+                        payMode = 4;
+                        break;
                 }
             }
         });
