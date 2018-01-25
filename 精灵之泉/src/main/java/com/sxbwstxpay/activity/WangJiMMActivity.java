@@ -103,8 +103,8 @@ public class WangJiMMActivity extends ZjbBaseActivity implements View.OnClickLis
                     Toast.makeText(WangJiMMActivity.this, "两次密码不一致", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (editView[2].getText().toString().trim().length()<=6) {
-                    Toast.makeText(WangJiMMActivity.this, "密码不能小于或等于6位", Toast.LENGTH_SHORT).show();
+                if (editView[2].getText().toString().trim().length()<6) {
+                    Toast.makeText(WangJiMMActivity.this, "密码不能小于6位", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 forgetPSW();
