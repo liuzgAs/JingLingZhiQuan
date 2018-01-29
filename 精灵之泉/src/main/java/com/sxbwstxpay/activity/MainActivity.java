@@ -29,9 +29,9 @@ import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.fragment.RenZhengFragment;
-import com.sxbwstxpay.fragment.ShengQianCZFragment;
 import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
+import com.sxbwstxpay.fragment.XianShiQGFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
 import com.sxbwstxpay.interfacepage.OnPatchLister;
 import com.sxbwstxpay.model.ExtraMap;
@@ -50,7 +50,7 @@ import com.tencent.tauth.Tencent;
 public class MainActivity extends AppCompatActivity {
     private String[] tabsItem = new String[5];
     private Class[] fragment = new Class[]{
-            ShengQianCZFragment.class,
+            XianShiQGFragment.class,
             ZhuanQianFragment.class,
             ShouKuanFragment.class,
             RenZhengFragment.class,

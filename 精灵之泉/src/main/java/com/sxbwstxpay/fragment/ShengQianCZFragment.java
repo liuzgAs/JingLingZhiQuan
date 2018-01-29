@@ -279,19 +279,19 @@ public class ShengQianCZFragment extends ZjbBaseFragment implements View.OnClick
                 viewShaiXuan.setVisibility(View.GONE);
             }
         });
-        xianShiQGFragment.setOnScrollListener(new XianShiQGFragment.OnScrollListener() {
-            @Override
-            public void scroll(int distance) {
-                if (distance >= indexBannerHeight && distance <= indexBannerTabHeight) {
-                    tabTranYDistance = indexBannerTabHeight - distance - DpUtils.convertDpToPixel(40f, getContext());
-                } else if (distance >= 0 && distance < indexBannerHeight) {
-                    tabTranYDistance = 0;
-                } else {
-                    tabTranYDistance = DpUtils.convertDpToPixel(-40f, getContext());
-                }
-                viewTabLayout.setTranslationY(tabTranYDistance);
-            }
-        });
+//        xianShiQGFragment.setOnScrollListener(new XianShiQGFragment.OnScrollListener() {
+//            @Override
+//            public void scroll(int distance) {
+//                if (distance >= indexBannerHeight && distance <= indexBannerTabHeight) {
+//                    tabTranYDistance = indexBannerTabHeight - distance - DpUtils.convertDpToPixel(40f, getContext());
+//                } else if (distance >= 0 && distance < indexBannerHeight) {
+//                    tabTranYDistance = 0;
+//                } else {
+//                    tabTranYDistance = DpUtils.convertDpToPixel(-40f, getContext());
+//                }
+//                viewTabLayout.setTranslationY(tabTranYDistance);
+//            }
+//        });
         imageHongBaoDialog.setOnClickListener(this);
     }
 

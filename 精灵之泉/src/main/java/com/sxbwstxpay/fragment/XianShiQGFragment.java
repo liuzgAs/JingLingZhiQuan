@@ -13,11 +13,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -28,6 +31,9 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChanPinXQActivity;
+import com.sxbwstxpay.activity.ChengShiXZActivity;
+import com.sxbwstxpay.activity.GouWuCActivity;
+import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -52,6 +58,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import okhttp3.Response;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -119,7 +127,10 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 case Constant.BROADCASTCODE.CITY_CHOOSE:
                     IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
                     cityId = cityBean.getId();
+                    textCity.setText(cityBean.getName());
                     onRefresh();
+                    break;
+                default:
                     break;
             }
         }
@@ -131,6 +142,10 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private float tabHeight;
     private TabLayout tablayoutHeader;
     private View tabCarview;
+    private Badge badge;
+    private TextView textCity;
+    private View viewBar;
+    private List<IndexGoods.CateBean> cateBeanList;
 
     public void hideView() {
         Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
@@ -182,15 +197,28 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     @Override
     protected void findID() {
+        viewBar = mInflate.findViewById(R.id.viewBar);
         recyclerView = (EasyRecyclerView) mInflate.findViewById(R.id.recyclerView);
         viewShangJiaTip = mInflate.findViewById(R.id.viewShangJiaTip);
         textNum = (TextView) mInflate.findViewById(R.id.textNum);
         tablayoutHeaderX = (TabLayout) mInflate.findViewById(R.id.tablayoutHeaderX);
         tabCarview = mInflate.findViewById(R.id.tabCarview);
+        textCity = (TextView) mInflate.findViewById(R.id.textCity);
+        badge = new QBadgeView(getActivity())
+                .setBadgeTextColor(Color.WHITE)
+                .setBadgeTextSize(8f, true)
+                .setBadgeBackgroundColor(getResources().getColor(R.color.red))
+                .setBadgeGravity(Gravity.END | Gravity.TOP)
+                .setGravityOffset(3f, 3f, true);
     }
 
     @Override
     protected void initViews() {
+        ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
+        layoutParams.height = (int) DpUtils.convertDpToPixel(70,getActivity()) + ScreenUtils.getStatusBarHeight(getActivity());
+        viewBar.setLayoutParams(layoutParams);
+        viewBar.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
+        textCity.setText(mCity);
         tablayoutHeaderX.setVisibility(View.GONE);
         tabCarview.setVisibility(View.GONE);
         viewShangJiaTip.setVisibility(View.GONE);
@@ -214,6 +242,8 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
+            private MyAdapter adapterGrid;
+            private GridView gridView;
             private ConvenientBanner banner;
 
             @Override
@@ -229,6 +259,8 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 banner.startTurning(3000);
                 tablayoutHeader = (TabLayout) header_xian_shi_qg.findViewById(R.id.tablayoutHeader);
                 tablayoutHeader.addOnTabSelectedListener(new MyTabSelectListener(tablayoutHeader, 0));
+                gridView = (GridView) header_xian_shi_qg.findViewById(R.id.gridView);
+                adapterGrid = new MyAdapter();
                 return header_xian_shi_qg;
             }
 
@@ -244,6 +276,41 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
                 }
                 initTablayout(tablayoutHeader);
+                if (cateBeanList!=null){
+                    gridView.setAdapter(adapterGrid);
+                }
+            }
+
+            class MyAdapter extends BaseAdapter {
+                class ViewHolder {
+                    public TextView textTitle;
+                }
+                @Override
+                public int getCount() {
+                    return cateBeanList.size();
+                }
+                @Override
+                public Object getItem(int position) {
+                    return null;
+                }
+                @Override
+                public long getItemId(int position) {
+                    return 0;
+                }
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    ViewHolder holder;
+                    if (convertView == null) {
+                        holder = new ViewHolder();
+                        convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_grid_shouye, null);
+                        holder.textTitle = (TextView) convertView.findViewById(R.id.textTitle);
+                        convertView.setTag(holder);
+                    } else {
+                        holder = (ViewHolder) convertView.getTag();
+                    }
+                    holder.textTitle.setText(cateBeanList.get(position).getName());
+                    return convertView;
+                }
             }
 
         });
@@ -341,7 +408,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int distance = RecycleViewDistancaUtil.getDistance(recyclerView, 0);
-                onScrollListener.scroll(distance);
+//                onScrollListener.scroll(distance);
                 if (distance >= indexBannerHeight || distance == -1) {
                     tablayoutHeaderX.setVisibility(View.VISIBLE);
                     tabCarview.setVisibility(View.VISIBLE);
@@ -357,6 +424,8 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     protected void setListeners() {
         mInflate.findViewById(R.id.imageCancle).setOnClickListener(this);
         tablayoutHeaderX.addOnTabSelectedListener(new MyTabSelectListener(tablayoutHeaderX, 1));
+        textCity.setOnClickListener(this);
+        mInflate.findViewById(R.id.textSouSuo).setOnClickListener(this);
     }
 
     @Override
@@ -399,6 +468,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     page++;
                     IndexGoods indexGoods = GsonUtils.parseJSON(s, IndexGoods.class);
                     if (indexGoods.getStatus() == 1) {
+                        cateBeanList = indexGoods.getCate();
                         indexGoodsBanner = indexGoods.getBanner();
                         indexGoodsTimes = indexGoods.getTimes();
                         initTablayout(tablayoutHeaderX);
@@ -461,18 +531,33 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.textSouSuo:
+                intent.putExtra(Constant.INTENT_KEY.type, 0);
+                intent.setClass(getActivity(), SouSuoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.viewVip:
+                intent.setClass(getActivity(), GouWuCActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.textCity:
+                intent.setClass(getActivity(), ChengShiXZActivity.class);
+                startActivity(intent);
+                break;
             case R.id.imageCancle:
                 hideView();
                 break;
+                default:
         }
     }
 
-    public OnScrollListener onScrollListener;
-
-    public void setOnScrollListener(OnScrollListener onScrollListener) {
-        this.onScrollListener = onScrollListener;
-    }
+//    public OnScrollListener onScrollListener;
+//
+//    public void setOnScrollListener(OnScrollListener onScrollListener) {
+//        this.onScrollListener = onScrollListener;
+//    }
 
     interface OnScrollListener {
         void scroll(int distance);
@@ -620,4 +705,22 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             select(tab);
         }
     }
+
+
+    /**
+     * des： 网络请求参数
+     * author： ZhangJieBo
+     * date： 2017/8/28 0028 上午 9:55
+     */
+    private OkObject getOkObject() {
+        String url = Constant.HOST + Constant.Url.INDEX_CATE;
+        HashMap<String, String> params = new HashMap<>();
+        try {
+            params.put("uid", userInfo.getUid());
+        } catch (Exception e) {
+        }
+        params.put("tokenTime", tokenTime);
+        return new OkObject(params, url);
+    }
+
 }
