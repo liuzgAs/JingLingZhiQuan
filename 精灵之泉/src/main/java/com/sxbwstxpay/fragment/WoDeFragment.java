@@ -81,6 +81,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 case Constant.BROADCASTCODE.MINE:
                     initData();
                     break;
+                default:
+                    break;
             }
         }
     };

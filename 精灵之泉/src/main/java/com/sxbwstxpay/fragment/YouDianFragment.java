@@ -4,10 +4,14 @@ package com.sxbwstxpay.fragment;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.amap.api.location.AMapLocation;
@@ -29,6 +33,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +50,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     private View viewBar;
     List<LatLng> latLngList = new ArrayList<>();
     List<Marker> markerList = new ArrayList<>();
+    private View textBar;
 
     public YouDianFragment() {
         // Required empty public constructor
@@ -88,6 +94,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
             aMap = mMapView.getMap();
         }
         viewBar = mInflate.findViewById(R.id.viewBar);
+        textBar = mInflate.findViewById(R.id.textBar);
     }
 
     OnLocationChangedListener mListener;
@@ -97,6 +104,9 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     @Override
     protected void initViews() {
 //        viewBar.setPadding(0, (int)ScreenUtils.getStatusBarHeight(getActivity()),0,0);
+        ViewGroup.LayoutParams layoutParams = textBar.getLayoutParams();
+        layoutParams.height = ScreenUtils.getStatusBarHeight(getActivity());
+        textBar.setLayoutParams(layoutParams);
         // 设置定位监听
         aMap.setLocationSource(this);
         // 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
@@ -108,6 +118,28 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     @Override
     protected void setListeners() {
         mInflate.findViewById(R.id.imageReLocation).setOnClickListener(this);
+        aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                showYouDianDialog(marker.getId());
+                return false;
+            }
+        });
+    }
+
+    /**
+     * 优店dialog
+     * @param id
+     */
+    private void showYouDianDialog(String id) {
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_youdian, null);
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity(),R.style.dialog).setView(view).create();
+        alertDialog.show();
+        Window dialogWindow = alertDialog.getWindow();
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        DisplayMetrics d = getActivity().getResources().getDisplayMetrics(); // 获取屏幕宽、高用
+        lp.width = (int) (d.widthPixels * 0.8); // 高度设置为屏幕的0.6
+        dialogWindow.setAttributes(lp);
     }
 
     @Override
@@ -118,18 +150,6 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
         latLngList.add(new LatLng(24.491542,118.198107));
         latLngList.add(new LatLng(24.492923,118.194749));
         markerList.clear();
-        aMap.setInfoWindowAdapter(new AMap.InfoWindowAdapter() {
-            @Override
-            public View getInfoWindow(Marker marker) {
-                View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker, null);
-                return view;
-            }
-
-            @Override
-            public View getInfoContents(Marker marker) {
-                return null;
-            }
-        });
         for (int i = 0; i < latLngList.size(); i++) {
             final MarkerOptions markerOption = new MarkerOptions();
             markerOption.position(latLngList.get(i));
@@ -227,9 +247,6 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                 LogUtil.LogShitou("YouDianFragment--onLocationChanged", ""+new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude()).toString());
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude()),17);
                 aMap.moveCamera(cameraUpdate);
-                for (int i = 0; i < markerList.size(); i++) {
-                    markerList.get(i).showInfoWindow();
-                }
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode()+ ": " + aMapLocation.getErrorInfo();
                 Log.e("AmapErr",errText);

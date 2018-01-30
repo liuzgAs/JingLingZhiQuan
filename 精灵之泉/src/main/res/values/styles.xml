@@ -32,11 +32,8 @@
         <item name="android:windowNoTitle">true</item><!--无标题-->
         <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
         <item name="android:backgroundDimEnabled">true</item><!--模糊-->
-    </style><![CDATA[
-
-    !-- 全屏dialog样式 左右插入 -->
-
-    ]]>
+    </style>
+    <![CDATA[!-- 全屏dialog样式 左右插入 -->]]>
 
     <style name="mydialog">
         <item name="android:windowFullscreen">true</item>
