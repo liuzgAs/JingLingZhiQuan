@@ -148,7 +148,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         textGradeName = (TextView) mInflate.findViewById(R.id.textGradeName);
         textVipTime = (TextView) mInflate.findViewById(R.id.textVipTime);
         viewWoDeDianPu = mInflate.findViewById(R.id.viewWoDeDianPu);
-        viewJiFen = mInflate.findViewById(R.id.viewJiFen);
+        viewJiFen = mInflate.findViewById(R.id.viewYouHuiQuan);
         viewJiFen01 = mInflate.findViewById(R.id.viewJiFen01);
         cardViewHuiYuan = mInflate.findViewById(R.id.cardViewHuiYuan);
         cardViewFeiHuiYuan = mInflate.findViewById(R.id.cardViewFeiHuiYuan);
@@ -320,7 +320,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
             case R.id.textHuiYuanBtn:
                 quYuYongJin(intent);
                 break;
-            case R.id.viewJiFen:
+            case R.id.viewYouHuiQuan:
                 intent.setClass(getActivity(), TuiGuangYJActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.id, 4);
                 intent.putExtra(Constant.INTENT_KEY.value, dbb);

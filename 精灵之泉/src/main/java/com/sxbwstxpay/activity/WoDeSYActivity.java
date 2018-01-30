@@ -74,7 +74,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         textFenRun = (TextView) findViewById(R.id.textFenRun);
         textYongJin = (TextView) findViewById(R.id.textYongJin);
         textFanYong = (TextView) findViewById(R.id.textFanYong);
-        textJiFen = (TextView) findViewById(R.id.textJiFen);
+        textJiFen = (TextView) findViewById(R.id.textYouHuiQuan);
     }
 
     @Override
@@ -92,7 +92,6 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         SpannableString span2 = new SpannableString("¥" + "0.0");
         span2.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textFanYong.setText(span2);
-        textJiFen.setText(dbb);
     }
 
     @Override
@@ -101,7 +100,8 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.viewFenRun).setOnClickListener(this);
         findViewById(R.id.viewYongJin).setOnClickListener(this);
         findViewById(R.id.viewFanYong).setOnClickListener(this);
-        findViewById(R.id.viewJiFen).setOnClickListener(this);
+        findViewById(R.id.viewYouHuiQuan).setOnClickListener(this);
+        findViewById(R.id.textWoDeJiFen).setOnClickListener(this);
     }
 
     /**
@@ -165,7 +165,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.viewFenRun:
                 intent.setClass(this, TuiGuangYJActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.value,dbb);
+                intent.putExtra(Constant.INTENT_KEY.value, dbb);
                 intent.putExtra(Constant.INTENT_KEY.id, 1);
                 startActivity(intent);
                 break;
@@ -179,11 +179,14 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
                 intent.putExtra(Constant.INTENT_KEY.id, 3);
                 startActivity(intent);
                 break;
-            case R.id.viewJiFen:
+            case R.id.textWoDeJiFen:
                 intent.setClass(this, TuiGuangYJActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.id, 4);
-                intent.putExtra(Constant.INTENT_KEY.value,dbb);
+                intent.putExtra(Constant.INTENT_KEY.value, dbb);
                 startActivity(intent);
+                break;
+            case R.id.viewYouHuiQuan:
+
                 break;
             case R.id.imageBack:
                 finish();
