@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:src="@mipmap/marker"
+        android:layout_width="50dp"
+        android:layout_height="66dp" />
+    <com.sxbwstxpay.customview.CircleImageView
+        android:layout_marginTop="3dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageImg"
+        android:layout_width="44dp"
+        android:layout_height="44dp" />
+</RelativeLayout>

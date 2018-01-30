@@ -32,7 +32,7 @@ import com.sxbwstxpay.fragment.RenZhengFragment;
 import com.sxbwstxpay.fragment.ShouKuanFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.XianShiQGFragment;
-import com.sxbwstxpay.fragment.ZhuanQianFragment;
+import com.sxbwstxpay.fragment.YouDianFragment;
 import com.sxbwstxpay.interfacepage.OnPatchLister;
 import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.model.ShareBean;
@@ -51,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
     private String[] tabsItem = new String[5];
     private Class[] fragment = new Class[]{
             XianShiQGFragment.class,
-            ZhuanQianFragment.class,
+            YouDianFragment.class,
             ShouKuanFragment.class,
             RenZhengFragment.class,
             WoDeFragment.class
     };
     private int[] imgRes = new int[]{
             R.drawable.selector_shengqian_item,
-            R.drawable.selector_zhuanqian_item,
+            R.drawable.selector_youdian_item,
             R.drawable.selector_shoukuan_item,
             R.drawable.selector_renzheng_item,
             R.drawable.selector_mine_item
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         tokenTime = aCache.getAsString(Constant.ACACHE.TOKENTIME);
         paintPassword = aCache.getAsString(Constant.ACACHE.PAINT_PASSWORD);
         tabsItem[0] = "省钱";
-        tabsItem[1] = "赚钱";
+        tabsItem[1] = "优店";
         tabsItem[2] = "收款";
         tabsItem[3] = "认证";
         tabsItem[4] = "我的";
