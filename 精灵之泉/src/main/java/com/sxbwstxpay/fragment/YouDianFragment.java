@@ -327,17 +327,17 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     }
 
     private void getStore(LatLng latLng) {
-        showLoadingDialog();
+//        showLoadingDialog();
         ApiClient.post(getActivity(), getOkObject(latLng), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
-                cancelLoadingDialog();
+//                cancelLoadingDialog();
                 LogUtil.LogShitou("YouDianFragment--onSuccess",s+ "");
                 try {
                     MapIndex mapIndex = GsonUtils.parseJSON(s, MapIndex.class);
                     if (mapIndex.getStatus()==1){
                         dataBeanList = mapIndex.getData();
-                        aMap.clear();
+//                        aMap.clear();
                         markerList.clear();
                         for (int i = 0; i < dataBeanList.size(); i++) {
                             final MarkerOptions markerOption = new MarkerOptions();
@@ -372,7 +372,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
 
             @Override
             public void onError(Response response) {
-                cancelLoadingDialog();
+//                cancelLoadingDialog();
                 Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
