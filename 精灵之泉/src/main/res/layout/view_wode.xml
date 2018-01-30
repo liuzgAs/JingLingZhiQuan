@@ -76,12 +76,13 @@
                 android:src="@mipmap/mine01" />
 
             <TextView
+                android:textColor="@color/light_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView8"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="我的账单"
+                android:text="实名认证"
                 android:textSize="@dimen/litterText" />
         </RelativeLayout>
 
@@ -100,12 +101,13 @@
                 android:src="@mipmap/mine02" />
 
             <TextView
+                android:textColor="@color/light_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView9"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="我的商户"
+                android:text="聚合支付"
                 android:textSize="@dimen/litterText" />
         </RelativeLayout>
 
@@ -124,12 +126,13 @@
                 android:src="@mipmap/mine03" />
 
             <TextView
+                android:textColor="@color/light_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView10"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="我的收益"
+                android:text="智能还款"
                 android:textSize="@dimen/litterText" />
         </RelativeLayout>
 
@@ -148,12 +151,37 @@
                 android:src="@mipmap/mine04" />
 
             <TextView
+                android:textColor="@color/light_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView11"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="商城订单"
+                android:text="我的账单"
+                android:textSize="@dimen/litterText" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/mine05" />
+
+            <TextView
+                android:textColor="@color/light_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView12"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="我的收益"
                 android:textSize="@dimen/litterText" />
         </RelativeLayout>
     </LinearLayout>

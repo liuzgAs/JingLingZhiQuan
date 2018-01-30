@@ -87,7 +87,6 @@
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:gravity="right|center_vertical"
                     android:id="@+id/viewHuiYuan01"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -95,10 +94,11 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:gravity="right|center_vertical"
                     android:orientation="vertical"
                     android:visibility="visible">
+
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/textHuiYuanBtn01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                         android:text="区域佣金"
                         android:textColor="@color/basic_color"
                         android:textSize="@dimen/litterText"
-                        />
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <RelativeLayout
@@ -184,28 +184,35 @@
                     android:orientation="horizontal">
 
                     <View
-                        android:id="@+id/viewZhangDan2"
+                        android:id="@+id/viewShiMingRZ"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
 
                     <View
-                        android:id="@+id/viewShangHu2"
+                        android:id="@+id/viewJuHeZF"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
 
                     <View
-                        android:id="@+id/viewShouYi2"
+                        android:id="@+id/viewZhiNengHK"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
 
                     <View
-                        android:id="@+id/viewDingDan2"
+                        android:id="@+id/viewWoDeZD"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
+
+                    <View
+                        android:id="@+id/viewWoDeSY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -261,17 +268,19 @@
                                 android:layout_toRightOf="@+id/imageView7"
                                 android:text="会员有效期至2017-12-31"
                                 android:textSize="@dimen/litterText" />
+
                             <LinearLayout
-                                android:layout_alignParentRight="true"
-                                android:gravity="center_vertical"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center_vertical">
+
                                 <TextView
-                                    android:layout_toLeftOf="@+id/textHuiYuanBtn"
                                     android:id="@+id/textGradeName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="10dp"
+                                    android:layout_toLeftOf="@+id/textHuiYuanBtn"
                                     android:text="详情"
                                     android:textColor="@color/basic_color"
                                     android:textSize="@dimen/litterText" />
@@ -389,6 +398,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/viewShangChengDD"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
+                        android:background="@drawable/layout_selector_white_system_gray"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView0400"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/mine_menu02" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toEndOf="@+id/imageView0400"
+                            android:layout_toRightOf="@+id/imageView0400"
+                            android:text="商城订单"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/normal_textsize" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_width"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
 
                     <RelativeLayout
                         android:id="@+id/viewWoDeDianPu"

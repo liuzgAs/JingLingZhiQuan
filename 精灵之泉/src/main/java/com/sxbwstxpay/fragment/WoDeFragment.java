@@ -178,10 +178,10 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
     @Override
     protected void setListeners() {
         mInflate.findViewById(R.id.viewGuanLiYHK).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewZhangDan2).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewShangHu2).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewShouYi2).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewDingDan2).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewShiMingRZ).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewJuHeZF).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewZhiNengHK).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewWoDeZD).setOnClickListener(this);
         viewWoDeDianPu.setOnClickListener(this);
         mInflate.findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
         mInflate.findViewById(R.id.viewWoDeZL).setOnClickListener(this);
@@ -190,7 +190,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewName).setOnClickListener(this);
         mInflate.findViewById(R.id.viewLianXiKF).setOnClickListener(this);
         mInflate.findViewById(R.id.viewZiZhiZS).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewWoDeSY).setOnClickListener(this);
         mInflate.findViewById(R.id.relatBanLiXYK).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewShangChengDD).setOnClickListener(this);
         viewJiFen.setOnClickListener(this);
         viewJiFen01.setOnClickListener(this);
         viewFeiHuiYuan01.setOnClickListener(this);
@@ -384,17 +386,25 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                     MyDialog.showTipDialog(getActivity(), storeTips);
                 }
                 break;
-            case R.id.viewZhangDan2:
+            case R.id.viewShiMingRZ:
+
+                break;
+            case R.id.viewJuHeZF:
+//                woDeSH();
+                break;
+            case R.id.viewZhiNengHK:
+
+                break;
+            case R.id.viewWoDeZD:
                 zhangDan();
+
                 break;
-            case R.id.viewShangHu2:
-                woDeSH();
-                break;
-            case R.id.viewShouYi2:
+            case R.id.viewWoDeSY:
                 shouYi();
                 break;
-            case R.id.viewDingDan2:
+            case R.id.viewShangChengDD:
                 dingDan();
+                shouYi();
                 break;
             default:
                 break;

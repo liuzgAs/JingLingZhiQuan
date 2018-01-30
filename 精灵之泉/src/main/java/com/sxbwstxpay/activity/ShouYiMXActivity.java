@@ -17,7 +17,7 @@ public class ShouYiMXActivity extends ZjbBaseNotLeftActivity implements View.OnC
     private ViewPager viewPager;
     private int[] viewId = new int[]{
             R.id.viewShouYi1,
-            R.id.viewShouYi2,
+            R.id.viewZhiNengHK,
             R.id.viewShouYi3,
             R.id.viewShouYi4
     };
@@ -81,7 +81,7 @@ public class ShouYiMXActivity extends ZjbBaseNotLeftActivity implements View.OnC
                 viewPager.setCurrentItem(0);
                 viewTabBg.setBackgroundResource(R.mipmap.mingxitab1);
                 break;
-            case R.id.viewShouYi2:
+            case R.id.viewZhiNengHK:
                 viewPager.setCurrentItem(1);
                 viewTabBg.setBackgroundResource(R.mipmap.mingxitab2);
                 break;
