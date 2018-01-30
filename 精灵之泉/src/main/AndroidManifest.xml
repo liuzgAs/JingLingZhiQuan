@@ -491,7 +491,8 @@
             android:name=".activity.imagepicker.ImagePreviewDelActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/ImagePickerThemeFullScreen" />
-        <activity android:name=".activity.JuHeZhiFuActivity"></activity>
+        <activity android:name=".activity.JuHeZhiFuActivity" />
+        <activity android:name=".activity.ShouKuanEWMActivity"></activity>
     </application>
 
 </manifest>
