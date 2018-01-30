@@ -28,11 +28,11 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
-import com.sxbwstxpay.fragment.RenZhengFragment;
-import com.sxbwstxpay.fragment.ShouKuanFragment;
+import com.sxbwstxpay.fragment.GouWuCheFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.XianShiQGFragment;
 import com.sxbwstxpay.fragment.YouDianFragment;
+import com.sxbwstxpay.fragment.ZhuanQianFragment;
 import com.sxbwstxpay.interfacepage.OnPatchLister;
 import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.model.ShareBean;
@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
     private Class[] fragment = new Class[]{
             XianShiQGFragment.class,
             YouDianFragment.class,
-            ShouKuanFragment.class,
-            RenZhengFragment.class,
+            ZhuanQianFragment.class,
+            GouWuCheFragment.class,
             WoDeFragment.class
     };
     private int[] imgRes = new int[]{
             R.drawable.selector_shengqian_item,
             R.drawable.selector_youdian_item,
-            R.drawable.selector_shoukuan_item,
+            R.drawable.selector_zhuanqian_item,
             R.drawable.selector_renzheng_item,
             R.drawable.selector_mine_item
     };

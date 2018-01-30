@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/basic_color"
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="发现一个商家"
+        android:textColor="@color/white"
+        android:textSize="@dimen/MoreBigText" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:src="@mipmap/denglu_touxiang"
+            android:id="@+id/imageImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="12dp"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageImg"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@+id/imageImg"
+            android:text="许达达"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/bigText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageImg"
+            android:layout_marginBottom="3dp"
+            android:layout_toEndOf="@+id/imageImg"
+            android:text="距离:小于10m"
+            android:textColor="@color/basic_color"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_toRightOf="@+id/imageImg" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/background" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="15dp"
+        android:text="店主很懒，没留下什么签名"
+        android:textColor="@color/text_gray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/background" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="继续寻宝"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/bigText" />
+
+        <TextView
+            android:background="@color/background"
+            android:layout_width="1dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="进店逛逛"
+            android:textColor="@color/basic_color"
+            android:textSize="@dimen/bigText" />
+    </LinearLayout>
+</LinearLayout>
