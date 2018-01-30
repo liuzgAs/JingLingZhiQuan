@@ -1,122 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/guanLiDianPuTop">
+        android:layout_height="320dp"
+        android:background="@color/white"
+        android:clipChildren="false"
+        android:id="@+id/relativeLayout3">
 
         <ImageView
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_empty"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="180dp"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/mine_top" />
+
+        <android.support.v7.widget.CardView
+            android:visibility="visible"
+            app:cardPreventCornerOverlap="false"
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="195dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:clipChildren="false"
+            app:cardCornerRadius="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/wodedianpucard"
+                android:clipChildren="false"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    tools:text="龙凤图兔宝宝"
+                    android:id="@+id/textStoreNmae"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/linearLayout3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/bigText" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_above="@+id/button"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="环岛东路塔普社区113号"
+                        android:textSize="@dimen/normal_textsize"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="商家电话：0592-2211999"
+                        android:textSize="@dimen/normal_textsize"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+                    <Button
+                        android:layout_weight="1"
+                        android:id="@+id/buttonGuanLi"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_jianbian270_basic_30dp"
+                        android:text="一键拨打商家电话"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/normal_textsize" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <com.sxbwstxpay.customview.CircleImageView
+            android:elevation="2dp"
+            android:layout_marginBottom="170dp"
+            android:id="@+id/imageStoreLogo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/ic_empty01"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
         <RelativeLayout
-            android:background="@color/tranblack"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                tools:text="序号：4654564"
+                android:id="@+id/textNo"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/viewBar"
-                android:fitsSystemWindows="true"
-                android:gravity="bottom"
-                android:minHeight="?attr/actionBarSize"
-                android:orientation="vertical">
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/titleHeight">
-
-
-
-                </RelativeLayout>
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/viewBar">
-
-                <com.sxbwstxpay.customview.CircleImageView
-                    android:layout_marginLeft="10dp"
-                    android:src="@mipmap/ic_empty01"
-                    app:civ_border_color="@color/white"
-                    app:civ_border_width="2dp"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:id="@+id/imageStoreLogo"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="龙凤图兔宝宝"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/bigText"
-                    android:id="@+id/textStoreNmae"
-                    android:layout_alignTop="@+id/imageStoreLogo"
-                    android:layout_toRightOf="@+id/imageStoreLogo"
-                    android:layout_toEndOf="@+id/imageStoreLogo" />
-
-                <TextView
-                    android:layout_marginBottom="13dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="李成的店"
-                    android:textColor="@color/gray_white"
-                    android:textSize="@dimen/litterText"
-                    android:id="@+id/textStoreDes"
-                    android:layout_alignBottom="@+id/imageStoreLogo"
-                    android:layout_toRightOf="@+id/imageStoreLogo"
-                    android:layout_toEndOf="@+id/imageStoreLogo" />
-
-                <RelativeLayout
-                    android:id="@+id/viewShare"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true">
-
-                    <ImageView
-                        android:src="@mipmap/fenxiang_dianpu"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:id="@+id/imageView100"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
-
-                    <TextView
-                        android:textSize="@dimen/normal_textsize"
-                        android:textColor="@color/white"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="店铺分享"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@+id/imageView100"
-                        android:layout_centerHorizontal="true" />
-                </RelativeLayout>
-            </RelativeLayout>
+                android:textColor="@color/white"
+                android:textSize="@dimen/litterText"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
         </RelativeLayout>
+
     </RelativeLayout>
 
     <com.bigkoo.convenientbanner.ConvenientBanner
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:id="@+id/banner"
@@ -125,6 +147,7 @@
         android:layout_height="175dp" />
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/viewJingPinTuiJian"
         android:background="@color/white"
         android:layout_width="match_parent"

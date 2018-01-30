@@ -72,6 +72,8 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                 case Constant.BROADCASTCODE.WX_SHARE_FAIL:
                     MyDialog.showTipDialog(GuanLiWDDPActivity.this, "取消分享");
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -195,7 +197,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                         previewUrl = storeGoods.getPreviewUrl();
                         share = storeGoods.getShare();
                         textTitle.setText(storeNmae);
-                        LogUtil.LogShitou("GuanLiWDDPActivity--onSuccess textTitle", ""+textTitle.getText().toString().trim());
+                        LogUtil.LogShitou("GuanLiWDDPActivity--onSuccess textTitle", "" + textTitle.getText().toString().trim());
                         List<IndexDataBean> storeGoodsData = storeGoods.getData();
                         adapter.clear();
                         adapter.addAll(storeGoodsData);
@@ -293,13 +295,12 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qg;
-                return new WoDeDPGLViewHolder(parent, layout,type);
+                return new WoDeDPGLViewHolder(parent, layout, type);
             }
 
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
-            private TextView textStoreDes;
             private TextView textStoreNmae;
             private ImageView imageStoreLogo;
             private ConvenientBanner banner;
@@ -309,19 +310,18 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                 View header_xian_shi_qg = LayoutInflater.from(GuanLiWDDPActivity.this).inflate(R.layout.header_guan_li_dp, null);
                 View viewJingPinTuiJian = header_xian_shi_qg.findViewById(R.id.viewJingPinTuiJian);
                 banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
-                if (type==0){
+                if (type == 0) {
                     viewJingPinTuiJian.setVisibility(View.VISIBLE);
                     banner.setVisibility(View.VISIBLE);
                     banner.setScrollDuration(1000);
                     banner.startTurning(3000);
-                }else {
+                } else {
                     viewJingPinTuiJian.setVisibility(View.GONE);
                     banner.setVisibility(View.GONE);
                 }
 
                 imageStoreLogo = (ImageView) header_xian_shi_qg.findViewById(R.id.imageStoreLogo);
                 textStoreNmae = (TextView) header_xian_shi_qg.findViewById(R.id.textStoreNmae);
-                textStoreDes = (TextView) header_xian_shi_qg.findViewById(R.id.textStoreDes);
                 header_xian_shi_qg.findViewById(R.id.viewShare).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -333,7 +333,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
 
             @Override
             public void onBindView(View headerView) {
-                if (storeGoodsBanner != null&&type==0) {
+                if (storeGoodsBanner != null && type == 0) {
                     banner.setPages(new CBViewHolderCreator() {
                         @Override
                         public Object createHolder() {
@@ -342,7 +342,6 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                     }, storeGoodsBanner);
                     banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
                 }
-                textStoreDes.setText(storeDes);
                 textStoreNmae.setText(storeNmae);
                 GlideApp.with(GuanLiWDDPActivity.this)
                         .asBitmap()

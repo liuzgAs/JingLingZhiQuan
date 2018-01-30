@@ -1,5 +1,6 @@
 package com.sxbwstxpay.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -136,7 +137,7 @@ public class IndexGoods {
         }
     }
 
-    public static class CateBean {
+    public static class CateBean implements Serializable{
         /**
          * id : 0
          * name : 限时抢购
@@ -144,6 +145,24 @@ public class IndexGoods {
 
         private int id;
         private String name;
+        private String jump;
+        private String img;
+
+        public String getJump() {
+            return jump;
+        }
+
+        public void setJump(String jump) {
+            this.jump = jump;
+        }
+
+        public String getImg() {
+            return img;
+        }
+
+        public void setImg(String img) {
+            this.img = img;
+        }
 
         public int getId() {
             return id;

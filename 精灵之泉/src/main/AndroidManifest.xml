@@ -500,6 +500,8 @@
         <activity
             android:name=".activity.YouHuiQuanActivity"
             android:launchMode="singleTop" />
+        <activity android:name=".activity.XuanPinSJActivity" />
+        <activity android:name=".activity.StoreListActivity"></activity>
     </application>
 
 </manifest>

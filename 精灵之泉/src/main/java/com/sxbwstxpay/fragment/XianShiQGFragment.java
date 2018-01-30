@@ -19,8 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -34,6 +36,8 @@ import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.activity.ChengShiXZActivity;
 import com.sxbwstxpay.activity.GouWuCActivity;
 import com.sxbwstxpay.activity.SouSuoActivity;
+import com.sxbwstxpay.activity.StoreListActivity;
+import com.sxbwstxpay.activity.XuanPinSJActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -45,6 +49,7 @@ import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.RecycleViewDistancaUtil;
@@ -127,6 +132,8 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 case Constant.BROADCASTCODE.CITY_CHOOSE:
                     IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
                     cityId = cityBean.getId();
+                    final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+                    aCache.put(Constant.ACACHE.CITY_ID, cityId);
                     textCity.setText(cityBean.getName());
                     onRefresh();
                     break;
@@ -215,7 +222,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
     @Override
     protected void initViews() {
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
-        layoutParams.height = (int) DpUtils.convertDpToPixel(70,getActivity()) + ScreenUtils.getStatusBarHeight(getActivity());
+        layoutParams.height = (int) DpUtils.convertDpToPixel(70, getActivity()) + ScreenUtils.getStatusBarHeight(getActivity());
         viewBar.setLayoutParams(layoutParams);
         viewBar.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
         textCity.setText(mCity);
@@ -261,6 +268,31 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 tablayoutHeader.addOnTabSelectedListener(new MyTabSelectListener(tablayoutHeader, 0));
                 gridView = (GridView) header_xian_shi_qg.findViewById(R.id.gridView);
                 adapterGrid = new MyAdapter();
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent();
+                        switch (cateBeanList.get(i).getJump()) {
+                            case "list":
+                                intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
+                                intent.setClass(getActivity(), XuanPinSJActivity.class);
+                                startActivity(intent);
+                                break;
+                            case "product":
+                                intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
+                                intent.setClass(getActivity(), StoreListActivity.class);
+                                startActivity(intent);
+                                break;
+                            case "store":
+                                intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
+                                intent.setClass(getActivity(), StoreListActivity.class);
+                                startActivity(intent);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
                 return header_xian_shi_qg;
             }
 
@@ -276,7 +308,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     banner.setPageIndicator(new int[]{R.drawable.shape_indicator_normal, R.drawable.shape_indicator_selected});
                 }
                 initTablayout(tablayoutHeader);
-                if (cateBeanList!=null){
+                if (cateBeanList != null) {
                     gridView.setAdapter(adapterGrid);
                 }
             }
@@ -284,19 +316,24 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             class MyAdapter extends BaseAdapter {
                 class ViewHolder {
                     public TextView textTitle;
+                    public ImageView imageImg;
                 }
+
                 @Override
                 public int getCount() {
                     return cateBeanList.size();
                 }
+
                 @Override
                 public Object getItem(int position) {
                     return null;
                 }
+
                 @Override
                 public long getItemId(int position) {
                     return 0;
                 }
+
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
                     ViewHolder holder;
@@ -304,11 +341,17 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         holder = new ViewHolder();
                         convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_grid_shouye, null);
                         holder.textTitle = (TextView) convertView.findViewById(R.id.textTitle);
+                        holder.imageImg = (ImageView) convertView.findViewById(R.id.imageImg);
                         convertView.setTag(holder);
                     } else {
                         holder = (ViewHolder) convertView.getTag();
                     }
                     holder.textTitle.setText(cateBeanList.get(position).getName());
+                    GlideApp.with(getActivity())
+                            .load(cateBeanList.get(position).getImg())
+                            .centerCrop()
+                            .placeholder(R.mipmap.ic_empty)
+                            .into(holder.imageImg);
                     return convertView;
                 }
             }
@@ -549,7 +592,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
             case R.id.imageCancle:
                 hideView();
                 break;
-                default:
+            default:
         }
     }
 
