@@ -221,6 +221,10 @@ public class Constant {
          * 红包灵气接口
          */
         public static final String INDEX_BONUSGET = "&g=App&m=Index&a=bonusGet";
+        /**
+         * 优惠券
+         */
+        public static final String COUPON_INDEX = "/Coupon/index";
     }
 
     public static class PERMISSION {

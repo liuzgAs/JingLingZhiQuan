@@ -186,7 +186,8 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.viewYouHuiQuan:
-
+                intent.setClass(this, YouHuiQuanActivity.class);
+                startActivity(intent);
                 break;
             case R.id.imageBack:
                 finish();

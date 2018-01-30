@@ -129,6 +129,7 @@ public class JuHeZhiFuActivity extends ZjbBaseActivity implements View.OnClickLi
             }
         });
         findViewById(R.id.imageBack).setOnClickListener(this);
+        findViewById(R.id.viewShouKuanMa).setOnClickListener(this);
     }
 
     private void checkAmount() {
@@ -159,7 +160,12 @@ public class JuHeZhiFuActivity extends ZjbBaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewShouKuanMa:
+                intent.setClass(this,ShouKuanEWMActivity.class);
+                startActivity(intent);
+                break;
             case R.id.imageBack:
                 finish();
                 break;

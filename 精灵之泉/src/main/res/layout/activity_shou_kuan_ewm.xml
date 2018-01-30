@@ -2,11 +2,130 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/basic_color"
     android:orientation="vertical"
     tools:context="com.sxbwstxpay.activity.ShouKuanEWMActivity">
-    <include layout="@layout/view_bar"/>
 
+    <include layout="@layout/view_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.61">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardCornerRadius="15dp"
+            android:id="@+id/cardEwm"
+            android:layout_marginTop="45dp"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:src="@mipmap/shoukuanererma" />
+        </android.support.v7.widget.CardView>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:text="收款人：李达达"
+            android:textColor="@color/white"
+            android:layout_below="@+id/cardEwm"
+            android:textSize="@dimen/titleSize"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.39"
+        android:background="@mipmap/shoukuanmadibu" >
+        <LinearLayout
+            android:layout_marginBottom="25dp"
+            android:orientation="vertical"
+            android:layout_above="@+id/btnBaoCunXC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/saomiao_shoukuan"
+                    android:id="@+id/image0100"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:background="@color/basic_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="40dp"
+                    android:layout_height="1dp" />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/erweima2"
+                    android:id="@+id/image0101"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:background="@color/basic_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="40dp"
+                    android:layout_height="1dp" />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/wanchengzhifuewm"
+                    android:id="@+id/image0102"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text="打开客户端\n扫一扫"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="40dp"
+                    android:layout_height="1dp" />
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text="扫描商户\n二维码"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="40dp"
+                    android:layout_height="1dp" />
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text="输入消费金额\n完成支付"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnBaoCunXC"
+            android:text="保存至相册"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentBottom="true"
+            style="@style/MyButton"/>
+    </RelativeLayout>
 </LinearLayout>
