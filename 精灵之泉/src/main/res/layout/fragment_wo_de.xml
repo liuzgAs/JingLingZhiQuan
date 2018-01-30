@@ -488,6 +488,50 @@
                         android:background="@color/line_gray" />
 
                     <RelativeLayout
+                        android:id="@+id/viewWoDeSH"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/normalItemHeight"
+                        android:background="@drawable/layout_selector_white_system_gray"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView0500"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/mine_menu06" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toEndOf="@+id/imageView0500"
+                            android:layout_toRightOf="@+id/imageView0500"
+                            android:text="我的商户"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/normal_textsize" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/right" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_width"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/line_gray" />
+
+                    <RelativeLayout
                         android:id="@+id/viewWoDeZL"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/normalItemHeight"

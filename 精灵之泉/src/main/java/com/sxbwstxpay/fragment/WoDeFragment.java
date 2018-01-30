@@ -193,6 +193,7 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
         mInflate.findViewById(R.id.viewWoDeSY).setOnClickListener(this);
         mInflate.findViewById(R.id.relatBanLiXYK).setOnClickListener(this);
         mInflate.findViewById(R.id.viewShangChengDD).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewWoDeSH).setOnClickListener(this);
         viewJiFen.setOnClickListener(this);
         viewJiFen01.setOnClickListener(this);
         viewFeiHuiYuan01.setOnClickListener(this);
@@ -390,21 +391,21 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
 
                 break;
             case R.id.viewJuHeZF:
-//                woDeSH();
                 break;
             case R.id.viewZhiNengHK:
 
                 break;
             case R.id.viewWoDeZD:
                 zhangDan();
-
                 break;
             case R.id.viewWoDeSY:
                 shouYi();
                 break;
             case R.id.viewShangChengDD:
                 dingDan();
-                shouYi();
+                break;
+            case R.id.viewWoDeSH:
+                woDeSH();
                 break;
             default:
                 break;
