@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         tabsItem[0] = "省钱";
         tabsItem[1] = "优店";
         tabsItem[2] = "收款";
-        tabsItem[3] = "认证";
+        tabsItem[3] = "购物车";
         tabsItem[4] = "我的";
 
         mTabHost = (FragmentTabHost) findViewById(R.id.tabHost);
