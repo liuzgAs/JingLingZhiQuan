@@ -225,6 +225,10 @@ public class Constant {
          * 优惠券
          */
         public static final String COUPON_INDEX = "/Coupon/index";
+        /**
+         * 优惠券
+         */
+        public static final String MAP_INDEX = "g=App&m=Map&a=index";
     }
 
     public static class PERMISSION {

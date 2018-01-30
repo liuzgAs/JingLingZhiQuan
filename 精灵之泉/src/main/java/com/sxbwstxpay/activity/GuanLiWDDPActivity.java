@@ -322,12 +322,12 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
 
                 imageStoreLogo = (ImageView) header_xian_shi_qg.findViewById(R.id.imageStoreLogo);
                 textStoreNmae = (TextView) header_xian_shi_qg.findViewById(R.id.textStoreNmae);
-                header_xian_shi_qg.findViewById(R.id.viewShare).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MyDialog.share01(GuanLiWDDPActivity.this, api, mTencent, "GuanLiWDDPActivity", share.getShareUrl(), share.getShareTitle(), share.getShareDes(), share.getShareImg());
-                    }
-                });
+//                header_xian_shi_qg.findViewById(R.id.viewShare).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        MyDialog.share01(GuanLiWDDPActivity.this, api, mTencent, "GuanLiWDDPActivity", share.getShareUrl(), share.getShareTitle(), share.getShareDes(), share.getShareImg());
+//                    }
+//                });
                 return header_xian_shi_qg;
             }
 
