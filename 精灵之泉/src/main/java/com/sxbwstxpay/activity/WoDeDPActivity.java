@@ -110,6 +110,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.viewYiWanCheng).setOnClickListener(this);
         findViewById(R.id.viewWoDeSuCai).setOnClickListener(this);
         findViewById(R.id.imageBack).setOnClickListener(this);
+        findViewById(R.id.buttonShangJiaRZ).setOnClickListener(this);
     }
 
     /**
@@ -185,17 +186,17 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
                 break;
             case R.id.viewDaiFuKuan:
                 intent.setClass(this, ShangChengDDActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.type,1);
+                intent.putExtra(Constant.INTENT_KEY.type, 1);
                 startActivity(intent);
                 break;
             case R.id.viewDaiShouHuo:
                 intent.setClass(this, ShangChengDDActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.type,2);
+                intent.putExtra(Constant.INTENT_KEY.type, 2);
                 startActivity(intent);
                 break;
             case R.id.viewYiWanCheng:
                 intent.setClass(this, ShangChengDDActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.type,3);
+                intent.putExtra(Constant.INTENT_KEY.type, 3);
                 startActivity(intent);
                 break;
             case R.id.viewShare:
@@ -206,12 +207,16 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.buttonGuanLi:
-                intent.putExtra(Constant.INTENT_KEY.type,0);
+                intent.putExtra(Constant.INTENT_KEY.type, 0);
                 intent.setClass(this, GuanLiWDDPActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageStoreLogo:
                 intent.setClass(this, DianPuXXActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                intent.setClass(this, ShangJiaRZActivity.class);
                 startActivity(intent);
                 break;
         }
