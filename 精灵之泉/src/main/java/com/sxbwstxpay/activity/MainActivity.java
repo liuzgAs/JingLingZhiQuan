@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         paintPassword = aCache.getAsString(Constant.ACACHE.PAINT_PASSWORD);
         tabsItem[0] = "省钱";
         tabsItem[1] = "优店";
-        tabsItem[2] = "收款";
+        tabsItem[2] = "赚钱";
         tabsItem[3] = "购物车";
         tabsItem[4] = "我的";
 

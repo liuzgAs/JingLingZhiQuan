@@ -20,6 +20,7 @@ import com.sxbwstxpay.activity.BangZhuZXActivity;
 import com.sxbwstxpay.activity.FeiLvActivity;
 import com.sxbwstxpay.activity.GongGaoActivity;
 import com.sxbwstxpay.activity.GuanLiYHKActivity;
+import com.sxbwstxpay.activity.JuHeZhiFuActivity;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
@@ -393,6 +394,8 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
 
                 break;
             case R.id.viewJuHeZF:
+                intent.setClass(getActivity(), JuHeZhiFuActivity.class);
+                startActivity(intent);
                 break;
             case R.id.viewZhiNengHK:
 

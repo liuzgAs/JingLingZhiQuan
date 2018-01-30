@@ -54,6 +54,8 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
                 case Constant.BROADCASTCODE.zhiFuGuanBi:
                     finish();
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -170,6 +172,8 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
             case R.id.imageBack:
                 finish();
                 break;
+            default:
+                break;
         }
     }
 
@@ -252,7 +256,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
         for (int i = 0; i < adapter.getAllData().size(); i++) {
             if (!adapter.getAllData().get(i).ischeck()) {
                 isQuanXuan = false;
-            }else {
+            } else {
                 Double mul = Arith.mul(Double.parseDouble(adapter.getAllData().get(i).getGoods_price()), (double) adapter.getAllData().get(i).getNum());
                 sum = Arith.add(mul, sum);
             }
@@ -262,7 +266,7 @@ public class GouWuCActivity extends ZjbBaseActivity implements View.OnClickListe
         } else {
             imageQuanXuan.setImageResource(R.mipmap.weixuanzhong);
         }
-        setSum(sum+"");
+        setSum(sum + "");
     }
 
     public void setSum(String sum) {
