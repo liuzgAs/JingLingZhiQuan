@@ -143,7 +143,7 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
             case R.id.textXieYi:
                 intent.setClass(this, WebActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.TITLE, "注册协议");
-                intent.putExtra(Constant.INTENT_KEY.URL,Constant.HOST+ Constant.Url.INFO_POLICY);
+                intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_POLICY);
                 startActivity(intent);
                 break;
             case R.id.imageXieYi:
@@ -182,6 +182,8 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
                     return;
                 }
                 login();
+                break;
+            default:
                 break;
         }
     }
@@ -230,7 +232,7 @@ public class DengLuActivity extends ZjbBaseNotLeftActivity implements View.OnCli
             Constant.changeControl++;
             Intent intent = new Intent();
             intent.setClass(DengLuActivity.this, LockActivity.class);
-            intent.putExtra(Constant.INTENT_KEY.Main,"Main");
+            intent.putExtra(Constant.INTENT_KEY.Main, "Main");
             startActivity(intent);
             finish();
         }

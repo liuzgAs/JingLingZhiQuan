@@ -31,7 +31,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/gson-2.2.4.jar')
     compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
-    compile files('libs/AMap2DMap_4.2.0_AMapSearch_5.1.0_AMapLocation_3.4.0_20170517.jar')
     compile project(':imagepicker')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
@@ -57,4 +56,10 @@ dependencies {
     compile 'pub.devrel:easypermissions:1.0.1'
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    //3D地图so及jar
+    implementation 'com.amap.api:3dmap:latest.integration'
+    //定位功能
+    implementation 'com.amap.api:location:latest.integration'
+    //搜索功能
+    implementation 'com.amap.api:search:latest.integration'
 }
