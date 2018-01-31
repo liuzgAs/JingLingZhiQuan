@@ -198,7 +198,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="银牌消费商"
+                android:text="认证商家"
                 android:textSize="@dimen/normal_textsize"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageView4521"
