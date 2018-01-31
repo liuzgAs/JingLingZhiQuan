@@ -279,6 +279,11 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                                 intent.setClass(getActivity(), XuanPinSJActivity.class);
                                 startActivity(intent);
                                 break;
+                            case "score":
+                                intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
+                                intent.setClass(getActivity(), XuanPinSJActivity.class);
+                                startActivity(intent);
+                                break;
                             case "product":
                                 intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
                                 intent.setClass(getActivity(), StoreListActivity.class);
