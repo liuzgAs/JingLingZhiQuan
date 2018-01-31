@@ -37,6 +37,7 @@ import com.sxbwstxpay.activity.ChengShiXZActivity;
 import com.sxbwstxpay.activity.GouWuCActivity;
 import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.activity.StoreListActivity;
+import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.XuanPinSJActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
@@ -286,6 +287,12 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                             case "store":
                                 intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
                                 intent.setClass(getActivity(), StoreListActivity.class);
+                                startActivity(intent);
+                                break;
+                            case "web":
+                                intent.setClass(getContext(), WebActivity.class);
+                                intent.putExtra(Constant.INTENT_KEY.TITLE, cateBeanList.get(i).getName());
+                                intent.putExtra(Constant.INTENT_KEY.URL, cateBeanList.get(i).getUrl());
                                 startActivity(intent);
                                 break;
                             default:

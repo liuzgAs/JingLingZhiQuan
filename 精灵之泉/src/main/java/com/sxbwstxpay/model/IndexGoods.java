@@ -147,6 +147,15 @@ public class IndexGoods {
         private String name;
         private String jump;
         private String img;
+        private String url;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
 
         public String getJump() {
             return jump;
