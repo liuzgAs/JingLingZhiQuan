@@ -51,9 +51,7 @@ public class YinDaoActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            GuideFragment guideFragment = new GuideFragment();
-            guideFragment.setImg(imgs[position], imgs.length - 1, position);
-            return guideFragment;
+            return new GuideFragment(imgs[position], imgs.length - 1, position);
         }
 
         @Override

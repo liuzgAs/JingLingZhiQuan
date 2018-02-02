@@ -1,6 +1,7 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +36,12 @@ public class GuideFragment extends ZjbBaseFragment {
         // Required empty public constructor
     }
 
+    @SuppressLint("ValidFragment")
+    public GuideFragment(int img, int guideImg_length, int position) {
+        this.img = img;
+        this.guideImg_length = guideImg_length;
+        this.position = position;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,17 +57,6 @@ public class GuideFragment extends ZjbBaseFragment {
             parent.removeView(mInflate);
         }
         return mInflate;
-    }
-
-    /**
-     * des： 设置图片
-     * author： ZhangJieBo
-     * date： 2017/7/6 0006 下午 2:08
-     */
-    public void setImg(int img, int guideImg_length, int position) {
-        this.img = img;
-        this.guideImg_length = guideImg_length;
-        this.position = position;
     }
 
     @Override
