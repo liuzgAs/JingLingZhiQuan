@@ -341,6 +341,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                         markerList.clear();
                         for (int i = 0; i < dataBeanList.size(); i++) {
                             final MarkerOptions markerOption = new MarkerOptions();
+                            markerOption.infoWindowEnable(false);
                             markerOption.title(String.valueOf(i));
                             markerOption.position(new LatLng(Double.parseDouble(dataBeanList.get(i).getLat()),Double.parseDouble(dataBeanList.get(i).getLng())));
                             final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker, null);
