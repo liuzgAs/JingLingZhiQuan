@@ -660,10 +660,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_width"
                         android:layout_marginLeft="10dp"
+                        android:visibility="gone"
                         android:layout_marginRight="10dp"
                         android:background="@color/line_gray" />
 
                     <RelativeLayout
+                        android:visibility="gone"
                         android:id="@+id/relatBanLiXYK"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/normalItemHeight"

@@ -165,5 +165,12 @@
             android:src="@mipmap/shangjia_toast" />
 
     </RelativeLayout>
-
+    <ImageView
+        android:id="@+id/imageHongBaoDialog"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/hongbaoxuanfu"
+        android:visibility="visible" />
 </RelativeLayout>
