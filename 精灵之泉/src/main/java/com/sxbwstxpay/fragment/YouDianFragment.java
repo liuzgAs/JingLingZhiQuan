@@ -344,7 +344,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                             markerOption.infoWindowEnable(false);
                             markerOption.title(String.valueOf(i));
                             markerOption.position(new LatLng(Double.parseDouble(dataBeanList.get(i).getLat()),Double.parseDouble(dataBeanList.get(i).getLng())));
-                            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker, null);
+                            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker_shop, null);
                             final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
                             GlideApp.with(getActivity())
                                     .asBitmap()
