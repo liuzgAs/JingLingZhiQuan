@@ -233,6 +233,10 @@ public class Constant {
          * 业绩管理
          */
         public static final String STORE_AMOUNT = "g=App&m=Store&a=amount";
+        /**
+         * 销售管理
+         */
+        public static final String STORE_SALESMANAGE = "g=App&m=Store&a=salesManage";
     }
 
     public static class PERMISSION {
