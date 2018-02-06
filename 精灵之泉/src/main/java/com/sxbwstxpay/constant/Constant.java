@@ -229,6 +229,10 @@ public class Constant {
          * 优惠券
          */
         public static final String MAP_INDEX = "g=App&m=Map&a=index";
+        /**
+         * 业绩管理
+         */
+        public static final String STORE_AMOUNT = "g=App&m=Store&a=amount";
     }
 
     public static class PERMISSION {

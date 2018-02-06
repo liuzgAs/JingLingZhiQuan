@@ -15,11 +15,11 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="15dp"
         android:background="@color/white" />
 
     <com.sxbwstxpay.customview.GridView4ScrollView
-        android:numColumns="5"
+        android:numColumns="4"
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -27,7 +27,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="15dp"
         android:background="@color/white" />
 
     <android.support.design.widget.TabLayout

@@ -111,6 +111,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.viewWoDeSuCai).setOnClickListener(this);
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.buttonShangJiaRZ).setOnClickListener(this);
+        findViewById(R.id.viewYeJiGL).setOnClickListener(this);
     }
 
     /**
@@ -173,6 +174,10 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.viewYeJiGL:
+                intent.setClass(this, YeJiGLActivity.class);
+                startActivity(intent);
+                break;
             case R.id.imageBack:
                 finish();
                 break;

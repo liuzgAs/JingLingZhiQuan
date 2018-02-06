@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/linearLayout3"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/bigText" />
 
@@ -62,7 +62,7 @@
                     android:layout_height="50dp"
                     android:layout_above="@+id/button"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -178,7 +178,7 @@
                     </RelativeLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_alignParentBottom="true"
@@ -526,7 +526,88 @@
             android:layout_toRightOf="@+id/imageView121"
             android:layout_toEndOf="@+id/imageView121" />
     </RelativeLayout>
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/viewYeJiGL"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:layout_below="@+id/viewFangKeGL"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
+        <ImageView
+            android:src="@mipmap/right_big"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/yejiguanli"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView129"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="业绩管理"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/litterText"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView129"
+            android:layout_toEndOf="@+id/imageView129" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/viewXiaoShouGL"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:layout_below="@+id/viewYeJiGL"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:src="@mipmap/right_big"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/xiaoshouguanli"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView128"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="销售管理"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/litterText"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView128"
+            android:layout_toEndOf="@+id/imageView128" />
+    </RelativeLayout>
     <RelativeLayout
         android:visibility="visible"
         android:id="@+id/viewWoDeSuCai"
@@ -534,7 +615,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/normalItemHeight"
-        android:layout_below="@+id/viewFangKeGL"
+        android:layout_below="@+id/viewXiaoShouGL"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
