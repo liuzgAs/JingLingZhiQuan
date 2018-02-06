@@ -249,33 +249,39 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
                     PayTask alipay = new PayTask((TuiGuangZFActivity) getContext());
                     LogUtil.LogShitou("TuiGuangZhiFuViewHolder--run", payAli + "");
                     Map<String, String> stringMap = alipay.payV2(payAli, true);
-                    AliPayBean aliPayBean = GsonUtils.parseJSON(stringMap.get("result"), AliPayBean.class);
-                    switch (aliPayBean.getAlipay_trade_app_pay_response().getCode()) {
-                        case 10000:
-                            ((TuiGuangZFActivity) getContext()).paySuccess();
-                            break;
-                        case 8000:
-                            ((TuiGuangZFActivity) getContext()).paySuccess();
-                            break;
-                        case 4000:
-                            MyDialog.showTipDialog(getContext(), "订单支付失败");
-                            break;
-                        case 5000:
-                            MyDialog.showTipDialog(getContext(), "重复请求");
-                            break;
-                        case 6001:
-                            MyDialog.showTipDialog(getContext(), "取消支付");
-                            break;
-                        case 6002:
-                            MyDialog.showTipDialog(getContext(), "网络连接错误");
-                            break;
-                        case 6004:
-                            MyDialog.showTipDialog(getContext(), "支付结果未知");
-                            break;
-                        default:
-                            MyDialog.showTipDialog(getContext(), "支付失败");
-                            break;
-                    }
+                    final AliPayBean aliPayBean = GsonUtils.parseJSON(stringMap.get("result"), AliPayBean.class);
+                    ((TuiGuangZFActivity) getContext()).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            switch (aliPayBean.getAlipay_trade_app_pay_response().getCode()) {
+                                case 10000:
+                                    ((TuiGuangZFActivity) getContext()).paySuccess();
+                                    break;
+                                case 8000:
+                                    ((TuiGuangZFActivity) getContext()).paySuccess();
+                                    break;
+                                case 4000:
+                                    MyDialog.showTipDialog(getContext(), "订单支付失败");
+                                    break;
+                                case 5000:
+                                    MyDialog.showTipDialog(getContext(), "重复请求");
+                                    break;
+                                case 6001:
+                                    MyDialog.showTipDialog(getContext(), "取消支付");
+                                    break;
+                                case 6002:
+                                    MyDialog.showTipDialog(getContext(), "网络连接错误");
+                                    break;
+                                case 6004:
+                                    MyDialog.showTipDialog(getContext(), "支付结果未知");
+                                    break;
+                                default:
+                                    MyDialog.showTipDialog(getContext(), "支付失败");
+                                    break;
+                            }
+                        }
+                    });
+
                 } catch (Exception e) {
                 }
             }

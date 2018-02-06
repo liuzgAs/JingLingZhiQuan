@@ -245,6 +245,14 @@ public class Constant {
          * 入驻商家支付
          */
         public static final String STORE_SETTLEDPAY = "g=App&m=Store&a=settledPay";
+        /**
+         * 商家认证请求
+         */
+        public static final String STORE_CARDBEFORE = "g=App&m=Store&a=cardBefore";
+        /**
+         * 商家认证提交
+         */
+        public static final String STORE_CARDADD = "g=App&m=Store&a=cardAdd";
     }
 
     public static class PERMISSION {
