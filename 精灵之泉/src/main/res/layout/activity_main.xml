@@ -1,4 +1,4 @@
-<android.support.v4.app.FragmentTabHost
+<com.sxbwstxpay.customview.TabFragmentHost
     android:id="@+id/tabHost"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -47,4 +47,4 @@
         </TabWidget>
 
     </LinearLayout>
-</android.support.v4.app.FragmentTabHost>
+</com.sxbwstxpay.customview.TabFragmentHost>

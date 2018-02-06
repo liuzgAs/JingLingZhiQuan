@@ -11,7 +11,6 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -28,6 +27,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.customview.TabFragmentHost;
 import com.sxbwstxpay.fragment.GouWuCheFragment;
 import com.sxbwstxpay.fragment.WoDeFragment;
 import com.sxbwstxpay.fragment.XianShiQGFragment;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.selector_renzheng_item,
             R.drawable.selector_mine_item
     };
-    public FragmentTabHost mTabHost;
+    public TabFragmentHost mTabHost;
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         tabsItem[3] = "购物车";
         tabsItem[4] = "我的";
 
-        mTabHost = (FragmentTabHost) findViewById(R.id.tabHost);
+        mTabHost = (TabFragmentHost) findViewById(R.id.tabHost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtab);
         for (int i = 0; i < tabsItem.length; i++) {
             View inflate = getLayoutInflater().inflate(R.layout.tabs_item, null);

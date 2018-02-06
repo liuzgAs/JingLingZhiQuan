@@ -338,7 +338,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                     if (mapIndex.getStatus()==1){
                         dataBeanList = mapIndex.getData();
 //                        aMap.clear();
-                        markerList.clear();
+//                        markerList.clear();
                         for (int i = 0; i < dataBeanList.size(); i++) {
                             final MarkerOptions markerOption = new MarkerOptions();
                             markerOption.infoWindowEnable(false);
