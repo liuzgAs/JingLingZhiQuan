@@ -91,6 +91,7 @@
                 android:layout_centerVertical="true"
                 />
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/viewShare"
                 android:layout_marginRight="10dp"
                 android:layout_centerVertical="true"

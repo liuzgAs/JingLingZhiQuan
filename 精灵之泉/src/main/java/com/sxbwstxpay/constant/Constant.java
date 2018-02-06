@@ -237,6 +237,14 @@ public class Constant {
          * 销售管理
          */
         public static final String STORE_SALESMANAGE = "g=App&m=Store&a=salesManage";
+        /**
+         * 商家认证请求
+         */
+        public static final String STORE_SETTLEDBEFORE = "g=App&m=Store&a=settledBefore";
+        /**
+         * 入驻商家支付
+         */
+        public static final String STORE_SETTLEDPAY = "g=App&m=Store&a=settledPay";
     }
 
     public static class PERMISSION {

@@ -47,6 +47,7 @@ public class TuiGuangZFActivity extends ZjbBaseActivity implements View.OnClickL
         }
     };
     private OrderVipbefore orderVipbefore;
+    private int type;
 
     /**
      * des： 支付成功提示
@@ -57,7 +58,11 @@ public class TuiGuangZFActivity extends ZjbBaseActivity implements View.OnClickL
         Intent intent = new Intent();
         intent.setAction(Constant.BROADCASTCODE.VIP);
         sendBroadcast(intent);
-        MyDialog.dialogFinish(this, "成功开通VIP");
+        if (type==1){
+            MyDialog.dialogFinish(this, "成功入驻");
+        }else {
+            MyDialog.dialogFinish(this, "成功开通VIP");
+        }
     }
 
     @Override
@@ -76,6 +81,8 @@ public class TuiGuangZFActivity extends ZjbBaseActivity implements View.OnClickL
     protected void initIntent() {
         Intent intent = getIntent();
         orderVipbefore = (OrderVipbefore) intent.getSerializableExtra(Constant.INTENT_KEY.value);
+        type = intent.getIntExtra(Constant.INTENT_KEY.type, 0);
+
     }
 
     @Override
@@ -112,7 +119,7 @@ public class TuiGuangZFActivity extends ZjbBaseActivity implements View.OnClickL
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.view_youhui_md;
-                return new TuiGuangZhiFuViewHolder(parent, layout);
+                return new TuiGuangZhiFuViewHolder(parent, layout,type);
             }
         });
     }

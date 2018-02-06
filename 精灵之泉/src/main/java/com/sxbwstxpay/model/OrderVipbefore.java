@@ -32,6 +32,25 @@ public class OrderVipbefore implements Serializable{
     private String urlTitle;
     private String dbUrl;
 
+    private String btn;
+    private int payState;
+
+    public String getBtn() {
+        return btn;
+    }
+
+    public void setBtn(String btn) {
+        this.btn = btn;
+    }
+
+    public int getPayState() {
+        return payState;
+    }
+
+    public void setPayState(int payState) {
+        this.payState = payState;
+    }
+
     public String getDbUrl() {
         return dbUrl;
     }

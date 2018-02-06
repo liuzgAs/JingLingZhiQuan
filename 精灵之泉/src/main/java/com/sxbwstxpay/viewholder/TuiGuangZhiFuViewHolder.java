@@ -55,9 +55,11 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
     private final RadioButton radioDongBaoBi;
     private final View viewXieYi;
     private boolean isXieYi = true;
+    int type;
 
-    public TuiGuangZhiFuViewHolder(ViewGroup parent, @LayoutRes int res) {
+    public TuiGuangZhiFuViewHolder(ViewGroup parent, @LayoutRes int res,int type) {
         super(parent, res);
+        this.type=type;
         textJinE = $(R.id.textJinE);
         textDes = $(R.id.textDes);
         checkZheKou = $(R.id.checkZheKou);
@@ -139,7 +141,12 @@ public class TuiGuangZhiFuViewHolder extends BaseViewHolder<OrderVipbefore> {
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObject() {
-        String url = Constant.HOST + Constant.Url.ORDER_VIPPAY;
+        String url;
+        if (type==1){
+            url = Constant.HOST + Constant.Url.STORE_SETTLEDPAY;
+        }else {
+            url = Constant.HOST + Constant.Url.ORDER_VIPPAY;
+        }
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", ((TuiGuangZFActivity) getContext()).userInfo.getUid());
         params.put("tokenTime", ((TuiGuangZFActivity) getContext()).tokenTime);

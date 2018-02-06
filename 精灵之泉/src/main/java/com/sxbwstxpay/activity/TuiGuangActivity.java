@@ -71,6 +71,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private TextView textViewTitle;
     private OrderVipbefore orderVipbefore;
     private CheckBox checkXieYi;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,8 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
 
     @Override
     protected void initIntent() {
-
+        Intent intent = getIntent();
+        type = intent.getIntExtra(Constant.INTENT_KEY.type, 0);
     }
 
     @Override
@@ -102,7 +104,6 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
 
     @Override
     protected void initViews() {
-        textViewTitle.setText("成为VIP精灵推广商");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
@@ -138,7 +139,12 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObject() {
-        String url = Constant.HOST + Constant.Url.ORDER_VIPBEFORE;
+        String url;
+        if (type==1){
+            url = Constant.HOST + Constant.Url.STORE_SETTLEDBEFORE;
+        }else {
+            url = Constant.HOST + Constant.Url.ORDER_VIPBEFORE;
+        }
         HashMap<String, String> params = new HashMap<>();
         params.put("uid",userInfo.getUid());
         params.put("tokenTime",tokenTime);
@@ -209,6 +215,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 if (checkXieYi.isChecked()) {
                     intent.setClass(this, TuiGuangZFActivity.class);
                     intent.putExtra(Constant.INTENT_KEY.value, orderVipbefore);
+                    intent.putExtra(Constant.INTENT_KEY.type,type);
                     startActivity(intent);
                 } else {
                     MyDialog.showTipDialog(this, "请阅读并同意《精灵之泉推广商服务协议》");

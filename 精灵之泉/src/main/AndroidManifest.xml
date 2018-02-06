@@ -510,7 +510,9 @@
             android:name=".activity.YeJiGLActivity"
             android:hardwareAccelerated="false"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.XiaoShouGLActivity"></activity>
+        <activity
+            android:name=".activity.XiaoShouGLActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

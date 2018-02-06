@@ -83,6 +83,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
     private int type;
     private String lat;
     private String lng;
+    private boolean isSuccess =true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,6 +218,9 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
             }
 
             public void showError(String msg) {
+                isSuccess=false;
+                LogUtil.LogShitou("GuanLiWDDPActivity--showError", "11111111111");
+                viewBar.getBackground().mutate().setAlpha(255);
                 View view_loaderror = LayoutInflater.from(GuanLiWDDPActivity.this).inflate(R.layout.view_loaderror, null);
                 TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
                 textMsg.setText(msg);
@@ -459,15 +463,18 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int scrollY = RecycleViewDistancaUtil.getDistance(recyclerView, 0);
-                float guangGaoHeight = getResources().getDimension(R.dimen.guanLiDianPuTop);
-                if (scrollY <= guangGaoHeight - viewBarHeight && scrollY >= 0) {
-                    int i = (int) ((double) scrollY / (double) (guangGaoHeight - viewBar.getHeight()) * 255);
-                    viewBar.getBackground().mutate().setAlpha(i);
-                    textTitle.setAlpha((float) i / 255f);
-                } else {
-                    viewBar.getBackground().mutate().setAlpha(255);
-                    textTitle.setAlpha(1);
+                LogUtil.LogShitou("GuanLiWDDPActivity--onScrolled", "22222222222");
+                if (isSuccess){
+                    int scrollY = RecycleViewDistancaUtil.getDistance(recyclerView, 0);
+                    float guangGaoHeight = getResources().getDimension(R.dimen.guanLiDianPuTop);
+                    if (scrollY <= guangGaoHeight - viewBarHeight && scrollY >= 0) {
+                        int i = (int) ((double) scrollY / (double) (guangGaoHeight - viewBar.getHeight()) * 255);
+                        viewBar.getBackground().mutate().setAlpha(i);
+                        textTitle.setAlpha((float) i / 255f);
+                    } else {
+                        viewBar.getBackground().mutate().setAlpha(255);
+                        textTitle.setAlpha(1);
+                    }
                 }
             }
         });
