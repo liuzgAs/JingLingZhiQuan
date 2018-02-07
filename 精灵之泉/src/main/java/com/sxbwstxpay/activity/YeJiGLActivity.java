@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -20,6 +21,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.StoreAmount;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -35,6 +37,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
     private View viewBar;
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<StoreAmount.DataBean> adapter;
+    private StoreAmount storeAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,15 +88,34 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
             }
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+
+            private TextView textNums;
+            private TextView textMoney;
+            private TextView textName;
+            private ImageView imageLogo;
+
             @Override
             public View onCreateView(ViewGroup parent) {
                 View view = LayoutInflater.from(YeJiGLActivity.this).inflate(R.layout.header_yejigl, null);
+                imageLogo = (ImageView) view.findViewById(R.id.imageLogo);
+                textName = (TextView) view.findViewById(R.id.textName);
+                textMoney = (TextView) view.findViewById(R.id.textMoney);
+                textNums = (TextView) view.findViewById(R.id.textNums);
                 return view;
             }
 
             @Override
             public void onBindView(View headerView) {
-
+                if (storeAmount!=null){
+                    GlideApp.with(YeJiGLActivity.this)
+                            .load(storeAmount.getImg())
+                            .centerCrop()
+                            .placeholder(R.mipmap.ic_empty)
+                            .into(imageLogo);
+                    textName.setText(storeAmount.getName());
+                    textMoney.setText(storeAmount.getMoney());
+                    textNums.setText(String.valueOf(storeAmount.getNums()));
+                }
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -209,7 +231,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
                 LogUtil.LogShitou("", s);
                 try {
                     page++;
-                    StoreAmount storeAmount = GsonUtils.parseJSON(s, StoreAmount.class);
+                    storeAmount = GsonUtils.parseJSON(s, StoreAmount.class);
                     if (storeAmount.getStatus() == 1) {
                         List<StoreAmount.DataBean> dataBeanList = storeAmount.getData();
                         adapter.clear();
