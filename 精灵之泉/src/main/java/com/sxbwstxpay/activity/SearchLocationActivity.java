@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -151,6 +153,11 @@ public class SearchLocationActivity extends ZjbBaseActivity implements View.OnCl
                 adapterHead.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        if (imm != null) {
+                            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(),
+                                    0);
+                        }
                         Intent intent = new Intent();
                         intent.putExtra(Constant.INTENT_KEY.Store,adapterHead.getItem(position));
                         setResult(Constant.REQUEST_RESULT_CODE.address,intent);
@@ -162,6 +169,11 @@ public class SearchLocationActivity extends ZjbBaseActivity implements View.OnCl
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(),
+                            0);
+                }
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.value,adapter.getItem(position));
                 setResult(Constant.REQUEST_RESULT_CODE.address,intent);

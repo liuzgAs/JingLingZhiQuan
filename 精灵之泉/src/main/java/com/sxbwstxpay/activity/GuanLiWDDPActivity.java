@@ -1,19 +1,23 @@
 package com.sxbwstxpay.activity;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -47,8 +51,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Response;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener , EasyPermissions.PermissionCallbacks{
     public RecyclerArrayAdapter<IndexDataBean> adapter;
     private EasyRecyclerView recyclerView;
     private View viewBar;
@@ -84,6 +90,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
     private String lat;
     private String lng;
     private boolean isSuccess =true;
+    private String tel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,6 +203,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                         storeDes = storeGoods.getStoreDes();
                         storeGoodsBanner = storeGoods.getBanner();
                         previewUrl = storeGoods.getPreviewUrl();
+                        tel = storeGoods.getTel();
                         share = storeGoods.getShare();
                         textTitle.setText(storeNmae);
                         LogUtil.LogShitou("GuanLiWDDPActivity--onSuccess textTitle", "" + textTitle.getText().toString().trim());
@@ -250,6 +258,7 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                         storeNmae = storeGoods.getStoreNmae();
                         storeDes = storeGoods.getStoreDes();
                         storeGoodsBanner = storeGoods.getBanner();
+                        tel = storeGoods.getTel();
                         previewUrl = storeGoods.getPreviewUrl();
                         share = storeGoods.getShare();
                         textTitle.setText(storeNmae);
@@ -305,6 +314,8 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
+            private TextView textTel;
+            private TextView textDes;
             private TextView textStoreNmae;
             private ImageView imageStoreLogo;
             private ConvenientBanner banner;
@@ -326,12 +337,20 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
 
                 imageStoreLogo = (ImageView) header_xian_shi_qg.findViewById(R.id.imageStoreLogo);
                 textStoreNmae = (TextView) header_xian_shi_qg.findViewById(R.id.textStoreNmae);
+                textDes = (TextView) header_xian_shi_qg.findViewById(R.id.textDes);
+                textTel = (TextView) header_xian_shi_qg.findViewById(R.id.textTel);
 //                header_xian_shi_qg.findViewById(R.id.viewShare).setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
 //                        MyDialog.share01(GuanLiWDDPActivity.this, api, mTencent, "GuanLiWDDPActivity", share.getShareUrl(), share.getShareTitle(), share.getShareDes(), share.getShareImg());
 //                    }
 //                });
+                header_xian_shi_qg.findViewById(R.id.buttonGuanLi).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        requiresPermission(tel);
+                    }
+                });
                 return header_xian_shi_qg;
             }
 
@@ -353,6 +372,8 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
                         .dontAnimate()
                         .placeholder(R.mipmap.ic_empty)
                         .into(imageStoreLogo);
+                textDes.setText(storeDes);
+                textTel.setText("商家电话："+tel);
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -527,4 +548,62 @@ public class GuanLiWDDPActivity extends ZjbBaseActivity implements View.OnClickL
         MyDialog.share(GuanLiWDDPActivity.this, "GuanLiWDDPActivity", api, id, type, share);
     }
 
+
+    private static final int CALL_PHONE = 1991;
+    private String phone;
+
+    /**
+     * 检查权限
+     */
+    private void requiresPermission(String phone) {
+        this.phone=phone;
+        String[] perms = {Manifest.permission.CALL_PHONE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            // Already have permission, do the thing
+            call();
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, "需要拨打电话权限",
+                    CALL_PHONE, perms);
+        }
+    }
+
+    /**
+     * 拨打电话
+     */
+    private void call() {
+    /*跳转到拨号界面，同时传递电话号码*/
+        if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(this, "电话号码为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+        startActivity(dialIntent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        call();
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this)
+                    .setTitle("为了您能使用拨打电话功能，请开启打电话权限！")
+                    .setPositiveButton("去设置")
+                    .setNegativeButton("取消")
+                    .setRequestCode(CALL_PHONE)
+                    .build()
+                    .show();
+        }
+    }
 }

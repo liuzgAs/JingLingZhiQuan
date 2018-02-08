@@ -27,8 +27,17 @@ public class StoreGoods {
     private String storeDes;
     private String storeLogo;
     private String storeNmae;
+    private String tel;
     private List<BannerBean> banner;
     private List<IndexDataBean> data;
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
     public String getInfo() {
         return info;

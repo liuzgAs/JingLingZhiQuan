@@ -51,6 +51,7 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name=".application.MyApplication"

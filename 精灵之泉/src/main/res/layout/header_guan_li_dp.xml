@@ -63,6 +63,7 @@
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/textDes"
                         android:layout_weight="1"
                         android:text="环岛东路塔普社区113号"
                         android:textSize="@dimen/normal_textsize"
@@ -70,6 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/textTel"
                         android:layout_weight="1"
                         android:text="商家电话：0592-2211999"
                         android:textSize="@dimen/normal_textsize"
