@@ -186,7 +186,7 @@ public class WoDeDPActivity extends ZjbBaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.viewYeJiGL:
-                intent.setClass(this, YeJiGLActivity.class);
+                intent.setClass(this, KuaJieSYActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageBack:

@@ -32,7 +32,7 @@ import java.util.List;
 
 import okhttp3.Response;
 
-public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class KuaJieSYActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private View viewBar;
     private EasyRecyclerView recyclerView;
@@ -43,7 +43,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ye_ji_gl);
-        init(YeJiGLActivity.class);
+        init(KuaJieSYActivity.class);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
 
     @Override
     protected void initViews() {
-        ((TextView) findViewById(R.id.textViewTitle)).setText("业绩管理");
+        ((TextView) findViewById(R.id.textViewTitle)).setText(R.string.kuajieshouyi);
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
@@ -80,7 +80,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<StoreAmount.DataBean>(YeJiGLActivity.this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<StoreAmount.DataBean>(KuaJieSYActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_yejigl;
@@ -96,7 +96,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
 
             @Override
             public View onCreateView(ViewGroup parent) {
-                View view = LayoutInflater.from(YeJiGLActivity.this).inflate(R.layout.header_yejigl, null);
+                View view = LayoutInflater.from(KuaJieSYActivity.this).inflate(R.layout.header_yejigl, null);
                 imageLogo = (ImageView) view.findViewById(R.id.imageLogo);
                 textName = (TextView) view.findViewById(R.id.textName);
                 textMoney = (TextView) view.findViewById(R.id.textMoney);
@@ -107,7 +107,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
             @Override
             public void onBindView(View headerView) {
                 if (storeAmount!=null){
-                    GlideApp.with(YeJiGLActivity.this)
+                    GlideApp.with(KuaJieSYActivity.this)
                             .load(storeAmount.getImg())
                             .centerCrop()
                             .placeholder(R.mipmap.ic_empty)
@@ -121,7 +121,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-                ApiClient.post(YeJiGLActivity.this, getOkObject(), new ApiClient.CallBack() {
+                ApiClient.post(KuaJieSYActivity.this, getOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         LogUtil.LogShitou("DingDanGLActivity--加载更多", s+"");
@@ -133,7 +133,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
                                 List<StoreAmount.DataBean> dataBeanList = storeAmount.getData();
                                 adapter.addAll(dataBeanList);
                             } else if (status == 3) {
-                                MyDialog.showReLoginDialog(YeJiGLActivity.this);
+                                MyDialog.showReLoginDialog(KuaJieSYActivity.this);
                             } else {
                                 adapter.pauseMore();
                             }
@@ -237,7 +237,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
                         adapter.clear();
                         adapter.addAll(dataBeanList);
                     } else if (storeAmount.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(YeJiGLActivity.this);
+                        MyDialog.showReLoginDialog(KuaJieSYActivity.this);
                     } else {
                         showError(storeAmount.getInfo());
                     }
@@ -257,7 +257,7 @@ public class YeJiGLActivity extends ZjbBaseActivity implements View.OnClickListe
              */
             private void showError(String msg) {
                 try {
-                    View viewLoader = LayoutInflater.from(YeJiGLActivity.this).inflate(R.layout.view_loaderror, null);
+                    View viewLoader = LayoutInflater.from(KuaJieSYActivity.this).inflate(R.layout.view_loaderror, null);
                     TextView textMsg = (TextView) viewLoader.findViewById(R.id.textMsg);
                     textMsg.setText(msg);
                     viewLoader.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {

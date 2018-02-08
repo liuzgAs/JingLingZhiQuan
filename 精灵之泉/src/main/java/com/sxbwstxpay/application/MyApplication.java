@@ -13,6 +13,7 @@ import com.sxbwstxpay.util.LogUtil;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class MyApplication extends MultiDexApplication {
             initHotfix();
         } catch (Exception e) {
         }
+        ZXingLibrary.initDisplayOpinion(this);
         OkGo.init(this);
         initCloudChannel(this);
     }

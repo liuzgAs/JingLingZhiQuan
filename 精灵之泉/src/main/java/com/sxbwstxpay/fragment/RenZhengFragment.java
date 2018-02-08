@@ -25,7 +25,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.lzy.imagepicker.ImagePicker;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.activity.MainActivity;
+import com.sxbwstxpay.activity.ShiMingRZActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -181,6 +181,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
         image04.setOnClickListener(this);
         image05.setOnClickListener(this);
         buttonTiJiao.setOnClickListener(this);
+        mInflate.findViewById(R.id.imageBack).setOnClickListener(this);
     }
 
     /**
@@ -281,7 +282,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
                 }
             });
         }
-        ((MainActivity) getActivity()).isChoosePic = false;
+        ((ShiMingRZActivity) getActivity()).isChoosePic = false;
     }
 
     @Override
@@ -504,6 +505,9 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.imageBack:
+                getActivity().finish();
+                break;
             case R.id.buttonTiJiao:
                 if (submitStatus != 1) {
                     Toast.makeText(getActivity(), textTip.getText().toString().trim(), Toast.LENGTH_SHORT).show();
@@ -841,7 +845,7 @@ public class RenZhengFragment extends ZjbBaseFragment implements View.OnClickLis
     }
 
     private void chooseTuPian(int requestCode) {
-        ((MainActivity) getActivity()).isChoosePic = true;
+        ((ShiMingRZActivity) getActivity()).isChoosePic = true;
 //        mImagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
 //        mImagePicker.setCrop(true);        //允许裁剪（单选才有效）
 //        float width = ScreenUtils.getScreenWidth(getActivity());

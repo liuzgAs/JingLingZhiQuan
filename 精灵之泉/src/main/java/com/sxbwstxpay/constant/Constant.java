@@ -312,6 +312,7 @@ public class Constant {
         public static final int IMAGE_PICKER = 2029;
         public static final int TuiJian = 2030;
         public static final int HONG_BAO = 2031;
+        public static final int EWM = 2032;
     }
 
     public static class ACACHE {
