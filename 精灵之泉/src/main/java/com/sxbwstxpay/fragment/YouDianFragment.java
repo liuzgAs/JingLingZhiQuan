@@ -41,6 +41,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.MapIndex;
+import com.sxbwstxpay.model.MapMarkerBean;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GlideApp;
@@ -68,10 +69,11 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     private View textBar;
     private TextView textCity;
     private boolean isFrist = true;
-    private List<MapIndex.DataBean> dataBeanList;
+    private List<MapMarkerBean> dataBeanList;
     private String city;
     private TextView textAddress;
     private int mapLV = 15;
+    private LatLng myLatLng;
 
     public YouDianFragment() {
         // Required empty public constructor
@@ -173,7 +175,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     private void showYouDianDialog(String id) {
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", id+"");
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", Integer.parseInt(id)+"");
-        final MapIndex.DataBean dataBean = dataBeanList.get(Integer.parseInt(id));
+        final MapMarkerBean dataBean = dataBeanList.get(Integer.parseInt(id));
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", "00000000");
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_youdian, null);
         final Dialog dialog = new Dialog(getActivity(), R.style.dialog);
@@ -303,13 +305,13 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                 textCity.setText(city);
                 cancelLoadingDialog();
                 LogUtil.LogShitou("YouDianFragment--onLocationChanged", "" + new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude()).toString());
-                LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
+                myLatLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(myLatLng, mapLV);
                 if (!isFrist) {
                     aMap.moveCamera(cameraUpdate);
                     isFrist = false;
                 }
-                getStore(latLng);
+                getStore(myLatLng);
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);
@@ -345,30 +347,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                     MapIndex mapIndex = GsonUtils.parseJSON(s, MapIndex.class);
                     if (mapIndex.getStatus()==1){
                         dataBeanList = mapIndex.getData();
-                        aMap.clear();
-                        markerList.clear();
-                        for (int i = 0; i < dataBeanList.size(); i++) {
-                            final MarkerOptions markerOption = new MarkerOptions();
-                            markerOption.infoWindowEnable(false);
-                            markerOption.title(String.valueOf(i));
-                            markerOption.position(new LatLng(Double.parseDouble(dataBeanList.get(i).getLat()),Double.parseDouble(dataBeanList.get(i).getLng())));
-                            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker_shop, null);
-                            final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
-                            GlideApp.with(getActivity())
-                                    .asBitmap()
-                                    .load(dataBeanList.get(i).getHeadImg())
-                                    .centerCrop()
-                                    .placeholder(R.mipmap.ic_empty)
-                                    .dontAnimate()
-                                    .into(new SimpleTarget<Bitmap>() {
-                                        @Override
-                                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                                            imageImg.setImageBitmap(resource);
-                                            markerOption.icon(BitmapDescriptorFactory.fromView(view));
-                                            markerList.add(aMap.addMarker(markerOption));
-                                        }
-                                    });
-                        }
+                        shouMarker();
                     }else if (mapIndex.getStatus()==3){
                         MyDialog.showReLoginDialog(getActivity());
                     }else {
@@ -392,13 +371,74 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==Constant.REQUEST_RESULT_CODE.address&&resultCode==Constant.REQUEST_RESULT_CODE.address){
             Tip tip = data.getParcelableExtra(Constant.INTENT_KEY.value);
-            textAddress.setText(tip.getName());
-            LatLonPoint point = tip.getPoint();
-            LatLng latLng = new LatLng(point.getLatitude(), point.getLongitude());
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
+            MapMarkerBean mapMarkerBean = (MapMarkerBean) data.getSerializableExtra(Constant.INTENT_KEY.Store);
+            if (tip!=null){
+                textAddress.setText(tip.getName());
+                LatLonPoint point = tip.getPoint();
+                LatLng latLng = new LatLng(point.getLatitude(), point.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
 //            aMap.moveCamera(cameraUpdate);
-            aMap.animateCamera(cameraUpdate, 500, null);
-            getStore(latLng);
+                aMap.animateCamera(cameraUpdate, 500, null);
+                getStore(latLng);
+            }
+
+            if (mapMarkerBean!=null){
+                textAddress.setText(mapMarkerBean.getNickName());
+                LatLng latLng = new LatLng(Double.parseDouble(mapMarkerBean.getLat()), Double.parseDouble(mapMarkerBean.getLng()));
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
+//            aMap.moveCamera(cameraUpdate);
+                aMap.animateCamera(cameraUpdate, 500, null);
+                dataBeanList = new ArrayList<>();
+                dataBeanList.add(mapMarkerBean);
+                shouMarker();
+            }
+        }
+    }
+
+    private void shouMarker() {
+        aMap.clear();
+        markerList.clear();
+        for (int i = 0; i < dataBeanList.size(); i++) {
+            final MarkerOptions markerOption = new MarkerOptions();
+            markerOption.infoWindowEnable(false);
+            markerOption.title(String.valueOf(i));
+            markerOption.position(new LatLng(Double.parseDouble(dataBeanList.get(i).getLat()),Double.parseDouble(dataBeanList.get(i).getLng())));
+            if (dataBeanList.get(i).getSettled()==1){
+                final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker_shop, null);
+                final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
+                GlideApp.with(getActivity())
+                        .asBitmap()
+                        .load(dataBeanList.get(i).getHeadImg())
+                        .centerCrop()
+                        .placeholder(R.mipmap.ic_empty)
+                        .dontAnimate()
+                        .into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                imageImg.setImageBitmap(resource);
+                                markerOption.icon(BitmapDescriptorFactory.fromView(view));
+                                markerList.add(aMap.addMarker(markerOption));
+                            }
+                        });
+            }else {
+                final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker, null);
+                final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
+                GlideApp.with(getActivity())
+                        .asBitmap()
+                        .load(dataBeanList.get(i).getHeadImg())
+                        .centerCrop()
+                        .placeholder(R.mipmap.ic_empty)
+                        .dontAnimate()
+                        .into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                imageImg.setImageBitmap(resource);
+                                markerOption.icon(BitmapDescriptorFactory.fromView(view));
+                                markerList.add(aMap.addMarker(markerOption));
+                            }
+                        });
+            }
+
         }
     }
 
@@ -409,6 +449,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), SearchLocationActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.CITY,city);
+                intent.putExtra(Constant.INTENT_KEY.position,myLatLng);
                 startActivityForResult(intent,Constant.REQUEST_RESULT_CODE.address);
                 break;
             case R.id.imageReLocation:

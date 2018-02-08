@@ -253,6 +253,10 @@ public class Constant {
          * 商家认证提交
          */
         public static final String STORE_CARDADD = "g=App&m=Store&a=cardAdd";
+        /**
+         * 搜索店铺
+         */
+        public static final String MAP_SEARCHSTORE = "g=App&m=Map&a=searchStore";
     }
 
     public static class PERMISSION {
@@ -295,6 +299,7 @@ public class Constant {
         public static final String Main = "Main";
         public static final String guanBi = "guanBi";
         public static final String isJiFen = "isJiFen";
+        public static final String Store = "store";
     }
 
     public static class REQUEST_RESULT_CODE {
