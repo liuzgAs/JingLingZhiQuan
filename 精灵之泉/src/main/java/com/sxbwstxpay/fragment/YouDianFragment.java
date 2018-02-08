@@ -149,7 +149,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
             public boolean onMarkerClick(Marker marker) {
                 String title = marker.getTitle();
                 showYouDianDialog(title);
-                LogUtil.LogShitou("YouDianFragment--onMarkerClick", ""+ title);
+                LogUtil.LogShitou("YouDianFragment--onMarkerClick", "" + title);
                 return false;
             }
         });
@@ -173,8 +173,8 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
      * @param id
      */
     private void showYouDianDialog(String id) {
-        LogUtil.LogShitou("YouDianFragment--showYouDianDialog", id+"");
-        LogUtil.LogShitou("YouDianFragment--showYouDianDialog", Integer.parseInt(id)+"");
+        LogUtil.LogShitou("YouDianFragment--showYouDianDialog", id + "");
+        LogUtil.LogShitou("YouDianFragment--showYouDianDialog", Integer.parseInt(id) + "");
         final MapMarkerBean dataBean = dataBeanList.get(Integer.parseInt(id));
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", "00000000");
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_youdian, null);
@@ -307,10 +307,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                 LogUtil.LogShitou("YouDianFragment--onLocationChanged", "" + new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude()).toString());
                 myLatLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(myLatLng, mapLV);
-                if (!isFrist) {
-                    aMap.moveCamera(cameraUpdate);
-                    isFrist = false;
-                }
+                aMap.animateCamera(cameraUpdate, 500, null);
                 getStore(myLatLng);
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
@@ -329,10 +326,10 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
         HashMap<String, String> params = new HashMap<>();
         if (isLogin) {
             params.put("uid", userInfo.getUid());
-            params.put("tokenTime",tokenTime);
+            params.put("tokenTime", tokenTime);
         }
-        params.put("lat",String.valueOf(latLng.latitude));
-        params.put("lng",String.valueOf(latLng.longitude));
+        params.put("lat", String.valueOf(latLng.latitude));
+        params.put("lng", String.valueOf(latLng.longitude));
         return new OkObject(params, url);
     }
 
@@ -342,19 +339,19 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
             @Override
             public void onSuccess(String s) {
 //                cancelLoadingDialog();
-                LogUtil.LogShitou("YouDianFragment--onSuccess",s+ "");
+                LogUtil.LogShitou("YouDianFragment--onSuccess", s + "");
                 try {
                     MapIndex mapIndex = GsonUtils.parseJSON(s, MapIndex.class);
-                    if (mapIndex.getStatus()==1){
+                    if (mapIndex.getStatus() == 1) {
                         dataBeanList = mapIndex.getData();
                         shouMarker();
-                    }else if (mapIndex.getStatus()==3){
+                    } else if (mapIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
-                    }else {
+                    } else {
                         Toast.makeText(getActivity(), mapIndex.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -369,10 +366,10 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==Constant.REQUEST_RESULT_CODE.address&&resultCode==Constant.REQUEST_RESULT_CODE.address){
+        if (requestCode == Constant.REQUEST_RESULT_CODE.address && resultCode == Constant.REQUEST_RESULT_CODE.address) {
             Tip tip = data.getParcelableExtra(Constant.INTENT_KEY.value);
             MapMarkerBean mapMarkerBean = (MapMarkerBean) data.getSerializableExtra(Constant.INTENT_KEY.Store);
-            if (tip!=null){
+            if (tip != null) {
                 textAddress.setText(tip.getName());
                 LatLonPoint point = tip.getPoint();
                 LatLng latLng = new LatLng(point.getLatitude(), point.getLongitude());
@@ -382,7 +379,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                 getStore(latLng);
             }
 
-            if (mapMarkerBean!=null){
+            if (mapMarkerBean != null) {
                 textAddress.setText(mapMarkerBean.getNickName());
                 LatLng latLng = new LatLng(Double.parseDouble(mapMarkerBean.getLat()), Double.parseDouble(mapMarkerBean.getLng()));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
@@ -396,14 +393,16 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     }
 
     private void shouMarker() {
-        aMap.clear();
+        for (int i = 0; i < markerList.size(); i++) {
+            markerList.get(i).remove();
+        }
         markerList.clear();
         for (int i = 0; i < dataBeanList.size(); i++) {
             final MarkerOptions markerOption = new MarkerOptions();
             markerOption.infoWindowEnable(false);
             markerOption.title(String.valueOf(i));
-            markerOption.position(new LatLng(Double.parseDouble(dataBeanList.get(i).getLat()),Double.parseDouble(dataBeanList.get(i).getLng())));
-            if (dataBeanList.get(i).getSettled()==1){
+            markerOption.position(new LatLng(Double.parseDouble(dataBeanList.get(i).getLat()), Double.parseDouble(dataBeanList.get(i).getLng())));
+            if (dataBeanList.get(i).getSettled() == 1) {
                 final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker_shop, null);
                 final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
                 GlideApp.with(getActivity())
@@ -420,7 +419,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                                 markerList.add(aMap.addMarker(markerOption));
                             }
                         });
-            }else {
+            } else {
                 final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker, null);
                 final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
                 GlideApp.with(getActivity())
@@ -448,9 +447,9 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
             case R.id.viewSearch:
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), SearchLocationActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.CITY,city);
-                intent.putExtra(Constant.INTENT_KEY.position,myLatLng);
-                startActivityForResult(intent,Constant.REQUEST_RESULT_CODE.address);
+                intent.putExtra(Constant.INTENT_KEY.CITY, city);
+                intent.putExtra(Constant.INTENT_KEY.position, myLatLng);
+                startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.address);
                 break;
             case R.id.imageReLocation:
                 textAddress.setText("");
