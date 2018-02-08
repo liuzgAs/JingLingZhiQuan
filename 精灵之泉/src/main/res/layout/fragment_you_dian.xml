@@ -26,8 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <RelativeLayout
-            android:visibility="gone"
-            android:background="@color/tranblack"
+            android:id="@+id/viewSearch"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight">
             <ImageView
@@ -39,8 +39,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_marginRight="10dp"
-                android:textColor="@color/basic_color"
-                android:textStyle="bold"
+                android:textColor="@color/light_black"
                 android:text="厦门"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/image0000"
@@ -50,7 +49,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
-                android:visibility="gone"
+                android:textSize="@dimen/normal_textsize"
+                android:textColor="@color/white"
+                android:id="@+id/textAddress"
+                android:gravity="center"
+                android:visibility="visible"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
@@ -60,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <ImageView
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="25dp"
                 android:layout_alignParentRight="true"

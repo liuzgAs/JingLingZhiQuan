@@ -27,14 +27,16 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.help.Tip;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.GuanLiWDDPActivity;
+import com.sxbwstxpay.activity.SearchLocationActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -67,6 +69,9 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     private TextView textCity;
     private boolean isFrist = true;
     private List<MapIndex.DataBean> dataBeanList;
+    private String city;
+    private TextView textAddress;
+    private int mapLV = 15;
 
     public YouDianFragment() {
         // Required empty public constructor
@@ -112,6 +117,7 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
         viewBar = mInflate.findViewById(R.id.viewBar);
         textBar = mInflate.findViewById(R.id.textBar);
         textCity = (TextView) mInflate.findViewById(R.id.textCity);
+        textAddress = (TextView) mInflate.findViewById(R.id.textAddress);
     }
 
     OnLocationChangedListener mListener;
@@ -128,13 +134,14 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
         aMap.setLocationSource(this);
         // 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         aMap.setMyLocationEnabled(true);
-        CameraUpdate mCameraUpdate = CameraUpdateFactory.zoomTo(17);
-        aMap.animateCamera(mCameraUpdate, 300, null);
+        CameraUpdate mCameraUpdate = CameraUpdateFactory.zoomTo(mapLV);
+        aMap.moveCamera(mCameraUpdate);
     }
 
     @Override
     protected void setListeners() {
         mInflate.findViewById(R.id.imageReLocation).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewSearch).setOnClickListener(this);
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -144,18 +151,18 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                 return false;
             }
         });
-        aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
-            @Override
-            public void onCameraChange(CameraPosition cameraPosition) {
-
-            }
-
-            @Override
-            public void onCameraChangeFinish(CameraPosition cameraPosition) {
-                LatLng target = cameraPosition.target;
-                getStore(target);
-            }
-        });
+//        aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
+//            @Override
+//            public void onCameraChange(CameraPosition cameraPosition) {
+//
+//            }
+//
+//            @Override
+//            public void onCameraChangeFinish(CameraPosition cameraPosition) {
+//                LatLng target = cameraPosition.target;
+//                getStore(target);
+//            }
+//        });
     }
 
     /**
@@ -292,11 +299,12 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
-                textCity.setText(aMapLocation.getAddress());
+                city = aMapLocation.getCity();
+                textCity.setText(city);
                 cancelLoadingDialog();
                 LogUtil.LogShitou("YouDianFragment--onLocationChanged", "" + new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude()).toString());
                 LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
                 if (!isFrist) {
                     aMap.moveCamera(cameraUpdate);
                     isFrist = false;
@@ -337,8 +345,8 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
                     MapIndex mapIndex = GsonUtils.parseJSON(s, MapIndex.class);
                     if (mapIndex.getStatus()==1){
                         dataBeanList = mapIndex.getData();
-//                        aMap.clear();
-//                        markerList.clear();
+                        aMap.clear();
+                        markerList.clear();
                         for (int i = 0; i < dataBeanList.size(); i++) {
                             final MarkerOptions markerOption = new MarkerOptions();
                             markerOption.infoWindowEnable(false);
@@ -380,11 +388,31 @@ public class YouDianFragment extends ZjbBaseFragment implements LocationSource, 
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==Constant.REQUEST_RESULT_CODE.address&&resultCode==Constant.REQUEST_RESULT_CODE.address){
+            Tip tip = data.getParcelableExtra(Constant.INTENT_KEY.value);
+            textAddress.setText(tip.getName());
+            LatLonPoint point = tip.getPoint();
+            LatLng latLng = new LatLng(point.getLatitude(), point.getLongitude());
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
+//            aMap.moveCamera(cameraUpdate);
+            aMap.animateCamera(cameraUpdate, 500, null);
+            getStore(latLng);
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.viewSearch:
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), SearchLocationActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.CITY,city);
+                startActivityForResult(intent,Constant.REQUEST_RESULT_CODE.address);
+                break;
             case R.id.imageReLocation:
-                showLoadingDialog();
-                LogUtil.LogShitou("YouDianFragment--onClick", "重新定位");
+                textAddress.setText("");
                 mlocationClient.startLocation();
                 break;
             default:

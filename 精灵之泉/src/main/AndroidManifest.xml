@@ -513,6 +513,7 @@
         <activity
             android:name=".activity.XiaoShouGLActivity"
             android:launchMode="singleTop" />
+        <activity android:name=".activity.SearchLocationActivity"></activity>
     </application>
 
 </manifest>
