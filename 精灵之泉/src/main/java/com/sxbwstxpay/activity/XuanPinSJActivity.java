@@ -28,6 +28,7 @@ import com.sxbwstxpay.model.GoodsIndex;
 import com.sxbwstxpay.model.IndexDataBean;
 import com.sxbwstxpay.model.IndexGoods;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.ShareBean;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
@@ -36,6 +37,8 @@ import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.JiFenSCViewHolder;
 import com.sxbwstxpay.viewholder.XuanPinSJViewHolder;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -113,6 +116,7 @@ public class XuanPinSJActivity extends ZjbBaseActivity implements SwipeRefreshLa
     private TextView textTitle;
     private String cityId;
     private View viewBar;
+    private IWXAPI api = WXAPIFactory.createWXAPI(XuanPinSJActivity.this, Constant.WXAPPID, true);
 
     public void hideView() {
         Animation animation02 = AnimationUtils.loadAnimation(XuanPinSJActivity.this, R.anim.push_down_out);
@@ -177,10 +181,10 @@ public class XuanPinSJActivity extends ZjbBaseActivity implements SwipeRefreshLa
                 switch (cateBean.getJump()) {
                     case "score":
                         layout = R.layout.item_ji_fen_sc;
-                        return new JiFenSCViewHolder(parent, layout, "MainActivity");
+                        return new JiFenSCViewHolder(parent, layout, "XuanPinSJActivity");
                     default:
                         layout = R.layout.item_xuan_pin_sj;
-                        return new XuanPinSJViewHolder(parent, layout, "MainActivity");
+                        return new XuanPinSJViewHolder(parent, layout, "XuanPinSJActivity");
                 }
             }
         });
@@ -372,6 +376,10 @@ public class XuanPinSJActivity extends ZjbBaseActivity implements SwipeRefreshLa
     public void onDestroy() {
         super.onDestroy();
         unregisterReceiver(reciver);
+    }
+
+    public void share(String id, String type, ShareBean share) {
+        MyDialog.share(XuanPinSJActivity.this, "XuanPinSJActivity", api, id, type, share);
     }
 
     @Override

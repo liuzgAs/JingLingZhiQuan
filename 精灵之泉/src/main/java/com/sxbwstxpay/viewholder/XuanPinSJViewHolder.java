@@ -14,6 +14,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.activity.ShangPinScActivity;
 import com.sxbwstxpay.activity.SouSuoActivity;
+import com.sxbwstxpay.activity.XuanPinSJActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.IndexDataBean;
@@ -62,8 +63,8 @@ public class XuanPinSJViewHolder extends BaseViewHolder<IndexDataBean> {
             @Override
             public void onClick(View v) {
                 switch (activity) {
-                    case "MainActivity":
-                        ((MainActivity) getContext()).share(data.getId(), "goods", data.getShare());
+                    case "XuanPinSJActivity":
+                        ((XuanPinSJActivity) getContext()).share(data.getId(), "goods", data.getShare());
                         break;
                     case "SouSuoActivity":
                         ((SouSuoActivity) getContext()).share(data.getId(), "goods", data.getShare());

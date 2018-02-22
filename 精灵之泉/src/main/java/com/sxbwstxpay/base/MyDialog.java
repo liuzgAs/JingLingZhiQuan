@@ -32,6 +32,7 @@ import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.activity.SouSuoActivity;
 import com.sxbwstxpay.activity.TuiGuangEWMActivity;
 import com.sxbwstxpay.activity.WoDeDPActivity;
+import com.sxbwstxpay.activity.XuanPinSJActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.GoodsEwm;
 import com.sxbwstxpay.model.OkObject;
@@ -192,6 +193,10 @@ public class MyDialog {
                 params.put("uid", ((MainActivity) context).userInfo.getUid());
                 params.put("tokenTime", ((MainActivity) context).tokenTime);
                 break;
+            case "XuanPinSJActivity":
+                params.put("uid", ((XuanPinSJActivity) context).userInfo.getUid());
+                params.put("tokenTime", ((XuanPinSJActivity) context).tokenTime);
+                break;
             case "ChanPinXQActivity":
                 params.put("uid", ((ChanPinXQActivity) context).userInfo.getUid());
                 params.put("tokenTime", ((ChanPinXQActivity) context).tokenTime);
@@ -212,6 +217,9 @@ public class MyDialog {
             case "MainActivity":
                 ((MainActivity) context).showLoadingDialog();
                 break;
+            case "XuanPinSJActivity":
+                ((XuanPinSJActivity) context).showLoadingDialog();
+                break;
             case "ChanPinXQActivity":
                 ((ChanPinXQActivity) context).showLoadingDialog();
                 break;
@@ -228,6 +236,9 @@ public class MyDialog {
                 switch (activity) {
                     case "MainActivity":
                         ((MainActivity) context).cancelLoadingDialog();
+                        break;
+                    case "XuanPinSJActivity":
+                        ((XuanPinSJActivity) context).cancelLoadingDialog();
                         break;
                     case "ChanPinXQActivity":
                         ((ChanPinXQActivity) context).cancelLoadingDialog();
@@ -296,6 +307,14 @@ public class MyDialog {
                                             switch (activity) {
                                                 case "MainActivity":
                                                     ((MainActivity) context).runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Toast.makeText(context, "图片保存在\"/sdcard/精灵之泉/\"目录下", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                    break;
+                                                case "XuanPinSJActivity":
+                                                    ((XuanPinSJActivity) context).runOnUiThread(new Runnable() {
                                                         @Override
                                                         public void run() {
                                                             Toast.makeText(context, "图片保存在\"/sdcard/精灵之泉/\"目录下", Toast.LENGTH_SHORT).show();
@@ -372,6 +391,9 @@ public class MyDialog {
                 switch (activity) {
                     case "MainActivity":
                         ((MainActivity) context).cancelLoadingDialog();
+                        break;
+                    case "XuanPinSJActivity":
+                        ((XuanPinSJActivity) context).cancelLoadingDialog();
                         break;
                     case "ChanPinXQActivity":
                         ((ChanPinXQActivity) context).cancelLoadingDialog();
@@ -635,6 +657,9 @@ public class MyDialog {
                     case "TuiGuangEWMActivity":
                         mTencent.shareToQQ((TuiGuangEWMActivity) context, params, new BaseUiListener());
                         break;
+                    case "XuanPinSJActivity":
+                        mTencent.shareToQQ((XuanPinSJActivity) context, params, new BaseUiListener());
+                        break;
                     case "MainActivity":
                         mTencent.shareToQQ((MainActivity) context, params, new BaseUiListener());
                         break;
@@ -664,6 +689,9 @@ public class MyDialog {
                 switch (activity) {
                     case "TuiGuangEWMActivity":
                         mTencent.shareToQzone((TuiGuangEWMActivity) context, params, new BaseUiListener());
+                        break;
+                    case "XuanPinSJActivity":
+                        mTencent.shareToQQ((XuanPinSJActivity) context, params, new BaseUiListener());
                         break;
                     case "MainActivity":
                         mTencent.shareToQQ((MainActivity) context, params, new BaseUiListener());
