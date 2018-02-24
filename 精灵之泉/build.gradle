@@ -56,11 +56,8 @@ dependencies {
     compile 'pub.devrel:easypermissions:1.0.1'
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
-    //3D地图so及jar
-    implementation 'com.amap.api:3dmap:latest.integration'
-    //定位功能
-    implementation 'com.amap.api:location:latest.integration'
-    //搜索功能
-    implementation 'com.amap.api:search:latest.integration'
+    compile 'com.amap.api:3dmap:5.0.0'
+    compile 'com.amap.api:location:3.3.0'
+    compile 'com.amap.api:search:5.0.0'
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
 }
