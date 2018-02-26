@@ -74,7 +74,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     /**
      * 是否抵扣积分
      */
-    private int useScore = 1;
+    private int useScore = 0;
     private View viewTiJiaoDD;
     private View viewDuiHuan;
     private TextView textDiKouJF;
