@@ -1,6 +1,7 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.DingDanXQActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -52,8 +54,11 @@ public class ShangChengDDFragment extends ZjbBaseFragment implements SwipeRefres
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
                 case Constant.BROADCASTCODE.ShuaXinDingDan:
+                    onRefresh();
+                    break;
+                case Constant.BROADCASTCODE.SHUA_XIN_SHOW_HOU:
                     onRefresh();
                     break;
             }
@@ -64,6 +69,7 @@ public class ShangChengDDFragment extends ZjbBaseFragment implements SwipeRefres
         // Required empty public constructor
     }
 
+    @SuppressLint("ValidFragment")
     public ShangChengDDFragment(String state) {
         // Required empty public constructor
         this.state = state;
@@ -192,9 +198,10 @@ public class ShangChengDDFragment extends ZjbBaseFragment implements SwipeRefres
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                Intent intent = new Intent();
-//                intent.setClass(getActivity(), DingDanXQActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), DingDanXQActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
+                startActivity(intent);
             }
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
@@ -278,7 +285,8 @@ public class ShangChengDDFragment extends ZjbBaseFragment implements SwipeRefres
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.ShuaXinDingDan);
-        getActivity().registerReceiver(reciver,filter);
+        filter.addAction(Constant.BROADCASTCODE.SHUA_XIN_SHOW_HOU);
+        getActivity().registerReceiver(reciver, filter);
     }
 
     @Override

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/layout_selector_white_system_gray"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <ImageView
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_width="80dp"
+        android:id="@+id/imageImg"
+        android:layout_height="80dp" />
+    <TextView
+        android:layout_toRightOf="@+id/imageImg"
+        android:layout_alignTop="@+id/imageImg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lines="2"
+        android:text="新鲜牛奶"
+        android:textSize="@dimen/normal_textsize"
+        android:layout_width="match_parent"
+        android:id="@+id/textTitle"
+        android:textColor="@color/light_black"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_below="@+id/textTitle"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/litterText"
+        android:text="规格：60克以上"
+        android:textColor="@color/text_gray"
+        android:layout_toRightOf="@+id/imageImg"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:id="@+id/textGuiGe"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/textNum"
+        android:textSize="@dimen/litterText"
+        android:layout_width="wrap_content"
+        android:layout_alignBaseline="@+id/textGuiGe"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="X1"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/light_black"
+        android:text="¥39.00"
+        android:layout_toRightOf="@+id/imageImg"
+        android:layout_alignBottom="@+id/imageImg"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/normal_textsize"
+        android:id="@+id/textPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_alignBaseline="@+id/textPrice"
+        android:layout_toRightOf="@+id/textPrice"
+        android:layout_width="wrap_content"
+        android:id="@+id/textxie"
+        android:text="/"
+        android:textColor="@color/text_gray"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/textZhuan"
+        android:textColor="@color/basic_color"
+        android:text="赚1.3"
+        android:layout_alignBaseline="@+id/textxie"
+        android:layout_toRightOf="@+id/textxie"
+        android:textSize="@dimen/normal_textsize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/textShouHou"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/textPrice"
+        android:layout_marginRight="10dp"
+        android:textSize="@dimen/litterText"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_basic_20dp"
+        android:text="申请售后"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

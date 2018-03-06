@@ -261,6 +261,18 @@ public class Constant {
          * 商户收款码
          */
         public static final String PAY_CHECKCODE = "g=App&m=Pay&a=checkCode";
+        /**
+         * 订单详情
+         */
+        public static final String USER_ORDERINFO = "g=App&m=User&a=orderInfo";
+        /**
+         * 申请售后请求
+         */
+        public static final String AFTER_ADDBEFORE = "g=App&m=After&a=addBefore";
+        /**
+         * 申请售后提交
+         */
+        public static final String AFTER_ADDSUBMIT = "g=App&m=After&a=addSubmit";
     }
 
     public static class PERMISSION {
@@ -362,6 +374,7 @@ public class Constant {
         public static final String VIP = "VIP";
         public static final String ShiMingTS = "ShiMingTS";
         public static final String MINE = "mine";
+        public static final String SHUA_XIN_SHOW_HOU = "shua_xin_show_hou";
     }
 
     public static class VALUE{

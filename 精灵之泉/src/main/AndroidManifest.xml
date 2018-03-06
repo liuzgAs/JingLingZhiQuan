@@ -51,7 +51,8 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".application.MyApplication"
@@ -522,7 +523,8 @@
         <activity
             android:name=".activity.SearchLocationActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.ShiMingRZActivity"></activity>
+        <activity android:name=".activity.ShiMingRZActivity" />
+        <activity android:name=".activity.ShenQingSHActivity"></activity>
     </application>
 
 </manifest>

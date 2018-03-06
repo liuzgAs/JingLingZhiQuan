@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <TextView
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:text="465"
+        android:id="@+id/textDes"
+        android:textSize="@dimen/normal_textsize"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/textName"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:text="订单金额"
+        android:textSize="@dimen/normal_textsize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

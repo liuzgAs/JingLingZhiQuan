@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/item_dingdan_xiangqing" />
+
+    <RelativeLayout
+        android:id="@+id/viewShouHouLeiXing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/layout_selector_white_system_gray">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:text="＊"
+            android:id="@+id/text0100"
+            android:textColor="@color/red"
+            android:textSize="@dimen/bigText" />
+        <TextView
+            android:layout_toRightOf="@+id/text0100"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="售后类型："
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/text0101"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textShouHouLeiXing"
+            android:layout_toRightOf="@+id/text0101"
+            android:layout_centerVertical="true"
+            android:hint="请选择售后类型"
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/light_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@mipmap/down1"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="12dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/viewShouHouYuanYin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/layout_selector_white_system_gray">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:text="＊"
+            android:id="@+id/text0200"
+            android:textColor="@color/red"
+            android:textSize="@dimen/bigText" />
+        <TextView
+            android:layout_toRightOf="@+id/text0200"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="售后原因："
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/text0201"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textShouHouYuanYin"
+            android:layout_toRightOf="@+id/text0201"
+            android:layout_centerVertical="true"
+            android:hint="请选择售后原因"
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/light_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@mipmap/down1"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="12dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/layout_selector_white_system_gray">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:text="＊"
+            android:id="@+id/text0300"
+            android:textColor="@color/red"
+            android:textSize="@dimen/bigText" />
+        <TextView
+            android:layout_toRightOf="@+id/text0300"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="售后数量："
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/text0301"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/imageJian"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/jian1"
+            android:layout_toRightOf="@+id/text0301"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:text="1"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageJian"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/light_black"
+            android:layout_width="wrap_content"
+            android:id="@+id/textMaxNum"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/imageJia"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/jia1"
+            android:layout_toRightOf="@+id/textMaxNum"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/layout_selector_white_system_gray">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:text="＊"
+            android:id="@+id/text0400"
+            android:textColor="@color/red"
+            android:textSize="@dimen/bigText" />
+        <TextView
+            android:layout_toRightOf="@+id/text0400"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="最大退款金额："
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/text0401"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textMaxMoney"
+            android:layout_toRightOf="@+id/text0401"
+            android:layout_centerVertical="true"
+            android:text="¥37.9"
+            android:textSize="@dimen/normal_textsize"
+            android:textColor="@color/light_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/imageZuiDa"
+            android:layout_width="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/about1"
+            android:layout_height="18dp" />
+
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/editShuoMing"
+        android:gravity="top|left"
+        android:hint="售后说明最多200字"
+        android:maxLength="200"
+        android:textSize="@dimen/normal_textsize"
+        android:background="@color/white"
+        android:layout_marginTop="1dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+</LinearLayout>
