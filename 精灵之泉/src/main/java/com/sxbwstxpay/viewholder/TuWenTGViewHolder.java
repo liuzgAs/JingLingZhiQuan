@@ -71,11 +71,13 @@ public class TuWenTGViewHolder extends BaseViewHolder<ShareShareDay.ListDataBean
                                 ((TuWenTGActivity)getContext()).showLoadingDialog();
                                 final int[] count = {0};
                                 for (int i = 0; i < data.getShare_images().size(); i++) {
-                                   ApiClient.downLoadFile(getContext(), data.getShare_images().get(i), "精灵之泉","图文推广" + System.currentTimeMillis()+".jpg", new ApiClient.CallBack() {
+                                    LogUtil.LogShitou("TuWenTGViewHolder--onSuccess", ""+data.getImgs().get(i));
+                                   ApiClient.downLoadFile(getContext(), data.getImgs().get(i), "精灵之泉","图文推广" + System.currentTimeMillis()+".jpg", new ApiClient.CallBack() {
                                        @Override
                                        public void onSuccess(String s) {
+                                           LogUtil.LogShitou("TuWenTGViewHolder--onSuccess", ""+s);
                                            count[0]++;
-                                           if (count[0]==data.getShare_images().size()){
+                                           if (count[0]==data.getImgs().size()){
                                                Toast.makeText(getContext(), "图片保存在/精灵之泉", Toast.LENGTH_SHORT).show();
                                                ((TuWenTGActivity)getContext()).cancelLoadingDialog();
                                            }

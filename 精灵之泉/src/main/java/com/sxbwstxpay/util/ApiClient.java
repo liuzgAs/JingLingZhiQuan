@@ -79,9 +79,9 @@ public class ApiClient {
      * @param context
      * @param url
      */
-    public static void downLoadFile(final Context context, String url, String dir,String fileName,final CallBack callBack) throws Exception {
+    public static void downLoadFile(final Context context, String url, String dir, String fileName, final CallBack callBack) throws Exception {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            String filePath = Environment.getExternalStorageDirectory().getCanonicalPath() + "/"+dir;
+            String filePath = Environment.getExternalStorageDirectory().getCanonicalPath() + "/" + dir;
             OkGo.get(url)
                     .tag(context)
                     .execute(new FileCallback(filePath, fileName) {
@@ -91,6 +91,12 @@ public class ApiClient {
                             // 最后通知图库更新
                             context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                                     Uri.fromFile(file)));
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                            LogUtil.LogShitou("ApiClient--onError", ""+response.message());
                         }
                     });
         } else {

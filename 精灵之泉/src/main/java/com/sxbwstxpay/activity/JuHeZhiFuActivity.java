@@ -163,7 +163,11 @@ public class JuHeZhiFuActivity extends ZjbBaseActivity implements View.OnClickLi
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.viewShouKuanMa:
+//                if (checkMoney()) {
+//                    return;
+//                }
                 intent.setClass(this,ShouKuanEWMActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.value,amount);
                 startActivity(intent);
                 break;
             case R.id.imageBack:
@@ -200,45 +204,8 @@ public class JuHeZhiFuActivity extends ZjbBaseActivity implements View.OnClickLi
                 viewTabBg.setBackgroundResource(R.mipmap.mingxitab3);
                 break;
             case R.id.buttonShouKuan:
-                if (amount.contains(".")) {
-                    if (amount.length() >= 4) {
-                        String amountSub;
-                        LogUtil.LogShitou("ShouKuanFragment--onClick1", "" + amount.substring(amount.length() - 1));
-                        LogUtil.LogShitou("ShouKuanFragment--onClick2", "" + amount.substring(amount.length() - 2));
-                        if (TextUtils.equals(amount.substring(amount.length() - 2), "00")) {
-                            amountSub = amount.substring(amount.length() - 6, amount.length() - 1);
-                        } else if (TextUtils.equals(amount.substring(amount.length() - 1), "0")) {
-                            amountSub = amount.substring(amount.length() - 5, amount.length() - 2);
-                        } else {
-                            amountSub = amount.substring(amount.length() - 4);
-                        }
-                        LogUtil.LogShitou("ShouKuanFragment--amountsubstring", "" + amountSub);
-                        String[] split = amountSub.split("");
-                        List<String> list = new ArrayList<>();
-                        for (int i = 0; i < split.length; i++) {
-                            if (!TextUtils.equals(".", split[i])) {
-                                list.add(split[i]);
-                            }
-                        }
-                        if (Integer.parseInt(list.get(1)) == Integer.parseInt(list.get(2))
-                                && Integer.parseInt(list.get(1)) == Integer.parseInt(list.get(3))
-                                && Integer.parseInt(list.get(2)) == Integer.parseInt(list.get(3))) {
-                            Toast.makeText(JuHeZhiFuActivity.this, "后三位数不能相同", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-                } else {
-                    if (amount.length() >= 3) {
-                        String amountSub = amount.substring(amount.length() - 3);
-                        LogUtil.LogShitou("ShouKuanFragment--amountsubstring", "" + amountSub);
-                        String[] split = amountSub.split("");
-                        if (Integer.parseInt(split[1]) == Integer.parseInt(split[2])
-                                && Integer.parseInt(split[1]) == Integer.parseInt(split[3])
-                                && Integer.parseInt(split[2]) == Integer.parseInt(split[3])) {
-                            Toast.makeText(JuHeZhiFuActivity.this, "后三位数不能相同", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
+                if (checkMoney()) {
+                    return;
                 }
                 showLoadingDialog();
                 ApiClient.post(JuHeZhiFuActivity.this, getOkObject(), new ApiClient.CallBack() {
@@ -406,6 +373,54 @@ public class JuHeZhiFuActivity extends ZjbBaseActivity implements View.OnClickLi
             default:
                 break;
         }
+    }
+
+    private boolean checkMoney() {
+        if (TextUtils.isEmpty(amount)){
+            Toast.makeText(JuHeZhiFuActivity.this, "请输入收款金额", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (amount.contains(".")) {
+            if (amount.length() >= 4) {
+                String amountSub;
+                LogUtil.LogShitou("ShouKuanFragment--onClick1", "" + amount.substring(amount.length() - 1));
+                LogUtil.LogShitou("ShouKuanFragment--onClick2", "" + amount.substring(amount.length() - 2));
+                if (TextUtils.equals(amount.substring(amount.length() - 2), "00")) {
+                    amountSub = amount.substring(amount.length() - 6, amount.length() - 1);
+                } else if (TextUtils.equals(amount.substring(amount.length() - 1), "0")) {
+                    amountSub = amount.substring(amount.length() - 5, amount.length() - 2);
+                } else {
+                    amountSub = amount.substring(amount.length() - 4);
+                }
+                LogUtil.LogShitou("ShouKuanFragment--amountsubstring", "" + amountSub);
+                String[] split = amountSub.split("");
+                List<String> list = new ArrayList<>();
+                for (int i = 0; i < split.length; i++) {
+                    if (!TextUtils.equals(".", split[i])) {
+                        list.add(split[i]);
+                    }
+                }
+                if (Integer.parseInt(list.get(1)) == Integer.parseInt(list.get(2))
+                        && Integer.parseInt(list.get(1)) == Integer.parseInt(list.get(3))
+                        && Integer.parseInt(list.get(2)) == Integer.parseInt(list.get(3))) {
+                    Toast.makeText(JuHeZhiFuActivity.this, "后三位数不能相同", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            }
+        } else {
+            if (amount.length() >= 3) {
+                String amountSub = amount.substring(amount.length() - 3);
+                LogUtil.LogShitou("ShouKuanFragment--amountsubstring", "" + amountSub);
+                String[] split = amountSub.split("");
+                if (Integer.parseInt(split[1]) == Integer.parseInt(split[2])
+                        && Integer.parseInt(split[1]) == Integer.parseInt(split[3])
+                        && Integer.parseInt(split[2]) == Integer.parseInt(split[3])) {
+                    Toast.makeText(JuHeZhiFuActivity.this, "后三位数不能相同", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void setAmount() {

@@ -257,6 +257,10 @@ public class Constant {
          * 搜索店铺
          */
         public static final String MAP_SEARCHSTORE = "g=App&m=Map&a=searchStore";
+        /**
+         * 商户收款码
+         */
+        public static final String PAY_CHECKCODE = "g=App&m=Pay&a=checkCode";
     }
 
     public static class PERMISSION {

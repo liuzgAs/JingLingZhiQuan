@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.util.UpgradeUtils;
 import com.sxbwstxpay.util.VersionUtils;
@@ -47,7 +48,7 @@ public class DangQianBBActivity extends ZjbBaseActivity implements View.OnClickL
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
-        textBanBen.setText("精灵之泉 v"+ VersionUtils.getCurrVersionName(this));
+        textBanBen.setText("精灵之泉 v" + VersionUtils.getCurrVersionName(this));
     }
 
     @Override
@@ -56,6 +57,7 @@ public class DangQianBBActivity extends ZjbBaseActivity implements View.OnClickL
         findViewById(R.id.viewGongNeng).setOnClickListener(this);
         findViewById(R.id.viewTouSu).setOnClickListener(this);
         findViewById(R.id.imageBack).setOnClickListener(this);
+        findViewById(R.id.imageLogo).setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +70,9 @@ public class DangQianBBActivity extends ZjbBaseActivity implements View.OnClickL
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.imageLogo:
+                LogUtil.isPrintLog=!LogUtil.isPrintLog;
+                break;
             case R.id.viewXieYi:
                 intent.setClass(this, WebActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.TITLE, "用户使用协议");
@@ -88,6 +93,8 @@ public class DangQianBBActivity extends ZjbBaseActivity implements View.OnClickL
                 break;
             case R.id.imageBack:
                 finish();
+                break;
+            default:
                 break;
         }
     }
