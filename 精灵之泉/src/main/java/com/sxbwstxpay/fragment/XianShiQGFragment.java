@@ -257,7 +257,7 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
         tabCarview.setVisibility(View.GONE);
         viewShangJiaTip.setVisibility(View.GONE);
         int screenWidth = ScreenUtils.getScreenWidth(getActivity());
-        indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(185, getActivity());
+        indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(105, getActivity());
         tabHeight = getActivity().getResources().getDimension(R.dimen.tabHeight);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
