@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_weight="1"
     android:layout_width="80dp"
-    android:layout_height="60dp"
+    android:layout_height="@dimen/tabHeight"
     android:orientation="vertical">
 
     <ImageView
@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:text="13:00"
             android:textColor="@color/tab_text_ligth_black"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/textQiangGouDes"

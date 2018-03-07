@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/layout_selector_white_system_gray"
     android:layout_width="match_parent"
-    android:layout_height="45dp">
+    android:layout_height="60dp">
     <ImageView
         android:layout_centerHorizontal="true"
-        android:layout_width="25dp"
+        android:layout_width="30dp"
         android:id="@+id/imageImg"
-        android:layout_height="25dp" />
+        android:layout_height="30dp" />
     <TextView
         android:id="@+id/textTitle"
         android:text="限时抢购"
