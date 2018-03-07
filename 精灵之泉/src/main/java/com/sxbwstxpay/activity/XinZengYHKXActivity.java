@@ -195,11 +195,11 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                     Toast.makeText(XinZengYHKXActivity.this, "输入信用卡有效期", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (Integer.valueOf(editZhangDanRi.getText().toString().trim())<1||Integer.valueOf(editZhangDanRi.getText().toString().trim())>31) {
+                if (Integer.valueOf(editZhangDanRi.getText().toString().trim()) < 1 || Integer.valueOf(editZhangDanRi.getText().toString().trim()) > 31) {
                     Toast.makeText(XinZengYHKXActivity.this, "信用卡账单日范围是1到31", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (Integer.valueOf(editHuanKuanRi.getText().toString().trim())<1||Integer.valueOf(editHuanKuanRi.getText().toString().trim())>31) {
+                if (Integer.valueOf(editHuanKuanRi.getText().toString().trim()) < 1 || Integer.valueOf(editHuanKuanRi.getText().toString().trim()) > 31) {
                     Toast.makeText(XinZengYHKXActivity.this, "信用卡还款日范围是1到31", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -244,6 +244,8 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                         id = bankBean.getId();
                     }
                 }).show();
+                break;
+            default:
                 break;
         }
 
@@ -349,8 +351,8 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
         params.put("code", editCode.getText().toString().trim());
         params.put("name2", nameTiJiao.toString().trim());
         params.put("phone2", phoneTiJiao.toString().trim());
-        params.put("day1",editZhangDanRi.getText().toString().trim() );
-        params.put("day2",editHuanKuanRi.getText().toString().trim() );
+        params.put("day1", editZhangDanRi.getText().toString().trim());
+        params.put("day2", editHuanKuanRi.getText().toString().trim());
         return new OkObject(params, url);
     }
 
