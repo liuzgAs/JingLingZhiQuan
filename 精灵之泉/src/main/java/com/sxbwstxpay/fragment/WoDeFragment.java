@@ -32,6 +32,7 @@ import com.sxbwstxpay.activity.WoDeSHActivity;
 import com.sxbwstxpay.activity.WoDeSYActivity;
 import com.sxbwstxpay.activity.WoDeZDActivity;
 import com.sxbwstxpay.activity.WoDeZLActivity;
+import com.sxbwstxpay.activity.ZhiNengHKActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -400,7 +401,9 @@ public class WoDeFragment extends ZjbBaseFragment implements View.OnClickListene
                 startActivity(intent);
                 break;
             case R.id.viewZhiNengHK:
-
+                LogUtil.LogShitou("WoDeFragment--onClick", "智能还款");
+                intent.setClass(getActivity(), ZhiNengHKActivity.class);
+                startActivity(intent);
                 break;
             case R.id.viewWoDeZD:
                 zhangDan();

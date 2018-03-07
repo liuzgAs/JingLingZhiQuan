@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    android:animateLayoutChanges="true"
+    tools:context="com.sxbwstxpay.activity.ZhiNengHKActivity">
+    <include layout="@layout/view_bar" />
+
+    <TextView
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="长按删除银行卡~"
+        android:gravity="center"
+        android:background="@color/textYellow"
+        android:textColor="@color/white"
+        android:textSize="@dimen/normal_textsize"
+        android:id="@+id/textShanChu" />
+
+    <android.support.design.widget.TabLayout
+        android:background="@color/white"
+        android:id="@+id/tablayout"
+        app:tabTextColor="@color/light_black"
+        app:tabSelectedTextColor="@color/basic_color"
+        app:tabIndicatorColor="@color/basic_color"
+        app:tabIndicatorHeight="2dp"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

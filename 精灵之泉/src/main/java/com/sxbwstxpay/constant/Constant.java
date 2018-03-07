@@ -273,6 +273,22 @@ public class Constant {
          * 申请售后提交
          */
         public static final String AFTER_ADDSUBMIT = "g=App&m=After&a=addSubmit";
+        /**
+         * 我的信用卡
+         */
+        public static final String HK_CARDLIST = "g=App&m=Hk&a=cardList";
+        /**
+         * 信用卡删除
+         */
+        public static final String HK_CARDDEL = "g=App&m=Hk&a=cardDel";
+        /**
+         * 添加信用卡请求
+         */
+        public static final String HK_CARDADDBEFORE = "g=App&m=Hk&a=cardAddbefore";
+        /**
+         * 添加信用卡
+         */
+        public static final String HK_CARDADD = "?g=App&m=Hk&a=cardAdd";
     }
 
     public static class PERMISSION {

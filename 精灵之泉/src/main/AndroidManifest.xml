@@ -524,7 +524,9 @@
             android:name=".activity.SearchLocationActivity"
             android:launchMode="singleTop" />
         <activity android:name=".activity.ShiMingRZActivity" />
-        <activity android:name=".activity.ShenQingSHActivity"></activity>
+        <activity android:name=".activity.ShenQingSHActivity" />
+        <activity android:name=".activity.ZhiNengHKActivity"></activity>
+        <activity android:name=".activity.XinZengYHKXActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.sxbwstxpay.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +17,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.activity.XinZengYHKActivity;
+import com.sxbwstxpay.activity.XinZengYHKXActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -35,23 +34,15 @@ import java.util.List;
 
 import okhttp3.Response;
 
-public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class GuanLiYHKXFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private View mInflate;
     private RecyclerArrayAdapter<BankCardlist.DataBean> adapter;
     private EasyRecyclerView recyclerView;
-    private int type = 0;
 
-    public GuanLiYHKFragment() {
+    public GuanLiYHKXFragment() {
         // Required empty public constructor
     }
-
-    @SuppressLint("ValidFragment")
-    public GuanLiYHKFragment(int type) {
-        // Required empty public constructor
-        this.type = type;
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -118,29 +109,13 @@ public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLa
             public View onCreateView(ViewGroup parent) {
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.footer_xuan_ze_xyk, null);
                 TextView textXinZengXYK = (TextView) view.findViewById(R.id.textXinZengXYK);
-                switch (type) {
-                    case 1:
-                        textXinZengXYK.setText("新增银行卡");
-                        break;
-                    case 2:
-                        textXinZengXYK.setText("新增信用卡");
-                        break;
-                }
+                textXinZengXYK.setText("新增信用卡");
                 textXinZengXYK.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
-                        intent.setClass(getActivity(), XinZengYHKActivity.class);
-                        switch (type) {
-                            case 1:
-                                intent.putExtra(Constant.INTENT_KEY.TITLE, "新增银行卡");
-                                intent.putExtra(Constant.INTENT_KEY.type, 1);
-                                break;
-                            case 2:
-                                intent.putExtra(Constant.INTENT_KEY.TITLE, "新增信用卡");
-                                intent.putExtra(Constant.INTENT_KEY.type, 2);
-                                break;
-                        }
+                        intent.setClass(getActivity(), XinZengYHKXActivity.class);
+                        intent.putExtra(Constant.INTENT_KEY.TITLE, "新增信用卡");
                         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);
                     }
                 });
@@ -153,60 +128,61 @@ public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLa
             }
         });
         recyclerView.setRefreshListener(this);
-       adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
-           /**
-            * des： 网络请求参数
-            * author： ZhangJieBo
-            * date： 2017/8/28 0028 上午 9:55
-            */
-           private OkObject getOkObject1(String id) {
-               String url = Constant.HOST + Constant.Url.BANK_CARDDEL;
-               HashMap<String, String> params = new HashMap<>();
-               params.put("uid",userInfo.getUid());
-               params.put("tokenTime",tokenTime);
-               params.put("id",id);
-               return new OkObject(params, url);
-           }
-           @Override
-           public boolean onItemLongClick(final int position) {
-               AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).setTitle("提示")
-                       .setMessage("确定要删除吗？")
-                       .setNegativeButton("取消", null)
-                       .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialog, int which) {
-                               showLoadingDialog();
-                               ApiClient.post(getActivity(), getOkObject1(adapter.getItem(position).getId()), new ApiClient.CallBack() {
-                                   @Override
-                                   public void onSuccess(String s) {
-                                       cancelLoadingDialog();
-                                       LogUtil.LogShitou("GuanLiYHKFragment--删除银行卡", ""+s);
-                                       try {
-                                           SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                                           if (simpleInfo.getStatus()==1){
-                                               onRefresh();
-                                           }else if (simpleInfo.getStatus()==3){
-                                               MyDialog.showReLoginDialog(getActivity());
-                                           }else {
-                                           }
-                                           Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
-                                       } catch (Exception e) {
-                                           Toast.makeText(getActivity(),"数据出错", Toast.LENGTH_SHORT).show();
-                                       }
-                                   }
-                               
-                                   @Override
-                                   public void onError(Response response) {
-                                       cancelLoadingDialog();
-                                       Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
-                                   }
-                               });
-                           }
-                       }).create();
-               alertDialog.show();
-               return false;
-           }
-       });
+        adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
+            /**
+             * des： 网络请求参数
+             * author： ZhangJieBo
+             * date： 2017/8/28 0028 上午 9:55
+             */
+            private OkObject getOkObject1(String id) {
+                String url = Constant.HOST + Constant.Url.HK_CARDDEL;
+                HashMap<String, String> params = new HashMap<>();
+                params.put("uid", userInfo.getUid());
+                params.put("tokenTime", tokenTime);
+                params.put("id", id);
+                return new OkObject(params, url);
+            }
+
+            @Override
+            public boolean onItemLongClick(final int position) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).setTitle("提示")
+                        .setMessage("确定要删除吗？")
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                showLoadingDialog();
+                                ApiClient.post(getActivity(), getOkObject1(adapter.getItem(position).getId()), new ApiClient.CallBack() {
+                                    @Override
+                                    public void onSuccess(String s) {
+                                        cancelLoadingDialog();
+                                        LogUtil.LogShitou("GuanLiYHKFragment--删除银行卡", "" + s);
+                                        try {
+                                            SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
+                                            if (simpleInfo.getStatus() == 1) {
+                                                onRefresh();
+                                            } else if (simpleInfo.getStatus() == 3) {
+                                                MyDialog.showReLoginDialog(getActivity());
+                                            } else {
+                                            }
+                                            Toast.makeText(getActivity(), simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                                        } catch (Exception e) {
+                                            Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Response response) {
+                                        cancelLoadingDialog();
+                                        Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }).create();
+                alertDialog.show();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -223,11 +199,11 @@ public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLa
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObject() {
-        String url = Constant.HOST + Constant.Url.BANK_CARDLIST;
+        String url = Constant.HOST + Constant.Url.HK_CARDLIST;
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
-        params.put("type", type + "");//储蓄卡1  信用卡2
+        params.put("type", "3");
         return new OkObject(params, url);
     }
 
