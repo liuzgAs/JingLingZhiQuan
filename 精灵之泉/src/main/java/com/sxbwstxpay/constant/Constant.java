@@ -289,6 +289,14 @@ public class Constant {
          * 添加信用卡
          */
         public static final String HK_CARDADD = "?g=App&m=Hk&a=cardAdd";
+        /**
+         * 选择代还通道
+         */
+        public static final String HK_PAYMENT = "?g=App&m=Hk&a=payment";
+        /**
+         * 还款计划
+         */
+        public static final String HK_INDEX = "?g=App&m=Hk&a=index";
     }
 
     public static class PERMISSION {

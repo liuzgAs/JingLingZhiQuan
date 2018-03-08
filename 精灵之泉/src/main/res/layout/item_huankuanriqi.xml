@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sxbwstxpay.customview.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_selector_white_system_gray"
+
+    android:orientation="vertical">
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:id="@+id/textRiQi"
+        android:layout_height="match_parent"
+        android:text="1"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/normal_textsize" />
+</com.sxbwstxpay.customview.SquareLayout>

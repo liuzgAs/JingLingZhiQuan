@@ -21,6 +21,7 @@ public class ZhiNengHKActivity extends ZjbBaseActivity implements View.OnClickLi
     private TabLayout tablayout;
     private ViewPager viewPager;
     private TextView textShanChu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +81,8 @@ public class ZhiNengHKActivity extends ZjbBaseActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.imageBack:
                 finish();
+                break;
+            default:
                 break;
         }
     }

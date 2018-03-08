@@ -18,6 +18,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.XinZengYHKXActivity;
+import com.sxbwstxpay.activity.XuanZeTDXActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -181,6 +182,15 @@ public class GuanLiYHKXFragment extends ZjbBaseFragment implements SwipeRefreshL
                         }).create();
                 alertDialog.show();
                 return false;
+            }
+        });
+        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), XuanZeTDXActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id,adapter.getItem(position).getId());
+                startActivity(intent);
             }
         });
     }
