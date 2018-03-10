@@ -305,6 +305,10 @@ public class Constant {
          * 支付执行金额
          */
         public static final String HK_CONFIRM = "g=App&m=Hk&a=confirm";
+        /**
+         * 信用卡账单
+         */
+        public static final String HK_BILL = "?g=App&m=Hk&a=bill";
     }
 
     public static class PERMISSION {
