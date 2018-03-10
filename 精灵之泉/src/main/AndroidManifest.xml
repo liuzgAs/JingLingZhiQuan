@@ -538,9 +538,18 @@
         <activity
             android:name=".activity.XuanZeTDXActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.HuanKuanJiHuaActivity" />
-        <activity android:name=".activity.HuanKuanMXActivity" />
-        <activity android:name=".activity.ZhiFuZXJinEActivity"></activity>
+        <activity
+            android:name=".activity.HuanKuanJiHuaActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.HuanKuanMXActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ZhiFuZXJinEActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ZhangDanMXActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

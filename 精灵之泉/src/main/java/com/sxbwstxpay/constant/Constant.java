@@ -309,6 +309,10 @@ public class Constant {
          * 信用卡账单
          */
         public static final String HK_BILL = "?g=App&m=Hk&a=bill";
+        /**
+         * 信用卡账单详情
+         */
+        public static final String HK_BILLINFO = "?g=App&m=Hk&a=billInfo";
     }
 
     public static class PERMISSION {

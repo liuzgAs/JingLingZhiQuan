@@ -2,6 +2,7 @@ package com.sxbwstxpay.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ZhangDanMXActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -163,7 +165,10 @@ public class XinYongKaZDJHFragment extends ZjbBaseFragment implements SwipeRefre
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), ZhangDanMXActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.id,String.valueOf(adapter.getItem(position).getId()));
+                startActivity(intent);
             }
         });
         recyclerView.setRefreshListener(this);
