@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context="com.sxbwstxpay.activity.HuanKuanMXActivity">
+
+    <include layout="@layout/view_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_jianbian180_basic_0dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/text0000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="还款总金额"
+                android:textColor="@color/white"
+                android:textSize="@dimen/litterText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/text0000"
+                android:text="0.00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/MoreBigText" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/text0001"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="手续费"
+                android:textColor="@color/white"
+                android:textSize="@dimen/litterText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/text0001"
+                android:text="0.00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/MoreBigText" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"
+            android:text="类型" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"
+            android:text="金额" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:background="@color/white"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"
+            android:text="时间" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background" />
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:layout_weight="1"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_empty="@layout/view_empty"
+        app:layout_progress="@layout/view_progress"
+        app:scrollbarStyle="insideOverlay" />
+    <Button
+        android:id="@+id/btnQueRenGC"
+        android:text="确认执行"
+        android:textSize="@dimen/bigText"
+        android:textColor="@color/white"
+        android:background="@color/basic_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight" />
+</LinearLayout>

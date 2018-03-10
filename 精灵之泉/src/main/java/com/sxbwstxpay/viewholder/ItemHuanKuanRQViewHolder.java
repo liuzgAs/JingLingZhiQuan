@@ -27,6 +27,7 @@ public class ItemHuanKuanRQViewHolder extends BaseViewHolder<RiQi> {
         super.setData(data);
         if (TextUtils.equals(data.getRiQi(),"0")||TextUtils.isEmpty(data.getRiQi())){
             textRiQi.setText("");
+            textRiQi.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.white));
         }else {
             textRiQi.setText(data.getRiQi());
             if (data.isSelect()){

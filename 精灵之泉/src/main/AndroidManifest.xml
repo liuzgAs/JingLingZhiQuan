@@ -538,7 +538,9 @@
         <activity
             android:name=".activity.XuanZeTDXActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.HuanKuanJiHuaActivity"></activity>
+        <activity android:name=".activity.HuanKuanJiHuaActivity" />
+        <activity android:name=".activity.HuanKuanMXActivity" />
+        <activity android:name=".activity.ZhiFuZXJinEActivity"></activity>
     </application>
 
 </manifest>

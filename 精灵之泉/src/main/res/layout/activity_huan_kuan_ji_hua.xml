@@ -16,20 +16,20 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_marginRight="0.5dp"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="0.2dp"
+            android:layout_weight="1"
             android:background="@color/basic_color"
             android:gravity="center">
 
             <ImageView
-                android:src="@mipmap/zhangdanri"
                 android:id="@+id/image0000"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="12dp"
+                android:src="@mipmap/zhangdanri" />
 
             <TextView
                 android:id="@+id/textDay1"
@@ -42,23 +42,24 @@
                 android:textSize="@dimen/normal_textsize" />
 
         </RelativeLayout>
+
         <RelativeLayout
-            android:layout_marginLeft="0.5dp"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="0.2dp"
+            android:layout_weight="1"
             android:background="@color/basic_color"
             android:gravity="center">
 
             <ImageView
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:src="@mipmap/huankuanri"
                 android:id="@+id/image0100"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="12dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:src="@mipmap/huankuanri" />
 
             <TextView
                 android:id="@+id/textDay2"
@@ -75,95 +76,130 @@
 
     <RelativeLayout
         android:id="@+id/viewHuanKuanRiQi"
-        android:background="@color/white"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white">
+
         <TextView
             android:id="@+id/text0200"
-            android:text="还款日期"
-            android:textSize="@dimen/normal_textsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="还款日期"
+            android:textSize="@dimen/normal_textsize" />
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:src="@mipmap/right"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:id="@+id/image0200"
-            android:layout_marginRight="10dp"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/image0200"
-            android:layout_marginRight="5dp"
-            android:src="@mipmap/riqi"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/right" />
+
+        <ImageView
             android:id="@+id/image0201"
-            android:layout_height="wrap_content" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/image0200"
+            android:src="@mipmap/riqi" />
+
         <TextView
             android:id="@+id/textHuanKuanRiQi"
-            android:ellipsize="end"
-            android:layout_toRightOf="@+id/text0200"
-            android:layout_marginLeft="10dp"
-            android:maxLines="2"
-            android:gravity="center_vertical|right"
-            android:layout_toLeftOf="@+id/image0201"
-            android:layout_marginRight="10dp"
-            android:textSize="@dimen/normal_textsize"
-            android:textColor="@color/light_black"
-            tools:text="21、22、23、24"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/image0201"
+            android:layout_toRightOf="@+id/text0200"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:maxLines="2"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize"
+            tools:text="21、22、23、24" />
     </RelativeLayout>
+
     <RelativeLayout
-        android:background="@color/white"
-        android:layout_marginTop="1dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white">
+
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
             android:text="还款期笔数"
-            android:textSize="@dimen/normal_textsize"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/normal_textsize" />
+
         <TextView
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:textSize="@dimen/normal_textsize"
-            android:textColor="@color/light_black"
-            tools:text="20"
+            android:id="@+id/textNum"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content" />
+            android:layout_marginRight="10dp"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize"
+            tools:text="20" />
     </RelativeLayout>
+
     <RelativeLayout
-        android:background="@color/white"
-        android:layout_marginTop="1dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white">
+
         <TextView
-            android:text="还款金额"
-            android:textSize="@dimen/normal_textsize"
+            android:id="@+id/text0400"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
+            android:text="还款金额"
+            android:textSize="@dimen/normal_textsize" />
+
+        <EditText
+            android:id="@+id/editHuanKuanJinE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:textSize="@dimen/normal_textsize"
-            android:textColor="@color/light_black"
-            tools:text="¥12222"
-            android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/text0400"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="请输入还款金额"
+            android:inputType="numberDecimal"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/normal_textsize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/btnChaKanMingXi"
+            android:background="@color/basic_color"
+            android:text="查看还款明细"
+            android:textColor="@color/white"
+            android:textSize="@dimen/bigText" />
     </RelativeLayout>
 </LinearLayout>
