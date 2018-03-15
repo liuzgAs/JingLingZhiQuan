@@ -129,7 +129,7 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
             params.put("uid", userInfo.getUid());
             params.put("tokenTime", tokenTime);
         }
-        params.put("payment", payment);
+        params.put("id", id);
         return new OkObject(params, url);
     }
 

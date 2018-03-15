@@ -195,6 +195,14 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                     Toast.makeText(XinZengYHKXActivity.this, "输入信用卡有效期", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (TextUtils.isEmpty(editZhangDanRi.getText().toString().trim())) {
+                    Toast.makeText(XinZengYHKXActivity.this, "请填写账单日", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(editZhangDanRi.getText().toString().trim())) {
+                    Toast.makeText(XinZengYHKXActivity.this, "请填写还款日", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (Integer.valueOf(editZhangDanRi.getText().toString().trim()) < 1 || Integer.valueOf(editZhangDanRi.getText().toString().trim()) > 31) {
                     Toast.makeText(XinZengYHKXActivity.this, "信用卡账单日范围是1到31", Toast.LENGTH_SHORT).show();
                     return;
