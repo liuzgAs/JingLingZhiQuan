@@ -55,7 +55,7 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
     private TextView textHuanKuanRiQi;
     private String days = "";
     private int num;
-    private TextView textNum;
+    private EditText textNum;
     private EditText editHuanKuanJinE;
     private String id;
     private BroadcastReceiver reciver = new BroadcastReceiver() {
@@ -71,6 +71,11 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
             }
         }
     };
+    private int dayNum;
+    private TextView textTips;
+    private String url;
+    private String tips;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +102,9 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
         textDay2 = (TextView) findViewById(R.id.textDay2);
         viewBar = findViewById(R.id.viewBar);
         textHuanKuanRiQi = (TextView) findViewById(R.id.textHuanKuanRiQi);
-        textNum = (TextView) findViewById(R.id.textNum);
+        textNum = (EditText) findViewById(R.id.textNum);
         editHuanKuanJinE = (EditText) findViewById(R.id.editHuanKuanJinE);
+        textTips = (TextView) findViewById(R.id.textTips);
     }
 
     @Override
@@ -115,6 +121,7 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.viewHuanKuanRiQi).setOnClickListener(this);
         findViewById(R.id.btnChaKanMingXi).setOnClickListener(this);
+        textTips.setOnClickListener(this);
     }
 
     /**
@@ -137,6 +144,8 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
     protected void initData() {
         showLoadingDialog();
         ApiClient.post(HuanKuanJiHuaActivity.this, getOkObject(), new ApiClient.CallBack() {
+
+
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
@@ -146,6 +155,14 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
                     if (hkIndex.getStatus() == 1) {
                         textDay1.setText(hkIndex.getDay1());
                         textDay2.setText(hkIndex.getDay2());
+                        dayNum = hkIndex.getDayNum();
+                        if (hkIndex.getIsEdit() == 1) {
+                            textNum.setEnabled(true);
+                        } else {
+                            textNum.setEnabled(false);
+                        }
+                        tips = hkIndex.getTips();
+                        url = hkIndex.getUrl();
                         List<String> hkIndexCen = hkIndex.getCen();
                         riQiList.clear();
                         for (int i = 0; i < hkIndexCen.size(); i++) {
@@ -173,6 +190,15 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.textTips:
+                if (!TextUtils.isEmpty(url)) {
+                    Intent intent = new Intent();
+                    intent.setClass(HuanKuanJiHuaActivity.this, WebActivity.class);
+                    intent.putExtra(Constant.INTENT_KEY.TITLE,tips);
+                    intent.putExtra(Constant.INTENT_KEY.URL,url);
+                    startActivity(intent);
+                }
+                break;
             case R.id.btnChaKanMingXi:
                 if (TextUtils.isEmpty(days)) {
                     Toast.makeText(HuanKuanJiHuaActivity.this, "请选择还款日期", Toast.LENGTH_SHORT).show();
@@ -241,11 +267,12 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
                                 for (int i = 0; i < adapter.getAllData().size(); i++) {
                                     if (adapter.getItem(i).isSelect()) {
                                         days = days + adapter.getItem(i).getRiQi() + ",";
-                                        if (num <= 18) {
-                                            num++;
-                                            num++;
-                                        }
+                                        num++;
                                     }
+                                }
+                                num = num * dayNum;
+                                if (num > 20) {
+                                    num = 20;
                                 }
                                 days = days.substring(0, days.length() - 1);
                                 textHuanKuanRiQi.setText(days);

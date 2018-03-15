@@ -133,6 +133,7 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/text0300"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -141,16 +142,26 @@
             android:text="还款期笔数"
             android:textSize="@dimen/normal_textsize" />
 
-        <TextView
+        <EditText
             android:id="@+id/textNum"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/text0300"
+            android:background="@null"
+            android:enabled="false"
+            android:gravity="right"
+            android:hint="请输入还款期数"
+            android:inputType="number"
+            android:maxLength="2"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:text="0"
             android:textColor="@color/light_black"
-            android:textSize="@dimen/normal_textsize"
-            tools:text="20" />
+            android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -188,15 +199,24 @@
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>
 
+    <TextView
+        android:textColor="@color/basic_color"
+        android:textSize="@dimen/litterText"
+        tools:text="还款规则说明"
+        android:id="@+id/textTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Button
+            android:id="@+id/btnChaKanMingXi"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"
             android:layout_alignParentBottom="true"
-            android:id="@+id/btnChaKanMingXi"
             android:background="@color/basic_color"
             android:text="查看还款明细"
             android:textColor="@color/white"

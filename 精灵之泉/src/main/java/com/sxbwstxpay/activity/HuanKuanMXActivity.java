@@ -54,6 +54,8 @@ public class HuanKuanMXActivity extends ZjbBaseActivity implements SwipeRefreshL
             }
         }
     };
+    private TextView textDes1;
+    private TextView textDes2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,8 @@ public class HuanKuanMXActivity extends ZjbBaseActivity implements SwipeRefreshL
     protected void findID() {
         viewBar = findViewById(R.id.viewBar);
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
+        textDes1 = (TextView) findViewById(R.id.textDes1);
+        textDes2 = (TextView) findViewById(R.id.textDes2);
     }
 
     @Override
@@ -148,6 +152,8 @@ public class HuanKuanMXActivity extends ZjbBaseActivity implements SwipeRefreshL
                 try {
                     HkDetails hkDetails = GsonUtils.parseJSON(s, HkDetails.class);
                     if (hkDetails.getStatus() == 1) {
+                        textDes1.setText(hkDetails.getDes1());
+                        textDes2.setText(hkDetails.getDes2());
                         detailsId = hkDetails.getDetailsId();
                         List<HkDetails.DataBean> dataBeanList = hkDetails.getData();
                         adapter.clear();

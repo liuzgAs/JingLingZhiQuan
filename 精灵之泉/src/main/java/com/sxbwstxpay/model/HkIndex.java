@@ -20,8 +20,44 @@ public class HkIndex {
     private String day1;
     private String day2;
     private int status;
+    private int dayNum;
+    private int isEdit;
     private String info;
+    private String tips;
+    private String url;
     private List<String> cen;
+
+    public int getDayNum() {
+        return dayNum;
+    }
+
+    public void setDayNum(int dayNum) {
+        this.dayNum = dayNum;
+    }
+
+    public int getIsEdit() {
+        return isEdit;
+    }
+
+    public void setIsEdit(int isEdit) {
+        this.isEdit = isEdit;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getDay1() {
         return day1;

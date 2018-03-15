@@ -47,7 +47,7 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
     private TextView textHeJi;
     private TextView textCreditDes;
     final IWXAPI api = WXAPIFactory.createWXAPI(this, null);
-    private int payMode = 1;
+    private int payMode = 3;
     private String oid;
     private BroadcastReceiver recevier = new BroadcastReceiver() {
         @Override
@@ -74,6 +74,7 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
         }
     };
     private OrderPay orderPay;
+    private TextView textShouCiZhiFu;
 
     /**
      * des： 支付成功提示
@@ -118,6 +119,7 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
         textJieSuanSXF = (TextView) findViewById(R.id.textJieSuanSXF);
         textHeJi = (TextView) findViewById(R.id.textHeJi);
         textCreditDes = (TextView) findViewById(R.id.textCreditDes);
+        textShouCiZhiFu = (TextView) findViewById(R.id.textShouCiZhiFu);
     }
 
     @Override
@@ -184,6 +186,7 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
                         textZongJinE.setText(dataBeanList.get(0).getV());
                         textZhiFuSXF.setText(dataBeanList.get(1).getV());
                         textJieSuanSXF.setText(dataBeanList.get(2).getV());
+                        textShouCiZhiFu.setText(dataBeanList.get(3).getV());
                         textHeJi.setText("¥" + hkConfirm.getSum());
                         textCreditDes.setText(hkConfirm.getCreditDes());
                         oid = hkConfirm.getOid();

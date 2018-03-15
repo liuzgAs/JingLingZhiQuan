@@ -9,7 +9,6 @@
     tools:context="com.sxbwstxpay.activity.ZhiFuZXJinEActivity">
 
     <include layout="@layout/view_bar" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -100,6 +99,32 @@
             android:paddingBottom="12dp"
             android:paddingLeft="10dp"
             android:paddingTop="12dp"
+            android:text="首次支付金额"
+            android:textSize="@dimen/normal_textsize" />
+
+        <TextView
+            android:id="@+id/textShouCiZhiFu"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/light_black"
+            tools:text="¥123" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="12dp"
             android:text="合计"
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
@@ -141,6 +166,7 @@
 
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
@@ -174,6 +200,7 @@
                 android:background="@color/background" />
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
@@ -247,18 +274,21 @@
 
 
             <RadioButton
+                android:visibility="gone"
                 android:id="@+id/radioZhiFuBao"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:checked="true" />
+             />
 
             <RadioButton
+                android:visibility="gone"
                 android:id="@+id/radioWeiXin"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1" />
             <RadioButton
+                android:checked="true"
                 android:id="@+id/radioYinLian"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
