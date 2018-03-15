@@ -59,6 +59,15 @@ public class BankCardlist {
         private String phone;
         private double maxAmount;
         private double limitAmount;
+        private int code;
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
 
         public double getMaxAmount() {
             return maxAmount;

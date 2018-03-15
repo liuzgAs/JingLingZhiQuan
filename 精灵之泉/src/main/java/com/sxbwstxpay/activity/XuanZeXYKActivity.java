@@ -135,7 +135,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
             private StringBuffer phoneTiJiao;
 
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(final int position) {
                 if (Double.parseDouble(amount) > adapter.getItem(position).getLimitAmount()) {
                     MyDialog.showTipDialog(XuanZeXYKActivity.this, "单卡限额" + adapter.getItem(position).getMaxAmount() + "\n本次限额" + adapter.getItem(position).getLimitAmount());
                     return;
@@ -143,6 +143,15 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                 dataBean = adapter.getItem(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(XuanZeXYKActivity.this, R.style.mydialog);
                 View view = LayoutInflater.from(XuanZeXYKActivity.this).inflate(R.layout.dialog_zhi_fu, null);
+                TextView textTitle = (TextView) view.findViewById(R.id.textTitle);
+                View viewCode = view.findViewById(R.id.viewCode);
+                if (adapter.getItem(position).getCode() == 1) {
+                    viewCode.setVisibility(View.GONE);
+                    textTitle.setText("输入验证码");
+                } else {
+                    viewCode.setVisibility(View.VISIBLE);
+                    textTitle.setText("输入银行卡信息");
+                }
                 final TextView textYouXiaoQi = (TextView) view.findViewById(R.id.textYouXiaoQi);
                 TextView textPhone = (TextView) view.findViewById(R.id.textPhone);
                 TextView textCard = (TextView) view.findViewById(R.id.textCard);
@@ -194,41 +203,49 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                 buttonSms.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (TextUtils.isEmpty(youXiaoQi)) {
-                            Toast.makeText(XuanZeXYKActivity.this, "请选择有效期", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        String cvv2 = textCVV2.getText().toString().trim();
-                        if (cvv2.length() != 3) {
-                            Toast.makeText(XuanZeXYKActivity.this, "请输入CVV2银行卡背面的3位数", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        SimpleDateFormat sf = new SimpleDateFormat("yyMMdd");
-                        Date d = new Date(System.currentTimeMillis());
-                        String[] nowArr = sf.format(d).split("");
-                        String[] youXiaoQiArr = youXiaoQi.split("");
-                        String[] md5PhoneArr = AppUtil.getMD5(editCode.getText().toString().trim() + dataBean.getId() + "ad").split("");
-                        md5PhoneArr[Integer.parseInt(nowArr[2]) + 1] = youXiaoQiArr[1];
-                        md5PhoneArr[Integer.parseInt(nowArr[4]) + 10 + 1] = youXiaoQiArr[2];
-                        md5PhoneArr[Integer.parseInt(nowArr[6]) + 20 + 1] = youXiaoQiArr[3];
-                        if (Integer.parseInt(userInfo.getUid()) % 2 == 1) {
-                            md5PhoneArr[31] = youXiaoQiArr[4];
+                        if (adapter.getItem(position).getCode() == 1) {
+                            long currentTimeMillis = System.currentTimeMillis();
+                            phoneTiJiao = new StringBuffer();
+                            nameTiJiao = new StringBuffer();
+                            phoneTiJiao.append(AppUtil.getMD5(String.valueOf(currentTimeMillis)));
+                            nameTiJiao.append(AppUtil.getMD5(String.valueOf(currentTimeMillis)));
                         } else {
-                            md5PhoneArr[32] = youXiaoQiArr[4];
-                        }
-                        phoneTiJiao = new StringBuffer();
-                        for (int i = 1; i < md5PhoneArr.length; i++) {
-                            phoneTiJiao.append(md5PhoneArr[i]);
-                        }
-                        String[] cvv2Arr = cvv2.split("");
-                        String[] md5NameArr = AppUtil.getMD5(editCode.getText().toString().trim() + id + "ad").split("");
-                        md5NameArr[Integer.parseInt(nowArr[2]) + 1] = cvv2Arr[1];
-                        md5NameArr[Integer.parseInt(nowArr[4]) + 10 + 1] = cvv2Arr[2];
-                        md5NameArr[Integer.parseInt(nowArr[6]) + 20 + 1] = cvv2Arr[3];
-                        nameTiJiao = new StringBuffer();
-                        for (int i = 1; i < md5NameArr.length; i++) {
-                            nameTiJiao.append(md5NameArr[i]);
+                            if (TextUtils.isEmpty(youXiaoQi)) {
+                                Toast.makeText(XuanZeXYKActivity.this, "请选择有效期", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            String cvv2 = textCVV2.getText().toString().trim();
+                            if (cvv2.length() != 3) {
+                                Toast.makeText(XuanZeXYKActivity.this, "请输入CVV2银行卡背面的3位数", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            SimpleDateFormat sf = new SimpleDateFormat("yyMMdd");
+                            Date d = new Date(System.currentTimeMillis());
+                            String[] nowArr = sf.format(d).split("");
+                            String[] youXiaoQiArr = youXiaoQi.split("");
+                            String[] md5PhoneArr = AppUtil.getMD5(editCode.getText().toString().trim() + dataBean.getId() + "ad").split("");
+                            md5PhoneArr[Integer.parseInt(nowArr[2]) + 1] = youXiaoQiArr[1];
+                            md5PhoneArr[Integer.parseInt(nowArr[4]) + 10 + 1] = youXiaoQiArr[2];
+                            md5PhoneArr[Integer.parseInt(nowArr[6]) + 20 + 1] = youXiaoQiArr[3];
+                            if (Integer.parseInt(userInfo.getUid()) % 2 == 1) {
+                                md5PhoneArr[31] = youXiaoQiArr[4];
+                            } else {
+                                md5PhoneArr[32] = youXiaoQiArr[4];
+                            }
+                            phoneTiJiao = new StringBuffer();
+                            for (int i = 1; i < md5PhoneArr.length; i++) {
+                                phoneTiJiao.append(md5PhoneArr[i]);
+                            }
+                            String[] cvv2Arr = cvv2.split("");
+                            String[] md5NameArr = AppUtil.getMD5(editCode.getText().toString().trim() + id + "ad").split("");
+                            md5NameArr[Integer.parseInt(nowArr[2]) + 1] = cvv2Arr[1];
+                            md5NameArr[Integer.parseInt(nowArr[4]) + 10 + 1] = cvv2Arr[2];
+                            md5NameArr[Integer.parseInt(nowArr[6]) + 20 + 1] = cvv2Arr[3];
+                            nameTiJiao = new StringBuffer();
+                            for (int i = 1; i < md5NameArr.length; i++) {
+                                nameTiJiao.append(md5NameArr[i]);
+                            }
                         }
                         sendSMS();
                     }
@@ -272,7 +289,7 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
                         ApiClient.post(XuanZeXYKActivity.this, getOkObjectTiJiao(), new ApiClient.CallBack() {
                             @Override
                             public void onSuccess(String s) {
-                                LogUtil.LogShitou("XuanZeXYKActivity--onSuccess", "aaaaa"+s);
+                                LogUtil.LogShitou("XuanZeXYKActivity--onSuccess", "aaaaa" + s);
                                 try {
                                     cancelLoadingDialog();
                                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
