@@ -297,6 +297,22 @@ public class Constant {
          * 还款计划
          */
         public static final String HK_INDEX = "?g=App&m=Hk&a=index";
+        /**
+         * 还款明细
+         */
+        public static final String HK_DETAILS = "g=App&m=Hk&a=details";
+        /**
+         * 支付执行金额
+         */
+        public static final String HK_CONFIRM = "g=App&m=Hk&a=confirm";
+        /**
+         * 信用卡账单
+         */
+        public static final String HK_BILL = "?g=App&m=Hk&a=bill";
+        /**
+         * 信用卡账单详情
+         */
+        public static final String HK_BILLINFO = "?g=App&m=Hk&a=billInfo";
     }
 
     public static class PERMISSION {

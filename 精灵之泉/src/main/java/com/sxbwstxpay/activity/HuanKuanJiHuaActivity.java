@@ -1,9 +1,13 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +27,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.ChaKanMingXi;
 import com.sxbwstxpay.model.HkIndex;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.RiQi;
@@ -29,6 +35,7 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.MoneyInputFilter;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.ItemHuanKuanRQViewHolder;
 
@@ -40,12 +47,30 @@ import okhttp3.Response;
 
 public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnClickListener {
 
-    private String id;
+    private String payment;
     private View viewBar;
     private TextView textDay1;
     private TextView textDay2;
     private List<RiQi> riQiList = new ArrayList<>();
     private TextView textHuanKuanRiQi;
+    private String days = "";
+    private int num;
+    private TextView textNum;
+    private EditText editHuanKuanJinE;
+    private String id;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.zhiFuGuanBi:
+                    finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +87,18 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
     @Override
     protected void initIntent() {
         Intent intent = getIntent();
-        id = intent.getStringExtra(Constant.INTENT_KEY.id);
-        textDay1 = (TextView) findViewById(R.id.textDay1);
-        textDay2 = (TextView) findViewById(R.id.textDay2);
+        payment = intent.getStringExtra(Constant.INTENT_KEY.id);
+        id = intent.getStringExtra(Constant.INTENT_KEY.value);
     }
 
     @Override
     protected void findID() {
+        textDay1 = (TextView) findViewById(R.id.textDay1);
+        textDay2 = (TextView) findViewById(R.id.textDay2);
         viewBar = findViewById(R.id.viewBar);
         textHuanKuanRiQi = (TextView) findViewById(R.id.textHuanKuanRiQi);
+        textNum = (TextView) findViewById(R.id.textNum);
+        editHuanKuanJinE = (EditText) findViewById(R.id.editHuanKuanJinE);
     }
 
     @Override
@@ -79,12 +107,14 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
+        MoneyInputFilter.init(editHuanKuanJinE);
     }
 
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.viewHuanKuanRiQi).setOnClickListener(this);
+        findViewById(R.id.btnChaKanMingXi).setOnClickListener(this);
     }
 
     /**
@@ -99,7 +129,7 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
             params.put("uid", userInfo.getUid());
             params.put("tokenTime", tokenTime);
         }
-        params.put("id", id);
+        params.put("payment", payment);
         return new OkObject(params, url);
     }
 
@@ -143,6 +173,21 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.btnChaKanMingXi:
+                if (TextUtils.isEmpty(days)) {
+                    Toast.makeText(HuanKuanJiHuaActivity.this, "请选择还款日期", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(editHuanKuanJinE.getText().toString().trim())) {
+                    Toast.makeText(HuanKuanJiHuaActivity.this, "请输入还款金额", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ChaKanMingXi chaKanMingXi = new ChaKanMingXi(userInfo.getUid(), editHuanKuanJinE.getText().toString().trim(), id, days, num, payment);
+                Intent intent = new Intent();
+                intent.setClass(this, HuanKuanMXActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.value, chaKanMingXi);
+                startActivity(intent);
+                break;
             case R.id.viewHuanKuanRiQi:
                 View dialog_tu_pian = LayoutInflater.from(this).inflate(R.layout.dialog_huankuan_jihua, null);
                 EasyRecyclerView recyclerViewDialog = (EasyRecyclerView) dialog_tu_pian.findViewById(R.id.recyclerView);
@@ -191,11 +236,20 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
                             @Override
                             public void onClick(View view) {
                                 alertDialog.dismiss();
-//                                for (int i = 0; i < adapter.getAllData().size(); i++) {
-//                                    if (adapter.getItem(i).isSelect()){
-//                                        textHuanKuanRiQi.setText(adapter.getItem(i).getRiQi());
-//                                    }
-//                                }
+                                days = "";
+                                num = 0;
+                                for (int i = 0; i < adapter.getAllData().size(); i++) {
+                                    if (adapter.getItem(i).isSelect()) {
+                                        days = days + adapter.getItem(i).getRiQi() + ",";
+                                        if (num <= 18) {
+                                            num++;
+                                            num++;
+                                        }
+                                    }
+                                }
+                                days = days.substring(0, days.length() - 1);
+                                textHuanKuanRiQi.setText(days);
+                                textNum.setText(String.valueOf(num));
                             }
                         });
                         view1.findViewById(R.id.textQuXiao).setOnClickListener(new View.OnClickListener() {
@@ -232,5 +286,19 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        registerReceiver(reciver, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }
