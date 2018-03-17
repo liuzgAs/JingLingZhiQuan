@@ -108,6 +108,34 @@
 
 
             <RelativeLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/imageView1488"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="fitStart"
+                    android:src="@mipmap/yinlian" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/imageView1488"
+                    android:layout_toRightOf="@+id/imageView1488"
+                    android:text="银联支付"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/normal_textsize" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
@@ -172,38 +200,14 @@
                 android:layout_marginLeft="10dp"
                 android:background="@color/background" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <ImageView
-                    android:id="@+id/imageView1488"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:scaleType="fitStart"
-                    android:src="@mipmap/yinlian" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toEndOf="@+id/imageView1488"
-                    android:layout_toRightOf="@+id/imageView1488"
-                    android:text="银联支付"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/normal_textsize" />
-            </RelativeLayout>
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_width"
                 android:layout_marginLeft="10dp"
                 android:background="@color/background" />
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/viewDongBaoBi"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
@@ -262,11 +266,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
             <RadioButton
+                android:visibility="gone"
                 android:id="@+id/radioYinLian"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
             <RadioButton
+                android:visibility="gone"
                 android:id="@+id/radioDongBaoBi"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -276,6 +282,7 @@
         </RadioGroup>
     </LinearLayout>
     <RelativeLayout
+        android:visibility="gone"
         android:background="@color/background"
         android:id="@+id/viewXieYi"
         android:layout_width="match_parent"
