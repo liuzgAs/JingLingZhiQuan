@@ -162,6 +162,7 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
                             textNum.setEnabled(false);
                         }
                         tips = hkIndex.getTips();
+                        textTips.setText(tips);
                         url = hkIndex.getUrl();
                         List<String> hkIndexCen = hkIndex.getCen();
                         riQiList.clear();
