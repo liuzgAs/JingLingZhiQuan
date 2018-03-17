@@ -33,7 +33,7 @@ public class OrderVipbefore implements Serializable{
     private String urlTitle;
     private String dbUrl;
     private String selectTitle;
-    private List<SelectValueBean> selectValueBeanList;
+    private List<SelectValueBean> selectValue;
 
     public String getSelectTitle() {
         return selectTitle;
@@ -44,11 +44,11 @@ public class OrderVipbefore implements Serializable{
     }
 
     public List<SelectValueBean> getSelectValueBeanList() {
-        return selectValueBeanList;
+        return selectValue;
     }
 
-    public void setSelectValueBeanList(List<SelectValueBean> selectValueBeanList) {
-        this.selectValueBeanList = selectValueBeanList;
+    public void setSelectValueBeanList(List<SelectValueBean> selectValue) {
+        this.selectValue = selectValue;
     }
 
     private String btn;

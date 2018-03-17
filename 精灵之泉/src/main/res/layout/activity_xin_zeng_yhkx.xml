@@ -313,6 +313,7 @@
         android:background="@color/line_gray" />
 
     <RelativeLayout
+        android:id="@+id/viewYouXiaoQi"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
@@ -330,20 +331,16 @@
             android:textColor="@color/light_black"
             android:textSize="@dimen/normal_textsize" />
 
-        <EditText
-            android:id="@+id/editYouXiaoQi"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <TextView
+            android:id="@+id/textYouXiaoQi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/textView1382"
-            android:layout_toRightOf="@+id/textView1382"
             android:background="@null"
             android:gravity="right|center_vertical"
-            android:hint="输入信用卡有效期"
-            android:inputType="number"
-            android:maxLength="4"
+            android:hint="请选择信用卡有效期"
             android:paddingRight="10dp"
             android:textSize="@dimen/normal_textsize" />
     </RelativeLayout>

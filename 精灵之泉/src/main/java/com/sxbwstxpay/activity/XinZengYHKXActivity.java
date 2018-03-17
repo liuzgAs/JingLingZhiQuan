@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jzxiang.pickerview.TimePickerDialog;
+import com.jzxiang.pickerview.data.Type;
+import com.jzxiang.pickerview.listener.OnDateSetListener;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
@@ -51,7 +54,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
     private String mPhone_sms;
     private String title;
     private EditText editCVN2;
-    private EditText editYouXiaoQi;
+    private TextView textYouXiaoQi;
     private EditText editZhangDanRi;
     private EditText editHuanKuanRi;
 
@@ -84,7 +87,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
         editPhone = (EditText) findViewById(R.id.editPhone);
         editCode = (EditText) findViewById(R.id.editCode);
         editCVN2 = (EditText) findViewById(R.id.editCVN2);
-        editYouXiaoQi = (EditText) findViewById(R.id.editYouXiaoQi);
+        textYouXiaoQi = (TextView) findViewById(R.id.textYouXiaoQi);
         editZhangDanRi = (EditText) findViewById(R.id.editZhangDanRi);
         editHuanKuanRi = (EditText) findViewById(R.id.editHuanKuanRi);
     }
@@ -102,6 +105,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
         findViewById(R.id.imageBack).setOnClickListener(this);
         findViewById(R.id.XuanZeYH).setOnClickListener(this);
         findViewById(R.id.buttonTiJiao).setOnClickListener(this);
+        findViewById(R.id.viewYouXiaoQi).setOnClickListener(this);
         buttonSms.setOnClickListener(this);
     }
 
@@ -155,6 +159,26 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.viewYouXiaoQi:
+                TimePickerDialog timePickerDialog = new TimePickerDialog.Builder()
+                        .setType(Type.YEAR_MONTH)
+                        .setTitleStringId("有效期")
+                        .setMinMillseconds(System.currentTimeMillis())
+                        .setMaxMillseconds(System.currentTimeMillis() + 1000L * 60L * 60L * 24L * 365L * 50L)
+                        .setThemeColor(getResources().getColor(R.color.basic_color))
+                        .setCallBack(new OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(TimePickerDialog timePickerView, long millseconds) {
+                                SimpleDateFormat sf1 = new SimpleDateFormat("yyMM");
+                                Date d = new Date(millseconds);
+                                String format = sf1.format(d);
+                                textYouXiaoQi.setText(format);
+                            }
+                        })
+                        .build();
+                timePickerDialog.show(getSupportFragmentManager(), "year_month");
+                break;
             case R.id.imageBack:
                 finish();
                 break;
@@ -191,7 +215,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                     Toast.makeText(XinZengYHKXActivity.this, "输入信用卡背面后三位", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (editYouXiaoQi.getText().toString().trim().length() != 4) {
+                if (textYouXiaoQi.getText().toString().trim().length() != 4) {
                     Toast.makeText(XinZengYHKXActivity.this, "输入信用卡有效期", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -214,7 +238,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                 SimpleDateFormat sf = new SimpleDateFormat("yyMMdd");
                 Date d = new Date(System.currentTimeMillis());
                 String[] nowArr = sf.format(d).split("");
-                String[] youXiaoQiArr = editYouXiaoQi.getText().toString().trim().split("");
+                String[] youXiaoQiArr = textYouXiaoQi.getText().toString().trim().split("");
                 String[] md5PhoneArr = AppUtil.getMD5(editCode.getText().toString().trim() + editName.getText().toString().trim() + "ad").split("");
                 md5PhoneArr[Integer.parseInt(nowArr[2]) + 1] = youXiaoQiArr[1];
                 md5PhoneArr[Integer.parseInt(nowArr[4]) + 10 + 1] = youXiaoQiArr[2];

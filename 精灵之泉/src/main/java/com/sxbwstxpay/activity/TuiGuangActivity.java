@@ -1,17 +1,21 @@
 package com.sxbwstxpay.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -23,10 +27,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.AddCar;
+import com.sxbwstxpay.model.CartAddcart;
+import com.sxbwstxpay.model.CartIndex;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.OrderVipbefore;
 import com.sxbwstxpay.model.OrderVippay;
@@ -34,17 +44,22 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.viewholder.VipBuyViewHolder;
 import com.tencent.mm.opensdk.constants.Build;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Response;
 
 
 public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickListener {
+
+    private List<OrderVipbefore.SelectValueBean> selectValueBeanList;
 
     private ImageView imageImg;
     private View viewBar;
@@ -77,6 +92,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private OrderVipbefore orderVipbefore;
     private CheckBox checkXieYi;
     private int type;
+    private String selectTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,14 +161,14 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
      */
     private OkObject getOkObject() {
         String url;
-        if (type==1){
+        if (type == 1) {
             url = Constant.HOST + Constant.Url.STORE_SETTLEDBEFORE;
-        }else {
+        } else {
             url = Constant.HOST + Constant.Url.ORDER_VIPBEFORE;
         }
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid",userInfo.getUid());
-        params.put("tokenTime",tokenTime);
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
 
@@ -160,6 +176,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     protected void initData() {
         showLoadingDialog();
         ApiClient.post(TuiGuangActivity.this, getOkObject(), new ApiClient.CallBack() {
+
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
@@ -167,10 +184,12 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 try {
                     orderVipbefore = GsonUtils.parseJSON(s, OrderVipbefore.class);
                     if (orderVipbefore.getStatus() == 1) {
+                        selectValueBeanList = orderVipbefore.getSelectValueBeanList();
+                        selectTitle = orderVipbefore.getSelectTitle();
                         mWebView.loadUrl(orderVipbefore.getUrl());
                         textViewTitle.setText(orderVipbefore.getUrlTitle());
                         String text1 = orderVipbefore.getText1();
-                        String text2 = "("+orderVipbefore.getText2()+")";
+                        String text2 = "(" + orderVipbefore.getText2() + ")";
                         SpannableString span = new SpannableString(text1 + text2);
                         span.setSpan(new StrikethroughSpan(), text1.length(), (text1 + text2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         span.setSpan(new RelativeSizeSpan(0.8f), text1.length(), (text1 + text2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -228,18 +247,81 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private void showVipBuyDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialog_vip_buy = inflater.inflate(R.layout.dialog_vip_buy, null);
+        TextView textTitle = (TextView) dialog_vip_buy.findViewById(R.id.textTitle);
+        textTitle.setText(selectTitle);
         EasyRecyclerView recyclerView = (EasyRecyclerView) dialog_vip_buy.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.line_width), 0, 0);
+        itemDecoration.setDrawLastItem(false);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setRefreshingColorResources(R.color.basic_color);
+        final RecyclerArrayAdapter<OrderVipbefore.SelectValueBean> adapter;
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<OrderVipbefore.SelectValueBean>(TuiGuangActivity.this) {
+            @Override
+            public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                int layout = R.layout.item_vip_buy;
+                return new VipBuyViewHolder(parent, layout);
+            }
+        });
+        adapter.clear();
+        adapter.addAll(selectValueBeanList);
         final AlertDialog alertDialog1 = new AlertDialog.Builder(this, R.style.dialog)
                 .setView(dialog_vip_buy)
                 .create();
         alertDialog1.show();
+        dialog_vip_buy.findViewById(R.id.textCancle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog1.dismiss();
+            }
+        });
+        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                showLoadingDialog();
+                String url = Constant.HOST + Constant.Url.CART_ADDCART;
+                List<String> spe_name = new ArrayList<>();
+                AddCar addCar = new AddCar(userInfo.getUid(), tokenTime, "1", String.valueOf(adapter.getItem(position).getId()), "1", spe_name);
+                ApiClient.postJson(TuiGuangActivity.this, url, GsonUtils.parseObject(addCar), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        cancelLoadingDialog();
+                        LogUtil.LogShitou("ChanPinXQActivity-购物车新增", s + "");
+                        try {
+                            CartAddcart cartAddcart = GsonUtils.parseJSON(s, CartAddcart.class);
+                            if (cartAddcart.getStatus() == 1) {
+                                alertDialog1.dismiss();
+                                Intent intent = new Intent();
+                                intent.setClass(TuiGuangActivity.this, QueRenDDActivity.class);
+                                List<CartIndex.CartBean> cartBeanList = new ArrayList<CartIndex.CartBean>();
+                                cartBeanList.add(new CartIndex.CartBean(cartAddcart.getCartId() + ""));
+                                intent.putExtra(Constant.INTENT_KEY.value, new CartIndex(cartBeanList));
+                                startActivity(intent);
+                            } else if (cartAddcart.getStatus() == 3) {
+                                MyDialog.showReLoginDialog(TuiGuangActivity.this);
+                            } else {
+                                Toast.makeText(TuiGuangActivity.this, cartAddcart.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(TuiGuangActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        cancelLoadingDialog();
+                        Toast.makeText(TuiGuangActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
         Window dialogWindow = alertDialog1.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
         dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
-//        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-//        DisplayMetrics d = getResources().getDisplayMetrics(); // 获取屏幕宽、高用
-//        lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
-//        dialogWindow.setAttributes(lp);
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        DisplayMetrics d = getResources().getDisplayMetrics(); // 获取屏幕宽、高用
+        lp.width = (int) (d.widthPixels * 0.8); // 高度设置为屏幕的0.6
+        dialogWindow.setAttributes(lp);
     }
 
     /**

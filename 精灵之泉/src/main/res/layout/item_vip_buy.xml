@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:text="产品"
+    android:id="@+id/textName"
+    android:textSize="@dimen/bigText"
+    android:gravity="center"
+    android:paddingTop="12dp"
+    android:background="@drawable/layout_selector_white_system_gray"
+    android:paddingBottom="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+</TextView>
