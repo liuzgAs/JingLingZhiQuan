@@ -1,6 +1,7 @@
 package com.sxbwstxpay.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by zhangjiebo on 2017/9/17 0017.
@@ -31,6 +32,24 @@ public class OrderVipbefore implements Serializable{
     private String url;
     private String urlTitle;
     private String dbUrl;
+    private String selectTitle;
+    private List<SelectValueBean> selectValueBeanList;
+
+    public String getSelectTitle() {
+        return selectTitle;
+    }
+
+    public void setSelectTitle(String selectTitle) {
+        this.selectTitle = selectTitle;
+    }
+
+    public List<SelectValueBean> getSelectValueBeanList() {
+        return selectValueBeanList;
+    }
+
+    public void setSelectValueBeanList(List<SelectValueBean> selectValueBeanList) {
+        this.selectValueBeanList = selectValueBeanList;
+    }
 
     private String btn;
     private int payState;
@@ -145,5 +164,26 @@ public class OrderVipbefore implements Serializable{
 
     public void setUrlTitle(String urlTitle) {
         this.urlTitle = urlTitle;
+    }
+
+    public static class SelectValueBean{
+        private String name;
+        private int id;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
     }
 }

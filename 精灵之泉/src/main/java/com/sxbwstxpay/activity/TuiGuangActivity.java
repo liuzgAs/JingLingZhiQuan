@@ -2,12 +2,16 @@ package com.sxbwstxpay.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -18,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
@@ -188,19 +193,6 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
         });
     }
 
-    /**
-     * des： 网络请求参数
-     * author： ZhangJieBo
-     * date： 2017/8/28 0028 上午 9:55
-     */
-    private OkObject getOkObject1() {
-        String url = Constant.HOST + Constant.Url.ORDER_VIPPAY;
-        HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
-        params.put("tokenTime", tokenTime);
-        return new OkObject(params, url);
-    }
-
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
@@ -213,10 +205,11 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 break;
             case R.id.textJiaRu:
                 if (checkXieYi.isChecked()) {
-                    intent.setClass(this, TuiGuangZFActivity.class);
-                    intent.putExtra(Constant.INTENT_KEY.value, orderVipbefore);
-                    intent.putExtra(Constant.INTENT_KEY.type,type);
-                    startActivity(intent);
+                    showVipBuyDialog();
+//                    intent.setClass(this, TuiGuangZFActivity.class);
+//                    intent.putExtra(Constant.INTENT_KEY.value, orderVipbefore);
+//                    intent.putExtra(Constant.INTENT_KEY.type,type);
+//                    startActivity(intent);
                 } else {
                     MyDialog.showTipDialog(this, "请阅读并同意《精灵之泉推广商服务协议》");
                 }
@@ -227,6 +220,26 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
             default:
                 break;
         }
+    }
+
+    /**
+     * VIP购买dialog
+     */
+    private void showVipBuyDialog() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialog_vip_buy = inflater.inflate(R.layout.dialog_vip_buy, null);
+        EasyRecyclerView recyclerView = (EasyRecyclerView) dialog_vip_buy.findViewById(R.id.recyclerView);
+        final AlertDialog alertDialog1 = new AlertDialog.Builder(this, R.style.dialog)
+                .setView(dialog_vip_buy)
+                .create();
+        alertDialog1.show();
+        Window dialogWindow = alertDialog1.getWindow();
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
+//        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+//        DisplayMetrics d = getResources().getDisplayMetrics(); // 获取屏幕宽、高用
+//        lp.width = (int) (d.widthPixels * 1); // 高度设置为屏幕的0.6
+//        dialogWindow.setAttributes(lp);
     }
 
     /**
