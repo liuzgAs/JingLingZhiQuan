@@ -271,14 +271,16 @@ public class XuanZeXYKActivity extends ZjbBaseActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
-                        if (TextUtils.isEmpty(youXiaoQi)) {
-                            Toast.makeText(XuanZeXYKActivity.this, "请选择有效期", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        String cvv2 = textCVV2.getText().toString().trim();
-                        if (cvv2.length() != 3) {
-                            Toast.makeText(XuanZeXYKActivity.this, "请输入CVV2银行卡背面的3位数", Toast.LENGTH_SHORT).show();
-                            return;
+                        if (adapter.getItem(position).getCode() != 1){
+                            if (TextUtils.isEmpty(youXiaoQi)) {
+                                Toast.makeText(XuanZeXYKActivity.this, "请选择有效期", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            String cvv2 = textCVV2.getText().toString().trim();
+                            if (cvv2.length() != 3) {
+                                Toast.makeText(XuanZeXYKActivity.this, "请输入CVV2银行卡背面的3位数", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                         }
                         if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
                             Toast.makeText(XuanZeXYKActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();

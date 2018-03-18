@@ -131,16 +131,16 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
             }
 
             private void go(IndexStartad indexStartad) {
-                if (TextUtils.equals(isFirst, "1")) {
-                    Intent intent = new Intent(HuanYingActivity.this, YinDaoActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    toMainActivity();
-                }
                 ACache aCache = ACache.get(HuanYingActivity.this, Constant.ACACHE.LOCATION);
                 aCache.put(Constant.ACACHE.CITY, indexStartad.getCityName());
                 aCache.put(Constant.ACACHE.CITY_ID, indexStartad.getCityId()+"");
+//                if (TextUtils.equals(isFirst, "1")) {
+//                    Intent intent = new Intent(HuanYingActivity.this, YinDaoActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                } else {
+                toMainActivity();
+//                }
             }
 
             @Override
