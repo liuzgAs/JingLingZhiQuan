@@ -4,7 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
@@ -13,6 +15,9 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
@@ -25,6 +30,7 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.viewholder.ZhiFuZXJinEViewHolder;
 import com.tencent.mm.opensdk.constants.Build;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -40,11 +46,8 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
 
     private View viewBar;
     private EasyRecyclerView recyclerView;
+    private RecyclerArrayAdapter<HkConfirm.DataBean> adapter;
     private String detailsId;
-    private TextView textZongJinE;
-    private TextView textZhiFuSXF;
-    private TextView textJieSuanSXF;
-    private TextView textHeJi;
     private TextView textCreditDes;
     final IWXAPI api = WXAPIFactory.createWXAPI(this, null);
     private int payMode = 3;
@@ -74,7 +77,6 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
         }
     };
     private OrderPay orderPay;
-    private TextView textShouCiZhiFu;
 
     /**
      * des： 支付成功提示
@@ -114,12 +116,7 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
     protected void findID() {
         viewBar = findViewById(R.id.viewBar);
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
-        textZongJinE = (TextView) findViewById(R.id.textZongJinE);
-        textZhiFuSXF = (TextView) findViewById(R.id.textZhiFuSXF);
-        textJieSuanSXF = (TextView) findViewById(R.id.textJieSuanSXF);
-        textHeJi = (TextView) findViewById(R.id.textHeJi);
         textCreditDes = (TextView) findViewById(R.id.textCreditDes);
-        textShouCiZhiFu = (TextView) findViewById(R.id.textShouCiZhiFu);
     }
 
     @Override
@@ -128,6 +125,7 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
+        initRecycler();
     }
 
     @Override
@@ -171,6 +169,29 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
         return new OkObject(params, url);
     }
 
+    /**
+     * 初始化recyclerview
+     */
+    private void initRecycler() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.line_width), 0, 0);
+        itemDecoration.setDrawLastItem(false);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setRefreshingColorResources(R.color.basic_color);
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<HkConfirm.DataBean>(this) {
+            @Override
+            public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                int layout = R.layout.item_zhifuzjjine;
+                return new ZhiFuZXJinEViewHolder(parent, layout);
+            }
+
+            @Override
+            public int getViewType(int position) {
+                return super.getViewType(position);
+            }
+        });
+    }
+
     @Override
     protected void initData() {
         showLoadingDialog();
@@ -183,12 +204,9 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
                     HkConfirm hkConfirm = GsonUtils.parseJSON(s, HkConfirm.class);
                     if (hkConfirm.getStatus() == 1) {
                         List<HkConfirm.DataBean> dataBeanList = hkConfirm.getData();
-                        textZongJinE.setText(dataBeanList.get(0).getV());
-                        textZhiFuSXF.setText(dataBeanList.get(1).getV());
-                        textJieSuanSXF.setText(dataBeanList.get(2).getV());
-                        textShouCiZhiFu.setText(dataBeanList.get(3).getV());
-                        textHeJi.setText("¥" + hkConfirm.getSum());
                         textCreditDes.setText(hkConfirm.getCreditDes());
+                        adapter.clear();
+                        adapter.addAll(dataBeanList);
                         oid = hkConfirm.getOid();
                     } else if (hkConfirm.getStatus() == 3) {
                         MyDialog.showReLoginDialog(ZhiFuZXJinEActivity.this);
