@@ -183,6 +183,10 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.buttonSms:
+                if (TextUtils.isEmpty(editBankCard.getText().toString().trim())) {
+                    Toast.makeText(XinZengYHKXActivity.this, "请输入持卡人卡号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 sendSMS();
                 break;
             case R.id.buttonTiJiao:
@@ -327,6 +331,8 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
         String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", mPhone_sms);
+        params.put("type", "3");
+        params.put("bankCard", editBankCard.getText().toString().trim());
         return new OkObject(params, url);
     }
 
