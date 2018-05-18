@@ -1,5 +1,9 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.fragment.GuanLiYHKXFragment;
 import com.sxbwstxpay.fragment.XinYongKaZDFragment;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -21,6 +26,19 @@ public class ZhiNengHKActivity extends ZjbBaseActivity implements View.OnClickLi
     private TabLayout tablayout;
     private ViewPager viewPager;
     private TextView textShanChu;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.zhiFuGuanBi:
+                    viewPager.setCurrentItem(1);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,5 +127,18 @@ public class ZhiNengHKActivity extends ZjbBaseActivity implements View.OnClickLi
         public int getCount() {
             return 2;
         }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.zhiFuGuanBi);
+        registerReceiver(reciver, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }

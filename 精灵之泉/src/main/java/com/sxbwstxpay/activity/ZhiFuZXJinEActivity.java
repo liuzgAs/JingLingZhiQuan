@@ -84,14 +84,15 @@ public class ZhiFuZXJinEActivity extends ZjbBaseActivity implements View.OnClick
      * date： 2017/7/6 0006 下午 2:34
      */
     public void paySuccess() {
+        Toast.makeText(ZhiFuZXJinEActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
         Intent intent1 = new Intent();
         intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
         sendBroadcast(intent1);
         finish();
-        Intent intent = new Intent();
-        intent.putExtra(Constant.INTENT_KEY.id, oid);
-        intent.setClass(this, ZhiFuCGActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent();
+//        intent.putExtra(Constant.INTENT_KEY.id, oid);
+//        intent.setClass(this, ZhiFuCGActivity.class);
+//        startActivity(intent);
     }
 
     @Override

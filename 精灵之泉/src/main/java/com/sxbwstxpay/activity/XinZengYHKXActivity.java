@@ -330,6 +330,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
     private OkObject getOkObject1() {
         String url = Constant.HOST + Constant.Url.LOGIN_BINDSMS;
         HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
         params.put("userName", mPhone_sms);
         params.put("type", "3");
         params.put("bankCard", editBankCard.getText().toString().trim());
