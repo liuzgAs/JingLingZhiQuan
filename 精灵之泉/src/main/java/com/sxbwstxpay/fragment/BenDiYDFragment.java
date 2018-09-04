@@ -1,6 +1,7 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -79,7 +80,7 @@ public class BenDiYDFragment extends ZjbBaseFragment implements SwipeRefreshLayo
         }
     };
     private String cityId;
-
+    @SuppressLint({"NewApi", "ValidFragment"})
     public BenDiYDFragment(int type) {
         // Required empty public constructor
         this.type = type;

@@ -130,13 +130,14 @@ public class GuanLiYHKFragment extends ZjbBaseFragment implements SwipeRefreshLa
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
-                        intent.setClass(getActivity(), XinZengYHKActivity.class);
                         switch (type) {
                             case 1:
+                                intent.setClass(getActivity(), XinZengYHKActivity.class);
                                 intent.putExtra(Constant.INTENT_KEY.TITLE, "新增银行卡");
                                 intent.putExtra(Constant.INTENT_KEY.type, 1);
                                 break;
                             case 2:
+                                intent.setClass(getActivity(), XinZengYHKActivity.class);
                                 intent.putExtra(Constant.INTENT_KEY.TITLE, "新增信用卡");
                                 intent.putExtra(Constant.INTENT_KEY.type, 2);
                                 break;

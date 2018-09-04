@@ -52,7 +52,7 @@
             android:gravity="center"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="利润（元）"
+            android:text="收益（元）"
             android:textColor="@color/text_gray"
             android:textSize="@dimen/normal_textsize" />
     </LinearLayout>

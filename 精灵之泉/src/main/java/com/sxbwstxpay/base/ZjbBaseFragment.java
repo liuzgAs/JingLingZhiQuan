@@ -1,6 +1,7 @@
 package com.sxbwstxpay.base;
 
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
     public boolean isLogin = false;
     public int changeControl = 2016;
     private AlertDialog mAlertDialog;
+    /**
+     *
+     */
     public UserInfo userInfo;
     public String tokenTime;
 
@@ -79,6 +83,7 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
 
     public void showLoadingDialog() {
         if (mAlertDialog == null) {
+            @SuppressLint("RestrictedApi")
             View dialog_progress = getLayoutInflater(getArguments()).inflate(R.layout.view_progress01, null);
             mAlertDialog = new AlertDialog.Builder(getActivity(), R.style.dialog)
                     .setView(dialog_progress)

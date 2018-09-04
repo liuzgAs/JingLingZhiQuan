@@ -37,7 +37,7 @@ import java.util.List;
 
 import okhttp3.Response;
 
-public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClickListener {
+public class XinZengXYKActivity extends ZjbBaseActivity implements View.OnClickListener {
 
     private View viewBar;
     private List<BankCardaddbefore.DataBean> bankCardaddbeforeData = new ArrayList<>();
@@ -57,12 +57,13 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
     private TextView textYouXiaoQi;
     private EditText editZhangDanRi;
     private EditText editHuanKuanRi;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xin_zeng_yhkx);
-        init(XinZengYHKXActivity.class);
+        init(XinZengXYKActivity.class);
     }
 
     @Override
@@ -74,6 +75,8 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
     protected void initIntent() {
         Intent intent = getIntent();
         title = intent.getStringExtra(Constant.INTENT_KEY.TITLE);
+        type = intent.getIntExtra(Constant.INTENT_KEY.type, 2);
+
     }
 
     @Override
@@ -125,7 +128,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
     @Override
     protected void initData() {
         showLoadingDialog();
-        ApiClient.post(XinZengYHKXActivity.this, getOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(XinZengXYKActivity.this, getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
@@ -139,19 +142,19 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                             editName.setEnabled(false);
                         }
                     } else if (bankCardaddbefore.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(XinZengYHKXActivity.this);
+                        MyDialog.showReLoginDialog(XinZengXYKActivity.this);
                     } else {
-                        Toast.makeText(XinZengYHKXActivity.this, bankCardaddbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(XinZengXYKActivity.this, bankCardaddbefore.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(XinZengYHKXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                Toast.makeText(XinZengYHKXActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(XinZengXYKActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -183,78 +186,60 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.buttonSms:
-                if (TextUtils.isEmpty(editName.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请输入真实姓名", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                CheckIdCard checkIdCard1 = new CheckIdCard(editCard.getText().toString().trim());
-                if (!checkIdCard1.validate()) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if (TextUtils.isEmpty(editBankCard.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请输入持卡人卡号", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请输入持卡人卡号", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (textYouXiaoQi.getText().toString().trim().length() != 4) {
-                    Toast.makeText(XinZengYHKXActivity.this, "输入信用卡有效期", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (editCVN2.getText().toString().trim().length() != 3) {
-                    Toast.makeText(XinZengYHKXActivity.this, "输入信用卡背面后三位", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                jiaMi();
                 sendSMS();
                 break;
             case R.id.buttonTiJiao:
                 if (TextUtils.isEmpty(editName.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请输入真实姓名", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请输入真实姓名", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 CheckIdCard checkIdCard = new CheckIdCard(editCard.getText().toString().trim());
                 if (!checkIdCard.validate()) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(id)) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请选择开户银行", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请选择开户银行", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(editBankCard.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请输入持卡人卡号", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请输入持卡人卡号", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(editPhone.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请输入银行预留手机号", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请输入银行预留手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(editCode.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (editCVN2.getText().toString().trim().length() != 3) {
-                    Toast.makeText(XinZengYHKXActivity.this, "输入信用卡背面后三位", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "输入信用卡背面后三位", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (textYouXiaoQi.getText().toString().trim().length() != 4) {
-                    Toast.makeText(XinZengYHKXActivity.this, "输入信用卡有效期", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "输入信用卡有效期", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(editZhangDanRi.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请填写账单日", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请填写账单日", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(editZhangDanRi.getText().toString().trim())) {
-                    Toast.makeText(XinZengYHKXActivity.this, "请填写还款日", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "请填写还款日", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Integer.valueOf(editZhangDanRi.getText().toString().trim()) < 1 || Integer.valueOf(editZhangDanRi.getText().toString().trim()) > 31) {
-                    Toast.makeText(XinZengYHKXActivity.this, "信用卡账单日范围是1到31", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "信用卡账单日范围是1到31", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (Integer.valueOf(editHuanKuanRi.getText().toString().trim()) < 1 || Integer.valueOf(editHuanKuanRi.getText().toString().trim()) > 31) {
-                    Toast.makeText(XinZengYHKXActivity.this, "信用卡还款日范围是1到31", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "信用卡还款日范围是1到31", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 SimpleDateFormat sf = new SimpleDateFormat("yyMMdd");
@@ -304,34 +289,6 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
         }
 
     }
-    private void jiaMi(){
-        SimpleDateFormat sf = new SimpleDateFormat("yyMMdd");
-        Date d = new Date(System.currentTimeMillis());
-        String[] nowArr = sf.format(d).split("");
-        String[] youXiaoQiArr = textYouXiaoQi.getText().toString().trim().split("");
-        String[] md5PhoneArr = AppUtil.getMD5(editCode.getText().toString().trim() + editName.getText().toString().trim() + "ad").split("");
-        md5PhoneArr[Integer.parseInt(nowArr[2]) + 1] = youXiaoQiArr[1];
-        md5PhoneArr[Integer.parseInt(nowArr[4]) + 10 + 1] = youXiaoQiArr[2];
-        md5PhoneArr[Integer.parseInt(nowArr[6]) + 20 + 1] = youXiaoQiArr[3];
-        if (Integer.parseInt(userInfo.getUid()) % 2 == 1) {
-            md5PhoneArr[31] = youXiaoQiArr[4];
-        } else {
-            md5PhoneArr[32] = youXiaoQiArr[4];
-        }
-        phoneTiJiao = new StringBuffer();
-        for (int i = 1; i < md5PhoneArr.length; i++) {
-            phoneTiJiao.append(md5PhoneArr[i]);
-        }
-        String[] cvv2Arr = editCVN2.getText().toString().trim().split("");
-        String[] md5NameArr = AppUtil.getMD5(editCode.getText().toString().trim() + editPhone.getText().toString().trim() + "ad").split("");
-        md5NameArr[Integer.parseInt(nowArr[2]) + 1] = cvv2Arr[1];
-        md5NameArr[Integer.parseInt(nowArr[4]) + 10 + 1] = cvv2Arr[2];
-        md5NameArr[Integer.parseInt(nowArr[6]) + 20 + 1] = cvv2Arr[3];
-        nameTiJiao = new StringBuffer();
-        for (int i = 1; i < md5NameArr.length; i++) {
-            nameTiJiao.append(md5NameArr[i]);
-        }
-    }
 
     /**
      * des： 短信发送按钮状态
@@ -363,7 +320,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
             buttonSms.postDelayed(mR, 0);
             getSms();
         } else {
-            Toast.makeText(XinZengYHKXActivity.this, "输入正确的手机号", Toast.LENGTH_SHORT).show();
+            Toast.makeText(XinZengXYKActivity.this, "输入正确的手机号", Toast.LENGTH_SHORT).show();
             editPhone.setText("");
         }
     }
@@ -378,12 +335,8 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("userName", mPhone_sms);
-        params.put("type", "3");
+        params.put("type", type+"");
         params.put("bankCard", editBankCard.getText().toString().trim());
-        params.put("name2", nameTiJiao.toString().trim());
-        params.put("phone2", phoneTiJiao.toString().trim());
-        params.put("card", editCard.getText().toString().trim());
-        params.put("name", editName.getText().toString().trim());
         return new OkObject(params, url);
     }
 
@@ -395,26 +348,26 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
      */
     private void getSms() {
         showLoadingDialog();
-        ApiClient.post(XinZengYHKXActivity.this, getOkObject1(), new ApiClient.CallBack() {
+        ApiClient.post(XinZengXYKActivity.this, getOkObject1(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
                 LogUtil.LogShitou("RenZhengFragment--获取短信", "" + s);
                 try {
                     SimpleInfo simpleInfo = GsonUtils.parseJSON(s, SimpleInfo.class);
-                    Toast.makeText(XinZengYHKXActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                     if (simpleInfo.getStatus() == 1) {
 
                     }
                 } catch (Exception e) {
-                    Toast.makeText(XinZengYHKXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                Toast.makeText(XinZengYHKXActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(XinZengXYKActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -428,7 +381,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObject2() {
-        String url = Constant.HOST + Constant.Url.HK_CARDADD;
+        String url = Constant.HOST + Constant.Url.BANK_CARDADD;
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
@@ -447,7 +400,7 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
 
     private void tiJiao() {
         showLoadingDialog();
-        ApiClient.post(XinZengYHKXActivity.this, getOkObject2(), new ApiClient.CallBack() {
+        ApiClient.post(XinZengXYKActivity.this, getOkObject2(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
@@ -458,19 +411,19 @@ public class XinZengYHKXActivity extends ZjbBaseActivity implements View.OnClick
                         setResult(Constant.REQUEST_RESULT_CODE.XIN_YONG_KA);
                         finish();
                     } else if (simpleInfo.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(XinZengYHKXActivity.this);
+                        MyDialog.showReLoginDialog(XinZengXYKActivity.this);
                     } else {
                     }
-                    Toast.makeText(XinZengYHKXActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, simpleInfo.getInfo(), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
-                    Toast.makeText(XinZengYHKXActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(XinZengXYKActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                Toast.makeText(XinZengYHKXActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(XinZengXYKActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
     }

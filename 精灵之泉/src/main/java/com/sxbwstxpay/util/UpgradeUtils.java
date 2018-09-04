@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -16,6 +17,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Process;
+import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
@@ -61,12 +64,14 @@ public class UpgradeUtils extends Activity {
     private static Upgrade upgrade;
     private static int contentLength;
     private static ProgressDialog progressDialog;
-
+    public static final String id = "channel_1";
+    public static final String name = "精灵之泉";
     private static OkObject getOkObject(String url) {
         HashMap<String, String> params = new HashMap<>();
         params.put("type", "android");
         return new OkObject(params, url);
     }
+    private static android.support.v7.app.AlertDialog alertDialog;
 
     /**
      * 使用此方法，json格式参考assets/upgrade.txt文件格式
@@ -118,7 +123,7 @@ public class UpgradeUtils extends Activity {
             TextView tvShengJi = (TextView) dialog_shengji.findViewById(R.id.tvShengJi);
             tvShengJi.setText(upgrade.getTitle());
             tvShengJi.setMovementMethod(ScrollingMovementMethod.getInstance());
-            final android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(mContext, R.style.dialog)
+           alertDialog = new android.support.v7.app.AlertDialog.Builder(mContext, R.style.dialog)
                     .setView(dialog_shengji)
                     .create();
             alertDialog.show();
@@ -147,6 +152,13 @@ public class UpgradeUtils extends Activity {
             buttonShengJi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        boolean hasInstallPermission = isHasInstallPermissionWithO(mContext);
+                        if (!hasInstallPermission) {
+                            startInstallPermissionSettingActivity(mContext);
+                            return;
+                        }
+                    }
                     if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             != PackageManager.PERMISSION_GRANTED) {
                         //申请WRITE_EXTERNAL_STORAGE权限
@@ -331,18 +343,35 @@ public class UpgradeUtils extends Activity {
         mNotifiviews.setViewVisibility(R.id.tv_subtitle, View.VISIBLE);
         mNotifiviews.setViewVisibility(R.id.progressBar1, View.VISIBLE);
 
-        mNotifi = new NotificationCompat.Builder(mContext)
-                .setContent(mNotifiviews)
-                .setAutoCancel(true)
-                // 单击后自动删除
-                // .setOngoing(true)// 无法删除的通知
-                // 定制通知布局
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setTicker("正在下载")
-                .setWhen(System.currentTimeMillis())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(channel);
+            Notification.Builder builder =new Notification.Builder(mContext)
+                    .setContent(mNotifiviews)
+                    .setAutoCancel(true)
+                    .setSmallIcon(R.mipmap.logo)
+                    .setTicker("正在下载")
+                    .setWhen(System.currentTimeMillis())
+                    .setContentIntent(contentIntent)
+                    .setOnlyAlertOnce(true)
+                    .setChannelId(id);
+            mNotifi=builder.build();
+            mNotifi.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
+        } else {
+            mNotifi = new NotificationCompat.Builder(mContext)
+                    .setContent(mNotifiviews)
+                    .setAutoCancel(true)
+                    // 单击后自动删除
+                    // .setOngoing(true)// 无法删除的通知
+                    // 定制通知布局
+                    .setSmallIcon(R.mipmap.logo)
+                    .setTicker("正在下载")
+                    .setWhen(System.currentTimeMillis())
 //                .setSound(Uri.parse("")) //声音
 //				.setVibrate(new long[] { 0, 100, 300, 400 })//设置更新振动
-                .setContentIntent(contentIntent).build();
+                    .setContentIntent(contentIntent).build();
+        }
         mNotifiMgr = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotifiMgr.notify(12345, mNotifi);
     }
@@ -405,4 +434,51 @@ public class UpgradeUtils extends Activity {
         mNotifiMgr.cancel(12345);
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private static boolean isHasInstallPermissionWithO(Context context){
+        if (context == null){
+            return false;
+        }
+        return context.getPackageManager().canRequestPackageInstalls();
+    }
+    /**
+     * 开启设置安装未知来源应用权限界面
+     * @param context
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private static void startInstallPermissionSettingActivity(Context context) {
+        if (context == null){
+            return;
+        }
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
+        ((Activity)context).startActivityForResult(intent,111);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode== Activity.RESULT_OK ){
+            if (requestCode==111){
+                if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    //申请WRITE_EXTERNAL_STORAGE权限
+                    ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            0);
+                } else {
+                    upgrade(upgrade);
+                    alertDialog.dismiss();
+                    if (upgrade.getUpStatus() == 1) {
+                        progressDialog = new ProgressDialog(mContext);
+                        progressDialog.setMessage("正在下载……");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        progressDialog.setProgress(0);
+                        progressDialog.setMax(100);
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+                    }
+                }
+            }
+        }
+    }
 }
