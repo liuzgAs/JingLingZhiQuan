@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".fragment.WoDeXFragment">
+
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_empty="@layout/view_empty"
+        app:layout_progress="@layout/view_progress"
+        app:scrollbarStyle="insideOverlay" />
+    <RelativeLayout
+        android:id="@+id/relaTitleStatue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/mine_title"
+        android:gravity="bottom"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleHeight"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:id="@+id/textTitleX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="个人中心"
+                android:textColor="@color/transparent"
+                android:textSize="@dimen/titleSize" />
+            <ImageView
+                android:id="@+id/imageSheZhi"
+                android:layout_width="@dimen/titleHeight"
+                android:layout_height="@dimen/titleHeight"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/white_selector"
+                android:padding="12dp"
+                android:src="@mipmap/shezhi" />
+        </RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

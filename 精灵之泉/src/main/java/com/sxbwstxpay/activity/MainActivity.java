@@ -29,7 +29,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.TabFragmentHost;
 import com.sxbwstxpay.fragment.GouWuCheFragment;
-import com.sxbwstxpay.fragment.WoDeFragment;
+import com.sxbwstxpay.fragment.WoDeXFragment;
 import com.sxbwstxpay.fragment.XianShiQGFragment;
 import com.sxbwstxpay.fragment.YouDianFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             YouDianFragment.class,
             ZhuanQianFragment.class,
             GouWuCheFragment.class,
-            WoDeFragment.class
+            WoDeXFragment.class
     };
     private int[] imgRes = new int[]{
             R.drawable.selector_shengqian_item,

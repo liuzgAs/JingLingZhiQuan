@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.ShouYeFragment">
+
+    <LinearLayout
+        android:id="@+id/viewBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bar_bg"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:id="@+id/image0000"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/location" />
+
+            <TextView
+                android:id="@+id/textCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/image0000"
+                android:text="厦门"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/imgeEWM"
+                android:paddingLeft="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="10dp"
+                android:src="@mipmap/saomiao" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/textSouSuo"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_tranwhite_20dp"
+                android:gravity="center_vertical"
+                android:hint="输入商品名称..."
+                android:paddingLeft="30dp"
+                android:textSize="@dimen/normal_textsize" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/search" />
+
+        </RelativeLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            app:tabTextColor="@color/white"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="2dp"
+            android:layout_marginBottom="5dp"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight"/>
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewBar">
+    </android.support.v4.view.ViewPager>
+    <ImageView
+        android:id="@+id/imageHongBaoDialog"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/hongbaoxuanfu"
+        android:visibility="visible" />
+</RelativeLayout>

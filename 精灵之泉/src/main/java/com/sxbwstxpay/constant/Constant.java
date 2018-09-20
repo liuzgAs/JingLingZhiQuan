@@ -173,6 +173,10 @@ public class Constant {
         public static final String STORE_STOREINFO = "&g=App&m=Store&a=storeInfo";
         //我的店铺信息保存
         public static final String STORE_STORESAVE = "&g=App&m=Store&a=storeSave";
+        //测试请求
+        public static final String TESTSTYLE = "&g=App&m=TestStyle&a=index";
+        //获取测试结果
+        public static final String TEST_RESULT = "&g=App&m=TestStyle&a=test_result";
         //图文二维码
         public static final String GOODS_EWM = "&g=App&m=Goods&a=ewm";
         //首页搜索

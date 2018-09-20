@@ -18,6 +18,7 @@
     <dimen name="titleSize">18dp</dimen>
     <dimen name="diver">10dp</dimen>
     <dimen name="chanPinXQBanner">200dp</dimen>
+    <dimen name="chanPinXQBanner1">100dp</dimen>
     <dimen name="guanLiDianPuTop">190dp</dimen>
     <dimen name="tabHeight">55dp</dimen>
 </resources>
