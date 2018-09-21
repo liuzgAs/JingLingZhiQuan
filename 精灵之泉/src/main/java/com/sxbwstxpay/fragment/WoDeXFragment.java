@@ -23,7 +23,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.activity.CeShiActivity;
+import com.sxbwstxpay.activity.CeShiSYActivity;
 import com.sxbwstxpay.activity.GongGaoActivity;
 import com.sxbwstxpay.activity.JingLingLCActivity;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
@@ -284,6 +284,18 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                         startActivity(intent);
                     }
                 });
+                textTest.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (userIndex!=null){
+                            if (userIndex.getIs_test()==1){
+                                Intent intent = new Intent();
+                                intent.setClass(getActivity(), CeShiSYActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                });
                 return view;
             }
 
@@ -296,6 +308,11 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                             .dontAnimate()
                             .placeholder(R.mipmap.ic_empty)
                             .into(imageTouXiang);
+                    if (!TextUtils.isEmpty(userIndex.getStyle_text())){
+                        textTest.setText(userIndex.getStyle_text());
+                    }else {
+                        textTest.setText("风格未知，请测试");
+                    }
                     textNickName.setText(userIndex.getNickName());
                     textVipText.setText(userIndex.getGradeName());
                     textVipTime.setText(userIndex.getVipTime());
@@ -359,7 +376,7 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                     case 3:
                         break;
                     case 4:
-                        intent.setClass(getActivity(), CeShiActivity.class);
+                        intent.setClass(getActivity(), CeShiSYActivity.class);
                         startActivity(intent);
                         break;
                     case 5:

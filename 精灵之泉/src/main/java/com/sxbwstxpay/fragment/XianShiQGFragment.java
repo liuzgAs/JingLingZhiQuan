@@ -21,6 +21,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -558,6 +559,17 @@ public class XianShiQGFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         List<IndexDataBean> indexGoodsData = indexGoods.getData();
                         adapter.clear();
                         adapter.addAll(indexGoodsData);
+                        if (!TextUtils.isEmpty(indexGoods.getTipsContent())){
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("提示")
+                                    .setMessage(indexGoods.getTipsContent())
+                                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).show();
+                        }
                     } else if (indexGoods.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
                     } else {

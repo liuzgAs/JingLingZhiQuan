@@ -1,19 +1,25 @@
 package com.sxbwstxpay.model;
 
+import java.io.Serializable;
+
 /**
  * Created by liuzhigang on 2018/9/20/020.
  *
  * @author LiuZG
  */
-public class Test_result {
+public class Test_result implements Serializable{
 
     /**
      * style : 端庄范
+     * bgimg : http://api.jlzquan.com/Uploads/web/5ba48e08ae863.jpg
+     * btn_txt : 查看专属我的风格搭配
      * status : 1
      * info : 返回成功！
      */
 
     private String style;
+    private String bgimg;
+    private String btn_txt;
     private int status;
     private String info;
 
@@ -23,6 +29,22 @@ public class Test_result {
 
     public void setStyle(String style) {
         this.style = style;
+    }
+
+    public String getBgimg() {
+        return bgimg;
+    }
+
+    public void setBgimg(String bgimg) {
+        this.bgimg = bgimg;
+    }
+
+    public String getBtn_txt() {
+        return btn_txt;
+    }
+
+    public void setBtn_txt(String btn_txt) {
+        this.btn_txt = btn_txt;
     }
 
     public int getStatus() {

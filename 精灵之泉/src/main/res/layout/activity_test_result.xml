@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/test_result_bg"
+    tools:context=".activity.TestResultActivity">
+    <LinearLayout
+        android:id="@+id/viewBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:gravity="bottom">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleHeight">
+            <ImageView
+                android:id="@+id/imageBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/back_gray"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/light_black"
+                android:text="测试结果"
+                android:textStyle="bold"
+                android:textSize="@dimen/titleSize"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewBar"
+        app:layout_constraintVertical_bias="0.466">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageImg"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"
+                android:maxHeight="700dp"
+                android:maxWidth="360dp"
+                />
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/lt" />
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/rt" />
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/rb" />
+
+            <ImageView
+                android:id="@+id/image4"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/lb" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="11dp"
+                android:layout_toLeftOf="@+id/image2"
+                android:layout_toRightOf="@+id/image1"
+                android:background="@color/line_gold">
+
+            </View>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="11dp"
+                android:layout_marginTop="11dp"
+                android:layout_toLeftOf="@+id/image3"
+                android:layout_toRightOf="@+id/image4"
+                android:background="@color/line_gold">
+
+            </View>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/image4"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/image1"
+                android:layout_marginLeft="12dp"
+                android:background="@color/line_gold">
+
+            </View>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/image3"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/image2"
+                android:layout_marginRight="12dp"
+                android:background="@color/line_gold">
+
+            </View>
+            <Button
+                android:id="@+id/buttonTest"
+                android:background="@drawable/btn_jianbian270_basic_30dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_textsize"
+                android:layout_width="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="50dp"
+                android:layout_above="@+id/line2"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="查看专属我的风格搭配" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

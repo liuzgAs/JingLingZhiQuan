@@ -20,13 +20,20 @@ public class IndexGoods {
 
     private String img;
     private String info;
+    private String tipsContent;
     private PageBean page;
     private int status;
     private List<BannerBean> banner;
     private List<CateBean> cate;
     private List<IndexDataBean> data;
     private List<TimesBean> times;
+    public String getTipsContent() {
+        return tipsContent;
+    }
 
+    public void setTipsContent(String tipsContent) {
+        this.tipsContent = tipsContent;
+    }
     public String getImg() {
         return img;
     }

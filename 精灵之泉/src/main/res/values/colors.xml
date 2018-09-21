@@ -22,6 +22,9 @@
     <color name="tranblack">#66000000</color>
     <color name="textYellow">#ff6e0b</color>
     <color name="textBlue">#4f9cdd</color>
+
+    <color name="line_gold">#dbb36b</color>
+
     <!--波形图-->
     <color name="hengxian">#ededee</color>
     <color name="quXian01">#37d726</color>

@@ -61,6 +61,8 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.viewBanBen).setOnClickListener(this);
         findViewById(R.id.viewGuanYu).setOnClickListener(this);
         findViewById(R.id.viewHuanCun).setOnClickListener(this);
+        findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
+
     }
 
     @Override
@@ -93,6 +95,10 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
                 break;
             case R.id.imageBack:
                 finish();
+                break;
+            case R.id.viewBangZhuZX:
+                intent.setClass(this, BangZhuZXActivity.class);
+                startActivity(intent);
                 break;
         }
     }

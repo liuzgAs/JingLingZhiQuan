@@ -22,13 +22,21 @@ public class UserIndex {
     private int status;
     private int is_db;
     private int is_btn;
+    private int is_test;
     private String vipTime;
     private String btnText;
     private String btnUrl;
     private String txName;
+    private String style_text;
     private String storeTips;
     private String dbb;
+    public int getIs_test() {
+        return is_test;
+    }
 
+    public void setIs_test(int is_test) {
+        this.is_test = is_test;
+    }
     public int getIs_db() {
         return is_db;
     }
@@ -44,7 +52,13 @@ public class UserIndex {
     public void setIs_btn(int is_btn) {
         this.is_btn = is_btn;
     }
+    public String getStyle_text() {
+        return style_text;
+    }
 
+    public void setStyle_text(String style_text) {
+        this.style_text = style_text;
+    }
     public String getBtnText() {
         return btnText;
     }

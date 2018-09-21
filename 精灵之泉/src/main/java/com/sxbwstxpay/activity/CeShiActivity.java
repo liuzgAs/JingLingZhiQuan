@@ -1,5 +1,6 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -200,6 +201,9 @@ public class CeShiActivity extends ZjbBaseNotLeftActivity implements CeShiInterf
                     Test_result test_result = GsonUtils.parseJSON(s, Test_result.class);
                     if (test_result.getStatus() == 1) {
                         Toast.makeText(CeShiActivity.this, test_result.getStyle(), Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(CeShiActivity.this,TestResultActivity.class);
+                        intent.putExtra("test_result",test_result);
+                        startActivity(intent);
                         finish();
                     } else if (test_result.getStatus() == 3) {
                         MyDialog.showReLoginDialog(CeShiActivity.this);

@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ceshi_bg"
+    android:background="#010101"
     tools:context=".activity.CeShiSYActivity">
+    <com.sxbwstxpay.customview.ResizableImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ceshi_bg"
+        android:scaleType="centerCrop"
+        />
     <LinearLayout
         android:id="@+id/viewBar"
         android:layout_width="match_parent"
@@ -34,11 +40,86 @@
         </RelativeLayout>
     </LinearLayout>
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/image1"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_below="@+id/viewBar"
         android:src="@mipmap/lt"/>
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/viewBar"
+        android:src="@mipmap/rt"/>
+    <ImageView
+        android:id="@+id/image3"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/rb"/>
+    <ImageView
+        android:id="@+id/image4"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/lb"/>
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_toRightOf="@+id/image1"
+        android:layout_below="@+id/viewBar"
+        android:layout_marginTop="11dp"
+        android:layout_toLeftOf="@+id/image2"
+        android:background="@color/line_gold">
+    </View>
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="11dp"
+        android:layout_toRightOf="@+id/image4"
+        android:layout_marginTop="11dp"
+        android:layout_toLeftOf="@+id/image3"
+        android:background="@color/line_gold">
+    </View>
+    <View
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/image4"
+        android:layout_below="@+id/image1"
+        android:layout_marginLeft="12dp"
+        android:layout_alignParentLeft="true"
+        android:background="@color/line_gold">
+    </View>
+    <View
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/image3"
+        android:layout_below="@+id/image2"
+        android:layout_marginRight="12dp"
+        android:layout_alignParentRight="true"
+        android:background="@color/line_gold">
+    </View>
+    <Button
+        android:id="@+id/buttonTest"
+        style="@style/MyButton"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:text="立即测试" />
 </RelativeLayout>
