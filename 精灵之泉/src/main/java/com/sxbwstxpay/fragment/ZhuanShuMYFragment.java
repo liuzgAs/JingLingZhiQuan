@@ -26,7 +26,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.BannerBean;
-import com.sxbwstxpay.model.IndexStyle;
+import com.sxbwstxpay.model.IndexStyleMy;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GlideApp;
@@ -34,7 +34,7 @@ import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.LocalImageHolderView;
-import com.sxbwstxpay.viewholder.ZhuanShuCDViewHolder;
+import com.sxbwstxpay.viewholder.ZhuanShuMYViewHolder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,26 +43,26 @@ import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ZhuanShuCDFragment#newInstance} factory method to
+ * Use the {@link ZhuanShuMYFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String ARG_PARAM1 = "param1";
 
     private String mParam1;
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<IndexStyle.DataBean> adapter;
+    private RecyclerArrayAdapter<IndexStyleMy.DataBean> adapter;
 
-    public ZhuanShuCDFragment() {
+    public ZhuanShuMYFragment() {
     }
 
-    private List<IndexStyle.CateBean> cateBeanList;
+    private List<IndexStyleMy.CateBean> cateBeanList;
     private int page = 1;
     private List<BannerBean> indexGoodsBanner;
 
-    public static ZhuanShuCDFragment newInstance(String param1) {
-        ZhuanShuCDFragment fragment = new ZhuanShuCDFragment();
+    public static ZhuanShuMYFragment newInstance(String param1) {
+        ZhuanShuMYFragment fragment = new ZhuanShuMYFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -132,11 +132,51 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexStyle.DataBean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexStyleMy.DataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_zhuanshu;
-                return new ZhuanShuCDViewHolder(parent, layout);
+                return new ZhuanShuMYViewHolder(parent, layout);
+            }
+        });
+        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
+            @Override
+            public void onMoreShow() {
+                XianShiQGMore();
+            }
+
+            private void XianShiQGMore() {
+                ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+                    @Override
+                    public void onSuccess(String s) {
+                        LogUtil.LogShitou("XianShiQGFragment--限时抢购更多", s + "");
+                        try {
+                            page++;
+                            IndexStyleMy indexGoods = GsonUtils.parseJSON(s, IndexStyleMy.class);
+                            int status = indexGoods.getStatus();
+                            if (status == 1) {
+                                List<IndexStyleMy.DataBean> indexGoodsData = indexGoods.getData();
+                                adapter.addAll(indexGoodsData);
+                            } else if (status == 3) {
+                                MyDialog.showReLoginDialog(getActivity());
+                            } else {
+                                adapter.pauseMore();
+                            }
+                        } catch (Exception e) {
+                            adapter.pauseMore();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response response) {
+                        adapter.pauseMore();
+                    }
+                });
+            }
+
+            @Override
+            public void onMoreClick() {
+
             }
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
@@ -158,15 +198,15 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
                 gridView = (GridView) header_xian_shi_qg.findViewById(R.id.gridView);
-                gridView.setNumColumns(5);
                 adapterGrid = new MyAdapter();
+                gridView.setNumColumns(3);
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     }
                 });
                 textTitle = (TextView) header_xian_shi_qg.findViewById(R.id.textTitle);
-                textTitle.setText("专属潮搭");
+                textTitle.setText("专属美颜");
                 return header_xian_shi_qg;
             }
 
@@ -230,46 +270,6 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
             }
 
         });
-        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
-            @Override
-            public void onMoreShow() {
-                XianShiQGMore();
-            }
-
-            private void XianShiQGMore() {
-                ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
-                    @Override
-                    public void onSuccess(String s) {
-                        LogUtil.LogShitou("XianShiQGFragment--限时抢购更多", s + "");
-                        try {
-                            page++;
-                            IndexStyle indexGoods = GsonUtils.parseJSON(s, IndexStyle.class);
-                            int status = indexGoods.getStatus();
-                            if (status == 1) {
-                                List<IndexStyle.DataBean> indexGoodsData = indexGoods.getData();
-                                adapter.addAll(indexGoodsData);
-                            } else if (status == 3) {
-                                MyDialog.showReLoginDialog(getActivity());
-                            } else {
-                                adapter.pauseMore();
-                            }
-                        } catch (Exception e) {
-                            adapter.pauseMore();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response response) {
-                        adapter.pauseMore();
-                    }
-                });
-            }
-
-            @Override
-            public void onMoreClick() {
-
-            }
-        });
         adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
             @Override
             public void onNoMoreShow() {
@@ -305,7 +305,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getXianShiQGOkObject() {
-        String url = Constant.HOST + Constant.Url.INDEX_STYLE;
+        String url = Constant.HOST + Constant.Url.INDEX_STYLEMY;
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
@@ -323,11 +323,11 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                 LogUtil.LogShitou("限时购", s);
                 try {
                     page++;
-                    IndexStyle indexStyle = GsonUtils.parseJSON(s, IndexStyle.class);
+                    IndexStyleMy indexStyle = GsonUtils.parseJSON(s, IndexStyleMy.class);
                     if (indexStyle.getStatus() == 1) {
                         cateBeanList = indexStyle.getCate();
                         indexGoodsBanner = indexStyle.getBanner();
-                        List<IndexStyle.DataBean> indexGoodsData = indexStyle.getData();
+                        List<IndexStyleMy.DataBean> indexGoodsData = indexStyle.getData();
                         adapter.clear();
                         adapter.addAll(indexGoodsData);
                     } else if (indexStyle.getStatus() == 3) {

@@ -554,10 +554,24 @@
         <activity
             android:name=".activity.XinZengXYKActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.JingLingLCActivity" />
-        <activity android:name=".activity.CeShiActivity" />
-        <activity android:name=".activity.CeShiSYActivity" />
-        <activity android:name=".activity.TestResultActivity"></activity>
+        <activity
+            android:name=".activity.JingLingLCActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.CeShiActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.CeShiSYActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.TestResultActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeDPXActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".activity.FaBuFWActivity" />
+        <activity android:name=".activity.FaBuJGActivity" />
+        <activity android:name=".activity.WoDeFWActivity"></activity>
     </application>
 
 </manifest>

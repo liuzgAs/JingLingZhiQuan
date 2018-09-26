@@ -1,11 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +19,22 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.BannerBean;
-import com.sxbwstxpay.model.IndexStyle;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.Supermarket;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.viewholder.JingLingCSViewHolder;
 import com.sxbwstxpay.viewholder.LocalImageHolderView;
-import com.sxbwstxpay.viewholder.ZhuanShuCDViewHolder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,26 +43,26 @@ import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ZhuanShuCDFragment#newInstance} factory method to
+ * Use the {@link JingLingCSFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String ARG_PARAM1 = "param1";
 
     private String mParam1;
     private View mInflate;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<IndexStyle.DataBean> adapter;
+    private RecyclerArrayAdapter<Supermarket.DataBean> adapter;
 
-    public ZhuanShuCDFragment() {
+    public JingLingCSFragment() {
     }
 
-    private List<IndexStyle.CateBean> cateBeanList;
+    private List<Supermarket.CateBean> cateBeanList;
     private int page = 1;
     private List<BannerBean> indexGoodsBanner;
 
-    public static ZhuanShuCDFragment newInstance(String param1) {
-        ZhuanShuCDFragment fragment = new ZhuanShuCDFragment();
+    public static JingLingCSFragment newInstance(String param1) {
+        JingLingCSFragment fragment = new JingLingCSFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -127,18 +127,19 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
      * 初始化recyclerview
      */
     private void initRecycler() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.line_width), 0, 0);
-        itemDecoration.setDrawLastItem(false);
-        recyclerView.addItemDecoration(itemDecoration);
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(manager);
+        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(5f, getActivity()));
+        recyclerView.addItemDecoration(spaceDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexStyle.DataBean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Supermarket.DataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_zhuanshu;
-                return new ZhuanShuCDViewHolder(parent, layout);
+                int layout = R.layout.item_xian_shi_qg;
+                return new JingLingCSViewHolder(parent, layout);
             }
         });
+        manager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(2));
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
 
             private MyAdapter adapterGrid;
@@ -158,7 +159,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
                 gridView = (GridView) header_xian_shi_qg.findViewById(R.id.gridView);
-                gridView.setNumColumns(5);
+                gridView.setNumColumns(3);
                 adapterGrid = new MyAdapter();
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -166,7 +167,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                     }
                 });
                 textTitle = (TextView) header_xian_shi_qg.findViewById(R.id.textTitle);
-                textTitle.setText("专属潮搭");
+                textTitle.setText("精灵超市");
                 return header_xian_shi_qg;
             }
 
@@ -243,10 +244,10 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                         LogUtil.LogShitou("XianShiQGFragment--限时抢购更多", s + "");
                         try {
                             page++;
-                            IndexStyle indexGoods = GsonUtils.parseJSON(s, IndexStyle.class);
+                            Supermarket indexGoods = GsonUtils.parseJSON(s, Supermarket.class);
                             int status = indexGoods.getStatus();
                             if (status == 1) {
-                                List<IndexStyle.DataBean> indexGoodsData = indexGoods.getData();
+                                List<Supermarket.DataBean> indexGoodsData = indexGoods.getData();
                                 adapter.addAll(indexGoodsData);
                             } else if (status == 3) {
                                 MyDialog.showReLoginDialog(getActivity());
@@ -305,7 +306,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getXianShiQGOkObject() {
-        String url = Constant.HOST + Constant.Url.INDEX_STYLE;
+        String url = Constant.HOST + Constant.Url.INDEX_SUPERMARKET;
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
@@ -323,11 +324,11 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                 LogUtil.LogShitou("限时购", s);
                 try {
                     page++;
-                    IndexStyle indexStyle = GsonUtils.parseJSON(s, IndexStyle.class);
+                    Supermarket indexStyle = GsonUtils.parseJSON(s, Supermarket.class);
                     if (indexStyle.getStatus() == 1) {
                         cateBeanList = indexStyle.getCate();
                         indexGoodsBanner = indexStyle.getBanner();
-                        List<IndexStyle.DataBean> indexGoodsData = indexStyle.getData();
+                        List<Supermarket.DataBean> indexGoodsData = indexStyle.getData();
                         adapter.clear();
                         adapter.addAll(indexGoodsData);
                     } else if (indexStyle.getStatus() == 3) {

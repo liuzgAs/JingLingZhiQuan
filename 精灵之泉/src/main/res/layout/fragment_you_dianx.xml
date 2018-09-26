@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sxbwstxpay.fragment.YouDianFragment">
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/imageReLocation"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:src="@mipmap/dingwei_re"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+    <LinearLayout
+        android:id="@+id/viewBar"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textBar"
+            android:background="@color/tranblack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/viewSearch"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalItemHeight">
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/dizhi"
+                android:layout_width="18dp"
+                android:id="@+id/image0000"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginRight="10dp"
+                android:textColor="@color/light_black"
+                android:text="厦门"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/image0000"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/normal_textsize"
+                android:id="@+id/textCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/normal_textsize"
+                android:textColor="@color/white"
+                android:id="@+id/textAddress"
+                android:gravity="center"
+                android:visibility="visible"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@+id/textCity"
+                android:background="@drawable/shape_tranbasic_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:visibility="visible"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="25dp"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/search_white"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/dizhi"
+                android:layout_width="18dp"
+                android:id="@+id/image0001"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

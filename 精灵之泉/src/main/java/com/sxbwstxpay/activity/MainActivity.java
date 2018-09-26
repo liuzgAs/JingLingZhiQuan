@@ -28,9 +28,9 @@ import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.TabFragmentHost;
-import com.sxbwstxpay.fragment.GouWuCheFragment;
+import com.sxbwstxpay.fragment.ShouKuanXFragment;
+import com.sxbwstxpay.fragment.ShouYeFragment;
 import com.sxbwstxpay.fragment.WoDeXFragment;
-import com.sxbwstxpay.fragment.XianShiQGFragment;
 import com.sxbwstxpay.fragment.YouDianFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
 import com.sxbwstxpay.interfacepage.OnPatchLister;
@@ -50,17 +50,17 @@ import com.tencent.tauth.Tencent;
 public class MainActivity extends AppCompatActivity {
     private String[] tabsItem = new String[5];
     private Class[] fragment = new Class[]{
-            XianShiQGFragment.class,
+            ShouYeFragment.class,
             YouDianFragment.class,
+            ShouKuanXFragment.class,
             ZhuanQianFragment.class,
-            GouWuCheFragment.class,
             WoDeXFragment.class
     };
     private int[] imgRes = new int[]{
             R.drawable.selector_shengqian_item,
             R.drawable.selector_youdian_item,
-            R.drawable.selector_zhuanqian_item,
             R.drawable.selector_renzheng_item,
+            R.drawable.selector_zhuanqian_item,
             R.drawable.selector_mine_item
     };
     public TabFragmentHost mTabHost;
@@ -125,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
         paintPassword = aCache.getAsString(Constant.ACACHE.PAINT_PASSWORD);
         tabsItem[0] = "省钱";
         tabsItem[1] = "优店";
-        tabsItem[2] = "赚钱";
-        tabsItem[3] = "购物车";
+        tabsItem[2] = "收款";
+        tabsItem[3] = "赚钱";
         tabsItem[4] = "我的";
 
         mTabHost = (TabFragmentHost) findViewById(R.id.tabHost);

@@ -31,7 +31,7 @@ import com.sxbwstxpay.activity.SheZhiActivity;
 import com.sxbwstxpay.activity.ShiMingRZActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.WebActivity;
-import com.sxbwstxpay.activity.WoDeDPActivity;
+import com.sxbwstxpay.activity.WoDeDPXActivity;
 import com.sxbwstxpay.activity.WoDeSYActivity;
 import com.sxbwstxpay.activity.WoDeZDActivity;
 import com.sxbwstxpay.activity.WoDeZLActivity;
@@ -363,7 +363,7 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                             return;
                         }
                         if (TextUtils.isEmpty(userIndex.getStoreTips())) {
-                            intent.setClass(getActivity(), WoDeDPActivity.class);
+                            intent.setClass(getActivity(), WoDeDPXActivity.class);
                             startActivity(intent);
                         } else {
                             MyDialog.showTipDialog(getActivity(), userIndex.getStoreTips());

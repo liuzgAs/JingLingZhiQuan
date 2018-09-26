@@ -66,4 +66,7 @@ dependencies {
     compile 'com.amap.api:location:3.3.0'
     compile 'com.amap.api:search:5.0.0'
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
+    compile('com.afollestad.material-dialogs:commons:0.9.6.0') {
+        exclude group: 'com.android.support'
+    }
 }

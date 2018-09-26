@@ -43,6 +43,7 @@
 
     <style name="TabLayoutTextStyle">
         <item name="android:textSize">@dimen/normal_textsize</item>
+
     </style>
 
     <style name="MyButton">

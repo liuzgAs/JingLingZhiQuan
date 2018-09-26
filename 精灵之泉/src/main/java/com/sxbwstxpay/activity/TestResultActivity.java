@@ -52,7 +52,6 @@ public class TestResultActivity extends ZjbBaseActivity implements View.OnClickL
         buttonTest.setText(test_result.getBtn_txt());
         GlideApp.with(this)
                 .load(test_result.getBgimg())
-                .centerCrop()
                 .placeholder(R.mipmap.ic_empty)
                 .into(imageImg);
     }

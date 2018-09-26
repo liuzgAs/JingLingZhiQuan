@@ -75,12 +75,13 @@
 
         </RelativeLayout>
         <android.support.design.widget.TabLayout
+            android:background="@color/transparent"
             android:id="@+id/tablayout"
             app:tabTextColor="@color/white"
             app:tabSelectedTextColor="@color/white"
             app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="2dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="3dp"
             app:tabTextAppearance="@style/TabLayoutTextStyle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"/>
@@ -96,7 +97,7 @@
         android:layout_width="80dp"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:src="@mipmap/hongbaoxuanfu"
         android:visibility="visible" />
 </RelativeLayout>

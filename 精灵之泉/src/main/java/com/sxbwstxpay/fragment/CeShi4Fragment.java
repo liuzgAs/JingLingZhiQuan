@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -169,6 +170,10 @@ public class CeShi4Fragment extends ZjbBaseFragment implements View.OnClickListe
                     if (dataBeans.get(i).getIsc()){
                         ids.add(dataBeans.get(i).getId());
                     }
+                }
+                if (ids.size()==0){
+                    Toast.makeText(getActivity(),"请至少选择一项！",Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 ceShiInterface.setIds(3,ids);
                 break;

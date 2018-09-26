@@ -123,6 +123,12 @@ public class Constant {
         public static final String LOGIN_LOGOUT = "&g=App&m=Login&a=logOut";
         //限时购
         public static final String INDEX_GOODS = "&g=App&m=Index&a=goods";
+        //专属穿搭
+        public static final String INDEX_STYLE = "&g=App&m=Index&a=style";
+        //专属美颜
+        public static final String INDEX_STYLEMY = "&g=App&m=Index&a=stylemy";
+        //精灵超市
+        public static final String INDEX_SUPERMARKET = "&g=App&m=Index&a=supermarket";
         //城市选择
         public static final String INDEX_CITYLIST = "&g=App&m=Index&a=cityList";
         //限时购分类
@@ -159,10 +165,20 @@ public class Constant {
         public static final String ORDER_PAYS = "&g=App&m=Order&a=pays";
         //商城订单
         public static final String USER_ORDER = "&g=App&m=User&a=order";
+        //我发布的服务
+        public static final String SKILL_MY = "&g=App&m=Skill&a=my";
         //订单操作
         public static final String USER_ORDERDONE = "&g=App&m=User&a=orderDone";
         //我的店铺
         public static final String STORE_MYSTORE = "&g=App&m=Store&a=myStore";
+        //服务删除
+        public static final String DELSKILL = "&g=App&m=Skill&a=delSkill";
+        //服务暂停与启动
+        public static final String ONOFF = "g=App&m=Skill&a=onOff";
+        //发布服务请求
+        public static final String SKILL_ADDBEFORE = "&g=App&m=Skill&a=addBefore";
+        //服务提交
+        public static final String SKILL_ADDAFTER = "&g=App&m=Skill&a=addAfter";
         //管理我的店铺
         public static final String STORE_GOODS = "&g=App&m=Store&a=goods";
         //商品下架
@@ -402,6 +418,7 @@ public class Constant {
         public static final String WX_SHARE_FAIL = "wxShareFail";
         public static final String EXTRAMAP = "extramap";
         public static final String CITY_CHOOSE = "cityChoose";
+        public static final String CHANGEFW = "changefw";
         public static final String ShangJia01 = "ShangJia01";
         public static final String ShangJia02 = "ShangJia02";
         public static final String address = "address";
