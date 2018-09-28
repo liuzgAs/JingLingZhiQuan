@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JingLingZhiQuan.iml" filepath="$PROJECT_DIR$/JingLingZhiQuan.iml" />
       <module fileurl="file://$PROJECT_DIR$/../JingLingZhiQuan0102/JingLingZhiQuan.iml" filepath="$PROJECT_DIR$/../JingLingZhiQuan0102/JingLingZhiQuan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/faceplatform/faceplatform.iml" filepath="$PROJECT_DIR$/faceplatform/faceplatform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/faceplatform-ui/faceplatform-ui.iml" filepath="$PROJECT_DIR$/faceplatform-ui/faceplatform-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/imagepicker/imagepicker.iml" filepath="$PROJECT_DIR$/imagepicker/imagepicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/精灵之泉/精灵之泉.iml" filepath="$PROJECT_DIR$/精灵之泉/精灵之泉.iml" />
     </modules>

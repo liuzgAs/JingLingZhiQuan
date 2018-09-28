@@ -8,6 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/faceplatform" />
+            <option value="$PROJECT_DIR$/faceplatform-ui" />
             <option value="$PROJECT_DIR$/imagepicker" />
             <option value="$PROJECT_DIR$/精灵之泉" />
           </set>

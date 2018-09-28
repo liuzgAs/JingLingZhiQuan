@@ -569,9 +569,25 @@
         <activity
             android:name=".activity.WoDeDPXActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.FaBuFWActivity" />
-        <activity android:name=".activity.FaBuJGActivity" />
-        <activity android:name=".activity.WoDeFWActivity"></activity>
+        <activity
+            android:name=".activity.FaBuFWActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.FaBuJGActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WoDeFWActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.GuanLiWDDPXActivity"
+            android:launchMode="singleTop" />
+        <!-- 活体图像采集界面 -->
+        <activity
+            android:name=".activity.FaceLivenessExpActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.JingLingKTActivity"></activity>
     </application>
 
 </manifest>

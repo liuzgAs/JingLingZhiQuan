@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,20 +39,26 @@ import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.help.Tip;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.activity.GuanLiWDDPActivity;
+import com.sxbwstxpay.activity.GuanLiWDDPXActivity;
 import com.sxbwstxpay.activity.SearchLocationActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
-import com.sxbwstxpay.model.MapIndex;
-import com.sxbwstxpay.model.MapMarkerBean;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.SkillIndex;
+import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.viewholder.PcateViewHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,11 +80,14 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     private View textBar;
     private TextView textCity;
     private boolean isFrist = true;
-    private List<MapMarkerBean> dataBeanList;
+    private List<SkillIndex.DataBean> dataBeanList;
     private String city;
     private TextView textAddress;
     private int mapLV = 15;
     private LatLng myLatLng;
+    private ImageView image0001;
+    private int cid=0;
+    private String cityId;
 
     public YouDianXFragment() {
         // Required empty public constructor
@@ -107,7 +121,11 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
 
     @Override
     protected void initSP() {
-
+        final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+        String cityAcache = aCache.getAsString(Constant.ACACHE.CITY);
+        if (cityAcache != null) {
+            cityId = aCache.getAsString(Constant.ACACHE.CITY_ID);
+        }
     }
 
     @Override
@@ -120,6 +138,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         textBar = mInflate.findViewById(R.id.textBar);
         textCity = (TextView) mInflate.findViewById(R.id.textCity);
         textAddress = (TextView) mInflate.findViewById(R.id.textAddress);
+        image0001 = (ImageView) mInflate.findViewById(R.id.image0001);
     }
 
     OnLocationChangedListener mListener;
@@ -138,12 +157,14 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         aMap.setMyLocationEnabled(true);
         CameraUpdate mCameraUpdate = CameraUpdateFactory.zoomTo(mapLV);
         aMap.moveCamera(mCameraUpdate);
+        setPopwindow();
     }
 
     @Override
     protected void setListeners() {
         mInflate.findViewById(R.id.imageReLocation).setOnClickListener(this);
         mInflate.findViewById(R.id.viewSearch).setOnClickListener(this);
+        image0001.setOnClickListener(this);
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -175,17 +196,11 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     private void showYouDianDialog(String id) {
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", id + "");
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", Integer.parseInt(id) + "");
-        final MapMarkerBean dataBean = dataBeanList.get(Integer.parseInt(id));
+        final SkillIndex.DataBean dataBean = dataBeanList.get(Integer.parseInt(id));
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", "00000000");
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_youdian, null);
-        final Dialog dialog = new Dialog(getActivity(), R.style.dialog);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_youdianx, null);
+        final Dialog dialog = new Dialog(getActivity(), R.style.dialogx);
         dialog.setContentView(view);
-        view.findViewById(R.id.textJiXu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
         view.findViewById(R.id.textJinDian).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,9 +208,15 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, String.valueOf(dataBean.getSid()));
                 intent.putExtra(Constant.INTENT_KEY.type, 1);
-                intent.setClass(getActivity(), GuanLiWDDPActivity.class);
+                intent.setClass(getActivity(), GuanLiWDDPXActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", "11111111111");
@@ -203,6 +224,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         TextView textNickName = (TextView) view.findViewById(R.id.textNickName);
         TextView textDistance = (TextView) view.findViewById(R.id.textDistance);
         TextView textDes = (TextView) view.findViewById(R.id.textDes);
+        TextView textNickDes = (TextView) view.findViewById(R.id.textNickDes);
         ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
         GlideApp.with(getActivity())
                 .load(dataBean.getHeadImg())
@@ -213,12 +235,14 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         textTitle.setText(dataBean.getTitle());
         textNickName.setText(dataBean.getNickName());
         textDistance.setText(dataBean.getDistance());
+        textNickDes.setText(dataBean.getNickNameDes());
         textDes.setText(dataBean.getDes());
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", "2222222222");
         Window dialogWindow = dialog.getWindow();
+        dialogWindow.setGravity(Gravity.BOTTOM);
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         DisplayMetrics d = getActivity().getResources().getDisplayMetrics(); // 获取屏幕宽、高用
-        lp.width = (int) (d.widthPixels * 0.8); // 高度设置为屏幕的0.6
+        lp.width = (int) (d.widthPixels * 0.95); // 高度设置为屏幕的0.6
         dialogWindow.setAttributes(lp);
         dialog.show();
     }
@@ -320,7 +344,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
      * date： 2017/8/28 0028 上午 9:55
      */
     private OkObject getOkObject(LatLng latLng) {
-        String url = Constant.HOST + Constant.Url.MAP_INDEX;
+        String url = Constant.HOST + Constant.Url.SKILL_INDEX;
         HashMap<String, String> params = new HashMap<>();
         if (isLogin) {
             params.put("uid", userInfo.getUid());
@@ -328,6 +352,8 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         }
         params.put("lat", String.valueOf(latLng.latitude));
         params.put("lng", String.valueOf(latLng.longitude));
+        params.put("cid", cid+"");
+        params.put("cityId", cityId+"");
         return new OkObject(params, url);
     }
 
@@ -339,9 +365,11 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
 //                cancelLoadingDialog();
                 LogUtil.LogShitou("YouDianFragment--onSuccess", s + "");
                 try {
-                    MapIndex mapIndex = GsonUtils.parseJSON(s, MapIndex.class);
+                    SkillIndex mapIndex = GsonUtils.parseJSON(s, SkillIndex.class);
                     if (mapIndex.getStatus() == 1) {
                         dataBeanList = mapIndex.getData();
+                        popAdapter.clear();
+                        popAdapter.addAll(mapIndex.getCate());
                         shouMarker();
                     } else if (mapIndex.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getActivity());
@@ -366,7 +394,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.REQUEST_RESULT_CODE.address && resultCode == Constant.REQUEST_RESULT_CODE.address) {
             Tip tip = data.getParcelableExtra(Constant.INTENT_KEY.value);
-            MapMarkerBean mapMarkerBean = (MapMarkerBean) data.getSerializableExtra(Constant.INTENT_KEY.Store);
+            SkillIndex.DataBean mapMarkerBean = (SkillIndex.DataBean) data.getSerializableExtra(Constant.INTENT_KEY.Store);
             if (tip != null) {
                 textAddress.setText(tip.getName());
                 LatLonPoint point = tip.getPoint();
@@ -453,8 +481,70 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
                 textAddress.setText("");
                 mlocationClient.startLocation();
                 break;
+            case R.id.image0001:
+                if (mPopupWindow.isShowing()) {
+                    mPopupWindow.dismiss();
+                } else {
+                    // 设置PopupWindow 显示的形式 底部或者下拉等
+                    // 在某个位置显示
+                    viewBar.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
+                    mPopupWindow.showAsDropDown(image0001);
+                    // 作为下拉视图显示
+                    // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+                }
+                break;
             default:
                 break;
         }
+    }
+
+    private View mPopView;
+    private PopupWindow mPopupWindow;
+    private RecyclerArrayAdapter<SkillIndex.CateBean> popAdapter;
+
+    private void setPopwindow(){
+        mPopView = getLayoutInflater().inflate(R.layout.popwindow_pcate, null);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        mPopupWindow = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        // 点击popuwindow外让其消失
+        EasyRecyclerView recyclePacate=mPopView.findViewById(R.id.recyclePacate);
+        initPopRecycler(recyclePacate);
+        mPopupWindow.setOutsideTouchable(true);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                viewBar.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.transparent));
+            }
+        });
+    }
+
+    private void initPopRecycler(EasyRecyclerView recyclePacate) {
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
+        recyclePacate.setLayoutManager(manager);
+        SpaceDecoration spaceDecoration =new SpaceDecoration((int) DpUtils.convertDpToPixel(1f, getActivity()));
+//        recyclerView.addItemDecoration(itemDecoration1);
+//        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recyclePacate.addItemDecoration(spaceDecoration);
+        recyclePacate.setAdapter(popAdapter = new RecyclerArrayAdapter<SkillIndex.CateBean>(getActivity()) {
+            @Override
+            public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                int layout = R.layout.item_pcate;
+                return new PcateViewHolder(parent, layout);
+            }
+        });
+        manager.setSpanSizeLookup(popAdapter.obtainGridSpanSizeLookUp(1));
+        popAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                mPopupWindow.dismiss();
+                viewBar.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.transparent));
+                cid=popAdapter.getItem(position).getId();
+                Constant.CID=popAdapter.getItem(position).getId();
+                getStore(myLatLng);
+            }
+        });
     }
 }

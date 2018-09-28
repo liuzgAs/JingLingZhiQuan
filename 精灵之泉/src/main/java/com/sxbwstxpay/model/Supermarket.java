@@ -1,5 +1,6 @@
 package com.sxbwstxpay.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  *
  * @author LiuZG
  */
-public class Supermarket {
+public class Supermarket implements Serializable{
 
     /**
      * banner : [{"title":"4","url":"","img":"http://api.jlzquan.com/Uploads/banner/5ba9a8e308e0f.png","code":"","itemId":"0"},{"title":"3","url":"","img":"http://api.jlzquan.com/Uploads/banner/5ba9a8d65cd26.png","code":"","itemId":"0"}]
@@ -120,7 +121,7 @@ public class Supermarket {
     }
 
 
-    public static class CateBean {
+    public static class CateBean implements Serializable{
         /**
          * id : 5
          * name : 水果生鲜

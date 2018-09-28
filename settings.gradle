@@ -1,1 +1,1 @@
-include ':精灵之泉', ':imagepicker'
+include ':精灵之泉', ':imagepicker',':faceplatform',':faceplatform-ui'

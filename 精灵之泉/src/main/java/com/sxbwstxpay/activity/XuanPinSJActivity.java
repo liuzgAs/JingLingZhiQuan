@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +25,15 @@ import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.GoodsIndex;
 import com.sxbwstxpay.model.IndexDataBean;
-import com.sxbwstxpay.model.IndexGoods;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.ShareBean;
+import com.sxbwstxpay.model.Supermarket;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
-import com.sxbwstxpay.viewholder.JiFenSCViewHolder;
 import com.sxbwstxpay.viewholder.XuanPinSJViewHolder;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -51,7 +49,7 @@ public class XuanPinSJActivity extends ZjbBaseActivity implements SwipeRefreshLa
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexDataBean> adapter;
     private int page = 1;
-    private IndexGoods.CateBean cateBean;
+    private Supermarket.CateBean cateBean;
     private View viewShangJiaTip;
     private Timer timer;
     private BroadcastReceiver reciver = new BroadcastReceiver() {
@@ -149,7 +147,7 @@ public class XuanPinSJActivity extends ZjbBaseActivity implements SwipeRefreshLa
     @Override
     protected void initIntent() {
         Intent intent = getIntent();
-        cateBean = (IndexGoods.CateBean) intent.getSerializableExtra(Constant.INTENT_KEY.value);
+        cateBean = (Supermarket.CateBean) intent.getSerializableExtra(Constant.INTENT_KEY.value);
     }
 
     @Override
@@ -177,15 +175,17 @@ public class XuanPinSJActivity extends ZjbBaseActivity implements SwipeRefreshLa
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(XuanPinSJActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout;
-                switch (cateBean.getJump()) {
-                    case "score":
-                        layout = R.layout.item_ji_fen_sc;
-                        return new JiFenSCViewHolder(parent, layout, "XuanPinSJActivity");
-                    default:
-                        layout = R.layout.item_xuan_pin_sj;
-                        return new XuanPinSJViewHolder(parent, layout, "XuanPinSJActivity");
-                }
+                int layout= R.layout.item_xuan_pin_sj;
+//                switch (cateBean.getJump()) {
+//                    case "score":
+//                        layout = R.layout.item_ji_fen_sc;
+//                        return new JiFenSCViewHolder(parent, layout, "XuanPinSJActivity");
+//                    default:
+//                        layout = R.layout.item_xuan_pin_sj;
+//                        return new XuanPinSJViewHolder(parent, layout, "XuanPinSJActivity");
+//                }
+                return new XuanPinSJViewHolder(parent, layout, "XuanPinSJActivity");
+
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
@@ -246,28 +246,28 @@ public class XuanPinSJActivity extends ZjbBaseActivity implements SwipeRefreshLa
             }
         });
         View emptyView = recyclerView.getEmptyView();
-        textTitle = (TextView) emptyView.findViewById(R.id.textTitle);
-        if (cateBean != null) {
-            if (!TextUtils.isEmpty(cateBean.getJump())) {
-                switch (cateBean.getJump()) {
-                    case "time":
-                        textTitle.setText(getResources().getString(R.string.nothing));
-                        break;
-                    case "list":
-                        textTitle.setText(getResources().getString(R.string.nothing));
-                        break;
-                    case "product":
-                        textTitle.setText("本地优质商家火热招募中");
-                        break;
-                    case "store":
-                        textTitle.setText("本地优质商家火热招募中");
-                        break;
-                    default:
-                        textTitle.setText(getResources().getString(R.string.nothing));
-                        break;
-                }
-            }
-        }
+//        textTitle = (TextView) emptyView.findViewById(R.id.textTitle);
+//        if (cateBean != null) {
+//            if (!TextUtils.isEmpty(cateBean.getJump())) {
+//                switch (cateBean.getJump()) {
+//                    case "time":
+//                        textTitle.setText(getResources().getString(R.string.nothing));
+//                        break;
+//                    case "list":
+//                        textTitle.setText(getResources().getString(R.string.nothing));
+//                        break;
+//                    case "product":
+//                        textTitle.setText("本地优质商家火热招募中");
+//                        break;
+//                    case "store":
+//                        textTitle.setText("本地优质商家火热招募中");
+//                        break;
+//                    default:
+//                        textTitle.setText(getResources().getString(R.string.nothing));
+//                        break;
+//                }
+//            }
+//        }
         recyclerView.setRefreshListener(this);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override

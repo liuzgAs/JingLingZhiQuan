@@ -1,6 +1,7 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,8 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.CeShiSYActivity;
+import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -53,7 +56,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
     private View mInflate;
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexStyle.DataBean> adapter;
-
+    private String cid;
     public ZhuanShuCDFragment() {
     }
 
@@ -163,6 +166,14 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        if (i==2){
+                            Intent intent=new Intent();
+                            intent.setClass(getActivity(), CeShiSYActivity.class);
+                            startActivity(intent);
+                        }else {
+                            cid=cateBeanList.get(i).getId();
+                            onRefresh();
+                        }
                     }
                 });
                 textTitle = (TextView) header_xian_shi_qg.findViewById(R.id.textTitle);
@@ -294,6 +305,11 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getGoods_id());
+                intent.setClass(getActivity(), ChanPinXQActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
         recyclerView.setRefreshListener(this);
@@ -310,7 +326,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
         params.put("uid", userInfo.getUid());
         params.put("tokenTime", tokenTime);
         params.put("p", page + "");
-        params.put("cid", "");
+        params.put("cid", cid);
         return new OkObject(params, url);
     }
 

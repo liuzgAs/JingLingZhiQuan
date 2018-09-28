@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ShouKuanEWMActivity;
 import com.sxbwstxpay.activity.WeiXinMPMaActivity;
 import com.sxbwstxpay.activity.XuanZeTDActivity;
 import com.sxbwstxpay.base.MyDialog;
@@ -45,7 +46,7 @@ public class ShouKuanXFragment extends ZjbBaseFragment implements View.OnClickLi
     private View mInflate;
     private View mRelaTitleStatue;
     private TextView textAmount;
-    private View[] tabView = new View[4];
+    private View[] tabView = new View[3];
     private View viewTabBg;
     private int[] textKeyId = new int[]{
             R.id.textKey00,
@@ -101,10 +102,9 @@ public class ShouKuanXFragment extends ZjbBaseFragment implements View.OnClickLi
     protected void findID() {
         mRelaTitleStatue = mInflate.findViewById(R.id.relaTitleStatue);
         textAmount = (TextView) mInflate.findViewById(R.id.textAmount);
-        tabView[0] = mInflate.findViewById(R.id.viewDongBao);
-        tabView[1] = mInflate.findViewById(R.id.viewYinLian);
-        tabView[2] = mInflate.findViewById(R.id.viewZhiFuBao);
-        tabView[3] = mInflate.findViewById(R.id.viewWeiXin);
+        tabView[0] = mInflate.findViewById(R.id.viewYinLian);
+        tabView[1] = mInflate.findViewById(R.id.viewZhiFuBao);
+        tabView[2] = mInflate.findViewById(R.id.viewWeiXin);
         viewTabBg = mInflate.findViewById(R.id.viewTabBg);
         viewShouKuan = mInflate.findViewById(R.id.viewShouKuan);
         imageBuShouKuan = (ImageView) mInflate.findViewById(R.id.imageBuShouKuan);
@@ -146,6 +146,7 @@ public class ShouKuanXFragment extends ZjbBaseFragment implements View.OnClickLi
         mInflate.findViewById(R.id.textKeyDian).setOnClickListener(this);
         mInflate.findViewById(R.id.textKeyDelete).setOnClickListener(this);
         mInflate.findViewById(R.id.buttonShouKuan).setOnClickListener(this);
+        mInflate.findViewById(R.id.viewShouKuanMa).setOnClickListener(this);
         mInflate.findViewById(R.id.textKeyDelete).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -184,8 +185,17 @@ public class ShouKuanXFragment extends ZjbBaseFragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        Intent intent=new Intent();
         switch (v.getId()) {
             default:
+                break;
+            case R.id.viewShouKuanMa:
+//                if (checkMoney()) {
+//                    return;
+//                }
+                intent.setClass(getActivity(),ShouKuanEWMActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.value,amount);
+                startActivity(intent);
                 break;
             case R.id.textKeyDelete:
                 if (amount.length() > 0) {
@@ -199,29 +209,23 @@ public class ShouKuanXFragment extends ZjbBaseFragment implements View.OnClickLi
                     checkAmount();
                 }
                 break;
-            case R.id.viewDongBao:
-                type = 4;
-//                imageBuShouKuan.setVisibility(View.GONE);
-//                viewShouKuan.setVisibility(View.VISIBLE);
-                viewTabBg.setBackgroundResource(R.mipmap.mingxitab1);
-                break;
             case R.id.viewYinLian:
                 type = 1;
 //                imageBuShouKuan.setVisibility(View.GONE);
 //                viewShouKuan.setVisibility(View.VISIBLE);
-                viewTabBg.setBackgroundResource(R.mipmap.mingxitab2);
+                viewTabBg.setBackgroundResource(R.mipmap.mingxitab1);
                 break;
             case R.id.viewZhiFuBao:
                 type = 2;
 //                imageBuShouKuan.setVisibility(View.VISIBLE);
 //                viewShouKuan.setVisibility(View.GONE);
-                viewTabBg.setBackgroundResource(R.mipmap.mingxitab3);
+                viewTabBg.setBackgroundResource(R.mipmap.mingxitab2);
                 break;
             case R.id.viewWeiXin:
                 type = 3;
 //                imageBuShouKuan.setVisibility(View.VISIBLE);
 //                viewShouKuan.setVisibility(View.GONE);
-                viewTabBg.setBackgroundResource(R.mipmap.mingxitab4);
+                viewTabBg.setBackgroundResource(R.mipmap.mingxitab3);
                 break;
             case R.id.buttonShouKuan:
                 if (amount.contains(".")) {

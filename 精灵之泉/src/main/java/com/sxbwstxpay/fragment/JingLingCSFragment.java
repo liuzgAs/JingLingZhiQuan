@@ -1,6 +1,7 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,6 +22,8 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ChanPinXQActivity;
+import com.sxbwstxpay.activity.XuanPinSJActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -164,6 +167,10 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent=new Intent();
+                        intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
+                        intent.setClass(getActivity(), XuanPinSJActivity.class);
+                        startActivity(intent);
                     }
                 });
                 textTitle = (TextView) header_xian_shi_qg.findViewById(R.id.textTitle);
@@ -295,6 +302,11 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
+                intent.setClass(getActivity(), ChanPinXQActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
         recyclerView.setRefreshListener(this);

@@ -1,10 +1,16 @@
 package com.sxbwstxpay.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -90,6 +96,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +118,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
     protected void initIntent() {
         id = getIntent().getStringExtra(Constant.INTENT_KEY.id);
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -154,6 +162,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
         } else {
             textViewTitle.setText("编辑服务");
         }
+        requestPermissions(99, Manifest.permission.CAMERA);
     }
 
     @Override
@@ -189,8 +198,58 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                 cancelLoadingDialog();
                 LogUtil.LogShitou("WoDeDPActivity--发布", s + "");
                 try {
-                     skillBefore = GsonUtils.parseJSON(s, Skill_Addbefore.class);
+                    skillBefore = GsonUtils.parseJSON(s, Skill_Addbefore.class);
                     if (skillBefore.getStatus() == 1) {
+                        if (skillBefore.getIsRealname() == 1) {
+                            new AlertDialog.Builder(FaBuFWActivity.this)
+                                    .setTitle("提示")
+                                    .setMessage("未实名认证，请先进行实名认证！")
+                                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            finish();
+                                        }
+                                    })
+                                    .setCancelable(false)
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which){
+                                            dialog.dismiss();
+                                            Intent intent = new Intent();
+                                            intent.setClass(FaBuFWActivity.this, ShiMingRZActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    .create()
+                                    .show();
+                        }
+                        if (skillBefore.getIsFace()==1){
+                            new AlertDialog.Builder(FaBuFWActivity.this)
+                                    .setTitle("提示")
+                                    .setMessage(skillBefore.getTips())
+                                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            finish();
+                                        }
+                                    })
+                                    .setCancelable(false)
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which){
+                                            dialog.dismiss();
+                                            Intent intent = new Intent();
+                                            intent.setClass(FaBuFWActivity.this, FaceLivenessExpActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    .create()
+                                    .show();
+                        }
                         textTips.setText(skillBefore.getNotice());
                         if (TextUtils.isEmpty(skillBefore.getImg())) {
                             viewImg.setVisibility(View.VISIBLE);
@@ -211,7 +270,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                         edit04.setText(skillBefore.getContact());
                         edit05.setText(skillBefore.getIntro());
                         imageId = skillBefore.getImg_id();
-                        cityId=skillBefore.getCityId();
+                        cityId = skillBefore.getCityId();
                     } else if (skillBefore.getStatus() == 3) {
                         MyDialog.showReLoginDialog(FaBuFWActivity.this);
                     } else {
@@ -251,7 +310,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                 break;
             case R.id.viewXuanZhePL:
                 ArrayList<String> item = new ArrayList<>();
-                for (int i=1;i<skillBefore.getCate().size();i++){
+                for (int i = 1; i < skillBefore.getCate().size(); i++) {
                     item.add(skillBefore.getCate().get(i).getName());
                 }
                 new MaterialDialog.Builder(this)
@@ -261,7 +320,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                             @Override
                             public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                                 dialog.dismiss();
-                                cid=skillBefore.getCate().get(position).getId()+"";
+                                cid = skillBefore.getCate().get(position).getId() + "";
                                 textPinLei.setText(skillBefore.getCate().get(position).getName());
                             }
                         })
@@ -281,6 +340,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                 break;
         }
     }
+
     /**
      * des： 网络请求参数
      * author： ZhangJieBo
@@ -333,6 +393,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
             }
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -388,6 +449,40 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                             Toast.makeText(FaBuFWActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
                         }
                     });
+        }
+    }
+    private void requestPermissions(int requestCode, String permission) {
+        if (permission != null && permission.length() > 0) {
+            try {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    // 检查是否有权限
+                    int hasPer = checkSelfPermission(permission);
+                    if (hasPer != PackageManager.PERMISSION_GRANTED) {
+                        // 是否应该显示权限请求
+                        boolean isShould = shouldShowRequestPermissionRationale(permission);
+                        requestPermissions(new String[]{permission}, requestCode);
+                    }
+                } else {
+
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        boolean flag = false;
+        for (int i = 0; i < permissions.length; i++) {
+            if (PackageManager.PERMISSION_GRANTED == grantResults[i]) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            requestPermissions(99, Manifest.permission.CAMERA);
         }
     }
 }

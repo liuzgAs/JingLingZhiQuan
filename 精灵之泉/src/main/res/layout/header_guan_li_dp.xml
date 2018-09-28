@@ -185,5 +185,30 @@
             android:layout_toLeftOf="@+id/textView46"
             android:layout_toStartOf="@+id/textView46" />
     </RelativeLayout>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:background="@color/white"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/bigText"
+        android:text="服务"/>
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/hrecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.jude.easyrecyclerview.EasyRecyclerView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalItemHeight"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/bigText"
+        android:text="热门商品"/>
 </LinearLayout>

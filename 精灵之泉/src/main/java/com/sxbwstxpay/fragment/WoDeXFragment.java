@@ -25,6 +25,7 @@ import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.CeShiSYActivity;
 import com.sxbwstxpay.activity.GongGaoActivity;
+import com.sxbwstxpay.activity.JingLingKTActivity;
 import com.sxbwstxpay.activity.JingLingLCActivity;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
@@ -396,6 +397,8 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                         startActivity(intent);
                         break;
                     case 8:
+                        intent.setClass(getActivity(), JingLingKTActivity.class);
+                        startActivity(intent);
                         break;
                     default:
                         break;

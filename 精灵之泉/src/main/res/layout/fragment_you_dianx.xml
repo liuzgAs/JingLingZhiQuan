@@ -55,9 +55,10 @@
                 android:gravity="center"
                 android:visibility="visible"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:layout_toLeftOf="@+id/image0001"
                 android:layout_toRightOf="@+id/textCity"
                 android:background="@drawable/shape_tranbasic_20dp"
                 android:layout_width="match_parent"
@@ -66,17 +67,20 @@
                 android:visibility="visible"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="25dp"
-                android:layout_alignParentRight="true"
                 android:src="@mipmap/search_white"
+                android:layout_toLeftOf="@+id/image0001"
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
             <ImageView
-                android:layout_marginLeft="15dp"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/dizhi"
-                android:layout_width="18dp"
+                android:src="@mipmap/youdian_fl"
+                android:layout_width="38dp"
+                android:padding="8dp"
+                android:layout_marginRight="10dp"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true"
                 android:id="@+id/image0001"
-                android:layout_height="wrap_content" />
+                android:layout_height="38dp" />
         </RelativeLayout>
     </LinearLayout>
 

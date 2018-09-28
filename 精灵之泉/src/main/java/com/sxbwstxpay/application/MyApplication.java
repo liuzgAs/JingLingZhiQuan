@@ -11,7 +11,9 @@ import android.support.multidex.MultiDexApplication;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
+import com.baidu.idl.face.platform.FaceSDKManager;
 import com.lzy.okgo.OkGo;
+import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.interfacepage.OnPatchLister;
 import com.sxbwstxpay.util.LogUtil;
 import com.taobao.sophix.PatchStatus;
@@ -44,8 +46,9 @@ public class MyApplication extends MultiDexApplication {
         ZXingLibrary.initDisplayOpinion(this);
         OkGo.init(this);
         initCloudChannel(this);
-    }
+        FaceSDKManager.getInstance().initialize(this, Constant.Config.licenseID, Constant.Config.licenseFileName);
 
+    }
 
     public static Context getContext() {
         return context;

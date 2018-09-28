@@ -31,7 +31,7 @@ import com.sxbwstxpay.customview.TabFragmentHost;
 import com.sxbwstxpay.fragment.ShouKuanXFragment;
 import com.sxbwstxpay.fragment.ShouYeFragment;
 import com.sxbwstxpay.fragment.WoDeXFragment;
-import com.sxbwstxpay.fragment.YouDianFragment;
+import com.sxbwstxpay.fragment.YouDianXFragment;
 import com.sxbwstxpay.fragment.ZhuanQianFragment;
 import com.sxbwstxpay.interfacepage.OnPatchLister;
 import com.sxbwstxpay.model.ExtraMap;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] tabsItem = new String[5];
     private Class[] fragment = new Class[]{
             ShouYeFragment.class,
-            YouDianFragment.class,
+            YouDianXFragment.class,
             ShouKuanXFragment.class,
             ZhuanQianFragment.class,
             WoDeXFragment.class

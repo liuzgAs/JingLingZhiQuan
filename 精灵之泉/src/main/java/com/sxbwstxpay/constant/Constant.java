@@ -15,6 +15,7 @@ public class Constant {
     public static String WXSCRENT = "02d7e0ca570f95630b552bd055fdd14a";//微信scrent
     public static String QQ_ID = "1106239952";//qq
     public static String QQ_KEY = "HcA9s2rpKkLO2M5w";//qq
+    public static int CID = 0;//qq
 
     public static class Url {
         //app下载链接
@@ -167,6 +168,10 @@ public class Constant {
         public static final String USER_ORDER = "&g=App&m=User&a=order";
         //我发布的服务
         public static final String SKILL_MY = "&g=App&m=Skill&a=my";
+        //精灵课堂
+        public static final String CLASSROOMITEM_INDEX = "&g=App&m=ClassroomItem&a=index";
+        //精灵课堂输密码加载视频
+        public static final String CLASSROOMITEM_SUBPWD = "&g=App&m=ClassroomItem&a=subpwd";
         //订单操作
         public static final String USER_ORDERDONE = "&g=App&m=User&a=orderDone";
         //我的店铺
@@ -207,6 +212,8 @@ public class Constant {
         public static final String INDEX_STORE = "&g=App&m=Index&a=store";
         //本地优店店铺
         public static final String STORE_INDEX = "&g=App&m=Store&a=index";
+        //查看服务店铺
+        public static final String SKILL_DETAILS = "&g=App&m=Skill&a=details";
         //我的素材
         public static final String USER_ITEM = "&g=App&m=User&a=item";
         //发布素材提交
@@ -249,6 +256,10 @@ public class Constant {
          * 优惠券
          */
         public static final String MAP_INDEX = "g=App&m=Map&a=index";
+        /**
+         * 服务主页
+         */
+        public static final String SKILL_INDEX = "g=App&m=Skill&a=index";
         /**
          * 业绩管理
          */
@@ -441,5 +452,26 @@ public class Constant {
     public static class VALUE{
         public static final float IndexBannerHeight = 452f;
     }
+    public static class Config {
 
+
+
+
+        //    // 为了apiKey,secretKey为您调用百度人脸在线接口的，如注册，比对等。
+//    // 为了的安全，建议放在您的服务端，端把人脸传给服务器，在服务端端
+//    // license为调用sdk的人脸检测功能使用，人脸识别 = 人脸检测（sdk功能）  + 人脸比对（服务端api）
+        public static String apiKey = "替换为你的apiKey(ak)";
+        public static String secretKey = "替换为你的secretKey(sk)";
+        public static String licenseID = "sxbwstxpay-face-android";
+        public static String licenseFileName = "idl-license.face-android";
+        /*
+         * <p>
+         * 每个开发者账号只能创建一个人脸库；groupID用于标识人脸库
+         * <p>
+         * 人脸识别 接口 https://aip.baidubce.com/rest/2.0/face/v3/search
+         * 人脸注册 接口 https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/add
+         */
+        public static String groupID = "替换为你的人脸组groupID";
+
+    }
 }
