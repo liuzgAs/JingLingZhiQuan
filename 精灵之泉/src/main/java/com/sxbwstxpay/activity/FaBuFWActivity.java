@@ -30,6 +30,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
@@ -101,6 +102,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fa_bu_fw);
+        MyApplication.getInstance().images.clear();
         init(FaBuFWActivity.class);
     }
 
@@ -244,7 +246,6 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                                             Intent intent = new Intent();
                                             intent.setClass(FaBuFWActivity.this, FaceLivenessExpActivity.class);
                                             startActivity(intent);
-                                            finish();
                                         }
                                     })
                                     .create()
@@ -334,6 +335,31 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.btnFaBu:
+                if (MyApplication.getInstance().images.size()==0){
+                    new AlertDialog.Builder(FaBuFWActivity.this)
+                            .setTitle("提示")
+                            .setMessage(skillBefore.getTips())
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    finish();
+                                }
+                            })
+                            .setCancelable(false)
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which){
+                                    dialog.dismiss();
+                                    Intent intent = new Intent();
+                                    intent.setClass(FaBuFWActivity.this, FaceLivenessExpActivity.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .create()
+                            .show();
+                    return;
+                }
                 addAfter();
                 break;
             default:
@@ -362,6 +388,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
         params.put("intro", edit05.getText().toString());
         params.put("img_id", imageId);
         params.put("id", id);
+        params.put("faceImgs", MyApplication.getInstance().images.toString().replace("[","").replace("]",""));
         return new OkObject(params, url);
     }
 

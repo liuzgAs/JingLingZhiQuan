@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class Test_result implements Serializable{
 
     /**
+     * cid : 17
      * style : 端庄范
      * bgimg : http://api.jlzquan.com/Uploads/web/5ba48e08ae863.jpg
      * btn_txt : 查看专属我的风格搭配
@@ -17,11 +18,20 @@ public class Test_result implements Serializable{
      * info : 返回成功！
      */
 
+    private String cid;
     private String style;
     private String bgimg;
     private String btn_txt;
     private int status;
     private String info;
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
 
     public String getStyle() {
         return style;

@@ -28,7 +28,7 @@ import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.TabFragmentHost;
-import com.sxbwstxpay.fragment.ShouKuanXFragment;
+import com.sxbwstxpay.fragment.GouWuCheFragment;
 import com.sxbwstxpay.fragment.ShouYeFragment;
 import com.sxbwstxpay.fragment.WoDeXFragment;
 import com.sxbwstxpay.fragment.YouDianXFragment;
@@ -52,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
     private Class[] fragment = new Class[]{
             ShouYeFragment.class,
             YouDianXFragment.class,
-            ShouKuanXFragment.class,
             ZhuanQianFragment.class,
+            GouWuCheFragment.class,
             WoDeXFragment.class
     };
     private int[] imgRes = new int[]{
             R.drawable.selector_shengqian_item,
             R.drawable.selector_youdian_item,
-            R.drawable.selector_renzheng_item,
             R.drawable.selector_zhuanqian_item,
+            R.drawable.selector_renzheng_item,
             R.drawable.selector_mine_item
     };
     public TabFragmentHost mTabHost;
@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
                     if (isShow) {
                         MyDialog.showTipDialog(MainActivity.this, "取消分享");
                     }
+                    break;
+                case Constant.BROADCASTCODE.STYLE:
+                    mTabHost.setCurrentTab(0);
                     break;
                 case Constant.BROADCASTCODE.EXTRAMAP:
                     ExtraMap extraMap = (ExtraMap) intent.getSerializableExtra(Constant.INTENT_KEY.EXTRAMAP);
@@ -258,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction(Constant.BROADCASTCODE.EXTRAMAP);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);
+        filter.addAction(Constant.BROADCASTCODE.STYLE);
         registerReceiver(receiver, filter);
     }
 

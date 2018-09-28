@@ -1,7 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -57,13 +60,27 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexStyle.DataBean> adapter;
     private String cid;
+
     public ZhuanShuCDFragment() {
     }
 
     private List<IndexStyle.CateBean> cateBeanList;
     private int page = 1;
     private List<BannerBean> indexGoodsBanner;
-
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.STYLE:
+                    cid = (String) intent.getSerializableExtra(Constant.INTENT_KEY.STYLE);
+                    onRefresh();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     public static ZhuanShuCDFragment newInstance(String param1) {
         ZhuanShuCDFragment fragment = new ZhuanShuCDFragment();
         Bundle args = new Bundle();
@@ -105,7 +122,18 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
     protected void initSP() {
 
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.STYLE);
+        getActivity().registerReceiver(receiver, filter);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiver);
+    }
     @Override
     protected void findID() {
         recyclerView = mInflate.findViewById(R.id.recyclerView);

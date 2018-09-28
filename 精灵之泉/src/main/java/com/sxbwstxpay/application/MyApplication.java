@@ -34,6 +34,7 @@ public class MyApplication extends MultiDexApplication {
     private List<Activity> activityList = new LinkedList<Activity>();
     private static MyApplication instance;
     private static OnPatchLister onPatchLister;
+    public List<Integer> images = new LinkedList<Integer>();
 
     @Override
     public void onCreate() {
@@ -47,9 +48,7 @@ public class MyApplication extends MultiDexApplication {
         OkGo.init(this);
         initCloudChannel(this);
         FaceSDKManager.getInstance().initialize(this, Constant.Config.licenseID, Constant.Config.licenseFileName);
-
     }
-
     public static Context getContext() {
         return context;
     }

@@ -30,6 +30,7 @@ import com.sxbwstxpay.activity.JingLingLCActivity;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
 import com.sxbwstxpay.activity.ShiMingRZActivity;
+import com.sxbwstxpay.activity.TestResultActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.WoDeDPXActivity;
@@ -375,6 +376,9 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                         startActivity(intent);
                         break;
                     case 3:
+                        intent.setClass(getActivity(), TestResultActivity.class);
+                        intent.putExtra("type",1);
+                        startActivity(intent);
                         break;
                     case 4:
                         intent.setClass(getActivity(), CeShiSYActivity.class);

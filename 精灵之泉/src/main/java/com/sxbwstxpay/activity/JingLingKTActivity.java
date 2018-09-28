@@ -36,7 +36,7 @@ import com.sxbwstxpay.viewholder.JingLingKTViewHolder;
 import java.util.HashMap;
 import java.util.List;
 
-import cn.jzvd.JZVideoPlayer;
+import cn.jzvd.JzvdStd;
 import okhttp3.Response;
 
 public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -301,7 +301,7 @@ public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickL
                     page++;
                     Subpwd subpwd = GsonUtils.parseJSON(s, Subpwd.class);
                     if (subpwd.getStatus() == 1) {
-                        JZVideoPlayer.startFullscreen(JingLingKTActivity.this, JZVideoPlayer.class, subpwd.getVideo_url(), "精灵视频");
+                        JzvdStd.startFullscreen(JingLingKTActivity.this, JzvdStd.class,subpwd.getVideo_url(), "精灵视频");
                     } else if (subpwd.getStatus() == 3) {
                         MyDialog.showReLoginDialog(JingLingKTActivity.this);
                     } else {

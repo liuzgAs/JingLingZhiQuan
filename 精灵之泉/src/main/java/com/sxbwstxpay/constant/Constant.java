@@ -374,6 +374,7 @@ public class Constant {
         public static final String id = "id";
         public static final String tongDaoId = "tongDaoId";
         public static final String img = "img";
+        public static final String STYLE = "Style";
         public static final String value = "value";
         public static final String URL = "URL";
         public static final String EXTRAMAP = "ExtraMap";
@@ -430,6 +431,7 @@ public class Constant {
         public static final String EXTRAMAP = "extramap";
         public static final String CITY_CHOOSE = "cityChoose";
         public static final String CHANGEFW = "changefw";
+        public static final String STYLE = "Style";
         public static final String ShangJia01 = "ShangJia01";
         public static final String ShangJia02 = "ShangJia02";
         public static final String address = "address";
