@@ -73,11 +73,11 @@
                 android:layout_height="20dp" />
             <ImageView
                 android:layout_centerVertical="true"
-                android:src="@mipmap/youdian_fl"
+                android:src="@mipmap/item03_normal"
                 android:layout_width="38dp"
                 android:padding="8dp"
                 android:layout_marginRight="10dp"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 android:layout_alignParentRight="true"
                 android:id="@+id/image0001"
                 android:layout_height="38dp" />

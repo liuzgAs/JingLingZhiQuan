@@ -178,7 +178,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
     @Override
     protected void initViews() {
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
-        layoutParams.height = (int) DpUtils.convertDpToPixel(115, getActivity()) + ScreenUtils.getStatusBarHeight(getActivity());
+        layoutParams.height = (int) DpUtils.convertDpToPixel(120, getActivity()) + ScreenUtils.getStatusBarHeight(getActivity());
         viewBar.setLayoutParams(layoutParams);
         viewBar.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
 

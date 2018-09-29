@@ -204,6 +204,9 @@ public class CeShiActivity extends ZjbBaseNotLeftActivity implements CeShiInterf
                         Intent intent=new Intent(CeShiActivity.this,TestResultActivity.class);
                         intent.putExtra("test_result",test_result);
                         startActivity(intent);
+                        Intent intent1=new Intent();
+                        intent1.setAction(Constant.BROADCASTCODE.CHANGEWODE);
+                        sendBroadcast(intent1);
                         finish();
                     } else if (test_result.getStatus() == 3) {
                         MyDialog.showReLoginDialog(CeShiActivity.this);

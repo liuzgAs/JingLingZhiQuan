@@ -524,7 +524,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     private void initPopRecycler(EasyRecyclerView recyclePacate) {
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
         recyclePacate.setLayoutManager(manager);
-        SpaceDecoration spaceDecoration =new SpaceDecoration((int) DpUtils.convertDpToPixel(1f, getActivity()));
+        SpaceDecoration spaceDecoration =new SpaceDecoration((int) DpUtils.convertDpToPixel(10f, getActivity()));
 //        recyclerView.addItemDecoration(itemDecoration1);
 //        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclePacate.addItemDecoration(spaceDecoration);

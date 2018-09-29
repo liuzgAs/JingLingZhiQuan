@@ -5,7 +5,7 @@
     android:id="@+id/viewWoDe"
     android:background="@drawable/layout_selector_white_system_gray"
     android:orientation="vertical"
-    android:layout_height="100dp">
+    android:layout_height="105dp">
     <ImageView
         android:id="@+id/image"
         android:layout_width="26dp"
@@ -17,6 +17,6 @@
         android:layout_marginTop="5dp"
         android:id="@+id/textTitle"
         android:textColor="@color/light_black"
-        android:textSize="@dimen/normal_textsize"
+        android:textSize="14sp"
         android:text="商城订单"/>
 </LinearLayout>

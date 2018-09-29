@@ -33,6 +33,7 @@
             android:background="@color/line_gray"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:visibility="gone"
             android:layout_weight="0"
             ></LinearLayout>
 
@@ -42,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_gravity="center_horizontal|bottom"
-            android:background="#ffffff"
+            android:background="#001000"
             android:divider="@null">
         </TabWidget>
 

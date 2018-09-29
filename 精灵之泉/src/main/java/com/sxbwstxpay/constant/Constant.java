@@ -24,6 +24,8 @@ public class Constant {
         public static final String INFO_ABOUT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=about";
         //联系客服
         public static final String INFO_CONTACT = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=contact";
+        //服务入驻协议
+        public static final String INFO_FW = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&id=13";
         //资质证书
         public static final String INFO_CA = "http://api.jlzquan.com/index.php?g=App&m=Index&a=info&type=ca";
         //注册协议
@@ -431,6 +433,7 @@ public class Constant {
         public static final String EXTRAMAP = "extramap";
         public static final String CITY_CHOOSE = "cityChoose";
         public static final String CHANGEFW = "changefw";
+        public static final String CHANGEWODE = "changewode";
         public static final String STYLE = "Style";
         public static final String ShangJia01 = "ShangJia01";
         public static final String ShangJia02 = "ShangJia02";

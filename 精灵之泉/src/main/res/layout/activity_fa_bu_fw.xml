@@ -64,7 +64,7 @@
             <RelativeLayout
                 android:id="@+id/viewImgAdd"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:background="#f6f5fa">
 
                 <LinearLayout
@@ -99,7 +99,7 @@
             <LinearLayout
                 android:id="@+id/viewXuanZhePL"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/normalItemHeight"
+                android:layout_height="45dp"
                 android:gravity="center_vertical"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
@@ -120,7 +120,7 @@
             <LinearLayout
                 android:id="@+id/viewDiQu"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/normalItemHeight"
+                android:layout_height="45dp"
                 android:gravity="center_vertical"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
@@ -142,7 +142,7 @@
             <EditText
                 android:id="@+id/edit01"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/normalItemHeight"
+                android:layout_height="45dp"
                 android:background="@color/white"
                 android:layout_marginTop="1dp"
                 android:gravity="center_vertical"
@@ -154,7 +154,7 @@
             <EditText
                 android:id="@+id/edit02"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/normalItemHeight"
+                android:layout_height="45dp"
                 android:background="@color/white"
                 android:layout_marginTop="1dp"
                 android:gravity="center_vertical"
@@ -166,7 +166,7 @@
             <EditText
                 android:id="@+id/edit03"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/normalItemHeight"
+                android:layout_height="45dp"
                 android:background="@color/white"
                 android:layout_marginTop="1dp"
                 android:gravity="center_vertical"
@@ -178,7 +178,7 @@
             <EditText
                 android:id="@+id/edit04"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/normalItemHeight"
+                android:layout_height="45dp"
                 android:background="@color/white"
                 android:layout_marginTop="1dp"
                 android:gravity="center_vertical"
@@ -190,7 +190,7 @@
             <EditText
                 android:id="@+id/edit05"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:background="@color/white"
                 android:layout_marginTop="1dp"
                 android:gravity="top"
@@ -207,7 +207,7 @@
                 android:gravity="center_vertical"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -228,7 +228,7 @@
     <Button
         android:id="@+id/btnFaBu"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/normalItemHeight"
+        android:layout_height="45dp"
         android:text="发布"
         android:textColor="@color/white"
         android:textSize="@dimen/normal_textsize"

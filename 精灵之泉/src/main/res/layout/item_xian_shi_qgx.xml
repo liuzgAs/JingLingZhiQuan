@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageRecom_img"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_empty" />
+
+        <TextView
+            android:id="@+id/textStock_num"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_trnblack_15dp"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="库存5000"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize" />
+    </RelativeLayout>
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="@dimen/normal_textsize"
+        android:textColor="@color/light_black"
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="伊利 金典 有机纯牛奶 250ml*12 天赐有机 WWF 低脂优蛋白 领券满99减5元" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/bigText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥2999"
+            android:id="@+id/textPrice"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:id="@+id/textView99"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textPrice"
+            android:layout_toEndOf="@+id/textPrice" />
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/basic_color"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赚150"
+            android:id="@+id/textGoods_money"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView99"
+            android:layout_toEndOf="@+id/textView99" />
+
+        <LinearLayout
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/textGoods_money"
+            android:layout_toEndOf="@+id/textGoods_money">
+
+            <ImageView
+                android:paddingRight="15dp"
+                android:src="@mipmap/fenxiang"
+                android:layout_width="35dp"
+                android:visibility="invisible"
+                android:layout_height="match_parent"
+                android:id="@+id/imageShare"
+                />
+
+            <ImageView
+                android:paddingRight="15dp"
+                android:src="@mipmap/tupian"
+                android:layout_width="35dp"
+                android:visibility="invisible"
+                android:layout_height="match_parent"
+                android:id="@+id/imageSuCai"
+                 />
+
+            <Button
+                android:textSize="15dp"
+                android:background="@drawable/btn_jianbian270_basic_30dp"
+                android:textColor="@color/white"
+                android:layout_width="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="20dp"
+                android:text="+"
+                android:id="@+id/buttonShangJia"
+           />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

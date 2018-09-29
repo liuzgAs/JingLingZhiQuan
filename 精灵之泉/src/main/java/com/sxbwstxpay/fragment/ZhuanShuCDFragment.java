@@ -27,7 +27,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.CeShiSYActivity;
-import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
@@ -333,11 +332,11 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent();
-                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getGoods_id());
-                intent.setClass(getActivity(), ChanPinXQActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getGoods_id());
+//                intent.setClass(getActivity(), ChanPinXQActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                startActivity(intent);
             }
         });
         recyclerView.setRefreshListener(this);

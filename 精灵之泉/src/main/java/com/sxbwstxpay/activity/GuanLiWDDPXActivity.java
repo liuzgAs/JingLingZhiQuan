@@ -233,13 +233,16 @@ public class GuanLiWDDPXActivity extends ZjbBaseActivity implements View.OnClick
     private void initRecycler() {
         GridLayoutManager manager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(manager);
-        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(5f, this));
+        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(10f, this));
+        spaceDecoration.setPaddingEdgeSide(false);//是否为左右2边添加padding.默认true.
+        spaceDecoration.setPaddingStart(false);//是否在给第一行的item添加上padding(不包含header).默认true.
+        spaceDecoration.setPaddingHeaderFooter(false);
         recyclerView.addItemDecoration(spaceDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<SkillDetails.DataBean>(GuanLiWDDPXActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_xian_shi_qg;
+                int layout = R.layout.item_xian_shi_qgx;
                 return new ShangjiaDPViewHolder(parent, layout);
             }
 

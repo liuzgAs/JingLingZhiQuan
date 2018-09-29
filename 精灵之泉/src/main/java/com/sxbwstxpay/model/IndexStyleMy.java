@@ -167,6 +167,7 @@ public class IndexStyleMy {
         private String goods_id;
         private String title;
         private List<DesBean> des;
+        private List<ImgsBean> imgs;
 
         public String getImg() {
             return img;
@@ -198,6 +199,37 @@ public class IndexStyleMy {
 
         public void setDes(List<DesBean> des) {
             this.des = des;
+        }
+        public List<ImgsBean> getImgs() {
+            return imgs;
+        }
+        public void setImgs(List<ImgsBean> imgs) {
+            this.imgs = imgs;
+        }
+        public static class ImgsBean {
+            /**
+             * img : http://api.jlzquan.com/Uploads/test/5baef97dd9f99.png
+             * goods_id : 5213
+             */
+
+            private String img;
+            private String goods_id;
+
+            public String getImg() {
+                return img;
+            }
+
+            public void setImg(String img) {
+                this.img = img;
+            }
+
+            public String getGoods_id() {
+                return goods_id;
+            }
+
+            public void setGoods_id(String goods_id) {
+                this.goods_id = goods_id;
+            }
         }
         public static class DesBean {
             /**

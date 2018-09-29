@@ -1,7 +1,6 @@
 package com.sxbwstxpay.viewholder;
 
 import android.support.annotation.LayoutRes;
-import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -28,9 +27,9 @@ public class PcateViewHolder extends BaseViewHolder<SkillIndex.CateBean> {
         super.setData(data);
         textPcate.setText(data.getName());
         if (Constant.CID==data.getId()){
-            textPcate.setTextColor(ContextCompat.getColor(getContext(),R.color.light_black));
+            textPcate.setBackgroundResource(R.drawable.youdian_bg2);
         }else {
-            textPcate.setTextColor(ContextCompat.getColor(getContext(),R.color.text_gray));
+            textPcate.setBackgroundResource(R.drawable.youdian_bg1);
         }
     }
 

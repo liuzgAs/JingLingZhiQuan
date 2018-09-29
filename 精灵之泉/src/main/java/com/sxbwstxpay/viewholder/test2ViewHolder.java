@@ -24,7 +24,6 @@ public class test2ViewHolder extends BaseViewHolder<TestStyle.DataBean> {
         textTitle = $(R.id.textTitle);
         image = $(R.id.image);
         viewSelet = $(R.id.viewSelet);
-
     }
 
     @Override

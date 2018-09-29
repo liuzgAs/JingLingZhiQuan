@@ -174,6 +174,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.viewImgAdd).setOnClickListener(this);
         findViewById(R.id.viewXuanZhePL).setOnClickListener(this);
         findViewById(R.id.viewDiQu).setOnClickListener(this);
+        findViewById(R.id.textXieYi).setOnClickListener(this);
         btnFaBu.setOnClickListener(this);
     }
 
@@ -333,6 +334,12 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                 break;
             case R.id.imageBack:
                 finish();
+                break;
+            case R.id.textXieYi:
+                intent.setClass(FaBuFWActivity.this, WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, "服务入驻协议");
+                intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_FW);
+                startActivity(intent);
                 break;
             case R.id.btnFaBu:
                 if (MyApplication.getInstance().images.size()==0){

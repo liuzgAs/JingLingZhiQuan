@@ -32,7 +32,7 @@ import com.sxbwstxpay.util.Arith;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
-import com.sxbwstxpay.viewholder.GouWuCViewHolder;
+import com.sxbwstxpay.viewholder.GouWuCXViewHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -140,7 +140,7 @@ public class GouWuCheFragment extends ZjbBaseFragment implements View.OnClickLis
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_car;
-                return new GouWuCViewHolder(parent, layout);
+                return new GouWuCXViewHolder(parent, layout,GouWuCheFragment.this);
             }
         });
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {

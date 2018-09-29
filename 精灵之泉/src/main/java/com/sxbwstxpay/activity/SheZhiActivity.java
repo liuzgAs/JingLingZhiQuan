@@ -8,9 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.util.DataCleanManager;
+import com.sxbwstxpay.util.PermissionPageUtils;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.util.VersionUtils;
 
@@ -62,6 +64,7 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
         findViewById(R.id.viewGuanYu).setOnClickListener(this);
         findViewById(R.id.viewHuanCun).setOnClickListener(this);
         findViewById(R.id.viewBangZhuZX).setOnClickListener(this);
+        findViewById(R.id.viewDingWei).setOnClickListener(this);
 
     }
 
@@ -99,6 +102,9 @@ public class SheZhiActivity extends ZjbBaseActivity implements View.OnClickListe
             case R.id.viewBangZhuZX:
                 intent.setClass(this, BangZhuZXActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.viewDingWei:
+                new PermissionPageUtils(MyApplication.getContext()).jumpPermissionPage();
                 break;
         }
     }

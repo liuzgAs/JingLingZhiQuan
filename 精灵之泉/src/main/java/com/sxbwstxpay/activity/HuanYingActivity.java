@@ -177,6 +177,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
             // Do not have permissions, request them now
             EasyPermissions.requestPermissions(this, "需要开启定位权限",
                     LOCATION, perms);
+//            initLocation();
         }
     }
 
@@ -282,6 +283,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
 
         // Forward results to EasyPermissions
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+
     }
 
     @Override
@@ -299,7 +301,8 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             new AppSettingsDialog.Builder(this).build().show();
         }else {
-            methodRequiresTwoPermission();
+//            methodRequiresTwoPermission();
+            initLocation();
         }
     }
 

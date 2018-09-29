@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@mipmap/mine_top"
+    android:background="@mipmap/wode_top_beijin"
     android:orientation="vertical">
 
     <View
@@ -17,8 +17,8 @@
 
         <com.sxbwstxpay.customview.CircleImageView
             android:id="@+id/imageTouXiang"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/relaTitleStatue01"
             android:layout_marginLeft="10dp"
@@ -174,7 +174,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="120dp"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -201,7 +201,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="实名认证"
-                android:textColor="@color/light_black"
+                android:textColor="@color/gray_deep"
                 android:textSize="@dimen/litterText" />
         </RelativeLayout>
 
@@ -228,7 +228,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="精灵理财"
-                android:textColor="@color/light_black"
+                android:textColor="@color/gray_deep"
                 android:textSize="@dimen/litterText" />
         </RelativeLayout>
 
@@ -255,7 +255,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="我的账单"
-                android:textColor="@color/light_black"
+                android:textColor="@color/gray_deep"
                 android:textSize="@dimen/litterText" />
         </RelativeLayout>
 
@@ -282,7 +282,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="我的收益"
-                android:textColor="@color/light_black"
+                android:textColor="@color/gray_deep"
                 android:textSize="@dimen/litterText" />
         </RelativeLayout>
     </LinearLayout>

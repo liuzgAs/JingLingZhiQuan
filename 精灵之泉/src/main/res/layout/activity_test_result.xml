@@ -10,7 +10,7 @@
         android:id="@+id/viewBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:gravity="bottom">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewBar"
-        app:layout_constraintVertical_bias="0.466">
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"

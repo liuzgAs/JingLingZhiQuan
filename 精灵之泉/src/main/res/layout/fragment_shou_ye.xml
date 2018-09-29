@@ -10,10 +10,9 @@
         android:id="@+id/viewBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/bar_bg"
+        android:background="@mipmap/topbg_01"
         android:gravity="bottom"
         android:orientation="vertical">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="30dp">
@@ -49,14 +48,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalItemHeight"
+            android:layout_height="40dp"
+            android:gravity="bottom"
             android:layout_centerVertical="true">
 
             <TextView
                 android:id="@+id/textSouSuo"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_centerVertical="true"
+                android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/shape_tranwhite_20dp"
@@ -85,6 +84,10 @@
             app:tabTextAppearance="@style/TabLayoutTextStyle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalItemHeight"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:id="@+id/view"></View>
     </LinearLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"

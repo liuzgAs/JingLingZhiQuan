@@ -1,7 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -73,7 +76,25 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
     RecyclerArrayAdapter<WoDe> adapter;
     ArrayList<WoDe> woDes = new ArrayList<>();
     private UserIndex userIndex;
-
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.CHANGEWODE:
+                    onRefresh();
+                    break;
+                case Constant.BROADCASTCODE.VIP:
+                    onRefresh();
+                    break;
+                case Constant.BROADCASTCODE.MINE:
+                    onRefresh();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     public WoDeXFragment() {
     }
 
@@ -491,5 +512,20 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
             default:
                 break;
         }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.CHANGEWODE);
+        filter.addAction(Constant.BROADCASTCODE.VIP);
+        filter.addAction(Constant.BROADCASTCODE.MINE);
+        getActivity().registerReceiver(reciver, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(reciver);
     }
 }

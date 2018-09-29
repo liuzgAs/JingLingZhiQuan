@@ -9,36 +9,36 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.model.TestStyle;
-import com.sxbwstxpay.util.ScreenUtils;
+import com.sxbwstxpay.util.GlideApp;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
  */
-public class test1ViewHolder extends BaseViewHolder<TestStyle.DataBean> {
+public class test3ViewHolder extends BaseViewHolder<TestStyle.DataBean> {
     private final TextView textTitle;
     private final ImageView image;
-    private final View view;
+    private final View viewSelet;
 
-    public test1ViewHolder(ViewGroup parent, @LayoutRes int res) {
+    public test3ViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
         textTitle = $(R.id.textTitle);
         image = $(R.id.image);
-        view = $(R.id.view);
-        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        int screenWidth = ScreenUtils.getScreenWidth(getContext());
-        layoutParams.width = screenWidth;
-        layoutParams.height = (int) ((float) screenWidth * 184f / 1080f);
-        view.setLayoutParams(layoutParams);
+        viewSelet = $(R.id.viewSelet);
     }
 
     @Override
     public void setData(TestStyle.DataBean data) {
         super.setData(data);
         textTitle.setText(data.getTitle());
+        GlideApp.with(getContext())
+                .load(data.getImg())
+                .centerCrop()
+                .placeholder(R.mipmap.ic_empty)
+                .into(image);
         if (data.getIsc()){
-            image.setImageResource(R.mipmap.ceshi_xz);
+            viewSelet.setVisibility(View.VISIBLE);
         }else {
-            image.setImageResource(R.mipmap.ceshi_weixz);
+            viewSelet.setVisibility(View.GONE);
         }
     }
     

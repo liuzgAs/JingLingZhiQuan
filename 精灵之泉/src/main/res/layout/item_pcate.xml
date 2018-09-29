@@ -5,10 +5,10 @@
     <TextView
         android:id="@+id/textPcate"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@drawable/layout_selector_white_system_gray"
+        android:layout_height="40dp"
+        android:background="@drawable/youdian_bg1"
         android:textSize="@dimen/normal_textsize"
-        android:textColor="@color/text_gray"
+        android:textColor="@color/light_black"
         android:text="adfa"
         android:gravity="center"/>
 </LinearLayout>

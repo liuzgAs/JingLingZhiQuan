@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.util.Log;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -171,11 +171,11 @@ public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickL
                             .title("提示")
                             .iconRes(R.mipmap.logo)
                             .content(skillMy.getPwdBgTxt())
+                            .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                             .widgetColor(ContextCompat.getColor(JingLingKTActivity.this, R.color.basic_color))
                             .input("请输入密码", "", new MaterialDialog.InputCallback() {
                                 @Override
                                 public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                                    Log.i("yqy", "输入的是：" + input);
                                 }
                             })
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -183,7 +183,6 @@ public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickL
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     if (dialog.getInputEditText().length() >0) {
                                         dialog.dismiss();
-                                        LogUtil.LogShitou("密码：", dialog.getInputEditText().getText().toString());
                                         subpwd(adapter.getItem(position).getId(),dialog.getInputEditText().getText().toString());
                                     }else {
                                         dialog.dismiss();
@@ -301,7 +300,7 @@ public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickL
                     page++;
                     Subpwd subpwd = GsonUtils.parseJSON(s, Subpwd.class);
                     if (subpwd.getStatus() == 1) {
-                        JzvdStd.startFullscreen(JingLingKTActivity.this, JzvdStd.class,subpwd.getVideo_url(), "精灵视频");
+                        JzvdStd.startFullscreen(JingLingKTActivity.this, JzvdStd.class,subpwd.getVideo_url(), "精灵课堂");
                     } else if (subpwd.getStatus() == 3) {
                         MyDialog.showReLoginDialog(JingLingKTActivity.this);
                     } else {

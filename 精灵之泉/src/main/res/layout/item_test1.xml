@@ -8,6 +8,7 @@
     android:layout_height="50dp"
     android:gravity="center_vertical"
     android:paddingRight="10dp"
+    android:id="@+id/view"
     android:orientation="horizontal"
     android:paddingLeft="10dp">
     <TextView

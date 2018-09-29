@@ -31,7 +31,7 @@
         android:id="@+id/textTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/bigText"
+        android:textSize="18sp"
         android:textColor="@color/light_black"
         android:textStyle="bold"
         android:layout_marginTop="5dp"

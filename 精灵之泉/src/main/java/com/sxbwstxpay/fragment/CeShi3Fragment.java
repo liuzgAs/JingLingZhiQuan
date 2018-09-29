@@ -22,7 +22,7 @@ import com.sxbwstxpay.interfacepage.CeShiInterface;
 import com.sxbwstxpay.model.TestStyle;
 import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.ScreenUtils;
-import com.sxbwstxpay.viewholder.test2ViewHolder;
+import com.sxbwstxpay.viewholder.test3ViewHolder;
 
 import java.util.ArrayList;
 
@@ -132,14 +132,14 @@ public class CeShi3Fragment extends ZjbBaseFragment implements View.OnClickListe
     private void initRecycler() {
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(manager);
-        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(10f, getActivity()));
+        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(15f, getActivity()));
         recyclerView.addItemDecoration(spaceDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<TestStyle.DataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_test3;
-                return new test2ViewHolder(parent, layout);
+                return new test3ViewHolder(parent, layout);
             }
         });
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
