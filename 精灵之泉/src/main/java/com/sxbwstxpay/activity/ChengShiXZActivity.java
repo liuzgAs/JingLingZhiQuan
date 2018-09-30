@@ -41,7 +41,7 @@ public class ChengShiXZActivity extends ZjbBaseActivity implements View.OnClickL
     private MyAdapter mAdapter;
     private List<IndexCitylist.CityEntity> indexCitylistCity = new ArrayList<>();
     private View viewBar;
-
+    int type=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +56,7 @@ public class ChengShiXZActivity extends ZjbBaseActivity implements View.OnClickL
 
     @Override
     protected void initIntent() {
-
+        type=getIntent().getIntExtra("type",0);
     }
 
     @Override
@@ -189,7 +189,11 @@ public class ChengShiXZActivity extends ZjbBaseActivity implements View.OnClickL
                     IndexCitylist.CityEntity.ListEntity listEntity = listEntityList.get(i);
                     Intent data = new Intent();
                     data.putExtra(Constant.INTENT_KEY.CITY, listEntity);
-                    data.setAction(Constant.BROADCASTCODE.CITY_CHOOSE);
+                    if (type==1){
+                        data.setAction(Constant.BROADCASTCODE.CITY_CHOOSEYD);
+                    }else {
+                        data.setAction(Constant.BROADCASTCODE.CITY_CHOOSE);
+                    }
                     sendBroadcast(data);
                     finish();
                 }

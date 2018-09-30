@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] imgRes = new int[]{
             R.drawable.selector_shengqian_item,
             R.drawable.selector_youdian_item,
-            R.drawable.selector_zhuanqian_item,
+            R.drawable.selector_vip_item,
             R.drawable.selector_renzheng_item,
             R.drawable.selector_mine_item
     };
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         paintPassword = aCache.getAsString(Constant.ACACHE.PAINT_PASSWORD);
         tabsItem[0] = "省钱";
         tabsItem[1] = "优店";
-        tabsItem[2] = "赚钱";
+        tabsItem[2] = "VIP";
         tabsItem[3] = "购物车";
         tabsItem[4] = "我的";
 

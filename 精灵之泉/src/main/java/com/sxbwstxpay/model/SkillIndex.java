@@ -1,5 +1,6 @@
 package com.sxbwstxpay.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -109,7 +110,7 @@ public class SkillIndex {
         }
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * id : 1
          * lng : 118.106292

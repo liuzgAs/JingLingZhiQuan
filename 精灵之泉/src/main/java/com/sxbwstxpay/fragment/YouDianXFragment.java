@@ -2,7 +2,10 @@ package com.sxbwstxpay.fragment;
 
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,8 +38,6 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.help.Tip;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -44,11 +45,13 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ChengShiXZActivity;
 import com.sxbwstxpay.activity.GuanLiWDDPXActivity;
-import com.sxbwstxpay.activity.SearchLocationActivity;
+import com.sxbwstxpay.activity.SearchDPActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.model.IndexCitylist;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.SkillIndex;
 import com.sxbwstxpay.util.ACache;
@@ -88,7 +91,26 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     private ImageView image0001;
     private int cid=0;
     private String cityId;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.CITY_CHOOSEYD:
+                    IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
+                    cityId = cityBean.getId();
+                    final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+                    aCache.put(Constant.ACACHE.CITY_ID, cityId);
+                    textCity.setText(cityBean.getName());
+                    textAddress.setText("");
+                    getStore(myLatLng);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     public YouDianXFragment() {
         // Required empty public constructor
     }
@@ -164,6 +186,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     protected void setListeners() {
         mInflate.findViewById(R.id.imageReLocation).setOnClickListener(this);
         mInflate.findViewById(R.id.viewSearch).setOnClickListener(this);
+        textCity.setOnClickListener(this);
         image0001.setOnClickListener(this);
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
             @Override
@@ -186,6 +209,13 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
 //                getStore(target);
 //            }
 //        });
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSEYD);
+        getActivity().registerReceiver(reciver, filter);
     }
 
     /**
@@ -256,6 +286,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     public void onDestroy() {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
+        getActivity().unregisterReceiver(reciver);
         mMapView.onDestroy();
         if (null != mlocationClient) {
             mlocationClient.onDestroy();
@@ -393,16 +424,15 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.REQUEST_RESULT_CODE.address && resultCode == Constant.REQUEST_RESULT_CODE.address) {
-            Tip tip = data.getParcelableExtra(Constant.INTENT_KEY.value);
+            SkillIndex.DataBean tip = (SkillIndex.DataBean)data.getSerializableExtra(Constant.INTENT_KEY.value);
             SkillIndex.DataBean mapMarkerBean = (SkillIndex.DataBean) data.getSerializableExtra(Constant.INTENT_KEY.Store);
             if (tip != null) {
-                textAddress.setText(tip.getName());
-                LatLonPoint point = tip.getPoint();
-                LatLng latLng = new LatLng(point.getLatitude(), point.getLongitude());
+                textAddress.setText(tip.getTitle());
+                LatLng latLng = new LatLng(Double.valueOf(tip.getLat()), Double.valueOf(tip.getLng()));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
-//            aMap.moveCamera(cameraUpdate);
+                aMap.moveCamera(cameraUpdate);
                 aMap.animateCamera(cameraUpdate, 500, null);
-                getStore(latLng);
+//                getStore(latLng);
             }
 
             if (mapMarkerBean != null) {
@@ -419,9 +449,16 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     }
 
     private void shouMarker() {
+        if (dataBeanList.size()>0){
+            LatLng latLng = new LatLng(Double.valueOf(dataBeanList.get(0).getLat()), Double.valueOf(dataBeanList.get(0).getLng()));
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, mapLV);
+            aMap.moveCamera(cameraUpdate);
+            aMap.animateCamera(cameraUpdate, 500, null);
+        }
         for (int i = 0; i < markerList.size(); i++) {
             markerList.get(i).remove();
         }
+
         markerList.clear();
         for (int i = 0; i < dataBeanList.size(); i++) {
             final MarkerOptions markerOption = new MarkerOptions();
@@ -469,13 +506,18 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
 
     @Override
     public void onClick(View view) {
+        Intent intent=new Intent();
         switch (view.getId()) {
             case R.id.viewSearch:
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), SearchLocationActivity.class);
-                intent.putExtra(Constant.INTENT_KEY.CITY, city);
+                intent.setClass(getActivity(), SearchDPActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.CITY, cityId);
                 intent.putExtra(Constant.INTENT_KEY.position, myLatLng);
                 startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.address);
+                break;
+            case R.id.textCity:
+                intent.setClass(getActivity(), ChengShiXZActivity.class);
+                intent.putExtra("type",1);
+                startActivity(intent);
                 break;
             case R.id.imageReLocation:
                 textAddress.setText("");

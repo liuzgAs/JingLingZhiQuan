@@ -348,6 +348,13 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             isHongBaoShow = true;
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(reciver);
+    }
+
     private static final int CAMERA = 1991;
 
     @AfterPermissionGranted(CAMERA)

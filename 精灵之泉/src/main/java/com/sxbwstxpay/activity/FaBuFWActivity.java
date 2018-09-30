@@ -236,7 +236,6 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.dismiss();
-                                            finish();
                                         }
                                     })
                                     .setCancelable(false)
@@ -342,7 +341,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.btnFaBu:
-                if (MyApplication.getInstance().images.size()==0){
+                if (MyApplication.getInstance().images.size()==0&&skillBefore.getIsFace()==1){
                     new AlertDialog.Builder(FaBuFWActivity.this)
                             .setTitle("提示")
                             .setMessage(skillBefore.getTips())
@@ -350,7 +349,6 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
-                                    finish();
                                 }
                             })
                             .setCancelable(false)

@@ -432,6 +432,7 @@ public class Constant {
         public static final String WX_SHARE_FAIL = "wxShareFail";
         public static final String EXTRAMAP = "extramap";
         public static final String CITY_CHOOSE = "cityChoose";
+        public static final String CITY_CHOOSEYD = "cityChooseyd";
         public static final String CHANGEFW = "changefw";
         public static final String CHANGEWODE = "changewode";
         public static final String STYLE = "Style";

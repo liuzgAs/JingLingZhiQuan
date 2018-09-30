@@ -587,7 +587,10 @@
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.JingLingKTActivity"></activity>
+        <activity android:name=".activity.JingLingKTActivity"
+            android:launchMode="singleTop"></activity>
+        <activity android:name=".activity.SearchDPActivity"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

@@ -240,6 +240,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
         tabCarview.setVisibility(View.GONE);
         viewShangJiaTip.setVisibility(View.GONE);
         int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+//        indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(125, getActivity());
         indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(125, getActivity());
         tabHeight = getActivity().getResources().getDimension(R.dimen.tabHeight);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -270,7 +271,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                 ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
                 int screenWidth = ScreenUtils.getScreenWidth(getActivity());
                 layoutParams.width = screenWidth;
-                layoutParams.height = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f);
+                layoutParams.height = (int) ((float) screenWidth * 874f / 1080f);
                 banner.setLayoutParams(layoutParams);
                 banner.setScrollDuration(1000);
                 banner.startTurning(3000);
