@@ -138,7 +138,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Supermarket.DataBean>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                int layout = R.layout.item_xian_shi_qg;
+                int layout = R.layout.item_xian_shi_qgx;
                 return new JingLingCSViewHolder(parent, layout);
             }
         });

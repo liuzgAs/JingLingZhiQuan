@@ -51,7 +51,6 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private View mInflate;
     private View mRelaTitleStatue;
     private RecyclerArrayAdapter<IndexMakemoney> adapter;
-    private ImageView viewImg;
     private IWXAPI api;
     private Tencent mTencent;
     private ShareIndex shareIndex;
@@ -123,7 +122,6 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     protected void findID() {
         mRelaTitleStatue = mInflate.findViewById(R.id.relaTitleStatue);
         recyclerView = (EasyRecyclerView) mInflate.findViewById(R.id.recyclerView);
-        viewImg = (ImageView) mInflate.findViewById(R.id.viewImg);
     }
 
     @Override
@@ -137,14 +135,6 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
 
     @Override
     protected void setListeners() {
-        viewImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), TuiGuangActivity.class);
-                getActivity().startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -163,18 +153,34 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                 return new ZhuanQianViewHolder(parent, layout);
             }
         });
-//        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
-//            @Override
-//            public View onCreateView(ViewGroup parent) {
-//                View header_zahun_qian = LayoutInflater.from(getActivity()).inflate(R.layout.header_zahun_qian, null);
-//                return header_zahun_qian;
-//            }
-//
-//            @Override
-//            public void onBindView(View headerView) {
-//
-//            }
-//        });
+        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+            private ImageView viewImg;
+            @Override
+            public View onCreateView(ViewGroup parent) {
+                View header_zahun_qian = LayoutInflater.from(getActivity()).inflate(R.layout.header_zahun_qian, null);
+                viewImg=header_zahun_qian.findViewById(R.id.viewImg);
+                viewImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), TuiGuangActivity.class);
+                        getActivity().startActivity(intent);
+                    }
+                });
+                return header_zahun_qian;
+            }
+
+            @Override
+            public void onBindView(View headerView) {
+                if (indexMakemoney!=null){
+                    GlideApp.with(getActivity())
+                            .asBitmap()
+                            .load(indexMakemoney.getImg())
+                            .placeholder(R.mipmap.ic_empty)
+                            .into(viewImg);
+                }
+            }
+        });
     }
 
     /**
@@ -209,7 +215,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
-
+    private IndexMakemoney indexMakemoney;
     @Override
     public void onRefresh() {
         ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
@@ -217,14 +223,9 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
             public void onSuccess(String s) {
                 LogUtil.LogShitou("赚钱", s);
                 try {
-                    IndexMakemoney indexMakemoney = GsonUtils.parseJSON(s, IndexMakemoney.class);
+                     indexMakemoney = GsonUtils.parseJSON(s, IndexMakemoney.class);
                     if (indexMakemoney.getStatus() == 1) {
                         grade = indexMakemoney.getGrade();
-                        GlideApp.with(getActivity())
-                                .asBitmap()
-                                .load(indexMakemoney.getImg())
-                                .placeholder(R.mipmap.ic_empty)
-                                .into(viewImg);
                         adapter.clear();
                         adapter.add(indexMakemoney);
                         adapter.notifyDataSetChanged();

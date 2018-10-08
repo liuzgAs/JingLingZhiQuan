@@ -381,6 +381,7 @@ public class Constant {
         public static final String URL = "URL";
         public static final String EXTRAMAP = "ExtraMap";
         public static final String CITY = "city";
+        public static final String CID = "cid";
         public static final String position = "position";
         public static final String BIG_IMG_POSITION = "bigImgPosition";
         public static final String BIG_IMG = "bigImg";
@@ -426,6 +427,7 @@ public class Constant {
     public static class BROADCASTCODE {
         public static final String NearFilter01 = "NearFilter01";
         public static final String PAY_RECEIVER = "pay_receiver";
+        public static final String PAY_SUCCESS = "pay_success";
         public static final String WX_LOGIN = "wxLogin";
         public static final String WX_SHARE = "wxShare";
         public static final String WX_LOGIN_FAIL = "wxLoginFail";

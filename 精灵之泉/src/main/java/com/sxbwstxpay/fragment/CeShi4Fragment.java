@@ -104,7 +104,7 @@ public class CeShi4Fragment extends ZjbBaseFragment implements View.OnClickListe
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(getActivity()));
         viewBar.setLayoutParams(layoutParams);
-        textTitle.setText("四、关于脸部轮廓五官的描述，哪个和你最接近？（单选）");
+        textTitle.setText("关于脸部轮廓五官的描述，哪个和你最接近？（单选）");
         buttonLeft.setText("上一题");
         buttonRight.setText("生成结果");
         LinearLayout.LayoutParams layoutParams1=(LinearLayout.LayoutParams) recyclerView.getLayoutParams();

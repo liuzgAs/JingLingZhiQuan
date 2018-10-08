@@ -53,7 +53,7 @@ public class ZhuanShuCDViewHolder extends BaseViewHolder<IndexStyle.DataBean> {
         textStyle.setText(data.getTitle());
         adapter.clear();
         adapter.addAll(data.getDes());
-        for (int i=0;i<imageImg.length;i++){
+        for (int i=0;i<data.getImgs().size();i++){
             final int j=i;
             imageImg[i].setOnClickListener(new View.OnClickListener() {
                 @Override

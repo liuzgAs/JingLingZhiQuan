@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 
 
@@ -32,6 +33,7 @@ public class WebActivity extends ZjbBaseActivity implements View.OnClickListener
     private ProgressBar pb1;
     private TextView mTv_title;
     private View viewBar;
+    private String cid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class WebActivity extends ZjbBaseActivity implements View.OnClickListener
         Intent intent = getIntent();
         mUrl = intent.getStringExtra(Constant.INTENT_KEY.URL);
         title = intent.getStringExtra(Constant.INTENT_KEY.TITLE);
+        cid = intent.getStringExtra(Constant.INTENT_KEY.CID);
         viewBar = findViewById(R.id.viewBar);
     }
 
@@ -84,6 +87,20 @@ public class WebActivity extends ZjbBaseActivity implements View.OnClickListener
                 } else {
                     pb1.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        mWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                LogUtil.LogShitou("url",url);
+                if (url.contains("TestStyle")){
+                    Intent intent = new Intent();
+                    intent.setAction(Constant.BROADCASTCODE.STYLE);
+                    intent.putExtra(Constant.INTENT_KEY.STYLE, cid);
+                    sendBroadcast(intent);
+                    finish();
+                }
+                return false;
             }
         });
     }

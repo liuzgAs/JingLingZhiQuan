@@ -1,12 +1,20 @@
 package com.sxbwstxpay.activity;
 
+import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
 import android.util.DisplayMetrics;
@@ -20,12 +28,14 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -41,6 +51,7 @@ import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.OrderVipbefore;
 import com.sxbwstxpay.model.OrderVippay;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -65,26 +76,17 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     private View viewBar;
     private TextView textText1;
     final IWXAPI api = WXAPIFactory.createWXAPI(this, null);
-    //    private BroadcastReceiver recevier = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            String action = intent.getAction();
-//            if (TextUtils.equals(action, Constant.BROADCASTCODE.PAY_RECEIVER)) {
-//                cancelLoadingDialog();
-//                int error = intent.getIntExtra("error", -1);
-//                if (error == 0) {
-//                    Intent intent1 = new Intent();
-//                    intent1.setAction(Constant.BROADCASTCODE.VIP_TUI_GUANG_SHANG);
-//                    sendBroadcast(intent1);
-//                    MyDialog.dialogFinish(TuiGuangActivity.this, "支付成功");
-//                } else if (error == -1) {
-//                    MyDialog.showTipDialog(TuiGuangActivity.this, "支付失败");
-//                } else if (error == -2) {
-//                    MyDialog.showTipDialog(TuiGuangActivity.this, "支付取消");
-//                }
-//            }
-//        }
-//    };
+        private BroadcastReceiver recevier = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (TextUtils.equals(action, Constant.BROADCASTCODE.PAY_SUCCESS)) {
+                if (orderVipbefore!=null){
+                    showPaySDialog(orderVipbefore);
+                }
+            }
+        }
+    };
     private WebSettings mSettings;
     private ProgressBar pb1;
     private WebView mWebView;
@@ -184,7 +186,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 try {
                     orderVipbefore = GsonUtils.parseJSON(s, OrderVipbefore.class);
                     if (orderVipbefore.getStatus() == 1) {
-                        selectValueBeanList = orderVipbefore.getSelectValueBeanList();
+                        selectValueBeanList = orderVipbefore.getSelectValue();
                         selectTitle = orderVipbefore.getSelectTitle();
                         mWebView.loadUrl(orderVipbefore.getUrl());
                         textViewTitle.setText(orderVipbefore.getUrlTitle());
@@ -240,7 +242,48 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                 break;
         }
     }
+    private void showPaySDialog(OrderVipbefore vipbefore){
+        //添加到剪切板
+        ClipboardManager clipboardManager =
+                (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        /**之前的应用过期的方法，clipboardManager.setText(copy);*/
+        assert clipboardManager != null;
+        clipboardManager.setPrimaryClip(ClipData.newPlainText(null,vipbefore.getWechatAccount()));
+        if (clipboardManager.hasPrimaryClip()){
+            clipboardManager.getPrimaryClip().getItemAt(0).getText();
+        }
 
+        final MaterialDialog dialog = new MaterialDialog.Builder(TuiGuangActivity.this)
+                .customView(R.layout.dialog_pays, false)
+                .show();
+        View customeView = dialog.getCustomView();
+        ImageView imageImg = (ImageView) customeView.findViewById(R.id.imageImg);
+        TextView textAccount = (TextView) customeView.findViewById(R.id.textAccount);
+        Button buttonNext = (Button) customeView.findViewById(R.id.buttonNext);
+        GlideApp.with(TuiGuangActivity.this)
+                .asBitmap()
+                .load(vipbefore.getImg())
+                .placeholder(R.mipmap.ic_empty)
+                .into(imageImg);
+        textAccount.setText(vipbefore.getImgDes());
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                try {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    ComponentName cmp = new ComponentName("com.tencent.mm","com.tencent.mm.ui.LauncherUI");
+                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setComponent(cmp);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(TuiGuangActivity.this, "检查到您手机没有安装微信，请安装后使用该功能", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+    }
     /**
      * VIP购买dialog
      */
@@ -320,7 +363,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
         dialogWindow.setWindowAnimations(R.style.dialogFenXiang);
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         DisplayMetrics d = getResources().getDisplayMetrics(); // 获取屏幕宽、高用
-        lp.width = (int) (d.widthPixels * 0.8); // 高度设置为屏幕的0.6
+        lp.width = (int) (d.widthPixels * 0.9); // 高度设置为屏幕的0.6
         dialogWindow.setAttributes(lp);
     }
 
@@ -356,14 +399,14 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction(Constant.BROADCASTCODE.PAY_RECEIVER);
-//        registerReceiver(recevier, filter);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.PAY_SUCCESS);
+        registerReceiver(recevier, filter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        unregisterReceiver(recevier);
+        unregisterReceiver(recevier);
     }
 }

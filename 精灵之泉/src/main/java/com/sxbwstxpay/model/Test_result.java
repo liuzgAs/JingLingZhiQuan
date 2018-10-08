@@ -19,6 +19,7 @@ public class Test_result implements Serializable{
      */
 
     private String cid;
+    private String url;
     private String style;
     private String bgimg;
     private String btn_txt;
@@ -31,6 +32,13 @@ public class Test_result implements Serializable{
 
     public void setCid(String cid) {
         this.cid = cid;
+    }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getStyle() {

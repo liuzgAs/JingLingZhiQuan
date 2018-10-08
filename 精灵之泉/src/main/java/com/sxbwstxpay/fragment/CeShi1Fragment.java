@@ -102,7 +102,7 @@ public class CeShi1Fragment extends ZjbBaseFragment implements View.OnClickListe
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(getActivity()));
         viewBar.setLayoutParams(layoutParams);
-        textTitle.setText("一、以下作为你性格形象的标签，你会选哪个？（单选）");
+        textTitle.setText("以下作为你性格形象的标签，你会选哪个？（单选）");
         buttonLeft.setVisibility(View.GONE);
         buttonRight.setText("下一题");
         initRecycler();

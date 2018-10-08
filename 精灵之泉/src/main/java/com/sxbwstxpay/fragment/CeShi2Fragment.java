@@ -104,7 +104,7 @@ public class CeShi2Fragment extends ZjbBaseFragment implements View.OnClickListe
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(getActivity()));
         viewBar.setLayoutParams(layoutParams);
-        textTitle.setText("二、以下着装风格中，那些是你喜欢的？（可多选）");
+        textTitle.setText("以下着装风格中，那些是你喜欢的？（可多选）");
         buttonLeft.setText("上一题");
         buttonRight.setText("下一题");
         LinearLayout.LayoutParams layoutParams1=(LinearLayout.LayoutParams) recyclerView.getLayoutParams();

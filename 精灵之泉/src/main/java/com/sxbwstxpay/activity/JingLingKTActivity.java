@@ -297,7 +297,6 @@ public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickL
                 cancelLoadingDialog();
                 LogUtil.LogShitou("提交密码", s);
                 try {
-                    page++;
                     Subpwd subpwd = GsonUtils.parseJSON(s, Subpwd.class);
                     if (subpwd.getStatus() == 1) {
                         JzvdStd.startFullscreen(JingLingKTActivity.this, JzvdStd.class,subpwd.getVideo_url(), "精灵课堂");

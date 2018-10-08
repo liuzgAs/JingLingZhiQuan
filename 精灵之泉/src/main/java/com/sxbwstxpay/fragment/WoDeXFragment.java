@@ -33,7 +33,6 @@ import com.sxbwstxpay.activity.JingLingLCActivity;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.SheZhiActivity;
 import com.sxbwstxpay.activity.ShiMingRZActivity;
-import com.sxbwstxpay.activity.TestResultActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.WoDeDPXActivity;
@@ -44,6 +43,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
+import com.sxbwstxpay.model.Test_result;
 import com.sxbwstxpay.model.UserIndex;
 import com.sxbwstxpay.model.WoDe;
 import com.sxbwstxpay.util.ApiClient;
@@ -397,9 +397,7 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                         startActivity(intent);
                         break;
                     case 3:
-                        intent.setClass(getActivity(), TestResultActivity.class);
-                        intent.putExtra("type",1);
-                        startActivity(intent);
+                        getRez();
                         break;
                     case 4:
                         intent.setClass(getActivity(), CeShiSYActivity.class);
@@ -430,6 +428,7 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                 }
             }
         });
+        
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -527,5 +526,46 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(reciver);
+    }
+    private void getRez(){
+        showLoadingDialog();
+        ApiClient.post(getActivity(), getOkObjectRez(), new ApiClient.CallBack() {
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("TestResultActivity--测试结果", "");
+                try {
+                    Test_result test_result = GsonUtils.parseJSON(s, Test_result.class);
+                    if (test_result.getStatus() == 1) {
+                        Intent intent=new Intent();
+                        intent.setClass(getActivity(), WebActivity.class);
+                        intent.putExtra(Constant.INTENT_KEY.TITLE, test_result.getStyle());
+                        intent.putExtra(Constant.INTENT_KEY.URL,test_result.getUrl());
+                        intent.putExtra(Constant.INTENT_KEY.CID,test_result.getCid());
+                        startActivity(intent);
+                    } else if (test_result.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(getActivity());
+                    } else {
+                        Toast.makeText(getActivity(), test_result.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private OkObject getOkObjectRez() {
+        String url = Constant.HOST + Constant.Url.TEST_RESULT;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        params.put("style", "");
+        return new OkObject(params, url);
     }
 }

@@ -200,9 +200,15 @@ public class CeShiActivity extends ZjbBaseNotLeftActivity implements CeShiInterf
                 try {
                     Test_result test_result = GsonUtils.parseJSON(s, Test_result.class);
                     if (test_result.getStatus() == 1) {
-                        Toast.makeText(CeShiActivity.this, test_result.getStyle(), Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(CeShiActivity.this,TestResultActivity.class);
-                        intent.putExtra("test_result",test_result);
+//                        Toast.makeText(CeShiActivity.this, test_result.getStyle(), Toast.LENGTH_SHORT).show();
+//                        Intent intent=new Intent(CeShiActivity.this,TestResultActivity.class);
+//                        intent.putExtra("test_result",test_result);
+//                        startActivity(intent);
+                        Intent intent=new Intent();
+                        intent.setClass(CeShiActivity.this, WebActivity.class);
+                        intent.putExtra(Constant.INTENT_KEY.TITLE, test_result.getStyle());
+                        intent.putExtra(Constant.INTENT_KEY.URL,test_result.getUrl());
+                        intent.putExtra(Constant.INTENT_KEY.CID,test_result.getCid());
                         startActivity(intent);
                         Intent intent1=new Intent();
                         intent1.setAction(Constant.BROADCASTCODE.CHANGEWODE);

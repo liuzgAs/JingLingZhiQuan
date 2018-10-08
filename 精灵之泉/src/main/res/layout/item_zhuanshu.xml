@@ -8,7 +8,7 @@
         android:id="@+id/imageImg1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintDimensionRatio="H,540:648"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -18,27 +18,28 @@
         android:id="@+id/imageImg2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintDimensionRatio="H,270:270"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/imageImg1"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/textStyle"
+        app:layout_constraintWidth_percent="0.25"
+        />
     <ImageView
         android:id="@+id/imageImg3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintDimensionRatio="H,270:270"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/imageImg2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textStyle"
         app:layout_constraintWidth_percent="0.25" />
     <ImageView
         android:id="@+id/imageImg4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintDimensionRatio="H,270:270"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/imageImg1"
         app:layout_constraintRight_toRightOf="parent"
@@ -48,37 +49,41 @@
         android:id="@+id/imageImg5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintDimensionRatio="H,270:270"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/imageImg4"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageImg3"
         app:layout_constraintWidth_percent="0.25" />
+    <TextView
+        android:id="@+id/textStyle"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="潮搭"
+        app:layout_constraintDimensionRatio="H,540:108"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/imageImg1"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#77000000"
+        android:textStyle="bold"
+        app:layout_constraintWidth_percent="0.5"
+        android:textColor="@color/white"
+        android:textSize="@dimen/normal_textsize" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#77000000"
-        android:paddingBottom="10dp"
-        android:paddingTop="3dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/textStyle"
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:text="潮搭"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="@dimen/normal_textsize" />
 
         <com.sxbwstxpay.customview.HorizontalView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textStyle">
+            >
 
             <com.sxbwstxpay.customview.MyEasyRecyclerView
                 android:id="@+id/recyclerView"

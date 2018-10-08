@@ -7,108 +7,42 @@ import java.util.List;
  * Created by zhangjiebo on 2017/9/17 0017.
  */
 public class OrderVipbefore implements Serializable{
+
     /**
-     * amount : 499
-     * cutAmount : 20
-     * cutDes : 使用实名认证奖励20元抵扣
-     * img : http://api.jlzquan.com/index.php?g=App&m=Web&a=vip
-     * info : 返回成功！
-     * status : 1
-     * text1 : 活动优惠499.00元
-     * text2 : 原价4990.00元
-     * url : http://api.jlzquan.com/index.php?g=App&m=Web&a=vip
+     * img :
+     * url : http://api.jlzquan.com/index.php?g=App&m=Web&a=vip1
      * urlTitle : 成为VIP精灵推广商
+     * text1 : 买【魔幻产品1盒】598元（原价898元）,就送精灵VIP
+     * text2 :
+     * amount : 598
+     * selectTitle : 请选择
+     * selectValue : [{"name":"魔幻宝盒","id":"5068"},{"name":"精灵神仙水","id":"5340"},{"name":"精灵元素粉","id":"5341"}]
+     * cutAmount : 0
+     * cutDes : 使用实名认证奖励0元抵扣
+     * dbb :
+     * dbUrl :
+     * imgDes : 精灵客服微信帐号：666666
+     * wechatAccount : 66666
+     * status : 1
+     * info : 返回成功！
      */
 
-    private double amount;
-    private double cutAmount;
-    private String cutDes;
     private String img;
-    private String info;
-    private String dbb;
-    private int status;
-    private String text1;
-    private String text2;
     private String url;
     private String urlTitle;
-    private String dbUrl;
+    private String text1;
+    private String text2;
+    private double amount;
     private String selectTitle;
+    private double cutAmount;
+    private String cutDes;
+    private String dbb;
+    private String dbUrl;
+    private String imgDes;
+    private String wechatAccount;
+    private int status;
+    private String info;
     private List<SelectValueBean> selectValue;
-
-    public String getSelectTitle() {
-        return selectTitle;
-    }
-
-    public void setSelectTitle(String selectTitle) {
-        this.selectTitle = selectTitle;
-    }
-
-    public List<SelectValueBean> getSelectValueBeanList() {
-        return selectValue;
-    }
-
-    public void setSelectValueBeanList(List<SelectValueBean> selectValue) {
-        this.selectValue = selectValue;
-    }
-
-    private String btn;
-    private int payState;
-
-    public String getBtn() {
-        return btn;
-    }
-
-    public void setBtn(String btn) {
-        this.btn = btn;
-    }
-
-    public int getPayState() {
-        return payState;
-    }
-
-    public void setPayState(int payState) {
-        this.payState = payState;
-    }
-
-    public String getDbUrl() {
-        return dbUrl;
-    }
-
-    public void setDbUrl(String dbUrl) {
-        this.dbUrl = dbUrl;
-    }
-
-    public String getDbb() {
-        return dbb;
-    }
-
-    public void setDbb(String dbb) {
-        this.dbb = dbb;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public double getCutAmount() {
-        return cutAmount;
-    }
-
-    public void setCutAmount(double cutAmount) {
-        this.cutAmount = cutAmount;
-    }
-
-    public String getCutDes() {
-        return cutDes;
-    }
-
-    public void setCutDes(String cutDes) {
-        this.cutDes = cutDes;
-    }
 
     public String getImg() {
         return img;
@@ -116,38 +50,6 @@ public class OrderVipbefore implements Serializable{
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getText1() {
-        return text1;
-    }
-
-    public void setText1(String text1) {
-        this.text1 = text1;
-    }
-
-    public String getText2() {
-        return text2;
-    }
-
-    public void setText2(String text2) {
-        this.text2 = text2;
     }
 
     public String getUrl() {
@@ -166,9 +68,118 @@ public class OrderVipbefore implements Serializable{
         this.urlTitle = urlTitle;
     }
 
-    public static class SelectValueBean{
+    public String getText1() {
+        return text1;
+    }
+
+    public void setText1(String text1) {
+        this.text1 = text1;
+    }
+
+    public String getText2() {
+        return text2;
+    }
+
+    public void setText2(String text2) {
+        this.text2 = text2;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getSelectTitle() {
+        return selectTitle;
+    }
+
+    public void setSelectTitle(String selectTitle) {
+        this.selectTitle = selectTitle;
+    }
+
+    public double getCutAmount() {
+        return cutAmount;
+    }
+
+    public void setCutAmount(double cutAmount) {
+        this.cutAmount = cutAmount;
+    }
+
+    public String getCutDes() {
+        return cutDes;
+    }
+
+    public void setCutDes(String cutDes) {
+        this.cutDes = cutDes;
+    }
+
+    public String getDbb() {
+        return dbb;
+    }
+
+    public void setDbb(String dbb) {
+        this.dbb = dbb;
+    }
+
+    public String getDbUrl() {
+        return dbUrl;
+    }
+
+    public void setDbUrl(String dbUrl) {
+        this.dbUrl = dbUrl;
+    }
+
+    public String getImgDes() {
+        return imgDes;
+    }
+
+    public void setImgDes(String imgDes) {
+        this.imgDes = imgDes;
+    }
+
+    public String getWechatAccount() {
+        return wechatAccount;
+    }
+
+    public void setWechatAccount(String wechatAccount) {
+        this.wechatAccount = wechatAccount;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public List<SelectValueBean> getSelectValue() {
+        return selectValue;
+    }
+
+    public void setSelectValue(List<SelectValueBean> selectValue) {
+        this.selectValue = selectValue;
+    }
+
+    public static class SelectValueBean {
+        /**
+         * name : 魔幻宝盒
+         * id : 5068
+         */
+
         private String name;
-        private int id;
+        private String id;
 
         public String getName() {
             return name;
@@ -178,11 +189,11 @@ public class OrderVipbefore implements Serializable{
             this.name = name;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
     }
