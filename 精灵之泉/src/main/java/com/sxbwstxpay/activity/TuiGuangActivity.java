@@ -201,6 +201,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                         span.setSpan(new StrikethroughSpan(), text1.length(), (text1 + text2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         span.setSpan(new RelativeSizeSpan(0.8f), text1.length(), (text1 + text2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textText1.setText(span);
+//                        showPaySDialog(orderVipbefore);
                     } else if (orderVipbefore.getStatus() == 3) {
                         MyDialog.showReLoginDialog(TuiGuangActivity.this);
                     } else {
@@ -264,7 +265,10 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
         View customeView = dialog.getCustomView();
         ImageView imageImg = (ImageView) customeView.findViewById(R.id.imageImg);
         TextView textAccount = (TextView) customeView.findViewById(R.id.textAccount);
+        TextView textDes2 = (TextView) customeView.findViewById(R.id.textDes2);
         Button buttonNext = (Button) customeView.findViewById(R.id.buttonNext);
+        textDes2.setText(vipbefore.getImgDes2());
+        buttonNext.setText(vipbefore.getBtnTxt());
         GlideApp.with(TuiGuangActivity.this)
                 .asBitmap()
                 .load(vipbefore.getImg())

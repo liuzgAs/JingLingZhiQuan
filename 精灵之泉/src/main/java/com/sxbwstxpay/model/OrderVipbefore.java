@@ -39,6 +39,8 @@ public class OrderVipbefore implements Serializable{
     private String dbb;
     private String dbUrl;
     private String imgDes;
+    private String imgDes2;
+    private String btnTxt;
     private String wechatAccount;
     private int status;
     private String info;
@@ -138,6 +140,20 @@ public class OrderVipbefore implements Serializable{
 
     public void setImgDes(String imgDes) {
         this.imgDes = imgDes;
+    }
+    public String getImgDes2() {
+        return imgDes2;
+    }
+
+    public void setImgDes2(String imgDes2) {
+        this.imgDes2 = imgDes2;
+    }
+    public String getBtnTxt() {
+        return btnTxt;
+    }
+
+    public void setBtnTxt(String btnTxt) {
+        this.btnTxt = btnTxt;
     }
 
     public String getWechatAccount() {

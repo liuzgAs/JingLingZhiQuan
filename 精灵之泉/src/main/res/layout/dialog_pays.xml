@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:textSize="@dimen/bigText"
-        android:text="微信号：456156165"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/light_black"
@@ -26,19 +25,13 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
         <TextView
+            android:id="@+id/textDes2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gray_deep"
             android:maxLines="1"
             android:textSize="@dimen/litterText"
-            android:text="已复制>"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/line_gold"
-            android:maxLines="1"
-            android:textSize="@dimen/litterText"
-            android:text="点击跳转微信>微信黏贴搜索"/>
+            />
     </LinearLayout>
     <Button
         android:layout_width="match_parent"
@@ -52,5 +45,5 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textSize="@dimen/moreLitterText"
-        android:text="点击跳转微信添加精灵售后获取贴心服务" />
+        />
 </LinearLayout>

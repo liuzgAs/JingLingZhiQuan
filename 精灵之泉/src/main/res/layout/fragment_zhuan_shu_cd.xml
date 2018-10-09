@@ -23,7 +23,7 @@
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
         android:src="@mipmap/ic_top"
-        app:backgroundTint="@color/basic_color"
+        app:backgroundTint="@color/white"
         app:elevation="5dp"
         app:fabSize="mini" />
 </FrameLayout>

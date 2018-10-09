@@ -326,7 +326,10 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         View customeView = dialog.getCustomView();
         ImageView imageImg = (ImageView) customeView.findViewById(R.id.imageImg);
         TextView textAccount = (TextView) customeView.findViewById(R.id.textAccount);
+        TextView textDes2 = (TextView) customeView.findViewById(R.id.textDes2);
         Button buttonNext = (Button) customeView.findViewById(R.id.buttonNext);
+        textDes2.setText(vipbefore.getImgDes2());
+        buttonNext.setText(vipbefore.getBtnTxt());
         GlideApp.with(ZhiFuCGActivity.this)
                 .asBitmap()
                 .load(vipbefore.getImg())
