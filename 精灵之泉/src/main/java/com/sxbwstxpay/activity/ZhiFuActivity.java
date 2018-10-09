@@ -37,6 +37,8 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
     private EasyRecyclerView recyclerView;
     private View viewBar;
     private int oid;
+    private int type;
+
     private BroadcastReceiver recevier = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -69,11 +71,11 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
         Intent intent1 = new Intent();
         intent1.setAction(Constant.BROADCASTCODE.zhiFuGuanBi);
         intent1.setAction(Constant.BROADCASTCODE.ShuaXinDingDan);
-        intent1.setAction(Constant.BROADCASTCODE.PAY_SUCCESS);
         sendBroadcast(intent1);
         finish();
         Intent intent = new Intent();
         intent.putExtra(Constant.INTENT_KEY.id, oid);
+        intent.putExtra(Constant.INTENT_KEY.type, type);
         intent.setClass(this, ZhiFuCGActivity.class);
         startActivity(intent);
     }
@@ -94,6 +96,7 @@ public class ZhiFuActivity extends ZjbBaseActivity implements View.OnClickListen
     protected void initIntent() {
         Intent intent = getIntent();
         oid = intent.getIntExtra(Constant.INTENT_KEY.id, 0);
+        type=intent.getIntExtra(Constant.INTENT_KEY.type, 0);
     }
 
     @Override

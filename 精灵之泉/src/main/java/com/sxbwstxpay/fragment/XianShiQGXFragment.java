@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -162,6 +163,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
     private View viewBar;
     private List<IndexGoods.CateBean> cateBeanList;
     private Dialog mDialog;
+    private FloatingActionButton top;
 
     public void hideView() {
         Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
@@ -213,6 +215,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
 
     @Override
     protected void findID() {
+        top = mInflate.findViewById(R.id.top);
         viewBar = mInflate.findViewById(R.id.viewBar);
         recyclerView = (EasyRecyclerView) mInflate.findViewById(R.id.recyclerView);
         viewShangJiaTip = mInflate.findViewById(R.id.viewShangJiaTip);
@@ -478,9 +481,11 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                 if (distance >= indexBannerHeight || distance == -1) {
                     tablayoutHeaderX.setVisibility(View.VISIBLE);
                     tabCarview.setVisibility(View.VISIBLE);
+                    top.setVisibility(View.VISIBLE);
                 } else {
                     tablayoutHeaderX.setVisibility(View.GONE);
                     tabCarview.setVisibility(View.GONE);
+                    top.setVisibility(View.GONE);
                 }
             }
         });
@@ -493,6 +498,12 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
         textCity.setOnClickListener(this);
         mInflate.findViewById(R.id.textSouSuo).setOnClickListener(this);
         mInflate.findViewById(R.id.imgeEWM).setOnClickListener(this);
+        top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.scrollToPosition(0);
+            }
+        });
     }
 
     @Override

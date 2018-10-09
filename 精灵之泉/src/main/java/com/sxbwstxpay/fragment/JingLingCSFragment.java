@@ -3,9 +3,11 @@ package com.sxbwstxpay.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +37,7 @@ import com.sxbwstxpay.util.DpUtils;
 import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.RecycleViewDistancaUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.JingLingCSViewHolder;
 import com.sxbwstxpay.viewholder.LocalImageHolderView;
@@ -63,6 +66,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
     private List<Supermarket.CateBean> cateBeanList;
     private int page = 1;
     private List<BannerBean> indexGoodsBanner;
+    private FloatingActionButton top;
 
     public static JingLingCSFragment newInstance(String param1) {
         JingLingCSFragment fragment = new JingLingCSFragment();
@@ -109,6 +113,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
     @Override
     protected void findID() {
         recyclerView = mInflate.findViewById(R.id.recyclerView);
+        top = mInflate.findViewById(R.id.top);
     }
 
     @Override
@@ -118,7 +123,12 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
 
     @Override
     protected void setListeners() {
-
+        top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.scrollToPosition(0);
+            }
+        });
     }
 
     @Override
@@ -297,6 +307,24 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
             @Override
             public void onErrorClick() {
                 adapter.resumeMore();
+            }
+        });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int scrollY = RecycleViewDistancaUtil.getDistance(recyclerView, 0);
+                float guangGaoHeight = getResources().getDimension(R.dimen.guanLiDianPuTop);
+                if (scrollY <= guangGaoHeight - 0 && scrollY >= 0) {
+                    top.setVisibility(View.GONE);
+                } else {
+                    top.setVisibility(View.VISIBLE);
+                }
             }
         });
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {

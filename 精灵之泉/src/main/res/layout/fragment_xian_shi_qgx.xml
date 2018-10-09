@@ -85,7 +85,17 @@
         android:layout_below="@+id/viewBar"
         app:layout_progress="@layout/view_progress"
         app:scrollbarStyle="insideOverlay" />
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/top"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_top"
+        app:backgroundTint="@color/basic_color"
+        app:elevation="5dp"
+        app:fabSize="mini" />
     <include
         layout="@layout/view_xian_shi_tab"
         android:layout_width="match_parent"

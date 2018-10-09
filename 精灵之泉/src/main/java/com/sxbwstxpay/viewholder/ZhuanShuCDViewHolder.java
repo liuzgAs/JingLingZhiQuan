@@ -26,6 +26,7 @@ import com.sxbwstxpay.util.GlideApp;
 public class ZhuanShuCDViewHolder extends BaseViewHolder<IndexStyle.DataBean> {
     private ImageView imageImg[]=new ImageView[5];
     private TextView textStyle;
+    private TextView textIntro;
     private MyEasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexStyle.DataBean.DesBean> adapter;
     public ZhuanShuCDViewHolder(ViewGroup parent, @LayoutRes int res) {
@@ -36,6 +37,7 @@ public class ZhuanShuCDViewHolder extends BaseViewHolder<IndexStyle.DataBean> {
         imageImg[3] = $(R.id.imageImg4);
         imageImg[4] = $(R.id.imageImg5);
         textStyle = $(R.id.textStyle);
+        textIntro = $(R.id.textIntro);
         recyclerView = $(R.id.recyclerView);
         initRecycler();
     }
@@ -43,13 +45,18 @@ public class ZhuanShuCDViewHolder extends BaseViewHolder<IndexStyle.DataBean> {
     @Override
     public void setData(final IndexStyle.DataBean data) {
         super.setData(data);
+        for (int i=0;i<imageImg.length;i++){
+            imageImg[i].setVisibility(View.INVISIBLE);
+        }
         for (int i=0;i<data.getImgs().size();i++){
+            imageImg[i].setVisibility(View.VISIBLE);
             GlideApp.with(getContext())
                     .load(data.getImgs().get(i).getImg())
                     .centerCrop()
                     .placeholder(R.mipmap.ic_empty)
                     .into(imageImg[i]);
         }
+        textIntro.setText(data.getIntro());
         textStyle.setText(data.getTitle());
         adapter.clear();
         adapter.addAll(data.getDes());
@@ -102,5 +109,12 @@ public class ZhuanShuCDViewHolder extends BaseViewHolder<IndexStyle.DataBean> {
             public void daoDiLe() {
             }
         });
+    }
+    private void setImg(IndexStyle.DataBean data,int i){
+        GlideApp.with(getContext())
+                .load(data.getImgs().get(i-1).getImg())
+                .centerCrop()
+                .placeholder(R.mipmap.ic_empty)
+                .into(imageImg[i-1]);
     }
 }

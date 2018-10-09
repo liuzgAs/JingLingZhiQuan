@@ -36,6 +36,7 @@ import com.sxbwstxpay.viewholder.JingLingKTViewHolder;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
 import okhttp3.Response;
 
@@ -317,5 +318,17 @@ public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickL
             }
 
         });
+    }
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
     }
 }

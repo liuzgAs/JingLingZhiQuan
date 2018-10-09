@@ -160,7 +160,7 @@ public class XuanPinSJActivity extends ZjbBaseActivity implements SwipeRefreshLa
 
     @Override
     protected void initViews() {
-        ((TextView)findViewById(R.id.textViewTitle)).setText(cateBean.getName());
+        ((TextView)findViewById(R.id.textViewTitle)).setText("精灵超市");
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);

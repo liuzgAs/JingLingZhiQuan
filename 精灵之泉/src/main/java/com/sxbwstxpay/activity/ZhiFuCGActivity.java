@@ -1,5 +1,10 @@
 package com.sxbwstxpay.activity;
 
+import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,8 +12,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -19,9 +28,11 @@ import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.OrderPays;
+import com.sxbwstxpay.model.OrderVipbefore;
 import com.sxbwstxpay.model.RecommBean;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 import com.sxbwstxpay.util.ScreenUtils;
@@ -44,6 +55,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
     private int isVip;
     private String btnText;
     private int jump;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +73,7 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
     protected void initIntent() {
         Intent intent = getIntent();
         oid = intent.getIntExtra(Constant.INTENT_KEY.id, 0);
+        type= intent.getIntExtra(Constant.INTENT_KEY.type, 0);
     }
 
     @Override
@@ -77,6 +90,9 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
         layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(this));
         viewBar.setLayoutParams(layoutParams);
         initRecycle();
+        if (type!=0){
+            showDialog();
+        }
     }
 
     @Override
@@ -256,5 +272,83 @@ public class ZhiFuCGActivity extends ZjbBaseActivity implements View.OnClickList
                 break;
         }
     }
+    private void showDialog(){
+        showLoadingDialog();
+        ApiClient.post(ZhiFuCGActivity.this, getOkObjects(), new ApiClient.CallBack() {
 
+            @Override
+            public void onSuccess(String s) {
+                cancelLoadingDialog();
+                LogUtil.LogShitou("TuiGuangActivity--推广商", s + "");
+                try {
+                    OrderVipbefore orderVipbefore = GsonUtils.parseJSON(s, OrderVipbefore.class);
+                    if (orderVipbefore.getStatus() == 1) {
+                        showPaySDialog(orderVipbefore);
+                    } else if (orderVipbefore.getStatus() == 3) {
+                        MyDialog.showReLoginDialog(ZhiFuCGActivity.this);
+                    } else {
+                        Toast.makeText(ZhiFuCGActivity.this, orderVipbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(ZhiFuCGActivity.this, "数据出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Response response) {
+                cancelLoadingDialog();
+                Toast.makeText(ZhiFuCGActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private OkObject getOkObjects() {
+        String url=Constant.HOST + Constant.Url.ORDER_VIPBEFORE;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", userInfo.getUid());
+        params.put("tokenTime", tokenTime);
+        return new OkObject(params, url);
+    }
+    private void showPaySDialog(OrderVipbefore vipbefore){
+        //添加到剪切板
+        ClipboardManager clipboardManager =
+                (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        /**之前的应用过期的方法，clipboardManager.setText(copy);*/
+        assert clipboardManager != null;
+        clipboardManager.setPrimaryClip(ClipData.newPlainText(null,vipbefore.getWechatAccount()));
+        if (clipboardManager.hasPrimaryClip()){
+            clipboardManager.getPrimaryClip().getItemAt(0).getText();
+        }
+
+        final MaterialDialog dialog = new MaterialDialog.Builder(ZhiFuCGActivity.this)
+                .customView(R.layout.dialog_pays, false)
+                .show();
+        View customeView = dialog.getCustomView();
+        ImageView imageImg = (ImageView) customeView.findViewById(R.id.imageImg);
+        TextView textAccount = (TextView) customeView.findViewById(R.id.textAccount);
+        Button buttonNext = (Button) customeView.findViewById(R.id.buttonNext);
+        GlideApp.with(ZhiFuCGActivity.this)
+                .asBitmap()
+                .load(vipbefore.getImg())
+                .placeholder(R.mipmap.ic_empty)
+                .into(imageImg);
+        textAccount.setText(vipbefore.getImgDes());
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                try {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    ComponentName cmp = new ComponentName("com.tencent.mm","com.tencent.mm.ui.LauncherUI");
+                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setComponent(cmp);
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(ZhiFuCGActivity.this, "检查到您手机没有安装微信，请安装后使用该功能", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+    }
 }

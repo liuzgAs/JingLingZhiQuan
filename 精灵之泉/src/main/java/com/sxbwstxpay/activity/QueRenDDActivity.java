@@ -70,6 +70,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     };
     private int is_address;
     private int is_dbb;
+    private int type;
     private boolean isXieYi = true;
     /**
      * 是否抵扣积分
@@ -100,6 +101,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
     protected void initIntent() {
         Intent intent = getIntent();
         cartIndex = (CartIndex) intent.getSerializableExtra(Constant.INTENT_KEY.value);
+        type = (int) intent.getIntExtra(Constant.INTENT_KEY.type,0);
     }
 
     @Override
@@ -456,6 +458,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                             Intent intent = new Intent();
                             intent.setClass(QueRenDDActivity.this, ZhiFuActivity.class);
                             intent.putExtra(Constant.INTENT_KEY.id, cartNeworder.getOid());
+                            intent.putExtra(Constant.INTENT_KEY.type, type);
                             startActivity(intent);
                         }else {
 

@@ -346,12 +346,12 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                         texttXName.setText(userIndex.getTxName());
                         texttXName.setVisibility(View.VISIBLE);
                     }
-                    if (userIndex.getGrade() == 1) {
-                        viewNoVip.setVisibility(View.GONE);
-                        viewVip.setVisibility(View.VISIBLE);
-                    } else {
+                    if (userIndex.getGrade() == 0) {
                         viewNoVip.setVisibility(View.VISIBLE);
                         viewVip.setVisibility(View.GONE);
+                    } else {
+                        viewNoVip.setVisibility(View.GONE);
+                        viewVip.setVisibility(View.VISIBLE);
                     }
                     if (userIndex.getIs_btn() == 1) {
                         textVipType.setVisibility(View.VISIBLE);

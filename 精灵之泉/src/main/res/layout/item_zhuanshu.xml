@@ -2,13 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageImg1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,540:648"
+        app:layout_constraintDimensionRatio="H,540:800"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -18,28 +19,28 @@
         android:id="@+id/imageImg2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,270:270"
+        app:layout_constraintDimensionRatio="H,270:340"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/imageImg1"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textStyle"
+        app:layout_constraintTop_toBottomOf="@+id/viewStyle"
         app:layout_constraintWidth_percent="0.25"
         />
     <ImageView
         android:id="@+id/imageImg3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,270:270"
+        app:layout_constraintDimensionRatio="H,270:340"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/imageImg2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textStyle"
+        app:layout_constraintTop_toBottomOf="@+id/viewStyle"
         app:layout_constraintWidth_percent="0.25" />
     <ImageView
         android:id="@+id/imageImg4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,270:270"
+        app:layout_constraintDimensionRatio="H,270:340"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/imageImg1"
         app:layout_constraintRight_toRightOf="parent"
@@ -49,35 +50,43 @@
         android:id="@+id/imageImg5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,270:270"
+        app:layout_constraintDimensionRatio="H,270:340"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/imageImg4"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageImg3"
         app:layout_constraintWidth_percent="0.25" />
-    <TextView
-        android:id="@+id/textStyle"
+    <FrameLayout
+        android:id="@+id/viewStyle"
         android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:text="潮搭"
-        app:layout_constraintDimensionRatio="H,540:108"
+        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="H,540:120"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/imageImg1"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="#77000000"
-        android:textStyle="bold"
-        app:layout_constraintWidth_percent="0.5"
-        android:textColor="@color/white"
-        android:textSize="@dimen/normal_textsize" />
+        app:layout_constraintWidth_percent="0.5">
+        <TextView
+            android:id="@+id/textStyle"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:layout_margin="3dp"
+            android:text="潮搭"
+            android:background="@drawable/shape_light_black_statly"
+            android:textStyle="bold"
+            android:textColor="@color/gray_deep"
+            android:textSize="@dimen/normal_textsize" />
+    </FrameLayout>
     <RelativeLayout
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="#77000000"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageImg1"
+        >
 
 
         <com.sxbwstxpay.customview.HorizontalView
@@ -94,4 +103,21 @@
             </com.sxbwstxpay.customview.MyEasyRecyclerView>
         </com.sxbwstxpay.customview.HorizontalView>
     </RelativeLayout>
+    <TextView
+        android:id="@+id/textIntro"
+        app:layout_constraintTop_toBottomOf="@+id/recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,1080:200"
+        app:layout_constraintHorizontal_bias="0"
+        android:maxLines="2"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="5dp"
+        android:textColor="@color/gray_deep"
+        android:textSize="@dimen/bigText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 </android.support.constraint.ConstraintLayout>

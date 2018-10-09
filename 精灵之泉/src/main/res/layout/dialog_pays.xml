@@ -52,5 +52,5 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textSize="@dimen/moreLitterText"
-        android:text="点击跳转微信 添加精灵售后 获取贴心服务" />
+        android:text="点击跳转微信添加精灵售后获取贴心服务" />
 </LinearLayout>

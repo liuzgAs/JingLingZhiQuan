@@ -129,7 +129,14 @@ public class IndexStyleMy {
         private String id;
         private String name;
         private String img;
+        private int act;
+        public int getAct() {
+            return act;
+        }
 
+        public void setAct(int act) {
+            this.act = act;
+        }
         public String getId() {
             return id;
         }
@@ -162,13 +169,19 @@ public class IndexStyleMy {
          * title : 专属风格：蛋形
          * des : []
          */
-
+        private String intro;
         private String img;
         private String goods_id;
         private String title;
         private List<DesBean> des;
         private List<ImgsBean> imgs;
+        public String getIntro() {
+            return intro;
+        }
 
+        public void setIntro(String intro) {
+            this.intro = intro;
+        }
         public String getImg() {
             return img;
         }

@@ -82,7 +82,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
             String action = intent.getAction();
             if (TextUtils.equals(action, Constant.BROADCASTCODE.PAY_SUCCESS)) {
                 if (orderVipbefore!=null){
-                    showPaySDialog(orderVipbefore);
+//                    showPaySDialog(orderVipbefore);
                 }
             }
         }
@@ -191,7 +191,12 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                         mWebView.loadUrl(orderVipbefore.getUrl());
                         textViewTitle.setText(orderVipbefore.getUrlTitle());
                         String text1 = orderVipbefore.getText1();
-                        String text2 = "(" + orderVipbefore.getText2() + ")";
+                        String text2;
+                        if (TextUtils.isEmpty(orderVipbefore.getText2())){
+                             text2 = "";
+                        }else {
+                             text2 = "(" + orderVipbefore.getText2() + ")";
+                        }
                         SpannableString span = new SpannableString(text1 + text2);
                         span.setSpan(new StrikethroughSpan(), text1.length(), (text1 + text2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         span.setSpan(new RelativeSizeSpan(0.8f), text1.length(), (text1 + text2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -339,6 +344,7 @@ public class TuiGuangActivity extends ZjbBaseActivity implements View.OnClickLis
                                 List<CartIndex.CartBean> cartBeanList = new ArrayList<CartIndex.CartBean>();
                                 cartBeanList.add(new CartIndex.CartBean(cartAddcart.getCartId() + ""));
                                 intent.putExtra(Constant.INTENT_KEY.value, new CartIndex(cartBeanList));
+                                intent.putExtra(Constant.INTENT_KEY.type, 1);
                                 startActivity(intent);
                             } else if (cartAddcart.getStatus() == 3) {
                                 MyDialog.showReLoginDialog(TuiGuangActivity.this);

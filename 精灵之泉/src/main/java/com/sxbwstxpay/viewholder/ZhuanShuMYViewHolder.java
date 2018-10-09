@@ -28,6 +28,8 @@ public class ZhuanShuMYViewHolder extends BaseViewHolder<IndexStyleMy.DataBean> 
     private MyEasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexStyleMy.DataBean.DesBean> adapter;
     private ImageView imageImg[]=new ImageView[5];
+    private TextView textIntro;
+
     public ZhuanShuMYViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
         imageImg[0] = $(R.id.imageImg1);
@@ -36,6 +38,7 @@ public class ZhuanShuMYViewHolder extends BaseViewHolder<IndexStyleMy.DataBean> 
         imageImg[3] = $(R.id.imageImg4);
         imageImg[4] = $(R.id.imageImg5);
         textStyle = $(R.id.textStyle);
+        textIntro = $(R.id.textIntro);
         recyclerView = $(R.id.recyclerView);
         initRecycler();
     }
@@ -43,13 +46,18 @@ public class ZhuanShuMYViewHolder extends BaseViewHolder<IndexStyleMy.DataBean> 
     @Override
     public void setData(final IndexStyleMy.DataBean data) {
         super.setData(data);
+        for (int i=0;i<imageImg.length;i++){
+            imageImg[i].setVisibility(View.INVISIBLE);
+        }
         for (int i=0;i<data.getImgs().size();i++){
+            imageImg[i].setVisibility(View.VISIBLE);
             GlideApp.with(getContext())
                     .load(data.getImgs().get(i).getImg())
                     .centerCrop()
                     .placeholder(R.mipmap.ic_empty)
                     .into(imageImg[i]);
         }
+        textIntro.setText(data.getIntro());
         textStyle.setText(data.getTitle());
         adapter.clear();
         adapter.addAll(data.getDes());

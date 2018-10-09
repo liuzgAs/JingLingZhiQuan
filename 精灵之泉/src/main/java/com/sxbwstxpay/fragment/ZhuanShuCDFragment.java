@@ -5,11 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,7 @@ import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
+import com.sxbwstxpay.util.RecycleViewDistancaUtil;
 import com.sxbwstxpay.util.ScreenUtils;
 import com.sxbwstxpay.viewholder.LocalImageHolderView;
 import com.sxbwstxpay.viewholder.ZhuanShuCDViewHolder;
@@ -59,6 +62,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexStyle.DataBean> adapter;
     private String cid;
+    private FloatingActionButton top;
 
     public ZhuanShuCDFragment() {
     }
@@ -136,6 +140,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
     @Override
     protected void findID() {
         recyclerView = mInflate.findViewById(R.id.recyclerView);
+        top = mInflate.findViewById(R.id.top);
     }
 
     @Override
@@ -145,7 +150,12 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
 
     @Override
     protected void setListeners() {
-
+        top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.scrollToPosition(0);
+            }
+        });
     }
 
     @Override
@@ -158,7 +168,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
      */
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.line_width), 0, 0);
+        DividerDecoration itemDecoration = new DividerDecoration(ContextCompat.getColor(getActivity(),R.color.background), (int) getResources().getDimension(R.dimen.line_width3), 0, 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
@@ -258,6 +268,12 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                         holder = (ViewHolder) convertView.getTag();
                     }
                     holder.textTitle.setText(cateBeanList.get(position).getName());
+                    if (cateBeanList.get(position).getAct()==1){
+                        holder.textTitle.setTextColor(ContextCompat.getColor(getActivity(),R.color.basic_color));
+                    }else {
+                        holder.textTitle.setTextColor(ContextCompat.getColor(getActivity(),R.color.light_black));
+
+                    }
                     GlideApp.with(getActivity())
                             .load(cateBeanList.get(position).getImg())
                             .centerCrop()
@@ -327,6 +343,24 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
             @Override
             public void onErrorClick() {
                 adapter.resumeMore();
+            }
+        });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int scrollY = RecycleViewDistancaUtil.getDistance(recyclerView, 0);
+                float guangGaoHeight = getResources().getDimension(R.dimen.guanLiDianPuTop);
+                if (scrollY <= guangGaoHeight - 0 && scrollY >= 0) {
+                    top.setVisibility(View.GONE);
+                } else {
+                    top.setVisibility(View.VISIBLE);
+                }
             }
         });
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {

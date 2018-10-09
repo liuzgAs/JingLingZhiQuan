@@ -179,7 +179,8 @@ public class PermissionPageUtils {
     }
 
     private void goOppoMainager() {
-        doStartApplicationWithPackageName("com.coloros.safecenter");
+//        doStartApplicationWithPackageName("com.coloros.safecenter");
+        doStartApplicationWithPackageName(packageName);
     }
 
     /**
@@ -189,15 +190,27 @@ public class PermissionPageUtils {
      * 本质上没有什么区别，通过Intent open...打开比调用doStartApplicationWithPackageName方法更快，也是android本身提供的方法
      */
     private void goCoolpadMainager() {
-        doStartApplicationWithPackageName("com.yulong.android.security:remote");
+//        doStartApplicationWithPackageName("com.yulong.android.security:remote");
+        doStartApplicationWithPackageName(packageName);
+
       /*  Intent openQQ = getPackageManager().getLaunchIntentForPackage("com.yulong.android.security:remote");
         startActivity(openQQ);*/
     }
 
     private void goVivoMainager() {
-        doStartApplicationWithPackageName("com.bairenkeji.icaller");
-     /*   Intent openQQ = getPackageManager().getLaunchIntentForPackage("com.vivo.securedaemonservice");
-        startActivity(openQQ);*/
+//        doStartApplicationWithPackageName("com.bairenkeji.icaller");
+//        doStartApplicationWithPackageName(packageName);
+//     Intent openQQ = mContext.getPackageManager().getLaunchIntentForPackage("com.vivo.securedaemonservice");
+//        mContext.startActivity(openQQ);
+//        getAppDetailSettingIntent();
+        // vivo 点击设置图标>加速白名单>我的app
+        //      点击软件管理>软件管理权限>软件>我的app>信任该软件
+        Intent appIntent = mContext.getPackageManager().getLaunchIntentForPackage("com.iqoo.secure");
+        if(appIntent != null){
+            mContext.startActivity(appIntent);
+            return;
+        }
+
     }
 
     /**
