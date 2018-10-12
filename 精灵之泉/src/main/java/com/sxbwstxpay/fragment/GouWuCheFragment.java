@@ -21,6 +21,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sxbwstxpay.R;
+import com.sxbwstxpay.activity.ChanPinXQActivity;
 import com.sxbwstxpay.activity.QueRenDDActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseFragment;
@@ -146,6 +147,11 @@ public class GouWuCheFragment extends ZjbBaseFragment implements View.OnClickLis
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getGoods_id());
+                intent.setClass(getActivity(), ChanPinXQActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
         TextView textTitle = (TextView) recyclerView.getEmptyView().findViewById(R.id.textTitle);

@@ -16,6 +16,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
+import com.sxbwstxpay.customview.CircleImageView;
 import com.sxbwstxpay.customview.ObservableScrollView;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.StoreMystore;
@@ -45,7 +46,7 @@ public class WoDeDPXActivity extends ZjbBaseActivity implements View.OnClickList
     private ImageView image;
     private int mHeight;
 
-    private ImageView imageStoreLogo;
+    private CircleImageView imageStoreLogo;
     private BroadcastReceiver reciver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -98,7 +99,7 @@ public class WoDeDPXActivity extends ZjbBaseActivity implements View.OnClickList
         textNum03 = (TextView) findViewById(R.id.textNum03);
         textNum04 = (TextView) findViewById(R.id.textNum04);
         textStoreNmae = (TextView) findViewById(R.id.textStoreNmae);
-        imageStoreLogo = (ImageView) findViewById(R.id.imageStoreLogo);
+        imageStoreLogo = (CircleImageView) findViewById(R.id.imageStoreLogo);
         textNo = (TextView) findViewById(R.id.textNo);
         viewBar = findViewById(R.id.viewBar);
         scrollView = (ObservableScrollView)findViewById(R.id.scrollView);

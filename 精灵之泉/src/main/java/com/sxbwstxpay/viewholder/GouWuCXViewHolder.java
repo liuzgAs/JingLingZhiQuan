@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.sxbwstxpay.R;
-import com.sxbwstxpay.activity.MainActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.fragment.GouWuCheFragment;
@@ -140,7 +139,7 @@ public class GouWuCXViewHolder extends BaseViewHolder<CartIndex.CartBean> {
                 .setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((MainActivity) getContext()).showLoadingDialog();
+                        fragment.showLoadingDialog();
                         ApiClient.post(getContext(), getOkObject1(), new ApiClient.CallBack() {
                             @Override
                             public void onSuccess(String s) {

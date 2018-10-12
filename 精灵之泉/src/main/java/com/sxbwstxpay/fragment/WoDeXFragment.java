@@ -188,6 +188,7 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
         SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(1f, getActivity()));
         recyclerView.addItemDecoration(spaceDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
+        recyclerView.getSwipeToRefresh().setProgressViewOffset(true, 30, 220);
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<WoDe>(getActivity()) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
