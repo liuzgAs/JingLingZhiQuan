@@ -185,7 +185,8 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     @Override
     protected void setListeners() {
         mInflate.findViewById(R.id.imageReLocation).setOnClickListener(this);
-        mInflate.findViewById(R.id.viewSearch).setOnClickListener(this);
+//        mInflate.findViewById(R.id.viewSearch).setOnClickListener(this);
+        textAddress.setOnClickListener(this);
         textCity.setOnClickListener(this);
         image0001.setOnClickListener(this);
         aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
@@ -508,7 +509,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     public void onClick(View view) {
         Intent intent=new Intent();
         switch (view.getId()) {
-            case R.id.viewSearch:
+            case R.id.textAddress:
                 intent.setClass(getActivity(), SearchDPActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.CITY, cityId);
                 intent.putExtra(Constant.INTENT_KEY.position, myLatLng);

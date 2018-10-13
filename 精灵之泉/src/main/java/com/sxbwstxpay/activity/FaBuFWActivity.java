@@ -71,6 +71,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
     private EditText edit03;
     private EditText edit04;
     private EditText edit05;
+    private EditText edit06;
     private Button btnFaBu;
     private String id;
     private String imageId;
@@ -151,6 +152,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
         edit03 = (EditText) findViewById(R.id.edit03);
         edit04 = (EditText) findViewById(R.id.edit04);
         edit05 = (EditText) findViewById(R.id.edit05);
+        edit06 = (EditText) findViewById(R.id.edit06);
         btnFaBu = (Button) findViewById(R.id.btnFaBu);
     }
 
@@ -270,6 +272,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                         edit03.setText(skillBefore.getPrice());
                         edit04.setText(skillBefore.getContact());
                         edit05.setText(skillBefore.getIntro());
+                        edit06.setText(skillBefore.getCidName());
                         imageId = skillBefore.getImg_id();
                         cityId = skillBefore.getCityId();
                     } else if (skillBefore.getStatus() == 3) {
@@ -365,6 +368,30 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                             .show();
                     return;
                 }
+                if (TextUtils.isEmpty(edit01.getText())){
+                    Toast.makeText(FaBuFWActivity.this, "请输入服务名称！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edit02.getText())){
+                    Toast.makeText(FaBuFWActivity.this, "请输入地址！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edit03.getText())){
+                    Toast.makeText(FaBuFWActivity.this, "请输入价格！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edit04.getText())){
+                    Toast.makeText(FaBuFWActivity.this, "请输入联系人！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edit05.getText())){
+                    Toast.makeText(FaBuFWActivity.this, "请输入服务描述！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edit06.getText())){
+                    Toast.makeText(FaBuFWActivity.this, "请输入经营品类！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 addAfter();
                 break;
             default:
@@ -391,6 +418,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
         params.put("price", edit03.getText().toString());
         params.put("contact", edit04.getText().toString());
         params.put("intro", edit05.getText().toString());
+        params.put("cate_name", edit06.getText().toString());
         params.put("img_id", imageId);
         params.put("id", id);
         params.put("faceImgs", MyApplication.getInstance().images.toString().replace("[","").replace("]",""));

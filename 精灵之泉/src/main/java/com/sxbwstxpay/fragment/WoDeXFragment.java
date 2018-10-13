@@ -36,6 +36,7 @@ import com.sxbwstxpay.activity.ShiMingRZActivity;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.WoDeDPXActivity;
+import com.sxbwstxpay.activity.WoDeSHActivity;
 import com.sxbwstxpay.activity.WoDeSYActivity;
 import com.sxbwstxpay.activity.WoDeZDActivity;
 import com.sxbwstxpay.activity.WoDeZLActivity;
@@ -153,7 +154,7 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
         woDes.clear();
         woDes.add(new WoDe("商城订单", R.mipmap.wode_scdd));
         woDes.add(new WoDe("我的店铺", R.mipmap.wode_wddp));
-        woDes.add(new WoDe("我的资料", R.mipmap.wode_wdzl));
+        woDes.add(new WoDe("我的商户", R.mipmap.wode_wdzl));
         woDes.add(new WoDe("我的风格", R.mipmap.wode_wdfg));
         woDes.add(new WoDe("风格测试", R.mipmap.wode_fgcs));
         woDes.add(new WoDe("联系客服", R.mipmap.wode_lxkf));
@@ -394,7 +395,7 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                         }
                         break;
                     case 2:
-                        intent.setClass(getActivity(), WoDeZLActivity.class);
+                        intent.setClass(getActivity(), WoDeSHActivity.class);
                         startActivity(intent);
                         break;
                     case 3:

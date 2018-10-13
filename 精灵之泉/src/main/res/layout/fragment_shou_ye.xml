@@ -31,7 +31,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/image0000"
-                android:text="厦门"
+                android:text="选择城市"
                 android:textColor="@color/white"
                 android:textSize="16dp" />
 

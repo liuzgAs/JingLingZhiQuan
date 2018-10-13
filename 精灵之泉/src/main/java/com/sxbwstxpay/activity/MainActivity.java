@@ -218,6 +218,10 @@ public class MainActivity extends AppCompatActivity {
                     intent.setClass(this, WoDeZDActivity.class);
                     startActivity(intent);
                     break;
+                case "app_my_skill":
+                    intent.setClass(this, WoDeFWActivity.class);
+                    startActivity(intent);
+                    break;
                 case "app_pay":
                     mTabHost.setCurrentTab(2);
                     break;

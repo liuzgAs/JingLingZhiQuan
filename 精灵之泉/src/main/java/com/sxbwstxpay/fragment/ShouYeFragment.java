@@ -195,6 +195,9 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             tablayout.getTabAt(i).setText(titles.get(i));
         }
         viewPager.setCurrentItem(0);
+        if (mCity!=null){
+            textCity.setText(mCity);
+        }
     }
 
     @Override

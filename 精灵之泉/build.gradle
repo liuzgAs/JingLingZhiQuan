@@ -7,8 +7,8 @@ android {
         applicationId "com.sxbwstxpay"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 18101201
-        versionName "1.1.3"
+        versionCode 18101303
+        versionName "1.1.6"
 //        ndk {
 //            //选择要添加的对应cpu类型的.so库。
 //            abiFilters  'x86'
