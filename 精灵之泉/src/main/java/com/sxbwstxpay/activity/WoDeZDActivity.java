@@ -104,7 +104,7 @@ public class WoDeZDActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
         @Override
         public Fragment getItem(int position) {
-            return new ZhangDanFragment(position + 1);
+            return ZhangDanFragment.newInstance(position + 1);
         }
 
         @Override

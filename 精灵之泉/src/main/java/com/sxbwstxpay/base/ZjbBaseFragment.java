@@ -2,6 +2,7 @@ package com.sxbwstxpay.base;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
     public boolean isLogin = false;
     public int changeControl = 2016;
     private AlertDialog mAlertDialog;
+    public Context mContext;
     /**
      *
      */
@@ -35,6 +37,7 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //禁止横屏
+        mContext=getActivity();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
@@ -115,6 +118,7 @@ public abstract class ZjbBaseFragment extends Fragment implements FragmentBackHa
     @Override
     public void onDestroy() {
         super.onDestroy();
+        cancelLoadingDialog();
     }
     @Override
     public boolean onBackPressed() {

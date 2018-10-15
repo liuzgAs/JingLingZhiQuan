@@ -137,12 +137,12 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
      * 初始化recyclerview
      */
     private void initRecycler() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DividerDecoration itemDecoration = new DividerDecoration(ContextCompat.getColor(getActivity(),R.color.background), (int) getResources().getDimension(R.dimen.line_width3), 0, 0);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        DividerDecoration itemDecoration = new DividerDecoration(ContextCompat.getColor(mContext,R.color.background), (int) getResources().getDimension(R.dimen.line_width3), 0, 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexStyleMy.DataBean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexStyleMy.DataBean>(mContext) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_zhuanshu;
@@ -156,7 +156,7 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
             }
 
             private void XianShiQGMore() {
-                ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+                ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         LogUtil.LogShitou("XianShiQGFragment--限时抢购更多", s + "");
@@ -168,7 +168,7 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
                                 List<IndexStyleMy.DataBean> indexGoodsData = indexGoods.getData();
                                 adapter.addAll(indexGoodsData);
                             } else if (status == 3) {
-                                MyDialog.showReLoginDialog(getActivity());
+                                MyDialog.showReLoginDialog(mContext);
                             } else {
                                 adapter.pauseMore();
                             }
@@ -198,10 +198,10 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
 
             @Override
             public View onCreateView(ViewGroup parent) {
-                View header_xian_shi_qg = LayoutInflater.from(getActivity()).inflate(R.layout.header_shou_ye, null);
+                View header_xian_shi_qg = LayoutInflater.from(mContext).inflate(R.layout.header_shou_ye, null);
                 banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
                 ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
-                int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+                int screenWidth = ScreenUtils.getScreenWidth(mContext);
                 layoutParams.width = screenWidth;
                 layoutParams.height = (int) ((float) screenWidth * 936f / 1080f);
                 banner.setLayoutParams(layoutParams);
@@ -264,7 +264,7 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
                     ViewHolder holder;
                     if (convertView == null) {
                         holder = new ViewHolder();
-                        convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_grid_shouye, null);
+                        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_grid_shouye, null);
                         holder.textTitle = (TextView) convertView.findViewById(R.id.textTitle);
                         holder.imageImg = (ImageView) convertView.findViewById(R.id.imageImg);
                         convertView.setTag(holder);
@@ -273,11 +273,11 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
                     }
                     holder.textTitle.setText(cateBeanList.get(position).getName());
                     if (cateBeanList.get(position).getAct()==1){
-                        holder.textTitle.setTextColor(ContextCompat.getColor(getActivity(),R.color.basic_color));
+                        holder.textTitle.setTextColor(ContextCompat.getColor(mContext,R.color.basic_color));
                     }else {
-                        holder.textTitle.setTextColor(ContextCompat.getColor(getActivity(),R.color.light_black));
+                        holder.textTitle.setTextColor(ContextCompat.getColor(mContext,R.color.light_black));
                     }
-                    GlideApp.with(getActivity())
+                    GlideApp.with(mContext)
                             .load(cateBeanList.get(position).getImg())
                             .centerCrop()
                             .placeholder(R.mipmap.ic_empty)
@@ -353,7 +353,7 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
     @Override
     public void onRefresh() {
         page = 1;
-        ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("限时购", s);
@@ -367,7 +367,7 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
                         adapter.clear();
                         adapter.addAll(indexGoodsData);
                     } else if (indexStyle.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(getActivity());
+                        MyDialog.showReLoginDialog(mContext);
                     } else {
                         showError(indexStyle.getInfo());
                     }
@@ -383,7 +383,7 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
 
             public void showError(String msg) {
                 try {
-                    View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                    View view_loaderror = LayoutInflater.from(mContext).inflate(R.layout.view_loaderror, null);
                     TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
                     textMsg.setText(msg);
                     view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {

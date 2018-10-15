@@ -465,8 +465,10 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.USER_INDEX;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
-        params.put("tokenTime", tokenTime);
+        if (userInfo!=null){
+            params.put("uid", userInfo.getUid());
+            params.put("tokenTime", tokenTime);
+        }
         return new OkObject(params, url);
     }
 

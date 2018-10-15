@@ -2,6 +2,7 @@ package com.sxbwstxpay.customview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -16,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class TabFragmentHost extends TabHost implements
@@ -270,11 +273,11 @@ public class TabFragmentHost extends TabHost implements
     @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
+        invokeFragmentManagerNoteStateNotSaved();
         SavedState ss = new SavedState(superState);
         ss.curTab = getCurrentTabTag();
         return ss;
     }
-
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         SavedState ss = (SavedState) state;
@@ -331,5 +334,63 @@ public class TabFragmentHost extends TabHost implements
             mLastTab = newTab;
         }
         return ft;
+    }
+
+
+    private Method noteStateNotSavedMethod;
+    private Object fragmentMgr;
+    private String[] activityClassName = {"Activity", "FragmentActivity"};
+    private void invokeFragmentManagerNoteStateNotSaved() {
+        //java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            return;
+        }
+        try {
+            if (noteStateNotSavedMethod != null && fragmentMgr != null) {
+                noteStateNotSavedMethod.invoke(fragmentMgr);
+                return;
+            }
+            Class cls = getClass();
+            do {
+                cls = cls.getSuperclass();
+            } while (!(activityClassName[0].equals(cls.getSimpleName())
+                    || activityClassName[1].equals(cls.getSimpleName())));
+
+            Field fragmentMgrField = prepareField(cls, "mFragments");
+            if (fragmentMgrField != null) {
+                fragmentMgr = fragmentMgrField.get(this);
+                noteStateNotSavedMethod = getDeclaredMethod(fragmentMgr, "noteStateNotSaved");
+                if (noteStateNotSavedMethod != null) {
+                    noteStateNotSavedMethod.invoke(fragmentMgr);
+                }
+            }
+
+        } catch (Exception ex) {
+        }
+    }
+
+    private Field prepareField(Class<?> c, String fieldName) throws NoSuchFieldException {
+        while (c != null) {
+            try {
+                Field f = c.getDeclaredField(fieldName);
+                f.setAccessible(true);
+                return f;
+            } finally {
+                c = c.getSuperclass();
+            }
+        }
+        throw new NoSuchFieldException();
+    }
+
+    private Method getDeclaredMethod(Object object, String methodName, Class<?>... parameterTypes) {
+        Method method = null;
+        for (Class<?> clazz = object.getClass(); clazz != Object.class; clazz = clazz.getSuperclass()) {
+            try {
+                method = clazz.getDeclaredMethod(methodName, parameterTypes);
+                return method;
+            } catch (Exception e) {
+            }
+        }
+        return null;
     }
 }

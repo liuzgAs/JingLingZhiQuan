@@ -140,12 +140,12 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
      * 初始化recyclerview
      */
     private void initRecycler() {
-        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager manager = new GridLayoutManager(mContext, 2);
         recyclerView.setLayoutManager(manager);
-        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(5f, getActivity()));
+        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(5f, mContext));
         recyclerView.addItemDecoration(spaceDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Supermarket.DataBean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Supermarket.DataBean>(mContext) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qgx;
@@ -162,10 +162,10 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
 
             @Override
             public View onCreateView(ViewGroup parent) {
-                View header_xian_shi_qg = LayoutInflater.from(getActivity()).inflate(R.layout.header_shou_ye, null);
+                View header_xian_shi_qg = LayoutInflater.from(mContext).inflate(R.layout.header_shou_ye, null);
                 banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
                 ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
-                int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+                int screenWidth = ScreenUtils.getScreenWidth(mContext);
                 layoutParams.width = screenWidth;
                 layoutParams.height = (int) ((float) screenWidth * 936f / 1080f);
                 banner.setLayoutParams(layoutParams);
@@ -179,7 +179,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent intent=new Intent();
                         intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
-                        intent.setClass(getActivity(), XuanPinSJActivity.class);
+                        intent.setClass(mContext, XuanPinSJActivity.class);
                         startActivity(intent);
                     }
                 });
@@ -230,7 +230,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
                     ViewHolder holder;
                     if (convertView == null) {
                         holder = new ViewHolder();
-                        convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_grid_shouye, null);
+                        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_grid_shouye, null);
                         holder.textTitle = (TextView) convertView.findViewById(R.id.textTitle);
                         holder.imageImg = (ImageView) convertView.findViewById(R.id.imageImg);
                         convertView.setTag(holder);
@@ -238,7 +238,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
                         holder = (ViewHolder) convertView.getTag();
                     }
                     holder.textTitle.setText(cateBeanList.get(position).getName());
-                    GlideApp.with(getActivity())
+                    GlideApp.with(mContext)
                             .load(cateBeanList.get(position).getImg())
                             .centerCrop()
                             .placeholder(R.mipmap.ic_empty)
@@ -255,7 +255,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
             }
 
             private void XianShiQGMore() {
-                ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+                ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         LogUtil.LogShitou("XianShiQGFragment--限时抢购更多", s + "");
@@ -267,7 +267,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
                                 List<Supermarket.DataBean> indexGoodsData = indexGoods.getData();
                                 adapter.addAll(indexGoodsData);
                             } else if (status == 3) {
-                                MyDialog.showReLoginDialog(getActivity());
+                                MyDialog.showReLoginDialog(mContext);
                             } else {
                                 adapter.pauseMore();
                             }
@@ -332,7 +332,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
             public void onItemClick(int position) {
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
-                intent.setClass(getActivity(), ChanPinXQActivity.class);
+                intent.setClass(mContext, ChanPinXQActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
@@ -358,7 +358,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
     @Override
     public void onRefresh() {
         page = 1;
-        ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("限时购", s);
@@ -372,7 +372,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
                         adapter.clear();
                         adapter.addAll(indexGoodsData);
                     } else if (indexStyle.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(getActivity());
+                        MyDialog.showReLoginDialog(mContext);
                     } else {
                         showError(indexStyle.getInfo());
                     }
@@ -388,7 +388,7 @@ public class JingLingCSFragment extends ZjbBaseFragment implements SwipeRefreshL
 
             public void showError(String msg) {
                 try {
-                    View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                    View view_loaderror = LayoutInflater.from(mContext).inflate(R.layout.view_loaderror, null);
                     TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
                     textMsg.setText(msg);
                     view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {

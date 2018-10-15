@@ -103,6 +103,7 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        cancelLoadingDialog();
     }
 
     protected abstract void initSP();

@@ -275,7 +275,9 @@ public class HuanKuanJiHuaActivity extends ZjbBaseActivity implements View.OnCli
                                 if (num > 20) {
                                     num = 20;
                                 }
-                                days = days.substring(0, days.length() - 1);
+                                if (days.length()-1>0){
+                                    days = days.substring(0, days.length() - 1);
+                                }
                                 textHuanKuanRiQi.setText(days);
                                 textNum.setText(String.valueOf(num));
                             }

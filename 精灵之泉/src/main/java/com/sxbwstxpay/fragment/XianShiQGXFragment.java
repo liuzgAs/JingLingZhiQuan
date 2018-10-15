@@ -118,7 +118,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                             }
                         }, 2000, 1000);
                     } else {
-                        Animation animation01 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_up_in);
+                        Animation animation01 = AnimationUtils.loadAnimation(mContext, R.anim.push_up_in);
                         viewShangJiaTip.startAnimation(animation01);
                         viewShangJiaTip.setVisibility(View.VISIBLE);
                         timer = new Timer();
@@ -141,7 +141,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                 case Constant.BROADCASTCODE.CITY_CHOOSE:
                     IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
                     cityId = cityBean.getId();
-                    final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+                    final ACache aCache = ACache.get(mContext, Constant.ACACHE.LOCATION);
                     aCache.put(Constant.ACACHE.CITY_ID, cityId);
                     textCity.setText(cityBean.getName());
                     onRefresh();
@@ -166,7 +166,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
     private FloatingActionButton top;
 
     public void hideView() {
-        Animation animation02 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_down_out);
+        Animation animation02 = AnimationUtils.loadAnimation(mContext, R.anim.push_down_out);
         viewShangJiaTip.startAnimation(animation02);
         viewShangJiaTip.setVisibility(View.GONE);
         if (timer != null) {
@@ -203,7 +203,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
 
     @Override
     protected void initSP() {
-        final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+        final ACache aCache = ACache.get(mContext, Constant.ACACHE.LOCATION);
         String cityAcache = aCache.getAsString(Constant.ACACHE.CITY);
         if (cityAcache != null) {
             mCity = cityAcache;
@@ -223,7 +223,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
         tablayoutHeaderX = (TabLayout) mInflate.findViewById(R.id.tablayoutHeaderX);
         tabCarview = mInflate.findViewById(R.id.tabCarview);
         textCity = (TextView) mInflate.findViewById(R.id.textCity);
-        badge = new QBadgeView(getActivity())
+        badge = new QBadgeView(mContext)
                 .setBadgeTextColor(Color.WHITE)
                 .setBadgeTextSize(8f, true)
                 .setBadgeBackgroundColor(getResources().getColor(R.color.red))
@@ -234,19 +234,19 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
     @Override
     protected void initViews() {
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
-        layoutParams.height = (int) DpUtils.convertDpToPixel(70, getActivity()) + ScreenUtils.getStatusBarHeight(getActivity());
+        layoutParams.height = (int) DpUtils.convertDpToPixel(70, mContext) + ScreenUtils.getStatusBarHeight(mContext);
         viewBar.setLayoutParams(layoutParams);
-        viewBar.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
+        viewBar.setPadding(0, ScreenUtils.getStatusBarHeight(mContext), 0, 0);
         viewBar.setVisibility(View.GONE);
         textCity.setText(mCity);
         tablayoutHeaderX.setVisibility(View.GONE);
         tabCarview.setVisibility(View.GONE);
         viewShangJiaTip.setVisibility(View.GONE);
-        int screenWidth = ScreenUtils.getScreenWidth(getActivity());
-//        indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(125, getActivity());
-        indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(125, getActivity());
-        tabHeight = getActivity().getResources().getDimension(R.dimen.tabHeight);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        int screenWidth = ScreenUtils.getScreenWidth(mContext);
+//        indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(125, mContext);
+        indexBannerHeight = (int) ((float) screenWidth * Constant.VALUE.IndexBannerHeight / 1080f) + (int) DpUtils.convertDpToPixel(125, mContext);
+        tabHeight = mContext.getResources().getDimension(R.dimen.tabHeight);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
         DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.marginTop), 0, 0);
         itemDecoration.setDrawLastItem(false);
@@ -254,7 +254,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
         recyclerView.getSwipeToRefresh().setProgressViewOffset(true, 30, 220);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexDataBean>(mContext) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_xian_shi_qg;
@@ -269,10 +269,10 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
 
             @Override
             public View onCreateView(ViewGroup parent) {
-                View header_xian_shi_qg = LayoutInflater.from(getActivity()).inflate(R.layout.header_xian_shi_qg, null);
+                View header_xian_shi_qg = LayoutInflater.from(mContext).inflate(R.layout.header_xian_shi_qg, null);
                 banner = (ConvenientBanner) header_xian_shi_qg.findViewById(R.id.banner);
                 ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
-                int screenWidth = ScreenUtils.getScreenWidth(getActivity());
+                int screenWidth = ScreenUtils.getScreenWidth(mContext);
                 layoutParams.width = screenWidth;
                 layoutParams.height = (int) ((float) screenWidth * 874f / 1080f);
                 banner.setLayoutParams(layoutParams);
@@ -290,22 +290,22 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                         switch (cateBeanList.get(i).getJump()) {
                             case "list":
                                 intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
-                                intent.setClass(getActivity(), XuanPinSJActivity.class);
+                                intent.setClass(mContext, XuanPinSJActivity.class);
                                 startActivity(intent);
                                 break;
                             case "score":
                                 intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
-                                intent.setClass(getActivity(), XuanPinSJActivity.class);
+                                intent.setClass(mContext, XuanPinSJActivity.class);
                                 startActivity(intent);
                                 break;
                             case "product":
                                 intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
-                                intent.setClass(getActivity(), StoreListActivity.class);
+                                intent.setClass(mContext, StoreListActivity.class);
                                 startActivity(intent);
                                 break;
                             case "store":
                                 intent.putExtra(Constant.INTENT_KEY.value, cateBeanList.get(i));
-                                intent.setClass(getActivity(), StoreListActivity.class);
+                                intent.setClass(mContext, StoreListActivity.class);
                                 startActivity(intent);
                                 break;
                             case "web":
@@ -365,7 +365,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                     ViewHolder holder;
                     if (convertView == null) {
                         holder = new ViewHolder();
-                        convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_grid_shouye, null);
+                        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_grid_shouye, null);
                         holder.textTitle = (TextView) convertView.findViewById(R.id.textTitle);
                         holder.imageImg = (ImageView) convertView.findViewById(R.id.imageImg);
                         convertView.setTag(holder);
@@ -373,7 +373,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                         holder = (ViewHolder) convertView.getTag();
                     }
                     holder.textTitle.setText(cateBeanList.get(position).getName());
-                    GlideApp.with(getActivity())
+                    GlideApp.with(mContext)
                             .load(cateBeanList.get(position).getImg())
                             .centerCrop()
                             .placeholder(R.mipmap.ic_empty)
@@ -390,7 +390,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
             }
 
             private void XianShiQGMore() {
-                ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+                ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         LogUtil.LogShitou("XianShiQGFragment--限时抢购更多", s + "");
@@ -419,7 +419,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                                     adapter.addAll(indexGoodsData);
                                 }
                             } else if (status == 3) {
-                                MyDialog.showReLoginDialog(getActivity());
+                                MyDialog.showReLoginDialog(mContext);
                             } else {
                                 adapter.pauseMore();
                             }
@@ -467,7 +467,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
             public void onItemClick(int position) {
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, adapter.getItem(position).getId());
-                intent.setClass(getActivity(), ChanPinXQActivity.class);
+                intent.setClass(mContext, ChanPinXQActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
@@ -519,8 +519,10 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
     private OkObject getXianShiQGOkObject() {
         String url = Constant.HOST + Constant.Url.INDEX_GOODS;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
-        params.put("tokenTime", tokenTime);
+        if (userInfo!=null){
+            params.put("uid", userInfo.getUid());
+            params.put("tokenTime", tokenTime);
+        }
         params.put("p", page + "");
         params.put("lat", lat);
         params.put("lng", lng);
@@ -538,7 +540,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
     private void xianShiQiangGou() {
         id = "0";
         page = 1;
-        ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("限时购", s);
@@ -554,7 +556,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                         adapter.clear();
                         adapter.addAll(indexGoodsData);
 //                        if (!TextUtils.isEmpty(indexGoods.getTipsContent())){
-//                            new AlertDialog.Builder(getActivity())
+//                            new AlertDialog.Builder(mContext)
 //                                    .setTitle("提示")
 //                                    .setMessage(indexGoods.getTipsContent())
 //                                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
@@ -565,7 +567,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
 //                                    }).show();
 //                        }
                     } else if (indexGoods.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(getActivity());
+                        MyDialog.showReLoginDialog(mContext);
                     } else {
                         showError(indexGoods.getInfo());
                     }
@@ -581,7 +583,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
 
             public void showError(String msg) {
                 try {
-                    View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                    View view_loaderror = LayoutInflater.from(mContext).inflate(R.layout.view_loaderror, null);
                     TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
                     textMsg.setText(msg);
                     view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
@@ -606,14 +608,14 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
         filter.addAction(Constant.BROADCASTCODE.ShangJia01);
         filter.addAction(Constant.BROADCASTCODE.VIP);
         filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
-        getActivity().registerReceiver(reciver, filter);
+        mContext.registerReceiver(reciver, filter);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         try {
-            getActivity().unregisterReceiver(reciver);
+            mContext.unregisterReceiver(reciver);
         } catch (Exception e) {
         }
     }
@@ -623,7 +625,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
     @AfterPermissionGranted(CAMERA)
     private void methodRequiresTwoPermission() {
         String[] perms = {Manifest.permission.CAMERA};
-        if (EasyPermissions.hasPermissions(getActivity(), perms)) {
+        if (EasyPermissions.hasPermissions(mContext, perms)) {
             // Already have permission, do the thing
             ewm();
         } else {
@@ -661,16 +663,16 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity) getActivity()).isChoosePic = false;
+        ((MainActivity) mContext).isChoosePic = false;
     }
 
     /**
      * 扫描二维码
      */
     private void ewm() {
-        ((MainActivity) getActivity()).isChoosePic = true;
+        ((MainActivity) mContext).isChoosePic = true;
         Intent intent = new Intent();
-        intent.setClass(getActivity(), CaptureActivity.class);
+        intent.setClass(mContext, CaptureActivity.class);
         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.EWM);
     }
 
@@ -684,15 +686,15 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                 break;
             case R.id.textSouSuo:
                 intent.putExtra(Constant.INTENT_KEY.type, 0);
-                intent.setClass(getActivity(), SouSuoActivity.class);
+                intent.setClass(mContext, SouSuoActivity.class);
                 startActivity(intent);
                 break;
             case R.id.viewVip:
-                intent.setClass(getActivity(), GouWuCActivity.class);
+                intent.setClass(mContext, GouWuCActivity.class);
                 startActivity(intent);
                 break;
             case R.id.textCity:
-                intent.setClass(getActivity(), ChengShiXZActivity.class);
+                intent.setClass(mContext, ChengShiXZActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageCancle:
@@ -712,7 +714,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
             tabLayout.removeAllTabs();
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
             for (int i = 0; i < indexGoodsTimes.size(); i++) {
-                View item_qiang_gou_sj = LayoutInflater.from(getActivity()).inflate(R.layout.item_qiang_gou_sj, null);
+                View item_qiang_gou_sj = LayoutInflater.from(mContext).inflate(R.layout.item_qiang_gou_sj, null);
                 TextView textQiangGouTitle = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouTitle);
                 TextView textQiangGouDes = (TextView) item_qiang_gou_sj.findViewById(R.id.textQiangGouDes);
                 textQiangGouTitle.setText(indexGoodsTimes.get(i).getTimes());
@@ -763,7 +765,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                 id = indexGoodsTimes.get(tab.getPosition()).getId();
 
                 showLoadingDialog();
-                ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+                ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         cancelLoadingDialog();
@@ -806,7 +808,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                                     recyclerView.getRecyclerView().scrollBy(0, indexBannerHeight);
                                 }
                             } else if (indexGoods.getStatus() == 3) {
-                                MyDialog.showReLoginDialog(getActivity());
+                                MyDialog.showReLoginDialog(mContext);
                             } else {
                                 showError(indexGoods.getInfo());
                             }
@@ -822,7 +824,7 @@ public class XianShiQGXFragment extends ZjbBaseFragment implements SwipeRefreshL
                     }
 
                     public void showError(String msg) {
-                        View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                        View view_loaderror = LayoutInflater.from(mContext).inflate(R.layout.view_loaderror, null);
                         TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
                         textMsg.setText(msg);
                         view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {

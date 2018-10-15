@@ -147,7 +147,12 @@ public class PermissionPageUtils {
         } else {
             goIntentSetting();
         }
-        mContext.startActivity(intent);
+        try {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            mContext.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void goMeizuMainager() {
@@ -172,6 +177,7 @@ public class PermissionPageUtils {
         Uri uri = Uri.fromParts("package", mContext.getPackageName(), null);
         intent.setData(uri);
         try {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
             mContext.startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();

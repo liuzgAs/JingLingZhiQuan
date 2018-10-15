@@ -96,7 +96,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                 case Constant.BROADCASTCODE.CITY_CHOOSE:
                     IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
                     cityId = cityBean.getId();
-                    final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+                    final ACache aCache = ACache.get(mContext, Constant.ACACHE.LOCATION);
                     aCache.put(Constant.ACACHE.CITY_ID, cityId);
                     textCity.setText(cityBean.getName());
                     initData();
@@ -148,7 +148,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
 
     @Override
     protected void initSP() {
-        final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+        final ACache aCache = ACache.get(mContext, Constant.ACACHE.LOCATION);
         String cityAcache = aCache.getAsString(Constant.ACACHE.CITY);
         if (cityAcache != null) {
             mCity = cityAcache;
@@ -178,9 +178,9 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
     @Override
     protected void initViews() {
         ViewGroup.LayoutParams layoutParams = viewBar.getLayoutParams();
-        layoutParams.height = (int) DpUtils.convertDpToPixel(120, getActivity()) + ScreenUtils.getStatusBarHeight(getActivity());
+        layoutParams.height = (int) DpUtils.convertDpToPixel(120, mContext) + ScreenUtils.getStatusBarHeight(mContext);
         viewBar.setLayoutParams(layoutParams);
-        viewBar.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
+        viewBar.setPadding(0, ScreenUtils.getStatusBarHeight(mContext), 0, 0);
 
         viewPager.setAdapter(new MyViewPagerAdapter(getChildFragmentManager()));
         tablayout.setupWithViewPager(viewPager);
@@ -220,8 +220,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
     private OkObject getXianShiQGOkObject() {
         String url = Constant.HOST + Constant.Url.INDEX_GOODS;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
-        params.put("tokenTime", tokenTime);
+        if (userInfo!=null){
+            params.put("uid", userInfo.getUid());
+            params.put("tokenTime", tokenTime);
+        }
         params.put("p", "1");
         params.put("lat", lat);
         params.put("lng", lng);
@@ -230,7 +232,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
         return new OkObject(params, url);
     }
     private void xianShiQiangGou() {
-        ApiClient.post(getActivity(), getXianShiQGOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("限时购", s);
@@ -239,7 +241,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                     if (indexGoods.getStatus() == 1) {
                         List<IndexDataBean> indexGoodsData = indexGoods.getData();
                         if (!TextUtils.isEmpty(indexGoods.getTipsContent())){
-                            new AlertDialog.Builder(getActivity())
+                            new AlertDialog.Builder(mContext)
                                     .setTitle("提示")
                                     .setMessage(indexGoods.getTipsContent())
                                     .setNegativeButton("确定", new DialogInterface.OnClickListener() {
@@ -250,18 +252,18 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                                     }).show();
                         }
                     } else if (indexGoods.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(getActivity());
+                        MyDialog.showReLoginDialog(mContext);
                     } else {
-                        Toast.makeText(getActivity(),indexGoods.getInfo(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext,indexGoods.getInfo(),Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(),"数据出错",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,"数据出错",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Response response) {
-                Toast.makeText(getActivity(),"网络出错",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"网络出错",Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -279,11 +281,11 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                 break;
             case R.id.textSouSuo:
                 intent.putExtra(Constant.INTENT_KEY.type, 0);
-                intent.setClass(getActivity(), SouSuoActivity.class);
+                intent.setClass(mContext, SouSuoActivity.class);
                 startActivity(intent);
                 break;
             case R.id.textCity:
-                intent.setClass(getActivity(), ChengShiXZActivity.class);
+                intent.setClass(mContext, ChengShiXZActivity.class);
                 startActivity(intent);
                 break;
             default:
@@ -306,9 +308,9 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     LogUtil.LogShitou("XianShiQGFragment--onActivityResult", ""+result);
-                    Toast.makeText(getActivity(), "解析结果:" + result, Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "解析结果:" + result, Toast.LENGTH_LONG).show();
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    Toast.makeText(getActivity(), "解析二维码失败", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "解析二维码失败", Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -345,7 +347,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
-        getActivity().registerReceiver(reciver, filter);
+        mContext.registerReceiver(reciver, filter);
         if (!isHongBaoShow) {
             hongBaoQingQing();
             isHongBaoShow = true;
@@ -355,7 +357,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(reciver);
+        mContext.unregisterReceiver(reciver);
     }
 
     private static final int CAMERA = 1991;
@@ -363,7 +365,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
     @AfterPermissionGranted(CAMERA)
     private void methodRequiresTwoPermission() {
         String[] perms = {Manifest.permission.CAMERA};
-        if (EasyPermissions.hasPermissions(getActivity(), perms)) {
+        if (EasyPermissions.hasPermissions(mContext, perms)) {
             // Already have permission, do the thing
             ewm();
         } else {
@@ -401,15 +403,15 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
      * 扫描二维码
      */
     private void ewm() {
-        ((MainActivity) getActivity()).isChoosePic = true;
+        ((MainActivity) mContext).isChoosePic = true;
         Intent intent = new Intent();
-        intent.setClass(getActivity(), CaptureActivity.class);
+        intent.setClass(mContext, CaptureActivity.class);
         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.EWM);
     }
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity) getActivity()).isChoosePic = false;
+        ((MainActivity) mContext).isChoosePic = false;
     }
 
     /**
@@ -418,18 +420,18 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
      * @param indexBonusget
      */
     private void showHongBaoDialog(IndexBonusget indexBonusget) {
-        int screenWidth = ScreenUtils.getScreenWidth(getActivity());
-        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hongbaolq, null);
+        int screenWidth = ScreenUtils.getScreenWidth(mContext);
+        View inflate = LayoutInflater.from(mContext).inflate(R.layout.dialog_hongbaolq, null);
         TextView texthongBao = (TextView) inflate.findViewById(R.id.texthongBao);
 
         texthongBao.setText(indexBonusget.getMoney() + "元");
         View linearhongBao = inflate.findViewById(R.id.linearhongBao);
         ViewGroup.LayoutParams layoutParams = linearhongBao.getLayoutParams();
-        int width = screenWidth - (int) DpUtils.convertDpToPixel(40 * 2, getActivity());
+        int width = screenWidth - (int) DpUtils.convertDpToPixel(40 * 2, mContext);
         layoutParams.width = width;
         layoutParams.height = (int) (width * 1.15f);
         linearhongBao.setLayoutParams(layoutParams);
-        final Dialog mDialog = new Dialog(getActivity(), R.style.mydialog);
+        final Dialog mDialog = new Dialog(mContext, R.style.mydialog);
         mDialog.setContentView(inflate);
         mDialog.show();
         inflate.findViewById(R.id.viewhongBao).setOnClickListener(new View.OnClickListener() {
@@ -438,7 +440,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                 mDialog.dismiss();
             }
         });
-        Toast.makeText(getActivity(), indexBonusget.getDes(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, indexBonusget.getDes(), Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -447,7 +449,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
     private void hongBaoQingQing() {
 
         showLoadingDialog();
-        ApiClient.post(getActivity(), getHongBaoQQOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getHongBaoQQOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
@@ -464,7 +466,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                     } else if (indexBonusdown.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getContext());
                     } else {
-                        Toast.makeText(getActivity(), indexBonusdown.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, indexBonusdown.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                 }
@@ -473,7 +475,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -497,19 +499,19 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
     @SuppressLint("WrongConstant")
     private void hongBaoDialog() {
         if (mDialog == null) {
-            int screenWidth = ScreenUtils.getScreenWidth(getActivity());
-            int screenHeight = ScreenUtils.getScreenHeight(getActivity());
+            int screenWidth = ScreenUtils.getScreenWidth(mContext);
+            int screenHeight = ScreenUtils.getScreenHeight(mContext);
 
 
-            View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hongbao, null);
+            View inflate = LayoutInflater.from(mContext).inflate(R.layout.dialog_hongbao, null);
             RelativeLayout relaHongBao = (RelativeLayout) inflate.findViewById(R.id.relaHongBao);
 
 
             for (int i = 0; i < 10; i++) {
-                ImageView imageView = new ImageView(getActivity());
+                ImageView imageView = new ImageView(mContext);
                 imageView.setImageResource(R.mipmap.hongbao002);
                 int anInt = new Random().nextInt(40);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 60), getActivity());
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 60), mContext);
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 layoutParams.rightMargin = new Random().nextInt(screenWidth) - (int) hongBaoSize;
@@ -532,10 +534,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                 });
             }
             for (int i = 0; i < 10; i++) {
-                ImageView imageView = new ImageView(getActivity());
+                ImageView imageView = new ImageView(mContext);
                 imageView.setImageResource(R.mipmap.hongbao002);
                 int anInt = new Random().nextInt(40);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 60), getActivity());
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 60), mContext);
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 layoutParams.leftMargin = new Random().nextInt(screenWidth) - (int) hongBaoSize;
@@ -559,10 +561,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             }
 
             for (int i = 0; i < 10; i++) {
-                ImageView imageView = new ImageView(getActivity());
+                ImageView imageView = new ImageView(mContext);
                 imageView.setImageResource(R.mipmap.hongbao001);
                 int anInt = new Random().nextInt(40);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), getActivity());
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), mContext);
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 layoutParams.rightMargin = new Random().nextInt(screenWidth) - (int) hongBaoSize;
@@ -585,10 +587,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                 });
             }
             for (int i = 0; i < 10; i++) {
-                ImageView imageView = new ImageView(getActivity());
+                ImageView imageView = new ImageView(mContext);
                 imageView.setImageResource(R.mipmap.hongbao001);
                 int anInt = new Random().nextInt(40);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), getActivity());
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), mContext);
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 layoutParams.leftMargin = new Random().nextInt(screenWidth) - (int) hongBaoSize;
@@ -611,10 +613,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                 });
             }
             for (int i = 0; i < 10; i++) {
-                ImageView imageView = new ImageView(getActivity());
+                ImageView imageView = new ImageView(mContext);
                 imageView.setImageResource(R.mipmap.hongbao003);
                 int anInt = new Random().nextInt(40);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), getActivity());
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), mContext);
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 layoutParams.rightMargin = new Random().nextInt(screenWidth) - (int) hongBaoSize;
@@ -638,10 +640,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             }
 
             for (int i = 0; i < 10; i++) {
-                ImageView imageView = new ImageView(getActivity());
+                ImageView imageView = new ImageView(mContext);
                 imageView.setImageResource(R.mipmap.hongbao003);
                 int anInt = new Random().nextInt(40);
-                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), getActivity());
+                float hongBaoSize = DpUtils.convertDpToPixel((anInt + 80), mContext);
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) hongBaoSize, (int) hongBaoSize);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 layoutParams.leftMargin = new Random().nextInt(screenWidth) - (int) hongBaoSize;
@@ -665,7 +667,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             }
 
 
-            mDialog = new Dialog(getActivity(), R.style.mydialog);
+            mDialog = new Dialog(mContext, R.style.mydialog);
             mDialog.setContentView(inflate);
             mDialog.show();
         } else {
@@ -680,11 +682,11 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             mDialog.dismiss();
         }
         if (!isLogin) {
-            ToLoginActivity.toLoginActivity(getActivity());
+            ToLoginActivity.toLoginActivity(mContext);
             return;
         }
         showLoadingDialog();
-        ApiClient.post(getActivity(), getQiangHongBAoOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getQiangHongBAoOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 cancelLoadingDialog();
@@ -693,39 +695,39 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
                     IndexBonusbefore indexBonusbefore = GsonUtils.parseJSON(s, IndexBonusbefore.class);
                     if (indexBonusbefore.getStatus() == 1) {
                         if (indexBonusbefore.getGoRealName() == 1) {
-                            MyDialog.showTipDialog(getActivity(), indexBonusbefore.getDes());
-                            new AlertDialog.Builder(getActivity())
+                            MyDialog.showTipDialog(mContext, indexBonusbefore.getDes());
+                            new AlertDialog.Builder(mContext)
                                     .setTitle("提示")
                                     .setMessage(indexBonusbefore.getDes())
                                     .setNegativeButton("否", null)
                                     .setPositiveButton("是", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            ((MainActivity) getActivity()).mTabHost.setCurrentTab(3);
+                                            ((MainActivity) mContext).mTabHost.setCurrentTab(3);
                                         }
                                     })
                                     .show();
                         } else {
                             Intent intent = new Intent();
-                            intent.setClass(getActivity(), WebHongBaoActivity.class);
+                            intent.setClass(mContext, WebHongBaoActivity.class);
                             intent.putExtra(Constant.INTENT_KEY.TITLE, "领取红包");
                             intent.putExtra(Constant.INTENT_KEY.URL, indexBonusbefore.getUrl());
                             startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.HONG_BAO);
                         }
                     } else if (indexBonusbefore.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(getActivity());
+                        MyDialog.showReLoginDialog(mContext);
                     } else {
-                        Toast.makeText(getActivity(), indexBonusbefore.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, indexBonusbefore.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Response response) {
                 cancelLoadingDialog();
-                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
     }

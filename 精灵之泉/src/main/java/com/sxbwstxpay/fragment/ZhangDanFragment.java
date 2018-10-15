@@ -4,6 +4,7 @@ package com.sxbwstxpay.fragment;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,11 +50,23 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
     public ZhangDanFragment() {
         // Required empty public constructor
     }
+    private static final String ARG_PARAM1 = "param1";
 
-    public ZhangDanFragment(int type) {
-        this.type = type;
+    public static ZhangDanFragment newInstance(int param1) {
+        ZhangDanFragment fragment = new ZhangDanFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            type = getArguments().getInt(ARG_PARAM1,1);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,14 +115,14 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
     }
 
     private void initRecycle() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
         DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.marginTop), 0, 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         int red = getResources().getColor(R.color.basic_color);
         recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<List<UserMoneylog.DataBean>>(getActivity()) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<List<UserMoneylog.DataBean>>(mContext) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_zhangdan_list;
@@ -119,14 +132,14 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                View header_zahun_qian = LayoutInflater.from(getActivity()).inflate(R.layout.header_zhang_dan, null);
+                View header_zahun_qian = LayoutInflater.from(mContext).inflate(R.layout.header_zhang_dan, null);
                 final TextView textStartTime = (TextView) header_zahun_qian.findViewById(R.id.textStartTime);
                 final TextView textEndTime = (TextView) header_zahun_qian.findViewById(R.id.textEndTime);
                 header_zahun_qian.findViewById(R.id.viewStartTime).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Calendar c = Calendar.getInstance();
-                        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 s_time = year + "-" + (month + 1) + "-" + dayOfMonth;
@@ -142,7 +155,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                     @Override
                     public void onClick(View v) {
                         Calendar c = Calendar.getInstance();
-                        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 e_time = year + "-" + (month + 1) + "-" + dayOfMonth;
@@ -165,7 +178,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
-                ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+                ApiClient.post(mContext, getOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
                         LogUtil.LogShitou("ZhangDanFragment--我的账单更多", s+"");
@@ -177,7 +190,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                                 List<List<UserMoneylog.DataBean>> userMoneylogData = userMoneylog.getData();
                                 adapter.addAll(userMoneylogData);
                             } else if (status == 3) {
-                                MyDialog.showReLoginDialog(getActivity());
+                                MyDialog.showReLoginDialog(mContext);
                             } else {
                                 adapter.pauseMore();
                             }
@@ -235,8 +248,10 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
     private OkObject getOkObject() {
         String url = Constant.HOST + Constant.Url.USER_MONEYLOG;
         HashMap<String, String> params = new HashMap<>();
-        params.put("uid", userInfo.getUid());
-        params.put("tokenTime", tokenTime);
+        if (userInfo!=null){
+            params.put("uid", userInfo.getUid());
+            params.put("tokenTime", tokenTime);
+        }
         params.put("type", type + "");
         params.put("s_time", s_time);
         params.put("e_time", e_time);
@@ -247,7 +262,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
     @Override
     public void onRefresh() {
         page = 1;
-        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("我的账单", s);
@@ -259,7 +274,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
                         adapter.clear();
                         adapter.addAll(userMoneylogData);
                     } else if (userMoneylog.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(getActivity());
+                        MyDialog.showReLoginDialog(mContext);
                     } else {
                         showError(userMoneylog.getInfo());
                     }
@@ -274,7 +289,7 @@ public class ZhangDanFragment extends ZjbBaseFragment implements SwipeRefreshLay
             }
 
             public void showError(String msg) {
-                View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                View view_loaderror = LayoutInflater.from(mContext).inflate(R.layout.view_loaderror, null);
                 TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
                 textMsg.setText(msg);
                 view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {

@@ -105,6 +105,7 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        cancelLoadingDialog();
     }
 
     protected abstract void initSP();
