@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.ZjbBaseNotLeftActivity;
-import com.sxbwstxpay.fragment.JianJieTJYHFragment;
 import com.sxbwstxpay.fragment.ZhiJieTJYHFragment;
 import com.sxbwstxpay.util.ScreenUtils;
 
@@ -55,7 +54,7 @@ public class WoDeSHActivity extends ZjbBaseNotLeftActivity implements View.OnCli
         viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
         tablayout.setupWithViewPager(viewPager);
         tablayout.getTabAt(0).setText("直接推荐用户");
-        tablayout.getTabAt(1).setText("间接推荐用户");
+//        tablayout.getTabAt(1).setText("间接推荐用户");
     }
 
     @Override
@@ -88,8 +87,8 @@ public class WoDeSHActivity extends ZjbBaseNotLeftActivity implements View.OnCli
             switch (position) {
                 case 0:
                     return new ZhiJieTJYHFragment();
-                case 1:
-                    return new JianJieTJYHFragment();
+//                case 1:
+//                    return new JianJieTJYHFragment();
                 default:
                     return new ZhiJieTJYHFragment();
             }
@@ -97,7 +96,7 @@ public class WoDeSHActivity extends ZjbBaseNotLeftActivity implements View.OnCli
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
     }
 }

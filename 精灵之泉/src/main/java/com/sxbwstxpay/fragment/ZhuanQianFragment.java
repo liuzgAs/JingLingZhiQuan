@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.sunfusheng.marqueeview.MarqueeView;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.TuiGuangActivity;
 import com.sxbwstxpay.base.MyDialog;
@@ -38,6 +41,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.Tencent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import okhttp3.Response;
@@ -61,12 +65,12 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
             switch (action) {
                 case Constant.BROADCASTCODE.WX_SHARE:
                     if (isShow) {
-                        MyDialog.showTipDialog(getActivity(), "分享成功");
+                        MyDialog.showTipDialog(mContext, "分享成功");
                     }
                     break;
                 case Constant.BROADCASTCODE.WX_SHARE_FAIL:
                     if (isShow) {
-                        MyDialog.showTipDialog(getActivity(), "取消分享");
+                        MyDialog.showTipDialog(mContext, "取消分享");
                     }
                     break;
                 case Constant.BROADCASTCODE.FenXiangZCLJ:
@@ -89,15 +93,15 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         // Required empty public constructor
     }
 
-
+    ArrayList<String> info=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (mInflate == null) {
             mInflate = inflater.inflate(R.layout.fragment_zhuan_qian, container, false);
-            mTencent = Tencent.createInstance(Constant.QQ_ID, getActivity());
-            api = WXAPIFactory.createWXAPI(getActivity(), Constant.WXAPPID, true);
+            mTencent = Tencent.createInstance(Constant.QQ_ID, mContext);
+            api = WXAPIFactory.createWXAPI(mContext, Constant.WXAPPID, true);
             init();
         }
         //缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
@@ -127,9 +131,9 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     @Override
     protected void initViews() {
         ViewGroup.LayoutParams layoutParams = mRelaTitleStatue.getLayoutParams();
-        layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(getActivity()));
+        layoutParams.height = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(mContext));
         mRelaTitleStatue.setLayoutParams(layoutParams);
-        mRelaTitleStatue.setPadding(0, ScreenUtils.getStatusBarHeight(getActivity()), 0, 0);
+        mRelaTitleStatue.setPadding(0, ScreenUtils.getStatusBarHeight(mContext), 0, 0);
         initRecycle();
     }
 
@@ -142,11 +146,12 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     }
 
     private void initRecycle() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        int red = getResources().getColor(R.color.basic_color);
-        recyclerView.setRefreshingColor(red);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexMakemoney>(getActivity()) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        DividerDecoration itemDecoration = new DividerDecoration(Color.TRANSPARENT, (int) getResources().getDimension(R.dimen.diver), 0, 0);
+        itemDecoration.setDrawLastItem(false);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setRefreshingColorResources(R.color.basic_color);
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexMakemoney>(mContext) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_zhuan_qian;
@@ -155,16 +160,19 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         });
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             private ImageView viewImg;
+            private MarqueeView marqueeView;
+
             @Override
             public View onCreateView(ViewGroup parent) {
-                View header_zahun_qian = LayoutInflater.from(getActivity()).inflate(R.layout.header_zahun_qian, null);
+                View header_zahun_qian = LayoutInflater.from(mContext).inflate(R.layout.header_zahun_qian, null);
                 viewImg=header_zahun_qian.findViewById(R.id.viewImg);
+                marqueeView=header_zahun_qian.findViewById(R.id.marqueeView);
                 viewImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
-                        intent.setClass(getActivity(), TuiGuangActivity.class);
-                        getActivity().startActivity(intent);
+                        intent.setClass(mContext, TuiGuangActivity.class);
+                        startActivity(intent);
                     }
                 });
                 return header_zahun_qian;
@@ -173,14 +181,31 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
             @Override
             public void onBindView(View headerView) {
                 if (indexMakemoney!=null){
-                    GlideApp.with(getActivity())
+                    GlideApp.with(mContext)
                             .asBitmap()
                             .load(indexMakemoney.getImg())
                             .placeholder(R.mipmap.ic_empty)
                             .into(viewImg);
+                    info.clear();
+                    for (int i=0;i<indexMakemoney.getNotice().size();i++){
+                        info.add(indexMakemoney.getNotice().get(i).getN());
+                    }
+                    marqueeView.startWithList(info, R.anim.anim_bottom_in, R.anim.anim_top_out);
+//                    marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(int position, TextView textView) {
+//                            Intent intent = new Intent();
+//                            intent.setClass(mContext, WebHaoWuActivity.class);
+//                            intent.putExtra(Constant.IntentKey.TITLE, indexHome.getNews().get(position).getTitle());
+//                            intent.putExtra(Constant.IntentKey.URL, indexHome.getNews().get(position).getUrl());
+//                            intent.putExtra(Constant.IntentKey.NEWS,indexHome.getNews().get(position));
+//                            startActivity(intent);
+//                        }
+//                    });
                 }
             }
         });
+        recyclerView.setRefreshListener(this);
     }
 
     /**
@@ -218,7 +243,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
     private IndexMakemoney indexMakemoney;
     @Override
     public void onRefresh() {
-        ApiClient.post(getActivity(), getOkObject(), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getOkObject(), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
                 LogUtil.LogShitou("赚钱", s);
@@ -230,7 +255,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                         adapter.add(indexMakemoney);
                         adapter.notifyDataSetChanged();
                         showLoadingDialog();
-                        ApiClient.post(getActivity(), getOkObject1(), new ApiClient.CallBack() {
+                        ApiClient.post(mContext, getOkObject1(), new ApiClient.CallBack() {
                             @Override
                             public void onSuccess(String s) {
                                 cancelLoadingDialog();
@@ -239,23 +264,23 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
                                     shareIndex = GsonUtils.parseJSON(s, ShareIndex.class);
                                     if (shareIndex.getStatus() == 1) {
                                     } else if (shareIndex.getStatus() == 3) {
-                                        MyDialog.showReLoginDialog(getActivity());
+                                        MyDialog.showReLoginDialog(mContext);
                                     } else {
-                                        Toast.makeText(getActivity(), shareIndex.getInfo(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext, shareIndex.getInfo(), Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (Exception e) {
-                                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, "数据出错", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
                             public void onError(Response response) {
                                 cancelLoadingDialog();
-                                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
                             }
                         });
                     } else if (indexMakemoney.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(getActivity());
+                        MyDialog.showReLoginDialog(mContext);
                     } else {
                         showError(indexMakemoney.getInfo());
                     }
@@ -270,7 +295,7 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
             }
 
             public void showError(String msg) {
-                View view_loaderror = LayoutInflater.from(getActivity()).inflate(R.layout.view_loaderror, null);
+                View view_loaderror = LayoutInflater.from(mContext).inflate(R.layout.view_loaderror, null);
                 TextView textMsg = (TextView) view_loaderror.findViewById(R.id.textMsg);
                 textMsg.setText(msg);
                 view_loaderror.findViewById(R.id.buttonReLoad).setOnClickListener(new View.OnClickListener() {
@@ -302,13 +327,13 @@ public class ZhuanQianFragment extends ZjbBaseFragment implements SwipeRefreshLa
         filter.addAction(Constant.BROADCASTCODE.FenXiangZCLJ);
         filter.addAction(Constant.BROADCASTCODE.FenXiangXiaZaiLJ);
         filter.addAction(Constant.BROADCASTCODE.VIP);
-        getActivity().registerReceiver(reciver, filter);
+        mContext.registerReceiver(reciver, filter);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(reciver);
+        mContext.unregisterReceiver(reciver);
     }
 
     @Override

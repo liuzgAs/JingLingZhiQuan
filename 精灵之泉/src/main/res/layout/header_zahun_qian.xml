@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="wrap_content">
     <ImageView
         android:scaleType="centerCrop"
@@ -8,4 +10,35 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:id="@+id/viewImg" />
+    <LinearLayout
+        android:id="@+id/viewTips"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:background="@mipmap/fabufw_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:addStatesFromChildren="true"
+        android:paddingRight="5dp">
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@mipmap/fabuwf_tongzhi" />
+
+        <com.sunfusheng.marqueeview.MarqueeView
+            android:id="@+id/marqueeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:mvAnimDuration="1000"
+            app:mvDirection="bottom_to_top"
+            app:mvInterval="5000"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            app:mvTextColor="#f6641b"
+            app:mvTextSize="13sp"
+            app:mvSingleLine="true"/>
+    </LinearLayout>
 </LinearLayout>

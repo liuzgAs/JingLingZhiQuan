@@ -100,7 +100,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
                 case Constant.BROADCASTCODE.CITY_CHOOSEYD:
                     IndexCitylist.CityEntity.ListEntity cityBean = (IndexCitylist.CityEntity.ListEntity) intent.getSerializableExtra(Constant.INTENT_KEY.CITY);
                     cityId = cityBean.getId();
-                    final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+                    final ACache aCache = ACache.get(mContext, Constant.ACACHE.LOCATION);
                     aCache.put(Constant.ACACHE.CITY_ID, cityId);
                     textCity.setText(cityBean.getName());
                     textAddress.setText("");
@@ -143,7 +143,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
 
     @Override
     protected void initSP() {
-        final ACache aCache = ACache.get(getActivity(), Constant.ACACHE.LOCATION);
+        final ACache aCache = ACache.get(mContext, Constant.ACACHE.LOCATION);
         String cityAcache = aCache.getAsString(Constant.ACACHE.CITY);
         if (cityAcache != null) {
             cityId = aCache.getAsString(Constant.ACACHE.CITY_ID);
@@ -169,9 +169,9 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
 
     @Override
     protected void initViews() {
-//        viewBar.setPadding(0, (int)ScreenUtils.getStatusBarHeight(getActivity()),0,0);
+//        viewBar.setPadding(0, (int)ScreenUtils.getStatusBarHeight(mContext),0,0);
         ViewGroup.LayoutParams layoutParams = textBar.getLayoutParams();
-        layoutParams.height = ScreenUtils.getStatusBarHeight(getActivity());
+        layoutParams.height = ScreenUtils.getStatusBarHeight(mContext);
         textBar.setLayoutParams(layoutParams);
         // 设置定位监听
         aMap.setLocationSource(this);
@@ -216,7 +216,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         super.onStart();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSEYD);
-        getActivity().registerReceiver(reciver, filter);
+        mContext.registerReceiver(reciver, filter);
     }
 
     /**
@@ -229,8 +229,8 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", Integer.parseInt(id) + "");
         final SkillIndex.DataBean dataBean = dataBeanList.get(Integer.parseInt(id));
         LogUtil.LogShitou("YouDianFragment--showYouDianDialog", "00000000");
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_youdianx, null);
-        final Dialog dialog = new Dialog(getActivity(), R.style.dialogx);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_youdianx, null);
+        final Dialog dialog = new Dialog(mContext, R.style.dialogx);
         dialog.setContentView(view);
         view.findViewById(R.id.textJinDian).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,7 +239,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
                 Intent intent = new Intent();
                 intent.putExtra(Constant.INTENT_KEY.id, String.valueOf(dataBean.getSid()));
                 intent.putExtra(Constant.INTENT_KEY.type, 1);
-                intent.setClass(getActivity(), GuanLiWDDPXActivity.class);
+                intent.setClass(mContext, GuanLiWDDPXActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
@@ -257,7 +257,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         TextView textDes = (TextView) view.findViewById(R.id.textDes);
         TextView textNickDes = (TextView) view.findViewById(R.id.textNickDes);
         ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
-        GlideApp.with(getActivity())
+        GlideApp.with(mContext)
                 .load(dataBean.getHeadImg())
                 .centerCrop()
                 .circleCrop()
@@ -272,7 +272,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         Window dialogWindow = dialog.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        DisplayMetrics d = getActivity().getResources().getDisplayMetrics(); // 获取屏幕宽、高用
+        DisplayMetrics d = mContext.getResources().getDisplayMetrics(); // 获取屏幕宽、高用
         lp.width = (int) (d.widthPixels * 0.95); // 高度设置为屏幕的0.6
         dialogWindow.setAttributes(lp);
         dialog.show();
@@ -287,7 +287,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
     public void onDestroy() {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
-        getActivity().unregisterReceiver(reciver);
+        mContext.unregisterReceiver(reciver);
         mMapView.onDestroy();
         if (null != mlocationClient) {
             mlocationClient.onDestroy();
@@ -320,7 +320,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         mListener = onLocationChangedListener;
         if (mlocationClient == null) {
             //初始化定位
-            mlocationClient = new AMapLocationClient(getActivity());
+            mlocationClient = new AMapLocationClient(mContext);
             //初始化定位参数
             mLocationOption = new AMapLocationClientOption();
             //设置定位回调监听
@@ -391,7 +391,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
 
     private void getStore(LatLng latLng) {
 //        showLoadingDialog();
-        ApiClient.post(getActivity(), getOkObject(latLng), new ApiClient.CallBack() {
+        ApiClient.post(mContext, getOkObject(latLng), new ApiClient.CallBack() {
             @Override
             public void onSuccess(String s) {
 //                cancelLoadingDialog();
@@ -404,19 +404,19 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
                         popAdapter.addAll(mapIndex.getCate());
                         shouMarker();
                     } else if (mapIndex.getStatus() == 3) {
-                        MyDialog.showReLoginDialog(getActivity());
+                        MyDialog.showReLoginDialog(mContext);
                     } else {
-                        Toast.makeText(getActivity(), mapIndex.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, mapIndex.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "数据出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "数据出错", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Response response) {
 //                cancelLoadingDialog();
-                Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -467,9 +467,9 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
             markerOption.title(String.valueOf(i));
             markerOption.position(new LatLng(Double.parseDouble(dataBeanList.get(i).getLat()), Double.parseDouble(dataBeanList.get(i).getLng())));
             if (dataBeanList.get(i).getSettled() == 1) {
-                final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker_shop, null);
+                final View view = LayoutInflater.from(mContext).inflate(R.layout.view_marker_shop, null);
                 final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
-                GlideApp.with(getActivity())
+                GlideApp.with(mContext)
                         .asBitmap()
                         .load(dataBeanList.get(i).getHeadImg())
                         .centerCrop()
@@ -484,9 +484,9 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
                             }
                         });
             } else {
-                final View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_marker, null);
+                final View view = LayoutInflater.from(mContext).inflate(R.layout.view_marker, null);
                 final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
-                GlideApp.with(getActivity())
+                GlideApp.with(mContext)
                         .asBitmap()
                         .load(dataBeanList.get(i).getHeadImg())
                         .centerCrop()
@@ -510,13 +510,13 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         Intent intent=new Intent();
         switch (view.getId()) {
             case R.id.textAddress:
-                intent.setClass(getActivity(), SearchDPActivity.class);
+                intent.setClass(mContext, SearchDPActivity.class);
                 intent.putExtra(Constant.INTENT_KEY.CITY, cityId);
                 intent.putExtra(Constant.INTENT_KEY.position, myLatLng);
                 startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.address);
                 break;
             case R.id.textCity:
-                intent.setClass(getActivity(), ChengShiXZActivity.class);
+                intent.setClass(mContext, ChengShiXZActivity.class);
                 intent.putExtra("type",1);
                 startActivity(intent);
                 break;
@@ -530,7 +530,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
                 } else {
                     // 设置PopupWindow 显示的形式 底部或者下拉等
                     // 在某个位置显示
-                    viewBar.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.white));
+                    viewBar.setBackgroundColor(ContextCompat.getColor(mContext,R.color.white));
                     mPopupWindow.showAsDropDown(image0001);
                     // 作为下拉视图显示
                     // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
@@ -559,19 +559,19 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
         mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                viewBar.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.transparent));
+                viewBar.setBackgroundColor(ContextCompat.getColor(mContext,R.color.transparent));
             }
         });
     }
 
     private void initPopRecycler(EasyRecyclerView recyclePacate) {
-        GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager manager = new GridLayoutManager(mContext, 3);
         recyclePacate.setLayoutManager(manager);
-        SpaceDecoration spaceDecoration =new SpaceDecoration((int) DpUtils.convertDpToPixel(10f, getActivity()));
+        SpaceDecoration spaceDecoration =new SpaceDecoration((int) DpUtils.convertDpToPixel(10f, mContext));
 //        recyclerView.addItemDecoration(itemDecoration1);
 //        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclePacate.addItemDecoration(spaceDecoration);
-        recyclePacate.setAdapter(popAdapter = new RecyclerArrayAdapter<SkillIndex.CateBean>(getActivity()) {
+        recyclePacate.setAdapter(popAdapter = new RecyclerArrayAdapter<SkillIndex.CateBean>(mContext) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_pcate;
@@ -583,7 +583,7 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
             @Override
             public void onItemClick(int position) {
                 mPopupWindow.dismiss();
-                viewBar.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.transparent));
+                viewBar.setBackgroundColor(ContextCompat.getColor(mContext,R.color.transparent));
                 cid=popAdapter.getItem(position).getId();
                 Constant.CID=popAdapter.getItem(position).getId();
                 getStore(myLatLng);
