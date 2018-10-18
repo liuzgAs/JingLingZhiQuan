@@ -164,6 +164,10 @@ public class Constant {
         public static final String CART_NEWORDER = "&g=App&m=Cart&a=newOrder";
         //支付界面
         public static final String ORDER_PAY = "&g=App&m=Order&a=pay";
+        //支付页显示0
+        public static final String PAYBEFORE = "&g=App&m=Pay&a=payBefore";
+        //支付信息请求1
+        public static final String PAY = "&g=App&m=Pay&a=pay";
         //支付成功
         public static final String ORDER_PAYS = "&g=App&m=Order&a=pays";
         //商城订单
@@ -267,6 +271,10 @@ public class Constant {
          */
         public static final String STORE_AMOUNT = "g=App&m=Store&a=amount";
         /**
+         * 我的收益4
+         */
+        public static final String INCOME4 = "g=App&m=User&a=income4";
+        /**
          * 销售管理
          */
         public static final String STORE_SALESMANAGE = "g=App&m=Store&a=salesManage";
@@ -318,6 +326,10 @@ public class Constant {
          * 添加信用卡请求
          */
         public static final String HK_CARDADDBEFORE = "g=App&m=Hk&a=cardAddbefore";
+        /**
+         * 精灵出行
+         */
+        public static final String TRAVEL = "g=App&m=Index&a=travel";
         /**
          * 添加信用卡
          */

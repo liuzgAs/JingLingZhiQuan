@@ -15,9 +15,16 @@ public class UserIncome {
     private double amount1;
     private double amount2;
     private double amount3;
+    private double amount4;
     private int status;
     private String info;
+    public double getAmount4() {
+        return amount4;
+    }
 
+    public void setAmount4(double amount4) {
+        this.amount4 = amount4;
+    }
     public double getAmount1() {
         return amount1;
     }

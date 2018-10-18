@@ -174,6 +174,16 @@ public class DingDanXQActivity extends ZjbBaseActivity implements View.OnClickLi
                 textDetails.setText(details);
             }
         });
+        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id,adapter.getItem(position).getGoods_id());
+                intent.setClass(DingDanXQActivity.this, ChanPinXQActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+               startActivity(intent);
+            }
+        });
     }
 
 

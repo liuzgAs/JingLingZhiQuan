@@ -595,6 +595,10 @@
             android:launchMode="singleTop"></activity>
         <activity android:name=".activity.SearchDPActivity"
             android:launchMode="singleTop"></activity>
+        <activity android:name=".activity.DiYongJinMXActivity"
+            android:launchMode="singleTop"></activity>
+        <activity android:name=".activity.ZhiFuXActivity"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

@@ -456,7 +456,7 @@ public class QueRenDDActivity extends ZjbBaseActivity implements View.OnClickLis
                             startActivity(intent3);
                         }else if (cartNeworder.getGoPay()==1){
                             Intent intent = new Intent();
-                            intent.setClass(QueRenDDActivity.this, ZhiFuActivity.class);
+                            intent.setClass(QueRenDDActivity.this, ZhiFuXActivity.class);
                             intent.putExtra(Constant.INTENT_KEY.id, cartNeworder.getOid());
                             intent.putExtra(Constant.INTENT_KEY.type, type);
                             startActivity(intent);

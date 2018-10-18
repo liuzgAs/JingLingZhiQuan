@@ -218,7 +218,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
-                        android:text="我的优惠券"
+                        android:text="我的抵用金"
                         android:textColor="@color/light_black"
                         android:textSize="18dp" />
 
@@ -240,7 +240,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_toLeftOf="@+id/imageView473"
                         android:layout_toStartOf="@+id/imageView473"
-                        android:text="0张"
+                        android:text="0"
                         android:textColor="@color/red"
                         android:textScaleX="1.1"
                         android:textSize="20dp" />
@@ -253,6 +253,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/basic_color"
                 android:text="查看我的积分"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

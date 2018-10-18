@@ -161,6 +161,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
         titles.add("专属美颜");
         titles.add("精灵超市");
         titles.add("限时抢购");
+        titles.add("精灵出行");
 
     }
 
@@ -184,11 +185,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
 
         viewPager.setAdapter(new MyViewPagerAdapter(getChildFragmentManager()));
         tablayout.setupWithViewPager(viewPager);
-        tablayout.setTabMode(TabLayout.MODE_FIXED);
         tablayout.post(new Runnable() {
             @Override
             public void run() {
-                TabsIndicator.setIndicator(tablayout, 18, 18);
+                TabsIndicator.setIndicator(tablayout, 1, 1);
             }
         });
         for (int i = 0; i < titles.size(); i++) {
@@ -332,8 +332,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             else if (position==2){
                 return JingLingCSFragment.newInstance("");
             }
-            else {
+            else if (position==3){
                 return new XianShiQGXFragment();
+            }else {
+                return JingLingCXFragment.newInstance("");
             }
         }
 

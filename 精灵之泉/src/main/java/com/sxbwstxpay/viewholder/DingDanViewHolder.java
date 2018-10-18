@@ -20,7 +20,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.DingDanXQActivity;
 import com.sxbwstxpay.activity.ShangChengDDActivity;
 import com.sxbwstxpay.activity.WebActivity;
-import com.sxbwstxpay.activity.ZhiFuActivity;
+import com.sxbwstxpay.activity.ZhiFuXActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
@@ -43,13 +43,12 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
 
     private final TextView textOrderSn;
     private final TextView textStatus_text;
-    private final TextView textSum;
-    private final TextView textGoods_money;
     private final TextView textOrderAmount;
     private final TextView textSumDes;
     private final TextView textBtn;
     private final Button buttonSure;
     private final ListView listView;
+    private final ListView listView1;
     private UserOrder.ListBean data;
     private final View viewBtn;
 
@@ -57,20 +56,19 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         super(parent, res);
         textOrderSn = $(R.id.textOrderSn);
         textStatus_text = $(R.id.textStatus_text);
-        textSum = $(R.id.textSum);
-        textGoods_money = $(R.id.textGoods_money);
         textOrderAmount = $(R.id.textOrderAmount);
         textSumDes = $(R.id.textSumDes);
         textBtn = $(R.id.textBtn);
         buttonSure = $(R.id.buttonSure);
         listView = $(R.id.listView);
+        listView1 = $(R.id.listView1);
         viewBtn = $(R.id.viewBtn);
         buttonSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (data.getIs_pay() == 1) {
                     Intent intent = new Intent();
-                    intent.setClass(getContext(), ZhiFuActivity.class);
+                    intent.setClass(getContext(), ZhiFuXActivity.class);
                     intent.putExtra(Constant.INTENT_KEY.id, Integer.parseInt(data.getId()));
                     getContext().startActivity(intent);
                 }
@@ -91,6 +89,15 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.putExtra(Constant.INTENT_KEY.id, data.getId());
+                intent.setClass(getContext(), DingDanXQActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
@@ -181,8 +188,6 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         this.data = data;
         textOrderSn.setText(data.getOrderSn());
         textStatus_text.setText(data.getStatus_text());
-        textSum.setText("¥" + data.getSum());
-        textGoods_money.setText("¥" + data.getGoods_money());
         textOrderAmount.setText("¥" + data.getOrderAmount());
         textSumDes.setText(data.getSumDes());
         if (data.getIs_cancle() == 1) {
@@ -209,6 +214,8 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         if (data.getOg()!=null){
             listView.setAdapter(new MyAdapter());
         }
+        listView1.setAdapter(new MyAdapter1());
+
     }
 
     class MyAdapter extends BaseAdapter {
@@ -286,4 +293,42 @@ public class DingDanViewHolder extends BaseViewHolder<UserOrder.ListBean> {
         }
     }
 
+    class MyAdapter1 extends BaseAdapter {
+        class ViewHolder {
+            public TextView textN;
+            public TextView textV;
+        }
+
+        @Override
+        public int getCount() {
+            return data.getDes().size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                holder = new ViewHolder();
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_dingdanmx, null);
+                holder.textN = (TextView) convertView.findViewById(R.id.textN);
+                holder.textV = (TextView) convertView.findViewById(R.id.textV);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            holder.textN.setText( data.getDes().get(position).getN());
+            holder.textV.setText( data.getDes().get(position).getV());
+            return convertView;
+        }
+    }
 }

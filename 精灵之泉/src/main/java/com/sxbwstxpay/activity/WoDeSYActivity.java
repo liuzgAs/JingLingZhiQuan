@@ -92,6 +92,9 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
         SpannableString span2 = new SpannableString("¥" + "0.0");
         span2.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textFanYong.setText(span2);
+        SpannableString span3 = new SpannableString("¥" + "0.0");
+        span3.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textJiFen.setText(span3);
     }
 
     @Override
@@ -141,6 +144,9 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
                         SpannableString span2 = new SpannableString("¥" + userIncome.getAmount3());
                         span2.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textFanYong.setText(span2);
+                        SpannableString span3 = new SpannableString("¥" + userIncome.getAmount4());
+                        span3.setSpan(new RelativeSizeSpan(0.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textJiFen.setText(span3);
                     } else if (userIncome.getStatus() == 3) {
                         MyDialog.showReLoginDialog(WoDeSYActivity.this);
                     } else {
@@ -186,7 +192,7 @@ public class WoDeSYActivity extends ZjbBaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.viewYouHuiQuan:
-                intent.setClass(this, YouHuiQuanActivity.class);
+                intent.setClass(this, DiYongJinMXActivity.class);
                 startActivity(intent);
                 break;
             case R.id.imageBack:

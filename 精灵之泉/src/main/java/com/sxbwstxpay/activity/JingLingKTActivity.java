@@ -83,7 +83,6 @@ public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickL
     @Override
     protected void setListeners() {
         findViewById(R.id.imageBack).setOnClickListener(this);
-
     }
 
     @Override
@@ -285,7 +284,6 @@ public class JingLingKTActivity extends ZjbBaseActivity implements View.OnClickL
         params.put("tokenTime", tokenTime);
         params.put("pwd", AppUtil.getMD5(AppUtil.getMD5(pwd) + "ad"));
         params.put("id", id);
-
         return new OkObject(params, url);
     }
 

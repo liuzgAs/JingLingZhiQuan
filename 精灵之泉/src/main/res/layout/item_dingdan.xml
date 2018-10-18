@@ -57,63 +57,16 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/line_gray" />
-
-    <LinearLayout
+    <com.sxbwstxpay.customview.ListView4ScrollView
+        android:id="@+id/listView1"
+        android:divider="@color/transparent"
+        android:dividerHeight="3dp"
+        android:background="@color/white"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="合计："
-                android:textSize="@dimen/normal_textsize" />
-
-            <TextView
-                android:id="@+id/textSum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="¥156.02"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="赚："
-                android:textSize="@dimen/normal_textsize" />
-
-            <TextView
-                android:id="@+id/textGoods_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="¥40"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/normal_textsize" />
-        </LinearLayout>
-
-    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"

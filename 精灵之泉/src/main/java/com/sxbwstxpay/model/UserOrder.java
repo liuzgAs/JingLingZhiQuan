@@ -174,6 +174,7 @@ public class UserOrder {
         private int is_del;
         private int saleState;
         private List<OgBean> og;
+        private List<DesBean> des;
 
         public String getId() {
             return id;
@@ -286,7 +287,13 @@ public class UserOrder {
         public void setOg(List<OgBean> og) {
             this.og = og;
         }
+        public List<DesBean> getDes() {
+            return des;
+        }
 
+        public void setDes(List<DesBean> des) {
+            this.des = des;
+        }
         public static class OgBean {
             /**
              * goods_id : 1
@@ -387,6 +394,31 @@ public class UserOrder {
 
             public void setGoods_desc(String goods_desc) {
                 this.goods_desc = goods_desc;
+            }
+        }
+        public static class DesBean {
+            /**
+             * n : 合计：
+             * v : ￥58
+             */
+
+            private String n;
+            private String v;
+
+            public String getN() {
+                return n;
+            }
+
+            public void setN(String n) {
+                this.n = n;
+            }
+
+            public String getV() {
+                return v;
+            }
+
+            public void setV(String v) {
+                this.v = v;
             }
         }
     }
