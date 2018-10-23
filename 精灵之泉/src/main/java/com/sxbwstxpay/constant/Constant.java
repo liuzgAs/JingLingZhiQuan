@@ -358,6 +358,18 @@ public class Constant {
          * 信用卡账单详情
          */
         public static final String HK_BILLINFO = "?g=App&m=Hk&a=billInfo";
+        /**
+         * 收藏
+         */
+        public static final String COLLECT = "?g=App&m=Index&a=collect";
+        /**
+         * 取消收藏
+         */
+        public static final String CANCLECOLLECT = "?g=App&m=Index&a=cancleCollect";
+        /**
+         * 我的收藏（搭配与美颜）
+         */
+        public static final String STYLECOLLECT = "?g=App&m=User&a=styleCollect";
     }
 
     public static class PERMISSION {

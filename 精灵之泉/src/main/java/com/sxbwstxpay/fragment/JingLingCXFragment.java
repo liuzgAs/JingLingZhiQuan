@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sxbwstxpay.R;
@@ -17,6 +18,7 @@ import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.model.Travel;
 import com.sxbwstxpay.util.ApiClient;
+import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.GsonUtils;
 import com.sxbwstxpay.util.LogUtil;
 
@@ -34,6 +36,7 @@ public class JingLingCXFragment extends ZjbBaseFragment implements View.OnClickL
 
     private String mParam1;
     private View mInflate;
+    private ImageView imageView;
 
 
     public JingLingCXFragment() {
@@ -60,7 +63,7 @@ public class JingLingCXFragment extends ZjbBaseFragment implements View.OnClickL
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
         if (mInflate == null) {
-            mInflate = inflater.inflate(R.layout.fragment_jing_ling_cx, container, false);
+            mInflate = inflater.inflate(R.layout.fragment_image, container, false);
             init();
         }
         //缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
@@ -82,7 +85,7 @@ public class JingLingCXFragment extends ZjbBaseFragment implements View.OnClickL
 
     @Override
     protected void findID() {
-
+        imageView=mInflate.findViewById(R.id.image);
     }
 
     @Override
@@ -92,19 +95,23 @@ public class JingLingCXFragment extends ZjbBaseFragment implements View.OnClickL
 
     @Override
     protected void setListeners() {
-        mInflate.findViewById(R.id.image01).setOnClickListener(this);
+        imageView.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
-
+        travel();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.image01:
-                travel();
+            case R.id.image:
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), WebActivity.class);
+                intent.putExtra(Constant.INTENT_KEY.TITLE, travel.getUrlTitle());
+                intent.putExtra(Constant.INTENT_KEY.URL, travel.getUrl());
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -124,6 +131,7 @@ public class JingLingCXFragment extends ZjbBaseFragment implements View.OnClickL
         params.put("tokenTime", tokenTime);
         return new OkObject(params, url);
     }
+    Travel travel;
     private void travel() {
         showLoadingDialog();
         ApiClient.post(mContext, getOkObject(), new ApiClient.CallBack() {
@@ -132,13 +140,13 @@ public class JingLingCXFragment extends ZjbBaseFragment implements View.OnClickL
                 cancelLoadingDialog();
                 LogUtil.LogShitou("XinZengYHKActivity--银行卡添加前请求", s + "");
                 try {
-                    Travel travel = GsonUtils.parseJSON(s, Travel.class);
+                     travel = GsonUtils.parseJSON(s, Travel.class);
                     if (travel.getStatus() == 1) {
-                        Intent intent=new Intent();
-                        intent.setClass(getActivity(), WebActivity.class);
-                        intent.putExtra(Constant.INTENT_KEY.TITLE, travel.getUrlTitle());
-                        intent.putExtra(Constant.INTENT_KEY.URL, travel.getUrl());
-                        startActivity(intent);
+                        GlideApp.with(getContext())
+                                .asBitmap()
+                                .load(travel.getImg())
+                                .placeholder(R.mipmap.ic_empty)
+                                .into(imageView);
                     } else if (travel.getStatus() == 3) {
                         MyDialog.showReLoginDialog(mContext);
                     } else {

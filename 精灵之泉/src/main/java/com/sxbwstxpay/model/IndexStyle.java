@@ -170,14 +170,28 @@ public class IndexStyle {
          * title : 专属风格：甜美范
          * des : [{"is_seleteed":1,"name":"脖子短"},{"is_seleteed":1,"name":"背厚手臂粗"},{"is_seleteed":1,"name":"腰粗"},{"is_seleteed":0,"name":"臀大腿粗"},{"is_seleteed":0,"name":"腿短"},{"is_seleteed":0,"name":"矮个"}]
          */
-
+        private String id;
+        private int is_collect;
         private String img;
         private String goods_id;
         private String intro;
         private String title;
         private List<DesBean> des;
         private List<ImgsBean> imgs;
+        public String getId() {
+            return id;
+        }
 
+        public void setId(String id) {
+            this.id = id;
+        }
+        public int getIs_collect() {
+            return is_collect;
+        }
+
+        public void setIs_collect(int is_collect) {
+            this.is_collect = is_collect;
+        }
         public String getIntro() {
             return intro;
         }

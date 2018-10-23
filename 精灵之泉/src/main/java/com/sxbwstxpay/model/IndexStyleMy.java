@@ -169,12 +169,28 @@ public class IndexStyleMy {
          * title : 专属风格：蛋形
          * des : []
          */
+        private String id;
+        private int is_collect;
         private String intro;
         private String img;
         private String goods_id;
         private String title;
         private List<DesBean> des;
         private List<ImgsBean> imgs;
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+        public int getIs_collect() {
+            return is_collect;
+        }
+
+        public void setIs_collect(int is_collect) {
+            this.is_collect = is_collect;
+        }
         public String getIntro() {
             return intro;
         }

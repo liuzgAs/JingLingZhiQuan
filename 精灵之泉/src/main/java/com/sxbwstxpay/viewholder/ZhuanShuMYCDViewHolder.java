@@ -15,10 +15,10 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.activity.ChanPinXQActivity;
+import com.sxbwstxpay.activity.WoDeShouCActivity;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.MyEasyRecyclerView;
-import com.sxbwstxpay.fragment.ZhuanShuMYFragment;
 import com.sxbwstxpay.model.CommonlyUsed;
 import com.sxbwstxpay.model.IndexStyleMy;
 import com.sxbwstxpay.model.OkObject;
@@ -35,17 +35,17 @@ import okhttp3.Response;
 /**
  * Created by Administrator on 2017/3/28 0028.
  */
-public class ZhuanShuMYViewHolder extends BaseViewHolder<IndexStyleMy.DataBean> {
+public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean> {
     private TextView textStyle;
     private MyEasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexStyleMy.DataBean.DesBean> adapter;
     private ImageView imageImg[]=new ImageView[5];
     private TextView textIntro;
     private ImageView imageCollect;
-    private ZhuanShuMYFragment fragment;
+    private WoDeShouCActivity fragment;
     private IndexStyleMy.DataBean dataBean;
 
-    public ZhuanShuMYViewHolder(ViewGroup parent, @LayoutRes int res,ZhuanShuMYFragment fragment) {
+    public ZhuanShuMYCDViewHolder(ViewGroup parent, @LayoutRes int res, WoDeShouCActivity fragment) {
         super(parent, res);
         this.fragment=fragment;
         imageImg[0] = $(R.id.imageImg1);

@@ -1,10 +1,12 @@
 package com.sxbwstxpay.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -77,6 +79,15 @@ public class WebActivity extends ZjbBaseActivity implements View.OnClickListener
         mSettings.setJavaScriptEnabled(true);
         mSettings.setUseWideViewPort(true);
         mSettings.setLoadWithOverviewMode(true);
+        //启用数据库
+        mSettings.setDatabaseEnabled(true);
+        String dir = this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
+         //启用地理定位
+        mSettings.setGeolocationEnabled(true);
+         //设置定位的数据库路径
+        mSettings.setGeolocationDatabasePath(dir);
+         //最重要的方法，一定要设置，这就是出不来的主要原因
+        mSettings.setDomStorageEnabled(true);
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -87,6 +98,12 @@ public class WebActivity extends ZjbBaseActivity implements View.OnClickListener
                 } else {
                     pb1.setVisibility(View.VISIBLE);
                 }
+            }
+
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                callback.invoke(origin, true, false);
+                super.onGeolocationPermissionsShowPrompt(origin, callback);
             }
         });
         mWebView.setWebViewClient(new WebViewClient(){

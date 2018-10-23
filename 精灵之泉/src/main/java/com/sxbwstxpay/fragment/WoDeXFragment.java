@@ -38,6 +38,7 @@ import com.sxbwstxpay.activity.WebActivity;
 import com.sxbwstxpay.activity.WoDeDPXActivity;
 import com.sxbwstxpay.activity.WoDeSHActivity;
 import com.sxbwstxpay.activity.WoDeSYActivity;
+import com.sxbwstxpay.activity.WoDeShouCActivity;
 import com.sxbwstxpay.activity.WoDeZDActivity;
 import com.sxbwstxpay.activity.WoDeZLActivity;
 import com.sxbwstxpay.base.MyDialog;
@@ -153,13 +154,13 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
     protected void initViews() {
         woDes.clear();
         woDes.add(new WoDe("商城订单", R.mipmap.wode_scdd));
+        woDes.add(new WoDe("我的收藏", R.mipmap.wode_shouc));
         woDes.add(new WoDe("我的店铺", R.mipmap.wode_wddp));
         woDes.add(new WoDe("我的商户", R.mipmap.wode_wdzl));
         woDes.add(new WoDe("我的风格", R.mipmap.wode_wdfg));
         woDes.add(new WoDe("风格测试", R.mipmap.wode_fgcs));
         woDes.add(new WoDe("联系客服", R.mipmap.wode_lxkf));
         woDes.add(new WoDe("站内公告", R.mipmap.wode_zngg));
-        woDes.add(new WoDe("资质证书", R.mipmap.wode_zzzs));
         woDes.add(new WoDe("精灵课堂", R.mipmap.wode_bzzx));
         textTitleX.setText("个人中心");
         viewBarHeight = (int) (getResources().getDimension(R.dimen.titleHeight) + ScreenUtils.getStatusBarHeight(getActivity()));
@@ -384,6 +385,10 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                         startActivity(intent);
                         break;
                     case 1:
+                        intent.setClass(getActivity(), WoDeShouCActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 2:
                         if (userIndex==null){
                             return;
                         }
@@ -394,31 +399,25 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                             MyDialog.showTipDialog(getActivity(), userIndex.getStoreTips());
                         }
                         break;
-                    case 2:
+                    case 3:
                         intent.setClass(getActivity(), WoDeSHActivity.class);
                         startActivity(intent);
                         break;
-                    case 3:
+                    case 4:
                         getRez();
                         break;
-                    case 4:
+                    case 5:
                         intent.setClass(getActivity(), CeShiSYActivity.class);
                         startActivity(intent);
                         break;
-                    case 5:
+                    case 6:
                         intent.setClass(getActivity(), WebActivity.class);
                         intent.putExtra(Constant.INTENT_KEY.TITLE, "联系客服");
                         intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_CONTACT);
                         startActivity(intent);
                         break;
-                    case 6:
-                        intent.setClass(getActivity(), GongGaoActivity.class);
-                        startActivity(intent);
-                        break;
                     case 7:
-                        intent.setClass(getActivity(), WebActivity.class);
-                        intent.putExtra(Constant.INTENT_KEY.TITLE, "资质证书");
-                        intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_CA);
+                        intent.setClass(getActivity(), GongGaoActivity.class);
                         startActivity(intent);
                         break;
                     case 8:

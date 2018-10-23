@@ -146,7 +146,7 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_zhuanshu;
-                return new ZhuanShuMYViewHolder(parent, layout);
+                return new ZhuanShuMYViewHolder(parent, layout,ZhuanShuMYFragment.this);
             }
         });
         adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {

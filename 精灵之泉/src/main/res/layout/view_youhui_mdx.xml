@@ -78,22 +78,6 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp" />
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="支付方式"
-        android:textColor="@color/light_black"
-        android:textSize="@dimen/litterText" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_width"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/background" />
     <LinearLayout
         android:id="@+id/viewCreditPay"
         android:layout_width="match_parent"
@@ -101,11 +85,20 @@
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:layout_height="50dp">
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitStart"
+            android:src="@mipmap/dijinquan" />
         <TextView
             android:id="@+id/textCreditPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/gray_deep"
             android:textSize="@dimen/normal_textsize"/>
         <CheckBox
@@ -118,6 +111,22 @@
         android:layout_height="@dimen/line_width"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="@color/background" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="支付方式"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/litterText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:background="@color/background" />
 
     <LinearLayout

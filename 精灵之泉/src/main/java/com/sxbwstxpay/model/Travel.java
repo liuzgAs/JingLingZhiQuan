@@ -18,6 +18,7 @@ public class Travel {
     private String url;
     private int status;
     private String info;
+    private String img;
 
     public String getUrlTitle() {
         return urlTitle;
@@ -49,5 +50,12 @@ public class Travel {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }
