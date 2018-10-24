@@ -1,5 +1,9 @@
 package com.sxbwstxpay.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -36,6 +40,17 @@ public class WoDeShouCActivity extends ZjbBaseActivity implements View.OnClickLi
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexStyleMy.DataBean> adapter;
     private int page = 1;
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.SCREFRESH:
+                    onRefresh();
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -227,5 +242,18 @@ public class WoDeShouCActivity extends ZjbBaseActivity implements View.OnClickLi
             default:
                 break;
         }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.SCREFRESH);
+        registerReceiver(reciver, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
     }
 }

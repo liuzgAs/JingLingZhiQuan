@@ -1,6 +1,10 @@
 package com.sxbwstxpay.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -57,7 +61,17 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
     private EasyRecyclerView recyclerView;
     private RecyclerArrayAdapter<IndexStyleMy.DataBean> adapter;
     private FloatingActionButton top;
-
+    private BroadcastReceiver reciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constant.BROADCASTCODE.SCREFRESH:
+                    onRefresh();
+                    break;
+            }
+        }
+    };
     public ZhuanShuMYFragment() {
     }
 
@@ -399,5 +413,17 @@ public class ZhuanShuMYFragment extends ZjbBaseFragment implements SwipeRefreshL
                 }
             }
         });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BROADCASTCODE.SCREFRESH);
+        mContext.registerReceiver(reciver, filter);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mContext.unregisterReceiver(reciver);
     }
 }

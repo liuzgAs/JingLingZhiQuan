@@ -79,6 +79,9 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                     cid = (String) intent.getSerializableExtra(Constant.INTENT_KEY.STYLE);
                     onRefresh();
                     break;
+                case Constant.BROADCASTCODE.SCREFRESH:
+                    onRefresh();
+                    break;
                 default:
                     break;
             }
@@ -130,6 +133,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
         super.onResume();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.STYLE);
+        filter.addAction(Constant.BROADCASTCODE.SCREFRESH);
         mContext.registerReceiver(receiver, filter);
     }
     @Override

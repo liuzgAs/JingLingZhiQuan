@@ -223,8 +223,8 @@ public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean
                     CommonlyUsed commonlyUsed = GsonUtils.parseJSON(s, CommonlyUsed.class);
                     if (commonlyUsed.getStatus() == 1) {
                         Toast.makeText(getContext(), "取消收藏", Toast.LENGTH_SHORT).show();
-                        imageCollect.setImageResource(R.mipmap.shouc_no);
-                        dataBean.setIs_collect(0);
+                        Intent intent = new Intent(Constant.BROADCASTCODE.SCREFRESH);
+                        getContext().sendBroadcast(intent);
                     } else if (commonlyUsed.getStatus() == 3) {
                         MyDialog.showReLoginDialog(getContext());
                     } else {
