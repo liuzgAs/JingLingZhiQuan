@@ -21,7 +21,7 @@ import com.sxbwstxpay.R;
 import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.base.ZjbBaseActivity;
 import com.sxbwstxpay.constant.Constant;
-import com.sxbwstxpay.model.IndexStyleMy;
+import com.sxbwstxpay.model.IndexStyle;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.GsonUtils;
@@ -38,7 +38,7 @@ public class WoDeShouCActivity extends ZjbBaseActivity implements View.OnClickLi
     private View viewBar;
     private TextView textViewTitle;
     private EasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<IndexStyleMy.DataBean> adapter;
+    private RecyclerArrayAdapter<IndexStyle.DataBean> adapter;
     private int page = 1;
     private BroadcastReceiver reciver = new BroadcastReceiver() {
         @Override
@@ -102,7 +102,7 @@ public class WoDeShouCActivity extends ZjbBaseActivity implements View.OnClickLi
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setRefreshingColorResources(R.color.basic_color);
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexStyleMy.DataBean>(WoDeShouCActivity.this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<IndexStyle.DataBean>(WoDeShouCActivity.this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_zhuanshu;
@@ -117,10 +117,10 @@ public class WoDeShouCActivity extends ZjbBaseActivity implements View.OnClickLi
                     public void onSuccess(String s) {
                         try {
                             page++;
-                            IndexStyleMy skillMy = GsonUtils.parseJSON(s, IndexStyleMy.class);
+                            IndexStyle skillMy = GsonUtils.parseJSON(s, IndexStyle.class);
                             int status = skillMy.getStatus();
                             if (status == 1) {
-                                List<IndexStyleMy.DataBean> dataBeans = skillMy.getData();
+                                List<IndexStyle.DataBean> dataBeans = skillMy.getData();
                                 adapter.addAll(dataBeans);
                             } else if (status == 3) {
                                 MyDialog.showReLoginDialog(WoDeShouCActivity.this);
@@ -196,9 +196,9 @@ public class WoDeShouCActivity extends ZjbBaseActivity implements View.OnClickLi
                 LogUtil.LogShitou("我的订单", s);
                 try {
                     page++;
-                    IndexStyleMy skillMy = GsonUtils.parseJSON(s, IndexStyleMy.class);
+                    IndexStyle skillMy = GsonUtils.parseJSON(s, IndexStyle.class);
                     if (skillMy.getStatus() == 1) {
-                        List<IndexStyleMy.DataBean> userOrderList = skillMy.getData();
+                        List<IndexStyle.DataBean> userOrderList = skillMy.getData();
                         adapter.clear();
                         adapter.addAll(userOrderList);
                     } else if (skillMy.getStatus() == 3) {

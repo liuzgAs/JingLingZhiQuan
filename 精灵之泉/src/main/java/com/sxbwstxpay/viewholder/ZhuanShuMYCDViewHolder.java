@@ -20,7 +20,7 @@ import com.sxbwstxpay.base.MyDialog;
 import com.sxbwstxpay.constant.Constant;
 import com.sxbwstxpay.customview.MyEasyRecyclerView;
 import com.sxbwstxpay.model.CommonlyUsed;
-import com.sxbwstxpay.model.IndexStyleMy;
+import com.sxbwstxpay.model.IndexStyle;
 import com.sxbwstxpay.model.OkObject;
 import com.sxbwstxpay.util.ApiClient;
 import com.sxbwstxpay.util.DpUtils;
@@ -35,15 +35,15 @@ import okhttp3.Response;
 /**
  * Created by Administrator on 2017/3/28 0028.
  */
-public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean> {
+public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyle.DataBean> {
     private TextView textStyle;
     private MyEasyRecyclerView recyclerView;
-    private RecyclerArrayAdapter<IndexStyleMy.DataBean.DesBean> adapter;
+    private RecyclerArrayAdapter<IndexStyle.DataBean.DesBean> adapter;
     private ImageView imageImg[]=new ImageView[5];
     private TextView textIntro;
     private ImageView imageCollect;
     private WoDeShouCActivity fragment;
-    private IndexStyleMy.DataBean dataBean;
+    private IndexStyle.DataBean dataBean;
 
     public ZhuanShuMYCDViewHolder(ViewGroup parent, @LayoutRes int res, WoDeShouCActivity fragment) {
         super(parent, res);
@@ -71,7 +71,7 @@ public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean
     }
 
     @Override
-    public void setData(final IndexStyleMy.DataBean data) {
+    public void setData(final IndexStyle.DataBean data) {
         super.setData(data);
         dataBean=data;
         for (int i=0;i<imageImg.length;i++){
@@ -113,15 +113,15 @@ public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean
      */
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(adapter = new RecyclerArrayAdapter<IndexStyleMy.DataBean.DesBean>(getContext()) {
+        recyclerView.setAdapter(adapter = new RecyclerArrayAdapter<IndexStyle.DataBean.DesBean>(getContext()) {
 
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 int layout = R.layout.item_cd_style;
-                return new MYStyleViewHolder(parent, layout);
+                return new CDStyleViewHolder(parent, layout);
             }
         });
-        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(12f, getContext()));
+        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(6f, getContext()));
         spaceDecoration.setPaddingEdgeSide(false);
         recyclerView.addItemDecoration(spaceDecoration);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -150,7 +150,7 @@ public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean
      * author： ZhangJieBo
      * date： 2017/8/28 0028 上午 9:55
      */
-    private OkObject getOkObject(IndexStyleMy.DataBean dataBean) {
+    private OkObject getOkObject(IndexStyle.DataBean dataBean) {
         String url = Constant.HOST + Constant.Url.COLLECT;
         HashMap<String, String> params = new HashMap<>();
         if (fragment.userInfo!=null){
@@ -162,7 +162,7 @@ public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean
         return new OkObject(params, url);
     }
 
-    public void shoucang(final IndexStyleMy.DataBean dataBean) {
+    public void shoucang(final IndexStyle.DataBean dataBean) {
         fragment.showLoadingDialog();
         ApiClient.post(getContext(), getOkObject(dataBean), new ApiClient.CallBack() {
             @Override
@@ -200,7 +200,7 @@ public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean
      * author： ZhangJieBo
      * date： 2017/8/28 0028 上午 9:55
      */
-    private OkObject getOkObject1(IndexStyleMy.DataBean dataBean) {
+    private OkObject getOkObject1(IndexStyle.DataBean dataBean) {
         String url = Constant.HOST + Constant.Url.CANCLECOLLECT;
         HashMap<String, String> params = new HashMap<>();
         if (fragment.userInfo!=null){
@@ -212,7 +212,7 @@ public class ZhuanShuMYCDViewHolder extends BaseViewHolder<IndexStyleMy.DataBean
         return new OkObject(params, url);
     }
 
-    public void qxshoucang(final IndexStyleMy.DataBean dataBean) {
+    public void qxshoucang(final IndexStyle.DataBean dataBean) {
         fragment.showLoadingDialog();
         ApiClient.post(getContext(), getOkObject1(dataBean), new ApiClient.CallBack() {
             @Override

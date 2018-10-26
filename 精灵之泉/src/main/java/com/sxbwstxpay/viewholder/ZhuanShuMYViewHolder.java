@@ -121,7 +121,7 @@ public class ZhuanShuMYViewHolder extends BaseViewHolder<IndexStyleMy.DataBean> 
                 return new MYStyleViewHolder(parent, layout);
             }
         });
-        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(12f, getContext()));
+        SpaceDecoration spaceDecoration = new SpaceDecoration((int) DpUtils.convertDpToPixel(6f, getContext()));
         spaceDecoration.setPaddingEdgeSide(false);
         recyclerView.addItemDecoration(spaceDecoration);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
