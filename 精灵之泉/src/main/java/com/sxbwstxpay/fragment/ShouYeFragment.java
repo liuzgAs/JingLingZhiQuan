@@ -210,6 +210,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
 
     @Override
     protected void initData() {
+        if (!isHongBaoShow) {
+            hongBaoQingQing();
+            isHongBaoShow = true;
+        }
         xianShiQiangGou();
     }
     /**
@@ -350,10 +354,10 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.CITY_CHOOSE);
         mContext.registerReceiver(reciver, filter);
-        if (!isHongBaoShow) {
-            hongBaoQingQing();
-            isHongBaoShow = true;
-        }
+//        if (!isHongBaoShow) {
+//            hongBaoQingQing();
+//            isHongBaoShow = true;
+//        }
     }
 
     @Override
@@ -493,6 +497,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             params.put("uid", userInfo.getUid());
             params.put("tokenTime", tokenTime);
         }
+
         return new OkObject(params, url);
     }
     /**

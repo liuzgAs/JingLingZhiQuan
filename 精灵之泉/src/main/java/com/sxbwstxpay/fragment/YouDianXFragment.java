@@ -466,41 +466,57 @@ public class YouDianXFragment extends ZjbBaseFragment implements LocationSource,
             markerOption.infoWindowEnable(false);
             markerOption.title(String.valueOf(i));
             markerOption.position(new LatLng(Double.parseDouble(dataBeanList.get(i).getLat()), Double.parseDouble(dataBeanList.get(i).getLng())));
-            if (dataBeanList.get(i).getSettled() == 1) {
-                final View view = LayoutInflater.from(mContext).inflate(R.layout.view_marker_shop, null);
-                final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
-                GlideApp.with(mContext)
-                        .asBitmap()
-                        .load(dataBeanList.get(i).getHeadImg())
-                        .centerCrop()
-                        .placeholder(R.mipmap.ic_empty)
-                        .dontAnimate()
-                        .into(new SimpleTarget<Bitmap>() {
-                            @Override
-                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                                imageImg.setImageBitmap(resource);
-                                markerOption.icon(BitmapDescriptorFactory.fromView(view));
-                                markerList.add(aMap.addMarker(markerOption));
-                            }
-                        });
-            } else {
-                final View view = LayoutInflater.from(mContext).inflate(R.layout.view_marker, null);
-                final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
-                GlideApp.with(mContext)
-                        .asBitmap()
-                        .load(dataBeanList.get(i).getHeadImg())
-                        .centerCrop()
-                        .placeholder(R.mipmap.ic_empty)
-                        .dontAnimate()
-                        .into(new SimpleTarget<Bitmap>() {
-                            @Override
-                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                                imageImg.setImageBitmap(resource);
-                                markerOption.icon(BitmapDescriptorFactory.fromView(view));
-                                markerList.add(aMap.addMarker(markerOption));
-                            }
-                        });
-            }
+            final View view = LayoutInflater.from(mContext).inflate(R.layout.view_marker, null);
+            final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
+            GlideApp.with(mContext)
+                    .asBitmap()
+                    .load(dataBeanList.get(i).getHeadImg())
+                    .centerCrop()
+                    .placeholder(R.mipmap.ic_empty)
+                    .dontAnimate()
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                            imageImg.setImageBitmap(resource);
+                            markerOption.icon(BitmapDescriptorFactory.fromView(view));
+                            markerList.add(aMap.addMarker(markerOption));
+                        }
+                    });
+//            if (dataBeanList.get(i).getSettled() == 1) {
+//                final View view = LayoutInflater.from(mContext).inflate(R.layout.view_marker_shop, null);
+//                final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
+//                GlideApp.with(mContext)
+//                        .asBitmap()
+//                        .load(dataBeanList.get(i).getHeadImg())
+//                        .centerCrop()
+//                        .placeholder(R.mipmap.ic_empty)
+//                        .dontAnimate()
+//                        .into(new SimpleTarget<Bitmap>() {
+//                            @Override
+//                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+//                                imageImg.setImageBitmap(resource);
+//                                markerOption.icon(BitmapDescriptorFactory.fromView(view));
+//                                markerList.add(aMap.addMarker(markerOption));
+//                            }
+//                        });
+//            } else {
+//                final View view = LayoutInflater.from(mContext).inflate(R.layout.view_marker, null);
+//                final ImageView imageImg = (ImageView) view.findViewById(R.id.imageImg);
+//                GlideApp.with(mContext)
+//                        .asBitmap()
+//                        .load(dataBeanList.get(i).getHeadImg())
+//                        .centerCrop()
+//                        .placeholder(R.mipmap.ic_empty)
+//                        .dontAnimate()
+//                        .into(new SimpleTarget<Bitmap>() {
+//                            @Override
+//                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+//                                imageImg.setImageBitmap(resource);
+//                                markerOption.icon(BitmapDescriptorFactory.fromView(view));
+//                                markerList.add(aMap.addMarker(markerOption));
+//                            }
+//                        });
+//            }
 
         }
     }

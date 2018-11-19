@@ -112,6 +112,14 @@ public class JingLingCXFragment extends ZjbBaseFragment implements View.OnClickL
                 intent.putExtra(Constant.INTENT_KEY.TITLE, travel.getUrlTitle());
                 intent.putExtra(Constant.INTENT_KEY.URL, travel.getUrl());
                 startActivity(intent);
+//                try {
+//                    PackageManager packageManager = getActivity().getPackageManager();
+//                    Intent intent = packageManager.getLaunchIntentForPackage("ctrip.android.view"); //微信
+//                    startActivity(intent);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(mContext,"你未安装携程APP",Toast.LENGTH_SHORT).show();
+//                }
                 break;
             default:
                 break;

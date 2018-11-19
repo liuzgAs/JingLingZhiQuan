@@ -158,7 +158,7 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
         woDes.add(new WoDe("我的店铺", R.mipmap.wode_wddp));
         woDes.add(new WoDe("我的商户", R.mipmap.wode_wdzl));
         woDes.add(new WoDe("我的风格", R.mipmap.wode_wdfg));
-        woDes.add(new WoDe("风格测试", R.mipmap.wode_fgcs));
+        woDes.add(new WoDe("精灵资质", R.mipmap.wode_zzzs));
         woDes.add(new WoDe("联系客服", R.mipmap.wode_lxkf));
         woDes.add(new WoDe("站内公告", R.mipmap.wode_zngg));
         woDes.add(new WoDe("精灵课堂", R.mipmap.wode_bzzx));
@@ -407,7 +407,9 @@ public class WoDeXFragment extends ZjbBaseFragment implements SwipeRefreshLayout
                         getRez();
                         break;
                     case 5:
-                        intent.setClass(getActivity(), CeShiSYActivity.class);
+                        intent.setClass(getActivity(), WebActivity.class);
+                        intent.putExtra(Constant.INTENT_KEY.TITLE, "资质证书");
+                        intent.putExtra(Constant.INTENT_KEY.URL, Constant.HOST + Constant.Url.INFO_CA);
                         startActivity(intent);
                         break;
                     case 6:

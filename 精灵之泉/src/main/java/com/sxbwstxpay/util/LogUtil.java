@@ -5,7 +5,7 @@ import android.util.Log;
 public class LogUtil {
   
     //可以全局控制是否打印log日志  
-    public static boolean isPrintLog = false;
+    public static boolean isPrintLog = true;
   
     private static int LOG_MAXLENGTH = 2000;  
   
