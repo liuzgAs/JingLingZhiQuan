@@ -5,8 +5,22 @@
     android:layout_height="match_parent"
     tools:context="com.sxbwstxpay.activity.HuanYingActivity">
     <ImageView
-        android:scaleType="fitXY"
+        android:id="@+id/imageImg"
+        android:scaleType="centerCrop"
         android:src="@mipmap/welcome01"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <!-- android:src="@mipmap/qidong1"-->
+    <TextView
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="25dp"
+        android:id="@+id/textDaoJiShi"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/litterText"
+        android:gravity="center"
+        android:background="@drawable/shape_daojishi"
+        android:text="3s"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 </RelativeLayout>

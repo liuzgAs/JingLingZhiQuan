@@ -298,7 +298,7 @@ public class ZhuanShuCDFragment extends ZjbBaseFragment implements SwipeRefreshL
                 ApiClient.post(mContext, getXianShiQGOkObject(), new ApiClient.CallBack() {
                     @Override
                     public void onSuccess(String s) {
-                        LogUtil.LogShitou("XianShiQGFragment--限时抢购更多", s + "");
+//                        LogUtil.LogShitou("XianShiQGFragment--限时抢购更多", s + "");
                         try {
                             page++;
                             IndexStyle indexGoods = GsonUtils.parseJSON(s, IndexStyle.class);
