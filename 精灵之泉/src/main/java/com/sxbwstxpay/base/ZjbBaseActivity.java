@@ -82,6 +82,11 @@ public abstract class ZjbBaseActivity extends SwipeBackActivity {
                 intent.setClass(this, LockActivity.class);
                 startActivity(intent);
             }
+//            if (!TextUtils.isEmpty(paintPassword)&&activityTop){
+//                Intent intent = new Intent();
+//                intent.setClass(this, LockActivity.class);
+//                startActivity(intent);
+//            }
         }
         super.onStart();
     }

@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
     <!--主界面不要透明,否则就显示桌面了~-->
     <style name="AppThemeNoTranslucent" parent="Theme.AppCompat.DayNight.NoActionBar">

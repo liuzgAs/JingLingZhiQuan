@@ -301,6 +301,7 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
                 viewTips.setVisibility(View.GONE);
                 break;
             case R.id.viewImgAdd:
+                isChoosePic = true;
                 PictureSelector.create(this)
                         .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                         .selectionMode(PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
@@ -545,4 +546,5 @@ public class FaBuFWActivity extends ZjbBaseActivity implements View.OnClickListe
             requestPermissions(99, Manifest.permission.CAMERA);
         }
     }
+
 }

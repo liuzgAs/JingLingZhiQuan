@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -57,6 +58,7 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import okhttp3.Response;
@@ -192,7 +194,9 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
             }
         });
         for (int i = 0; i < titles.size(); i++) {
-            tablayout.getTabAt(i).setText(titles.get(i));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Objects.requireNonNull(tablayout.getTabAt(i)).setText(titles.get(i));
+            }
         }
         viewPager.setCurrentItem(0);
         if (mCity!=null){
@@ -409,7 +413,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
      * 扫描二维码
      */
     private void ewm() {
-        ((MainActivity) mContext).isChoosePic = true;
+//        ((MainActivity) mContext).isChoosePic = true;
         Intent intent = new Intent();
         intent.setClass(mContext, CaptureActivity.class);
         startActivityForResult(intent, Constant.REQUEST_RESULT_CODE.EWM);
@@ -417,7 +421,7 @@ public class ShouYeFragment extends ZjbBaseFragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity) mContext).isChoosePic = false;
+        ((MainActivity) mContext).isChoosePic = true;
     }
 
     /**

@@ -281,6 +281,7 @@ public class WoDeDPXActivity extends ZjbBaseActivity implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
+        isChoosePic = true;
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE);
         filter.addAction(Constant.BROADCASTCODE.WX_SHARE_FAIL);

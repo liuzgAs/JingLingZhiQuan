@@ -86,6 +86,7 @@ public class HuanYingActivity extends ZjbBaseNotLeftActivity implements EasyPerm
                     final ACache aCache = ACache.get(HuanYingActivity.this, Constant.ACACHE.LOCATION);
                     String city = aCache.getAsString(Constant.ACACHE.CITY);
                     if (TextUtils.isEmpty(city)){
+                        LogUtil.LogShitou(aMapLocation.getErrorInfo());
                         MyDialog.dialogFinish(HuanYingActivity.this, "定位失败");
                     }else {
                         getData();

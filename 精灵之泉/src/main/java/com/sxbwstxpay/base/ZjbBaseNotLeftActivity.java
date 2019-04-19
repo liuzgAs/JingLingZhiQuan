@@ -79,6 +79,11 @@ public abstract class ZjbBaseNotLeftActivity extends AppCompatActivity {
                 intent.setClass(this, LockActivity.class);
                 startActivity(intent);
             }
+//            if (!TextUtils.isEmpty(paintPassword)&&activityTop){
+//                Intent intent = new Intent();
+//                intent.setClass(this, LockActivity.class);
+//                startActivity(intent);
+//            }
         }
         super.onStart();
     }

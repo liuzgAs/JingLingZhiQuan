@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.sxbwstxpay.R;
 import com.sxbwstxpay.application.MyApplication;
 import com.sxbwstxpay.base.ToLoginActivity;
@@ -18,8 +20,6 @@ import com.sxbwstxpay.model.ExtraMap;
 import com.sxbwstxpay.util.ACache;
 import com.sxbwstxpay.util.GlideApp;
 import com.sxbwstxpay.util.StringUtil;
-
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClickListener {
     private Lock9View mLock9View;
@@ -85,7 +85,7 @@ public class LockActivity extends ZjbBaseNotLeftActivity implements View.OnClick
             if (!TextUtils.isEmpty(userInfo.getHeadImg())) {
                 GlideApp.with(LockActivity.this)
                         .load(userInfo.getHeadImg())
-                        .transform(new CropCircleTransformation(this))
+                        .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                         .placeholder(R.mipmap.ic_empty01)
                         .into(imageTouXiang);
             }

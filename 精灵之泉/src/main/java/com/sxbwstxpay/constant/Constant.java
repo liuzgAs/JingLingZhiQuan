@@ -446,7 +446,7 @@ public class Constant {
         public static final String LNG = "lng";
         public static final String CITY = "city";
         public static final String CITY_ID = "cityId";
-        public static final String PAINT_PASSWORD= "paintPassword";
+        public static final String PAINT_PASSWORD = "paintPassword";
     }
 
     public static class BROADCASTCODE {
@@ -483,12 +483,11 @@ public class Constant {
         public static final String SHUA_XIN_SHOW_HOU = "shua_xin_show_hou";
     }
 
-    public static class VALUE{
+    public static class VALUE {
         public static final float IndexBannerHeight = 452f;
     }
+
     public static class Config {
-
-
 
 
         //    // 为了apiKey,secretKey为您调用百度人脸在线接口的，如注册，比对等。
